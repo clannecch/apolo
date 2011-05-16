@@ -1,4 +1,4 @@
-<h1>Listing activities</h1>
+<h1>Listado de Actividades</h1>
 
 <table>
   <tr>
@@ -11,13 +11,13 @@
 <% @activities.each do |activity| %>
   <tr>
     <td><%= activity.detalle %></td>
-    <td><%= link_to 'Show', activity %></td>
-    <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-    <td><%= link_to 'Destroy', activity, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Visualizar', activity %></td>
+    <td><%= link_to 'EditAR', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Borrar', activity, :confirm => 'Esta Seguro?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Activity', new_activity_path %>
+<%= link_to 'Nueva Actividad', new_activity_path %>
