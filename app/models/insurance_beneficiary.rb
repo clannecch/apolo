@@ -16,5 +16,20 @@
 class InsuranceBeneficiary < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :document_type
+	
+	
+	
+=begin
+    delegate :detalle, :to => :document_type
+    	
+	def detalle
+	  document_type.detalle
+	end 	
 
+	delegate :detalle, :to => :document_type, :prefix => true
+
+    def document_type_detalle
+	  document_type.detalle
+	end 	
+=end
 end
