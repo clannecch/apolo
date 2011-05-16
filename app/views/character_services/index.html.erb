@@ -1,0 +1,23 @@
+<h1>Listado de Caracter de Servicio</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @character_services.each do |character_service| %>
+  <tr>
+    <td><%= character_service.detalle %></td>
+    <td><%= link_to 'Visualizar', character_service %></td>
+    <td><%= link_to 'Editar', edit_character_service_path(character_service) %></td>
+    <td><%= link_to 'Borrar', character_service, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Caracter de Servicio', new_character_service_path %>

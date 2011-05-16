@@ -1,0 +1,63 @@
+# == Schema Information
+# Schema version: 20110513210029
+#
+# Table name: employee_familiars
+#
+#  id                  :integer         not null, primary key
+#  apellido            :string(255)
+#  nombre              :string(255)
+#  fecha_nacimiento    :date
+#  numero_documento    :integer
+#  health_insurance_id :integer
+#  cuil                :string(255)
+#  cuit                :string(255)
+#  tomo                :string(255)
+#  folio               :string(255)
+#  acta                :string(255)
+#  country_id          :integer
+#  province_id         :integer
+#  comuna              :string(255)
+#  employee_id         :integer
+#  document_type_id    :integer
+#  activity_id         :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  apellido: MyString
+  nombre: MyString
+  fecha_nacimiento: 2011-05-13
+  Numero_documento: 1
+  health_insurance_id: 1
+  cuil: MyString
+  cuit: MyString
+  tomo: MyString
+  folio: MyString
+  acta: MyString
+  country_id: 1
+  province_id: 1
+  comuna: MyString
+  employee_id: 1
+  document_type_id: 1
+  activity_id: 1
+
+two:
+  apellido: MyString
+  nombre: MyString
+  fecha_nacimiento: 2011-05-13
+  Numero_documento: 1
+  health_insurance_id: 1
+  cuil: MyString
+  cuit: MyString
+  tomo: MyString
+  folio: MyString
+  acta: MyString
+  country_id: 1
+  province_id: 1
+  comuna: MyString
+  employee_id: 1
+  document_type_id: 1
+  activity_id: 1

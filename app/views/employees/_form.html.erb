@@ -1,0 +1,387 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Legajo" %><br />
+    <%= f.text_field :legajo %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Nombre" %><br />
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Apellido" %><br />
+    <%= f.text_field :apellido %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Telefono" %><br />
+    <%= f.text_field :telefono %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Tipo Documento" %><br />
+    <%= f.collection_select :document_type_id, DocumentType.all, :id, :detalle, :prompt => true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Numero de Documento" %><br />
+    <%= f.text_field :numero_documento %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Emitido por" %><br />
+    <%= f.collection_select :issued_id, Issued.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Sexo" %><br />
+	<%= select( "employee", "sexo", { "Masculino" => "M", "Femenino" => "F"}) %>  
+  </div>
+
+  <div class="field">
+    <%= f.label "Nacionalidad" %><br />
+    <%= f.collection_select :nationality_id, Nationality.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Estado Civil" %><br />
+    <%= f.collection_select :marital_status_id, MaritalStatus.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Fecha de Nacimiento" %><br />
+    <%= f.date_select :fecha_nacimiento %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Calle" %><br />
+    <%= f.text_field :calle %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Puerta" %><br />
+    <%= f.text_field :puerta %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Piso" %><br />
+    <%= f.text_field :piso %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Departamento" %><br />
+    <%= f.text_field :departamento %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Localidad" %><br />
+    <%= f.collection_select :location_id, Location.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Provincia" %><br />
+    <%= f.collection_select :province_id, Province.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Pais" %><br />
+    <%= f.collection_select :country_id, Country.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Codigo Postal" %><br />
+    <%= f.text_field :codigo_postal %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Movil" %><br />
+    <%= f.text_field :movil %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tipo de Email" %><br />
+    <%= f.text_field :email_type_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Direccion eMail" %><br />
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Categoria" %><br />
+    <%= f.collection_select :category_id, Category.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Seccion" %><br />
+    <%= f.collection_select :section_id, Section.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tarea Desempeñada" %><br />
+    <%= f.collection_select :task_id, Task.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Lugar de Trabajo" %><br />
+    <%= f.collection_select :place_id, Place.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Ocupacion" %><br />
+    <%= f.collection_select :employment_id, Employment.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Caracter de Servicio" %><br />
+    <%= f.collection_select :character_service_id, CharacterService.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Matricula Nacional" %><br />
+    <%= f.text_field :matricula_nacional %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Matricula Provincial" %><br />
+    <%= f.text_field :matricula_provincial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Discapacidad" %><br />
+	<%= select( "employee", "discapacidad", { "No" => "N", "Si" => "S"}) %>  
+  </div>
+
+  <div class="field">
+    <%= f.label "Obra Social" %><br />
+    <%= f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Plan Obra Social" %><br />
+    <%= f.text_field :plan_osocial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero Afiliado Obra Social" %><br />
+    <%= f.text_field :numero_afiliado_osocial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Cargas Extras Obra Social" %><br />
+    <%= f.text_field :cargas_extras_osocial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Sindicato" %><br />
+    <%= f.collection_select :labor_union_id, LaborUnion.all, :id, :detalle, :prompt => true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Numero Afiliado Sindicato" %><br />
+    <%= f.text_field :numero_afiliado_sindicato %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero de Jubilacion" %><br />
+    <%= f.text_field :numero_jubilacion %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero Ganancias" %><br />
+    <%= f.text_field :numero_ganancias %>
+  </div>
+
+  <div class="field">
+    <%= f.label "CUIT" %><br />
+    <%= f.text_field :cuit %>
+  </div>
+
+  <div class="field">
+    <%= f.label "CUIL" %><br />
+    <%= f.text_field :cuil %>
+  </div>
+
+
+
+
+
+
+  <div class="field">
+    <%= f.label "fecha_ingreso" %><br />
+    <%=  f.date_select :fecha_ingreso %>
+  </div>
+
+  <div class="field">
+    <%= f.label "fecha_egreso" %><br />
+    <%=  f.date_select :fecha_egreso %>
+  </div>
+
+  <div class="field">
+    <%= f.label "horas_pactadas" %><br />
+    <%= f.text_field :horas_pactadas %>
+  </div>
+
+  <div class="field">
+    <%= f.label "remuneracion_fuera_convenio" %><br />
+    <%= f.text_field :remuneracion_fuera_convenio %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tipo de Remuneracion" %><br />
+    <%= f.collection_select :remuneration_type_id, RemunerationType.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Grupo de Remuneraciones" %><br />
+    <%= f.collection_select :group_renumbering_id, GroupRenumbering.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Grupo de Retenciones" %><br />
+    <%= f.collection_select :group_retention_id, GroupRetention.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Grupo de Aportes Patronales" %><br />
+    <%= f.collection_select :group_employer_contribution_id, GroupEmployerContribution.all, :id, :detalle, :prompt => true %>
+  <div>
+
+  <div class="field">
+    <%= f.label "Centro de costo" %><br />
+    <%= f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Años de Antiguedad Reconocida" %><br />
+    <%= f.text_field :antiguedad_reconocida_anos %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Meses de Antiguedad Reconocida" %><br />
+    <%= f.text_field :antiguedad_reconocida_meses %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Retencion Minima Obra Social" %><br />
+    <%= f.text_field :retencion_minima_osocial %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Nivel de Estudios" %><br />
+    <%= f.collection_select :educational_level_id, EducationalLevel.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero Tarjeta de Fichaje" %><br />
+    <%= f.text_field :id_card %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero de Cofre" %><br />
+    <%= f.text_field :numero_cofre %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Modalidad de Contrato" %><br />
+    <%= f.collection_select :contract_mode_id, ContractMode.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Domicilio Sobre" %><br />
+    <%= f.collection_select :home_about_id, HomeAbout.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Cuadras de Asfalto" %><br />
+    <%= f.text_field :cuadras_asfalto %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Entre Calle(izquierda)" %><br />
+    <%= f.text_field :domicilio_entre_calle_izquierda %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Entre Calle(Derecha)" %><br />
+    <%= f.text_field :domicilio_entre_calle_derecha %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Entre Calle(detras)" %><br />
+    <%= f.text_field :domicilio_entre_calles_detras %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Avenida mas Cercana" %><br />
+    <%= f.text_field :domicilio_avenida_cercana %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Altura Avenida mas Cercana" %><br />
+    <%= f.text_field :domicilio_avenida_cercana_altura %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Imputacion Contable" %><br />
+    <%= f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Aseguradora" %><br />
+    <%= f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Seguro Conyuge" %><br />
+    <%= f.text_field :seguro_conyuge %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero Poliza de Seguro" %><br />
+    <%= f.text_field :Seguro_numero_poliza %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Monto Asegurado" %><br />
+    <%= f.text_field :seguro_monto_asegurado %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Banco Deposito Haberes" %><br />
+    <%= f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tipo Cuenta Bancaria" %><br />
+    <%= f.collection_select :bank_deposit_account_type_id, BankDepositAccountType.all, :id, :detalle, :prompt => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Numero Cuenta Bancaria" %><br />
+    <%= f.text_field :deposito_banco_cuenta %>
+  </div>
+
+  <div class="field">
+    <%= f.label "CBU Cuenta Bancaria" %><br />
+    <%= f.text_field :deposito_banco_cbu %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

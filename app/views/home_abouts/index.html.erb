@@ -1,0 +1,23 @@
+<h1>Listado de Tipos de Calles</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @home_abouts.each do |home_about| %>
+  <tr>
+    <td><%= home_about.detalle %></td>
+    <td><%= link_to 'Visualizar', home_about %></td>
+    <td><%= link_to 'Editar', edit_home_about_path(home_about) %></td>
+    <td><%= link_to 'Borrar', home_about, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tipo de Calle', new_home_about_path %>

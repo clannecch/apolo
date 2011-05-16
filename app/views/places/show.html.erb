@@ -1,0 +1,11 @@
+<h1>Visializacion de Lugar</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @place.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_place_path(@place) %> |
+<%= link_to 'Volver', places_path %>

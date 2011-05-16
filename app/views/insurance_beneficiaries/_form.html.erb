@@ -1,0 +1,34 @@
+<%= form_for(@insurance_beneficiary) do |f| %>
+  <% if @insurance_beneficiary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@insurance_beneficiary.errors.count, "error") %> prohibited this insurance_beneficiary from being saved:</h2>
+
+      <ul>
+      <% @insurance_beneficiary.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Apellido" %><br />
+    <%= f.text_field :apellido %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Nombre" %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo de documento" %><br />
+    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "Numero de Documento" %><br />
+    <%= f.text_field :numero_documento %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

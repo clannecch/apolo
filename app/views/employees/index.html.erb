@@ -1,0 +1,59 @@
+<h1>Listado de Empleados</h1>
+
+<table width='50%'> 
+  <tr> 
+    <th>Legajo</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Telefono</th>
+    <th>Tipo de Documento</th>
+    <th>Numero documento</th>
+    <th>Lugar Emision</th>
+    <th>Sexo</th>
+    <th>Nationalidad</th>
+    <th>Estado Civil</th>
+    <th>Fecha Nacimiento</th>
+    <th>Calle</th>
+    <th>Puerta</th>
+    <th>Piso</th>
+    <th>Departamento</th>
+    <th>Localidad</th>
+    <th>Provincia</th>
+    <th>Pais</th>
+    <th>Codigo Postal</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @employees.each do |employee| %>
+  <tr>
+    <td><%= employee.legajo %></td>
+    <td><%= employee.nombre %></td>
+    <td><%= employee.apellido %></td>
+    <td><%= employee.telefono %></td>
+    <td><%= employee.document_type.try(:detalle) %></td>
+    <td><%= employee.numero_documento %></td>
+    <td><%= employee.issued_id %></td>
+    <td><%= employee.sexo %></td>
+    <td><%= employee.nationality.try(:detalle) %></td>
+    <td><%= employee.marital_status.try(:detalle) %></td>
+    <td><%= employee.fecha_nacimiento %></td>
+    <td><%= employee.calle %></td>
+    <td><%= employee.puerta %></td>
+    <td><%= employee.piso %></td>
+    <td><%= employee.departamento %></td>
+    <td><%= employee.location.try(:detalle) %></td>
+    <td><%= employee.province.try(:detalle) %></td>
+    <td><%= employee.country.try(:detalle) %></td>
+    <td><%= employee.codigo_postal %></td>
+    <td><%= link_to 'Visualizar', employee %></td>
+    <td><%= link_to 'Editar', edit_employee_path(employee) %></td>
+    <td><%= link_to 'Borrar', employee, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Empleado', new_employee_path %>

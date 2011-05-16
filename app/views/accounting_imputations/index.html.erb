@@ -1,0 +1,23 @@
+<h1>Listado de Cuentas Contables</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @accounting_imputations.each do |accounting_imputation| %>
+  <tr>
+    <td><%= accounting_imputation.detalle %></td>
+    <td><%= link_to 'Visualizar', accounting_imputation %></td>
+    <td><%= link_to 'Editar', edit_accounting_imputation_path(accounting_imputation) %></td>
+    <td><%= link_to 'Borrar', accounting_imputation, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Cuenta Contable', new_accounting_imputation_path %>

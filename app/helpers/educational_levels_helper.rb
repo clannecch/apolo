@@ -1,0 +1,2 @@
+module EducationalLevelsHelper
+end

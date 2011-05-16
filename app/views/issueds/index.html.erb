@@ -1,0 +1,23 @@
+<h1>Listado de Lugares de Emision de Documentos</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @issueds.each do |issued| %>
+  <tr>
+    <td><%= issued.detalle %></td>
+    <td><%= link_to 'Visualizar', issued %></td>
+    <td><%= link_to 'Editar', edit_issued_path(issued) %></td>
+    <td><%= link_to 'Borrar', issued, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Lugar de EMision de Documento', new_issued_path %>

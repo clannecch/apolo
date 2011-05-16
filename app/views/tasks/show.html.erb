@@ -1,0 +1,12 @@
+<h1>Visualizacion de Tarea</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @task.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_task_path(@task) %> |
+<%= link_to 'Volver', tasks_path %>

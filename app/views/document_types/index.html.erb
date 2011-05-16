@@ -1,0 +1,23 @@
+<h1>Listado de Tipo de Documentos</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @document_types.each do |document_type| %>
+  <tr>
+    <td><%= document_type.detalle %></td>
+    <td><%= link_to 'Visualizar', document_type %></td>
+    <td><%= link_to 'Editar', edit_document_type_path(document_type) %></td>
+    <td><%= link_to 'Borrar', document_type, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tipo de Documento', new_document_type_path %>

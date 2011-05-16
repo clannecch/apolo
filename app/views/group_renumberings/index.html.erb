@@ -1,0 +1,23 @@
+<h1>Listado de Grupos de Remuneraciones</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @group_renumberings.each do |group_renumbering| %>
+  <tr>
+    <td><%= group_renumbering.detalle %></td>
+    <td><%= link_to 'Visualizar', group_renumbering %></td>
+    <td><%= link_to 'Editar', edit_group_renumbering_path(group_renumbering) %></td>
+    <td><%= link_to 'Borrar', group_renumbering, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Grupo de Remuneraciones', new_group_renumbering_path %>

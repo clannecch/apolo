@@ -1,0 +1,13 @@
+<h1>Visualizacion de Cuentas Contables</h1>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @accounting_imputation.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_accounting_imputation_path(@accounting_imputation) %> |
+<%= link_to 'Volver', accounting_imputations_path %>

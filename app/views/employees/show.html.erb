@@ -1,0 +1,102 @@
+<h1>Visualizacion de Empleado</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Legajo:</b>
+  <%= @employee.legajo %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @employee.nombre %>
+</p>
+
+<p>
+  <b>Apellido:</b>
+  <%= @employee.apellido %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @employee.telefono %>
+</p>
+
+<p>
+  <b>Tipo de Documento:</b>
+  <%= @employee.document_type.try(:detalle) %>
+</p>
+
+<p>
+  <b>Numero de Documento:</b>
+  <%= @employee.numero_documento %>
+</p>
+
+<p>
+  <b>Lugar Emision Documento:</b>
+  <%= @employee.issued.try(:detalle) %>
+</p>
+
+<p>
+  <b>Sexo:</b>
+  <%= @employee.sexo %>
+</p>
+
+<p>
+  <b>Nacionalidad:</b>
+  <%= @employee.nationality.try(:detalle) %>
+</p>
+
+<p>
+  <b>Estado Civil:</b>
+  <%= @employee.marital_status.try(:detalle) %>
+</p>
+
+<p>
+  <b>Fecha nacimiento:</b>
+  <%= @employee.fecha_nacimiento %>
+</p>
+
+<p>
+  <b>Calle:</b>
+  <%= @employee.calle %>
+</p>
+
+<p>
+  <b>Puerta:</b>
+  <%= @employee.puerta %>
+</p>
+
+<p>
+  <b>Piso:</b>
+  <%= @employee.piso %>
+</p>
+
+<p>
+  <b>Departamento:</b>
+  <%= @employee.departamento %>
+</p>
+
+<p>
+  <b>Localidad:</b>
+  <%= @employee.location.try(:detalle) %>
+</p>
+
+<p>
+  <b>Provincia:</b>
+  <%= @employee.province.try(:detalle) %>
+</p>
+
+<p>
+  <b>Pais:</b>
+  <%= @employee.country.try(:detalle) %>
+</p>
+
+<p>
+  <b>Codigo postal:</b>
+  <%= @employee.codigo_postal %>
+</p>
+
+
+<%= link_to 'Editar', edit_employee_path(@employee) %> |
+<%= link_to 'Volver', employees_path %>

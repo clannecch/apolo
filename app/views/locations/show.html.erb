@@ -1,0 +1,12 @@
+<h1>Listado de Localidades</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @location.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_location_path(@location) %> |
+<%= link_to 'volver', locations_path %>

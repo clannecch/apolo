@@ -1,0 +1,23 @@
+<h1>Listado de Tipos de Cuenta Bancaria</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bank_deposit_account_types.each do |bank_deposit_account_type| %>
+  <tr>
+    <td><%= bank_deposit_account_type.detalle %></td>
+    <td><%= link_to 'Visualizar', bank_deposit_account_type %></td>
+    <td><%= link_to 'Editar', edit_bank_deposit_account_type_path(bank_deposit_account_type) %></td>
+    <td><%= link_to 'Borrar', bank_deposit_account_type, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tipo de Cuenta Bancaria', new_bank_deposit_account_type_path %>

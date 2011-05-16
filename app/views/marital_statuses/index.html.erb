@@ -1,0 +1,23 @@
+<h1>Listado de Estado Civil</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @marital_statuses.each do |marital_status| %>
+  <tr>
+    <td><%= marital_status.detalle %></td>
+    <td><%= link_to 'Visualizar', marital_status %></td>
+    <td><%= link_to 'Editar', edit_marital_status_path(marital_status) %></td>
+    <td><%= link_to 'Borrar', marital_status, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Estado Civil', new_marital_status_path %>

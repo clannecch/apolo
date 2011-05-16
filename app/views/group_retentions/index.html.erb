@@ -1,0 +1,23 @@
+<h1>Listado de Grupos de Retenciones</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @group_retentions.each do |group_retention| %>
+  <tr>
+    <td><%= group_retention.detalle %></td>
+    <td><%= link_to 'Visualizar', group_retention %></td>
+    <td><%= link_to 'Editar', edit_group_retention_path(group_retention) %></td>
+    <td><%= link_to 'Borrar', group_retention, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Grupo de Retenciones', new_group_retention_path %>

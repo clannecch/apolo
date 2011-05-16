@@ -1,0 +1,12 @@
+<h1>Visualizacion de Categorias</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @category.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_category_path(@category) %> |
+<%= link_to 'Volver', categories_path %>

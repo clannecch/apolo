@@ -1,0 +1,23 @@
+<h1>Listado de Sindicatos</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @labor_unions.each do |labor_union| %>
+  <tr>
+    <td><%= labor_union.detalle %></td>
+    <td><%= link_to 'Visualizar', labor_union %></td>
+    <td><%= link_to 'Editar', edit_labor_union_path(labor_union) %></td>
+    <td><%= link_to 'Borrar', labor_union, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Sindicato', new_labor_union_path %>

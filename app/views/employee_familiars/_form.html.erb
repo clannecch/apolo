@@ -1,0 +1,81 @@
+<%= form_for(@employee_familiar) do |f| %>
+  <% if @employee_familiar.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee_familiar.errors.count, "error") %> prohibited this employee_familiar from being saved:</h2>
+
+      <ul>
+      <% @employee_familiar.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :apellido %><br />
+    <%= f.text_field :apellido %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_nacimiento %><br />
+    <%= f.date_select :fecha_nacimiento %>
+  </div>
+  <div class="field">
+    <%= f.label "Numero de documento" %><br />
+    <%= f.text_field :numero_documento %>
+  </div>
+  <div class="field">
+    <%= f.label "Obra Social"%><br />
+    <%= f.collection_select :health_insurance_id,  HealthInsurance.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "CUIL" %><br />
+    <%= f.text_field :cuil %>
+  </div>
+  <div class="field">
+    <%= f.label "CUIT" %><br />
+    <%= f.text_field :cuit %>
+  </div>
+  <div class="field">
+    <%= f.label "Tomo" %><br />
+    <%= f.text_field :tomo %>
+  </div>
+  <div class="field">
+    <%= f.label "Folio" %><br />
+    <%= f.text_field :folio %>
+  </div>
+  <div class="field">
+    <%= f.label "Acta" %><br />
+    <%= f.text_field :acta %>
+  </div>
+  <div class="field">
+    <%= f.label "Pais" %><br />
+    <%= f.collection_select :country_id,  Country.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "Provincia" %><br />
+    <%= f.collection_select :province_id,  Province.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "Comuna" %><br />
+    <%= f.text_field :comuna %>
+  </div>
+  <div class="field">
+    <%= f.label "Employee_id" %><br />
+    <%= f.text_field :employee_id %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo de Documento" %><br />
+    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "Actividad" %><br />
+    <%= f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

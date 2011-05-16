@@ -1,0 +1,12 @@
+<h1>Visualizar Aseguradora</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @insurance_company.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_insurance_company_path(@insurance_company) %> |
+<%= link_to 'Volver', insurance_companies_path %>

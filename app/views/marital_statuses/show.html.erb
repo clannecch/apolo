@@ -1,0 +1,11 @@
+<h1>Visualizacion de Estado Civil</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @marital_status.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_marital_status_path(@marital_status) %> |
+<%= link_to 'Volver', marital_statuses_path %>

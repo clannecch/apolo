@@ -1,0 +1,12 @@
+<h1>Visualizar Lugar de Emision de Documento</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @issued.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_issued_path(@issued) %> |
+<%= link_to 'volver', issueds_path %>

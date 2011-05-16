@@ -1,0 +1,23 @@
+<h1>Listado de Modalidades de Contrato</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contract_modes.each do |contract_mode| %>
+  <tr>
+    <td><%= contract_mode.detalle %></td>
+    <td><%= link_to 'Visualizar', contract_mode %></td>
+    <td><%= link_to 'Editar', edit_contract_mode_path(contract_mode) %></td>
+    <td><%= link_to 'Borrar', contract_mode, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Modalidad de Contrato', new_contract_mode_path %>

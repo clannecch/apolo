@@ -1,0 +1,11 @@
+<h1>Visualizar Provincia</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @province.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_province_path(@province) %> |
+<%= link_to 'Volver', provinces_path %>

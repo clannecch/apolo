@@ -1,0 +1,2 @@
+module BankDepositAccountTypesHelper
+end

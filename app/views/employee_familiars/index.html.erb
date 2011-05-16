@@ -1,0 +1,55 @@
+<h1>Listado de Familiares</h1>
+
+<table>
+  <tr>
+    <th>Apellido</th>
+    <th>Nombre</th>
+    <th>Fecha nacimiento</th>
+    <th>Numero documento</th>
+    <th>Obra Sociale</th>
+    <th>Cuil</th>
+    <th>Cuit</th>
+    <th>Tomo</th>
+    <th>Folio</th>
+    <th>Acta</th>
+    <th>Pais</th>
+    <th>Provincia</th>
+    <th>Comuna</th>
+    <th>Employee</th>
+    <th>tipo de documento</th>
+    <th>Ocupacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @employee_familiars.each do |employee_familiar| %>
+  <tr>
+    <td><%= employee_familiar.apellido %></td>
+    <td><%= employee_familiar.nombre %></td>
+    <td><%= employee_familiar.fecha_nacimiento %></td>
+    <td><%= employee_familiar.numero_documento %></td>
+    <td><%= employee_familiar.health_insurance_id %></td>
+    <td><%= employee_familiar.cuil %></td>
+    <td><%= employee_familiar.cuit %></td>
+    <td><%= employee_familiar.tomo %></td>
+    <td><%= employee_familiar.folio %></td>
+    <td><%= employee_familiar.acta %></td>
+    <td><%= employee_familiar.country_id %></td>
+    <td><%= employee_familiar.province_id %></td>
+    <td><%= employee_familiar.comuna %></td>
+    <td><%= employee_familiar.document_type_id %></td>
+    <td><%= employee_familiar.activity_id %></td>
+    <td><%= employee_familiar.employee_id %></td>
+    
+    <td><%= link_to 'Visualizar', employee_familiar %></td>
+    <td><%= link_to 'Editas', edit_employee_familiar_path(employee_familiar) %></td>
+    <td><%= link_to 'Borrar', employee_familiar, :confirm => 'Esta Seguro?', :method => :delete %></td>
+	
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Familiar', new_employee_familiar_path %>

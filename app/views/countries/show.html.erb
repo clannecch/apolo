@@ -1,0 +1,12 @@
+<h1>Visualizacion de Pais</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @country.detalle %>
+</p>
+
+
+<%= link_to 'Editar', edit_country_path(@country) %> |
+<%= link_to 'Volver', countries_path %>

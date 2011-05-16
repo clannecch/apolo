@@ -1,0 +1,2 @@
+module LaborUnionsHelper
+end
