@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  codigo: MyString
+  detalle: MyString
+  calculation_type: 1
+  valor: 9.99
+  porcentual_asistencia: MyString
+  base_calculo: MyString
+  prioridad_calculo: 1
+  pide_datos: false
+  statistical_value: 1
+  acumulador_cantidad: MyString
+  concepto_asociado_haber: 
+  concepto_asociado_retencion: 
+  concepto_asociado_haber_2: 
+  concepto_asociado_retencion_2: 
+  grupo_ganancias_id: 1
+  accounting_imputation_id: 1
+  type: MyString
+
+two:
+  codigo: MyString
+  detalle: MyString
+  calculation_type: 1
+  valor: 9.99
+  porcentual_asistencia: MyString
+  base_calculo: MyString
+  prioridad_calculo: 1
+  pide_datos: false
+  statistical_value: 1
+  acumulador_cantidad: MyString
+  concepto_asociado_haber: 
+  concepto_asociado_retencion: 
+  concepto_asociado_haber_2: 
+  concepto_asociado_retencion_2: 
+  grupo_ganancias_id: 1
+  accounting_imputation_id: 1
+  type: MyString

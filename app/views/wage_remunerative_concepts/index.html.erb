@@ -1,0 +1,55 @@
+<h1>Listing wage_remunerative_concepts</h1>
+
+<table>
+  <tr>
+    <th>Codigo</th>
+    <th>Detalle</th>
+    <th>Calculation type</th>
+    <th>Valor</th>
+    <th>Porcentual asistencia</th>
+    <th>Base calculo</th>
+    <th>Prioridad calculo</th>
+    <th>Pide datos</th>
+    <th>Statistical value</th>
+    <th>Acumulador cantidad</th>
+    <th>Concepto asociado haber</th>
+    <th>Concepto asociado retencion</th>
+    <th>Concepto asociado haber 2</th>
+    <th>Concepto asociado retencion 2</th>
+    <th>Grupo ganancias</th>
+    <th>Accounting imputation</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @wage_remunerative_concepts.each do |wage_remunerative_concept| %>
+  <tr>
+    <td><%= wage_remunerative_concept.codigo %></td>
+    <td><%= wage_remunerative_concept.detalle %></td>
+    <td><%= wage_remunerative_concept.calculation_type %></td>
+    <td><%= wage_remunerative_concept.valor %></td>
+    <td><%= wage_remunerative_concept.porcentual_asistencia %></td>
+    <td><%= wage_remunerative_concept.base_calculo %></td>
+    <td><%= wage_remunerative_concept.prioridad_calculo %></td>
+    <td><%= wage_remunerative_concept.pide_datos %></td>
+    <td><%= wage_remunerative_concept.statistical_value %></td>
+    <td><%= wage_remunerative_concept.acumulador_cantidad %></td>
+    <td><%= wage_remunerative_concept.concepto_asociado_haber %></td>
+    <td><%= wage_remunerative_concept.concepto_asociado_retencion %></td>
+    <td><%= wage_remunerative_concept.concepto_asociado_haber_2 %></td>
+    <td><%= wage_remunerative_concept.concepto_asociado_retencion_2 %></td>
+    <td><%= wage_remunerative_concept.grupo_ganancias_id %></td>
+    <td><%= wage_remunerative_concept.accounting_imputation_id %></td>
+    <td><%= wage_remunerative_concept.type %></td>
+    <td><%= link_to 'Show', wage_remunerative_concept %></td>
+    <td><%= link_to 'Edit', edit_wage_remunerative_concept_path(wage_remunerative_concept) %></td>
+    <td><%= link_to 'Destroy', wage_remunerative_concept, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Wage remunerative concept', new_wage_remunerative_concept_path %>
