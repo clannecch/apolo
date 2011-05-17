@@ -53,7 +53,7 @@
   </div>
   <div class="field">
     <%= f.label :concepto_asociado_haber %><br />
-    <%= f.text_field :concepto_asociado_haber %>
+    <%= f.collection_select(:concepto_asociado_haber_id, @wage_remunerative_concept.all_without_me, :id, :detalle, :prompt => true) %>
   </div>
   <div class="field">
     <%= f.label :concepto_asociado_retencion %><br />

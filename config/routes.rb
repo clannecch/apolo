@@ -1,4 +1,6 @@
 APSSueldos::Application.routes.draw do
+  resources :wage_remunerative_concepts, :path => 'conceptos_remuneraciones'
+
   resources :activities
 
   resources :employee_familiars
