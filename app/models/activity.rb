@@ -11,4 +11,5 @@
 
 class Activity < ActiveRecord::Base
 	has_many :employee_familiars
+  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end

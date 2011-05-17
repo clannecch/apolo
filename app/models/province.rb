@@ -11,4 +11,5 @@
 
 class Province < ActiveRecord::Base
 	has_many :empleados
+  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end

@@ -12,4 +12,5 @@
 class HealthInsurance < ActiveRecord::Base
 	has_many :employees
 	has_many :employee_familiars
+  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end
