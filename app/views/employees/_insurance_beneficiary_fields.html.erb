@@ -1,0 +1,22 @@
+<div class="nested-fields">
+   <div class="field">
+    <%= f.label "Apellido" %><br />
+    <%= f.text_field :apellido %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Nombre" %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label "Tipo de documento" %><br />
+    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label "Numero de Documento" %><br />
+    <%= f.text_field :numero_documento %>
+  </div>
+  <%= link_to_remove_association "Borrar Beneficiario", f %>
+  <hr>
+</div>
+

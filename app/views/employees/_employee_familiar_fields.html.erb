@@ -1,16 +1,4 @@
-<%= form_for(@employee_familiar) do |f| %>
-  <% if @employee_familiar.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee_familiar.errors.count, "error") %> prohibited this employee_familiar from being saved:</h2>
-
-      <ul>
-      <% @employee_familiar.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<div class="nested-fields">
   <div class="field">
     <%= f.label :apellido %><br />
     <%= f.text_field :apellido %>
@@ -75,8 +63,7 @@
     <%= f.label "Actividad" %><br />
     <%= f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true %>
   </div>
-    
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <%= link_to_remove_association "Borrar Familiar", f %>
+  <hr>
+</div>
+

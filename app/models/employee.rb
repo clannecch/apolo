@@ -108,8 +108,11 @@ class Employee < ActiveRecord::Base
 	belongs_to :insurance_company
 	belongs_to :bank_deposit_account_type
 	belongs_to :bank_deposit
-	has_many   :insurance_beneficiary
-	has_many   :employee_familiar
+	has_many   :insurance_beneficiaries
+	has_many   :employee_familiars
+	
+	accepts_nested_attributes_for :employee_familiars, :allow_destroy => true
+	accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
 	
     validates_uniqueness_of		:numero_documento, :scope => :document_type_id,						:message => "existente"
 	validates_uniqueness_of 	:legajo , :case_sensitive => false,									:message => "existente"

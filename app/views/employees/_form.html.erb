@@ -380,6 +380,31 @@
     <%= f.label "CBU Cuenta Bancaria" %><br />
     <%= f.text_field :deposito_banco_cbu %>
   </div>
+  
+  <div class="field">
+    <h3>Familiares</h3>
+    <div id="employee_familiares">
+      <%= f.fields_for :employee_familiars do |employee_familiar| %>
+        <%= render 'employee_familiar_fields', :f => employee_familiar %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Agregar Familiar', f, :employee_familiars %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <h3>Benefiario Seguro</h3>
+    <div id="Insurance_beneficiary">
+      <%= f.fields_for :insurance_beneficiaries do |insurance_beneficiary| %>
+        <%= render 'insurance_beneficiary_fields', :f => insurance_beneficiary %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries %>
+      </div>
+    </div>
+  </div>
+
 
   <div class="actions">
     <%= f.submit %>
