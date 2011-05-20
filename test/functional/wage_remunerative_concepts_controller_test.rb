@@ -17,7 +17,7 @@ class WageRemunerativeConceptsControllerTest < ActionController::TestCase
   end
 
   test "should create wage_remunerative_concept" do
-    assert_difference('WageRemunerativeConcept.count') do
+    assert_difference('RemunerativeConcept.count') do
       post :create, :wage_remunerative_concept => @wage_remunerative_concept.attributes
     end
 
@@ -40,7 +40,7 @@ class WageRemunerativeConceptsControllerTest < ActionController::TestCase
   end
 
   test "should destroy wage_remunerative_concept" do
-    assert_difference('WageRemunerativeConcept.count', -1) do
+    assert_difference('RemunerativeConcept.count', -1) do
       delete :destroy, :id => @wage_remunerative_concept.to_param
     end
 

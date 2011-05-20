@@ -1,7 +1,7 @@
 APSSueldos::Application.routes.draw do
-  resources :wage_remunerative_concepts, :path => 'conceptos_remuneraciones'
+  resources :wage_retention_concepts
 
-  resources :activities
+  resources :activities, :path => 'Actividades'
 
   resources :employee_familiars
 

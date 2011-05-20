@@ -27,8 +27,8 @@
 class EmployeeFamiliar < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :activity
-	has_many :document_types
-	has_many :health_insurance
+	belongs_to :document_type
+	belongs_to :health_insurance
 	
 
 	validates_presence_of		  :nombre,															                      :message => "es un dato requerido"

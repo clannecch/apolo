@@ -82,7 +82,8 @@
 #
 
 class Employee < ActiveRecord::Base
-	belongs_to :document_type
+  belongs_to :document_type
+  belongs_to :educational_level
 	belongs_to :nationality
 	belongs_to :marital_status
 	belongs_to :issued
