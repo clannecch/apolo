@@ -98,7 +98,7 @@ class Employee < ActiveRecord::Base
 	belongs_to :task
 	belongs_to :category
 	belongs_to :remuneration_type
-	belongs_to :group_renumbering
+	belongs_to :group_renuneration
 	belongs_to :group_employer_contribution
 	belongs_to :group_retention
 	belongs_to :cost_center

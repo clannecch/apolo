@@ -1,0 +1,43 @@
+<h1>Listing retention_concepts</h1>
+
+<table>
+  <tr>
+    <th>Codigo</th>
+    <th>Detalle</th>
+    <th>Calculation type</th>
+    <th>Valor</th>
+    <th>Base calculo</th>
+    <th>Pide datos</th>
+    <th>Statistical value</th>
+    <th>Es ganancia</th>
+    <th>Accounting imputation</th>
+    <th>Es auxiliar ganancias</th>
+    <th>Grupo ganancias</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @retention_concepts.each do |retention_concept| %>
+  <tr>
+    <td><%= retention_concept.codigo %></td>
+    <td><%= retention_concept.detalle %></td>
+    <td><%= retention_concept.calculation_type %></td>
+    <td><%= retention_concept.valor %></td>
+    <td><%= retention_concept.base_calculo %></td>
+    <td><%= retention_concept.pide_datos %></td>
+    <td><%= retention_concept.statistical_value %></td>
+    <td><%= retention_concept.es_ganancia %></td>
+    <td><%= retention_concept.accounting_imputation_id %></td>
+    <td><%= retention_concept.es_auxiliar_ganancias %></td>
+    <td><%= retention_concept.grupo_ganancias %></td>
+    <td><%= link_to 'Show', retention_concept %></td>
+    <td><%= link_to 'Edit', edit_retention_concept_path(retention_concept) %></td>
+    <td><%= link_to 'Destroy', retention_concept, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Retention concept', new_retention_concept_path %>

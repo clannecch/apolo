@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  codigo: MyString
+  detalle: MyString
+  calculation_type: 1
+  valor: 9.99
+  base_calculo: MyString
+  pide_datos: false
+  statistical_value: 1
+  accounting_imputation_id: 1
+
+two:
+  codigo: MyString
+  detalle: MyString
+  calculation_type: 1
+  valor: 9.99
+  base_calculo: MyString
+  pide_datos: false
+  statistical_value: 1
+  accounting_imputation_id: 1

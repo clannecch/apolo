@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Codigo:</b>
+  <%= @employer_contribution_concept.codigo %>
+</p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @employer_contribution_concept.detalle %>
+</p>
+
+<p>
+  <b>Calculation type:</b>
+  <%= @employer_contribution_concept.calculation_type %>
+</p>
+
+<p>
+  <b>Valor:</b>
+  <%= @employer_contribution_concept.valor %>
+</p>
+
+<p>
+  <b>Base calculo:</b>
+  <%= @employer_contribution_concept.base_calculo %>
+</p>
+
+<p>
+  <b>Pide datos:</b>
+  <%= @employer_contribution_concept.pide_datos %>
+</p>
+
+<p>
+  <b>Statistical value:</b>
+  <%= @employer_contribution_concept.statistical_value %>
+</p>
+
+<p>
+  <b>Accounting imputation:</b>
+  <%= @employer_contribution_concept.accounting_imputation_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_employer_contribution_concept_path(@employer_contribution_concept) %> |
+<%= link_to 'Back', employer_contribution_concepts_path %>

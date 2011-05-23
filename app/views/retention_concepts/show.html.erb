@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Codigo:</b>
+  <%= @retention_concept.codigo %>
+</p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @retention_concept.detalle %>
+</p>
+
+<p>
+  <b>Calculation type:</b>
+  <%= @retention_concept.calculation_type %>
+</p>
+
+<p>
+  <b>Valor:</b>
+  <%= @retention_concept.valor %>
+</p>
+
+<p>
+  <b>Base calculo:</b>
+  <%= @retention_concept.base_calculo %>
+</p>
+
+<p>
+  <b>Pide datos:</b>
+  <%= @retention_concept.pide_datos %>
+</p>
+
+<p>
+  <b>Statistical value:</b>
+  <%= @retention_concept.statistical_value %>
+</p>
+
+<p>
+  <b>Es ganancia:</b>
+  <%= @retention_concept.es_ganancia %>
+</p>
+
+<p>
+  <b>Accounting imputation:</b>
+  <%= @retention_concept.accounting_imputation_id %>
+</p>
+
+<p>
+  <b>Es auxiliar ganancias:</b>
+  <%= @retention_concept.es_auxiliar_ganancias %>
+</p>
+
+<p>
+  <b>Grupo ganancias:</b>
+  <%= @retention_concept.grupo_ganancias %>
+</p>
+
+
+<%= link_to 'Edit', edit_retention_concept_path(@retention_concept) %> |
+<%= link_to 'Back', retention_concepts_path %>

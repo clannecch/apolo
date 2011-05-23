@@ -1,5 +1,13 @@
 APSSueldos::Application.routes.draw do
-  resources :wage_retention_concepts
+  resources :group_remuneration_relations
+
+  resources :group_remunerations
+
+  resources :employer_contribution_concepts
+
+  resources :retention_concepts
+
+  resources :remunerative_concepts
 
   resources :activities, :path => 'Actividades'
 

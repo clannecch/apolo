@@ -5,7 +5,7 @@ class AddParte3ToEmployee < ActiveRecord::Migration
     add_column :employees, :horas_pactadas, :decimal
     add_column :employees, :remuneracion_fuera_convenio, :decimal
     add_column :employees, :remuneration_type_id, :integer
-    add_column :employees, :group_renumbering_id, :integer
+    add_column :employees, :group_renuneration_id, :integer
     add_column :employees, :group_retention_id, :integer
     add_column :employees, :group_employercontribution_id, :integer
     add_column :employees, :cost_center_id, :integer

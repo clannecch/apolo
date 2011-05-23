@@ -1,0 +1,49 @@
+<%= form_for(@employer_contribution_concept) do |f| %>
+  <% if @employer_contribution_concept.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employer_contribution_concept.errors.count, "error") %> prohibited this employer_contribution_concept from being saved:</h2>
+
+      <ul>
+      <% @employer_contribution_concept.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :codigo %><br />
+    <%= f.text_field :codigo %>
+  </div>
+  <div class="field">
+    <%= f.label :detalle %><br />
+    <%= f.text_field :detalle %>
+  </div>
+  <div class="field">
+    <%= f.label :calculation_type %><br />
+    <%= f.text_field :calculation_type %>
+  </div>
+  <div class="field">
+    <%= f.label :valor %><br />
+    <%= f.text_field :valor %>
+  </div>
+  <div class="field">
+    <%= f.label :base_calculo %><br />
+    <%= f.text_field :base_calculo %>
+  </div>
+  <div class="field">
+    <%= f.label :pide_datos %><br />
+    <%= f.check_box :pide_datos %>
+  </div>
+  <div class="field">
+    <%= f.label :statistical_value %><br />
+    <%= f.text_field :statistical_value %>
+  </div>
+  <div class="field">
+    <%= f.label :accounting_imputation_id %><br />
+    <%= f.text_field :accounting_imputation_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
