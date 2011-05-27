@@ -11,5 +11,6 @@
 
 class GroupEmployerContribution < ActiveRecord::Base
 	has_many :employees
+  has_and_belongs_to_many :employer_contribution_concepts
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end

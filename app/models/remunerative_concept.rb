@@ -6,7 +6,7 @@ class RemunerativeConcept < ActiveRecord::Base
   #has_many :group_remuneration_relations
   has_and_belongs_to_many :group_remunerations
   validate :cannot_asociate_iqual_concept
-  validates_presence_of :detalle, :codigo, :calculation_type, :valor
+  validates_presence_of :detalle, :codigo, :acumuladores_valor
 
   def cannot_asociate_iqual_concept
     if (self.concepto_asociado_haber_id == self.concepto_asociado_haber_2_id) && !self.concepto_asociado_haber_id.nil?
@@ -16,6 +16,10 @@ class RemunerativeConcept < ActiveRecord::Base
 
   def all_without_myself
     (new_record?) ? RemunerativeConcept.all : (RemunerativeConcept.all - [self])
+  end
+
+  def to_s
+    self.try(:detalle) || 'n/a'
   end
 end
 

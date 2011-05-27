@@ -15,6 +15,14 @@
     <%= f.label :detalle %><br />
     <%= f.text_field :detalle %>
   </div>
+  <div class="field">
+    <h3>Codigos de Retenciones</h3>
+    <div class="field">
+      <%= f.label :detalle %><br />
+      <%= f.collection_select :retention_concept_ids, RetentionConcept.all, :id, :detalle, {}, :multiple => true %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

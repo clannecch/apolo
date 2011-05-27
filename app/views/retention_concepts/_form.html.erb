@@ -20,40 +20,28 @@
     <%= f.text_field :detalle %>
   </div>
   <div class="field">
-    <%= f.label :calculation_type %><br />
-    <%= f.text_field :calculation_type %>
+    <%= f.label :formula_calculo_valor %><br />
+    <%= f.text_field :formula_calculo_valor %>
   </div>
   <div class="field">
-    <%= f.label :valor %><br />
-    <%= f.text_field :valor %>
+    <%= f.label :acumuladores_valor %><br />
+    <%= f.text_field :acumuladores_valor %>
   </div>
   <div class="field">
-    <%= f.label :base_calculo %><br />
-    <%= f.text_field :base_calculo %>
+    <%= f.label :prioridad %><br />
+    <%= f.text_field :prioridad %>
   </div>
-  <div class="field">
-    <%= f.label :pide_datos %><br />
-    <%= f.check_box :pide_datos %>
-  </div>
+    <div class="field">
+      <%= f.label "data_to_ask" %><br />
+      <%= f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true %>
+    </div>
   <div class="field">
     <%= f.label :statistical_value %><br />
     <%= f.text_field :statistical_value %>
   </div>
   <div class="field">
-    <%= f.label :es_ganancia %><br />
-    <%= f.check_box :es_ganancia %>
-  </div>
-  <div class="field">
     <%= f.label :accounting_imputation_id %><br />
     <%= f.text_field :accounting_imputation_id %>
-  </div>
-  <div class="field">
-    <%= f.label :es_auxiliar_ganancias %><br />
-    <%= f.text_field :es_auxiliar_ganancias %>
-  </div>
-  <div class="field">
-    <%= f.label :grupo_ganancias %><br />
-    <%= f.text_field :grupo_ganancias %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110523132804) do
+ActiveRecord::Schema.define(:version => 20110526222515) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
 
   create_table "countries", :force => true do |t|
     t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_to_asks", :force => true do |t|
+    t.string   "detalle"
+    t.boolean  "cantidad"
+    t.boolean  "importe"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -180,18 +188,18 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
   create_table "employer_contribution_concepts", :force => true do |t|
     t.string   "codigo"
     t.string   "detalle"
-    t.integer  "calculation_type"
-    t.decimal  "valor"
-    t.string   "base_calculo"
-    t.boolean  "pide_datos"
     t.integer  "statistical_value"
     t.integer  "accounting_imputation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "prioridad"
+    t.string   "acumuladores_valor"
+    t.string   "formula_calculo_valor"
   end
 
-  create_table "employer_contributions", :force => true do |t|
-    t.string   "detalle"
+  create_table "employer_contribution_concepts_group_employer_contributions", :id => false, :force => true do |t|
+    t.integer  "group_employer_contribution_id"
+    t.integer  "employer_contribution_concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -208,14 +216,20 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
     t.datetime "updated_at"
   end
 
-  create_table "group_remuneration_relations", :force => true do |t|
+  create_table "group_remunerations", :force => true do |t|
+    t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_remunerations_remunerative_concepts", :id => false, :force => true do |t|
     t.integer  "group_remuneration_id"
     t.integer  "remunerative_concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "group_remunerations", :force => true do |t|
+  create_table "group_renuneration", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -223,6 +237,13 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
 
   create_table "group_retentions", :force => true do |t|
     t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_retentions_retention_concepts", :id => false, :force => true do |t|
+    t.integer  "group_retention_id"
+    t.integer  "retention_concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -306,14 +327,9 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
   create_table "remunerative_concepts", :force => true do |t|
     t.string   "codigo"
     t.string   "detalle"
-    t.integer  "calculation_type"
-    t.decimal  "valor"
     t.boolean  "porcentual_asistencia"
-    t.string   "base_calculo"
     t.integer  "prioridad_calculo"
-    t.boolean  "pide_datos"
     t.integer  "statistical_value"
-    t.string   "acumulador_cantidad"
     t.integer  "grupo_ganancias_id"
     t.integer  "accounting_imputation_id"
     t.integer  "concepto_asociado_haber_id"
@@ -322,22 +338,24 @@ ActiveRecord::Schema.define(:version => 20110523132804) do
     t.integer  "concepto_asociado_retencion_2_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "acumuladores_valor"
+    t.string   "acumuladores_cantidad"
+    t.string   "calculo_valor"
+    t.string   "calculo_cantidad"
+    t.integer  "data_to_ask_id"
   end
 
   create_table "retention_concepts", :force => true do |t|
     t.string   "codigo"
     t.string   "detalle"
-    t.integer  "calculation_type"
-    t.decimal  "valor"
-    t.string   "base_calculo"
-    t.boolean  "pide_datos"
     t.integer  "statistical_value"
-    t.boolean  "es_ganancia"
     t.integer  "accounting_imputation_id"
-    t.string   "es_auxiliar_ganancias"
-    t.string   "grupo_ganancias"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "prioridad"
+    t.string   "formula_calculo_valor"
+    t.string   "acumuladores_valor"
+    t.integer  "data_to_ask_id"
   end
 
   create_table "sections", :force => true do |t|

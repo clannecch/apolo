@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+    <div class="field">
+      <h3>Codigos de Aportes Patronales</h3>
+      <div class="field">
+        <%= f.label :detalle %><br />
+        <%= f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true %>
+      </div>
+    </div>
+
+
   <div class="field">
     <%= f.label :detalle %><br />
     <%= f.text_field :detalle %>

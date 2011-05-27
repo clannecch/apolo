@@ -1,5 +1,5 @@
 APSSueldos::Application.routes.draw do
-  resources :group_remuneration_relations
+  resources :data_to_asks
 
   resources :group_remunerations
 

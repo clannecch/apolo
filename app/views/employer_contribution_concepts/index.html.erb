@@ -4,10 +4,9 @@
   <tr>
     <th>Codigo</th>
     <th>Detalle</th>
-    <th>Calculation type</th>
-    <th>Valor</th>
-    <th>Base calculo</th>
-    <th>Pide datos</th>
+    <th>Formula de Calculo</th>
+    <th>Acumuladores</th>
+    <th>Prioridad</th>
     <th>Statistical value</th>
     <th>Accounting imputation</th>
     <th></th>
@@ -19,10 +18,9 @@
   <tr>
     <td><%= employer_contribution_concept.codigo %></td>
     <td><%= employer_contribution_concept.detalle %></td>
-    <td><%= employer_contribution_concept.calculation_type %></td>
-    <td><%= employer_contribution_concept.valor %></td>
-    <td><%= employer_contribution_concept.base_calculo %></td>
-    <td><%= employer_contribution_concept.pide_datos %></td>
+    <td><%= employer_contribution_concept.formula_calculo_valor %></td>
+    <td><%= employer_contribution_concept.acumuladores_valor %></td>
+    <td><%= employer_contribution_concept.prioridad %></td>
     <td><%= employer_contribution_concept.statistical_value %></td>
     <td><%= employer_contribution_concept.accounting_imputation_id %></td>
     <td><%= link_to 'Show', employer_contribution_concept %></td>

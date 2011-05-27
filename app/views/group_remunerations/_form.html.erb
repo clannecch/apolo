@@ -18,13 +18,9 @@
 
     <div class="field">
       <h3>Codigos de Remuneraciones</h3>
-      <div id="group_remuneration_relation">
-        <%= f.fields_for :group_remuneration_relations do |group_remuneration_relation| %>
-          <%= render 'group_remuneration_relation_fields', :f => group_remuneration_relation %>
-        <% end %>
-        <div class="links">
-          <%= link_to_add_association 'Agregar Remuneracion', f, :group_remuneration_relation %>
-        </div>
+      <div class="field">
+        <%= f.label :detalle %><br />
+        <%= f.collection_select :remunerative_concept_ids, RemunerativeConcept.all, :id, :detalle, {}, :multiple => true %>
       </div>
     </div>
 

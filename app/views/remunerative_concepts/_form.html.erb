@@ -20,36 +20,37 @@
     <%= f.text_field :detalle %>
   </div>
   <div class="field">
-    <%= f.label :calculation_type %><br />
-    <%= f.text_field :calculation_type %>
-  </div>
-  <div class="field">
-    <%= f.label :valor %><br />
-    <%= f.text_field :valor %>
-  </div>
-  <div class="field">
     <%= f.label :porcentual_asistencia %><br />
     <%= f.check_box :porcentual_asistencia %>
-  </div>
-  <div class="field">
-    <%= f.label :base_calculo %><br />
-    <%= f.text_field :base_calculo %>
   </div>
   <div class="field">
     <%= f.label :prioridad_calculo %><br />
     <%= f.text_field :prioridad_calculo %>
   </div>
+    <div class="field">
+      <%= f.label "data_to_ask" %><br />
+      <%= f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true %>
+    </div>
   <div class="field">
-    <%= f.label :pide_datos %><br />
-    <%= f.check_box :pide_datos %>
+    <%= f.label :calculo_cantidad %><br />
+    <%= f.text_field :calculo_cantidad %>
   </div>
+  <div class="field">
+    <%= f.label :calculo_valor %><br />
+    <%= f.text_field :calculo_valor %>
+  </div>
+
   <div class="field">
     <%= f.label :statistical_value %><br />
     <%= f.text_field :statistical_value %>
   </div>
   <div class="field">
-    <%= f.label :acumulador_cantidad %><br />
-    <%= f.text_field :acumulador_cantidad %>
+    <%= f.label :acumuladores_valor %><br />
+    <%= f.text_field :acumuladores_valor %>
+  </div>
+  <div class="field">
+    <%= f.label :acumuladores_cantidad %><br />
+    <%= f.text_field :acumuladores_cantidad %>
   </div>
   <div class="field">
     <%= f.label :grupo_ganancias_id %><br />
@@ -60,22 +61,19 @@
     <%= f.text_field :accounting_imputation_id %>
   </div>
 
+<% [:concepto_asociado_haber, :concepto_asociado_haber_2].each do |field| %>
   <div class="field">
-    <%= f.label :concepto_asociado_haber %><br />
-    <%= f.text_field :concepto_asociado_haber %>
+    <%= f.label field %><br />
+    <%= f.collection_select("#{field}_id", @remunerative_concept.all_without_myself, :id, :detalle, :prompt => "-- elija un codigo de #{field.to_s.humanize} --") %>
   </div>
+<% end unless RemunerativeConcept.count.zero? %>
+
+<% [:concepto_asociado_retencion, :concepto_asociado_retencion_2].each do |field| %>
   <div class="field">
-    <%= f.label :concepto_asociado_retencion %><br />
-    <%= f.text_field :concepto_asociado_retencion %>
+    <%= f.label field %><br />
+    <%= f.collection_select("#{field}_id", RetentionConcept.all, :id, :detalle, :prompt => "-- elija un codigo de #{field.to_s.humanize} --") %>
   </div>
-  <div class="field">
-    <%= f.label :concepto_asociado_haber_2 %><br />
-    <%= f.text_field :concepto_asociado_haber_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :concepto_asociado_retencion_2 %><br />
-    <%= f.text_field :concepto_asociado_retencion_2 %>
-  </div>
+<% end unless RetentionConcept.count.zero? %>
 
   <div class="actions">
     <%= f.submit %>

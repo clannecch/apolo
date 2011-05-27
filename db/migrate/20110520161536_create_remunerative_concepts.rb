@@ -8,7 +8,7 @@ class CreateRemunerativeConcepts < ActiveRecord::Migration
       t.boolean :porcentual_asistencia
       t.string :base_calculo
       t.integer :prioridad_calculo
-      t.boolean :pide_datos
+      t.integer :pide_datos
       t.integer :statistical_value
       t.string :acumulador_cantidad
       t.integer :grupo_ganancias_id
