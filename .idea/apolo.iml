@@ -74,6 +74,8 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] jquery-rails (v1.0.2, C:/Ruby192/lib/ruby/gems/1.9.1/gems/jquery-rails-1.0.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] cocoon (v1.0.4, C:/Ruby192/lib/ruby/gems/1.9.1/gems/cocoon-1.0.4)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] annotate (v2.4.0, C:/Ruby192/lib/ruby/gems/1.9.1/gems/annotate-2.4.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sqlite3-ruby (v1.3.3, C:/Ruby192/lib/ruby/gems/1.9.1/gems/sqlite3-ruby-1.3.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.9.0, C:/Ruby192/lib/ruby/gems/1.9.1/gems/rake-0.9.0)" level="application" />
   </component>
 </module>
 

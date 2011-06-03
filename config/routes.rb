@@ -37,8 +37,6 @@ APSSueldos::Application.routes.draw do
 
   resources :group_retentions
 
-  resources :group_renumberings
-
   resources :remuneration_types
 
   resources :categories

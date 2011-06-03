@@ -9,6 +9,7 @@
 #  updated_at :datetime
 #
 
+
 class AccountingImputation < ActiveRecord::Base
 	has_many :employees
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"

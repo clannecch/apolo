@@ -98,7 +98,7 @@ class Employee < ActiveRecord::Base
 	belongs_to :task
 	belongs_to :category
 	belongs_to :remuneration_type
-	belongs_to :group_renuneration
+	belongs_to :group_remuneration
 	belongs_to :group_employer_contribution
 	belongs_to :group_retention
 	belongs_to :cost_center
@@ -151,7 +151,7 @@ class Employee < ActiveRecord::Base
   validates_presence_of		    :category_id,														                        :message => "es un dato requerido"
   validates_presence_of		    :health_insurance_id,												                    :message => "es un dato requerido"
   validates_presence_of		    :remuneration_type_id,												                  :message => "es un dato requerido"
-  validates_presence_of		    :group_renumbering_id,												                  :message => "es un dato requerido"
+  validates_presence_of		    :group_remuneration_id,												                  :message => "es un dato requerido"
   validates_presence_of		    :group_retention_id,												                    :message => "es un dato requerido"
   validates_presence_of		    :cost_center_id,													                      :message => "es un dato requerido"
   validates_presence_of		    :contract_mode_id,													                    :message => "es un dato requerido"

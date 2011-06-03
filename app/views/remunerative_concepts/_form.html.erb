@@ -64,14 +64,14 @@
 <% [:concepto_asociado_haber, :concepto_asociado_haber_2].each do |field| %>
   <div class="field">
     <%= f.label field %><br />
-    <%= f.collection_select("#{field}_id", @remunerative_concept.all_without_myself, :id, :detalle, :prompt => "-- elija un codigo de #{field.to_s.humanize} --") %>
+    <%= f.collection_select("#{field}_id", @remunerative_concept.all_without_myself, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"}) %>
   </div>
 <% end unless RemunerativeConcept.count.zero? %>
 
 <% [:concepto_asociado_retencion, :concepto_asociado_retencion_2].each do |field| %>
   <div class="field">
     <%= f.label field %><br />
-    <%= f.collection_select("#{field}_id", RetentionConcept.all, :id, :detalle, :prompt => "-- elija un codigo de #{field.to_s.humanize} --") %>
+    <%= f.collection_select("#{field}_id", RetentionConcept.all, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"}) %>
   </div>
 <% end unless RetentionConcept.count.zero? %>
 

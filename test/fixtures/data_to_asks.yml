@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  detalle: MyString
+  cantidad: false
+  importe: false
+
+two:
+  detalle: MyString
+  cantidad: false
+  importe: false

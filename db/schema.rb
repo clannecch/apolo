@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526222515) do
+ActiveRecord::Schema.define(:version => 20110603143212) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(:version => 20110526222515) do
     t.decimal  "horas_pactadas"
     t.decimal  "remuneracion_fuera_convenio"
     t.integer  "remuneration_type_id"
-    t.integer  "group_renumbering_id"
+    t.integer  "group_remuneration_id"
     t.integer  "group_retention_id"
     t.integer  "cost_center_id"
     t.integer  "antiguedad_reconocida_anos"
