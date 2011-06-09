@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  recibo_sueldo_id: 1
+  remunerative_concept_id: 1
+  retention_concept_id: 1
+  detalle: MyString
+  _tipo: MyString
+  cost_center_id: 1
+  cantidad: 9.99
+  importe: 9.99
+  total: 9.99
+
+two:
+  recibo_sueldo_id: 1
+  remunerative_concept_id: 1
+  retention_concept_id: 1
+  detalle: MyString
+  _tipo: MyString
+  cost_center_id: 1
+  cantidad: 9.99
+  importe: 9.99
+  total: 9.99

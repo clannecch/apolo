@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  liquidacion_id: 1
+  employee_id: 1
+  fecha_recibo: 2011-06-08
+  observaciones: MyString
+  mensaje_recibo: MyString
+
+two:
+  liquidacion_id: 1
+  employee_id: 1
+  fecha_recibo: 2011-06-08
+  observaciones: MyString
+  mensaje_recibo: MyString

@@ -1,0 +1,35 @@
+<h1>Listing detalle_recibo_retencions</h1>
+
+<table>
+  <tr>
+    <th>Recibo sueldo</th>
+    <th>Retention concept</th>
+    <th>Detalle</th>
+    <th>Cost center</th>
+    <th>Cantidad</th>
+    <th>Importe</th>
+    <th>Total</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @detalle_recibo_retencions.each do |detalle_recibo_retencion| %>
+  <tr>
+    <td><%= detalle_recibo_retencion.recibo_sueldo_id %></td>
+    <td><%= detalle_recibo_retencion.retention_concept_id %></td>
+    <td><%= detalle_recibo_retencion.detalle %></td>
+    <td><%= detalle_recibo_retencion.cost_center_id %></td>
+    <td><%= detalle_recibo_retencion.cantidad %></td>
+    <td><%= detalle_recibo_retencion.importe %></td>
+    <td><%= detalle_recibo_retencion.total %></td>
+    <td><%= link_to 'Show', detalle_recibo_retencion %></td>
+    <td><%= link_to 'Edit', edit_detalle_recibo_retencion_path(detalle_recibo_retencion) %></td>
+    <td><%= link_to 'Destroy', detalle_recibo_retencion, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Detalle recibo retencion', new_detalle_recibo_retencion_path %>

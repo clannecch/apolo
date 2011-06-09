@@ -1,0 +1,35 @@
+<h1>Listing detalle_recibo_habers</h1>
+
+<table>
+  <tr>
+    <th>Recibo sueldo</th>
+    <th>Remunerative concept</th>
+    <th>Detalle</th>
+    <th>Cost center</th>
+    <th>Cantidad</th>
+    <th>Importe</th>
+    <th>Total</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @detalle_recibo_habers.each do |detalle_recibo_haber| %>
+  <tr>
+    <td><%= detalle_recibo_haber.recibo_sueldo_id %></td>
+    <td><%= detalle_recibo_haber.remunerative_concept_id %></td>
+    <td><%= detalle_recibo_haber.detalle %></td>
+    <td><%= detalle_recibo_haber.cost_center_id %></td>
+    <td><%= detalle_recibo_haber.cantidad %></td>
+    <td><%= detalle_recibo_haber.importe %></td>
+    <td><%= detalle_recibo_haber.total %></td>
+    <td><%= link_to 'Show', detalle_recibo_haber %></td>
+    <td><%= link_to 'Edit', edit_detalle_recibo_haber_path(detalle_recibo_haber) %></td>
+    <td><%= link_to 'Destroy', detalle_recibo_haber, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Detalle recibo haber', new_detalle_recibo_haber_path %>

@@ -1,0 +1,23 @@
+<h1>Listado de tipos de recibos</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tipo_recibos.each do |tipo_recibo| %>
+  <tr>
+    <td><%= tipo_recibo.detalle %></td>
+    <td><%= link_to 'Visualizar', tipo_recibo %></td>
+    <td><%= link_to 'Editar', edit_tipo_recibo_path(tipo_recibo) %></td>
+    <td><%= link_to 'Volver', tipo_recibo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Tipo recibo', new_tipo_recibo_path %>

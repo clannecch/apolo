@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Liquidacion:</b>
+  <%= @recibo_sueldo.liquidacion_id %>
+</p>
+
+<p>
+  <b>Employee:</b>
+  <%= @recibo_sueldo.employee_id %>
+</p>
+
+<p>
+  <b>Fecha recibo:</b>
+  <%= @recibo_sueldo.fecha_recibo %>
+</p>
+
+<p>
+  <b>Observaciones:</b>
+  <%= @recibo_sueldo.observaciones %>
+</p>
+
+<p>
+  <b>Mensaje recibo:</b>
+  <%= @recibo_sueldo.mensaje_recibo %>
+</p>
+
+
+<%= link_to 'Edit', edit_recibo_sueldo_path(@recibo_sueldo) %> |
+<%= link_to 'Back', recibo_sueldos_path %>

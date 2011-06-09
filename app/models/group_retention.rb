@@ -11,6 +11,7 @@
 
 class GroupRetention < ActiveRecord::Base
 	has_many :employees
+  has_many :retention_concepts
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
   has_and_belongs_to_many :retention_concepts
 end

@@ -1,0 +1,37 @@
+<%= form_for(@recibo_sueldo) do |f| %>
+  <% if @recibo_sueldo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recibo_sueldo.errors.count, "error") %> prohibited this recibo_sueldo from being saved:</h2>
+
+      <ul>
+      <% @recibo_sueldo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :liquidacion_id %><br />
+    <%= f.collection_select :liquidacion_id, Liquidacion.all, :id, :full_period, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :employee_id %><br />
+    <%= f.collection_select :employee_id, Employee.all, :id, :full_name , :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_recibo %><br />
+    <%= f.date_select :fecha_recibo %>
+  </div>
+  <div class="field">
+    <%= f.label :observaciones %><br />
+    <%= f.text_field :observaciones %>
+  </div>
+  <div class="field">
+    <%= f.label :mensaje_recibo %><br />
+    <%= f.text_field :mensaje_recibo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

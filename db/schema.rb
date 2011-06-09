@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603143212) do
+ActiveRecord::Schema.define(:version => 20110609035613) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -70,6 +70,20 @@ ActiveRecord::Schema.define(:version => 20110603143212) do
     t.string   "detalle"
     t.boolean  "cantidad"
     t.boolean  "importe"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "detalle_recibos", :force => true do |t|
+    t.integer  "recibo_sueldo_id"
+    t.integer  "remunerative_concept_id"
+    t.integer  "retention_concept_id"
+    t.string   "detalle"
+    t.string   "type"
+    t.integer  "cost_center_id"
+    t.decimal  "cantidad"
+    t.decimal  "importe"
+    t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -288,6 +302,20 @@ ActiveRecord::Schema.define(:version => 20110603143212) do
     t.datetime "updated_at"
   end
 
+  create_table "liquidacions", :force => true do |t|
+    t.string   "periodo"
+    t.date     "fecha_liquidacion"
+    t.date     "fecha_deposito"
+    t.integer  "bank_deposit_id"
+    t.string   "periodo_deposito"
+    t.date     "fecha_cierre"
+    t.integer  "quincena"
+    t.decimal  "techo_retenciones"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "tipo_recibo_id"
+  end
+
   create_table "locations", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
@@ -314,6 +342,16 @@ ActiveRecord::Schema.define(:version => 20110603143212) do
 
   create_table "provinces", :force => true do |t|
     t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recibo_sueldos", :force => true do |t|
+    t.integer  "liquidacion_id"
+    t.integer  "employee_id"
+    t.date     "fecha_recibo"
+    t.string   "observaciones"
+    t.string   "mensaje_recibo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -365,6 +403,12 @@ ActiveRecord::Schema.define(:version => 20110603143212) do
   end
 
   create_table "tasks", :force => true do |t|
+    t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tipo_recibos", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"

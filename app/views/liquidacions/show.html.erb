@@ -1,0 +1,51 @@
+<h1>Visualizacion de Liquidacion</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Periodo:</b>
+  <%= @liquidacion.periodo %>
+</p>
+
+<p>
+  <b>Tipo de Recibo:</b>
+  <%= @liquidacion.tipo_recibo.try(:detalle) %>
+</p>
+
+<p>
+  <b>Quincena:</b>
+  <%= @liquidacion.quincena %>
+</p>
+
+<p>
+  <b>Fecha liquidacion:</b>
+  <%= @liquidacion.fecha_liquidacion %>
+</p>
+
+<p>
+  <b>Banco ultimo deposito:</b>
+  <%= @liquidacion.bank_deposit_id %>
+</p>
+
+<p>
+  <b>Periodo deposito:</b>
+  <%= @liquidacion.periodo_deposito %>
+</p>
+
+<p>
+  <b>Fecha deposito:</b>
+  <%= @liquidacion.fecha_deposito %>
+</p>
+
+<p>
+  <b>Fecha cierre:</b>
+  <%= @liquidacion.fecha_cierre %>
+</p>
+
+<p>
+  <b>Techo retenciones:</b>
+  <%= @liquidacion.techo_retenciones %>
+</p>
+
+
+<%= link_to 'Editar', edit_liquidacion_path(@liquidacion) %> |
+<%= link_to 'Volver', liquidacions_path %>

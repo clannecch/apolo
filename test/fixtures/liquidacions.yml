@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  periodo: MyString
+  fecha_liquidacion: 2011-06-08
+  fecha_deposito: 2011-06-08
+  bank_deposit_id: 1
+  periodo_deposito: MyString
+  fecha_deposito: 2011-06-08
+  fecha_cierre: 2011-06-08
+  quincena: 1
+  techo_retenciones: 9.99
+
+two:
+  periodo: MyString
+  fecha_liquidacion: 2011-06-08
+  fecha_deposito: 2011-06-08
+  bank_deposit_id: 1
+  periodo_deposito: MyString
+  fecha_deposito: 2011-06-08
+  fecha_cierre: 2011-06-08
+  quincena: 1
+  techo_retenciones: 9.99

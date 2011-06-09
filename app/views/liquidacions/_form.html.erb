@@ -1,0 +1,53 @@
+<%= form_for(@liquidacion) do |f| %>
+  <% if @liquidacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@liquidacion.errors.count, "error") %> prohibited this liquidacion from being saved:</h2>
+
+      <ul>
+      <% @liquidacion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :periodo %><br />
+    <%= f.text_field :periodo %>
+  </div>
+  <div class="field">
+    <%= f.label :quincena %><br />
+    <%= f.text_field :quincena %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_recibo_id %><br />
+    <%= f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_liquidacion %><br />
+    <%= f.date_select :fecha_liquidacion %>
+  </div>
+  <div class="field">
+    <%= "Banco ultimo deposito:"%><br />
+    <%= f.text_field :bank_deposit_id %>
+  </div>
+  <div class="field">
+    <%= f.label :periodo_deposito %><br />
+    <%= f.text_field :periodo_deposito %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_deposito %><br />
+    <%= f.date_select :fecha_deposito %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_cierre %><br />
+    <%= f.date_select :fecha_cierre %>
+  </div>
+  <div class="field">
+    <%= f.label :techo_retenciones %><br />
+    <%= f.text_field :techo_retenciones %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

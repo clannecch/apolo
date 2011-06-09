@@ -1,0 +1,31 @@
+<h1>Listing recibo_sueldos</h1>
+
+<table>
+  <tr>
+    <th>Liquidacion</th>
+    <th>Employee</th>
+    <th>Fecha recibo</th>
+    <th>Observaciones</th>
+    <th>Mensaje recibo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recibo_sueldos.each do |recibo_sueldo| %>
+  <tr>
+    <td><%= recibo_sueldo.liquidacion_id %></td>
+    <td><%= recibo_sueldo.employee_id %></td>
+    <td><%= recibo_sueldo.fecha_recibo %></td>
+    <td><%= recibo_sueldo.observaciones %></td>
+    <td><%= recibo_sueldo.mensaje_recibo %></td>
+    <td><%= link_to 'Show', recibo_sueldo %></td>
+    <td><%= link_to 'Edit', edit_recibo_sueldo_path(recibo_sueldo) %></td>
+    <td><%= link_to 'Destroy', recibo_sueldo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recibo sueldo', new_recibo_sueldo_path %>

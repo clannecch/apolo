@@ -158,4 +158,9 @@ class Employee < ActiveRecord::Base
   validates_presence_of		    :accounting_imputation_id,											                :message => "es un dato requerido"
   validates_presence_of		    :group_employer_contribution_id,									              :message => "es un dato requerido"
 
+  private
+  def full_name
+#    apellido + ', '+nombre
+   [apellido, nombre].compact.join(' ')
+  end
 end

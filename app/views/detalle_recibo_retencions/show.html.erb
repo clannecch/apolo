@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Recibo sueldo:</b>
+  <%= @detalle_recibo_retencion.recibo_sueldo_id %>
+</p>
+
+<p>
+  <b>Retention concept:</b>
+  <%= @detalle_recibo_retencion.retention_concept_id %>
+</p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @detalle_recibo_retencion.detalle %>
+</p>
+
+<p>
+  <b>Cost center:</b>
+  <%= @detalle_recibo_retencion.cost_center_id %>
+</p>
+
+<p>
+  <b>Cantidad:</b>
+  <%= @detalle_recibo_retencion.cantidad %>
+</p>
+
+<p>
+  <b>Importe:</b>
+  <%= @detalle_recibo_retencion.importe %>
+</p>
+
+<p>
+  <b>Total:</b>
+  <%= @detalle_recibo_retencion.total %>
+</p>
+
+
+<%= link_to 'Edit', edit_detalle_recibo_retencion_path(@detalle_recibo_retencion) %> |
+<%= link_to 'Back', detalle_recibo_retencions_path %>

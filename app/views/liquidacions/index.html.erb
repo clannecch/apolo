@@ -1,0 +1,40 @@
+<h1>Listing liquidacions</h1>
+
+<table>
+  <tr>
+    <th>Periodo</th>
+    <th>Fecha liquidacion</th>
+    <th>Tipo Recibo</th>
+    <th>Quincena</th>
+    <th>Fecha deposito</th>
+    <th>Banco ultimo deposito</th>
+    <th>Periodo deposito</th>
+    <th>Fecha deposito</th>
+    <th>Fecha cierre</th>
+    <th>Techo retenciones</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @liquidacions.each do |liquidacion| %>
+  <tr>
+    <td><%= liquidacion.periodo %></td>
+    <td><%= liquidacion.tipo_recibo.try(:detalle) %></td>
+    <td><%= liquidacion.quincena %></td>
+    <td><%= liquidacion.fecha_liquidacion %></td>
+    <td><%= liquidacion.bank_deposit_id %></td>
+    <td><%= liquidacion.periodo_deposito %></td>
+    <td><%= liquidacion.fecha_deposito %></td>
+    <td><%= liquidacion.fecha_cierre %></td>
+    <td><%= liquidacion.techo_retenciones %></td>
+    <td><%= link_to 'Visualizar', liquidacion %></td>
+    <td><%= link_to 'Editar', edit_liquidacion_path(liquidacion) %></td>
+    <td><%= link_to 'Borrar', liquidacion, :confirm => 'Esta Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Liquidacion', new_liquidacion_path %>
