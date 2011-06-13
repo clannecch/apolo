@@ -3,6 +3,7 @@ class RemunerativeConcept < ActiveRecord::Base
   belongs_to :concepto_asociado_retencion, :class_name => "RetentionConcept"
   belongs_to :concepto_asociado_haber_2, :class_name => "RemunerativeConcept"
   belongs_to :concepto_asociado_retencion_2, :class_name => "RetentionConcept"
+  belongs_to :data_to_ask
   #has_many :group_remuneration_relations
   has_and_belongs_to_many :group_remunerations
   validate :cannot_asociate_iqual_concept

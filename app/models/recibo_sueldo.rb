@@ -1,15 +1,20 @@
 class ReciboSueldo < ActiveRecord::Base
   belongs_to              :employee
   belongs_to              :liquidacion
-  has_many                :detalle_recibos
+
+  #has_many                :detalle_recibo, :as => :detallable
+
+  validates_presence_of		:employee_id ,	:message => "es un dato requerido"
+  validates_uniqueness_of :employee_id ,  :Message => "existe liquidacion activa"
+
   has_many                :detalle_recibo_habers
+  accepts_nested_attributes_for :detalle_recibo_habers, :allow_destroy => true
+
   has_many                :detalle_recibo_retencions
+  accepts_nested_attributes_for :detalle_recibo_retencions, :allow_destroy => true
 
-  validates_presence_of		:employee_id ,															            :message => "es un dato requerido"
-
-  after_validation :carga_codigo_predefinido, :on => :create
-
-
+  after_validation        :carga_codigo_predefinido, :on => :create
+#=begin
   private
 
   def carga_codigo_predefinido
@@ -31,5 +36,5 @@ class ReciboSueldo < ActiveRecord::Base
       end
 
   end
-
+#=end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609035613) do
+ActiveRecord::Schema.define(:version => 20110610101506) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -70,6 +70,30 @@ ActiveRecord::Schema.define(:version => 20110609035613) do
     t.string   "detalle"
     t.boolean  "cantidad"
     t.boolean  "importe"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "detalle_recibo_habers", :force => true do |t|
+    t.integer  "recibo_sueldo_id"
+    t.integer  "remunerative_concept_id"
+    t.string   "detalle"
+    t.integer  "cost_center_id"
+    t.decimal  "cantidad"
+    t.decimal  "importe"
+    t.decimal  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "detalle_recibo_retencions", :force => true do |t|
+    t.integer  "recibo_sueldo_id"
+    t.integer  "retention_concept_id"
+    t.string   "detalle"
+    t.integer  "cost_center_id"
+    t.decimal  "cantidad"
+    t.decimal  "importe"
+    t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

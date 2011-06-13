@@ -1,13 +1,13 @@
 APSSueldos::Application.routes.draw do
-  resources :detalle_recibo_retencions
-
-  resources :detalle_recibo_habers
-
   resources :tipo_recibos
 
-  resources :recibo_sueldos
 
-  resources :liquidacions
+  resources :liquidacions do
+    resources :recibo_sueldos do
+      resources :detalle_recibo_retencions
+      resources :detalle_recibo_habers
+    end
+  end
 
   resources :data_to_asks
 

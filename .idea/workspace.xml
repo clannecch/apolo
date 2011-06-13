@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="41d4e5b2-967c-4884-8c8c-7b574bfb45df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/apolo.iml" afterPath="$PROJECT_DIR$/.idea/apolo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+    <list default="true" id="41d4e5b2-967c-4884-8c8c-7b574bfb45df" name="Default" comment="Controles en ingreso de novedadespara que controle valores obligatorios&#10;cambio de estetica (se paso a tabla los detalles)">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_haber_fields.html.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_retencion_fields.html.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20110610101206_create_detalle_recibo_habers.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20110610101506_create_detalle_recibo_retencions.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/employee.rb" afterPath="$PROJECT_DIR$/app/models/employee.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/group_remuneration.rb" afterPath="$PROJECT_DIR$/app/models/group_remuneration.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/group_retention.rb" afterPath="$PROJECT_DIR$/app/models/group_retention.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/detalle_recibo_habers_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/detalle_recibo_habers_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/detalle_recibo_retencions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/detalle_recibo_retencions_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/recibo_sueldos_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/recibo_sueldos_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/detalle_recibo.rb" afterPath="$PROJECT_DIR$/app/models/detalle_recibo.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" afterPath="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb" afterPath="$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" afterPath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/remunerative_concept.rb" afterPath="$PROJECT_DIR$/app/models/remunerative_concept.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liquidacions/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/liquidacions/edit.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/edit.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/new.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
@@ -34,37 +48,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="detalle_recibo.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo.rb">
+      <file leaf-file-name="_detalle_recibo_haber_fields.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_haber_fields.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="27" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
+            <state line="7" column="46" selection-start="433" selection-end="433" vertical-scroll-proportion="-4.576923">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detalle_recibo_haber.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_haber.rb">
+      <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
+            <state line="844" column="0" selection-start="50339" selection-end="50339" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detalle_recibo_retencion.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb">
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="30" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recibo_sueldos_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/recibo_sueldos_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0">
+            <state line="4" column="0" selection-start="36" selection-end="36" vertical-scroll-proportion="0.17258883">
               <folding />
             </state>
           </provider>
@@ -73,7 +78,43 @@
       <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-21.153847">
+            <state line="72" column="39" selection-start="2385" selection-end="2385" vertical-scroll-proportion="-15.038462">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_detalle_recibo_retencion_fields.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_retencion_fields.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="49" selection-start="458" selection-end="458" vertical-scroll-proportion="-5.230769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detalle_recibo_retencion.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="112" selection-end="158" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detalle_recibo_haber.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_haber.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="13" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remunerative_concept.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/remunerative_concept.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="25" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -82,16 +123,7 @@
       <file leaf-file-name="recibo_sueldo.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/recibo_sueldo.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="18" selection-start="879" selection-end="879" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="0" selection-start="3022" selection-end="3022" vertical-scroll-proportion="0.78426397">
+            <state line="10" column="78" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,22 +146,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/liquidacions/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/liquidacions/show.html.erb" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/app/views/detalle_recibo_habers/_form.html.erb" />
-        <option value="$PROJECT_DIR$/db/migrate/20110608215818_cambiar_tipo_por_type.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20110609035613_cambiar_guion_type_por_type.rb" />
-        <option value="$PROJECT_DIR$/app/views/detalle_recibo_retencions/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/models/group_retention.rb" />
-        <option value="$PROJECT_DIR$/app/models/group_remuneration.rb" />
-        <option value="$PROJECT_DIR$/app/models/group_employer_contribution.rb" />
-        <option value="$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb" />
-        <option value="$PROJECT_DIR$/app/models/detalle_recibo.rb" />
-        <option value="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20110610101206_create_detalle_recibo_habers.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20110610101506_create_detalle_recibo_retencions.rb" />
         <option value="$PROJECT_DIR$/app/controllers/recibo_sueldos_controller.rb" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/models/recibo_sueldo.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb" />
+        <option value="$PROJECT_DIR$/app/models/remunerative_concept.rb" />
+        <option value="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_retencion_fields.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_haber_fields.html.erb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -166,6 +198,44 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="RailsProjectView" />
+      <pane id="Favorites" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="db">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,7 +264,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -208,15 +278,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tipo_recibos" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,28 +354,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="liquidacions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apolo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apolo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="group_remunerations" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -322,7 +376,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="detalle_recibo_retencions" />
+              <option name="myItemId" value="employees" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,64 +412,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apolo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apolo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="db">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -427,6 +425,13 @@
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\claudio\apolo\db\migrate" />
+      <recent name="C:\Users\claudio\apolo\app\views\recibo_sueldos" />
+      <recent name="C:\Users\claudio\apolo\app\views\liquidacions" />
+    </key>
   </component>
   <component name="RunManager" selected="Rails.Development: apolo">
     <configuration default="false" name="Default" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console" temporary="true">
@@ -618,7 +623,7 @@
         <option name="repoAuthor" value="clannecch" />
         <option name="repoName" value="apolo" />
         <option name="url" value="https://github.com" />
-        <option name="useHttpAuthentication" value="false" />
+        <option name="useHttpAuthentication" value="true" />
         <option name="useProxy" value="false" />
         <username>clannecch</username>
       </GitHub>
@@ -646,16 +651,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977098" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977098" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296131" sideWeight="0.670229" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25818452" sideWeight="0.670229" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2559524" sideWeight="0.670229" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -663,6 +667,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -683,7 +688,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregue :&#10;liquidacion (Cabecera de liquidacion), recibosueldo(cabecera del recibo), detalle_recibo(detalle de codigos, este se hereda como detalle_recibo_haber, detelle_recibo_retencion)&#10;&#10;Se modifico elmodelo de recibo_sueldo, para que popule (en el caso de un recibo nuevo) detalle_recibo_haber y detalle_recibo_retencion&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controles en ingreso de novedadespara que controle valores obligatorios&#10;cambio de estetica (se paso a tabla los detalles)" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -701,6 +706,7 @@
     <MESSAGE value="se modifico el modelo wage_remunerative_concept. Se modifico la forma que define los belong_to y se definio una clase all_without_me que trae todos los registros menos el que estamos editando&#10;esta clase se agrego al _form.html.erb en el combo de seleccion de concepto asociado.&#10;&#10;Ademas se modifico el config\routes.rb por que faltaba la ruta de  wage_remunerative_concept.(por error se genero en otro directorio)&#10;&#10;Se agrego relacion entre gurpo de honorarios y honorarios.&#10;Se cambio honorarios para que los honorarios relacionados(campos qe apuntan a la misma tabla) funcionen. (se les puso en el modelo :belongs_to :concepto_asociado_haber, :class_name =&gt; &quot;RemunerativeConcept&quot;)&#10;se cambio formulario para que estos datos los puda por bloque y solo si hay algun codigo generado" />
     <MESSAGE value="Se agregaron las relacione para los grupos, se cambieron las estructuras de haberes, retencione sy aportes" />
     <MESSAGE value="Agregue :&#10;liquidacion (Cabecera de liquidacion), recibosueldo(cabecera del recibo), detalle_recibo(detalle de codigos, este se hereda como detalle_recibo_haber, detelle_recibo_retencion)&#10;&#10;Se modifico elmodelo de recibo_sueldo, para que popule (en el caso de un recibo nuevo) detalle_recibo_haber y detalle_recibo_retencion&#10;&#10;" />
+    <MESSAGE value="Controles en ingreso de novedadespara que controle valores obligatorios&#10;cambio de estetica (se paso a tabla los detalles)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,120 +721,120 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/db/schema.rb</url>
-          <line>84</line>
+          <line>108</line>
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="80" selection-end="80" vertical-scroll-proportion="-2.6153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="36" selection-start="892" selection-end="892" vertical-scroll-proportion="-19.615385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="134" selection-end="134" vertical-scroll-proportion="-3.2692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="0" selection-start="2024" selection-end="2024" vertical-scroll-proportion="-17.884615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/employee.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="3157" selection-end="3157" vertical-scroll-proportion="0.028475711">
+        <state line="136" column="0" selection-start="6494" selection-end="6494" vertical-scroll-proportion="0.029360967">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/liquidacions/_form.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/models/employee_familiar.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="633" selection-end="728" vertical-scroll-proportion="0.054817274">
+        <state line="41" column="0" selection-start="1471" selection-end="1471" vertical-scroll-proportion="0.9147541">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/accounting_imputations_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.5398089">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/group_remunerations/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/detalle_recibo_retencions/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="298" selection-end="298" vertical-scroll-proportion="0.17317487">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/group_remuneration.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="32" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/liquidacions/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="68" selection-start="75" selection-end="75" vertical-scroll-proportion="-1.9615384">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_haber.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="27" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/liquidacion.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/detalle_recibo_habers_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="806" selection-end="806" vertical-scroll-proportion="0.8360656">
+        <state line="0" column="0" selection-start="0" selection-end="257" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_retencion.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="30" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-21.153847">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/recibo_sueldos_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0">
+        <state line="5" column="0" selection-start="112" selection-end="158" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/recibo_sueldo.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="18" selection-start="879" selection-end="879" vertical-scroll-proportion="0.0">
+        <state line="10" column="78" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/remunerative_concept.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="3022" selection-end="3022" vertical-scroll-proportion="0.78426397">
+        <state line="5" column="25" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_retencion_fields.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="49" selection-start="458" selection-end="458" vertical-scroll-proportion="-5.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="39" selection-start="2385" selection-end="2385" vertical-scroll-proportion="-15.038462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/detalle_recibo_haber.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recibo_sueldos/_detalle_recibo_haber_fields.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="46" selection-start="433" selection-end="433" vertical-scroll-proportion="-4.576923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="844" column="0" selection-start="50339" selection-end="50339" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="36" selection-end="36" vertical-scroll-proportion="0.17258883">
           <folding />
         </state>
       </provider>

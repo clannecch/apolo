@@ -1,4 +1,4 @@
-<h1>Listing recibo_sueldos</h1>
+<h1>Empleados con Novedades Informadas</h1>
 
 <table>
   <tr>
@@ -19,13 +19,14 @@
     <td><%= recibo_sueldo.fecha_recibo %></td>
     <td><%= recibo_sueldo.observaciones %></td>
     <td><%= recibo_sueldo.mensaje_recibo %></td>
-    <td><%= link_to 'Show', recibo_sueldo %></td>
-    <td><%= link_to 'Edit', edit_recibo_sueldo_path(recibo_sueldo) %></td>
-    <td><%= link_to 'Destroy', recibo_sueldo, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Visualzar', [@liquidacion, recibo_sueldo] %></td>
+    <td><%= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo) %></td>
+    <td><%= link_to 'Borrar', [@liquidacion, recibo_sueldo], :confirm => 'Esta Seguro?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Recibo sueldo', new_recibo_sueldo_path %>
+<%= link_to 'Informar nuevo empleado', new_liquidacion_recibo_sueldo_path(@liquidacion) %> |
+<%= link_to 'Volver', liquidacion_path(@liquidacion) %> |

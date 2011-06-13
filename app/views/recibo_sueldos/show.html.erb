@@ -1,14 +1,7 @@
+<h3>Liquidacion Periodo: <%= @liquidacion.periodo %> Quincena: <%= @liquidacion.quincena%> Tipo liquidacion: <%=@liquidacion.tipo_recibo.try(:detalle)%></h3>
+<h4>Empleado: <%= @recibo_sueldo.employee.apellido %>, <%= @recibo_sueldo.employee.nombre %> </h4>
+
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Liquidacion:</b>
-  <%= @recibo_sueldo.liquidacion_id %>
-</p>
-
-<p>
-  <b>Employee:</b>
-  <%= @recibo_sueldo.employee_id %>
-</p>
 
 <p>
   <b>Fecha recibo:</b>
@@ -26,5 +19,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_recibo_sueldo_path(@recibo_sueldo) %> |
-<%= link_to 'Back', recibo_sueldos_path %>
+<%= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo) %> |
+<%= link_to 'Volver', liquidacion_recibo_sueldos_path %>

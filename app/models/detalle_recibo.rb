@@ -1,3 +1,3 @@
 class DetalleRecibo < ActiveRecord::Base
-  belongs_to :recibo_sueldo
+belongs_to :detallable, :polymorphic => true
 end
