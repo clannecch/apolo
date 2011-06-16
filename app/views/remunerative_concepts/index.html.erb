@@ -25,7 +25,7 @@
     <td><%= remunerative_concept.detalle %></td>
     <td><%= remunerative_concept.porcentual_asistencia %></td>
     <td><%= remunerative_concept.prioridad_calculo %></td>
-    <td><%= remunerative_concept.data_to_ask_id %></td>
+    <td><%= remunerative_concept.data_to_ask.try(:detalle) %></td>
     <td><%= remunerative_concept.statistical_value %></td>
     <td><%= remunerative_concept.grupo_ganancias_id %></td>
     <td><%= remunerative_concept.accounting_imputation_id %></td>

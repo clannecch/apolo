@@ -15,7 +15,7 @@
 <% @recibo_sueldos.each do |recibo_sueldo| %>
   <tr>
     <td><%= recibo_sueldo.liquidacion_id %></td>
-    <td><%= recibo_sueldo.employee_id %></td>
+    <td><%= recibo_sueldo.employee.try(:full_name) %></td>
     <td><%= recibo_sueldo.fecha_recibo %></td>
     <td><%= recibo_sueldo.observaciones %></td>
     <td><%= recibo_sueldo.mensaje_recibo %></td>

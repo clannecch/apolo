@@ -22,7 +22,7 @@
     <td><%= retention_concept.formula_calculo_valor %></td>
     <td><%= retention_concept.acumuladores_valor %></td>
     <td><%= retention_concept.prioridad %></td>
-    <td><%= retention_concept.data_to_ask_id %></td>
+    <td><%= retention_concept.data_to_ask.try(:detalle) %></td>
     <td><%= retention_concept.statistical_value %></td>
     <td><%= retention_concept.accounting_imputation_id %></td>
     <td><%= link_to 'Show', retention_concept %></td>

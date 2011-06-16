@@ -22,7 +22,7 @@
 
 <p>
   <b>Datos a Pedir:</b>
-  <%= @remunerative_concept.data_to_ask_id %>
+  <%= @remunerative_concept.data_to_ask.try(:detalle) %>
 </p>
 
 <p>

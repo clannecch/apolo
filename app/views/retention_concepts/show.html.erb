@@ -27,7 +27,7 @@
 
 <p>
   <b>datos_a_pedir:</b>
-  <%= @retention_concept.data_to_ask_id %>
+  <%= @retention_concept.data_to_ask.try(:detalle) %>
 </p>
 
 <p>
