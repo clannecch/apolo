@@ -81,10 +81,24 @@ class ReciboSueldosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  def calculo_recibo
+    @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
+    @recibo_sueldo.calculo_recibo
+
+    flash[:notice] = "calculado correctamente" if @recibo_sueldo.valid?
+
+    respond_to do |format|
+      format.html # calculo_recibo.html.erb
+    end
+  end
+
   protected
 
   def find_liquidacion
     raise "Debe ingresar una liquidacion!!!!!!!!!!!" if params[:liquidacion_id].blank?
     @liquidacion = Liquidacion.find(params[:liquidacion_id])
   end
+
 end

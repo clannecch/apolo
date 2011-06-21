@@ -15,8 +15,42 @@ class ReciboSueldo < ActiveRecord::Base
 
   after_validation        :carga_codigo_predefinido_create, :on => :create, :if => :employee_id?
   after_validation        :carga_codigo_predefinido_update, :on => :update, :if => :employee_id?
+
+  attr_accessor_with_default :acumuladores, OpenStruct.new
 #=begin
+
+
+  # ":cantidad * @basico"
+  # "self.cantidad * acumuladores.basico"
+  def calcular_recibo
+#    ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
+#    toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
+    detalle_recibo_habers.join(:remunerative_concept).order("remunerative_concepts.prioridad").each do |detalle_recibo_haber|
+#      controla error
+      begin
+#       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
+        detalle_recibo_haber.total = instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo))
+      rescue => e
+#       apila el error (mostrando cual es) y continua
+        errors.add(:base, "Error de calculo: #{e.message}")
+        next
+      end
+#     acumula en cada uno de los acumuladores de remunerative_concepts.acumuladores el split separa por palabra el default de separador es ' '
+      detalle_recibo_haber.remunerative_concept.acumuladores.split(' ').each do |acumulador|
+#       acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
+#       al ejecutarse el send aacumularia en acumuladores.sueldo_basico
+        acumuladores.send("#{acumulador}=", detalle_recibo_haber.total)
+      end
+    end
+
+  end
+
   private
+
+  #reemplaza del parametro los : por el nombre del modelo y el @ por el nombre de la colecicon de acumuladores
+  def prepare_calculo_for_evaluation(str_for_evaluation)
+    str_for_evaluation.gsub(/\:/,'self.').gsub(/@/, 'acumuladores.')
+  end
 
   def carga_codigo_predefinido_create
 
@@ -45,6 +79,5 @@ class ReciboSueldo < ActiveRecord::Base
       end
     end
   end
-
 
 end

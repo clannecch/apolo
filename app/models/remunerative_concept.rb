@@ -21,6 +21,7 @@ class RemunerativeConcept < ActiveRecord::Base
   def to_s
     self.try(:detalle) || 'n/a'
   end
+
 end
 
 

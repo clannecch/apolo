@@ -6,6 +6,9 @@ APSSueldos::Application.routes.draw do
     resources :recibo_sueldos do
       resources :detalle_recibo_retencions
       resources :detalle_recibo_habers
+      member do
+        get "calculo_recibo", :action => :calculo_recibo
+      end
     end
   end
 
