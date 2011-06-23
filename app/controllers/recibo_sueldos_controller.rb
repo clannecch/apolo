@@ -84,11 +84,14 @@ class ReciboSueldosController < ApplicationController
 
 
   def calculo_recibo
+#    se carga con los datos de un recibo
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
-    @recibo_sueldo.calculo_recibo
+# llama al metodo calcular recibo que esta en el modelo
+    @recibo_sueldo.calcular_recibo
+# Muestra un mensaje en el caso que este todo ok (@recibo_sueldo.errors.empty?)
+    flash.now[:notice] = "calculado correctamente" if @recibo_sueldo.errors.empty?
 
-    flash[:notice] = "calculado correctamente" if @recibo_sueldo.valid?
-
+# Se llama a el formulario con el mismo nombre del metodo para que muestre un resultado
     respond_to do |format|
       format.html # calculo_recibo.html.erb
     end

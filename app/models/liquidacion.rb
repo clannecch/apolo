@@ -1,3 +1,22 @@
+# == Schema Information
+# Schema version: 20110621182933
+#
+# Table name: liquidacions
+#
+#  id                :integer         not null, primary key
+#  periodo           :string(255)
+#  fecha_liquidacion :date
+#  fecha_deposito    :date
+#  bank_deposit_id   :integer
+#  periodo_deposito  :string(255)
+#  fecha_cierre      :date
+#  quincena          :integer
+#  techo_retenciones :decimal(, )
+#  created_at        :datetime
+#  updated_at        :datetime
+#  tipo_recibo_id    :integer
+#
+
 class Liquidacion < ActiveRecord::Base
   has_many :recibo_sueldos
   belongs_to :tipo_recibo

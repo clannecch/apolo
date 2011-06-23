@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110513210029
+# Schema version: 20110621182933
 #
 # Table name: employees
 #
@@ -50,7 +50,7 @@
 #  horas_pactadas                   :decimal(, )
 #  remuneracion_fuera_convenio      :decimal(, )
 #  remuneration_type_id             :integer
-#  group_renumbering_id             :integer
+#  group_remuneration_id            :integer
 #  group_retention_id               :integer
 #  cost_center_id                   :integer
 #  antiguedad_reconocida_anos       :integer

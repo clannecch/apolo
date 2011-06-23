@@ -1,6 +1,25 @@
+# == Schema Information
+# Schema version: 20110621182933
+#
+# Table name: detalle_recibo_retencions
+#
+#  id                   :integer         not null, primary key
+#  recibo_sueldo_id     :integer
+#  retention_concept_id :integer
+#  detalle              :string(255)
+#  cost_center_id       :integer
+#  cantidad             :decimal(, )
+#  importe              :decimal(, )
+#  total                :decimal(, )
+#  created_at           :datetime
+#  updated_at           :datetime
+#
+
 class DetalleReciboRetencion < ActiveRecord::Base
   belongs_to :retention_concept
   belongs_to :recibo_sueldo
+
+  delegate :acumuladores, :to => :recibo_sueldo
 
   validates_presence_of :retention_concept_id
 #  validates_numericality_of :cantidad, :if => :cantidad?

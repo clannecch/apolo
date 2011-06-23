@@ -22,6 +22,7 @@
     <td><%= link_to 'Visualzar', [@liquidacion, recibo_sueldo] %></td>
     <td><%= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo) %></td>
     <td><%= link_to 'Borrar', [@liquidacion, recibo_sueldo], :confirm => 'Esta Seguro?', :method => :delete %></td>
+    <td><%= link_to 'Calcular', calculo_recibo_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo.id) %></td>
   </tr>
 <% end %>
 </table>
@@ -30,3 +31,4 @@
 
 <%= link_to 'Informar nuevo empleado', new_liquidacion_recibo_sueldo_path(@liquidacion) %> |
 <%= link_to 'Volver', liquidacion_path(@liquidacion) %> |
+

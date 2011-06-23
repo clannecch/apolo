@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110513210029
+# Schema version: 20110621182933
 #
 # Table name: categories
 #
@@ -7,6 +7,7 @@
 #  detalle    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  importe    :decimal(, )
 #
 
 class Category < ActiveRecord::Base
