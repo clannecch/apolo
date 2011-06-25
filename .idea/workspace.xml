@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="41d4e5b2-967c-4884-8c8c-7b574bfb45df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" afterPath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" />
-    </list>
+    <list default="true" id="41d4e5b2-967c-4884-8c8c-7b574bfb45df" name="Default" comment="" />
     <ignored path="apolo.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
