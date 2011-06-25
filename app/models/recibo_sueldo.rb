@@ -77,30 +77,39 @@ class ReciboSueldo < ActiveRecord::Base
 #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
     detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
 #      controla error
+#     graba en el log
+      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
       begin
-#       graba en el log
-        Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
 #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
         detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
-      rescue => e
-#       apila el error (mostrando cual es) y continua
-        errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
+        rescue => e
+#         apila el error (mostrando cual es) y continua
+          errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
         next
+      end
+      if detalle_recibo_haber.remunerative_concept.calculo_cantidad.present?
+#         controla error
+        begin
+          detalle_recibo_haber.update_attributes(:cantidad_recibo => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)))
+          rescue => e
+#           apila el error (mostrando cual es) y continua
+          errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)}\n#{e.message}")
+          next
+        end
       end
 
 #     acumula en cada uno de los acumuladores de remunerative_concepts.acumuladores el split separa por palabra el default de separador es ' '
       detalle_recibo_haber.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
-#
         acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
-
-        #acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
+#       acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
 #       al ejecutarse el send aacumularia en acumuladores.sueldo_basico
-#        errors.add(:base, "Sumar " +detalle_recibo_haber.total.to_s + " al acumulador " + acumulador.to_s )
         self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
-#        errors.add(:base, "acumuladores.basico = "+self.acumuladores.basico.to_f.to_s)
       end
+#      detalle_recibo_haber.remunerative_concept.acumuladores_cantidad_valor.split(' ').each do |acumulador|
+#        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+#        self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.cantidad.to_f)
+#      end
     end
-
     detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
 #      controla error
       begin
