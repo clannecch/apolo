@@ -19,6 +19,7 @@ class DetalleReciboRetencion < ActiveRecord::Base
   belongs_to :retention_concept
   belongs_to :recibo_sueldo
 
+  delegate :employee, :to => :recibo_sueldo
   delegate :acumuladores, :to => :recibo_sueldo
 
   validates_presence_of :retention_concept_id
@@ -26,6 +27,19 @@ class DetalleReciboRetencion < ActiveRecord::Base
   validates_numericality_of :cantidad, :allow_blank => true
   validates_numericality_of :importe, :allow_blank => true
   validate :validate_retention_concepts_data_to_ask
+
+# reescrive el metodo method_missing que se ejecuta cuando no encuentra un metodo
+# si existe en employee ese metodo lo retorna, caso contrario continua con el default del method_missing
+  def method_missing(method, *args, &block)
+#    Rails.logger.info "METODO MISSING!!!!!!!!!!!! -> #{method.to_s}"
+#    $stdout.puts "METODO MISSING!!!!!!!!!!!! -> #{method.to_s}"
+    if employee.attribute_names.reject{|attr| attr =~ /^id$/}.include?(method.to_s)
+      employee.send(method, *args, &block)
+    else
+      super
+    end
+  end
+
 
   private
   def validate_retention_concepts_data_to_ask

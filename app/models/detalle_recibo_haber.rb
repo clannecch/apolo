@@ -42,7 +42,6 @@ class DetalleReciboHaber < ActiveRecord::Base
     else
       super
     end
-  
   end
 
   private

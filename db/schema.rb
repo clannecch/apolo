@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110621182933) do
+ActiveRecord::Schema.define(:version => 20110624220545) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20110621182933) do
     t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "cantidad_recibo"
   end
 
   create_table "detalle_recibo_retencions", :force => true do |t|
@@ -307,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20110621182933) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "employee_id"
+    t.date     "fecha_nacimiento"
   end
 
   create_table "insurance_companies", :force => true do |t|
@@ -406,6 +408,7 @@ ActiveRecord::Schema.define(:version => 20110621182933) do
     t.string   "calculo_valor"
     t.string   "calculo_cantidad"
     t.integer  "data_to_ask_id"
+    t.string   "cantidad_en_recibo"
   end
 
   create_table "retention_concepts", :force => true do |t|

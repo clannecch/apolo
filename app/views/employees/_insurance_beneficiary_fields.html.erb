@@ -16,6 +16,10 @@
     <%= f.label "Numero de Documento" %><br />
     <%= f.text_field :numero_documento %>
   </div>
+  <div class="field">
+    <%= f.label :fecha_nacimiento %><br />
+    <%= f.date_select :fecha_nacimiento %>
+  </div>
   <%= link_to_remove_association "Borrar Beneficiario", f %>
   <hr>
 </div>

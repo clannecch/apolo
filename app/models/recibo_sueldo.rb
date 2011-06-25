@@ -87,11 +87,17 @@ class ReciboSueldo < ActiveRecord::Base
         errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
         next
       end
+
 #     acumula en cada uno de los acumuladores de remunerative_concepts.acumuladores el split separa por palabra el default de separador es ' '
       detalle_recibo_haber.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
-#       acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
+#
+        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+
+        #acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
 #       al ejecutarse el send aacumularia en acumuladores.sueldo_basico
+#        errors.add(:base, "Sumar " +detalle_recibo_haber.total.to_s + " al acumulador " + acumulador.to_s )
         self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+#        errors.add(:base, "acumuladores.basico = "+self.acumuladores.basico.to_f.to_s)
       end
     end
 
@@ -99,14 +105,15 @@ class ReciboSueldo < ActiveRecord::Base
 #      controla error
       begin
 #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
-        detalle_recibo_retencion.total = detalle_recibo_retencion.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor))
+        detalle_recibo_retencion.update_attributes(:total => detalle_recibo_retencion.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)))
       rescue => e
 #       apila el error (mostrando cual es) y continua
         errors.add(:base, "Error de calculo Retencion: #{prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)}\n#{e.message}")
         next
       end
       detalle_recibo_retencion.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
-        acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+        self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_retencion.total.to_f)
       end
     end
   end
@@ -142,7 +149,7 @@ class ReciboSueldo < ActiveRecord::Base
 # reescrive el metodo method_missing que se ejecuta cuando no encuentra un metodo
 # si existe en employee ese metodo lo retorna, caso contrario continua con el default del method_missing
   def method_missing(method, *args, &block)
-    if employee.respond_to?(method)
+    if employee.attribute_names.reject{|attr| attr =~ /^id$/}.include?(method.to_s)
       employee.send(method, *args, &block)
     else
       super
@@ -158,9 +165,10 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def calculo_antiguedad (fi, pl)
-      a = pl[0.3].to_i - fi.year
-      a = a - 1 if fi.month >  pl[5..6].to_i
+      anos = pl[0..3].to_i - fi.year.to_i + employee.antiguedad_reconocida_anos.to_i
+      nos = anos - 1 if fi.month >  pl[5..6].to_i + employee.antiguedad_reconocida_meses
 # or   (fi.month >= pl[5..6].to_i and fi.day > pl.day)
+      return anos
   end
 
   def calculo_edad(fnac, fhoy)
@@ -169,11 +177,11 @@ class ReciboSueldo < ActiveRecord::Base
 
   def calculo_dias_trabajados_semestre(pl, ingreso , egreso)
       if pl[5..6].to_i < 7
-        finicio = (pl[0.3]+"-01-01").to_date
+        finicio = (pl[0..3]+"-01-01").to_date
       else
-        finicio = (pl[0.3]+"-07-01").to_date
+        finicio = (pl[0..3]+"-07-01").to_date
       end
-      ffinal  = Date.new(pl[0.3].to_i, pl[5..6].to_I,-1)
+      ffinal  = Date.new(pl[0..3].to_i, pl[5..6].to_I,-1)
       unless egreso.nil? && egreso > finicio &&  egreso < ffinal
         ffinal=egreso
       end
