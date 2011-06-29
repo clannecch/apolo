@@ -23,7 +23,7 @@ class ReciboSueldo < ActiveRecord::Base
   has_many                :detalle_recibos
 
   validates_presence_of		:employee_id ,	:message => "es un dato requerido"
-  validates_uniqueness_of :employee_id ,  :message => "existe liquidacion activa"
+  validates_uniqueness_of :employee_id ,  :message => "existe liquidacion activa", :scope => :liquidacion_id
 
   has_many                :detalle_recibo_habers
   accepts_nested_attributes_for :detalle_recibo_habers, :allow_destroy => true
@@ -72,7 +72,14 @@ class ReciboSueldo < ActiveRecord::Base
     else
         self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
     end
-
+    self.acumuladores.mejor_remuneracion_semestre = mejor_remuneracion_semestre
+    self.acumuladores.dias_trabajados_semestre    = calculo_dias_trabajados_semestre(self.liquidacion.periodo,self.employee.fecha_ingreso , self.employee.fecha_egreso)
+    self.acumuladores.dias_vacaciones             = calculo_dias_vacaciones(self.employee.fecha_ingreso ,self.liquidacion.periodo)
+    self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(self.employee.fecha_ingreso ,self.liquidacion.periodo)
+    self.acumuladores.mejor_remuneracion_habitual_anual        = calculo_mejor_remuneracion_habitual_anual
+    self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
+    self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso, self.employee.fecha_egreso)
+#    errors.add(:base, "dias vacaciones "+self.acumuladores.dias_vacaciones.to_s )
 #   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
 #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
     detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
@@ -190,19 +197,100 @@ class ReciboSueldo < ActiveRecord::Base
       else
         finicio = (pl[0..3]+"-07-01").to_date
       end
-      ffinal  = Date.new(pl[0..3].to_i, pl[5..6].to_I,-1)
-      unless egreso.nil? && egreso > finicio &&  egreso < ffinal
-        ffinal=egreso
+      ffinal  = Date.new(pl[0..3].to_i, pl[5..6].to_i, -1)
+      if !egreso.nil?
+        if (egreso.to_date > finicio.to_date) &&  (egreso.to_date < ffinal.to_date)
+          ffinal=egreso
+        end
       end
       if ingreso > finicio
         finicio= ingreso
       end
-      if ingreso.year*100+ingreso.month > pl || egreso.year*100+egreso.month < pl
+      if ingreso.year.to_s+"-"+ingreso.month.to_s > pl || egreso.year.to_s+"-"+egreso.month.to_s < pl
          diastrabajados = 0
       else
-        diastrabajados= finicio - ffinal
+        diastrabajados= ffinal - finicio
       end
       return diastrabajados
   end
 
+  def mejor_remuneracion_semestre
+    if self.liquidacion.periodo[4,5].to_i < 7
+      dpl = self.liquidacion.periodo[0..4]+"01"
+    else
+      dpl = self.liquidacion.periodo[0,4]+"07"
+    end
+#   ntotal = DetalleReciboHaber.group(:recibo_sueldo_id).joins(:remunerative_concept).where(['remunerative_concepts.acumuladores_valor like ?', "%@haberescondescuento%"]).sum(:total)
+#    ntotal = DetalleReciboHaber.joins(:recibo_sueldo).group("recibo_sueldos.employee_id").joins(:remunerative_concept).where(['remunerative_concepts.acumuladores_valor like ? ', "%@haberescondescuento%"]).sum(:total)
+#    ntotal = DetalleReciboHaber.joins(:recibo_sueldo).group(:recibo_sueldos =>{:employee_id}).joins(:remunerative_concept).where(['remunerative_concepts.acumuladores_valor like ? ', "%@haberescondescuento%"]).sum(:total)
+    ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
+              .group("recibo_sueldos.liquidacion_id")
+              .where(:recibo_sueldos => {:employee_id => employee_id})
+              .where(:liquidacions => {:periodo => dpl..liquidacion.periodo})
+              .where('remunerative_concepts.acumuladores_valor like ?',"%@aguinaldo%").sum(:total)
+#       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
+    return ntotal.map{|g| g.last.to_f}.max
+  end
+
+  def calculo_dias_vacaciones(fi, pl)
+    anos = calculo_antiguedad(fi, pl)
+
+    if anos < 1
+      dias_vacaciones = ( ( ( (pl+"-01").to_date - fi) + (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
+      errors.add(:base, "< anos "+dias_vacaciones.to_s)
+    else
+      case anos
+        when 1..9
+          dias_vacaciones = 14 +  7 if anos > 5
+        when 10..19
+          dias_vacaciones = 28
+        else
+          dias_vacaciones = 35
+      end
+    end
+    return dias_vacaciones
+  end
+
+  def calculo_cantidad_sueldos_indemnizacion_despido(fi, pl)
+    anos = calculo_antiguedad(fi, pl)
+    if pl[4..6].to_i - fi.month > 3
+      anos = anos + 1
+    end
+    return anos
+  end
+
+  def calculo_mejor_remuneracion_habitual_anual
+    dpl = liquidacion.periodo[0..4]+"01"
+    hpl = liquidacion.periodo[0..4]+"12"
+    ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
+              .group("recibo_sueldos.liquidacion_id")
+              .where(:recibo_sueldos => {:employee_id => employee_id})
+              .where(:liquidacions => {:periodo => dpl..hpl})
+              .where('remunerative_concepts.acumuladores_valor like ?',"%@remuneracion_habitual%").sum(:total)
+#       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
+    return ntotal.map{|g| g.last.to_f}.max
+  end
+
+  def calculo_cantidad_indemnizacion_falta_preaviso
+    if employee.fecha_egreso.present?
+      if self.acumuladores.antiguedad < 5
+        cantidad = 1
+      else
+        cantidad = 2
+      end
+    else
+      cantidad = 0
+    end
+    return cantidad
+  end
+
+  def calculo_dias_trabajados_mes(fi,fe)
+     if fi.year == fe.year && fi.month == fe.month
+       cantidad = fe.day - fi.month
+     else
+       cantidad = fe.day
+     end
+
+      return cantidad
+  end
 end
