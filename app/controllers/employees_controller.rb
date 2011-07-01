@@ -56,6 +56,7 @@ class EmployeesController < ApplicationController
   # PUT /employees/1
   # PUT /employees/1.xml
   def update
+    #raise params[:employee].inspect
     @employee = Employee.find(params[:id])
 
     respond_to do |format|

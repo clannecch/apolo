@@ -1,9 +1,10 @@
 class EmployeeFamiliarsController < ApplicationController
+  before filter :find_employee
 
   # GET /employee_familiars
   # GET /employee_familiars.xml
   def index
-    @employee_familiars = EmployeeFamiliar.all
+    @employee_familiars = @employee.employee_familiar.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,7 @@ class EmployeeFamiliarsController < ApplicationController
   # GET /employee_familiars/1
   # GET /employee_familiars/1.xml
   def show
-    @employee_familiar = EmployeeFamiliar.find(params[:id])
+    @employee_familiar = @employee.employee_familiar.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +26,7 @@ class EmployeeFamiliarsController < ApplicationController
   # GET /employee_familiars/new
   # GET /employee_familiars/new.xml
   def new
-    @employee_familiar = EmployeeFamiliar.new
+    @employee_familiar = @employee.employee_familiar.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,17 +36,17 @@ class EmployeeFamiliarsController < ApplicationController
 
   # GET /employee_familiars/1/edit
   def edit
-    @employee_familiar = EmployeeFamiliar.find(params[:id])
+    @employee_familiar = @employee.employee_familiar.find(params[:id])
   end
 
   # POST /employee_familiars
   # POST /employee_familiars.xml
   def create
-    @employee_familiar = EmployeeFamiliar.new(params[:employee_familiar])
+    @employee_familiar = @employee.employee_familiar.build(params[@employee, :employee_familiar])
 
     respond_to do |format|
       if @employee_familiar.save
-        format.html { redirect_to(@employee_familiar, :notice => 'Employee familiar was successfully created.') }
+        format.html { redirect_to([@employee, @employee_familiar], :notice => 'Employee familiar was successfully created.') }
         format.xml  { render :xml => @employee_familiar, :status => :created, :location => @employee_familiar }
       else
         format.html { render :action => "new" }
@@ -57,7 +58,7 @@ class EmployeeFamiliarsController < ApplicationController
   # PUT /employee_familiars/1
   # PUT /employee_familiars/1.xml
   def update
-    @employee_familiar = EmployeeFamiliar.find(params[:id])
+    @employee_familiar = @employee.employee_familiar.find(params[:id])
 
     respond_to do |format|
       if @employee_familiar.update_attributes(params[:employee_familiar])
@@ -73,7 +74,7 @@ class EmployeeFamiliarsController < ApplicationController
   # DELETE /employee_familiars/1
   # DELETE /employee_familiars/1.xml
   def destroy
-    @employee_familiar = EmployeeFamiliar.find(params[:id])
+    @employee_familiar = @employee.employee_familiar.find(params[:id])
     @employee_familiar.destroy
 
     respond_to do |format|
@@ -81,4 +82,11 @@ class EmployeeFamiliarsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+  def find_employee
+    raise "Debe Ingresar con un empleado!!!!!!!!!!!" if params[:employee_id].blank?
+    @employee = Employee.find(params[:employee_id])
+  end
+
 end

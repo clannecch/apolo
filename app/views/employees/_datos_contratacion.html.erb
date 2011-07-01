@@ -1,0 +1,64 @@
+<div class="field">
+  <%= f.label "fecha_ingreso" %><br />
+  <%=  f.date_select :fecha_ingreso %>
+</div>
+
+<div class="field">
+  <%= f.label "Modalidad de Contrato" %><br />
+  <%= f.collection_select :contract_mode_id, ContractMode.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "fecha_egreso" %><br />
+  <%=  f.date_select :fecha_egreso %>
+</div>
+
+<div class="field">
+  <%= f.label "horas_pactadas" %><br />
+  <%= f.text_field :horas_pactadas %>
+</div>
+
+<div class="field">
+  <%= f.label "remuneracion_fuera_convenio" %><br />
+  <%= f.text_field :remuneracion_fuera_convenio %>
+</div>
+
+<div class="field">
+  <%= f.label "Tipo de Remuneracion" %><br />
+  <%= f.collection_select :remuneration_type_id, RemunerationType.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Grupo de Remuneraciones" %><br />
+  <%= f.collection_select :group_remuneration_id, GroupRemuneration.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Grupo de Retenciones" %><br />
+  <%= f.collection_select :group_retention_id, GroupRetention.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Grupo de Aportes Patronales" %><br />
+  <%= f.collection_select :group_employer_contribution_id, GroupEmployerContribution.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Centro de costo" %><br />
+  <%= f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Años de Antiguedad Reconocida" %><br />
+  <%= f.text_field :antiguedad_reconocida_anos %>
+</div>
+
+<div class="field">
+  <%= f.label "Meses de Antiguedad Reconocida" %><br />
+  <%= f.text_field :antiguedad_reconocida_meses %>
+</div>
+
+<div class="field">
+  <%= f.label "Imputacion Contable" %><br />
+  <%= f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, :prompt => true %>
+</div>

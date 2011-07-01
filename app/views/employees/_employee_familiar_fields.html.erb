@@ -12,6 +12,10 @@
     <%= f.date_select :fecha_nacimiento %>
   </div>
   <div class="field">
+    <%= f.label "Tipo de Documento" %><br />
+    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
     <%= f.label "Numero de documento" %><br />
     <%= f.text_field :numero_documento %>
   </div>
@@ -50,14 +54,6 @@
   <div class="field">
     <%= f.label "Comuna" %><br />
     <%= f.text_field :comuna %>
-  </div>
-  <div class="field">
-    <%= f.label "Employee_id" %><br />
-    <%= f.text_field :employee_id %>
-  </div>
-  <div class="field">
-    <%= f.label "Tipo de Documento" %><br />
-    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
   </div>
   <div class="field">
     <%= f.label "Actividad" %><br />

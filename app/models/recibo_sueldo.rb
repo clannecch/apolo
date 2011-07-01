@@ -154,6 +154,24 @@ class ReciboSueldo < ActiveRecord::Base
           detalle_recibo_habers.build(:remunerative_concept_id => rc.remunerative_concept.concepto_asociado_haber_2_id, :cost_center_id => employee.cost_center_id)
         end
       end
+#
+    detalle_recibo_haber_adicionados = self.employee.employee_remunerative_concepts.map do |rc|
+      detalle_recibo_habers.build(:remunerative_concept_id => rc.remunerative_concept_id, :cost_center_id => rc.cost_center_id)
+    end
+
+    self.employee.employee_retention_concepts.each do |rc|
+      detalle_recibo_retencions.build(:retention_concept_id => rc.retention_concept_id, :cost_center_id => employee.cost_center_id)
+    end
+
+    detalle_recibo_haber_adicionados.each do |rc|
+      if rc.remunerative_concept.concepto_asociado_haber_id.present?
+        detalle_recibo_habers.build(:remunerative_concept_id => rc.remunerative_concept.concepto_asociado_haber_id, :cost_center_id => employee.cost_center_id)
+      end
+      if rc.remunerative_concept.concepto_asociado_haber_2_id.present?
+        detalle_recibo_habers.build(:remunerative_concept_id => rc.remunerative_concept.concepto_asociado_haber_2_id, :cost_center_id => employee.cost_center_id)
+      end
+    end
+#
   end
 
   def carga_codigo_predefinido_update

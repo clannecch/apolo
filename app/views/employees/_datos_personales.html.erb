@@ -1,0 +1,78 @@
+<div class="field">
+  <%= f.label "Legajo" %><br />
+  <%= f.text_field :legajo %>
+</div>
+
+<div class="field">
+  <%= f.label "Nombre" %><br />
+  <%= f.text_field :nombre %>
+</div>
+
+<div class="field">
+  <%= f.label "Apellido" %><br />
+  <%= f.text_field :apellido %>
+</div>
+
+<div class="field">
+  <%= f.label "Tipo Documento" %><br />
+  <%= f.collection_select :document_type_id, DocumentType.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Numero de Documento" %><br />
+  <%= f.text_field :numero_documento %>
+</div>
+
+<div class="field">
+  <%= f.label "Emitido por" %><br />
+  <%= f.collection_select :issued_id, Issued.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Sexo" %><br />
+  <%= select( "employee", "sexo", { "Masculino" => "M", "Femenino" => "F"}) %>
+</div>
+
+<div class="field">
+  <%= f.label "Nacionalidad" %><br />
+  <%= f.collection_select :nationality_id, Nationality.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Estado Civil" %><br />
+  <%= f.collection_select :marital_status_id, MaritalStatus.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Fecha de Nacimiento" %><br />
+  <%= f.text_field :fecha_nacimiento, :class => :datepicker %>
+</div>
+
+<div class="field">
+  <%= f.label "Nivel de Estudios" %><br />
+  <%= f.collection_select :educational_level_id, EducationalLevel.all, :id, :detalle, :prompt => true %>
+</div>
+
+<div class="field">
+  <%= f.label "Numero Tarjeta de Fichaje" %><br />
+  <%= f.text_field :id_card %>
+</div>
+
+<div class="field">
+  <%= f.label "Numero de Cofre" %><br />
+  <%= f.text_field :numero_cofre %>
+</div>
+<div class="field">
+  <%= f.label "Matricula Nacional" %><br />
+  <%= f.text_field :matricula_nacional %>
+</div>
+
+<div class="field">
+  <%= f.label "Matricula Provincial" %><br />
+  <%= f.text_field :matricula_provincial %>
+</div>
+
+<div class="field">
+  <%= f.label "Discapacidad" %><br />
+  <%= select( "employee", "discapacidad", { "No" => "N", "Si" => "S"}) %>
+</div>
