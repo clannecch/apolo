@@ -87,9 +87,10 @@ class DetalleReciboHabersController < ApplicationController
   protected
   def liquidacion
     raise "Debe Ingresar con Liquidacion!!!!!!!!!!!" if params[:liquidacion_id].blank?
-    @liquidacion = Liquidacon.find(params[:liquidacion_id])
+    @liquidacion = Liquidacion.find(params[:liquidacion_id])
   end
   def find_recibo_sueldo
+
     raise "Debe ingresar un recibo_sueldo!!!!!!!!!!!" if params[:recibi_sueldo_id].blank?
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:recibo_sueldo_id])
   end

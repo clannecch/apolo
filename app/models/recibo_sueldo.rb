@@ -72,14 +72,16 @@ class ReciboSueldo < ActiveRecord::Base
     else
         self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
     end
-    self.acumuladores.mejor_remuneracion_semestre = mejor_remuneracion_semestre
-    self.acumuladores.dias_trabajados_semestre    = calculo_dias_trabajados_semestre(self.liquidacion.periodo,self.employee.fecha_ingreso , self.employee.fecha_egreso)
-    self.acumuladores.dias_vacaciones             = calculo_dias_vacaciones(self.employee.fecha_ingreso ,self.liquidacion.periodo)
+    self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
+    self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
+    self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,self.employee.fecha_ingreso , self.employee.fecha_egreso)
+    self.acumuladores.dias_vacaciones                          = calculo_dias_vacaciones(self.employee.fecha_ingreso ,self.liquidacion.periodo)
     self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(self.employee.fecha_ingreso ,self.liquidacion.periodo)
     self.acumuladores.mejor_remuneracion_habitual_anual        = calculo_mejor_remuneracion_habitual_anual
-    self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
+      self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
     self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso, self.employee.fecha_egreso)
-#    errors.add(:base, "dias vacaciones "+self.acumuladores.dias_vacaciones.to_s )
+    self.acumuladores.dias_vacaciones_no_gozadas               = calculo_dias_vacaciones_no_gozadas(self.employee.fecha_ingreso, self.employee.fecha_egreso,self.liquidacion.periodo)
+
 #   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
 #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
     detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
@@ -209,7 +211,7 @@ class ReciboSueldo < ActiveRecord::Base
       if ingreso.year.to_s+"-"+ingreso.month.to_s > pl || egreso.year.to_s+"-"+egreso.month.to_s < pl
          diastrabajados = 0
       else
-        diastrabajados= ffinal - finicio
+        diastrabajados = ( (ffinal.month - finicio.month) * 30) + ffinal.day
       end
       return diastrabajados
   end
@@ -228,6 +230,21 @@ class ReciboSueldo < ActiveRecord::Base
               .where(:recibo_sueldos => {:employee_id => employee_id})
               .where(:liquidacions => {:periodo => dpl..liquidacion.periodo})
               .where('remunerative_concepts.acumuladores_valor like ?',"%@aguinaldo%").sum(:total)
+#       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
+    return ntotal.map{|g| g.last.to_f}.max
+  end
+
+  def mejor_remuneracion_habitual_semestre
+    if self.liquidacion.periodo[4,5].to_i < 7
+      dpl = self.liquidacion.periodo[0..4]+"01"
+    else
+      dpl = self.liquidacion.periodo[0,4]+"07"
+    end
+    ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
+              .group("recibo_sueldos.liquidacion_id")
+              .where(:recibo_sueldos => {:employee_id => employee_id})
+              .where(:liquidacions => {:periodo => dpl..liquidacion.periodo})
+              .where('remunerative_concepts.acumuladores_valor like ?',"%@remuneracion_habitual%").sum(:total)
 #       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
     return ntotal.map{|g| g.last.to_f}.max
   end
@@ -265,7 +282,7 @@ class ReciboSueldo < ActiveRecord::Base
     ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
               .group("recibo_sueldos.liquidacion_id")
               .where(:recibo_sueldos => {:employee_id => employee_id})
-              .where(:liquidacions => {:periodo => dpl..hpl})
+              .where(:liquidacions => {:periodo[0..3] => dpl..hpl})
               .where('remunerative_concepts.acumuladores_valor like ?',"%@remuneracion_habitual%").sum(:total)
 #       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
     return ntotal.map{|g| g.last.to_f}.max
@@ -290,7 +307,19 @@ class ReciboSueldo < ActiveRecord::Base
      else
        cantidad = fe.day
      end
+     if cantidad > 30
+       cantidad = 30
+     end
+     return cantidad
+  end
 
-      return cantidad
+  def calculo_dias_vacaciones_no_gozadas(fi,fe,pl)
+    if fi.year < pl[0..3].to_i
+      fi =(pl[0..4] + "01-01").to_date
+    end
+    cantidad = (fe.month - fi.month)
+    cantidad = cantidad * 30 + fe.day
+    cantidad = (self.acumuladores.dias_vacaciones.to_f / 360) * cantidad
+    return cantidad
   end
 end

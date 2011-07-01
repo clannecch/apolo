@@ -216,11 +216,6 @@
     <%= f.text_field :cuil %>
   </div>
 
-
-
-
-
-
   <div class="field">
     <%= f.label "fecha_ingreso" %><br />
     <%=  f.date_select :fecha_ingreso %>
@@ -396,15 +391,67 @@
   <div class="field">
     <h3>Benefiario Seguro</h3>
     <div id="Insurance_beneficiary">
-      <%= f.fields_for :insurance_beneficiaries do |insurance_beneficiary| %>
-        <%= render 'insurance_beneficiary_fields', :f => insurance_beneficiary %>
-      <% end %>
+      <table class="field">
+        <tr>
+           <th><%= f.label "Apellido" %></th>
+           <th><%= f.label "Nombre" %></th>
+           <th><%= f.label "Tipo documento" %></th>
+           <th><%= f.label "Numero de Documento" %></th>
+           <th><%= f.label "Fecha Nacimiento" %></th>
+           <th>&nbsp;</th>
+        </tr>
+        <%= f.fields_for :insurance_beneficiaries do |insurance_beneficiary| %>
+          <%= render 'insurance_beneficiary_fields', :f => insurance_beneficiary %>
+        <% end %>
+      </table>
       <div class="links">
         <%= link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries %>
       </div>
     </div>
   </div>
 
+    <div class="field">
+      <h3>Conceptos remunerativos personalizados</h3>
+      <div id="employee_remunerative_concept">
+        <table class="field">
+          <tr>
+             <th><%= f.label "Concepto haber" %></th>
+             <th><%= f.label "Detalle Personalizado" %></th>
+             <th><%= f.label "Centro Costo" %></th>
+             <th><%= f.label "Cantidad" %></th>
+             <th><%= f.label "Importe" %></th>
+             <th>&nbsp;</th>
+          </tr>
+          <%= f.fields_for :employee_remunerative_concepts do |erc| %>
+            <%= render 'employee_remunerative_concept_fields', :f => erc %>
+          <% end %>
+        </table>
+        <div class="links">
+          <%= link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts %>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <h3>Conceptos de retenciones personalizados</h3>
+      <div id="employee_retention_concept">
+        <table class="field">
+          <tr>
+             <th><%= f.label "Concepto haber" %></th>
+             <th><%= f.label "Detalle Personalizado" %></th>
+             <th><%= f.label "Cantidad" %></th>
+             <th><%= f.label "Importe" %></th>
+             <th>&nbsp;</th>
+          </tr>
+          <%= f.fields_for :employee_retention_concepts do |erc| %>
+            <%= render 'employee_retention_concept_fields', :f => erc %>
+          <% end %>
+        </table>
+        <div class="links">
+          <%= link_to_add_association 'Agregar retencion', f, :employee_retention_concepts %>
+        </div>
+      </div>
+    </div>
 
   <div class="actions">
     <%= f.submit %>

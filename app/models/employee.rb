@@ -110,11 +110,16 @@ class Employee < ActiveRecord::Base
 	belongs_to :bank_deposit_account_type
 	belongs_to :bank_deposit
 	has_many   :insurance_beneficiaries
-	has_many   :employee_familiars
-	
+  has_many   :employee_familiars
+  has_many   :employee_remunerative_concepts
+  has_many   :employee_retention_concepts
+
 	accepts_nested_attributes_for :employee_familiars, :allow_destroy => true
-	accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
-	
+  accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
+  accepts_nested_attributes_for :employee_remunerative_concepts, :allow_destroy => true
+  accepts_nested_attributes_for :employee_retention_concepts, :allow_destroy => true
+
+
   validates_uniqueness_of		  :numero_documento, :scope => :document_type_id,						      :message => "existente"
 	validates_uniqueness_of 	  :legajo , :case_sensitive => false,									            :message => "existente"
 	validates_length_of			    :apellido, :maximum => 30 , :minimum => 2	, 						        :message => "longitud invalida"

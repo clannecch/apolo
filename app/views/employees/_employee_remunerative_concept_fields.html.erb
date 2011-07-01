@@ -1,0 +1,8 @@
+  <tr class="nested-fields">
+    <td><%= f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, :prompt => true %></td>
+    <td><%= f.text_field :detalle %></td>
+    <td><%= f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, :prompt => true %></td>
+    <td><%= f.text_field :cantidad%></td>
+    <td><%= f.text_field :importe %></td>
+    <td><%= link_to_remove_association "Borrar", f %></td>
+  </tr>

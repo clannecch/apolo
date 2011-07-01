@@ -1,26 +1,9 @@
-<div class="nested-fields">
-   <div class="field">
-    <%= f.label "Apellido" %><br />
-    <%= f.text_field :apellido %>
-  </div>
+<tr class="nested-fields">
+  <td><%= f.text_field :apellido %></dt>
+  <td><%= f.text_field :nombre %></dt>
+   <td><%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true  %></td>
+   <td><%= f.text_field :numero_documento %></td>
+   <td><%= f.date_select :fecha_nacimiento%></td>
+ </tr>
 
-  <div class="field">
-    <%= f.label "Nombre" %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label "Tipo de documento" %><br />
-    <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>
-  </div>
-  <div class="field">
-    <%= f.label "Numero de Documento" %><br />
-    <%= f.text_field :numero_documento %>
-  </div>
-  <div class="field">
-    <%= f.label :fecha_nacimiento %><br />
-    <%= f.date_select :fecha_nacimiento %>
-  </div>
-  <%= link_to_remove_association "Borrar Beneficiario", f %>
-  <hr>
-</div>
 

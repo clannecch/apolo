@@ -15,6 +15,8 @@
 #  updated_at              :datetime
 #
 
+require 'custom_validators'
+
 class DetalleReciboHaber < ActiveRecord::Base
 # has_many   :remunerative_concepts
   belongs_to :remunerative_concept
@@ -24,6 +26,8 @@ class DetalleReciboHaber < ActiveRecord::Base
   delegate :employee, :to => :recibo_sueldo
   # hace esto
 
+  include MultiplicacionPorOcho
+
   def acumuladores
     ReciboSueldo.acumuladores
   end
@@ -32,7 +36,7 @@ class DetalleReciboHaber < ActiveRecord::Base
   validates_uniqueness_of   :remunerative_concept_id, :scope => [:cost_center_id, :recibo_sueldo_id]
   validates_numericality_of :cantidad, :if => :cantidad?
   validates_numericality_of :importe, :allow_blank => true
-  validate :validate_remunerative_concepts_data_to_ask
+  validates_with RemunerativeConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :remunerative_concept_id?
 
 
 # reescrive el metodo method_missing que se ejecuta cuando no encuentra un metodo
@@ -43,34 +47,5 @@ class DetalleReciboHaber < ActiveRecord::Base
     else
       super
     end
-  end
-
-  private
-  def validate_remunerative_concepts_data_to_ask
-
-    errors.add(:cantidad, "Debe Indicar cantidad en Haber") if remunerative_concept.data_to_ask.cantidad? && cantidad.to_i.zero?
-    errors.add(:importe,  "Debe Indicar importe en Haber" ) if remunerative_concept.data_to_ask.importe? && importe.to_i.zero?
-
-    errors.add(:cantidad,  "No debe indicar cantidad en Haber" ) if !remunerative_concept.data_to_ask.cantidad? && cantidad.present?
-    errors.add(:importe,  "No debe indicar importe en Haber" ) if !remunerative_concept.data_to_ask.importe? && importe.present?
-
-#    errors.add(:cantidad, "No debe informar cantidad en Haber") unless remunerative_concept.data_to_ask.cantidad? && cantidad.blank?
-
-#    case remunerative_concept.data_to_ask_id
-#      when 1
-#        importe.blank? && cantidad?
-#        errors.add(:importe, "importe no puede estar lleno")
-#      when 2
-#        cantidad.blank? && importe?
-#        errors.add(:cantidad, "cantidad no puede estar lleno")
-#      else
-#        errors.add(:cantidad, "cantidad debe estar lleno") if cantidad.blank? || cantidad.zero?
-#        errors.add(:importe, "importe debe estar lleno") if importe.blank? || importe.zero?
-#   end
-
-
-
-
-
   end
 end

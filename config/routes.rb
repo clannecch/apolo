@@ -1,4 +1,12 @@
 APSSueldos::Application.routes.draw do
+
+  resources :employees do
+    resources :employee_familiars
+    resources :employee_retention_concepts
+    resources :employee_remunerative_concepts
+  end
+  resources :deduccion_ganancias_tables
+
   resources :tipo_recibos
 
 
@@ -23,8 +31,6 @@ APSSueldos::Application.routes.draw do
   resources :remunerative_concepts
 
   resources :activities, :path => 'Actividades'
-
-  resources :employee_familiars
 
   resources :insurance_beneficiaries
 
@@ -80,7 +86,6 @@ APSSueldos::Application.routes.draw do
 
   resources :document_types
 
-  resources :employees
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,4 +1,5 @@
 class EmployeeFamiliarsController < ApplicationController
+
   # GET /employee_familiars
   # GET /employee_familiars.xml
   def index

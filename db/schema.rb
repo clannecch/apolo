@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110624220545) do
+ActiveRecord::Schema.define(:version => 20110701040526) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -71,6 +71,18 @@ ActiveRecord::Schema.define(:version => 20110624220545) do
     t.string   "detalle"
     t.boolean  "cantidad"
     t.boolean  "importe"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "deduccion_ganancias_tables", :force => true do |t|
+    t.string   "periodo"
+    t.float    "no_imponibles"
+    t.float    "conyuge"
+    t.float    "hijo"
+    t.float    "otras"
+    t.float    "especial_inciso_e"
+    t.float    "especial_inciso_abc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -145,6 +157,31 @@ ActiveRecord::Schema.define(:version => 20110624220545) do
     t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "employee_remunerative_concepts", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "remunerative_concept_id"
+    t.integer  "cantidad"
+    t.float    "importe"
+    t.date     "fecha_inicio"
+    t.date     "fecha_final"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cost_center_id"
+    t.text     "detalle"
+  end
+
+  create_table "employee_retention_concepts", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "retention_concept_id"
+    t.integer  "cantidad"
+    t.float    "importe"
+    t.date     "fecha_inicio"
+    t.date     "fecha_final"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "detalle"
   end
 
   create_table "employees", :force => true do |t|
