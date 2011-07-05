@@ -1,6 +1,7 @@
+<h3>Contratacion</h3>
 <div class="field">
   <%= f.label "fecha_ingreso" %><br />
-  <%=  f.date_select :fecha_ingreso %>
+  <%= f.text_field :fecha_ingreso, :class => :datepicker %>
 </div>
 
 <div class="field">
@@ -10,7 +11,12 @@
 
 <div class="field">
   <%= f.label "fecha_egreso" %><br />
-  <%=  f.date_select :fecha_egreso %>
+  <%= f.text_field :fecha_egreso, :class => :datepicker %>
+</div>
+
+<div class="field">
+  <%= f.label "Causa de Egreso" %><br />
+  <%= f.collection_select :causa_egreso_id, CausaEgreso.all, :id, :detalle, :prompt => true %>
 </div>
 
 <div class="field">

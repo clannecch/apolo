@@ -1,5 +1,9 @@
 APSSueldos::Application.routes.draw do
 
+  resources :causa_egresos
+
+  resources :email_types
+
   resources :employees do
     resources :employee_familiars
     resources :employee_retention_concepts

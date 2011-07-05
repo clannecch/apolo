@@ -1,3 +1,5 @@
+<%= f.label "" %><br />
+<h3>Domicilio</h3>
 <div class="field">
   <%= f.label "Telefono" %><br />
   <%= f.text_field :telefono %>
@@ -84,7 +86,7 @@
 
 <div class="field">
   <%= f.label "Tipo de Email" %><br />
-  <%= f.text_field :email_type_id %>
+  <%= f.collection_select :email_type_id, EmailType.all, :id, :detalle, :prompt => true %>
 </div>
 
 <div class="field">

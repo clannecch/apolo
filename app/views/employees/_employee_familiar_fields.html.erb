@@ -3,14 +3,17 @@
     <%= f.label :apellido %><br />
     <%= f.text_field :apellido %>
   </div>
+
   <div class="field">
     <%= f.label :nombre %><br />
     <%= f.text_field :nombre %>
   </div>
+
   <div class="field">
     <%= f.label :fecha_nacimiento %><br />
-    <%= f.date_select :fecha_nacimiento %>
+    <%= f.text_field :fecha_nacimiento, :class => :datepicker %>
   </div>
+
   <div class="field">
     <%= f.label "Tipo de Documento" %><br />
     <%= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true %>

@@ -9,7 +9,20 @@
          clear:both;
      }
    </style>
+    <%=javascript_tag do %>
+        $( "#employee_fecha_nacimiento" ).datepicker({
+            defaultDate: -<%= 18.years.days %>,
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date(1901, 1 - 1, 1),
+            maxDate: (new Date).setFullYear("<%= Date.today.year - 18 %>")
+        });
+
+    <% end %>
 <% end %>
+
+
+localizacion: <%= I18n.locale %>
 
 <%= form_for(@employee) do |f| %>
   <% if @employee.errors.any? %>
@@ -24,12 +37,16 @@
     </div>
   <% end %>
   <ul class="tabs">
-	<li><a href="#">Tab 1</a></li>
-	<li><a href="#">Tab 2</a></li>
-	<li><a href="#">Tab 3</a></li>
-    <li><a href="#">Tab 1</a></li>
-	<li><a href="#">Tab 2</a></li>
-	<li><a href="#">Tab 3</a></li>
+	<li><a href="#">Personales</a></li>
+	<li><a href="#">Domicilio</a></li>
+	<li><a href="#">Ocupacion</a></li>
+    <li><a href="#">Filiacion</a></li>
+	<li><a href="#">Contratacion</a></li>
+    <li><a href="#">Banco-Seguro</a></li>
+    <li><a href="#">Familiares</a></li>
+    <li><a href="#">Benef.Seguro</a></li>
+    <li><a href="#">Remuneraciones</a></li>
+    <li><a href="#">Retenciones</a></li>
   </ul>
   <div class="panels">
     <div class="panel">
@@ -44,17 +61,16 @@
     <div class="panel">
       <%= render :partial => 'datos_filiacion', :locals => {:f => f} %>
     </div>
-
     <div class="panel">
       <%= render :partial => 'datos_contratacion', :locals => {:f => f} %>
     </div>
-
     <div class="panel">
       <%= render :partial => 'datos_seguro_banco', :locals => {:f => f} %>
     </div>
 
     <div  class="panel">
-      <div class="field">
+      <div class="field-nested">
+        <%= f.label " " %><br />
         <h3>Familiares</h3>
         <div id="employee_familiares">
           <%= f.fields_for :employee_familiars do |employee_familiar| %>
@@ -80,12 +96,14 @@
                <th><%= f.label "Fecha Nacimiento" %></th>
                <th>&nbsp;</th>
             </tr>
+            <tbody id="nested-holder">
             <%= f.fields_for :insurance_beneficiaries do |insurance_beneficiary| %>
               <%= render 'insurance_beneficiary_fields', :f => insurance_beneficiary %>
             <% end %>
+            </tbody>
           </table>
           <div class="links">
-            <%= link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries %>
+            <%= link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries, 'data-association-insertion-node' => '#nested-holder', 'data-association-insertion-position' => :before %>
           </div>
         </div>
       </div>
@@ -104,12 +122,14 @@
                <th><%= f.label "Importe" %></th>
                <th>&nbsp;</th>
             </tr>
-            <%= f.fields_for :employee_remunerative_concepts do |erc| %>
-              <%= render 'employee_remunerative_concept_fields', :f => erc %>
-            <% end %>
+           <tbody id="nested-holder2">
+                <%= f.fields_for :employee_remunerative_concepts do |erc| %>
+                     <%= render 'employee_remunerative_concept_fields', :f => erc %>
+                <% end %>
+            </tbody>
           </table>
           <div class="links">
-            <%= link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts %>
+            <%= link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts, 'data-association-insertion-node' => '#nested-holder2', 'data-association-insertion-position' => :before  %>
           </div>
         </div>
       </div>
@@ -127,12 +147,14 @@
                <th><%= f.label "Importe" %></th>
                <th>&nbsp;</th>
             </tr>
-            <%= f.fields_for :employee_retention_concepts do |erc| %>
-              <%= render 'employee_retention_concept_fields', :f => erc %>
-            <% end %>
+            <tbody id="nested-holder3">
+                <%= f.fields_for :employee_retention_concepts do |erc| %>
+                  <%= render 'employee_retention_concept_fields', :f => erc %>
+                <% end %>
+            </tbody>
           </table>
           <div class="links">
-            <%= link_to_add_association 'Agregar retencion', f, :employee_retention_concepts %>
+            <%= link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before  %>
           </div>
         </div>
       </div>

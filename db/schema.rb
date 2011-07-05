@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701040526) do
+ActiveRecord::Schema.define(:version => 20110705185341) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(:version => 20110701040526) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "importe"
+  end
+
+  create_table "causa_egresos", :force => true do |t|
+    t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "character_services", :force => true do |t|
@@ -133,6 +139,12 @@ ActiveRecord::Schema.define(:version => 20110701040526) do
   end
 
   create_table "educational_levels", :force => true do |t|
+    t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "email_types", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -260,6 +272,7 @@ ActiveRecord::Schema.define(:version => 20110701040526) do
     t.string   "deposito_banco_cuenta"
     t.string   "deposito_banco_cbu"
     t.integer  "group_employer_contribution_id"
+    t.integer  "causa_egreso_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
