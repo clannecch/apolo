@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <h3>Liquidacion Periodo: <%= @liquidacion.periodo %> Quincena: <%= @liquidacion.quincena%> Tipo liquidacion: <%=@liquidacion.tipo_recibo.try(:detalle)%></h3>
+  <h3>Liquidacion Periodo: <%= @liquidacion.periodo_ano %> / <%= @liquidacion.periodo_mes %> Quincena: <%= @liquidacion.quincena%> Tipo liquidacion: <%=@liquidacion.tipo_recibo.try(:detalle)%></h3>
   <% if @recibo_sueldo.new_record? %>
     <div class="field">
         <%= f.label :employee_id %><br />

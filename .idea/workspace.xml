@@ -2,23 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41d4e5b2-967c-4884-8c8c-7b574bfb45df" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20110706162323_cambiar_periodo_to_deduccion_ganancias_table.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20110706162424_cambiar_periodo_mes_to_liquidacion.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/employee.rb" afterPath="$PROJECT_DIR$/app/models/employee.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_contratacion.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_contratacion.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_domicilio.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_domicilio.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_filiacion.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_filiacion.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_ocupacion.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_ocupacion.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_personales.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_personales.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" afterPath="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/liquidacion.rb" afterPath="$PROJECT_DIR$/app/models/liquidacion.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" afterPath="$PROJECT_DIR$/app/models/recibo_sueldo.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_datos_seguro_banco.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_datos_seguro_banco.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_insurance_beneficiary_fields.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/_insurance_beneficiary_fields.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/show.html.erb" afterPath="$PROJECT_DIR$/app/views/employees/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liquidacions/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/liquidacions/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liquidacions/index.html.erb" afterPath="$PROJECT_DIR$/app/views/liquidacions/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liquidacions/show.html.erb" afterPath="$PROJECT_DIR$/app/views/liquidacions/show.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" afterPath="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/application.js" afterPath="$PROJECT_DIR$/public/javascripts/application.js" />
     </list>
     <ignored path="apolo.iws" />
@@ -43,37 +42,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="employee.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/employee.rb">
+      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/liquidacions/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="37" selection-start="8128" selection-end="8128" vertical-scroll-proportion="0.0">
+            <state line="52" column="62" selection-start="1414" selection-end="1414" vertical-scroll-proportion="-5.8846154">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20110706162424_cambiar_periodo_mes_to_liquidacion.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20110706162424_cambiar_periodo_mes_to_liquidacion.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/employees/show.html.erb">
+        <entry file="file://$PROJECT_DIR$/app/views/liquidacions/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="24" selection-start="1784" selection-end="1784" vertical-scroll-proportion="-17.0">
+            <state line="25" column="52" selection-start="418" selection-end="418" vertical-scroll-proportion="-7.6538463">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recibo_sueldo.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/recibo_sueldo.rb">
+      <file leaf-file-name="liquidacion.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/liquidacion.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="77" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
+            <state line="22" column="26" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_datos_seguro_banco.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_seguro_banco.html.erb">
+      <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/schema.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.8305648">
+            <state line="32" column="20" selection-start="1238" selection-end="1242" vertical-scroll-proportion="-5.16">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="-8.923077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/application.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="20" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -96,22 +122,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/employees_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/config/application.rb" />
-        <option value="$PROJECT_DIR$/config/locales/es-AR.yml" />
-        <option value="$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_insurance_beneficiary_fields.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_personales.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_ocupacion.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_filiacion.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_seguro_banco.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_domicilio.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/employees/_datos_contratacion.html.erb" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/app/models/employee.rb" />
+        <option value="$PROJECT_DIR$/app/views/deduccion_ganancias_tables/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/liquidacions/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/show.html.erb" />
+        <option value="$PROJECT_DIR$/db/migrate/20110706162323_cambiar_periodo_to_deduccion_ganancias_table.rb" />
+        <option value="$PROJECT_DIR$/app/views/recibo_sueldos/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/detalle_recibo_haber.rb" />
+        <option value="$PROJECT_DIR$/app/models/recibo_sueldo.rb" />
         <option value="$PROJECT_DIR$/app/views/employees/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/public/javascripts/application.js" />
+        <option value="$PROJECT_DIR$/app/models/liquidacion.rb" />
+        <option value="$PROJECT_DIR$/app/views/liquidacions/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/liquidacions/_form.html.erb" />
+        <option value="$PROJECT_DIR$/db/migrate/20110706162424_cambiar_periodo_mes_to_liquidacion.rb" />
       </list>
     </option>
   </component>
@@ -148,43 +174,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apolo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="db">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Favorites" />
       <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
@@ -214,6 +203,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apolo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -240,7 +293,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="employees" />
+              <option name="myItemId" value="employee_familiars" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,17 +331,54 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="apolo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="db">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="preferences.general" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.general" />
     <property name="last_opened_file_path" value="$USER_HOME$/apolo - Copy/db" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -520,9 +610,10 @@
       <window_info id="Data Sources" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296131" sideWeight="0.670229" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23511904" sideWeight="0.670229" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23288691" sideWeight="0.670229" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897604" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -530,7 +621,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -552,7 +642,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="solapas en employee y control de jecha js." />
+    <option name="LAST_COMMIT_MESSAGE" value="Controles en employee. algo de refactoring en validates" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -577,6 +667,7 @@
     <MESSAGE value="Calculo de aguinaldo sobre las indemnizaciones y seagrega haberes y retenciones personalidados por empleado solo abm de pacientes" />
     <MESSAGE value="solapas en employee y control de jecha js" />
     <MESSAGE value="solapas en employee y control de jecha js." />
+    <MESSAGE value="Controles en employee. algo de refactoring en validates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -587,11 +678,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/models/liquidacion.rb</url>
-          <line>36</line>
+          <line>49</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/db/schema.rb</url>
-          <line>128</line>
+          <line>129</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/models/employee.rb</url>
@@ -601,92 +692,114 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="37" selection-start="1532" selection-end="1532" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_insurance_beneficiary_fields.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="68" selection-end="68" vertical-scroll-proportion="0.05821918" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_employee_remunerative_concept_fields.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="381" selection-end="440" vertical-scroll-proportion="0.20376712" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="2" selection-start="2" selection-end="2" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="22" selection-start="2077" selection-end="2077" vertical-scroll-proportion="0.676311" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_personales.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="27" selection-start="949" selection-end="963" vertical-scroll-proportion="-21.192308" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_domicilio.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_ocupacion.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_filiacion.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.9435216" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="49" selection-start="4666" selection-end="4666" vertical-scroll-proportion="-4.076923" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_contratacion.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="4" selection-start="4" selection-end="9" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/config.ru">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="35" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/employees/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="24" selection-start="1784" selection-end="1784" vertical-scroll-proportion="-17.0">
+        <state line="235" column="31" selection-start="3426" selection-end="3426" vertical-scroll-proportion="0.57253885">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/employee.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="179" column="37" selection-start="8128" selection-end="8128" vertical-scroll-proportion="0.0">
+        <state line="20" column="20" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/recibo_sueldo.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/liquidacion.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="77" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
+        <state line="22" column="26" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_seguro_banco.html.erb">
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.8305648">
+        <state line="32" column="20" selection-start="1238" selection-end="1242" vertical-scroll-proportion="-5.16">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/liquidacions/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="52" selection-start="418" selection-end="418" vertical-scroll-proportion="-7.6538463">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Ruby192/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_view/helpers/capture_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_filiacion.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="7" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.5380435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employee_familiars/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="663" selection-end="706" vertical-scroll-proportion="0.16847827">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_insurance_beneficiary_fields.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_employee_familiar_fields.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="311" selection-end="311" vertical-scroll-proportion="0.35326087">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_datos_personales.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="777" selection-end="777" vertical-scroll-proportion="0.5543478">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="-8.923077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/liquidacions/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="62" selection-start="1414" selection-end="1414" vertical-scroll-proportion="-5.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20110706162424_cambiar_periodo_mes_to_liquidacion.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

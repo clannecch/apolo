@@ -2,8 +2,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Periodo:</b>
-  <%= @liquidacion.periodo %>
+  <b>Periodo Año:</b>
+  <%= @liquidacion.periodo_ano %>
+</p>
+
+<p>
+  <b>Periodo Mes:</b>
+  <%= @liquidacion.periodo_mes %>
 </p>
 
 <p>
@@ -23,12 +28,17 @@
 
 <p>
   <b>Banco ultimo deposito:</b>
-  <%= @liquidacion.bank_deposit_id %>
+  <%= @liquidacion.bank_deposit.try(:detalle) %>
 </p>
 
 <p>
-  <b>Periodo deposito:</b>
-  <%= @liquidacion.periodo_deposito %>
+  <b>Periodo deposito Año:</b>
+  <%= @liquidacion.periodo_deposito_ano %>
+</p>
+
+<p>
+  <b>Periodo deposito Mes:</b>
+  <%= @liquidacion.periodo_deposito_mes %>
 </p>
 
 <p>

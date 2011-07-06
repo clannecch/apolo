@@ -15,6 +15,11 @@ $(function() {
 	});
 });
 
+$(function() {
+    $('.spinner_month').spinner({ min: 1, max: 12 });
+    $('.spinner_year').spinner({ min: 2010 });
+    $('#liquidacion_quincena').spinner({ min: 1, max: 2 });
+});
 // $(function() {
 //     $( '.datepicker').jdPicker({
 //         month_names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],

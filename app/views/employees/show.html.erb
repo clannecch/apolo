@@ -104,7 +104,7 @@
 
 <p>
    <b>Tipo de Email: </b>
-   <%= @employee.email_type_id %>
+   <%= @employee.email_type.try(:detalle) %>
 </p>
 
 <p>
@@ -128,7 +128,7 @@
 </p>
 
 <p>
-   <b>Lugar de Trabajo: ></b>
+   <b>Lugar de Trabajo: </b>
    <%= @employee.place.try(:detalle)%>
 </p>
 
@@ -208,7 +208,7 @@
 </p>
 
 <p>
-   <b>fecha_ingreso: ></b>
+   <b>fecha_ingreso: </b>
    <%= @employee.fecha_ingreso %>
 </p>
 

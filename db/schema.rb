@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110705185341) do
+ActiveRecord::Schema.define(:version => 20110706162323) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20110705185341) do
   end
 
   create_table "deduccion_ganancias_tables", :force => true do |t|
-    t.string   "periodo"
     t.float    "no_imponibles"
     t.float    "conyuge"
     t.float    "hijo"
@@ -91,6 +90,8 @@ ActiveRecord::Schema.define(:version => 20110705185341) do
     t.float    "especial_inciso_abc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "periodo_ano"
+    t.integer  "periodo_mes"
   end
 
   create_table "detalle_recibo_habers", :force => true do |t|
@@ -273,6 +274,7 @@ ActiveRecord::Schema.define(:version => 20110705185341) do
     t.string   "deposito_banco_cbu"
     t.integer  "group_employer_contribution_id"
     t.integer  "causa_egreso_id"
+    t.binary   "foto"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -380,17 +382,19 @@ ActiveRecord::Schema.define(:version => 20110705185341) do
   end
 
   create_table "liquidacions", :force => true do |t|
-    t.string   "periodo"
     t.date     "fecha_liquidacion"
     t.date     "fecha_deposito"
     t.integer  "bank_deposit_id"
-    t.string   "periodo_deposito"
     t.date     "fecha_cierre"
     t.integer  "quincena"
     t.decimal  "techo_retenciones"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tipo_recibo_id"
+    t.integer  "periodo_ano"
+    t.integer  "periodo_mes"
+    t.integer  "periodo_deposito_ano"
+    t.integer  "periodo_deposito_mes"
   end
 
   create_table "locations", :force => true do |t|

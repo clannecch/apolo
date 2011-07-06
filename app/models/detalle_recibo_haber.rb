@@ -26,7 +26,7 @@ class DetalleReciboHaber < ActiveRecord::Base
   delegate :employee, :to => :recibo_sueldo
   # hace esto
 
-  include MultiplicacionPorOcho
+#  include MultiplicacionPorOcho
 
   def acumuladores
     ReciboSueldo.acumuladores

@@ -1,3 +1,22 @@
+<% content_for(:head) do %>
+    <%=javascript_tag do %>
+        $( ".datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    <% end %>
+   <style>
+     .field_periodo{
+         float:left;
+         width:15%;
+     }
+
+      .actions{
+         clear:both;
+     }
+   </style>
+<% end %>
+
 <%= form_for(@liquidacion) do |f| %>
   <% if @liquidacion.errors.any? %>
     <div id="error_explanation">
@@ -11,13 +30,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :periodo %><br />
-    <%= f.text_field :periodo %>
+  <div class="field_periodo">
+    <%= "Periodo" %>
+    <%= f.text_field :periodo_ano, :class => 'spinner_year', :size => 5%>
   </div>
   <div class="field">
-    <%= f.label :quincena %><br />
-    <%= f.text_field :quincena %>
+    <%= f.text_field :periodo_mes, :class => 'spinner_month', :size => 3%>
+  </div>
+
+  <div class="field">
+    <%= f.label :quincena %>
+    <%= f.text_field :quincena , :size => 2%>
   </div>
   <div class="field">
     <%= f.label :tipo_recibo_id %><br />
@@ -25,23 +48,28 @@
   </div>
   <div class="field">
     <%= f.label :fecha_liquidacion %><br />
-    <%= f.date_select :fecha_liquidacion %>
+    <%= f.text_field :fecha_liquidacion ,:class => 'datepicker'%>
+    <%= f.date_select :fecha_liquidacion, :discard_day => true %>
+
   </div>
   <div class="field">
     <%= "Banco ultimo deposito:"%><br />
-    <%= f.text_field :bank_deposit_id %>
+    <%= f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field_periodo">
+    <%= "Periodo" %>
+    <%= f.text_field :periodo_deposito_ano, :class => 'spinner_year', :size => 5 %>
   </div>
   <div class="field">
-    <%= f.label :periodo_deposito %><br />
-    <%= f.text_field :periodo_deposito %>
+    <%= f.text_field :periodo_deposito_mes, :class => 'spinner_month', :size => 3 %>
   </div>
   <div class="field">
     <%= f.label :fecha_deposito %><br />
-    <%= f.date_select :fecha_deposito %>
+    <%= f.text_field :fecha_deposito,:class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :fecha_cierre %><br />
-    <%= f.date_select :fecha_cierre %>
+    <%= f.text_field :fecha_cierre,:class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :techo_retenciones %><br />
