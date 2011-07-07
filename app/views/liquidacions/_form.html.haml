@@ -24,7 +24,8 @@
             %li= msg
     .field_periodo
       = f.label :Periodo
-      = f.date_select :periodo, :discard_day => true
+      = f.date_select :periodo, :discard_day => true if @liquidacion.new_record?
+      = @liquidacion.periodo unless @liquidacion.new_record?
     .field
       = f.label :quincena
       = f.text_field :quincena , :size => 2
