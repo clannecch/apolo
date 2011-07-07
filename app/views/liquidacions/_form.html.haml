@@ -14,47 +14,47 @@
         clear:both;
     }
     = form_for(@liquidacion) do |f|
-  - if @liquidacion.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@liquidacion.errors.count, "error")
-        prohibited this liquidacion from being saved:
-      %ul
-        - @liquidacion.errors.full_messages.each do |msg|
-          %li= msg
-  .field_periodo
-    = f.label :Periodo
-    = f.date_select :periodo, :discard_day => true
-  .field
-    = f.label :quincena
-    = f.text_field :quincena , :size => 2
-  .field
-    = f.label :tipo_recibo_id
-    %br/
-    = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true
-  .field
-    = f.label :fecha_liquidacion
-    %br/
-    = f.text_field :fecha_liquidacion ,:class => 'datepicker'
-  .field
-    = "Banco ultimo deposito:"
-    %br/
-    = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true
-  <div class="field"
-  \#{f.label :periodo_deposito}
-  %br/
-  = f.date_select :periodo_deposito, :discard_day => true
-  .field
-    = f.label :fecha_deposito
-    %br/
-    = f.text_field :fecha_deposito,:class => 'datepicker'
-  .field
-    = f.label :fecha_cierre
-    %br/
-    = f.text_field :fecha_cierre,:class => 'datepicker'
-  .field
-    = f.label :techo_retenciones
-    %br/
-    = f.text_field :techo_retenciones
-  .actions
-    = f.submit
+    - if @liquidacion.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@liquidacion.errors.count, "error")
+          prohibited this liquidacion from being saved:
+        %ul
+          - @liquidacion.errors.full_messages.each do |msg|
+            %li= msg
+    .field_periodo
+      = f.label :Periodo
+      = f.date_select :periodo, :discard_day => true
+    .field
+      = f.label :quincena
+      = f.text_field :quincena , :size => 2
+    .field
+      = f.label :tipo_recibo_id
+      %br/
+      = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true
+    .field
+      = f.label :fecha_liquidacion
+      %br/
+      = f.text_field :fecha_liquidacion ,:class => 'datepicker'
+    .field
+      = "Banco ultimo deposito:"
+      %br/
+      = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true
+    .field
+      = f.label :periodo_deposito
+      %br/
+      = f.date_select :periodo_deposito, :discard_day => true
+    .field
+      = f.label :fecha_deposito
+      %br/
+      = f.text_field :fecha_deposito,:class => 'datepicker'
+    .field
+      = f.label :fecha_cierre
+      %br/
+      = f.text_field :fecha_cierre,:class => 'datepicker'
+    .field
+      = f.label :techo_retenciones
+      %br/
+      = f.text_field :techo_retenciones
+    .actions
+      = f.submit
