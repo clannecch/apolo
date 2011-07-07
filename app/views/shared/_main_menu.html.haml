@@ -1,11 +1,14 @@
+%hr
+= collection_select(:company, :id, Company.all, :id, :name, { :include_blank => '-- Cambiar de Companía --'}, :onchange => 'location.href="?cc="+$(this).val();')
+%hr
 %h3 Menu
 %ul.links
   %li
-    %a{:href => "employees"} Empleados
+    %a{:href => "/employees"} Empleados
   %li
-    %a{:href => "document_types"} Tipos de Documentos
+    %a{:href => "/document_types"} Tipos de Documentos
   %li
-    %a{:href => "issueds"} Lugar Emision Documento
+    %a{:href => "/issueds"} Lugar Emision Documento
   %li
     %a{:href => "marital_statuses"} Estado Civil
   %li
@@ -61,7 +64,7 @@
   %li
     %a{:href => "bank_deposit_account_types"} Tipos de Cuentas Bancarias
   %li
-    %a{:href => "remunerative_concepts"} Haberes
+    %a{:href => "/remunerative_concepts"} Haberes
   %li
     %a{:href => "retention_concepts"} Retenciones
   %li

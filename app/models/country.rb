@@ -10,6 +10,10 @@
 #
 
 class Country < ActiveRecord::Base
-	has_many :employees
-  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
+  has_many :employees
+  validates_presence_of		    :detalle, :message => "es un dato requerido"
+  #belongs_to :company
+
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
 end

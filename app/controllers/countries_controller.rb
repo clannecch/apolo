@@ -1,8 +1,17 @@
 class CountriesController < ApplicationController
+  before_filter :find_country, :except => [:index, :new, :create] 
+  
   # GET /countries
   # GET /countries.xml
   def index
-    @countries = Country.all
+    # TODO: cambiar todo este controlador y el detodos los modelos que tengan company_id por lo siguiente
+
+    # reemplazar para cambio a modelo con compania compania
+    #@countries = current_company.countries.all
+    @countries = Country.by_company(current_company.id).all
+
+    # comentar para el cambio a modelo con compania
+    #@countries = Country.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +22,6 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.xml
   def show
-    @country = Country.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +32,7 @@ class CountriesController < ApplicationController
   # GET /countries/new
   # GET /countries/new.xml
   def new
-    @country = Country.new
+    @country = Country.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +42,13 @@ class CountriesController < ApplicationController
 
   # GET /countries/1/edit
   def edit
-    @country = Country.find(params[:id])
   end
 
   # POST /countries
   # POST /countries.xml
   def create
-    @country = Country.new(params[:country])
+    #raise params[:country].inspect
+    @country = Country.by_company(current_company.id).new(params[:country])
 
     respond_to do |format|
       if @country.save
@@ -56,7 +64,6 @@ class CountriesController < ApplicationController
   # PUT /countries/1
   # PUT /countries/1.xml
   def update
-    @country = Country.find(params[:id])
 
     respond_to do |format|
       if @country.update_attributes(params[:country])
@@ -72,7 +79,6 @@ class CountriesController < ApplicationController
   # DELETE /countries/1
   # DELETE /countries/1.xml
   def destroy
-    @country = Country.find(params[:id])
     @country.destroy
 
     respond_to do |format|
@@ -80,4 +86,11 @@ class CountriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+
+  def find_country
+    @country = Country.by_company(current_company.id).find(params[:id])
+  end
+
 end

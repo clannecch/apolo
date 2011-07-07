@@ -60,10 +60,9 @@ table th		{ padding: 6px 5px; text-align: left; background-color: #e8eef4; borde
 table tr:hover	{ background-color: #C3D5D5;}
 
 div.sidebar {
-  width:19%;
+  width:15%;
   float:left;
 }
 
 div.content {
-  width:80%;
 }

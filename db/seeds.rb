@@ -7,6 +7,9 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
+Company.create(:name => 'Coca Cola')
+Company.create(:name => 'Pepsi')
+
 Country.create({"detalle"=>"Argentina"})
 Country.create({"detalle"=>"Italia"})
 Country.create({"detalle"=>"España"})

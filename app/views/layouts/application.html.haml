@@ -16,7 +16,7 @@
           font-size:14px;
           background-color:#fff;
       }
-      = javascript_include_tag :defaults
+    = javascript_include_tag :defaults
     = javascript_include_tag :cocoon
     = javascript_include_tag('jquery.tools.min.js')
     = javascript_include_tag('ui.spinner.js')
@@ -24,7 +24,11 @@
     = csrf_meta_tag
     = yield(:head)
   %body
-    .sidebar
-      = render('shared/main_menu')  
-    .content
-      = yield
+    .main
+      .sidebar
+        = render('shared/main_menu')  
+      .content
+        %h1
+          Companía: 
+          = current_company.name
+        = yield
