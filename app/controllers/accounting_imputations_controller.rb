@@ -2,6 +2,7 @@ class AccountingImputationsController < ApplicationController
   # GET /accounting_imputations
   # GET /accounting_imputations.xml
   def index
+    # TODO: mejorar la forma de traer este conjunto de registros!!! (se pueden usar optimize, :fixme, :todo) se llama con rake notes o rake notes:todo
     @accounting_imputations = AccountingImputation.all
 
     respond_to do |format|
