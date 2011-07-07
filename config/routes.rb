@@ -90,7 +90,8 @@ APSSueldos::Application.routes.draw do
 
   resources :document_types
 
-
+  root :to => "liquidacions#index"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -141,6 +142,7 @@ APSSueldos::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
+
 
   # See how all your routes lay out with "rake routes"
 

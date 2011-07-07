@@ -24,4 +24,7 @@
     = csrf_meta_tag
     = yield(:head)
   %body
-    = yield
+    .sidebar
+      = render('shared/main_menu')  
+    .content
+      = yield
