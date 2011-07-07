@@ -54,8 +54,7 @@ class ReciboSueldo < ActiveRecord::Base
           :total_remuneraciones         => 0,
           :total_retenciones            => 0,
           :horas_tabajadas              => 0,
-          :antiguedad                   => calculo_antiguedad(self.employee.fecha_ingreso ,self.liquidacion.periodo_ano,
-                                                              self.liquidacion.periodo_mes)
+          :antiguedad                   => calculo_antiguedad(self.employee.fecha_ingreso ,self.liquidacion.periodo)
         })
 
 #   acumuladores predefinidos
@@ -75,19 +74,18 @@ class ReciboSueldo < ActiveRecord::Base
     end
     self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
     self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
-    self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo_ano,
-                                                                  self.liquidacion.periodo_mes,self.employee.fecha_ingreso ,
-                                                                  self.employee.fecha_egreso)
+    self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,
+                                                                  self.employee.fecha_ingreso, self.employee.fecha_egreso)
     self.acumuladores.dias_vacaciones                          = calculo_dias_vacaciones(self.employee.fecha_ingreso ,
-                                                                  self.liquidacion.periodo_ano, self.liquidacion.periodo_mes)
-    self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(self.employee.fecha_ingreso ,
-                                                                  self.liquidacion.periodo_ano, self.liquidacion.periodo_mes)
+                                                                  self.liquidacion.periodo)
+    self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(
+                                                                  self.employee.fecha_ingreso, self.liquidacion.periodo)
     self.acumuladores.mejor_remuneracion_habitual_anual        = calculo_mejor_remuneracion_habitual_anual
       self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
-    self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso, self.employee.fecha_egreso)
+    self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso,
+                                                                  self.employee.fecha_egreso)
     self.acumuladores.dias_vacaciones_no_gozadas               = calculo_dias_vacaciones_no_gozadas(self.employee.fecha_ingreso,
-                                                                  self.employee.fecha_egreso,self.liquidacion.periodo_ano,
-                                                                  self.liquidacion.periodo_mes)
+                                                                  self.employee.fecha_egreso, self.liquidacion.periodo)
 
 #   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
 #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
@@ -207,10 +205,9 @@ class ReciboSueldo < ActiveRecord::Base
     str_for_evaluation.gsub(/\:/,'self.').gsub(/@/, 'acumuladores.')
   end
 
-  def calculo_antiguedad (fi, pl_ano, pl_mes)
-      anos = pl_ano - fi.year.to_i + employee.antiguedad_reconocida_anos.to_i
-      anos = anos - 1 if fi.month >  pl_mes + employee.antiguedad_reconocida_meses
-# or   (fi.month >= pl[5..6].to_i and fi.day > pl.day)
+  def calculo_antiguedad (fi, pl)
+      anos = pl.year.to_i - fi.year.to_i + employee.antiguedad_reconocida_anos.to_i
+      anos = anos - 1 if fi.month >  pl.month + employee.antiguedad_reconocida_meses
       return anos
   end
 
@@ -218,13 +215,13 @@ class ReciboSueldo < ActiveRecord::Base
     (fhoy.year - fnac.year) - (fhoy.yday < fnac.yday ? 1 : 0)
   end
 
-  def calculo_dias_trabajados_semestre(pl_ano,pl_mes, ingreso , egreso)
-      if pl_mes < 7
-        finicio = (pl_ano.to_s+"-01-01").to_date
+  def calculo_dias_trabajados_semestre(pl, ingreso , egreso)
+      if pl.month < 7
+        finicio = (pl.year.to_s+"-01-01").to_date
       else
-        finicio = (pl_ano.to_s+"-07-01").to_date
+        finicio = (pl.year.to_s+"-07-01").to_date
       end
-      ffinal  = Date.new(pl_ano, pl_mes, -1)
+      ffinal  = Date.new(pl.year, pl.month, -1)
       if !egreso.nil?
         if (egreso.to_date > finicio.to_date) &&  (egreso.to_date < ffinal.to_date)
           ffinal=egreso
@@ -233,8 +230,8 @@ class ReciboSueldo < ActiveRecord::Base
       if ingreso > finicio
         finicio= ingreso
       end
-      if (ingreso.year.to_i * 100) + ingreso.month.to_i > (pl_ano * 100 + pl_mes) ||
-          (egreso.year.to_i * 100) + egreso.month.to_i  < (pl_ano * 100 + pl_mes)
+      if (ingreso.year.to_i * 100) + ingreso.month.to_i > (pl.year * 100 + pl.month) ||
+          (egreso.year.to_i * 100) + egreso.month.to_i  < (pl.year * 100 + pl.month)
          diastrabajados = 0
       else
         diastrabajados = ( (ffinal.month - finicio.month) * 30) + ffinal.day
@@ -243,10 +240,10 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def mejor_remuneracion_semestre
-    if self.liquidacion.periodo_mes < 7
-      dpl = 1
+    if self.liquidacion.periodo.month < 7
+      dpl =Date.new(self.liquidacion.periodo.year,1,1)
     else
-      dpl = 7
+      dpl = Date.new(self.liquidacion.periodo.year,1,7)
     end
 #   ntotal = DetalleReciboHaber.group(:recibo_sueldo_id).joins(:remunerative_concept).where(['remunerative_concepts.acumuladores_valor like ?', "%@haberescondescuento%"]).sum(:total)
 #    ntotal = DetalleReciboHaber.joins(:recibo_sueldo).group("recibo_sueldos.employee_id").joins(:remunerative_concept).where(['remunerative_concepts.acumuladores_valor like ? ', "%@haberescondescuento%"]).sum(:total)
@@ -254,34 +251,37 @@ class ReciboSueldo < ActiveRecord::Base
     ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
               .group("recibo_sueldos.liquidacion_id")
               .where(:recibo_sueldos => {:employee_id => employee_id})
-              .where(:liquidacions => {:periodo_mes => dpl..liquidacion.periodo_mes})
-              .where(:liquidacions => {:periodo_ano => liquidacion.periodo_ano})
+              .where(:liquidacions => {:periodo => dpl..liquidacion.periodo})
               .where('remunerative_concepts.acumuladores_valor like ?',"%@aguinaldo%").sum(:total)
+#    .where(:liquidacions => {:periodo.month => dpl..liquidacion.periodo.month})
+#    .where(:liquidacions => {:periodo.year => liquidacion.periodo.year})
+
 #       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
     return ntotal.map{|g| g.last.to_f}.max
   end
 
   def mejor_remuneracion_habitual_semestre
-    if self.liquidacion.periodo_mes < 7
-      dpl = 1
+    if self.liquidacion.periodo.month < 7
+      dpl =Date.new(self.liquidacion.periodo.year,1,1)
     else
-      dpl = 7
+      dpl = Date.new(self.liquidacion.periodo.year,1,7)
     end
     ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
               .group("recibo_sueldos.liquidacion_id")
               .where(:recibo_sueldos => {:employee_id => employee_id})
-              .where(:liquidacions => {:periodo_mes => dpl..liquidacion.periodo_mes})
-              .where(:liquidacions => {:periodo_ano => liquidacion.periodo_ano})
+              .where(:liquidacions => {:periodo => dpl..liquidacion.periodo})
               .where('remunerative_concepts.acumuladores_valor like ?',"%@remuneracion_habitual%").sum(:total)
+#    .where(:liquidacions => {:periodo.month => dpl..liquidacion.periodo.month})
+#    .where(:liquidacions => {:periodo.year => liquidacion.periodo.year})
 #       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
     return ntotal.map{|g| g.last.to_f}.max
   end
 
-  def calculo_dias_vacaciones(fi, pl_ano, pl_mes)
-    anos = calculo_antiguedad(fi, pl_ano, pl_mes)
+  def calculo_dias_vacaciones(fi, pl)
+    anos = calculo_antiguedad(fi, pl)
 
     if anos < 1
-      dias_vacaciones = ( ( ( (pl_ano.to_s+'-'+pl_mes.to_s+"-01").to_date - fi) +
+      dias_vacaciones = ( ( ( (pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi) +
                                 (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
       errors.add(:base, "< anos "+dias_vacaciones.to_s)
     else
@@ -297,19 +297,20 @@ class ReciboSueldo < ActiveRecord::Base
     return dias_vacaciones
   end
 
-  def calculo_cantidad_sueldos_indemnizacion_despido(fi, pl_ano,pl_mes)
-    anos = calculo_antiguedad(fi, pl_ano,pl_mes)
-    if pl_mes - fi.month > 3
+  def calculo_cantidad_sueldos_indemnizacion_despido(fi, pl)
+    anos = calculo_antiguedad(fi, pl)
+    if pl.month - fi.month > 3
       anos = anos + 1
     end
     return anos
   end
 
   def calculo_mejor_remuneracion_habitual_anual
+
     ntotal = DetalleReciboHaber.joins([:remunerative_concept, :recibo_sueldo => :liquidacion])
               .group("recibo_sueldos.liquidacion_id")
               .where(:recibo_sueldos => {:employee_id => employee_id})
-              .where(:liquidacions => {:periodo_ano => liquidacion.periodo_ano})
+              .where(:liquidacions => {:periodo => liquidacion.periodo.beginning_of_year..liquidacion.periodo.end_of_year})
               .where('remunerative_concepts.acumuladores_valor like ?',"%@remuneracion_habitual%").sum(:total)
 #       errors.add(:base, "paso "+ntotal.map{|g| g.last.to_f}.max.to_s)
     return ntotal.map{|g| g.last.to_f}.max
@@ -340,9 +341,9 @@ class ReciboSueldo < ActiveRecord::Base
      return cantidad
   end
 
-  def calculo_dias_vacaciones_no_gozadas(fi,fe,pl_ano, pl_mes)
-    if fi.year < pl_ano
-      fi =(pl_ano.to_s + "01-01").to_date
+  def calculo_dias_vacaciones_no_gozadas(fi,fe,pl)
+    if fi.year < pl.year
+      fi =(pl.year.to_s + "01-01").to_date
     end
     cantidad = (fe.month - fi.month)
     cantidad = cantidad * 30 + fe.day

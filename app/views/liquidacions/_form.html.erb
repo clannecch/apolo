@@ -5,16 +5,17 @@
             changeYear: true
         });
     <% end %>
-   <style>
-     .field_periodo{
-         float:left;
-         width:15%;
-     }
+    <style>
+      .field_periodo{
+          float:left;
+          width:33%;
+      }
 
-      .actions{
-         clear:both;
-     }
-   </style>
+       .actions{
+          clear:both;
+      }
+    </style>
+
 <% end %>
 
 <%= form_for(@liquidacion) do |f| %>
@@ -31,17 +32,15 @@
   <% end %>
 
   <div class="field_periodo">
-    <%= "Periodo" %>
-    <%= f.text_field :periodo_ano, :class => 'spinner_year', :size => 5%>
-  </div>
-  <div class="field">
-    <%= f.text_field :periodo_mes, :class => 'spinner_month', :size => 3%>
+    <%= f.label :Periodo %>
+    <%= f.date_select :periodo, :discard_day => true %>
   </div>
 
   <div class="field">
     <%= f.label :quincena %>
     <%= f.text_field :quincena , :size => 2%>
   </div>
+
   <div class="field">
     <%= f.label :tipo_recibo_id %><br />
     <%= f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true %>
@@ -49,19 +48,15 @@
   <div class="field">
     <%= f.label :fecha_liquidacion %><br />
     <%= f.text_field :fecha_liquidacion ,:class => 'datepicker'%>
-    <%= f.date_select :fecha_liquidacion, :discard_day => true %>
 
   </div>
   <div class="field">
     <%= "Banco ultimo deposito:"%><br />
     <%= f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true %>
   </div>
-  <div class="field_periodo">
-    <%= "Periodo" %>
-    <%= f.text_field :periodo_deposito_ano, :class => 'spinner_year', :size => 5 %>
-  </div>
-  <div class="field">
-    <%= f.text_field :periodo_deposito_mes, :class => 'spinner_month', :size => 3 %>
+  <div class="field"
+    <%= f.label :periodo_deposito %><br />
+    <%= f.date_select :periodo_deposito, :discard_day => true %>
   </div>
   <div class="field">
     <%= f.label :fecha_deposito %><br />

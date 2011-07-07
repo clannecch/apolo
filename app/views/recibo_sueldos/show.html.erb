@@ -1,4 +1,4 @@
-<h3>Liquidacion Periodo: <%= @liquidacion.periodo_ano %> / <%= @liquidacion.periodo_mes %> Quincena: <%= @liquidacion.quincena%> Tipo liquidacion: <%=@liquidacion.tipo_recibo.try(:detalle)%></h3>
+<h3>Liquidacion Periodo: <%= @liquidacion.periodo.year %> / <%= @liquidacion.periodo.month %> Quincena: <%= @liquidacion.quincena%> Tipo liquidacion: <%=@liquidacion.tipo_recibo.try(:detalle)%></h3>
 
 <h4>Empleado: <%= @recibo_sueldo.employee.apellido %>, <%= @recibo_sueldo.employee.nombre %> </h4>
 

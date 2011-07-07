@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110706162323) do
+ActiveRecord::Schema.define(:version => 20110706162424) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -391,10 +391,8 @@ ActiveRecord::Schema.define(:version => 20110706162323) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tipo_recibo_id"
-    t.integer  "periodo_ano"
-    t.integer  "periodo_mes"
-    t.integer  "periodo_deposito_ano"
-    t.integer  "periodo_deposito_mes"
+    t.date     "periodo"
+    t.date     "periodo_deposito"
   end
 
   create_table "locations", :force => true do |t|

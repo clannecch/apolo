@@ -3,10 +3,9 @@
 <table>
   <tr>
     <th>Periodo</th>
-    <th>Fecha liquidacion</th>
-    <th>Tipo Recibo</th>
     <th>Quincena</th>
-    <th>Fecha deposito</th>
+    <th>Tipo Recibo</th>
+    <th>Fecha liquidacion</th>
     <th>Banco ultimo deposito</th>
     <th>Periodo deposito</th>
     <th>Fecha deposito</th>
@@ -19,12 +18,12 @@
 
 <% @liquidacions.each do |liquidacion| %>
   <tr>
-    <td><%= liquidacion.periodo_ano.to_s + '/' + liquidacion.periodo_mes.to_s %></td>
-    <td><%= liquidacion.tipo_recibo.try(:detalle) %></td>
+    <td><%= liquidacion.periodo.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s %></td>
     <td><%= liquidacion.quincena %></td>
+    <td><%= liquidacion.tipo_recibo.try(:detalle) %></td>
     <td><%= liquidacion.fecha_liquidacion %></td>
-    <td><%= liquidacion.bank_deposit_id %></td>
-    <td><%= liquidacion.periodo_deposito_ano.to_s + '/' + liquidacion.periodo_deposito_mes.to_s %></td>
+    <td><%= liquidacion.bank_deposit.try(:detalle) %></td>
+    <td><%= liquidacion.periodo_deposito.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s %></td>
     <td><%= liquidacion.fecha_deposito %></td>
     <td><%= liquidacion.fecha_cierre %></td>
     <td><%= liquidacion.techo_retenciones %></td>

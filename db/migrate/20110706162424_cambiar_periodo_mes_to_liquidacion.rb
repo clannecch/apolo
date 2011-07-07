@@ -4,6 +4,9 @@ class CambiarPeriodoMesToLiquidacion < ActiveRecord::Migration
     remove_column :liquidacions, :periodo_mes
     remove_column :liquidacions, :periodo_deposito_ano
     remove_column :liquidacions, :periodo_deposito_mes
+    add_column :liquidacions, :periodo, :date
+    add_column :liquidacions, :periodo_deposito, :date
+
   end
 
   def self.down
@@ -11,5 +14,7 @@ class CambiarPeriodoMesToLiquidacion < ActiveRecord::Migration
     add_column :liquidacions, :periodo_mes, :integer
     add_column :liquidacions, :periodo_deposito_ano, :integer
     add_column :liquidacions, :periodo_deposito_mes, :integer
+    remove_column :liquidacions, :periodo
+    remove_column :liquidacions, :periodo_deposito
   end
 end

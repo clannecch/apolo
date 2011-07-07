@@ -2,14 +2,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Periodo Año:</b>
-  <%= @liquidacion.periodo_ano %>
+  <b>Periodo de liquidacion:</b>
+  <%= @liquidacion.periodo.month %> / <%= @liquidacion.periodo.year %>
 </p>
 
-<p>
-  <b>Periodo Mes:</b>
-  <%= @liquidacion.periodo_mes %>
-</p>
 
 <p>
   <b>Tipo de Recibo:</b>
@@ -32,13 +28,8 @@
 </p>
 
 <p>
-  <b>Periodo deposito Año:</b>
-  <%= @liquidacion.periodo_deposito_ano %>
-</p>
-
-<p>
-  <b>Periodo deposito Mes:</b>
-  <%= @liquidacion.periodo_deposito_mes %>
+  <b>Periodo deposito:</b>
+  <%= @liquidacion.periodo_deposito.month %> /  <%= @liquidacion.periodo_deposito.year %>
 </p>
 
 <p>

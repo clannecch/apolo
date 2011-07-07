@@ -22,27 +22,15 @@ class Liquidacion < ActiveRecord::Base
   belongs_to :tipo_recibo
   belongs_to :bank_deposit
 
-  validates_uniqueness_of     :periodo_ano, :scope => [:periodo_mes, :quincena, :tipo_recibo_id],
-                                                                                :message => "+quincena+tipo recibo duplicado"
+  validates_uniqueness_of     :periodo,
+                              :scope => [:quincena, :tipo_recibo_id],            :message => "+quincena+tipo recibo duplicado"
 
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 
-  validates_numericality_of 	:periodo_ano, :greater_than => 2010,              :message => "valores mayor a 2010"
-  validates_inclusion_of		  :periodo_mes, :in => 1..12,                       :message => "acepta valores del 1 al 12"
-
-  validates_numericality_of 	:periodo_deposito_ano, :greater_than => 2009,
-                              :allow_nil => true,                               :message => "valores mayor a 2009"
-  validates_inclusion_of		  :periodo_deposito_mes, :in => 1..12,
-                              :allow_nil => true,
-                              :if => :periodo_deposito_ano?, 				            :message => "acepta valores del 1 al 12"
-
-
-	validates_presence_of		    :periodo_ano, :periodo_mes, :quincena,
+	validates_presence_of		    :periodo, :quincena,
                               :fecha_liquidacion,															  :message => "es un dato requerido"
   validates_presence_of		    :fecha_deposito,
-                              :if => :periodo_deposito_ano?,					          :message => "es un dato requerido"
-  validates_presence_of		    :periodo_mes,
-                              :if => :periodo_deposito_ano?,                    :message => "es un dato requerido"
+                              :if => :periodo_deposito?,					          :message => "es un dato requerido"
 
 #  validate                    :check_periodo
 
