@@ -26,6 +26,8 @@
 #
 
 class RemunerativeConcept < ActiveRecord::Base
+  paginates_per 10
+
   belongs_to :concepto_asociado_haber, :class_name => "RemunerativeConcept"
   belongs_to :concepto_asociado_retencion, :class_name => "RetentionConcept"
   belongs_to :concepto_asociado_haber_2, :class_name => "RemunerativeConcept"
