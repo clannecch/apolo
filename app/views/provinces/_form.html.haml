@@ -1,0 +1,15 @@
+= form_for(@province) do |f|
+  - if @province.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@province.errors.count, "error")
+        prohibited this province from being saved:
+      %ul
+        - @province.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .actions
+    = f.submit

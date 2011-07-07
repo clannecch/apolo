@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %b Codigo:
+  = @retention_concept.codigo
+%p
+  %b Detalle:
+  = @retention_concept.detalle
+%p
+  %b Formula de Calculo Valor:
+  = @retention_concept.formula_calculo_valor
+%p
+  %b Acumuladores Valor:
+  = @retention_concept.acumuladores_valor
+%p
+  %b Prioridad de Calculo:
+  = @retention_concept.prioridad
+%p
+  %b datos_a_pedir:
+  = @retention_concept.data_to_ask.try(:detalle)
+%p
+  %b Statistical value:
+  = @retention_concept.statistical_value
+%p
+  %b Accounting imputation:
+  = @retention_concept.accounting_imputation_id
+= link_to 'Edit', edit_retention_concept_path(@retention_concept)
+|
+\#{link_to 'Back', retention_concepts_path}

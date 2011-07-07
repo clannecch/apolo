@@ -1,0 +1,225 @@
+%h1 Visualizacion de Empleado
+%p#notice= notice
+%p
+  %b Legajo:
+  = @employee.legajo
+%p
+  %b Nombre:
+  = @employee.nombre
+%p
+  %b Apellido:
+  = @employee.apellido
+%p
+  %b Telefono:
+  = @employee.telefono
+%p
+  %b Tipo de Documento:
+  = @employee.document_type.try(:detalle)
+%p
+  %b Numero de Documento:
+  = @employee.numero_documento
+%p
+  %b Lugar Emision Documento:
+  = @employee.issued.try(:detalle)
+%p
+  %b Sexo:
+  = @employee.sexo
+%p
+  %b Nacionalidad:
+  = @employee.nationality.try(:detalle)
+%p
+  %b Estado Civil:
+  = @employee.marital_status.try(:detalle)
+%p
+  %b Fecha nacimiento:
+  = @employee.fecha_nacimiento
+%p
+  %b Calle:
+  = @employee.calle
+%p
+  %b Puerta:
+  = @employee.puerta
+%p
+  %b Piso:
+  = @employee.piso
+%p
+  %b Departamento:
+  = @employee.departamento
+%p
+  %b Localidad:
+  = @employee.location.try(:detalle)
+%p
+  %b Provincia:
+  = @employee.province.try(:detalle)
+%p
+  %b Pais:
+  = @employee.country.try(:detalle)
+%p
+  %b Codigo postal:
+  = @employee.codigo_postal
+%p
+  %b Movil:
+  = @employee.movil
+%p
+  %b Tipo de Email:
+  = @employee.email_type.try(:detalle)
+%p
+  %b Direccion eMail:
+  = @employee.email
+%p
+  %b Categoria:
+  = @employee.category.try(:detalle)
+%p
+  %b Seccion:
+  = @employee.section.try(:detalle)
+%p
+  %b Tarea Desempeñada:
+  = @employee.task.try(:detalle)
+%p
+  %b Lugar de Trabajo:
+  = @employee.place.try(:detalle)
+%p
+  %b Ocupacion:
+  = @employee.employment.try(:detalle)
+%p
+  %b Caracter de Servicio:
+  = @employee.character_service.try(:detalle)
+%p
+  %b Matricula Nacional:
+  = @employee.matricula_nacional
+%p
+  %b Matricula Provincial:
+  = @employee.matricula_provincial
+%p
+  %b Discapacidad:
+  = @employee.discapacidad
+%p
+  %b Obra Social:
+  = @employee.health_insurance.try(:detalle)
+%p
+  %b Plan Obra Social:
+  = @employee.plan_osocial
+%p
+  %b
+    Numero Afiliado Obra Social: </b/>
+    \#{@employee.numero_afiliado_osocial}
+%p
+  %b Cargas Extras Obra Social:
+  = @employee.cargas_extras_osocial
+%p
+  %b Sindicato:
+  = @employee.labor_union.try(:detalle)
+%p
+  %b Numero Afiliado Sindicato:
+  = @employee.numero_afiliado_sindicato
+%p
+  %b Numero de Jubilacion:
+  = @employee.numero_jubilacion
+%p
+  %b Numero Ganancias:
+  = @employee.numero_ganancias
+%p
+  %b CUIT:
+  = @employee.cuit
+%p
+  %b CUIL:
+  = @employee.cuil
+%p
+  %b fecha_ingreso:
+  = @employee.fecha_ingreso
+%p
+  %b fecha_egreso:
+  = @employee.fecha_egreso
+%p
+  %b horas_pactadas:
+  = @employee.horas_pactadas
+%p
+  %b remuneracion_fuera_convenio:>
+  = @employee.remuneracion_fuera_convenio
+%p
+  %b Tipo de Remuneracion:
+  = @employee.remuneration_type.try(:detalle)
+%p
+  %b Grupo de Remuneraciones: >
+  = @employee.group_remuneration.try(:detalle)
+%p
+  %b Grupo de Retenciones:
+  = @employee.group_retention.try(:detalle)
+%p
+  %b Grupo de Aportes Patronales:
+  = @employee.group_employer_contribution.try(:detalle)
+%p
+  %b Centro de costo:
+  = @employee.cost_center.try(:detalle)
+%p
+  %b Años de Antiguedad Reconocida:
+  = @employee.antiguedad_reconocida_anos
+%p
+  %b Meses de Antiguedad Reconocida:
+  = @employee.antiguedad_reconocida_meses
+%p
+  %b Retencion Minima Obra Social:
+  = @employee.retencion_minima_osocial
+%p
+  %b Nivel de Estudios:
+  = @employee.educational_level.try(:detalle)
+%p
+  %b Numero Tarjeta de Fichaje:
+  = @employee.id_card
+%p
+  %b Numero de Cofre:
+  = @employee.numero_cofre
+%p
+  %b Modalidad de Contrato:
+  = @employee.contract_mode.try(:detalle)
+%p
+  %b Domicilio Sobre:
+  = @employee.home_about.try(:detalle)
+%p
+  %b Cuadras de Asfalto:
+  = @employee.cuadras_asfalto
+%p
+  %b Entre Calle(izquierda):
+  = @employee.domicilio_entre_calle_izquierda
+%p
+  %b Entre Calle(Derecha):
+  = @employee.domicilio_entre_calle_derecha
+%p
+  %b Entre Calle(detras):
+  = @employee.domicilio_entre_calles_detras
+%p
+  %b Avenida mas Cercana:
+  = @employee.domicilio_avenida_cercana
+%p
+  %b Altura Avenida mas Cercana:
+  = @employee.domicilio_avenida_cercana_altura
+%p
+  %b Imputacion Contable:
+  = @employee.accounting_imputation.try(:detalle)
+%p
+  %b Aseguradora:
+  = @employee.insurance_company.try(:detalle)
+%p
+  %b Seguro Conyuge:
+  = @employee.seguro_conyuge
+%p
+  %b Numero Poliza de Seguro:
+  = @employee.Seguro_numero_poliza
+%p
+  %b Monto Asegurado:
+  = @employee.seguro_monto_asegurado
+%p
+  %b Banco Deposito Haberes:
+  = @employee.bank_deposit.try(:detalle)
+%p
+  %b Tipo Cuenta Bancaria:
+  = @employee.bank_deposit_account_type.try(:detalle)
+%p
+  %b Numero Cuenta Bancaria:
+  = @employee.deposito_banco_cuenta
+%p
+  %b CBU Cuenta Bancaria:
+  = @employee.deposito_banco_cbu
+= link_to 'Editar', edit_employee_path(@employee)
+|
+\#{link_to 'Volver', employees_path}

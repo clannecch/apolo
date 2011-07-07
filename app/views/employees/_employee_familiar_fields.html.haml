@@ -1,0 +1,63 @@
+.nested-fields
+  .field
+    = f.label :apellido
+    %br/
+    = f.text_field :apellido
+  .field
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre
+  .field
+    = f.label :fecha_nacimiento
+    %br/
+    = f.text_field :fecha_nacimiento, :class => :datepicker
+  .field
+    = f.label "Tipo de Documento"
+    %br/
+    = f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true
+  .field
+    = f.label "Numero de documento"
+    %br/
+    = f.text_field :numero_documento
+  .field
+    = f.label "Obra Social"
+    %br/
+    = f.collection_select :health_insurance_id,  HealthInsurance.all, :id, :detalle, :prompt => true
+  .field
+    = f.label "CUIL"
+    %br/
+    = f.text_field :cuil
+  .field
+    = f.label "CUIT"
+    %br/
+    = f.text_field :cuit
+  .field
+    = f.label "Tomo"
+    %br/
+    = f.text_field :tomo
+  .field
+    = f.label "Folio"
+    %br/
+    = f.text_field :folio
+  .field
+    = f.label "Acta"
+    %br/
+    = f.text_field :acta
+  .field
+    = f.label "Pais"
+    %br/
+    = f.collection_select :country_id,  Country.all, :id, :detalle, :prompt => true
+  .field
+    = f.label "Provincia"
+    %br/
+    = f.collection_select :province_id,  Province.all, :id, :detalle, :prompt => true
+  .field
+    = f.label "Comuna"
+    %br/
+    = f.text_field :comuna
+  .field
+    = f.label "Actividad"
+    %br/
+    = f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true
+  = link_to_remove_association "Borrar Familiar", f
+  %hr/

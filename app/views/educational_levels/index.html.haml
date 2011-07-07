@@ -1,0 +1,16 @@
+%h1
+  %h1 Listado de Niveles de Educacion
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @educational_levels.each do |educational_level|
+    %tr
+      %td= educational_level.detalle
+      %td= link_to 'Visualizar', educational_level
+      %td= link_to 'Editar', edit_educational_level_path(educational_level)
+      %td= link_to 'Borrar', educational_level, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Nivel de Educacion', new_educational_level_path

@@ -1,0 +1,8 @@
+%h1 Visualizacion de Seccion
+%p#notice= notice
+%p
+  %b Detalle:
+  = @section.detalle
+= link_to 'Editar', edit_section_path(@section)
+|
+\#{link_to 'Volver', sections_path}

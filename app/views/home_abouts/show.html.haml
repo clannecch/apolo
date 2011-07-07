@@ -1,0 +1,8 @@
+%h1 Visualizacion de Tipo de Calle
+%p#notice= notice
+%p
+  %b Detalle:
+  = @home_about.detalle
+= link_to 'Editar', edit_home_about_path(@home_about)
+|
+\#{link_to 'Volver', home_abouts_path}

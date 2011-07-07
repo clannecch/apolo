@@ -1,0 +1,8 @@
+%h1 Visualizacion de Ocupacion
+%p#notice= notice
+%p
+  %b Detalle:
+  = @employment.detalle
+= link_to 'Editar', edit_employment_path(@employment)
+|
+\#{link_to 'Volver', employments_path}

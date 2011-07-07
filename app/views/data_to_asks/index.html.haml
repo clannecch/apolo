@@ -1,0 +1,19 @@
+%h1 Listing data_to_asks
+%table
+  %tr
+    %th Detalle
+    %th Cantidad
+    %th Importe
+    %th
+    %th
+    %th
+  - @data_to_asks.each do |data_to_ask|
+    %tr
+      %td= data_to_ask.detalle
+      %td= data_to_ask.cantidad
+      %td= data_to_ask.importe
+      %td= link_to 'Show', data_to_ask
+      %td= link_to 'Edit', edit_data_to_ask_path(data_to_ask)
+      %td= link_to 'Destroy', data_to_ask, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Data to ask', new_data_to_ask_path

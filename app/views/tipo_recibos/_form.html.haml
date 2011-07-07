@@ -1,0 +1,15 @@
+= form_for(@tipo_recibo) do |f|
+  - if @tipo_recibo.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@tipo_recibo.errors.count, "error")
+        prohibited this tipo_recibo from being saved:
+      %ul
+        - @tipo_recibo.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .actions
+    = f.submit

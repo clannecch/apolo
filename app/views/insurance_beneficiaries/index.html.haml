@@ -1,0 +1,21 @@
+%h1 Listado de Beneficiarios seguro
+%table
+  %tr
+    %th Nombre
+    %th Apellido
+    %th Tipo de Documento
+    %th Numero documento
+    %th
+    %th
+    %th
+  - @insurance_beneficiaries.each do |insurance_beneficiary|
+    %tr
+      %td= insurance_beneficiary.nombre
+      %td= insurance_beneficiary.apellido
+      %td= insurance_beneficiary.document_type.try(:detalle)
+      %td= insurance_beneficiary.numero_documento
+      %td= link_to 'Visualizar', insurance_beneficiary
+      %td= link_to 'Editar', edit_insurance_beneficiary_path(insurance_beneficiary)
+      %td= link_to 'Borrar', insurance_beneficiary, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo beneficiario de seguro', new_insurance_beneficiary_path

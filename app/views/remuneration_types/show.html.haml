@@ -1,0 +1,8 @@
+%h1 Visualizacion de Tipo de Remuneracion
+%p#notice= notice
+%p
+  %b Detalle:
+  = @remuneration_type.detalle
+= link_to 'Editar', edit_remuneration_type_path(@remuneration_type)
+|
+\#{link_to 'Volver', remuneration_types_path}

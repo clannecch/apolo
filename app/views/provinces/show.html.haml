@@ -1,0 +1,8 @@
+%h1 Visualizar Provincia
+%p#notice= notice
+%p
+  %b Detalle:
+  = @province.detalle
+= link_to 'Editar', edit_province_path(@province)
+|
+\#{link_to 'Volver', provinces_path}

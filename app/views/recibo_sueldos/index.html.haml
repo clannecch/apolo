@@ -1,0 +1,26 @@
+%h1 Empleados con Novedades Informadas
+%table
+  %tr
+    %th Periodo
+    %th Employee
+    %th Fecha recibo
+    %th Observaciones
+    %th Mensaje recibo
+    %th
+    %th
+    %th
+  - @recibo_sueldos.each do |recibo_sueldo|
+    %tr
+      %td= recibo_sueldo.liquidacion.periodo.year.to_s + '/' + recibo_sueldo.liquidacion.periodo.month.to_s
+      %td= recibo_sueldo.employee.try(:full_name)
+      %td= recibo_sueldo.fecha_recibo
+      %td= recibo_sueldo.observaciones
+      %td= recibo_sueldo.mensaje_recibo
+      %td= link_to 'Visualzar', [@liquidacion, recibo_sueldo]
+      %td= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo)
+      %td= link_to 'Borrar', [@liquidacion, recibo_sueldo], :confirm => 'Esta Seguro?', :method => :delete
+      %td= link_to 'Calcular', calculo_recibo_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo.id)
+%br/
+= link_to 'Informar nuevo empleado', new_liquidacion_recibo_sueldo_path(@liquidacion)
+|
+\#{link_to 'Volver', liquidacion_path(@liquidacion)} |

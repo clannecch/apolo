@@ -1,0 +1,15 @@
+%h1 Listado de Paises
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @countries.each do |country|
+    %tr
+      %td= country.detalle
+      %td= link_to 'Visualizar', country
+      %td= link_to 'Editar', edit_country_path(country)
+      %td= link_to 'Borrar', country, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Pais', new_country_path

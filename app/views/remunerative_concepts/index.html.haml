@@ -1,0 +1,37 @@
+%h1 Listing remunerative_concepts
+%table
+  %tr
+    %th Codigo
+    %th Detalle
+    %th Porcentual asistencia
+    %th Prioridad calculot
+    %th Datos a Pedir
+    %th Statistical value
+    %th Grupo ganancias
+    %th Accounting imputation
+    %th Concepto asociado haber
+    %th Concepto asociado retencion
+    %th Concepto asociado haber 2
+    %th Concepto asociado retencion 2
+    %th
+    %th
+    %th
+  - @remunerative_concepts.each do |remunerative_concept|
+    %tr
+      %td= remunerative_concept.codigo
+      %td= remunerative_concept.detalle
+      %td= remunerative_concept.porcentual_asistencia
+      %td= remunerative_concept.prioridad_calculo
+      %td= remunerative_concept.data_to_ask.try(:detalle)
+      %td= remunerative_concept.statistical_value
+      %td= remunerative_concept.grupo_ganancias_id
+      %td= remunerative_concept.accounting_imputation_id
+      %td= remunerative_concept.concepto_asociado_haber
+      %td= remunerative_concept.concepto_asociado_retencion
+      %td= remunerative_concept.concepto_asociado_haber_2
+      %td= remunerative_concept.concepto_asociado_retencion_2
+      %td= link_to 'Show', remunerative_concept
+      %td= link_to 'Edit', edit_remunerative_concept_path(remunerative_concept)
+      %td= link_to 'Destroy', remunerative_concept, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Remunerative concept', new_remunerative_concept_path

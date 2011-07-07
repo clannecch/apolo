@@ -1,0 +1,15 @@
+= form_for(@contract_mode) do |f|
+  - if @contract_mode.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@contract_mode.errors.count, "error")
+        prohibited this contract_mode from being saved:
+      %ul
+        - @contract_mode.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .actions
+    = f.submit

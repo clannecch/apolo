@@ -1,0 +1,15 @@
+= form_for(@document_type) do |f|
+  - if @document_type.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@document_type.errors.count, "error")
+        prohibited this document_type from being saved:
+      %ul
+        - @document_type.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .actions
+    = f.submit

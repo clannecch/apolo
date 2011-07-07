@@ -1,0 +1,31 @@
+%h1 Listing liquidacions
+%table
+  %tr
+    %th Periodo
+    %th Quincena
+    %th Tipo Recibo
+    %th Fecha liquidacion
+    %th Banco ultimo deposito
+    %th Periodo deposito
+    %th Fecha deposito
+    %th Fecha cierre
+    %th Techo retenciones
+    %th
+    %th
+    %th
+  - @liquidacions.each do |liquidacion|
+    %tr
+      %td= liquidacion.periodo.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s
+      %td= liquidacion.quincena
+      %td= liquidacion.tipo_recibo.try(:detalle)
+      %td= liquidacion.fecha_liquidacion
+      %td= liquidacion.bank_deposit.try(:detalle)
+      %td= liquidacion.periodo_deposito.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s
+      %td= liquidacion.fecha_deposito
+      %td= liquidacion.fecha_cierre
+      %td= liquidacion.techo_retenciones
+      %td= link_to 'Visualizar', liquidacion
+      %td= link_to 'Editar', edit_liquidacion_path(liquidacion)
+      %td= link_to 'Borrar', liquidacion, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Liquidacion', new_liquidacion_path

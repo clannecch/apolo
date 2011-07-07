@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %b Detalle:
+  = @activity.detalle
+= link_to 'Editar', edit_activity_path(@activity)
+|
+\#{link_to 'Volver', activities_path}

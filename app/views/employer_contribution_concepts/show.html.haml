@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %b Codigo:
+  = @employer_contribution_concept.codigo
+%p
+  %b Detalle:
+  = @employer_contribution_concept.detalle
+%p
+  %b Formula de Calculo Valor:
+  = @employer_contribution_concept.formula_calculo_valor
+%p
+  %b Acumuladores:
+  = @employer_contribution_concept.acumuladores_valor
+%p
+  %b Prioridad de Calculo:
+  = @employer_contribution_concept.prioridad
+%p
+  %b Statistical value:
+  = @employer_contribution_concept.statistical_value
+%p
+  %b Accounting imputation:
+  = @employer_contribution_concept.accounting_imputation_id
+= link_to 'Edit', edit_employer_contribution_concept_path(@employer_contribution_concept)
+|
+\#{link_to 'Back', employer_contribution_concepts_path}

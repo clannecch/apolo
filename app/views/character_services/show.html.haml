@@ -1,0 +1,8 @@
+%h1 Visualizar Caracter de Servicio
+%p#notice= notice
+%p
+  %b Detalle:
+  = @character_service.detalle
+= link_to 'Editar', edit_character_service_path(@character_service)
+|
+\#{link_to 'Volver', character_services_path}

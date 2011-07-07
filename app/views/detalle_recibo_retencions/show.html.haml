@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %b Recibo sueldo:
+  = @detalle_recibo_retencion.recibo_sueldo_id
+%p
+  %b Retention concept:
+  = @detalle_recibo_retencion.retention_concept_id
+%p
+  %b Detalle:
+  = @detalle_recibo_retencion.detalle
+%p
+  %b Cost center:
+  = @detalle_recibo_retencion.cost_center_id
+%p
+  %b Cantidad:
+  = @detalle_recibo_retencion.cantidad
+%p
+  %b Importe:
+  = @detalle_recibo_retencion.importe
+%p
+  %b Total:
+  = @detalle_recibo_retencion.total
+= link_to 'Edit', edit_detalle_recibo_retencion_path(@detalle_recibo_retencion)
+|
+\#{link_to 'Back', detalle_recibo_retencions_path}

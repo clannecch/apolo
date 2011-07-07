@@ -1,0 +1,15 @@
+%h1 Listado de Aseguradoras
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @insurance_companies.each do |insurance_company|
+    %tr
+      %td= insurance_company.detalle
+      %td= link_to 'Visualizar', insurance_company
+      %td= link_to 'Editar', edit_insurance_company_path(insurance_company)
+      %td= link_to 'Borrar', insurance_company, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Aseguradora', new_insurance_company_path

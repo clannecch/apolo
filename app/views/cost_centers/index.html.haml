@@ -1,0 +1,15 @@
+%h1 Listado de Centros de Costos
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @cost_centers.each do |cost_center|
+    %tr
+      %td= cost_center.detalle
+      %td= link_to 'Visualizar', cost_center
+      %td= link_to 'Editar', edit_cost_center_path(cost_center)
+      %td= link_to 'Borrar', cost_center, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Centro de Costo', new_cost_center_path

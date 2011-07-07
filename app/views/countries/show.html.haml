@@ -1,0 +1,8 @@
+%h1 Visualizacion de Pais
+%p#notice= notice
+%p
+  %b Detalle:
+  = @country.detalle
+= link_to 'Editar', edit_country_path(@country)
+|
+\#{link_to 'Volver', countries_path}

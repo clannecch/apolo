@@ -1,0 +1,15 @@
+%h1 Listado de Actividades
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @activities.each do |activity|
+    %tr
+      %td= activity.detalle
+      %td= link_to 'Visualizar', activity
+      %td= link_to 'EditAR', edit_activity_path(activity)
+      %td= link_to 'Borrar', activity, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Actividad', new_activity_path

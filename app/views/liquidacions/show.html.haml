@@ -1,0 +1,34 @@
+%h1 Visualizacion de Liquidacion
+%p#notice= notice
+%p
+  %b Periodo de liquidacion:
+  = @liquidacion.periodo.month
+  \/ #{@liquidacion.periodo.year}
+%p
+  %b Tipo de Recibo:
+  = @liquidacion.tipo_recibo.try(:detalle)
+%p
+  %b Quincena:
+  = @liquidacion.quincena
+%p
+  %b Fecha liquidacion:
+  = @liquidacion.fecha_liquidacion
+%p
+  %b Banco ultimo deposito:
+  = @liquidacion.bank_deposit.try(:detalle)
+%p
+  %b Periodo deposito:
+  = @liquidacion.periodo_deposito.month
+  \/  #{@liquidacion.periodo_deposito.year}
+%p
+  %b Fecha deposito:
+  = @liquidacion.fecha_deposito
+%p
+  %b Fecha cierre:
+  = @liquidacion.fecha_cierre
+%p
+  %b Techo retenciones:
+  = @liquidacion.techo_retenciones
+= link_to 'Editar', edit_liquidacion_path(@liquidacion)
+|
+\#{link_to 'Volver', liquidacions_path}
