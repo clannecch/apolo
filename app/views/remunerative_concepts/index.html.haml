@@ -1,9 +1,69 @@
+-# 
+  Se pueden usar todos estos finales de nombre de campos para que haga el filtro para el campo X de forma
+  X_filtro
+  
+  la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
+  
+  "equals",
+  "eq",
+  "does_not_equal",
+  "ne",
+  "not_eq",
+  "contains",
+  "like",
+  "matches",
+  "does_not_contain",
+  "nlike",
+  "not_matches",
+  "starts_with",
+  "sw",
+  "does_not_start_with",
+  "dnsw",
+  "ends_with",
+  "ew",
+  "does_not_end_with",
+  "dnew",
+  "greater_than",
+  "gt",
+  "less_than",
+  "lt",
+  "greater_than_or_equal_to",
+  "gte",
+  "gteq",
+  "less_than_or_equal_to",
+  "lte",
+  "lteq",
+  "in",
+  "not_in",
+  "ni",
+  "not_in",
+  "is_true",
+  "is_false",
+  "is_present",
+  "is_blank",
+  "is_null",
+  "is_not_null"
+
 %h1 Listing remunerative_concepts
+= form_for @search do |f|
+  = f.label :codigo_contains
+  = f.text_field :codigo_contains
+  %br
+  = f.label :prioridad_calculo_greater_than
+  = f.select :prioridad_calculo_greater_than,  1..100, { :include_blank => true }
+  %br
+  =# f.label :comments_created_at_greater_than, 'With comments after'
+  =# f.datetime_select :comments_created_at_greater_than, :include_blank => true 
+  %br
+  = f.submit
+
+= paginate @remunerative_concepts
+
 %table
   %tr
-    %th Codigo
-    %th Detalle
-    %th Porcentual asistencia
+    %th= sort_link @search, :codigo, "Codiguito"
+    %th= sort_link @search, :detalle
+    %th= sort_link @search, :porcentual_asistencia, "% Asis"
     %th Prioridad calculot
     %th Datos a Pedir
     %th Statistical value
@@ -20,7 +80,7 @@
     %tr
       %td= remunerative_concept.codigo
       %td= remunerative_concept.detalle
-      %td= remunerative_concept.porcentual_asistencia
+      %td= remunerative_concept.porcentual_asistencia? ? 'si' : 'no'
       %td= remunerative_concept.prioridad_calculo
       %td= remunerative_concept.data_to_ask.try(:detalle)
       %td= remunerative_concept.statistical_value
@@ -33,5 +93,8 @@
       %td= link_to 'Show', remunerative_concept
       %td= link_to 'Edit', edit_remunerative_concept_path(remunerative_concept)
       %td= link_to 'Destroy', remunerative_concept, :confirm => 'Are you sure?', :method => :delete
+
+= paginate @remunerative_concepts
+
 %br/
 = link_to 'New Remunerative concept', new_remunerative_concept_path

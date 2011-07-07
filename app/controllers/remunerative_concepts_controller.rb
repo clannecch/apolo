@@ -2,7 +2,9 @@ class RemunerativeConceptsController < ApplicationController
   # GET /remunerative_concepts
   # GET /remunerative_concepts.xml
   def index
-    @remunerative_concepts = RemunerativeConcept.all
+    # la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
+    @search = RemunerativeConcept.search(params[:search])
+    @remunerative_concepts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb
