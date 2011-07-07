@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110516135018
+# Schema version: 20110706162424
 #
 # Table name: insurance_beneficiaries
 #
@@ -11,6 +11,7 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #  employee_id      :integer
+#  fecha_nacimiento :date
 #
 
 class InsuranceBeneficiary < ActiveRecord::Base

@@ -1,20 +1,20 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110706162424
 #
 # Table name: liquidacions
 #
 #  id                :integer         not null, primary key
-#  periodo           :string(255)
 #  fecha_liquidacion :date
 #  fecha_deposito    :date
 #  bank_deposit_id   :integer
-#  periodo_deposito  :string(255)
 #  fecha_cierre      :date
 #  quincena          :integer
 #  techo_retenciones :decimal(, )
 #  created_at        :datetime
 #  updated_at        :datetime
 #  tipo_recibo_id    :integer
+#  periodo           :date
+#  periodo_deposito  :date
 #
 
 class Liquidacion < ActiveRecord::Base
@@ -31,6 +31,8 @@ class Liquidacion < ActiveRecord::Base
                               :fecha_liquidacion,															  :message => "es un dato requerido"
   validates_presence_of		    :fecha_deposito,
                               :if => :periodo_deposito?,					          :message => "es un dato requerido"
+
+  default_scope order('periodo ASC') 
 
 #  validate                    :check_periodo
 
