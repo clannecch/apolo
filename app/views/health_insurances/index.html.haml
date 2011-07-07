@@ -1,0 +1,15 @@
+%h1 Listado de Obras Sociales
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @health_insurances.each do |health_insurance|
+    %tr
+      %td= health_insurance.detalle
+      %td= link_to 'Visualizar', health_insurance
+      %td= link_to 'Editar', edit_health_insurance_path(health_insurance)
+      %td= link_to 'Borrar', health_insurance, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Obra Social', new_health_insurance_path

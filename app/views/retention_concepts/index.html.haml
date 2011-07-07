@@ -1,0 +1,29 @@
+%h1 Listing retention_concepts
+%table
+  %tr
+    %th Codigo
+    %th Detalle
+    %th Formula de Calculo Valor
+    %th Acumuladores
+    %th Prioridad de calculo
+    %th datos_a_pedir
+    %th Statistical value
+    %th Accounting imputation
+    %th
+    %th
+    %th
+  - @retention_concepts.each do |retention_concept|
+    %tr
+      %td= retention_concept.codigo
+      %td= retention_concept.detalle
+      %td= retention_concept.formula_calculo_valor
+      %td= retention_concept.acumuladores_valor
+      %td= retention_concept.prioridad
+      %td= retention_concept.data_to_ask.try(:detalle)
+      %td= retention_concept.statistical_value
+      %td= retention_concept.accounting_imputation_id
+      %td= link_to 'Show', retention_concept
+      %td= link_to 'Edit', edit_retention_concept_path(retention_concept)
+      %td= link_to 'Destroy', retention_concept, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Retention concept', new_retention_concept_path

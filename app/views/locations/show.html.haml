@@ -1,0 +1,8 @@
+%h1 Listado de Localidades
+%p#notice= notice
+%p
+  %b Detalle:
+  = @location.detalle
+= link_to 'Editar', edit_location_path(@location)
+|
+\#{link_to 'volver', locations_path}

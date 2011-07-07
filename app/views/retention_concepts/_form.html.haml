@@ -1,0 +1,43 @@
+= form_for(@retention_concept) do |f|
+  - if @retention_concept.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@retention_concept.errors.count, "error")
+        prohibited this retention_concept from being saved:
+      %ul
+        - @retention_concept.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :codigo
+    %br/
+    = f.text_field :codigo
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .field
+    = f.label :formula_calculo_valor
+    %br/
+    = f.text_field :formula_calculo_valor
+  .field
+    = f.label :acumuladores_valor
+    %br/
+    = f.text_field :acumuladores_valor
+  .field
+    = f.label :prioridad
+    %br/
+    = f.text_field :prioridad
+  .field
+    = f.label "data_to_ask"
+    %br/
+    = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
+  .field
+    = f.label :statistical_value
+    %br/
+    = f.text_field :statistical_value
+  .field
+    = f.label :accounting_imputation_id
+    %br/
+    = f.text_field :accounting_imputation_id
+  .actions
+    = f.submit

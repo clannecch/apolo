@@ -1,0 +1,17 @@
+%h1 Visualizacion de beneficiarios seguro
+%p#notice= notice
+%p
+  %b Nombre:
+  = @insurance_beneficiary.nombre
+%p
+  %b Apellido:
+  = @insurance_beneficiary.apellido
+%p
+  %b Tipo de Documento:
+  = @insurance_beneficiary.document_type.try(:detalle)
+%p
+  %b Numero documento:
+  = @insurance_beneficiary.numero_documento
+= link_to 'Editar', edit_insurance_beneficiary_path(@insurance_beneficiary)
+|
+\#{link_to 'Volver', insurance_beneficiaries_path}

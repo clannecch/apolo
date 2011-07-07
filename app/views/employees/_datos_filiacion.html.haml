@@ -1,0 +1,45 @@
+%h3 Filiacion
+.field
+  = f.label "Obra Social"
+  %br/
+  = f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Plan Obra Social"
+  %br/
+  = f.text_field :plan_osocial
+.field
+  = f.label "Numero Afiliado Obra Social"
+  %br/
+  = f.text_field :numero_afiliado_osocial
+.field
+  = f.label "Cargas Extras Obra Social"
+  %br/
+  = f.text_field :cargas_extras_osocial
+.field
+  = f.label "Retencion Minima Obra Social"
+  %br/
+  = f.text_field :retencion_minima_osocial
+.field
+  = f.label "Sindicato"
+  %br/
+  = f.collection_select :labor_union_id, LaborUnion.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Numero Afiliado Sindicato"
+  %br/
+  = f.text_field :numero_afiliado_sindicato
+.field
+  = f.label "Numero de Jubilacion"
+  %br/
+  = f.text_field :numero_jubilacion
+.field
+  = f.label "Numero Ganancias"
+  %br/
+  = f.text_field :numero_ganancias
+.field
+  = f.label "CUIT"
+  %br/
+  = f.text_field :cuit
+.field
+  = f.label "CUIL"
+  %br/
+  = f.text_field :cuil

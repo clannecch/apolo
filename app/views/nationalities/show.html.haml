@@ -1,0 +1,8 @@
+%h1 Visualizar Nacionalidades
+%p#notice= notice
+%p
+  %b Detalle:
+  = @nationality.detalle
+= link_to 'Editar', edit_nationality_path(@nationality)
+|
+\#{link_to 'Volver', nationalities_path}

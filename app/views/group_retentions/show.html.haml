@@ -1,0 +1,8 @@
+%h1 Grupo de Retenciones
+%p#notice= notice
+%p
+  %b Detalle:
+  = @group_retention.detalle
+= link_to 'Editar', edit_group_retention_path(@group_retention)
+|
+\#{link_to 'Volver', group_retentions_path}

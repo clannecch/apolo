@@ -1,0 +1,8 @@
+%h1 Visializacion de Lugar
+%p#notice= notice
+%p
+  %b Detalle:
+  = @place.detalle
+= link_to 'Editar', edit_place_path(@place)
+|
+\#{link_to 'Volver', places_path}

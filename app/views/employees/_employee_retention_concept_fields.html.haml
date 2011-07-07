@@ -1,0 +1,6 @@
+%tr.nested-fields
+  %td= f.collection_select :retention_concept_id, RetentionConcept.all, :id, :detalle, :prompt => true
+  %td= f.text_field :detalle
+  %td= f.text_field :cantidad
+  %td= f.text_field :importe
+  %td= link_to_remove_association "Borrar", f

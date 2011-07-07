@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110706162424
 #
 # Table name: detalle_recibo_habers
 #
@@ -13,6 +13,7 @@
 #  total                   :decimal(, )
 #  created_at              :datetime
 #  updated_at              :datetime
+#  cantidad_recibo         :decimal(, )
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

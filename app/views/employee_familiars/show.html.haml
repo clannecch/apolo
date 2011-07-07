@@ -1,0 +1,53 @@
+%h1 Visualizacion de Familiar
+%p#notice= notice
+%p
+  %b Apellido:
+  = @employee_familiar.apellido
+%p
+  %b Nombre:
+  = @employee_familiar.nombre
+%p
+  %b Fecha nacimiento:
+  = @employee_familiar.fecha_nacimiento
+%p
+  %b Numero documento:
+  = @employee_familiar.numero_documento
+%p
+  %b Obra Social:
+  = @employee_familiar.health_insurance_id
+%p
+  %b Cuil:
+  = @employee_familiar.cuil
+%p
+  %b Cuit:
+  = @employee_familiar.cuit
+%p
+  %b Tomo:
+  = @employee_familiar.tomo
+%p
+  %b Folio:
+  = @employee_familiar.folio
+%p
+  %b Acta:
+  = @employee_familiar.acta
+%p
+  %b Pais:
+  = @employee_familiar.country_id
+%p
+  %b Provincia:
+  = @employee_familiar.province_id
+%p
+  %b Comuna:
+  = @employee_familiar.comuna
+%p
+  %b Tipo de documento:
+  = @employee_familiar.document_type_id
+%p
+  %b Ocupacion:
+  = @employee_familiar.activity_id
+%p
+  %b id empleado:
+  = @employee_familiar.employee_id
+= link_to 'Editar', edit_employee_familiar_path(@employee_familiar)
+|
+\#{link_to 'Volver', employee_familiars_path}

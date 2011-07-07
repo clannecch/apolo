@@ -1,0 +1,15 @@
+%h1 Listado de Tipos de Remuneracion
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @remuneration_types.each do |remuneration_type|
+    %tr
+      %td= remuneration_type.detalle
+      %td= link_to 'Visualizar', remuneration_type
+      %td= link_to 'Editar', edit_remuneration_type_path(remuneration_type)
+      %td= link_to 'Borrar', remuneration_type, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Tipo de Remuneracion', new_remuneration_type_path

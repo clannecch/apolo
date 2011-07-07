@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110706162424
 #
 # Table name: employees
 #
@@ -79,6 +79,8 @@
 #  deposito_banco_cuenta            :string(255)
 #  deposito_banco_cbu               :string(255)
 #  group_employer_contribution_id   :integer
+#  causa_egreso_id                  :integer
+#  foto                             :binary
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

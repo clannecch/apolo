@@ -1,0 +1,15 @@
+%h1 Listado de Aportes Patronales
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @group_employer_contributions.each do |group_employer_contribution|
+    %tr
+      %td= group_employer_contribution.detalle
+      %td= link_to 'Visualizar', group_employer_contribution
+      %td= link_to 'Editar', edit_group_employer_contribution_path(group_employer_contribution)
+      %td= link_to 'Borrar', group_employer_contribution, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Grupo de Aportes Patronales', new_group_employer_contribution_path

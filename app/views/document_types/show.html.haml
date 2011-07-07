@@ -1,0 +1,8 @@
+%h1 Visualizar Tipo de Documento
+%p#notice= notice
+%p
+  %b Detalle:
+  = @document_type.detalle
+= link_to 'Editar', edit_document_type_path(@document_type)
+|
+\#{link_to 'Volver', document_types_path}

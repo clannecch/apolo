@@ -1,0 +1,8 @@
+%h1 Visualizacion de Categorias
+%p#notice= notice
+%p
+  %b Detalle:
+  = @category.detalle
+= link_to 'Editar', edit_category_path(@category)
+|
+\#{link_to 'Volver', categories_path}

@@ -1,0 +1,15 @@
+%h1 Listado de secciones
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @sections.each do |section|
+    %tr
+      %td= section.detalle
+      %td= link_to 'Visualizar', section
+      %td= link_to 'Editar', edit_section_path(section)
+      %td= link_to 'Borrar', section, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Seccion', new_section_path

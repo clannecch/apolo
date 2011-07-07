@@ -1,0 +1,7 @@
+%tr.nested-fields
+  %td= f.text_field :apellido
+  %td= f.text_field :nombre
+  %td= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true
+  %td= f.text_field :numero_documento
+  %td= f.text_field :fecha_nacimiento, :class => :datepicker
+  %td= link_to_remove_association "Borrar", f

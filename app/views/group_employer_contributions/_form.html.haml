@@ -1,0 +1,21 @@
+= form_for(@group_employer_contribution) do |f|
+  - if @group_employer_contribution.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_employer_contribution.errors.count, "error")
+        prohibited this group_employer_contribution from being saved:
+      %ul
+        - @group_employer_contribution.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    %h3 Codigos de Aportes Patronales
+    .field
+      = f.label :detalle
+      %br/
+      = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true
+  .field
+    = f.label :detalle
+    %br/
+    = f.text_field :detalle
+  .actions
+    = f.submit

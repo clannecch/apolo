@@ -1,0 +1,15 @@
+%h1 Listado de Provincias
+%table
+  %tr
+    %th Detalle
+    %th
+    %th
+    %th
+  - @provinces.each do |province|
+    %tr
+      %td= province.detalle
+      %td= link_to 'Visualizar', province
+      %td= link_to 'Editar', edit_province_path(province)
+      %td= link_to 'Borrar', province, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nueva Provincia', new_province_path

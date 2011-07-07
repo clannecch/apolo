@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %b Detalle:
+  = @data_to_ask.detalle
+%p
+  %b Cantidad:
+  = @data_to_ask.cantidad
+%p
+  %b Importe:
+  = @data_to_ask.importe
+= link_to 'Edit', edit_data_to_ask_path(@data_to_ask)
+|
+\#{link_to 'Back', data_to_asks_path}

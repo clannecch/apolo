@@ -1,0 +1,17 @@
+%h3
+  Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
+%h4
+  Empleado: #{@recibo_sueldo.employee.apellido}, #{@recibo_sueldo.employee.nombre}
+%p#notice= notice
+%p
+  %b Fecha recibo:
+  = @recibo_sueldo.fecha_recibo
+%p
+  %b Observaciones:
+  = @recibo_sueldo.observaciones
+%p
+  %b Mensaje recibo:
+  = @recibo_sueldo.mensaje_recibo
+= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo)
+|
+\#{link_to 'Volver', liquidacion_recibo_sueldos_path}

@@ -1,0 +1,8 @@
+%h1 Visualizar Aseguradora
+%p#notice= notice
+%p
+  %b Detalle:
+  = @insurance_company.detalle
+= link_to 'Editar', edit_insurance_company_path(@insurance_company)
+|
+\#{link_to 'Volver', insurance_companies_path}

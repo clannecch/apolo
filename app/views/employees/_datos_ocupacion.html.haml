@@ -1,0 +1,25 @@
+%h3 Ocupacion
+.field
+  = f.label "Categoria"
+  %br/
+  = f.collection_select :category_id, Category.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Seccion"
+  %br/
+  = f.collection_select :section_id, Section.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Tarea Desempeñada"
+  %br/
+  = f.collection_select :task_id, Task.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Lugar de Trabajo"
+  %br/
+  = f.collection_select :place_id, Place.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Ocupacion"
+  %br/
+  = f.collection_select :employment_id, Employment.all, :id, :detalle, :prompt => true
+.field
+  = f.label "Caracter de Servicio"
+  %br/
+  = f.collection_select :character_service_id, CharacterService.all, :id, :detalle, :prompt => true

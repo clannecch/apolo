@@ -1,0 +1,45 @@
+%h1 Listado de Familiares
+%table
+  %tr
+    %th Apellido
+    %th Nombre
+    %th Fecha nacimiento
+    %th Numero documento
+    %th Obra Sociale
+    %th Cuil
+    %th Cuit
+    %th Tomo
+    %th Folio
+    %th Acta
+    %th Pais
+    %th Provincia
+    %th Comuna
+    %th Employee
+    %th tipo de documento
+    %th Ocupacion
+    %th
+    %th
+    %th
+  - @employee_familiars.each do |employee_familiar|
+    %tr
+      %td= employee_familiar.apellido
+      %td= employee_familiar.nombre
+      %td= employee_familiar.fecha_nacimiento
+      %td= employee_familiar.numero_documento
+      %td= employee_familiar.health_insurance_id
+      %td= employee_familiar.cuil
+      %td= employee_familiar.cuit
+      %td= employee_familiar.tomo
+      %td= employee_familiar.folio
+      %td= employee_familiar.acta
+      %td= employee_familiar.country_id
+      %td= employee_familiar.province_id
+      %td= employee_familiar.comuna
+      %td= employee_familiar.document_type_id
+      %td= employee_familiar.activity_id
+      %td= employee_familiar.employee_id
+      %td= link_to 'Visualizar', employee_familiar
+      %td= link_to 'Editas', edit_employee_familiar_path(employee_familiar)
+      %td= link_to 'Borrar', employee_familiar, :confirm => 'Esta Seguro?', :method => :delete
+%br/
+= link_to 'Nuevo Familiar', new_employee_familiar_path

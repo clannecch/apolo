@@ -1,0 +1,76 @@
+= form_for([@liquidacion,@recibo_sueldo]) do |f|
+  - if @recibo_sueldo.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@recibo_sueldo.errors.count, "error")
+        prohibited this recibo_sueldo from being saved:
+      %ul
+        - @recibo_sueldo.errors.full_messages.each do |msg|
+          %li= msg
+  %h3
+    Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
+  - if @recibo_sueldo.new_record?
+    .field
+      = f.label :employee_id
+      %br/
+      = f.collection_select :employee_id, Employee.all, :id, :full_name , :prompt => true
+  - else
+    %h4
+      Empleado:
+      - @recibo_sueldo.employee.apellido
+      , #{@recibo_sueldo.employee.nombre}
+  %table.field
+    %tr
+      %th= f.label "Fecha Recibo"
+      %th= f.label "Observaciones"
+      %th= f.label "Mensaje Recibo"
+    %tr
+    %tr
+      %td= f.date_select :fecha_recibo
+      %td= f.text_field :observaciones
+      %td= f.text_field :mensaje_recibo
+  /
+    <div class="field">
+    <haml:loud> f.label :fecha_recibo </haml:loud><br />
+    <haml:loud> f.date_select :fecha_recibo </haml:loud>
+    </div>
+    <div class="field">
+    <haml:loud> f.label :observaciones </haml:loud><br />
+    <haml:loud> f.text_field :observaciones </haml:loud>
+    </div>
+    <div class="field">
+    <haml:loud> f.label :mensaje_recibo </haml:loud><br />
+    <haml:loud> f.text_field :mensaje_recibo </haml:loud>
+    </div>
+  - if @recibo_sueldo.persisted?
+    .field
+      %h3 Haberes
+      #detalle_recibo_haber
+        %table.field
+          %tr
+            %th= f.label "Concepto Retencion"
+            %th= f.label "Detalle Personalizado"
+            %th= f.label "Centro Costo"
+            %th= f.label "Cantidad"
+            %th= f.label "Importe"
+            %th &nbsp;
+          = f.fields_for :detalle_recibo_habers do |drh|
+            = render 'detalle_recibo_haber_fields', :f => drh
+        .links
+          = link_to_add_association 'Agregar Haber', f, :detalle_recibo_habers
+    .field
+      %h3 Retenciones
+      #detalle_recibo_retencion
+        %table.field
+          %tr
+            %th= f.label "Concepto Retencion"
+            %th= f.label "Detalle Personalizado"
+            %th= f.label "Cantidad"
+            %th= f.label "Importe"
+            %th &nbsp;
+          = f.fields_for :detalle_recibo_retencions do |drh|
+            = render 'detalle_recibo_retencion_fields', :f => drh
+        .links
+          = link_to_add_association 'Agregar retencion', f, :detalle_recibo_retencions
+  .actions
+    = f.submit

@@ -1,0 +1,52 @@
+%p#notice= notice
+%p
+  %b Codigo:
+  = @remunerative_concept.codigo
+%p
+  %b Detalle:
+  = @remunerative_concept.detalle
+%p
+  %b Porcentual asistencia:
+  = @remunerative_concept.porcentual_asistencia
+%p
+  %b Prioridad Calculo:
+  = @remunerative_concept.prioridad_calculo
+%p
+  %b Datos a Pedir:
+  = @remunerative_concept.data_to_ask.try(:detalle)
+%p
+  %b Formula Calculo Cantidad:
+  = @remunerative_concept.calculo_cantidad
+%p
+  %b Formula Calculo Valor:
+  = @remunerative_concept.calculo_valor
+%p
+  %b Statistical value:
+  = @remunerative_concept.statistical_value
+%p
+  %b Acumuladores Valor:
+  = @remunerative_concept.acumuladores_valor
+%p
+  %b Acumuladores cantidad:
+  = @remunerative_concept.acumuladores_cantidad
+%p
+  %b Grupo ganancias:
+  = @remunerative_concept.grupo_ganancias_id
+%p
+  %b Accounting imputation:
+  = @remunerative_concept.accounting_imputation_id
+%p
+  %b Concepto asociado haber:
+  = @remunerative_concept.concepto_asociado_haber
+%p
+  %b Concepto asociado retencion:
+  = @remunerative_concept.concepto_asociado_retencion
+%p
+  %b Concepto asociado haber 2:
+  = @remunerative_concept.concepto_asociado_haber_2
+%p
+  %b Concepto asociado retencion 2:
+  = @remunerative_concept.concepto_asociado_retencion_2
+= link_to 'Edit', edit_remunerative_concept_path(@remunerative_concept)
+|
+\#{link_to 'Back', remunerative_concepts_path}

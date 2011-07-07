@@ -1,0 +1,8 @@
+%h1 Visualizar Lugar de Emision de Documento
+%p#notice= notice
+%p
+  %b Detalle:
+  = @issued.detalle
+= link_to 'Editar', edit_issued_path(@issued)
+|
+\#{link_to 'volver', issueds_path}
