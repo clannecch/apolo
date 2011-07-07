@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  periodo: MyString
+  no_imponibles: 1.5
+  conyuge: 1.5
+  hijo: 1.5
+  otras: 1.5
+  especial_inciso_e: 1.5
+  especial_inciso_abc: 1.5
+
+two:
+  periodo: MyString
+  no_imponibles: 1.5
+  conyuge: 1.5
+  hijo: 1.5
+  otras: 1.5
+  especial_inciso_e: 1.5
+  especial_inciso_abc: 1.5

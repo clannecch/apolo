@@ -1,0 +1,33 @@
+<h1>Listing employee_retention_concepts</h1>
+
+<table>
+  <tr>
+    <th>Employee</th>
+    <th>Retention concept</th>
+    <th>Cantidad</th>
+    <th>Importe</th>
+    <th>Fecha inicio</th>
+    <th>Fecha final</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @employee_retention_concepts.each do |employee_retention_concept| %>
+  <tr>
+    <td><%= employee_retention_concept.employee_id %></td>
+    <td><%= employee_retention_concept.retention_concept_id %></td>
+    <td><%= employee_retention_concept.cantidad %></td>
+    <td><%= employee_retention_concept.importe %></td>
+    <td><%= employee_retention_concept.fecha_inicio %></td>
+    <td><%= employee_retention_concept.fecha_final %></td>
+    <td><%= link_to 'Show', employee_retention_concept %></td>
+    <td><%= link_to 'Edit', edit_employee_retention_concept_path(employee_retention_concept) %></td>
+    <td><%= link_to 'Destroy', employee_retention_concept, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Employee retention concept', new_employee_retention_concept_path %>

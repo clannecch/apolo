@@ -1,0 +1,21 @@
+<%= form_for(@causa_egreso) do |f| %>
+  <% if @causa_egreso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@causa_egreso.errors.count, "error") %> prohibited this causa_egreso from being saved:</h2>
+
+      <ul>
+      <% @causa_egreso.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :detalle %><br />
+    <%= f.text_field :detalle %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

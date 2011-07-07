@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  employee_id: 1
+  remunerative_concept_id: 1
+  cantidad: 1
+  importe: 1.5
+  fecha_inicio: 2011-06-30
+  fecha_final: 2011-06-30
+
+two:
+  employee_id: 1
+  remunerative_concept_id: 1
+  cantidad: 1
+  importe: 1.5
+  fecha_inicio: 2011-06-30
+  fecha_final: 2011-06-30

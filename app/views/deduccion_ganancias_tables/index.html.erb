@@ -1,0 +1,35 @@
+<h1>Listing deduccion_ganancias_tables</h1>
+
+<table>
+  <tr>
+    <th>Periodo</th>
+    <th>No imponibles</th>
+    <th>Conyuge</th>
+    <th>Hijo</th>
+    <th>Otras</th>
+    <th>Especial inciso e</th>
+    <th>Especial inciso abc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @deduccion_ganancias_tables.each do |deduccion_ganancias_table| %>
+  <tr>
+    <td><%= deduccion_ganancias_table.periodo_ano.to_s + '/' + deduccion_ganancias_table.periodo_mes.to_s  %></td>
+    <td><%= deduccion_ganancias_table.no_imponibles %></td>
+    <td><%= deduccion_ganancias_table.conyuge %></td>
+    <td><%= deduccion_ganancias_table.hijo %></td>
+    <td><%= deduccion_ganancias_table.otras %></td>
+    <td><%= deduccion_ganancias_table.especial_inciso_e %></td>
+    <td><%= deduccion_ganancias_table.especial_inciso_abc %></td>
+    <td><%= link_to 'Show', deduccion_ganancias_table %></td>
+    <td><%= link_to 'Edit', edit_deduccion_ganancias_table_path(deduccion_ganancias_table) %></td>
+    <td><%= link_to 'Destroy', deduccion_ganancias_table, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Deduccion ganancias table', new_deduccion_ganancias_table_path %>

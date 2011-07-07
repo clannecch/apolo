@@ -1,0 +1,23 @@
+<h1>Listing causa_egresos</h1>
+
+<table>
+  <tr>
+    <th>Detalle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @causa_egresos.each do |causa_egreso| %>
+  <tr>
+    <td><%= causa_egreso.detalle %></td>
+    <td><%= link_to 'Show', causa_egreso %></td>
+    <td><%= link_to 'Edit', edit_causa_egreso_path(causa_egreso) %></td>
+    <td><%= link_to 'Destroy', causa_egreso, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Causa egreso', new_causa_egreso_path %>

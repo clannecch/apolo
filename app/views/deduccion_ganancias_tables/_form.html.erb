@@ -1,0 +1,52 @@
+<%= form_for(@deduccion_ganancias_table) do |f| %>
+  <% if @deduccion_ganancias_table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@deduccion_ganancias_table.errors.count, "error") %> prohibited this deduccion_ganancias_table from being saved:</h2>
+
+      <ul>
+      <% @deduccion_ganancias_table.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :periodo_ano %><br />
+    <%= f.text_field :periodo_ano %>
+  </div>
+  <div class="field">
+    <%= f.label :periodo_mes %><br />
+    <%= f.text_field :periodo_mes %>
+  </div>
+  <div class="field">
+    <%= f.label "A) Ganancias no Imponibles [(Art.23 Inciso a)]" %><br />
+    <%= f.text_field :no_imponibles %>
+  </div>
+  <hr />
+  <h3>B) Deduccion por carga de familia [(Art.23 Inciso b)]</h3>
+  <div class="field">
+    <%= f.label "1 - Conyuge"%><br />
+    <%= f.text_field :conyuge %>
+  </div>
+  <div class="field">
+    <%= f.label "2 - Hijo" %><br />
+    <%= f.text_field :hijo %>
+  </div>
+  <div class="field">
+    <%= f.label "3 - Otras" %><br />
+    <%= f.text_field :otras %>
+  </div>
+  <div class="field">
+    <hr />
+    <%= f.label "C) Deduccion especial [Art.23 Inciso c); Art.79 inciso e)]" %><br />
+    <%= f.text_field :especial_inciso_e %>
+  </div>
+  <div class="field">
+    <%= f.label "C) Deduccion especial [Art.23 Inciso c); Art.79 inciso a) b) y c)]" %><br />
+    <%= f.text_field :especial_inciso_abc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

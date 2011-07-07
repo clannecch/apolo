@@ -1,0 +1,41 @@
+<%= form_for(@employee_remunerative_concept) do |f| %>
+  <% if @employee_remunerative_concept.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee_remunerative_concept.errors.count, "error") %> prohibited this employee_remunerative_concept from being saved:</h2>
+
+      <ul>
+      <% @employee_remunerative_concept.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :employee_id %><br />
+    <%= f.text_field :employee_id %>
+  </div>
+  <div class="field">
+    <%= f.label :remunerative_concept_id %><br />
+    <%= f.text_field :remunerative_concept_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidad %><br />
+    <%= f.text_field :cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :importe %><br />
+    <%= f.text_field :importe %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_inicio %><br />
+    <%= f.date_select :fecha_inicio %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_final %><br />
+    <%= f.date_select :fecha_final %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
