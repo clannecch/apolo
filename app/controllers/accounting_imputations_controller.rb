@@ -1,9 +1,11 @@
 class AccountingImputationsController < ApplicationController
+  before_filter :find_accounting_imputation, :except => [:index, :new, :create]
+
   # GET /accounting_imputations
   # GET /accounting_imputations.xml
   def index
     # TODO: mejorar la forma de traer este conjunto de registros!!! (se pueden usar optimize, :fixme, :todo) se llama con rake notes o rake notes:todo
-    @accounting_imputations = AccountingImputation.all
+    @accounting_imputations = AccountingImputation.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +16,6 @@ class AccountingImputationsController < ApplicationController
   # GET /accounting_imputations/1
   # GET /accounting_imputations/1.xml
   def show
-    @accounting_imputation = AccountingImputation.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +26,7 @@ class AccountingImputationsController < ApplicationController
   # GET /accounting_imputations/new
   # GET /accounting_imputations/new.xml
   def new
-    @accounting_imputation = AccountingImputation.new
+    @accounting_imputation = AccountingImputation.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +36,12 @@ class AccountingImputationsController < ApplicationController
 
   # GET /accounting_imputations/1/edit
   def edit
-    @accounting_imputation = AccountingImputation.find(params[:id])
   end
 
   # POST /accounting_imputations
   # POST /accounting_imputations.xml
   def create
-    @accounting_imputation = AccountingImputation.new(params[:accounting_imputation])
+    @accounting_imputation = AccountingImputation.by_company(current_company.id).new(params[:accounting_imputation])
 
     respond_to do |format|
       if @accounting_imputation.save
@@ -57,7 +57,6 @@ class AccountingImputationsController < ApplicationController
   # PUT /accounting_imputations/1
   # PUT /accounting_imputations/1.xml
   def update
-    @accounting_imputation = AccountingImputation.find(params[:id])
 
     respond_to do |format|
       if @accounting_imputation.update_attributes(params[:accounting_imputation])
@@ -73,12 +72,15 @@ class AccountingImputationsController < ApplicationController
   # DELETE /accounting_imputations/1
   # DELETE /accounting_imputations/1.xml
   def destroy
-    @accounting_imputation = AccountingImputation.find(params[:id])
     @accounting_imputation.destroy
 
     respond_to do |format|
       format.html { redirect_to(accounting_imputations_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def find_accounting_imputation
+    @accounting_imputation = AccountingImputation.by_company(current_company.id).find(params[:id])
   end
 end

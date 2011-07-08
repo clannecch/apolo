@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @accounting_imputation.detalle
-= link_to 'Editar', edit_accounting_imputation_path(@accounting_imputation)
+= accounting_imputation_links(@accounting_imputation)
 |
 \#{link_to 'Volver', accounting_imputations_path}

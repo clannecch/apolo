@@ -22,8 +22,7 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.xml
   def show
-
-    respond_to do |format|
+     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @country }
     end
@@ -64,8 +63,7 @@ class CountriesController < ApplicationController
   # PUT /countries/1
   # PUT /countries/1.xml
   def update
-
-    respond_to do |format|
+      respond_to do |format|
       if @country.update_attributes(params[:country])
         format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
         format.xml  { head :ok }

@@ -24,8 +24,8 @@ group :development, :test do
   # database
   gem 'sqlite3'
   # design depends
-  gem 'hpricot'
-  gem 'ruby_parser'
+  #gem 'hpricot'
+  #gem 'ruby_parser'
   # documentation
   gem 'annotate'
   # testing

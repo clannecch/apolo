@@ -8,8 +8,6 @@
   - @bank_deposit_account_types.each do |bank_deposit_account_type|
     %tr
       %td= bank_deposit_account_type.detalle
-      %td= link_to 'Visualizar', bank_deposit_account_type
-      %td= link_to 'Editar', edit_bank_deposit_account_type_path(bank_deposit_account_type)
-      %td= link_to 'Borrar', bank_deposit_account_type, :confirm => 'Esta Seguro?', :method => :delete
+      %td= bank_deposit_account_type_links(bank_deposit_account_type)
 %br/
 = link_to 'Nuevo Tipo de Cuenta Bancaria', new_bank_deposit_account_type_path

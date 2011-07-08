@@ -8,8 +8,6 @@
   - @bank_deposits.each do |bank_deposit|
     %tr
       %td= bank_deposit.detalle
-      %td= link_to 'Visualizar', bank_deposit
-      %td= link_to 'Editar', edit_bank_deposit_path(bank_deposit)
-      %td= link_to 'Borrar', bank_deposit, :confirm => 'Esta Seguro?', :method => :delete
+      %td= bank_deposit_links(bank_deposit)
 %br/
 = link_to 'Nuevo Banco', new_bank_deposit_path

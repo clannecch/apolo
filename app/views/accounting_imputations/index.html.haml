@@ -8,8 +8,6 @@
   - @accounting_imputations.each do |accounting_imputation|
     %tr
       %td= accounting_imputation.detalle
-      %td= link_to 'Visualizar', accounting_imputation
-      %td= link_to 'Editar', edit_accounting_imputation_path(accounting_imputation)
-      %td= link_to 'Borrar', accounting_imputation, :confirm => 'Esta Seguro?', :method => :delete
+      %td= accounting_imputation_links(accounting_imputation)
 %br/
 = link_to 'Nueva Cuenta Contable', new_accounting_imputation_path
