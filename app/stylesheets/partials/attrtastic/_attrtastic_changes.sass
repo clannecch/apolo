@@ -1,0 +1,56 @@
+/*
+ *    Stylesheet for attrtastic
+ *
+ *    -------------------------------------
+ */
+
+.attrtastic
+  .attributes > ol
+    // remove numbers for lists
+    list-style: none
+    > li.attribute
+      // spaces between lines
+      margin-bottom: 10px
+      line-height: 18px
+      margin-right: -6px
+      // FIXME
+      .label
+        // attribute's label
+        font-family: helvetica, arial, sans-serif
+        font-weight: bold
+        color: #666666
+        // para ficar por cima do campo
+        width: 100%
+        display: block
+        font-size: 14px
+      .value
+        // attribute's value
+        background-color: #f6f6f6
+        padding: 2px
+        padding-left: 4px
+        display: block
+        min-height: 18px
+        font-size: 13px
+  hr
+    // bar to split groups
+    height: 1px
+    border-bottom: solid #e8e8e8 1px
+    margin-bottom: 15px
+    background-color: #fff
+  .attributes > ol
+    // one column
+    float: left
+    width: 100%
+  .column_left
+    // two columns - left
+    float: left
+    width: 47%
+    margin-left: 0px
+  .column_right
+    // two columns - right
+    float: right
+    width: 48%
+    margin-right: 0px
+
+// COLUMNS
+

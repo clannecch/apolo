@@ -1,0 +1,159 @@
+/*
+ *  Stylesheet for formtastic
+ *
+ *  -------------------------------------
+ */
+
+#main .block .content .inner form.formtastic
+  padding-right: 7px
+
+form.formtastic
+  hr
+    // bar to split groups
+    height: 1px
+    border-bottom: solid #eaeaea 1px
+    padding-top: 10px
+    margin-bottom: 15px
+    background-color: #fff
+    margin-right: -5px
+  .wat-cf
+    padding-top: 10px
+  fieldset
+    // one column
+    font-size: 14px
+    width: 100%
+    &.column_left
+      // two columns - left
+      float: left
+      width: 47%
+      margin-left: 0px
+    &.column_right
+      // two columns - right
+      float: right
+      width: 48%
+      margin-right: 0px
+    > ol > li
+      label
+        font-family: helvetica, arial, sans-serif
+        font-weight: bold
+        color: #666666
+        // to move and fix the label upper the value
+        width: 100%
+      fieldset ol
+        // to fix upper the value
+        padding: 20px 0 0 0
+      &.string input, &.password input, &.numeric input, &.text textarea, &.datepicker input
+        width: 100%
+        max-width: 100%
+        border: 1px solid #eaeaea
+        padding: 2px
+      &.select select, &.file input
+        // select box and input file
+        width: 100%
+        max-width: 100%
+      &.datepicker input
+        // icon of datepicker
+        background: url('../../images/icons/calendar.png') no-repeat right
+      &.string input:hover, &.password input:hover, &.numeric input:hover, &.text textarea:hover
+        border: 1px solid #a2a294
+        -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px
+        -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px
+      &.datepicker input:hover
+        border: 1px solid #a2a294
+        -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px
+        -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px
+        // hover icon of datepicker
+        background: url('../../images/icons/calendar-hover.png') no-repeat right
+      &.string input:focus, &.password input:focus, &.numeric input:focus, &.text textarea:focus, &.datepicker input:focus
+        border: 1px solid #a2a294
+      &.string input[disabled='disabled'], &.password input[disabled='disabled'], &.numeric input[disabled='disabled'], &.text textarea[disabled='disabled'], &.datepicker input[disabled='disabled']
+        // disabled fields
+        background-color: #f6f6f6
+        border: 1px solid #f6f6f6
+        -webkit-box-shadow: none
+        -moz-box-shadow: none
+      &.boolean label
+        // inline checkboxes
+        padding-left: 0px
+  fieldset.one_column
+    ol
+      width: 100%
+    legend, input, select, label, li
+      float: left
+      width: auto
+      margin-right: 10px
+
+
+// COLUMNS
+
+// LABELS
+
+// FIELDS
+
+#box .block .content form.formtastic fieldset > ol > li input
+  /* boxes (as a login box) have a fix width. To define
+   * width of text fields make problems on IE. By this way,
+   * stay functional
+   */
+  width: auto
+  max-width: 430px
+
+form.formtastic
+  fieldset > ol > li
+    // space between fields lines
+    margin-bottom: 10px
+    &.date fieldset ol li, &.time fieldset ol li, &.datetime fieldset ol li
+      // Data fields - to stay far away a problem, the columns are aligned
+      height: 20px
+    &.error input
+      // in case of error, border of field becomes red
+      border: 1px solid #fbb
+    &.radio fieldset ol li
+      // space between many lines with radios
+      margin-bottom: 4px
+      label
+        // label of radio button
+        color: #222
+        font-size: 13px
+        font-weight: normal
+    &.datepicker input
+      // datepicker (switch of the shadow was write by jquery)
+      -webkit-box-shadow: none
+      -moz-box-shadow: none
+    select
+      // space lines of fields with input selects
+      margin-bottom: 4px
+    p.inline-hints
+      // help text - why don't turn on intalic?
+      font-style: italic
+      color: #8C8C8C
+      font-size: .9em
+      margin: 2px 0 0 0
+  button.button, a.button
+    font-size: 12px
+
+// HINT
+
+// BUTTON
+
+// CHECK_BOXES
+
+#box .block .content form.formtastic fieldset > ol > li
+  &.check_boxes fieldset ol
+    width: 440px
+    li label
+      // text of checkboxes (Ex: edito roles of profile's user)
+      color: #222
+      font-size: 13px
+      font-weight: normal
+      padding-right: 50px
+  &#user_session_remember_me_input.boolean label
+    // checkbox 'remember me' no login
+    padding-top: 7px
+    padding-right: 5px
+    float: right
+    font-weight: normal
+    font-size: 13px
+
+// BOOLEAN
+

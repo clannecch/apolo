@@ -1,4 +1,4 @@
-es-AR:
+'es-AR':
   number:
     percentage:
       format:
@@ -176,3 +176,4 @@ es-AR:
 
       full_messages:
         format: "%{attribute} %{message}"
+

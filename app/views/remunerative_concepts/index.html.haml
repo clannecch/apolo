@@ -1,9 +1,9 @@
--# 
+-#
   Se pueden usar todos estos finales de nombre de campos para que haga el filtro para el campo X de forma
   X_filtro
-  
+
   la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
-  
+
   "equals",
   "eq",
   "does_not_equal",
@@ -44,6 +44,9 @@
   "is_null",
   "is_not_null"
 
+- content_for(:sidebar) do
+  = render('shared/sidebar')
+
 %h1 Listing remunerative_concepts
 = form_for @search do |f|
   = f.label :codigo_contains
@@ -53,13 +56,13 @@
   = f.select :prioridad_calculo_greater_than,  1..100, { :include_blank => true }
   %br
   =# f.label :comments_created_at_greater_than, 'With comments after'
-  =# f.datetime_select :comments_created_at_greater_than, :include_blank => true 
+  =# f.datetime_select :comments_created_at_greater_than, :include_blank => true
   %br
   = f.submit
 
 = paginate @remunerative_concepts
 
-%table
+%table.table
   %tr
     %th= sort_link @search, :codigo, "Codiguito"
     %th= sort_link @search, :detalle
@@ -98,3 +101,4 @@
 
 %br/
 = link_to 'New Remunerative concept', new_remunerative_concept_path
+

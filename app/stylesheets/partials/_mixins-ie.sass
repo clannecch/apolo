@@ -1,0 +1,14 @@
+/*
+ *  Cross-browser mixins for IE
+ *
+ *  -------------------------------------
+ */
+
+// Add here IE hacks
+
+@mixin box-shadow($x, $y, $blur, $color)
+  // Like IE don't support shadows, put design to border
+  border-style: solid
+  border-color: #c9c9c5
+  border-width: 1px
+

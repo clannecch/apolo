@@ -8,7 +8,7 @@
      .actions{
         clear:both;
     }
-     = javascript_tag do
+  = javascript_tag do
     $( "#employee_fecha_nacimiento" ).datepicker({
     defaultDate: -#{18.years.days},
     changeMonth: true,
@@ -16,9 +16,10 @@
     minDate: new Date(1901, 1 - 1, 1),
     maxDate: (new Date).setFullYear("#{Date.today.year - 18}")
     });
+
 localizacion: #{I18n.locale}
 
-\#{form_for(@employee) do |f|}
+= form_for(@employee) do |f|
   - if @employee.errors.any?
     #error_explanation
       %h2
@@ -123,3 +124,4 @@ localizacion: #{I18n.locale}
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
   .actions
     = f.submit
+

@@ -2,9 +2,13 @@
 %html
   %head
     %title APSSueldos
-    = stylesheet_link_tag 'aplication','jquery-ui'
+    = stylesheet_link_tag 'jquery.tipsy', :media => 'screen'
+    = stylesheet_link_tag 'apslabs', :media => 'screen'
+    /[if IE]
+      = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
+    = stylesheet_link_tag 'uniform.aristo', :media => 'screen'
+    = stylesheet_link_tag 'application', :media => 'screen'
     %link{:href => "http://static.flowplayer.org/tools/css/tabs.css", :rel => "stylesheet", :type => "text/css"}/
-    = stylesheet_link_tag "jdpicker.css"
     :css
       /* tab pane styling */
       .panes div {
@@ -21,14 +25,19 @@
     = javascript_include_tag('jquery.tools.min.js')
     = javascript_include_tag('ui.spinner.js')
     = javascript_include_tag('jquery.ui.datepicker-es')
+    = javascript_include_tag 'jquery.uniform'
+    = javascript_include_tag 'jquery.scrollTo.js'
+    = javascript_include_tag 'jquery.localscroll.js'
+    = javascript_include_tag 'jquery.tipsy.js'
     = csrf_meta_tag
     = yield(:head)
   %body
     .main
       .sidebar
-        = render('shared/main_menu')  
+        = render('shared/main_menu')
       .content
         %h1
-          Companía: 
+          Companía:
           = current_company.name
         = yield
+

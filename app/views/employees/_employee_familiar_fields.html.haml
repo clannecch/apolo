@@ -58,6 +58,7 @@
   .field
     = f.label "Actividad"
     %br/
-    = f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true
+    =# f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true
   = link_to_remove_association "Borrar Familiar", f
   %hr/
+
