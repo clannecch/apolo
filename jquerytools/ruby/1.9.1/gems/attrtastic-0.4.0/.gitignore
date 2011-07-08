@@ -1,6 +1,0 @@
-## PROJECT::SPECIFIC
-.yardoc
-
-pkg/*
-*.gem
-.bundle

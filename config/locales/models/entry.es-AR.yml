@@ -1,0 +1,10 @@
+'es-AR':
+  activerecord:
+    models:
+      entry: Asiento
+    attributes:
+      entry:
+        exercise: Ejercicio
+        description: Descripcion
+        date_on: Fecha
+

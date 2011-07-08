@@ -1,0 +1,8 @@
+en:
+  shared:
+    user:
+      signout: Sign Out
+      signin_as_user: Sign in as User
+      signin_as_admin: Sign in as Admin
+      welcome: "Welcome %{user}!"
+

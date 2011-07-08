@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      exercise: Exercise
+    attributes:
+      exercise:
+        started_on: started on
+        finished_on: finished on
+        uneven: uneven
+

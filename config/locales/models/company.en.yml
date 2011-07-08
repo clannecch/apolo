@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      company: Company
+    attributes:
+      company:
+        name: Name
+

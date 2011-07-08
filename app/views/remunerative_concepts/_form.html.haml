@@ -1,5 +1,6 @@
-= form_for(@remunerative_concept) do |f|
-  - if @remunerative_concept.errors.any?
+= semantic_form_for(@remunerative_concept) do |f|
+  = f.semantic_errors
+  -# if @remunerative_concept.errors.any?
     #error_explanation
       %h2
         = pluralize(@remunerative_concept.errors.count, "error")
@@ -7,26 +8,12 @@
       %ul
         - @remunerative_concept.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :codigo
-    %br/
-    = f.text_field :codigo
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
-  .field
-    = f.label :porcentual_asistencia
-    %br/
-    = f.check_box :porcentual_asistencia
-  .field
-    = f.label :prioridad_calculo
-    %br/
-    = f.text_field :prioridad_calculo
-  .field
-    = f.label "data_to_ask"
-    %br/
-    = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
+  = f.inputs do
+    = f.input :codigo
+    = f.input :detalle
+    = f.input :porcentual_asistencia
+    = f.input :prioridad_calculo
+    = f.input :data_to_ask#, :collection=> DataToAsk.all, :id, :detalle, :prompt => true
   .field
     = f.label :calculo_cantidad
     %br/
@@ -69,3 +56,4 @@
   - end unless RetentionConcept.count.zero?
   .actions
     = f.submit
+

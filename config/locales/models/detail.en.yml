@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      detail: Detail
+    attributes:
+      detail:
+        description: Description
+        debit: Debit
+        credit: Credit
+

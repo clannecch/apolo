@@ -1,0 +1,23 @@
+'es-AR':
+  flash:
+    actions:
+      index:
+        notice: no hay registros aún.
+      create:
+        notice: "%{resource_name} creado/a satisfactoriamente."
+      update:
+        notice: "%{resource_name} actualizado/a satisfactoriamente."
+      destroy:
+        notice: "%{resource_name} eliminado/a satisfactoriamente."
+        alert: "%{resource_name} no pudo ser eliminado/a."
+  scaffold:
+    actions_label: Acciones
+    actions:
+      show: mostrar
+      edit: editar
+      destroy: eliminar
+      destroy_confirm: está seguro?
+      new: "crear %{item}"
+      list: "listar %{item}"
+      back: volver
+

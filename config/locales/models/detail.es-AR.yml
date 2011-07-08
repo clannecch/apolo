@@ -1,0 +1,11 @@
+'es-AR':
+  activerecord:
+    models:
+      detail: Detalle
+    attributes:
+      detail:
+        account: Cuenta
+        description: Descripcion
+        debit: Debe
+        credit: Haber
+

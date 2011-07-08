@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+  layout 'apslabs'
+
   protect_from_forgery
 
   helper_method :current_company
-  
+
   before_filter :check_change_company
 
   protected
@@ -17,3 +19,4 @@ class ApplicationController < ActionController::Base
     session[:current_company] || Company.first
   end
 end
+

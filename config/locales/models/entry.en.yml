@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      entry: Entry
+    attributes:
+      entry:
+        description: Description
+        date_on: Date On
+

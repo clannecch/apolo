@@ -1,0 +1,56 @@
+!!! Strict
+%html{:lang => I18n.locale, "xml:lang" => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => I18n.locale, :name => "language"}/
+    %meta{:charset => "utf-8" }/
+    -#
+      Always force latest IE rendering engine (even in intranet) & Chrome Frame
+      Remove this if you use the .htaccess
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible" }/
+    -# Mobile viewport optimized: j.mp/bplateviewport
+    %meta{:content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
+    %title= ['AP Manager', yield(:title)].compact.join(' :: ')
+    = stylesheet_link_tag 'jquery.tipsy', :media => 'screen'
+    = stylesheet_link_tag 'apslabs', :media => 'screen'
+    /[if IE]
+      = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
+    = stylesheet_link_tag 'uniform.aristo', :media => 'screen'
+    = stylesheet_link_tag 'application', :media => 'screen'
+    = javascript_include_tag :defaults
+    = javascript_include_tag :cocoon
+    = javascript_include_tag 'jquery.uniform'
+    = javascript_include_tag 'jquery.scrollTo.js'
+    = javascript_include_tag 'jquery.localscroll.js'
+    = javascript_include_tag 'jquery.tipsy.js'
+    = csrf_meta_tag
+    = head if respond_to? :head
+    = yield :head
+  %body
+    #container
+      #header
+        #status
+          = content_for?(:status_menu) ? yield(:status_menu) : render('shared/status_menu')
+          = content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
+        %h1{:style => 'margin-left:0px;height:75px;padding: 10px 0px;'}
+          AP Manager
+          = render('shared/change_current_company')
+        = content_for?(:main_navigation) ? yield(:main_navigation) : render('shared/main_navigation')
+      #wrapper.wat-cf
+        %div{:id => content_for?(:sidebar) ? 'main':'full-main'}
+          .flash
+            - flash.each do |type, message|
+              .message{:class => type.to_s}
+                %p= message
+          .block
+            .content
+              = yield(:breadcrumbs) if content_for?(:breadcrumbs)
+              = yield(:controls) if content_for?(:controls)
+              %h2.title= yield(:title) if content_for?(:title)
+              .inner
+                = yield(:filtros) if content_for?(:filtros)
+                = yield
+        - if content_for?(:sidebar)
+          #sidebar
+            = yield(:sidebar) # example on app/views/shared/_sidebar.html.haml
+

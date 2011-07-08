@@ -1,0 +1,6 @@
+'es-AR':
+  activerecord:
+    errors:
+      messages:
+        regular_exercise_must_be_12_months: "En ejecicios regulares la diferencia de fechas debe ser de exactamente 12 meses"
+

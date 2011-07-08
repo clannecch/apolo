@@ -1,0 +1,8 @@
+'es-AR':
+  activerecord:
+    models:
+      company: Companía
+    attributes:
+      company:
+        name: Nombre
+

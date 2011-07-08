@@ -1,0 +1,13 @@
+en:
+  formtastic:
+    :yes: 'Yes'
+    :no: 'No'
+    :required: 'required'
+    titles:
+    labels:
+    hints:
+    placeholders:
+    actions:
+      create: "Create %{model}"
+      update: Save changes
+
