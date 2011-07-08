@@ -28,11 +28,13 @@
       = @liquidacion.periodo unless @liquidacion.new_record?
     .field
       = f.label :quincena
-      = f.text_field :quincena , :size => 2
+      = f.text_field :quincena , :size => 2 if @liquidacion.new_record?
+      = @liquidacion.quincena unless @liquidacion.new_record?
     .field
       = f.label :tipo_recibo_id
       %br/
-      = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true
+      = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true if @liquidacion.new_record?
+      = @liquidacion.tipo_recibo unless @liquidacion.new_record?
     .field
       = f.label :fecha_liquidacion
       %br/

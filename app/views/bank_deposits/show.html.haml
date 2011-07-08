@@ -3,6 +3,7 @@
 %p
   %b Detalle:
   = @bank_deposit.detalle
-= link_to 'Editar', edit_bank_deposit_path(@bank_deposit)
+= bank_deposit_links(@bank_deposit)
+
 |
 \#{link_to 'Volver', bank_deposits_path}

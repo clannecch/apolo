@@ -1,8 +1,10 @@
 class BankDepositAccountTypesController < ApplicationController
+  before_filter :bank_deposit_account_type, :except => [:index, :new, :create]
+
   # GET /bank_deposit_account_types
   # GET /bank_deposit_account_types.xml
   def index
-    @bank_deposit_account_types = BankDepositAccountType.all
+    @bank_deposit_account_types = BankDepositAccountType.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,6 @@ class BankDepositAccountTypesController < ApplicationController
   # GET /bank_deposit_account_types/1
   # GET /bank_deposit_account_types/1.xml
   def show
-    @bank_deposit_account_type = BankDepositAccountType.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,7 @@ class BankDepositAccountTypesController < ApplicationController
   # GET /bank_deposit_account_types/new
   # GET /bank_deposit_account_types/new.xml
   def new
-    @bank_deposit_account_type = BankDepositAccountType.new
+    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +35,12 @@ class BankDepositAccountTypesController < ApplicationController
 
   # GET /bank_deposit_account_types/1/edit
   def edit
-    @bank_deposit_account_type = BankDepositAccountType.find(params[:id])
   end
 
   # POST /bank_deposit_account_types
   # POST /bank_deposit_account_types.xml
   def create
-    @bank_deposit_account_type = BankDepositAccountType.new(params[:bank_deposit_account_type])
+    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).new(params[:bank_deposit_account_type])
 
     respond_to do |format|
       if @bank_deposit_account_type.save
@@ -56,7 +56,6 @@ class BankDepositAccountTypesController < ApplicationController
   # PUT /bank_deposit_account_types/1
   # PUT /bank_deposit_account_types/1.xml
   def update
-    @bank_deposit_account_type = BankDepositAccountType.find(params[:id])
 
     respond_to do |format|
       if @bank_deposit_account_type.update_attributes(params[:bank_deposit_account_type])
@@ -72,7 +71,6 @@ class BankDepositAccountTypesController < ApplicationController
   # DELETE /bank_deposit_account_types/1
   # DELETE /bank_deposit_account_types/1.xml
   def destroy
-    @bank_deposit_account_type = BankDepositAccountType.find(params[:id])
     @bank_deposit_account_type.destroy
 
     respond_to do |format|
@@ -80,4 +78,9 @@ class BankDepositAccountTypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def bank_deposit_account_type
+    @bank_deposit_account_type = Bank_deposit_account_type.by_company(current_company.id).find(params[:id])
+  end
+
 end
