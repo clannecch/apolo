@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @cost_center.detalle
-= link_to 'Editar', edit_cost_center_path(@cost_center)
+= cost_center_links(@cost_center)
 |
 \#{link_to 'Volver', cost_centers_path}

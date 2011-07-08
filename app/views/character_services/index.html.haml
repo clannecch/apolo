@@ -8,8 +8,6 @@
   - @character_services.each do |character_service|
     %tr
       %td= character_service.detalle
-      %td= link_to 'Visualizar', character_service
-      %td= link_to 'Editar', edit_character_service_path(character_service)
-      %td= link_to 'Borrar', character_service, :confirm => 'Esta Seguro?', :method => :delete
+      %td= character_service_links(character_service)
 %br/
 = link_to 'Nuevo Caracter de Servicio', new_character_service_path

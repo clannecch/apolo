@@ -45,7 +45,15 @@
   "is_not_null"
 
 - content_for(:sidebar) do
-  = render('shared/sidebar')
+  .block
+    Hola mundo
+  .block
+    = render('shared/sidebar')
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item  'Nuevo Concepto Remunerativo', new_remunerative_concept_path, :icon=> 'add'
+
 
 %h1 Listing remunerative_concepts
 = form_for @search do |f|
@@ -97,8 +105,10 @@
       %td= link_to 'Edit', edit_remunerative_concept_path(remunerative_concept)
       %td= link_to 'Destroy', remunerative_concept, :confirm => 'Are you sure?', :method => :delete
 
+.clear
 = paginate @remunerative_concepts
+.clear
 
 %br/
-= link_to 'New Remunerative concept', new_remunerative_concept_path
 
+.clear

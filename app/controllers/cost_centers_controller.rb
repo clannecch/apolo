@@ -1,8 +1,9 @@
 class CostCentersController < ApplicationController
+before_filter :find_cost_center, :except => [:index, :new, :create]
   # GET /cost_centers
   # GET /cost_centers.xml
   def index
-    @cost_centers = CostCenter.all
+    @cost_centers = CostCenter.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +14,6 @@ class CostCentersController < ApplicationController
   # GET /cost_centers/1
   # GET /cost_centers/1.xml
   def show
-    @cost_center = CostCenter.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @cost_center }
@@ -24,7 +23,7 @@ class CostCentersController < ApplicationController
   # GET /cost_centers/new
   # GET /cost_centers/new.xml
   def new
-    @cost_center = CostCenter.new
+    @cost_center = CostCenter.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +33,12 @@ class CostCentersController < ApplicationController
 
   # GET /cost_centers/1/edit
   def edit
-    @cost_center = CostCenter.find(params[:id])
   end
 
   # POST /cost_centers
   # POST /cost_centers.xml
   def create
-    @cost_center = CostCenter.new(params[:cost_center])
+    @cost_center = CostCenter.by_company(current_company.id).new(params[:cost_center])
 
     respond_to do |format|
       if @cost_center.save
@@ -56,7 +54,6 @@ class CostCentersController < ApplicationController
   # PUT /cost_centers/1
   # PUT /cost_centers/1.xml
   def update
-    @cost_center = CostCenter.find(params[:id])
 
     respond_to do |format|
       if @cost_center.update_attributes(params[:cost_center])
@@ -72,12 +69,14 @@ class CostCentersController < ApplicationController
   # DELETE /cost_centers/1
   # DELETE /cost_centers/1.xml
   def destroy
-    @cost_center = CostCenter.find(params[:id])
     @cost_center.destroy
 
     respond_to do |format|
       format.html { redirect_to(cost_centers_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_cost_center
+    @cost_center = CostCenter.by_company(current_company.id).find(params[:id])
   end
 end

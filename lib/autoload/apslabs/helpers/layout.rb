@@ -60,7 +60,7 @@ module Apslabs
       #
       # Returns a secondary navigation block to be displayed.
       def secondary_navigation(options = {}, &block)
-        options[:class] ||= ""
+        options[:class] ||= "".html_safe
         options[:class] << " secondary-navigation"
 
         navigation(options, &block)

@@ -1,8 +1,9 @@
 class ContractModesController < ApplicationController
+before_filter :find_contract_mode, :except => [:index, :new, :create]
   # GET /contract_modes
   # GET /contract_modes.xml
   def index
-    @contract_modes = ContractMode.all
+    @contract_modes = ContractMode.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class ContractModesController < ApplicationController
   # GET /contract_modes/1
   # GET /contract_modes/1.xml
   def show
-    @contract_mode = ContractMode.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class ContractModesController < ApplicationController
   # GET /contract_modes/new
   # GET /contract_modes/new.xml
   def new
-    @contract_mode = ContractMode.new
+    @contract_mode = ContractMode.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class ContractModesController < ApplicationController
 
   # GET /contract_modes/1/edit
   def edit
-    @contract_mode = ContractMode.find(params[:id])
   end
 
   # POST /contract_modes
   # POST /contract_modes.xml
   def create
-    @contract_mode = ContractMode.new(params[:contract_mode])
+    @contract_mode = ContractMode.by_company(current_company.id).new(params[:contract_mode])
 
     respond_to do |format|
       if @contract_mode.save
@@ -56,8 +55,6 @@ class ContractModesController < ApplicationController
   # PUT /contract_modes/1
   # PUT /contract_modes/1.xml
   def update
-    @contract_mode = ContractMode.find(params[:id])
-
     respond_to do |format|
       if @contract_mode.update_attributes(params[:contract_mode])
         format.html { redirect_to(@contract_mode, :notice => 'Contract mode was successfully updated.') }
@@ -72,7 +69,6 @@ class ContractModesController < ApplicationController
   # DELETE /contract_modes/1
   # DELETE /contract_modes/1.xml
   def destroy
-    @contract_mode = ContractMode.find(params[:id])
     @contract_mode.destroy
 
     respond_to do |format|
@@ -80,4 +76,11 @@ class ContractModesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+protected
+
+  def find_contract_mode
+    @contract_mode = ContractMode.by_company(current_company.id).find(params[:id])
+   end
+
 end
