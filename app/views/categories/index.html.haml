@@ -8,8 +8,6 @@
   - @categories.each do |category|
     %tr
       %td= category.detalle
-      %td= link_to 'Visualizar', category
-      %td= link_to 'Editar', edit_category_path(category)
-      %td= link_to 'Destruir', category, :confirm => 'Esta Seguro?', :method => :delete
+      %td= category_links(category)
 %br/
 = link_to 'Nueva Categoria', new_category_path

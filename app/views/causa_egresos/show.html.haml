@@ -1,0 +1,24 @@
+-#  ejemplos de html a haml
+  <p id="notice" class="diseno" border="1px"><%= notice %></p>
+  %p{:id => "notice", :class=>"diseno",:border=>"1px"}= notice
+  %p#notice{:class=>"diseno",:border=>"1px"}= notice
+  %p.diseno{:id => "notice", :border=>"1px"}= notice
+
+  <div class="diseno">hola</div>
+  %div.diseno hola
+  .diseno hola
+  ccs:
+    xxxx
+  javascript:
+    xxxx
+
+%p#notice= notice
+
+
+%p
+  %b Detalle:
+  = @causa_egreso.detalle
+
+
+= causa_egreso_links(@causa_egreso) |
+= link_to 'Back', causa_egresos_path

@@ -3,6 +3,7 @@
 %p
   %b Detalle:
   = @category.detalle
-= link_to 'Editar', edit_category_path(@category)
+= category_links(@category)
 |
-\#{link_to 'Volver', categories_path}
+\#{link_to 'Volver', category_path}
+

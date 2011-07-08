@@ -80,7 +80,7 @@ class BankDepositAccountTypesController < ApplicationController
   end
 
   def bank_deposit_account_type
-    @bank_deposit_account_type = Bank_deposit_account_type.by_company(current_company.id).find(params[:id])
+    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).find(params[:id])
   end
 
 end

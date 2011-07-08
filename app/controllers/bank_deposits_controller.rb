@@ -1,5 +1,5 @@
 class BankDepositsController < ApplicationController
-  before_filter :bank_deposits, :except => [:index, :new, :create]
+  before_filter :find_bank_deposit, :except => [:index, :new, :create]
 
   # GET /bank_deposits
   # GET /bank_deposits.xml
@@ -78,7 +78,7 @@ class BankDepositsController < ApplicationController
   end
 
   def find_bank_deposit
-    @bank_deposit = Bank_deposit.by_company(current_company.id).find(params[:id])
+    @bank_deposit = BankDeposit.by_company(current_company.id).find(params[:id])
   end
 
 end

@@ -1,0 +1,14 @@
+%h1 Listing causa_egresos
+
+%table
+  %tr
+    %th Detalle
+    %th
+- @causa_egresos.each do |causa_egreso|
+  %tr
+    %td= causa_egreso.detalle
+    %td= causa_egreso_links(causa_egreso)
+
+%br
+
+= link_to 'New Causa egreso', new_causa_egreso_path
