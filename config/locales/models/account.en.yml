@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      account: Account
+    attributes:
+      account:
+        name: Name
+        code: Code
+

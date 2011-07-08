@@ -1,0 +1,13 @@
+'es-AR':
+  activerecord:
+    models:
+      product: Producto
+    attributes:
+      product:
+        name: Nombre
+        since: Desde
+        until: Hasta
+        price: Precio
+        observation: Observacion
+        account: Cuenta contable
+        tasaiva: Tasa de IVA

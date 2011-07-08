@@ -1,0 +1,22 @@
+'es-AR':
+  title: Título de la aplicación por favor reemplazar
+  description: descripcion de la aplicación, por favor reemplazar.
+  keywords: keywords de la aplicacion, por favor reemplazar.
+  copyright: "Derechos de autor © %{year} Nombre de la aplicacion por favor reemplazar."
+  signin: Bienvenido al sistema!
+  signout: Gracias por usar nuestro sistema!
+  minimum_companies_required: se necesita una companía como mínimo
+  activerecord:
+    errors:
+      models:
+        exercise:
+          attributes:
+            started_on:
+              taken: "ya ha sido usada"
+            finished_on:
+              taken: "ya ha sido usada"
+        account:
+          attributes:
+            name:
+              taken: "ya ha sido usado"
+

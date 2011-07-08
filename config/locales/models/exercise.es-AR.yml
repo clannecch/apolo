@@ -1,0 +1,11 @@
+'es-AR':
+  activerecord:
+    models:
+      exercise: Ejercicio
+    attributes:
+      exercise:
+        started_on: inicio
+        finished_on: cierre
+        uneven: irregular
+        close: cerrado
+

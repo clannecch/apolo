@@ -1,0 +1,50 @@
+<%-
+=begin
+
+  This file is part of rails-templates (https://github.com/apslab/rails-templates) - application template and various custom templates to overrides generals rails generators
+  Copyright (C) 2011 - Luis Petek <lmpetek@gmail.com>, Maximiliano Dello Russo <maxidr@gmail.com> and Luis E. Guardiola <lguardiola@gmail.com>
+
+  controller.rb is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  Usage:
+    put this file into lib/templates/haml/scaffold/show.html.haml
+
+=end
+-%>
+<% attributes.map! do |attribute|
+	if (attribute.name=~/^(.*)_id$/) 
+	   attribute.name = $1
+	   attribute.type = :belongs_to
+	end
+	attribute
+end -%>
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), <%= singular_table_name.camelize %>.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@<%= singular_name %>) do |s|
+  = s.attributes(<%= singular_table_name.camelize %>.human_name + ' Info') do
+<% attributes.each do |attribute| 
+if attribute.reference? -%>
+    = s.attribute :<%= attribute.name %>_id, :value => @<%= singular_name %>.try( :<%= attribute.name%> ).try(:name)
+<% else -%>
+    = s.attribute :<%= attribute.name %>
+<% end 
+end -%>
+
+.clear

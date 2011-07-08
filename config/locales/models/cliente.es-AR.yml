@@ -1,0 +1,17 @@
+'es-AR':
+  activerecord:
+    models:
+      cliente: Cliente
+    attributes:
+      cliente:
+        codigo: Código  
+        razonsocial: Razon Social
+        fantasyname: Nombre de fantasia
+        cuit: C.U.I.T.
+        direccion: Dirección
+        contacto: Contacto
+        telefono: Teléfono
+        observation: Observacion
+        account_id: Cuenta contable
+        condicioniva_id: Condicion frente al IVA
+        email: eMail

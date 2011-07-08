@@ -1,0 +1,8 @@
+'es-AR':
+  shared:
+    user:
+      signout: Salir
+      signin_as_user: Igreso de Usuario
+      signin_as_admin: Igreso de Administración
+      welcome: "Bienvenido %{user}!"
+

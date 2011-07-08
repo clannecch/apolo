@@ -1,0 +1,9 @@
+en:
+  title: Application Title (please replace me)
+  description: application description (please replace me)
+  keywords: application keywords (please replace me)
+  copyright: "Copyright © %{year} Application name (please replace me)"
+  signin: Signed in!
+  signout: Signed out!
+  minimum_companies_required: at least one company is required.
+

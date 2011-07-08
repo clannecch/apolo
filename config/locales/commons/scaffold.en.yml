@@ -1,0 +1,23 @@
+en:
+  flash:
+    actions:
+      index:
+        notice: not records yet.
+      create:
+        notice: "%{resource_name} was successfully created"
+      update:
+        notice: "%{resource_name} was successfully updated"
+      destroy:
+        notice: "%{resource_name} was successfully destroyed"
+        error: "%{resource_name} could not be destroyed"
+  scaffold:
+    actions_label: Actions
+    actions:
+      show: show
+      edit: edit
+      destroy: destroy
+      destroy_confirm: Are you sure?
+      new: "new %{item}"
+      list: "list %{item}"
+      back: back
+

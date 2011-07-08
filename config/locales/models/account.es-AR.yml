@@ -1,0 +1,9 @@
+'es-AR':
+  activerecord:
+    models:
+      account: Cuenta
+    attributes:
+      account:
+        name: Nombre
+        code: Codigo
+

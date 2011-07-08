@@ -1,0 +1,7 @@
+'es-AR':
+  activerecord:
+    models:
+      supplier: Proveedor
+    attributes:
+      product:
+        account: Cuenta contable
