@@ -1,8 +1,9 @@
 class DocumentTypesController < ApplicationController
+  before_filter :find_document_type, :except => [:index, :new, :create]
   # GET /document_types
   # GET /document_types.xml
   def index
-    @document_types = DocumentType.all
+    @document_types = DocumentType.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/1
   # GET /document_types/1.xml
   def show
-    @document_type = DocumentType.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/new
   # GET /document_types/new.xml
   def new
-    @document_type = DocumentType.new
+    @document_type = DocumentType.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class DocumentTypesController < ApplicationController
 
   # GET /document_types/1/edit
   def edit
-    @document_type = DocumentType.find(params[:id])
   end
 
   # POST /document_types
   # POST /document_types.xml
   def create
-    @document_type = DocumentType.new(params[:document_type])
+    @document_type = DocumentType.by_company(current_company.id).new(params[:document_type])
 
     respond_to do |format|
       if @document_type.save
@@ -56,7 +55,6 @@ class DocumentTypesController < ApplicationController
   # PUT /document_types/1
   # PUT /document_types/1.xml
   def update
-    @document_type = DocumentType.find(params[:id])
 
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])
@@ -72,12 +70,15 @@ class DocumentTypesController < ApplicationController
   # DELETE /document_types/1
   # DELETE /document_types/1.xml
   def destroy
-    @document_type = DocumentType.find(params[:id])
     @document_type.destroy
 
     respond_to do |format|
       format.html { redirect_to(document_types_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def find_document_type
+      @document_type = DocumentType.by_company(current_company.id).find(params[:id])
   end
 end

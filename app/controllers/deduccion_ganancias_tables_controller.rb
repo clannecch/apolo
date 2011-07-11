@@ -1,8 +1,10 @@
 class DeduccionGananciasTablesController < ApplicationController
+  before_filter :find_deduccion_ganancias_table, :except => [:index, :new, :create]
+
   # GET /deduccion_ganancias_tables
   # GET /deduccion_ganancias_tables.xml
   def index
-    @deduccion_ganancias_tables = DeduccionGananciasTable.all
+    @deduccion_ganancias_tables = DeduccionGananciasTable.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,6 @@ class DeduccionGananciasTablesController < ApplicationController
   # GET /deduccion_ganancias_tables/1
   # GET /deduccion_ganancias_tables/1.xml
   def show
-    @deduccion_ganancias_table = DeduccionGananciasTable.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,7 @@ class DeduccionGananciasTablesController < ApplicationController
   # GET /deduccion_ganancias_tables/new
   # GET /deduccion_ganancias_tables/new.xml
   def new
-    @deduccion_ganancias_table = DeduccionGananciasTable.new
+    @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +35,12 @@ class DeduccionGananciasTablesController < ApplicationController
 
   # GET /deduccion_ganancias_tables/1/edit
   def edit
-    @deduccion_ganancias_table = DeduccionGananciasTable.find(params[:id])
   end
 
   # POST /deduccion_ganancias_tables
   # POST /deduccion_ganancias_tables.xml
   def create
-    @deduccion_ganancias_table = DeduccionGananciasTable.new(params[:deduccion_ganancias_table])
+    @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).new(params[:deduccion_ganancias_table])
 
     respond_to do |format|
       if @deduccion_ganancias_table.save
@@ -56,7 +56,6 @@ class DeduccionGananciasTablesController < ApplicationController
   # PUT /deduccion_ganancias_tables/1
   # PUT /deduccion_ganancias_tables/1.xml
   def update
-    @deduccion_ganancias_table = DeduccionGananciasTable.find(params[:id])
 
     respond_to do |format|
       if @deduccion_ganancias_table.update_attributes(params[:deduccion_ganancias_table])
@@ -72,12 +71,15 @@ class DeduccionGananciasTablesController < ApplicationController
   # DELETE /deduccion_ganancias_tables/1
   # DELETE /deduccion_ganancias_tables/1.xml
   def destroy
-    @deduccion_ganancias_table = DeduccionGananciasTable.find(params[:id])
     @deduccion_ganancias_table.destroy
 
     respond_to do |format|
       format.html { redirect_to(deduccion_ganancias_tables_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def find_deduccion_ganancias_table
+      @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).find(params[:id])
   end
 end

@@ -1,8 +1,9 @@
 class EmployeesController < ApplicationController
+  before_filter :find_employee, :except => [:index, :new, :create]
   # GET /employees
   # GET /employees.xml
   def index
-    @employees = Employee.all
+    @employees = Employee.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.xml
   def show
-    @employee = Employee.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.new
+    @employee = Employee.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find(params[:id])
   end
 
   # POST /employees
   # POST /employees.xml
   def create
-    @employee = Employee.new(params[:employee])
+    @employee = Employee.by_company(current_company.id).new(params[:employee])
 
     respond_to do |format|
       if @employee.save
@@ -57,7 +56,6 @@ class EmployeesController < ApplicationController
   # PUT /employees/1.xml
   def update
     #raise params[:employee].inspect
-    @employee = Employee.find(params[:id])
 
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
@@ -73,12 +71,14 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.xml
   def destroy
-    @employee = Employee.find(params[:id])
     @employee.destroy
 
     respond_to do |format|
       format.html { redirect_to(employees_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_employee
+      @employee = Employee.by_company(current_company.id).find(params[:id])
   end
 end

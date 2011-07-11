@@ -1,0 +1,9 @@
+%h1 Visualizacion de tipos de Email
+%p#notice= notice
+
+%p>
+  %dDetalle:
+  = @email_type.detalle
+= email_type_links(@email_type)
+|
+= link_to 'Volver', email_types_path

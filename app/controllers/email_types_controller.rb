@@ -1,8 +1,10 @@
 class EmailTypesController < ApplicationController
+  before_filter :find_email_type, :except => [:index, :new, :create]
+
   # GET /email_types
   # GET /email_types.xml
   def index
-    @email_types = EmailType.all
+    @email_types = EmailType.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,6 @@ class EmailTypesController < ApplicationController
   # GET /email_types/1
   # GET /email_types/1.xml
   def show
-    @email_type = EmailType.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,7 @@ class EmailTypesController < ApplicationController
   # GET /email_types/new
   # GET /email_types/new.xml
   def new
-    @email_type = EmailType.new
+    @email_type = EmailType.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +35,12 @@ class EmailTypesController < ApplicationController
 
   # GET /email_types/1/edit
   def edit
-    @email_type = EmailType.find(params[:id])
   end
 
   # POST /email_types
   # POST /email_types.xml
   def create
-    @email_type = EmailType.new(params[:email_type])
+    @email_type = EmailType.by_company(current_company.id).new(params[:email_type])
 
     respond_to do |format|
       if @email_type.save
@@ -56,7 +56,6 @@ class EmailTypesController < ApplicationController
   # PUT /email_types/1
   # PUT /email_types/1.xml
   def update
-    @email_type = EmailType.find(params[:id])
 
     respond_to do |format|
       if @email_type.update_attributes(params[:email_type])
@@ -72,12 +71,14 @@ class EmailTypesController < ApplicationController
   # DELETE /email_types/1
   # DELETE /email_types/1.xml
   def destroy
-    @email_type = EmailType.find(params[:id])
     @email_type.destroy
 
     respond_to do |format|
       format.html { redirect_to(email_types_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_email_type
+      @email_type = EmailType.by_company(current_company.id).find(params[:id])
   end
 end
