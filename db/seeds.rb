@@ -12,7 +12,7 @@ Company.create(:name => 'Pepsi')
 
 Country.create({"detalle"=>"Argentina"})
 Country.create({"detalle"=>"Italia"})
-Country.create({"detalle"=>"España"})
+Country.create({"detalle"=>"Espana"})
 
 =begin
 Country.all.each do |country|
