@@ -1,5 +1,5 @@
 module EmployeesHelper
-  def modelo_links(employee)
+  def employee_links(employee)
         links = []
         links << link_to_unless_current('Visualizar', employee)
         links << link_to('Editar', edit_employee_path(employee))
