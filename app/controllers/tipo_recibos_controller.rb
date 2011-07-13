@@ -1,8 +1,10 @@
 class TipoRecibosController < ApplicationController
+  before_filter :find_tipo_recibo , :except => [:index, :new, :create]
+
   # GET /tipo_recibos
   # GET /tipo_recibos.xml
   def index
-    @tipo_recibos = TipoRecibo.all
+    @tipo_recibos = TipoRecibo.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,6 @@ class TipoRecibosController < ApplicationController
   # GET /tipo_recibos/1
   # GET /tipo_recibos/1.xml
   def show
-    @tipo_recibo = TipoRecibo.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,7 @@ class TipoRecibosController < ApplicationController
   # GET /tipo_recibos/new
   # GET /tipo_recibos/new.xml
   def new
-    @tipo_recibo = TipoRecibo.new
+    @tipo_recibo = TipoRecibo.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +35,12 @@ class TipoRecibosController < ApplicationController
 
   # GET /tipo_recibos/1/edit
   def edit
-    @tipo_recibo = TipoRecibo.find(params[:id])
   end
 
   # POST /tipo_recibos
   # POST /tipo_recibos.xml
   def create
-    @tipo_recibo = TipoRecibo.new(params[:tipo_recibo])
+    @tipo_recibo = TipoRecibo.by_company(current_company.id).new(params[:tipo_recibo])
 
     respond_to do |format|
       if @tipo_recibo.save
@@ -56,7 +56,6 @@ class TipoRecibosController < ApplicationController
   # PUT /tipo_recibos/1
   # PUT /tipo_recibos/1.xml
   def update
-    @tipo_recibo = TipoRecibo.find(params[:id])
 
     respond_to do |format|
       if @tipo_recibo.update_attributes(params[:tipo_recibo])
@@ -72,12 +71,14 @@ class TipoRecibosController < ApplicationController
   # DELETE /tipo_recibos/1
   # DELETE /tipo_recibos/1.xml
   def destroy
-    @tipo_recibo = TipoRecibo.find(params[:id])
     @tipo_recibo.destroy
 
     respond_to do |format|
       format.html { redirect_to(tipo_recibos_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_tipo_recibo
+      @tipo_recibo = TipoRecibo.by_company(current_company.id).find(params[:id])
   end
 end

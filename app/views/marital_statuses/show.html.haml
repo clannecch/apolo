@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @marital_status.detalle
-= link_to 'Editar', edit_marital_status_path(@marital_status)
+= marital_status_links(@marital_status)
 |
 \#{link_to 'Volver', marital_statuses_path}

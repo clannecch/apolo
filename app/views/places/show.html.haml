@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @place.detalle
-= link_to 'Editar', edit_place_path(@place)
+= place_links(@place)
 |
 \#{link_to 'Volver', places_path}

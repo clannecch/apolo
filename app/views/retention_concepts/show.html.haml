@@ -23,6 +23,6 @@
 %p
   %b Accounting imputation:
   = @retention_concept.accounting_imputation_id
-= link_to 'Edit', edit_retention_concept_path(@retention_concept)
+= retention_concept_links(@retention_concept)
 |
-\#{link_to 'Back', retention_concepts_path}
+\#{link_to 'Volver', retention_concepts_path}

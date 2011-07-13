@@ -8,8 +8,6 @@
   - @tasks.each do |task|
     %tr
       %td= task.detalle
-      %td= link_to 'Visualizar', task
-      %td= link_to 'Editar', edit_task_path(task)
-      %td= link_to 'Destruir', task, :confirm => 'Esta Seguro?', :method => :delete
+      %td= task_links(task)
 %br/
 = link_to 'Nueva Tarea', new_task_path

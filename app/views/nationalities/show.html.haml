@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @nationality.detalle
-= link_to 'Editar', edit_nationality_path(@nationality)
+= nationality_links(@nationality)
 |
 \#{link_to 'Volver', nationalities_path}

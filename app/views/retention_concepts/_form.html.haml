@@ -8,34 +8,42 @@
         - @retention_concept.errors.full_messages.each do |msg|
           %li= msg
   .field
+    %br/
     = f.label :codigo
     %br/
     = f.text_field :codigo
   .field
+    %br/
     = f.label :detalle
     %br/
     = f.text_field :detalle
   .field
+    %br/
     = f.label :formula_calculo_valor
     %br/
     = f.text_field :formula_calculo_valor
   .field
+    %br/
     = f.label :acumuladores_valor
     %br/
     = f.text_field :acumuladores_valor
   .field
+    %br/
     = f.label :prioridad
     %br/
     = f.text_field :prioridad
   .field
+    %br/
     = f.label "data_to_ask"
     %br/
     = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
   .field
+    %br/
     = f.label :statistical_value
     %br/
     = f.text_field :statistical_value
   .field
+    %br/
     = f.label :accounting_imputation_id
     %br/
     = f.text_field :accounting_imputation_id

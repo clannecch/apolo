@@ -1,8 +1,11 @@
 class RemunerationTypesController < ApplicationController
+
+  before_filter :find_remuneration_type, :except => [:index, :new, :create]
+
   # GET /remuneration_types
   # GET /remuneration_types.xml
   def index
-    @remuneration_types = RemunerationType.all
+    @remuneration_types = RemunerationType.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,6 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types/1
   # GET /remuneration_types/1.xml
   def show
-    @remuneration_type = RemunerationType.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types/new
   # GET /remuneration_types/new.xml
   def new
-    @remuneration_type = RemunerationType.new
+    @remuneration_type = RemunerationType.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,12 @@ class RemunerationTypesController < ApplicationController
 
   # GET /remuneration_types/1/edit
   def edit
-    @remuneration_type = RemunerationType.find(params[:id])
   end
 
   # POST /remuneration_types
   # POST /remuneration_types.xml
   def create
-    @remuneration_type = RemunerationType.new(params[:remuneration_type])
+    @remuneration_type = RemunerationType.by_company(current_company.id).new(params[:remuneration_type])
 
     respond_to do |format|
       if @remuneration_type.save
@@ -56,7 +57,6 @@ class RemunerationTypesController < ApplicationController
   # PUT /remuneration_types/1
   # PUT /remuneration_types/1.xml
   def update
-    @remuneration_type = RemunerationType.find(params[:id])
 
     respond_to do |format|
       if @remuneration_type.update_attributes(params[:remuneration_type])
@@ -72,12 +72,15 @@ class RemunerationTypesController < ApplicationController
   # DELETE /remuneration_types/1
   # DELETE /remuneration_types/1.xml
   def destroy
-    @remuneration_type = RemunerationType.find(params[:id])
     @remuneration_type.destroy
 
     respond_to do |format|
       format.html { redirect_to(remuneration_types_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def find_remuneration_type
+      @remuneration_type = RemunerationType.by_company(current_company.id).find(params[:id])
   end
 end

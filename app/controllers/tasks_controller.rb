@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
+  before_filter :find_task, :except => [:index, :new, :create]
   # GET /tasks
   # GET /tasks.xml
   def index
-    @tasks = Task.all
+    @tasks = Task.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.xml
   def show
-    @task = Task.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   # GET /tasks/new.xml
   def new
-    @task = Task.new
+    @task = Task.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task = Task.find(params[:id])
   end
 
   # POST /tasks
   # POST /tasks.xml
   def create
-    @task = Task.new(params[:task])
+    @task = Task.by_company(current_company.id).new(params[:task])
 
     respond_to do |format|
       if @task.save
@@ -56,7 +55,6 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.xml
   def update
-    @task = Task.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -72,12 +70,14 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.xml
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
 
     respond_to do |format|
       format.html { redirect_to(tasks_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_task
+      @task = Task.by_company(current_company.id).find(params[:id])
   end
 end

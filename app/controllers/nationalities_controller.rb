@@ -1,8 +1,11 @@
 class NationalitiesController < ApplicationController
+
+  before_filter :find_nationality, :except => [:index, :new, :create]
+
   # GET /nationalities
   # GET /nationalities.xml
   def index
-    @nationalities = Nationality.all
+    @nationalities = Nationality.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,6 @@ class NationalitiesController < ApplicationController
   # GET /nationalities/1
   # GET /nationalities/1.xml
   def show
-    @nationality = Nationality.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class NationalitiesController < ApplicationController
   # GET /nationalities/new
   # GET /nationalities/new.xml
   def new
-    @nationality = Nationality.new
+    @nationality = Nationality.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,12 @@ class NationalitiesController < ApplicationController
 
   # GET /nationalities/1/edit
   def edit
-    @nationality = Nationality.find(params[:id])
   end
 
   # POST /nationalities
   # POST /nationalities.xml
   def create
-    @nationality = Nationality.new(params[:nationality])
+    @nationality = Nationality.by_company(current_company.id).new(params[:nationality])
 
     respond_to do |format|
       if @nationality.save
@@ -56,7 +57,6 @@ class NationalitiesController < ApplicationController
   # PUT /nationalities/1
   # PUT /nationalities/1.xml
   def update
-    @nationality = Nationality.find(params[:id])
 
     respond_to do |format|
       if @nationality.update_attributes(params[:nationality])
@@ -72,7 +72,6 @@ class NationalitiesController < ApplicationController
   # DELETE /nationalities/1
   # DELETE /nationalities/1.xml
   def destroy
-    @nationality = Nationality.find(params[:id])
     @nationality.destroy
 
     respond_to do |format|
@@ -80,4 +79,9 @@ class NationalitiesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def find_nationality
+      @nationality = Nationality.by_company(current_company.id).find(params[:id])
+  end
+
 end

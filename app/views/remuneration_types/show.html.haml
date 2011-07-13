@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @remuneration_type.detalle
-= link_to 'Editar', edit_remuneration_type_path(@remuneration_type)
+= remuneration_type_links(@remuneration_typemodelo)
 |
 \#{link_to 'Volver', remuneration_types_path}

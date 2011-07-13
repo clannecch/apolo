@@ -8,8 +8,6 @@
   - @nationalities.each do |nationality|
     %tr
       %td= nationality.detalle
-      %td= link_to 'Visualizar', nationality
-      %td= link_to 'Editar', edit_nationality_path(nationality)
-      %td= link_to 'borrar', nationality, :confirm => 'Esta Seguro?', :method => :delete
+      %td= nationality_links(nationality)
 %br/
 = link_to 'Nueva Nacionalidad', new_nationality_path

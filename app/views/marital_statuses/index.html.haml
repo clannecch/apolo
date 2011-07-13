@@ -8,8 +8,6 @@
   - @marital_statuses.each do |marital_status|
     %tr
       %td= marital_status.detalle
-      %td= link_to 'Visualizar', marital_status
-      %td= link_to 'Editar', edit_marital_status_path(marital_status)
-      %td= link_to 'Borrar', marital_status, :confirm => 'Esta Seguro?', :method => :delete
+      %td= marital_status_links(marital_status)
 %br/
 = link_to 'Nuevo Estado Civil', new_marital_status_path

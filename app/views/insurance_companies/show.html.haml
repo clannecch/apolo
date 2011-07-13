@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @insurance_company.detalle
-= link_to 'Editar', edit_insurance_company_path(@insurance_company)
+= insurance_company_links(@insurance_company)
 |
 \#{link_to 'Volver', insurance_companies_path}

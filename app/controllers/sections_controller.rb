@@ -1,8 +1,9 @@
 class SectionsController < ApplicationController
+  before_filter :find_section, :except => [:index, :new, :create]
   # GET /sections
   # GET /sections.xml
   def index
-    @sections = Section.all
+    @sections = Section.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class SectionsController < ApplicationController
   # GET /sections/1
   # GET /sections/1.xml
   def show
-    @section = Section.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class SectionsController < ApplicationController
   # GET /sections/new
   # GET /sections/new.xml
   def new
-    @section = Section.new
+    @section = Section.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class SectionsController < ApplicationController
 
   # GET /sections/1/edit
   def edit
-    @section = Section.find(params[:id])
   end
 
   # POST /sections
   # POST /sections.xml
   def create
-    @section = Section.new(params[:section])
+    @section = Section.by_company(current_company.id).new(params[:section])
 
     respond_to do |format|
       if @section.save
@@ -56,7 +55,6 @@ class SectionsController < ApplicationController
   # PUT /sections/1
   # PUT /sections/1.xml
   def update
-    @section = Section.find(params[:id])
 
     respond_to do |format|
       if @section.update_attributes(params[:section])
@@ -72,12 +70,14 @@ class SectionsController < ApplicationController
   # DELETE /sections/1
   # DELETE /sections/1.xml
   def destroy
-    @section = Section.find(params[:id])
     @section.destroy
 
     respond_to do |format|
       format.html { redirect_to(sections_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_section
+      @section = Section.by_company(current_company.id).find(params[:id])
   end
 end

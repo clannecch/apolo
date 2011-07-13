@@ -101,9 +101,7 @@
       %td= remunerative_concept.concepto_asociado_retencion
       %td= remunerative_concept.concepto_asociado_haber_2
       %td= remunerative_concept.concepto_asociado_retencion_2
-      %td= link_to 'Show', remunerative_concept
-      %td= link_to 'Edit', edit_remunerative_concept_path(remunerative_concept)
-      %td= link_to 'Destroy', remunerative_concept, :confirm => 'Are you sure?', :method => :delete
+      %td= remunerative_concept_links(remunerative_concept)
 
 .clear
 = paginate @remunerative_concepts

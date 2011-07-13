@@ -1,8 +1,9 @@
 class RetentionConceptsController < ApplicationController
+  before_filter :find_retention_concept, :except => [:index, :new, :create]
   # GET /retention_concepts
   # GET /retention_concepts.xml
   def index
-    @retention_concepts = RetentionConcept.all
+    @retention_concepts = RetentionConcept.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts/1
   # GET /retention_concepts/1.xml
   def show
-    @retention_concept = RetentionConcept.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts/new
   # GET /retention_concepts/new.xml
   def new
-    @retention_concept = RetentionConcept.new
+    @retention_concept = RetentionConcept.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class RetentionConceptsController < ApplicationController
 
   # GET /retention_concepts/1/edit
   def edit
-    @retention_concept = RetentionConcept.find(params[:id])
   end
 
   # POST /retention_concepts
   # POST /retention_concepts.xml
   def create
-    @retention_concept = RetentionConcept.new(params[:retention_concept])
+    @retention_concept = RetentionConcept.by_company(current_company.id).new(params[:retention_concept])
 
     respond_to do |format|
       if @retention_concept.save
@@ -56,7 +55,6 @@ class RetentionConceptsController < ApplicationController
   # PUT /retention_concepts/1
   # PUT /retention_concepts/1.xml
   def update
-    @retention_concept = RetentionConcept.find(params[:id])
 
     respond_to do |format|
       if @retention_concept.update_attributes(params[:retention_concept])
@@ -72,7 +70,6 @@ class RetentionConceptsController < ApplicationController
   # DELETE /retention_concepts/1
   # DELETE /retention_concepts/1.xml
   def destroy
-    @retention_concept = RetentionConcept.find(params[:id])
     @retention_concept.destroy
 
     respond_to do |format|
@@ -80,4 +77,8 @@ class RetentionConceptsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def find_retention_concept
+      @retention_concept = RetentionConcept.by_company(current_company.id).find(params[:id])
+  end
+
 end
