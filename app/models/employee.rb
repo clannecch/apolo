@@ -84,6 +84,9 @@
 #
 
 class Employee < ActiveRecord::Base
+
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
   belongs_to :document_type
   belongs_to :educational_level
 	belongs_to :nationality

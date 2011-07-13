@@ -1,8 +1,10 @@
 class LiquidacionsController < ApplicationController
+  before_filter :find_liquidacion, :except => [:index, :new, :create]
+
   # GET /liquidacions
   # GET /liquidacions.xml
   def index
-    @liquidacions = Liquidacion.all
+    @liquidacions = Liquidacion.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,6 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions/1
   # GET /liquidacions/1.xml
   def show
-    @liquidacion = Liquidacion.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,7 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions/new
   # GET /liquidacions/new.xml
   def new
-    @liquidacion = Liquidacion.new
+    @liquidacion = Liquidacion.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +35,12 @@ class LiquidacionsController < ApplicationController
 
   # GET /liquidacions/1/edit
   def edit
-    @liquidacion = Liquidacion.find(params[:id])
   end
 
   # POST /liquidacions
   # POST /liquidacions.xml
   def create
-    @liquidacion = Liquidacion.new(params[:liquidacion])
+    @liquidacion = Liquidacion.by_company(current_company.id).new(params[:liquidacion])
 
     respond_to do |format|
       if @liquidacion.save
@@ -56,7 +56,6 @@ class LiquidacionsController < ApplicationController
   # PUT /liquidacions/1
   # PUT /liquidacions/1.xml
   def update
-    @liquidacion = Liquidacion.find(params[:id])
 
     respond_to do |format|
       if @liquidacion.update_attributes(params[:liquidacion])
@@ -72,12 +71,14 @@ class LiquidacionsController < ApplicationController
   # DELETE /liquidacions/1
   # DELETE /liquidacions/1.xml
   def destroy
-    @liquidacion = Liquidacion.find(params[:id])
     @liquidacion.destroy
 
     respond_to do |format|
       format.html { redirect_to(liquidacions_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_liquidacion
+      @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
   end
 end

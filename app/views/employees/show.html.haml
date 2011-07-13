@@ -220,6 +220,7 @@
 %p
   %b CBU Cuenta Bancaria:
   = @employee.deposito_banco_cbu
+= employee_links(@employee)
 = link_to 'Editar', edit_employee_path(@employee)
 |
 \#{link_to 'Volver', employees_path}

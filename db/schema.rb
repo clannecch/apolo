@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707192946) do
+ActiveRecord::Schema.define(:version => 20110711220620) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.integer  "prioridad"
     t.string   "acumuladores_valor"
     t.string   "formula_calculo_valor"
+    t.integer  "company_id"
   end
 
   create_table "employer_contribution_concepts_group_employer_contributions", :id => false, :force => true do |t|
@@ -328,6 +329,7 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "group_remunerations", :force => true do |t|

@@ -1,8 +1,9 @@
 class LocationsController < ApplicationController
+  before_filter :find_location, :except => [:index, :new, :create]
   # GET /locations
   # GET /locations.xml
   def index
-    @locations = Location.all
+    @locations = Location.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.xml
   def show
-    @location = Location.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   # GET /locations/new.xml
   def new
-    @location = Location.new
+    @location = Location.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
-    @location = Location.find(params[:id])
   end
 
   # POST /locations
   # POST /locations.xml
   def create
-    @location = Location.new(params[:location])
+    @location = Location.by_company(current_company.id).new(params[:location])
 
     respond_to do |format|
       if @location.save
@@ -56,7 +55,6 @@ class LocationsController < ApplicationController
   # PUT /locations/1
   # PUT /locations/1.xml
   def update
-    @location = Location.find(params[:id])
 
     respond_to do |format|
       if @location.update_attributes(params[:location])
@@ -72,12 +70,14 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.xml
   def destroy
-    @location = Location.find(params[:id])
     @location.destroy
 
     respond_to do |format|
       format.html { redirect_to(locations_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_location
+      @location = Location.by_company(current_company.id).find(params[:id])
   end
 end

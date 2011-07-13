@@ -8,8 +8,6 @@
   - @group_retentions.each do |group_retention|
     %tr
       %td= group_retention.detalle
-      %td= link_to 'Visualizar', group_retention
-      %td= link_to 'Editar', edit_group_retention_path(group_retention)
-      %td= link_to 'Borrar', group_retention, :confirm => 'Esta Seguro?', :method => :delete
+      %td= group_retention_links(group_retention)
 %br/
 = link_to 'Nuevo Grupo de Retenciones', new_group_retention_path

@@ -17,6 +17,9 @@
     maxDate: (new Date).setFullYear("#{Date.today.year - 18}")
     });
 
+  = javascript_tag do
+    $( function() {	$("ul.tabs").tabs("div.panels > div");
+    });
 localizacion: #{I18n.locale}
 
 = form_for(@employee) do |f|

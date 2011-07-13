@@ -8,8 +8,6 @@
   - @labor_unions.each do |labor_union|
     %tr
       %td= labor_union.detalle
-      %td= link_to 'Visualizar', labor_union
-      %td= link_to 'Editar', edit_labor_union_path(labor_union)
-      %td= link_to 'Borrar', labor_union, :confirm => 'Esta Seguro?', :method => :delete
+      %td= labor_union_links(labor_union)
 %br/
 = link_to 'Nuevo Sindicato', new_labor_union_path

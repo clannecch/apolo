@@ -8,8 +8,6 @@
   - @locations.each do |location|
     %tr
       %td= location.detalle
-      %td= link_to 'Visualizar', location
-      %td= link_to 'Editar', edit_location_path(location)
-      %td= link_to 'Borrar', location, :confirm => 'Esta Seguro?', :method => :delete
+      %td= location_links(location)
 %br/
 = link_to 'Nueva Localidad', new_location_path

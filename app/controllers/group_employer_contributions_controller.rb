@@ -1,8 +1,11 @@
 class GroupEmployerContributionsController < ApplicationController
+
+  before_filter :find_group_employer_contribution, :except => [:index, :new, :create]
+
   # GET /group_employer_contributions
   # GET /group_employer_contributions.xml
   def index
-    @group_employer_contributions = GroupEmployerContribution.all
+    @group_employer_contributions = GroupEmployerContribution.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,6 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions/1
   # GET /group_employer_contributions/1.xml
   def show
-    @group_employer_contribution = GroupEmployerContribution.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions/new
   # GET /group_employer_contributions/new.xml
   def new
-    @group_employer_contribution = GroupEmployerContribution.new
+    @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,12 @@ class GroupEmployerContributionsController < ApplicationController
 
   # GET /group_employer_contributions/1/edit
   def edit
-    @group_employer_contribution = GroupEmployerContribution.find(params[:id])
   end
 
   # POST /group_employer_contributions
   # POST /group_employer_contributions.xml
   def create
-    @group_employer_contribution = GroupEmployerContribution.new(params[:group_employer_contribution])
+    @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).new(params[:group_employer_contribution])
 
     respond_to do |format|
       if @group_employer_contribution.save
@@ -56,7 +57,6 @@ class GroupEmployerContributionsController < ApplicationController
   # PUT /group_employer_contributions/1
   # PUT /group_employer_contributions/1.xml
   def update
-    @group_employer_contribution = GroupEmployerContribution.find(params[:id])
 
     respond_to do |format|
       if @group_employer_contribution.update_attributes(params[:group_employer_contribution])
@@ -72,12 +72,14 @@ class GroupEmployerContributionsController < ApplicationController
   # DELETE /group_employer_contributions/1
   # DELETE /group_employer_contributions/1.xml
   def destroy
-    @group_employer_contribution = GroupEmployerContribution.find(params[:id])
     @group_employer_contribution.destroy
 
     respond_to do |format|
       format.html { redirect_to(group_employer_contributions_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_group_employer_contribution
+      @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).find(params[:id])
   end
 end

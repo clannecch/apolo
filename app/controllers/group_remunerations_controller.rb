@@ -1,8 +1,11 @@
 class GroupRemunerationsController < ApplicationController
+
+  before_filter :find_group_remuneration, :except => [:index, :new, :create]
+
   # GET /group_remunerations
   # GET /group_remunerations.xml
   def index
-    @group_remunerations = GroupRemuneration.all
+    @group_remunerations = GroupRemuneration.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,6 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations/1
   # GET /group_remunerations/1.xml
   def show
-    @group_remuneration = GroupRemuneration.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations/new
   # GET /group_remunerations/new.xml
   def new
-    @group_remuneration = GroupRemuneration.new
+    @group_remuneration = GroupRemuneration.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,12 @@ class GroupRemunerationsController < ApplicationController
 
   # GET /group_remunerations/1/edit
   def edit
-    @group_remuneration = GroupRemuneration.find(params[:id])
   end
 
   # POST /group_remunerations
   # POST /group_remunerations.xml
   def create
-    @group_remuneration = GroupRemuneration.new(params[:group_remuneration])
+    @group_remuneration = GroupRemuneration.by_company(current_company.id).new(params[:group_remuneration])
 
     respond_to do |format|
       if @group_remuneration.save
@@ -56,7 +57,6 @@ class GroupRemunerationsController < ApplicationController
   # PUT /group_remunerations/1
   # PUT /group_remunerations/1.xml
   def update
-    @group_remuneration = GroupRemuneration.find(params[:id])
 
     respond_to do |format|
       if @group_remuneration.update_attributes(params[:group_remuneration])
@@ -72,12 +72,15 @@ class GroupRemunerationsController < ApplicationController
   # DELETE /group_remunerations/1
   # DELETE /group_remunerations/1.xml
   def destroy
-    @group_remuneration = GroupRemuneration.find(params[:id])
     @group_remuneration.destroy
 
     respond_to do |format|
       format.html { redirect_to(group_remunerations_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def find_group_remuneration
+      @group_remuneration = GroupRemuneration.by_company(current_company.id).find(params[:id])
   end
 end

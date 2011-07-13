@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @group_employer_contribution.detalle
-= link_to 'Editar', edit_group_employer_contribution_path(@group_employer_contribution)
+= group_employer_contribution_links(@group_employer_contribution)
 |
 \#{link_to 'Volver', group_employer_contributions_path}

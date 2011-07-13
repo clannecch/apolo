@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @health_insurance.detalle
-= link_to 'Editar', edit_health_insurance_path(@health_insurance)
+= health_insurance_links(@health_insurance)
 |
 \#{link_to 'Volver', health_insurances_path}

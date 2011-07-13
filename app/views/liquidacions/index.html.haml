@@ -24,8 +24,6 @@
       %td= liquidacion.fecha_deposito
       %td= liquidacion.fecha_cierre
       %td= liquidacion.techo_retenciones
-      %td= link_to 'Visualizar', liquidacion
-      %td= link_to 'Editar', edit_liquidacion_path(liquidacion)
-      %td= link_to 'Borrar', liquidacion, :confirm => 'Esta Seguro?', :method => :delete
+      %td= liquidacion_links(liquidacion)
 %br/
 = link_to 'Nueva Liquidacion', new_liquidacion_path

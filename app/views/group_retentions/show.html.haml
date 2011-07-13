@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @group_retention.detalle
-= link_to 'Editar', edit_group_retention_path(@group_retention)
+= group_retention_links(@group_retention)
 |
 \#{link_to 'Volver', group_retentions_path}

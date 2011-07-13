@@ -6,8 +6,8 @@
     %th Formula de Calculo
     %th Acumuladores
     %th Prioridad
-    %th Statistical value
-    %th Accounting imputation
+    %th Valor Estadistico
+    %th Cuenta Contable
     %th
     %th
     %th
@@ -20,8 +20,6 @@
       %td= employer_contribution_concept.prioridad
       %td= employer_contribution_concept.statistical_value
       %td= employer_contribution_concept.accounting_imputation_id
-      %td= link_to 'Show', employer_contribution_concept
-      %td= link_to 'Edit', edit_employer_contribution_concept_path(employer_contribution_concept)
-      %td= link_to 'Destroy', employer_contribution_concept, :confirm => 'Are you sure?', :method => :delete
+      %td= employer_contribution_concept_links(employer_contribution_concept)
 %br/
 = link_to 'New Employer contribution concept', new_employer_contribution_concept_path

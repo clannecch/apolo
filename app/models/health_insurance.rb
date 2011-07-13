@@ -10,6 +10,7 @@
 #
 
 class HealthInsurance < ActiveRecord::Base
+  scope :by_company, lambda {|company| where(:company_id => company) }
 	has_many :employees
 	has_many :employee_familiars
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"

@@ -10,6 +10,9 @@
 #
 
 class GroupRemuneration < ActiveRecord::Base
+
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
   #has_many :group_remuneration_relation
   #accepts_nested_attributes_for :group_remuneration_relation, :allow_destroy => true
   has_many :employees

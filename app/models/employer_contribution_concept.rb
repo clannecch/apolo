@@ -16,6 +16,9 @@
 #
 
 class EmployerContributionConcept < ActiveRecord::Base
+
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
   has_and_belongs_to_many :group_employer_contribution
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end
