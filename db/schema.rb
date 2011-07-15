@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110711220620) do
+ActiveRecord::Schema.define(:version => 20110715191034) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -296,6 +296,8 @@ ActiveRecord::Schema.define(:version => 20110711220620) do
     t.integer  "causa_egreso_id"
     t.binary   "foto"
     t.integer  "company_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|

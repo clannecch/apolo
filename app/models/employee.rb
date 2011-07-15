@@ -84,6 +84,8 @@
 #
 
 class Employee < ActiveRecord::Base
+#  attr_accessible  :full_address, :latitude, :longitude
+
 
   scope :by_company, lambda {|company| where(:company_id => company) }
 
@@ -125,6 +127,11 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
   accepts_nested_attributes_for :employee_remunerative_concepts, :allow_destroy => true
   accepts_nested_attributes_for :employee_retention_concepts, :allow_destroy => true
+
+  geocoded_by :full_address
+  after_validation :geocode, :if => lambda{ |employee| :full_address_changed? }
+#  , :if => :address_changed?
+
 
 
 
@@ -227,10 +234,15 @@ class Employee < ActiveRecord::Base
     end
   end
 
+
   private
   def full_name
 #    apellido + ', '+nombre
    [apellido, nombre].compact.join(' ')
+  end
+
+  def full_address
+   [calle, puerta, location.detalle, province.detalle , country.detalle].compact.join(', ')
   end
 
 end

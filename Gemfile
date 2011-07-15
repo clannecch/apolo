@@ -9,11 +9,15 @@ gem 'jquery-rails'
 gem 'cocoon'
 gem 'formtastic'
 gem 'attrtastic'
+gem 'subexec'
+gem 'mini_magick'
+gem 'geocoder'
+gem 'paperclip', '~> 2.3'
 
 # paginacion
 gem 'kaminari'
 
-# search
+# search                     y
 gem 'meta_search'
 
 # pdf
