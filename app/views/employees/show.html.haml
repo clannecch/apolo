@@ -1,5 +1,8 @@
 %h1 Visualizacion de Empleado
 %p#notice= notice
+= image_tag @employee.avatar.url
+= image_tag @employee.avatar.url(:medium)
+= image_tag @employee.avatar.url(:thumb)
 %p
   %b Legajo:
   = @employee.legajo

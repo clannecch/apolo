@@ -17,7 +17,7 @@ gem 'paperclip', '~> 2.3'
 # paginacion
 gem 'kaminari'
 
-# search                     y
+# search
 gem 'meta_search'
 
 # pdf

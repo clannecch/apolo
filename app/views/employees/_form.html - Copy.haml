@@ -20,7 +20,10 @@
   = javascript_tag do
     $( function() {	$("ul.tabs").tabs("div.panels > div");
     });
-= form_for @employee,  :html => { :multipart => true } do |f|
+localizacion: #{I18n.locale}
+
+= form_for :employee, @employee, :url => employee_path, :html => { :multipart => true } do |f|
+
   - if @employee.errors.any?
     #error_explanation
       %h2
@@ -29,10 +32,7 @@
       %ul
         - @employee.errors.full_messages.each do |msg|
           %li= msg
-  = image_tag @employee.avatar.url(:medium)
-  .field
-    = f.label "Cambiar Imagen"
-    = f.file_field :avatar
+  = f.file_field :avatar
   %ul.tabs
     %li
       %a{:href => "#"} Personales

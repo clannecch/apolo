@@ -1,5 +1,7 @@
 APSSueldos::Application.routes.draw do
 
+  resources :my_images
+
   resources :causa_egresos
 
   resources :email_types

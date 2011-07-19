@@ -22,6 +22,7 @@ APSSueldos::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-  Paperclip.options[:command_path] = "c:\"
+  Paperclip.options[:command_path] = "C:/Users/claudio/AppData/Local/Temp/"
+
 end
 

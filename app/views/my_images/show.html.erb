@@ -1,0 +1,16 @@
+<h1>Visualizacion de 'my_image'</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalle:</b>
+  <%= @detalle %>
+</p>
+
+
+<%= image_tag @my_image.avatar.url %> <br />
+
+<%= image_tag @my_image.avatar.url(:thumb) %>
+
+
+<%= link_to 'Editar', edit_my_image_path(@my_image) %> |
+<%= link_to 'Volver', my_images_path %>
