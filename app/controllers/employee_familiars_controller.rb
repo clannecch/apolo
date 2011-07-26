@@ -1,8 +1,8 @@
 class EmployeeFamiliarsController < ApplicationController
+
+
   before filter :find_employee
 
-  # GET /employee_familiars
-  # GET /employee_familiars.xml
   def index
     @employee_familiars = @employee.employee_familiar.all
 
@@ -12,8 +12,6 @@ class EmployeeFamiliarsController < ApplicationController
     end
   end
 
-  # GET /employee_familiars/1
-  # GET /employee_familiars/1.xml
   def show
     @employee_familiar = @employee.employee_familiar.find(params[:id])
 
@@ -23,8 +21,6 @@ class EmployeeFamiliarsController < ApplicationController
     end
   end
 
-  # GET /employee_familiars/new
-  # GET /employee_familiars/new.xml
   def new
     @employee_familiar = @employee.employee_familiar.build
 
@@ -34,13 +30,10 @@ class EmployeeFamiliarsController < ApplicationController
     end
   end
 
-  # GET /employee_familiars/1/edit
   def edit
     @employee_familiar = @employee.employee_familiar.find(params[:id])
   end
 
-  # POST /employee_familiars
-  # POST /employee_familiars.xml
   def create
     @employee_familiar = @employee.employee_familiar.build(params[@employee, :employee_familiar])
 
@@ -55,8 +48,6 @@ class EmployeeFamiliarsController < ApplicationController
     end
   end
 
-  # PUT /employee_familiars/1
-  # PUT /employee_familiars/1.xml
   def update
     @employee_familiar = @employee.employee_familiar.find(params[:id])
 
@@ -71,8 +62,6 @@ class EmployeeFamiliarsController < ApplicationController
     end
   end
 
-  # DELETE /employee_familiars/1
-  # DELETE /employee_familiars/1.xml
   def destroy
     @employee_familiar = @employee.employee_familiar.find(params[:id])
     @employee_familiar.destroy

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: employer_contribution_concepts
 #
@@ -13,6 +13,7 @@
 #  prioridad                :integer
 #  acumuladores_valor       :string(255)
 #  formula_calculo_valor    :string(255)
+#  company_id               :integer
 #
 
 require 'test_helper'

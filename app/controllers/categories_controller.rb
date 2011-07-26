@@ -1,8 +1,11 @@
 class CategoriesController < ApplicationController
   before_filter :find_category, :except => [:index, :new, :create]
 
+  respond_to :html, :xml, :json
+
   # GET /categories
   # GET /categories.xml
+  # GET /categories.json
   def index
     @categories = Category.by_company(current_company.id).all
 
@@ -14,6 +17,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   # GET /categories/1.xml
+  # GET /categories/1.json
   def show
      respond_to do |format|
       format.html # show.html.erb

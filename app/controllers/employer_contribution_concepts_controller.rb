@@ -1,4 +1,4 @@
-class EmployerContributionConceptsController < ApplicationController
+mclass EmployerContributionConceptsController < ApplicationController
   before_filter :find_employer_contribution_concept, :except => [:index, :new, :create]
 
   # GET /employer_contribution_concepts

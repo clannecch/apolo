@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: remunerative_concepts
 #
@@ -23,6 +23,7 @@
 #  calculo_cantidad                 :string(255)
 #  data_to_ask_id                   :integer
 #  cantidad_en_recibo               :string(255)
+#  company_id                       :integer
 #
 
 class RemunerativeConcept < ActiveRecord::Base

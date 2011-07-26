@@ -2,14 +2,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Detalle:</b>
-  <%= @detalle %>
+ <b>Detalle:</b>
+ <%= @detalle %>
 </p>
 
 
 <%= image_tag @my_image.avatar.url %> <br />
 
-<%= image_tag @my_image.avatar.url(:thumb) %>
+<%= image_tag @my_image.avatar.url(:medium) %> <br />
+
+<%= image_tag @my_image.avatar.url(:thumb) %> <br />
 
 
 <%= link_to 'Editar', edit_my_image_path(@my_image) %> |

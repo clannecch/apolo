@@ -54,6 +54,8 @@
       %a{:href => "#"} Remuneraciones
     %li
       %a{:href => "#"} Retenciones
+    %li
+      %a{:href => "#"} Documentos
   .panels
     .panel
       = render :partial => 'datos_personales', :locals => {:f => f}
@@ -127,6 +129,21 @@
                 = render 'employee_retention_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
+    .panel
+      .field
+        %h3 Documentos Asociados
+        #employee_document
+          %table.field
+            %tr
+              %th= f.label "Tipo"
+              %th= f.label "Detalle"
+              %th &nbsp;
+            %tbody#nested-holder4
+              = f.fields_for :employee_documents do |employee_document|
+                = render 'employee_document_fields', :f => employee_document
+          .links
+            = link_to_add_association 'Agregar Documento Asociado', f, :employee_documents, 'data-association-insertion-node' => '#nested-holder4', 'data-association-insertion-position' => :before
+
   .actions
     = f.submit
 

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: liquidacions
 #
@@ -15,6 +15,7 @@
 #  tipo_recibo_id    :integer
 #  periodo           :date
 #  periodo_deposito  :date
+#  company_id        :integer
 #
 
 require 'test_helper'

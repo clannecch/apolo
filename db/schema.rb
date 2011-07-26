@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110718201818) do
+ActiveRecord::Schema.define(:version => 20110726202321) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(:version => 20110718201818) do
 
   create_table "activities", :force => true do |t|
     t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "associated_document_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +176,22 @@ ActiveRecord::Schema.define(:version => 20110718201818) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "employee_documents", :force => true do |t|
+    t.string   "name"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.datetime "document_updated_at"
+    t.integer  "document_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "document_file"
+    t.binary   "document_thumb_file"
+    t.binary   "document_small_file"
+    t.integer  "asociate_document_type_id"
+    t.integer  "associated_document_type_id"
+    t.integer  "employee_id"
   end
 
   create_table "employee_familiars", :force => true do |t|
@@ -455,6 +478,9 @@ ActiveRecord::Schema.define(:version => 20110718201818) do
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.binary   "avatar_file"
+    t.binary   "avatar_thumb_file"
+    t.binary   "avatar_small_file"
   end
 
   create_table "nationalities", :force => true do |t|
