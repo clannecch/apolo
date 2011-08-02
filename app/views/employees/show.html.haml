@@ -1,8 +1,5 @@
 %h1 Visualizacion de Empleado
 %p#notice= notice
-= image_tag @employee.avatar.url
-= image_tag @employee.avatar.url(:medium)
-= image_tag @employee.avatar.url(:thumb)
 %p
   %b Legajo:
   = @employee.legajo
@@ -65,7 +62,7 @@
 %br/
 %br/
 %b Distancia hasta el lugar de trabajo :
-= @employee.distance_from("Catamarca 50, buenos aires") * 1.6
+= @employee.distance_from("Catamarca 50, buenos aires").to_i * 1.6
 %br/
 %p
   %b Movil:
@@ -230,6 +227,25 @@
 %p
   %b CBU Cuenta Bancaria:
   = @employee.deposito_banco_cbu
+
+
+%h3 Documentos Asociados
+%table{:width => "50%" ,:border => "1"}
+  %tr
+    %th Tipo de Documento
+    %th Nombre
+    %th Fecha de recepcion documentacion
+    %th
+
+  - @employee.attachments.each do |attach|
+    %tr
+      %td= attach.associated_document_type.try(:name)
+      %td= attach.name
+      %td= attach.reception_date
+      %td= link_to 'Visualizar', attach
+      %td= link_to 'Visualizar', attach
+
+
 = employee_links(@employee)
 = link_to 'Editar', edit_employee_path(@employee)
 |

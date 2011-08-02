@@ -1,4 +1,5 @@
 .nested-fields
+  %img{:src => f.object.document.url}
   %td= f.collection_select :associated_document_type_id, AssociatedDocumentType.all, :id, :name, :prompt => true
   %td= f.text_field :name
   %td= f.file_field :document

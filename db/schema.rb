@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726202321) do
+ActiveRecord::Schema.define(:version => 20110801204306) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(:version => 20110726202321) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "associated_document_type_id"
+    t.string   "name"
+    t.date     "reception_date"
+    t.string   "adjunto_file_name"
+    t.string   "adjunto_content_type"
+    t.integer  "associated_document_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "adjunto_file"
   end
 
   create_table "bank_deposit_account_types", :force => true do |t|

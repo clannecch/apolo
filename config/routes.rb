@@ -4,6 +4,8 @@ APSSueldos::Application.routes.draw do |map|
 
   resources :EmployeeDocumentsController
 
+  map.resources :attachments    , :only => :show
+
   map.resources :my_images, :member => { :avatars => :get }
 #  map.resources :employee_documents, :member => { :documents => :get }
 

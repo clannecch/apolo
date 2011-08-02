@@ -92,12 +92,13 @@
 
 require 'paperclip'
 class Employee < ActiveRecord::Base
-#  attr_accessible  :full_address, :latitude, :longitude
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-#                :url  => "/system/products/:id/:style/:basename.:extension"
+#  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+##                :url  => "/system/products/:id/:style/:basename.:extension"
 
+  has_many :attachments, :as => :attachable
 
+  accepts_nested_attributes_for :attachments , :allow_destroy => true
 
 # validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   scope :by_company, lambda {|company| where(:company_id => company) }
