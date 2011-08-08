@@ -350,4 +350,5 @@ class ReciboSueldo < ActiveRecord::Base
     cantidad = (self.acumuladores.dias_vacaciones.to_f / 360) * cantidad
     return cantidad
   end
+
 end

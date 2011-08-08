@@ -24,5 +24,7 @@ class ApplicationController < ActionController::Base
   def current_company
     session[:current_company] || Company.first
   end
+
+
 end
 

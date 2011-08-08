@@ -17,4 +17,11 @@ class Category < ActiveRecord::Base
 
   scope :by_company, lambda {|company| where(:company_id => company) }
 
+ # def print
+ #   require 'prawn'
+ #   pdf = Prawn::Document.new
+ #   pdf.text("Prawn Rocks")
+ #   pdf.render_file('prawn.pdf')
+  #  end
 end
+

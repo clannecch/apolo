@@ -27,12 +27,21 @@ APSSueldos::Application.routes.draw do |map|
   resources :tipo_recibos
 
 
+  resources :categories do
+    member do
+      get "imprimir", :action => :print
+    end
+  end
+
   resources :liquidacions do
     resources :recibo_sueldos do
       resources :detalle_recibo_retencions
       resources :detalle_recibo_habers
       member do
         get "calculo_recibo", :action => :calculo_recibo
+      end
+      member do
+        get "imprimir", :action => :print
       end
     end
   end
@@ -74,8 +83,6 @@ APSSueldos::Application.routes.draw do |map|
   resources :group_retentions
 
   resources :remuneration_types
-
-  resources :categories
 
   resources :labor_unions
 
