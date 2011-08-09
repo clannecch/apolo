@@ -20,6 +20,13 @@ class ReciboSueldosController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @recibo_sueldo }
+      format.pdf do
+        dump_tmp_filename = Rails.root.join('tmp',@recibo_sueldo.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_to_pdf(dump_tmp_filename,@recibo_sueldo)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
+          #File.delete(dump_tmp_filename)
+      end
     end
   end
 
@@ -97,9 +104,23 @@ class ReciboSueldosController < ApplicationController
     end
   end
 
+=begin
   def print
+    respond_to do |format|
+      format.pdf do
+        print_to_pdf()
+      end
+    end
+  end
+=end
+
+#  numero.truncate parte entera
+  #"456778904".gsub(/(.)(?=.{3}+$)/, %q(\1,))
+
+  def print_to_pdf(filename,entity)
     require 'prawn'
-#    @categories = Category.by_company(current_company.id).all
+    @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
+
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
@@ -108,7 +129,7 @@ class ReciboSueldosController < ApplicationController
     logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
     logo_cuit = "C.U.I.T.: "+"30-67932805-7"
     logo_inscripcion = "Nro.Inscripcion: " + "21.757"
-    logo_caja = "Caja: " + "Ex Caja Serv. Publico"
+    logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
 
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
@@ -133,18 +154,20 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [136, 720], :width => 170, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Apellido y Nombres".center(70), :at => [117,713], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "Apellido y Nombres".center(55), :at => [136,713], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [136, 710], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text [@recibo_sueldo.employee.apellido, @recibo_sueldo.employee.nombre].compact.join(', ')[0..35].center(35), :at => [136,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [136, 680], :width => 170, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Categoria".center(70), :at => [117,673], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "Categoria".center(28), :at => [136,673], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [136, 670], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @recibo_sueldo.employee.category.detalle[0..35].strip.center(30), :at => [136,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [136, 640], :width => 170, :height => 10 do
         pdf.stroke_bounds
@@ -153,6 +176,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [136, 630], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @recibo_sueldo.employee.task.detalle[0..35].strip.center(30), :at => [136,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 #
 
     pdf.bounding_box [306, 720], :width => 70, :height => 10 do
@@ -162,6 +186,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [306, 710], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @recibo_sueldo.employee.legajo.strip.center(14), :at => [307,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [306, 680], :width => 70, :height => 10 do
         pdf.stroke_bounds
@@ -170,6 +195,13 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [306, 670], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+if @recibo_sueldo.employee.remuneracion_fuera_convenio != 0
+  @basico = @recibo_sueldo.employee.remuneracion_fuera_convenio
+else
+  @basico = @recibo_sueldo.employee.category.importe
+end
+#gsub(/(.)(?=.{3}+$)/, %q(\1,))
+pdf.draw_text @basico.to_s.center(14), :at => [307,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [306, 640], :width => 70, :height => 10 do
         pdf.stroke_bounds
@@ -178,6 +210,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [306, 630], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @recibo_sueldo.employee.section.detalle.center(14), :at => [307,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
 #
 
@@ -188,14 +221,16 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [376, 710], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @recibo_sueldo.employee.fecha_ingreso.to_s.center(14), :at => [377,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [376, 680], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Fecha de Pago".center(20), :at => [377,773], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "Fecha de Pago".center(20), :at => [376,673], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [376, 670], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [376, 640], :width => 70, :height => 10 do
         pdf.stroke_bounds
@@ -204,6 +239,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [376, 630], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
+#pdf.draw_text @liquidacion. .to_s.center(14), :at => [377,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 #
 
     pdf.bounding_box [446, 720], :width => 90, :height => 10 do
@@ -345,7 +381,7 @@ class ReciboSueldosController < ApplicationController
     pdf.draw_text "cargo del que firma".center(40), :at => [400,3], :size => 5  # columna, linea, tamaño estilo
 
     @banda = 700
-    pdf.render_file('recibo.pdf')
+    pdf.render_file(filename)
   end
 
 

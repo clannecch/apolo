@@ -40,9 +40,9 @@ APSSueldos::Application.routes.draw do |map|
       member do
         get "calculo_recibo", :action => :calculo_recibo
       end
-      member do
-        get "imprimir", :action => :print
-      end
+      #member do
+      #  get "imprimir", :action => :print
+      #end
     end
   end
 
