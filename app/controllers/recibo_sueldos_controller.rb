@@ -154,98 +154,83 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [136, 720], :width => 170, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Apellido y Nombres".center(55), :at => [136,713], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "APELLIDO Y NOMBRES".center(55), :at => [136,713], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [136, 710], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text [@recibo_sueldo.employee.apellido, @recibo_sueldo.employee.nombre].compact.join(', ')[0..35].center(35), :at => [136,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [136, 680], :width => 170, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Categoria".center(28), :at => [136,673], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "CATEGORIA".center(28), :at => [136,673], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [136, 670], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @recibo_sueldo.employee.category.detalle[0..35].strip.center(30), :at => [136,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [136, 640], :width => 170, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Tarea".center(70), :at => [117,633], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "TAREA".center(70), :at => [117,633], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [136, 630], :width => 170, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @recibo_sueldo.employee.task.detalle[0..35].strip.center(30), :at => [136,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 #
 
     pdf.bounding_box [306, 720], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Legajo".center(20), :at => [307,713], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "LEGAJO".center(20), :at => [307,713], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [306, 710], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @recibo_sueldo.employee.legajo.strip.center(14), :at => [307,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [306, 680], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Basico".center(20), :at => [307,673], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "BASICO".center(20), :at => [307,673], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [306, 670], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-if @recibo_sueldo.employee.remuneracion_fuera_convenio != 0
-  @basico = @recibo_sueldo.employee.remuneracion_fuera_convenio
-else
-  @basico = @recibo_sueldo.employee.category.importe
-end
-#gsub(/(.)(?=.{3}+$)/, %q(\1,))
-pdf.draw_text @basico.to_s.center(14), :at => [307,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [306, 640], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Seccion".center(20), :at => [307,633], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "SECCION".center(20), :at => [307,633], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [306, 630], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @recibo_sueldo.employee.section.detalle.center(14), :at => [307,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
 #
 
     pdf.bounding_box [376, 720], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Fecha de Ingreso".center(20), :at => [377,713], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "FECHA DE INGRESO".center(20), :at => [377,713], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [376, 710], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @recibo_sueldo.employee.fecha_ingreso.to_s.center(14), :at => [377,693],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [376, 680], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Fecha de Pago".center(20), :at => [376,673], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "FECHA DE PAGO".center(20), :at => [376,673], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [376, 670], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:style => :bold, :size => 8  # columna, linea, tamaño estilo
 
     pdf.bounding_box [376, 640], :width => 70, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Periodo Abonado".center(20), :at => [377,633], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "PERIODO ABONADO".center(20), :at => [377,633], :size => 5
     pdf.bounding_box [376, 630], :width => 70, :height => 30 do
         pdf.stroke_bounds
     end
-#pdf.draw_text @liquidacion. .to_s.center(14), :at => [377,613],:style => :bold, :size => 8  # columna, linea, tamaño estilo
-#
 
+#
     pdf.bounding_box [446, 720], :width => 90, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Tipo y Nro.Documento".center(30), :at => [442,713], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "TIPO Y NUMERO DE DOCUMENTO".center(30), :at => [442,713], :size => 5
     pdf.bounding_box [446, 710], :width => 90, :height => 30 do
         pdf.stroke_bounds
     end
@@ -258,13 +243,15 @@ pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:
         pdf.stroke_bounds
     end
 
+
     pdf.bounding_box [446, 640], :width => 90, :height => 10 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "Centro de Costos".center(30), :at => [442,633], :size => 5  # columna, linea, tamaño estilo
+    pdf.draw_text "CENTRO DE COSTO".center(30), :at => [442,633], :size => 5  # columna, linea, tamaño estilo
     pdf.bounding_box [446, 630], :width => 90, :height => 30 do
         pdf.stroke_bounds
     end
+
 
 # dibujo grillapara detalle
 # Recuadro interno
@@ -324,20 +311,20 @@ pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:
         pdf.stroke_bounds
     end
 
-    pdf.bounding_box [5, 135], :width =>   40, :height => 40 do
+    pdf.bounding_box [5, 135], :width =>   45, :height => 40 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "LAPSO".center(11), :at => [5,128], :size => 6  # columna, linea, tamaño estilo
+    pdf.draw_text "LAPSO".center(15), :at => [5,128], :size => 6  # columna, linea, tamaño estilo
 
-    pdf.bounding_box [45, 135], :width =>   70, :height => 40 do
+    pdf.bounding_box [50, 135], :width =>   70, :height => 40 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "FECHA DEL DEPOSITO".center(19), :at => [45,128], :size => 6  # columna, linea, tamaño estilo
+    pdf.draw_text "FECHA DEL DEPOSITO".center(19), :at => [52,128], :size => 6  # columna, linea, tamaño estilo
 
-    pdf.bounding_box [115, 135], :width =>   130, :height => 40 do
+    pdf.bounding_box [120, 135], :width =>   125, :height => 40 do
         pdf.stroke_bounds
     end
-    pdf.draw_text "BANCO".center(36), :at => [115,128], :size => 6  # columna, linea, tamaño estilo
+    pdf.draw_text "BANCO".center(36), :at => [120,128], :size => 6  # columna, linea, tamaño estilo
 
     pdf.bounding_box [245, 135], :width =>   95, :height => 40 do
         pdf.stroke_bounds
@@ -366,6 +353,7 @@ pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:
 
     pdf.draw_text "Recibi conforme la suma de Pesos:", :at => [5,85], :size => 5  # columna, linea, tamaño estilo
 
+
     pdf.draw_text "  En concepto de mis Haberes correspondientes al periodo arriba indicado y", :at => [5,44], :size => 5  # columna, linea, tamaño estilo
     pdf.draw_text "segun la presente liquidacion. Dejano constancia de haber recibido una", :at => [5,37], :size => 5  # columna, linea, tamaño estilo
     pdf.draw_text "copia fiel de este recibo de acuerdo a la ley 20.744(T.O.) - Art.140", :at => [5,30], :size => 5  # columna, linea, tamaño estilo
@@ -374,17 +362,132 @@ pdf.draw_text @liquidacion.fecha_liquidacion.to_s.center(14), :at => [377,653],:
     pdf.draw_text "Caja de ahorro Nro.: "+"caja de ahorro del empleado", :at => [5,8], :size => 5  # columna, linea, tamaño estilo
 
 
-
     pdf.draw_text "________________________________________", :at => [400,23], :size => 5  # columna, linea, tamaño estilo
     pdf.draw_text "Por NOMBRE DE LA EMPRESA".center(40), :at => [400,17], :size => 5  # columna, linea, tamaño estilo
     pdf.draw_text "Nombre del que firma".center(40), :at => [400,10], :size => 5  # columna, linea, tamaño estilo
     pdf.draw_text "cargo del que firma".center(40), :at => [400,3], :size => 5  # columna, linea, tamaño estilo
 
-    @banda = 700
+    pdf.draw_text [@recibo_sueldo.employee.apellido, @recibo_sueldo.employee.nombre].compact.join(', ')[0..28].center(28), :at => [138,693],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.category.detalle[0..28].strip.center(28), :at => [136,653],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.task.detalle[0..328].strip.center(28), :at => [136,613],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.legajo.strip.center(11), :at => [307,693],:style => :bold, :size =>10
+    if @recibo_sueldo.employee.remuneracion_fuera_convenio != 0
+      @basico = @recibo_sueldo.employee.remuneracion_fuera_convenio
+    else
+      @basico = @recibo_sueldo.employee.category.importe
+    end
+    #n.truncate.to_s.gsub(/(.)(?=.{3}+$)/, %q(\1,))+"."+((n-n.truncate)*100).truncate.to_s
+    #@basico = @basico.truncate.to_s.gsub(/(.)(?=.{3}+$)/, %q(\1,))+"."+((@basico-@basico.truncate)*100).truncate.to_s
+    pdf.draw_text format_number(@basico).strip.center(11), :at => [307,653],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.section.detalle.center(11), :at => [307,613],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.fecha_ingreso.strftime("%d/%m/%Y").center(11), :at => [377,693],:style => :bold, :size => 10
+    pdf.draw_text @liquidacion.fecha_liquidacion.strftime("%d/%m/%Y").center(11), :at => [377,653],:style => :bold, :size => 10
+    pdf.draw_text @liquidacion.periodo.strftime("%m/%Y").center(11), :at => [377,613],:style => :bold, :size => 10
+    pdf.draw_text (@recibo_sueldo.employee.document_type.detalle[0..5]+" "+@recibo_sueldo.employee.numero_documento.to_i.to_s).center(15), :at => [448,693],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.cuil.center(15), :at => [446,650],:style => :bold, :size => 10
+    pdf.draw_text @recibo_sueldo.employee.cost_center.detalle.center(15), :at => [446,613],:style => :bold, :size => 10
+    offset = 570
+    total_remunerative_concept_ca = 0
+    total_remunerative_concept_sa = 0
+
+    @recibo_sueldo.detalle_recibo_habers.each do |h|
+      pdf.draw_text h.remunerative_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
+      pdf.draw_text format_number(h.cantidad_recibo).rjust(8), :at => [195,offset],:style => :bold, :size => 10
+      pdf.draw_text format_number(h.total).rjust(15), :at => [245,offset],:style => :bold, :size => 10
+      offset = offset - 10
+      total_remunerative_concept_ca += h.total
+      total_remunerative_concept_sa += h.total
+    end
+    total_retention = 0
+    @recibo_sueldo.detalle_recibo_retencions.each do |r|
+      pdf.draw_text r.retention_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
+      pdf.draw_text format_number(r.cantidad).rjust(8), :at => [195,offset],:style => :bold, :size => 10
+      pdf.draw_text format_number(r.total).rjust(15), :at => [435,offset],:style => :bold, :size => 10
+      offset = offset - 10
+      total_retention += r.total
+    end
+    pdf.draw_text @liquidacion.periodo_deposito.strftime("%m/%Y").rjust(6),
+                                  :at => [7,108],:style => :bold, :size => 10
+    pdf.draw_text @liquidacion.fecha_deposito.strftime("%d/%m/%Y"),
+                                  :at => [53,108],:style => :bold, :size => 10
+
+    if @liquidacion.bank_deposit.detalle.nil?
+    offset=offset
+    else
+      pdf.draw_text @liquidacion.bank_deposit.detalle[0..21].center(21) ,
+                                :at => [115,108],:style => :bold, :size => 10
+    end
+    pdf.draw_text format_number(total_remunerative_concept_ca).rjust(15), :at => [245,108],:style => :bold, :size => 10
+    pdf.draw_text format_number(total_remunerative_concept_ca).rjust(15), :at => [340,108],:style => :bold, :size => 10
+    pdf.draw_text format_number(total_retention).rjust(15), :at => [435,108],:style => :bold, :size => 10
+
+    pdf.draw_text format_number(total_remunerative_concept_ca-total_retention).rjust(15), :at => [435,65],:style => :bold, :size => 10
+    pdf.draw_text numero_a_palabras(total_remunerative_concept_ca-total_retention) , :at => [8,60],:style => :bold, :size => 10
     pdf.render_file(filename)
   end
 
+  def format_number(n)
+    if n.nil?
+      n = ""
+    else
+      n = n.truncate.to_s.gsub(/(.)(?=.{3}+$)/, %q(\1,))+"."+((n.abs-n.abs.truncate)*100).truncate.to_s.rjust(2,"0")
+    end
+  end
 
+  def numero_a_palabras(numero)
+    de_tres_en_tres = numero.to_i.to_s.reverse.scan(/\d{1,3}/).map{|n| n.reverse.to_i}
+
+    millones = [
+      {true => nil, false => nil},
+      {true => 'millon', false => 'millones'},
+      {true => "billon", false => "billones"},
+      {true => "trillon", false => "trillones"}
+    ]
+
+    centena_anterior = 0
+    contador = -1
+    palabras = de_tres_en_tres.map do |numeros|
+      contador += 1
+      if contador%2 == 0
+        centena_anterior = numeros
+        [centena_a_palabras(numeros), millones[contador/2][numeros==1]].compact if numeros > 0
+      elsif centena_anterior == 0
+        [centena_a_palabras(numeros), "mil", millones[contador/2][false]].compact if numeros > 0
+      else
+        [centena_a_palabras(numeros), "mil"] if numeros > 0
+      end
+    end
+
+    palabras.compact.reverse.join(' ') + " con "+((numero - numero.truncate)*100).to_i.to_s.rjust(2,"0") + "/100"
+  end
+
+  def centena_a_palabras(numero)
+    especiales = {
+      11 => 'once', 12 => 'doce', 13 => 'trece', 14 => 'catorce', 15 => 'quince',
+      10 => 'diez', 20 => 'veinte', 100 => 'cien'
+    }
+    if especiales.has_key?(numero)
+      return especiales[numero]
+    end
+
+    centenas = [nil, 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos']
+    decenas = [nil, 'dieci', 'veinti', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa']
+    unidades = [nil, 'un', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve']
+
+    centena, decena, unidad = numero.to_s.rjust(3,'0').scan(/\d/).map{|i| i.to_i}
+
+    palabras = []
+    palabras << centenas[centena]
+
+    if especiales.has_key?(decena*10 + unidad)
+      palabras << especiales[decena*10 + unidad]
+    else
+      tmp = "#{decenas[decena]}#{' y ' if decena > 2 && unidad > 0}#{unidades[unidad]}"
+      palabras << (tmp.blank? ? nil : tmp)
+    end
+
+    palabras.compact.join(' ')
+  end
   protected
 
   def find_liquidacion
