@@ -6,7 +6,7 @@ en:
       create:
         notice: "%{resource_name} was successfully created"
       update:
-        notice: "%{resource_name} was successfully updated"
+        notice: "%{resource_name} was successfully updated (2)"
       destroy:
         notice: "%{resource_name} was successfully destroyed"
         error: "%{resource_name} could not be destroyed"

@@ -1,0 +1,17 @@
+es-AR:
+  activerecord:
+    models:
+      retention_concept: Concepto de Retencion
+    attributes:
+      retention_concept:
+        codigo: Codigo
+        detalle: Detalle
+        statistical_value: Valor Estadistico
+        accounting_imputation_id: Cuenta Contable
+        created_at: Creado el
+        updated_at: Actualizado el
+        prioridad: Prioridad
+        formula_calculo_valor: Formula del Calculo del Valor
+        acumuladores_valor: Formula del Calculo de Cantidad
+        data_to_ask_id: Dato a Solicitar
+        company_id: Empresa

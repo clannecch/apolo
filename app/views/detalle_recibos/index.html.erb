@@ -1,0 +1,37 @@
+<h1>Detalle Recibos</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :recibo_sueldo_id, "Recibo Sueldo" %></td>
+		<th><%= sort_link @search, :remunerative_concept_id, "Remunerative Concept" %></td>
+		<th><%= sort_link @search, :retention_concept_id, "Retention Concept" %></td>
+		<th><%= sort_link @search, :detalle, "Detalle" %></td>
+		<th><%= sort_link @search, :type, "Type" %></td>
+		<th><%= sort_link @search, :cost_center_id, "Cost Center" %></td>
+		<th><%= sort_link @search, :cantidad, "Cantidad" %></td>
+		<th><%= sort_link @search, :importe, "Importe" %></td>
+		<th><%= sort_link @search, :total, "Total" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for detalle_recibo in @detalle_recibos %>
+		<tr>
+			<td><%= detalle_recibo.recibo_sueldo_id %></td>
+			<td><%= detalle_recibo.remunerative_concept_id %></td>
+			<td><%= detalle_recibo.retention_concept_id %></td>
+			<td><%= detalle_recibo.detalle %></td>
+			<td><%= detalle_recibo.type %></td>
+			<td><%= detalle_recibo.cost_center_id %></td>
+			<td><%= detalle_recibo.cantidad %></td>
+			<td><%= detalle_recibo.importe %></td>
+			<td><%= detalle_recibo.total %></td>
+            <td><a href="/detalle_recibos/<%= detalle_recibo.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/detalle_recibos/<%= detalle_recibo.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/detalle_recibos/<%= detalle_recibo.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Detalle Recibo", new_detalle_recibo_path %></p>
+
+<%= paginate @detalle_recibos %>

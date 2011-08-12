@@ -2,7 +2,9 @@ class EducationalLevelsController < ApplicationController
   # GET /educational_levels
   # GET /educational_levels.xml
   def index
-    @educational_levels = EducationalLevel.all
+    #@educational_levels = EducationalLevel.all
+    @search = EducationalLevel.search(params[:search])
+    @educational_levels = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,0 +1,16 @@
+<h1>Employer Contribution Concepts Group Employer Contribution</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Group Employer Contribution:</strong></td>
+		<td style="width:70%"><%= @employer_contribution_concepts_group_employer_contribution.group_employer_contribution_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Employer Contribution Concept:</strong></td>
+		<td style="width:70%"><%= @employer_contribution_concepts_group_employer_contribution.employer_contribution_concept_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_employer_contribution_concepts_group_employer_contribution_path(@employer_contribution_concepts_group_employer_contribution) %> |
+	<%= link_to "Eliminar", @employer_contribution_concepts_group_employer_contribution, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Employer Contribution Concepts Group Employer Contributions", employer_contribution_concepts_group_employer_contributions_path %>
+</p>

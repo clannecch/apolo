@@ -1,0 +1,21 @@
+<h1>Tipos de Remuneracion</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :detalle, "Detalle" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for remuneration_type in @remuneration_types %>
+		<tr>
+			<td><%= remuneration_type.detalle %></td>
+            <td><a href="/remuneration_types/<%= remuneration_type.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/remuneration_types/<%= remuneration_type.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/remuneration_types/<%= remuneration_type.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Tipo de Remuneracion", new_remuneration_type_path %></p>
+
+<%= paginate @remuneration_types %>

@@ -2,7 +2,9 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations
   # GET /group_remunerations.xml
   def index
-    @group_remunerations = GroupRemuneration.all
+    #@group_remunerations = GroupRemuneration.all
+    @search = GroupRemuneration.search(params[:search])
+    @group_remunerations = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

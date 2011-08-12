@@ -1,0 +1,29 @@
+<h1>Recibos de Sueldo</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :liquidacion_id, "Liquidacion" %></td>
+		<th><%= sort_link @search, :employee_id, "Employee" %></td>
+		<th><%= sort_link @search, :fecha_recibo, "Fecha Recibo" %></td>
+		<th><%= sort_link @search, :observaciones, "Observaciones" %></td>
+		<th><%= sort_link @search, :mensaje_recibo, "Mensaje Recibo" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for recibo_sueldo in @recibo_sueldos %>
+		<tr>
+			<td><%= recibo_sueldo.liquidacion_id %></td>
+			<td><%= recibo_sueldo.employee_id %></td>
+			<td><%= recibo_sueldo.fecha_recibo %></td>
+			<td><%= recibo_sueldo.observaciones %></td>
+			<td><%= recibo_sueldo.mensaje_recibo %></td>
+            <td><a href="/recibo_sueldos/<%= recibo_sueldo.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/recibo_sueldos/<%= recibo_sueldo.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/recibo_sueldos/<%= recibo_sueldo.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Recibo de Sueldo", new_recibo_sueldo_path %></p>
+
+<%= paginate @recibo_sueldos %>

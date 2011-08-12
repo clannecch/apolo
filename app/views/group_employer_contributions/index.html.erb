@@ -1,0 +1,21 @@
+<h1>Grupos de Aportes</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :detalle, "Detalle" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for group_employer_contribution in @group_employer_contributions %>
+		<tr>
+			<td><%= group_employer_contribution.detalle %></td>
+            <td><a href="/group_employer_contributions/<%= group_employer_contribution.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/group_employer_contributions/<%= group_employer_contribution.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/group_employer_contributions/<%= group_employer_contribution.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Grupo de Aporte", new_group_employer_contribution_path %></p>
+
+<%= paginate @group_employer_contributions %>

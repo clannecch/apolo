@@ -1,0 +1,16 @@
+<h1>Group Remunerations Remunerative Concept</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Group Remuneration:</strong></td>
+		<td style="width:70%"><%= @group_remunerations_remunerative_concept.group_remuneration_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Remunerative Concept:</strong></td>
+		<td style="width:70%"><%= @group_remunerations_remunerative_concept.remunerative_concept_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_group_remunerations_remunerative_concept_path(@group_remunerations_remunerative_concept) %> |
+	<%= link_to "Eliminar", @group_remunerations_remunerative_concept, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Group Remunerations Remunerative Concepts", group_remunerations_remunerative_concepts_path %>
+</p>

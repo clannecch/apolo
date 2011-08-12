@@ -1,0 +1,12 @@
+<h1>Seccion</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @section.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_section_path(@section) %> |
+	<%= link_to "Eliminar", @section, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Secciones", sections_path %>
+</p>

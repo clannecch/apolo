@@ -9,7 +9,7 @@ sass_dir = "app/stylesheets"
 environment = Compass::AppIntegration::Rails.env
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
-output_style = :compressed
+ output_style = :expanded #:compressed
 =begin
 asset_host do |asset|
   "http://assets#{asset.hash % 4 + 1}.odiseo.apslabs.com.ar"

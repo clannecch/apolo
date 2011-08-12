@@ -2,7 +2,9 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions
   # GET /liquidacions.xml
   def index
-    @liquidacions = Liquidacion.all
+    #@liquidacions = Liquidacion.all
+    @search = Liquidacion.search(params[:search])
+    @liquidacions = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

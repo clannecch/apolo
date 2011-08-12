@@ -1,0 +1,25 @@
+es-AR:
+  activerecord:
+    models:
+      employee_familiar: Familiar
+    attributes:
+      employee_familiar:
+        id: id
+        apellido: Apellido
+        nombre: Nombre
+        fecha_nacimiento: Fecha de Nacimiento
+        numero_documento: Numero de Documento
+        health_insurance_id: Obra Social
+        cuil: CUIL
+        cuit: CUIL
+        tomo: Tomo
+        folio: Folio
+        acta: Acta
+        country_id: Pais
+        province_id: Provincia
+        comuna: Comuna
+        employee_id: Empleado
+        document_type_id: Tipo de Documento
+        activity_id: Actividad
+        created_at: Creado el
+        updated_at: Actualizado el

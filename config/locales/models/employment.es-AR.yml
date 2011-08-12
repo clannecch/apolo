@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      employment: Empleador
+    attributes:
+      employment:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

@@ -3,7 +3,9 @@ before_filter :find_contract_mode, :except => [:index, :new, :create]
   # GET /contract_modes
   # GET /contract_modes.xml
   def index
-    @contract_modes = ContractMode.by_company(current_company.id).all
+    #@contract_modes = ContractMode.by_company(current_company.id).all
+    @search = ContractMode.by_company(current_company.id).search(params[:search])
+    @contract_modes = @search.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

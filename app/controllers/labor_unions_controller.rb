@@ -2,7 +2,9 @@ class LaborUnionsController < ApplicationController
   # GET /labor_unions
   # GET /labor_unions.xml
   def index
-    @labor_unions = LaborUnion.all
+    #@labor_unions = LaborUnion.all
+    @search = LaborUnion.search(params[:search])
+    @labor_unions = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

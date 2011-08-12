@@ -1,0 +1,32 @@
+<h1>Insurance Beneficiary</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Nombre:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.nombre %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Apellido:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.apellido %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Document Type:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.document_type_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Numero Documento:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.numero_documento %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Employee:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.employee_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Fecha Nacimiento:</strong></td>
+		<td style="width:70%"><%= @insurance_beneficiary.fecha_nacimiento %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_insurance_beneficiary_path(@insurance_beneficiary) %> |
+	<%= link_to "Eliminar", @insurance_beneficiary, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Insurance Beneficiaries", insurance_beneficiaries_path %>
+</p>

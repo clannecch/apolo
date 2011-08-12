@@ -2,7 +2,9 @@ class DeduccionGananciasTablesController < ApplicationController
   # GET /deduccion_ganancias_tables
   # GET /deduccion_ganancias_tables.xml
   def index
-    @deduccion_ganancias_tables = DeduccionGananciasTable.all
+    #@deduccion_ganancias_tables = DeduccionGananciasTable.all
+    @search = DeduccionGananciasTable.search(params[:search])
+    @deduccion_ganancias_tables = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

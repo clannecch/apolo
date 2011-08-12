@@ -8,7 +8,9 @@ class CountriesController < ApplicationController
 
     # reemplazar para cambio a modelo con compania compania
     #@countries = current_company.countries.all
-    @countries = Country.by_company(current_company.id).all
+    #@countries = Country.by_company(current_company.id).all
+    @search = Country.by_company(current_company.id).search(params[:search])
+    @countries = @search.page(params[:page]).per(10)
 
     # comentar para el cambio a modelo con compania
     #@countries = Country.all

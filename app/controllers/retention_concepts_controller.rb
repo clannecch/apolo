@@ -2,7 +2,9 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts
   # GET /retention_concepts.xml
   def index
-    @retention_concepts = RetentionConcept.all
+    #@retention_concepts = RetentionConcept.all
+    @search = RetentionConcept.search(params[:search])
+    @retention_concepts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

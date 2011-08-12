@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      contract_mode: Modalidad de Contratacion
+    attributes:
+      contract_mode:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      employer_contribution_concepts_group_employer_contribution: Employer Contribution Concepts Group Employer Contribution
+    attributes:
+      employer_contribution_concepts_group_employer_contribution:
+        group_employer_contribution_id: Group Employer Contribution
+        employer_contribution_concept_id: Employer Contribution Concept
+        created_at: Creado el
+        updated_at: Actualizado el

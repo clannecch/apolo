@@ -2,7 +2,9 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.xml
   def index
-    @places = Place.all
+    #@places = Place.all
+    @search = Place.search(params[:search])
+    @places = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

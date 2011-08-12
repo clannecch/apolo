@@ -1,0 +1,12 @@
+<h1>Obra Social</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @health_insurance.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_health_insurance_path(@health_insurance) %> |
+	<%= link_to "Eliminar", @health_insurance, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Obras Sociales", health_insurances_path %>
+</p>

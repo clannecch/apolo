@@ -2,7 +2,9 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions
   # GET /group_employer_contributions.xml
   def index
-    @group_employer_contributions = GroupEmployerContribution.all
+    #@group_employer_contributions = GroupEmployerContribution.all
+    @search = GroupEmployerContribution.search(params[:search])
+    @group_employer_contributions = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

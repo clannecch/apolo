@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      remuneration_type: Tipo de Remuneracion
+    attributes:
+      remuneration_type:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

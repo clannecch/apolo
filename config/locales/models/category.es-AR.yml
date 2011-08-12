@@ -1,0 +1,11 @@
+es-AR:
+  activerecord:
+    models:
+      category: Categoria
+    attributes:
+      category:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        importe: Importe
+        company_id: Empresa

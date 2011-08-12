@@ -2,7 +2,9 @@ class DataToAsksController < ApplicationController
   # GET /data_to_asks
   # GET /data_to_asks.xml
   def index
-    @data_to_asks = DataToAsk.all
+    #@data_to_asks = DataToAsk.all
+    @search = DataToAsk.search(params[:search])
+    @data_to_asks = @search.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,0 +1,9 @@
+es-AR:
+  activerecord:
+    models:
+      group_renuneration: Group Renuneration
+    attributes:
+      group_renuneration:
+        detalle: detalle
+        created_at: Creado el
+        updated_at: Actualizado el

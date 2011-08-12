@@ -4,7 +4,9 @@ class CausaEgresosController < ApplicationController
   # GET /causa_egresos
   # GET /causa_egresos.xml
   def index
-    @causa_egresos = CausaEgreso.by_company(current_company.id).all
+    #@causa_egresos = CausaEgreso.by_company(current_company.id).all
+    @search = CausaEgreso.by_company(current_company.id).search(params[:search])
+    @causa_egresos = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

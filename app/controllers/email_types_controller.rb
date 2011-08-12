@@ -2,7 +2,9 @@ class EmailTypesController < ApplicationController
   # GET /email_types
   # GET /email_types.xml
   def index
-    @email_types = EmailType.all
+    #@email_types = EmailType.all
+    @search = EmailType.search(params[:search])
+    @email_types = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

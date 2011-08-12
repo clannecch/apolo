@@ -1,0 +1,12 @@
+<h1>Nivel de Educacion</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @educational_level.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_educational_level_path(@educational_level) %> |
+	<%= link_to "Eliminar", @educational_level, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Niveles de Educacion", educational_levels_path %>
+</p>

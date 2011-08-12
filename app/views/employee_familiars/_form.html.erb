@@ -1,0 +1,117 @@
+<%= form_for @employee_familiar do |f| %>
+	<% if @employee_familiar.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@employee_familiar.errors.count, "error") %> prohibido guardar Employee Familiar:</h2>
+			<ul>
+			<% @employee_familiar.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :apellido %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :apellido %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :nombre %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :nombre %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :fecha_nacimiento %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :fecha_nacimiento, {:class => "dtPicker"} %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :numero_documento %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :numero_documento %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :health_insurance_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, :include_blank => 'Sin datos' %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :cuil %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :cuil %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :cuit %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :cuit %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :tomo %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :tomo %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :folio %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :folio %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :acta %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :acta %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :country_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :country_id, Country.all, :id, :detalle, :include_blank => 'Sin datos' %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :province_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :province_id, Province.all, :id, :detalle, :include_blank => 'Sin datos' %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :comuna %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :comuna %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :employee_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :employee_id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :document_type_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :document_type_id, DocumentType.all, :id, :detalle, :include_blank => 'Sin datos' %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :activity_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :activity_id %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

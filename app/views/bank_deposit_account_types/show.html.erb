@@ -1,0 +1,12 @@
+<h1>Tipo de Cuenta Bancaria</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @bank_deposit_account_type.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_bank_deposit_account_type_path(@bank_deposit_account_type) %> |
+	<%= link_to "Eliminar", @bank_deposit_account_type, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Tipos de Cuentas Bancarias", bank_deposit_account_types_path %>
+</p>

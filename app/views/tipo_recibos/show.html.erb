@@ -1,0 +1,12 @@
+<h1>Tipo Recibo</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @tipo_recibo.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_tipo_recibo_path(@tipo_recibo) %> |
+	<%= link_to "Eliminar", @tipo_recibo, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Tipo Recibos", tipo_recibos_path %>
+</p>

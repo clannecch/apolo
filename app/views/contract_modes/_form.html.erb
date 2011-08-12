@@ -1,0 +1,21 @@
+<%= form_for @contract_mode do |f| %>
+	<% if @contract_mode.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@contract_mode.errors.count, "error") %> prohibido guardar Modalidad de Cotratacion:</h2>
+			<ul>
+			<% @contract_mode.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :detalle %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

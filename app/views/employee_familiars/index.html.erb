@@ -1,0 +1,53 @@
+<h1>Employee Familiars</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :id, "Id" %></td>
+		<th><%= sort_link @search, :apellido, "Apellido" %></td>
+		<th><%= sort_link @search, :nombre, "Nombre" %></td>
+		<th><%= sort_link @search, :fecha_nacimiento, "Fecha Nacimiento" %></td>
+		<th><%= sort_link @search, :numero_documento, "Numero Documento" %></td>
+		<th><%= sort_link @search, :health_insurance_id, "Health Insurance" %></td>
+		<th><%= sort_link @search, :cuil, "Cuil" %></td>
+		<th><%= sort_link @search, :cuit, "Cuit" %></td>
+		<th><%= sort_link @search, :tomo, "Tomo" %></td>
+		<th><%= sort_link @search, :folio, "Folio" %></td>
+		<th><%= sort_link @search, :acta, "Acta" %></td>
+		<th><%= sort_link @search, :country_id, "Country" %></td>
+		<th><%= sort_link @search, :province_id, "Province" %></td>
+		<th><%= sort_link @search, :comuna, "Comuna" %></td>
+		<th><%= sort_link @search, :employee_id, "Employee" %></td>
+		<th><%= sort_link @search, :document_type_id, "Document Type" %></td>
+		<th><%= sort_link @search, :activity_id, "Activity" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for employee_familiar in @employee_familiars %>
+		<tr>
+			<td><%= employee_familiar.id %></td>
+			<td><%= employee_familiar.apellido %></td>
+			<td><%= employee_familiar.nombre %></td>
+			<td><%= employee_familiar.fecha_nacimiento %></td>
+			<td><%= employee_familiar.numero_documento %></td>
+			<td><%= employee_familiar.health_insurance_id %></td>
+			<td><%= employee_familiar.cuil %></td>
+			<td><%= employee_familiar.cuit %></td>
+			<td><%= employee_familiar.tomo %></td>
+			<td><%= employee_familiar.folio %></td>
+			<td><%= employee_familiar.acta %></td>
+			<td><%= employee_familiar.country_id %></td>
+			<td><%= employee_familiar.province_id %></td>
+			<td><%= employee_familiar.comuna %></td>
+			<td><%= employee_familiar.employee_id %></td>
+			<td><%= employee_familiar.document_type_id %></td>
+			<td><%= employee_familiar.activity_id %></td>
+            <td><a href="/employee_familiars/<%= employee_familiar.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/employee_familiars/<%= employee_familiar.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/employee_familiars/<%= employee_familiar.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Employee Familiar", new_employee_familiar_path %></p>
+
+<%= paginate @employee_familiars %>

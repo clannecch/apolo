@@ -2,7 +2,9 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts
   # GET /home_abouts.xml
   def index
-    @home_abouts = HomeAbout.all
+    #@home_abouts = HomeAbout.all
+    @search = HomeAbout.search(params[:search])
+    @home_abouts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

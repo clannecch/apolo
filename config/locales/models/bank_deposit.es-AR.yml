@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      bank_deposit: Banco
+    attributes:
+      bank_deposit:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

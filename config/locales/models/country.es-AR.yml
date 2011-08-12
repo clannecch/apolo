@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      country: Pais
+    attributes:
+      country:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

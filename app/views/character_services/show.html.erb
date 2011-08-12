@@ -1,0 +1,12 @@
+<h1>Caracter de Servicio</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @character_service.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_character_service_path(@character_service) %> |
+	<%= link_to "Eliminar", @character_service, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Caracteres de Servicios", character_services_path %>
+</p>

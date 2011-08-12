@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      group_remunerations_remunerative_concept: Group Remunerations Remunerative Concept
+    attributes:
+      group_remunerations_remunerative_concept:
+        group_remuneration_id: Group Remuneration
+        remunerative_concept_id: Remunerative Concept
+        created_at: Creado el
+        updated_at: Actualizado el

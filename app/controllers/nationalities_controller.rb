@@ -2,7 +2,9 @@ class NationalitiesController < ApplicationController
   # GET /nationalities
   # GET /nationalities.xml
   def index
-    @nationalities = Nationality.all
+    #@nationalities = Nationality.all
+    @search = Nationality.search(params[:search])
+    @nationalities = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

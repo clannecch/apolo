@@ -1,0 +1,21 @@
+<h1>Estados Civiles</h1>
+
+<table class="tableStandard">
+	<tr>
+		<th><%= sort_link @search, :detalle, "Detalle" %></td>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for marital_status in @marital_statuses %>
+		<tr>
+			<td><%= marital_status.detalle %></td>
+            <td><a href="/marital_statuses/<%= marital_status.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/marital_statuses/<%= marital_status.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/marital_statuses/<%= marital_status.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo Estado Civil", new_marital_status_path %></p>
+
+<%= paginate @marital_statuses %>

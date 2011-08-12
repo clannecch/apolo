@@ -3,7 +3,9 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   # GET /cost_centers
   # GET /cost_centers.xml
   def index
-    @cost_centers = CostCenter.by_company(current_company.id).all
+    #@cost_centers = CostCenter.by_company(current_company.id).all
+    @search = CostCenter.by_company(current_company.id).search(params[:search])
+    @cost_centers = @search.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

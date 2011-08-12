@@ -2,7 +2,9 @@ class HealthInsurancesController < ApplicationController
   # GET /health_insurances
   # GET /health_insurances.xml
   def index
-    @health_insurances = HealthInsurance.all
+    #@health_insurances = HealthInsurance.all
+    @search = HealthInsurance.search(params[:search])
+    @health_insurances = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

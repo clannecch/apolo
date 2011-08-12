@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      place: Lugar de Trabajo
+    attributes:
+      place:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

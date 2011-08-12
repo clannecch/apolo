@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
-    @tasks = Task.all
+    #@tasks = Task.all
+    @search = Task.search(params[:search])
+    @tasks = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

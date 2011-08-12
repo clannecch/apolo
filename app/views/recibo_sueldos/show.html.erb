@@ -1,0 +1,28 @@
+<h1>Recibo de Sueldo</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Liquidacion:</strong></td>
+		<td style="width:70%"><%= @recibo_sueldo.liquidacion_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Employee:</strong></td>
+		<td style="width:70%"><%= @recibo_sueldo.employee_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Fecha Recibo:</strong></td>
+		<td style="width:70%"><%= @recibo_sueldo.fecha_recibo %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Observaciones:</strong></td>
+		<td style="width:70%"><%= @recibo_sueldo.observaciones %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Mensaje Recibo:</strong></td>
+		<td style="width:70%"><%= @recibo_sueldo.mensaje_recibo %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_recibo_sueldo_path(@recibo_sueldo) %> |
+	<%= link_to "Eliminar", @recibo_sueldo, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Recibos de Sueldo", recibo_sueldos_path %>
+</p>

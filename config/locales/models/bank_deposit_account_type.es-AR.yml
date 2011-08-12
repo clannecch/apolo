@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      bank_deposit_account_type: Tipo de Cuenta Bancaria
+    attributes:
+      bank_deposit_account_type:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

@@ -1,0 +1,76 @@
+<h1>Employee Familiar</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Id:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Apellido:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.apellido %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Nombre:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.nombre %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Fecha Nacimiento:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.fecha_nacimiento %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Numero Documento:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.numero_documento %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Health Insurance:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.health_insurance_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Cuil:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.cuil %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Cuit:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.cuit %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Tomo:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.tomo %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Folio:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.folio %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Acta:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.acta %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Country:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.country_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Province:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.province_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Comuna:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.comuna %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Employee:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.employee_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Document Type:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.document_type_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Activity:</strong></td>
+		<td style="width:70%"><%= @employee_familiar.activity_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_employee_familiar_path(@employee_familiar) %> |
+	<%= link_to "Eliminar", @employee_familiar, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Employee Familiars", employee_familiars_path %>
+</p>

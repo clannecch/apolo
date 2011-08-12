@@ -2,7 +2,9 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses
   # GET /marital_statuses.xml
   def index
-    @marital_statuses = MaritalStatus.all
+    #@marital_statuses = MaritalStatus.all
+    @search = MaritalStatus.search(params[:search])
+    @marital_statuses = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

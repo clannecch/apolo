@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      group_remuneration: Grupo de Remuneracion
+    attributes:
+      group_remuneration:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

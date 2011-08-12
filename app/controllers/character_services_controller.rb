@@ -5,7 +5,9 @@ class CharacterServicesController < ApplicationController
   # GET /character_services
   # GET /character_services.xml
   def index
-    @character_services = CharacterService.by_company(current_company.id).all
+    #@character_services = CharacterService.by_company(current_company.id).all
+    @search = CharacterService.by_company(current_company.id).search(params[:search])
+    @character_services = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

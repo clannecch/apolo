@@ -4,7 +4,9 @@ class BankDepositsController < ApplicationController
   # GET /bank_deposits
   # GET /bank_deposits.xml
   def index
-    @bank_deposits = BankDeposit.by_company(current_company.id).all
+    #@bank_deposits = BankDeposit.by_company(current_company.id).all
+    @search = BankDeposit.by_company(current_company.id).search(params[:search])
+    @bank_deposits = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

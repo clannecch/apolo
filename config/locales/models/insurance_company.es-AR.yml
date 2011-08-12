@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      insurance_company: Compañia de Obra Social
+    attributes:
+      insurance_company:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

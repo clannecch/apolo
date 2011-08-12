@@ -2,7 +2,9 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types
   # GET /remuneration_types.xml
   def index
-    @remuneration_types = RemunerationType.all
+    #@remuneration_types = RemunerationType.all
+    @search = RemunerationType.search(params[:search])
+    @remuneration_types = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

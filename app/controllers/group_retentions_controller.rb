@@ -2,7 +2,9 @@ class GroupRetentionsController < ApplicationController
   # GET /group_retentions
   # GET /group_retentions.xml
   def index
-    @group_retentions = GroupRetention.all
+    #@group_retentions = GroupRetention.all
+    @search = GroupRetention.search(params[:search])
+    @group_retentions = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

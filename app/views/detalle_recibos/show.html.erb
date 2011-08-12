@@ -1,0 +1,44 @@
+<h1>Detalle Recibo</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Recibo Sueldo:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.recibo_sueldo_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Remunerative Concept:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.remunerative_concept_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Retention Concept:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.retention_concept_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.detalle %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Type:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.type %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Cost Center:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.cost_center_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Cantidad:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.cantidad %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Importe:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.importe %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Total:</strong></td>
+		<td style="width:70%"><%= @detalle_recibo.total %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_detalle_recibo_path(@detalle_recibo) %> |
+	<%= link_to "Eliminar", @detalle_recibo, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Detalle Recibos", detalle_recibos_path %>
+</p>

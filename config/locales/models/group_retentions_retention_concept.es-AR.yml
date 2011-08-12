@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      group_retentions_retention_concept: Group Retentions Retention Concept
+    attributes:
+      group_retentions_retention_concept:
+        group_retention_id: Group Retention
+        retention_concept_id: Retention Concept
+        created_at: Creado el
+        updated_at: Actualizado el

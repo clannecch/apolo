@@ -1,0 +1,51 @@
+<%= form_for @insurance_beneficiary do |f| %>
+	<% if @insurance_beneficiary.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@insurance_beneficiary.errors.count, "error") %> prohibido guardar Insurance Beneficiary:</h2>
+			<ul>
+			<% @insurance_beneficiary.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :nombre %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :nombre %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :apellido %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :apellido %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :document_type_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :document_type_id, DocumentType.all, :id, :detalle, :include_blank => 'Sin datos' %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :numero_documento %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :numero_documento %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :employee_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :employee_id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :fecha_nacimiento %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :fecha_nacimiento, {:class => "dtPicker"} %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

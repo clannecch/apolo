@@ -2,7 +2,9 @@ class ProvincesController < ApplicationController
   # GET /provinces
   # GET /provinces.xml
   def index
-    @provinces = Province.all
+    #@provinces = Province.all
+    @search = Province.search(params[:search])
+    @provinces = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

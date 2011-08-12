@@ -2,7 +2,9 @@ class IssuedsController < ApplicationController
   # GET /issueds
   # GET /issueds.xml
   def index
-    @issueds = Issued.all
+    #@issueds = Issued.all
+    @search = Issued.search(params[:search])
+    @issueds = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

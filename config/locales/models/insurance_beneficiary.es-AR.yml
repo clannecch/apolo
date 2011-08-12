@@ -1,0 +1,14 @@
+es-AR:
+  activerecord:
+    models:
+      insurance_beneficiary: Beneficiario de Obra Social
+    attributes:
+      insurance_beneficiary:
+        nombre: Nombre
+        apellido: Apellido
+        document_type_id: Tipo de Documento
+        numero_documento: Numero de Documento
+        created_at: Creado el
+        updated_at: Actualizado el
+        employee_id: Empleado
+        fecha_nacimiento: Fecha de Nacimiento

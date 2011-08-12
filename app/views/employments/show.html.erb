@@ -1,0 +1,12 @@
+<h1>Empleado</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @employment.detalle %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_employment_path(@employment) %> |
+	<%= link_to "Eliminar", @employment, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Empleados", employments_path %>
+</p>

@@ -4,7 +4,9 @@ class BankDepositAccountTypesController < ApplicationController
   # GET /bank_deposit_account_types
   # GET /bank_deposit_account_types.xml
   def index
-    @bank_deposit_account_types = BankDepositAccountType.by_company(current_company.id).all
+    #@bank_deposit_account_types = BankDepositAccountType.by_company(current_company.id).all
+    @search = BankDepositAccountType.by_company(current_company.id).search(params[:search])
+    @bank_deposit_account_types = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erb

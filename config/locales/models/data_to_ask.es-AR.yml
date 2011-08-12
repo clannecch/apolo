@@ -1,0 +1,12 @@
+es-AR:
+  activerecord:
+    models:
+      data_to_ask: Datos a Solicitar
+    attributes:
+      data_to_ask:
+        detalle: Detalle
+        cantidad: Cantidad
+        importe: Importe
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

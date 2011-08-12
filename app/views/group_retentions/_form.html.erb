@@ -1,0 +1,21 @@
+<%= form_for @group_retention do |f| %>
+	<% if @group_retention.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@group_retention.errors.count, "error") %> prohibido guardar Grupo de Retencion:</h2>
+			<ul>
+			<% @group_retention.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :detalle %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

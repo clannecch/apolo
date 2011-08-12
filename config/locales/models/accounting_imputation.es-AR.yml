@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      accounting_imputation: Cuenta Contable
+    attributes:
+      accounting_imputation:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa
