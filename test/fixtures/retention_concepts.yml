@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: retention_concepts
 #
@@ -14,6 +14,7 @@
 #  formula_calculo_valor    :string(255)
 #  acumuladores_valor       :string(255)
 #  data_to_ask_id           :integer
+#  company_id               :integer
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

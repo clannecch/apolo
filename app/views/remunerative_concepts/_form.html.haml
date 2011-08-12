@@ -13,47 +13,61 @@
     = f.input :detalle
     = f.input :porcentual_asistencia
     = f.input :prioridad_calculo
-    = f.input :data_to_ask#, :collection=> DataToAsk.all, :id, :detalle, :prompt => true
   .field
+    = f.label :data_to_ask
+    %br/
+    = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
+  .field
+    %br/
     = f.label :calculo_cantidad
     %br/
     = f.text_field :calculo_cantidad
   .field
+    %br/
     = f.label :calculo_valor
     %br/
     = f.text_field :calculo_valor
   .field
+    %br/
     = f.label :statistical_value
     %br/
     = f.text_field :statistical_value
   .field
+    %br/
     = f.label :acumuladores_valor
     %br/
     = f.text_field :acumuladores_valor
   .field
+    %br/
     = f.label :acumuladores_cantidad
     %br/
     = f.text_field :acumuladores_cantidad
   .field
+    %br/
     = f.label :grupo_ganancias_id
     %br/
     = f.text_field :grupo_ganancias_id
   .field
+    %br/
     = f.label :accounting_imputation_id
     %br/
     = f.text_field :accounting_imputation_id
   - [:concepto_asociado_haber, :concepto_asociado_haber_2].each do |field|
     .field
+      %br/
       = f.label field
       %br/
       = f.collection_select("#{field}_id", @remunerative_concept.all_without_myself, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"})
   - end unless RemunerativeConcept.count.zero?
   - [:concepto_asociado_retencion, :concepto_asociado_retencion_2].each do |field|
     .field
+      %br/
       = f.label field
       %br/
       = f.collection_select("#{field}_id", RetentionConcept.all, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"})
   - end unless RetentionConcept.count.zero?
+  %br/
+
   .actions
     = f.submit
 

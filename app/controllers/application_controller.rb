@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_company
 
+# paperclip claudio
+  helper :all # include all helpers, all the time
+  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+# fin paperclip claudio
+
+
   before_filter :check_change_company
 
   protected
@@ -18,5 +24,7 @@ class ApplicationController < ActionController::Base
   def current_company
     session[:current_company] || Company.first
   end
+
+
 end
 

@@ -1,9 +1,11 @@
 class PlacesController < ApplicationController
+
+  before_filter :find_place, :except => [:index, :new, :create]
+
   # GET /places
   # GET /places.xml
   def index
-    #@places = Place.all
-    @search = Place.search(params[:search])
+    @search = Place.by_company(current_company.id).search(params[:search])
     @places = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +17,6 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.xml
   def show
-    @place = Place.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class PlacesController < ApplicationController
   # GET /places/new
   # GET /places/new.xml
   def new
-    @place = Place.new
+    @place = Place.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,12 @@ class PlacesController < ApplicationController
 
   # GET /places/1/edit
   def edit
-    @place = Place.find(params[:id])
   end
 
   # POST /places
   # POST /places.xml
   def create
-    @place = Place.new(params[:place])
+    @place = Place.by_company(current_company.id).new(params[:place])
 
     respond_to do |format|
       if @place.save
@@ -58,7 +58,6 @@ class PlacesController < ApplicationController
   # PUT /places/1
   # PUT /places/1.xml
   def update
-    @place = Place.find(params[:id])
 
     respond_to do |format|
       if @place.update_attributes(params[:place])
@@ -74,12 +73,14 @@ class PlacesController < ApplicationController
   # DELETE /places/1
   # DELETE /places/1.xml
   def destroy
-    @place = Place.find(params[:id])
     @place.destroy
 
     respond_to do |format|
       format.html { redirect_to(places_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_place
+      @place = Place.by_company(current_company.id).find(params[:id])
   end
 end

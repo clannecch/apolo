@@ -1,9 +1,9 @@
 class HomeAboutsController < ApplicationController
+  before_filter :find_home_about, :except => [:index, :new, :create]
   # GET /home_abouts
   # GET /home_abouts.xml
   def index
-    #@home_abouts = HomeAbout.all
-    @search = HomeAbout.search(params[:search])
+    @search = HomeAbout.by_company(current_company.id).search(params[:search])
     @home_abouts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +15,6 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts/1
   # GET /home_abouts/1.xml
   def show
-    @home_about = HomeAbout.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +25,7 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts/new
   # GET /home_abouts/new.xml
   def new
-    @home_about = HomeAbout.new
+    @home_about = HomeAbout.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +35,12 @@ class HomeAboutsController < ApplicationController
 
   # GET /home_abouts/1/edit
   def edit
-    @home_about = HomeAbout.find(params[:id])
   end
 
   # POST /home_abouts
   # POST /home_abouts.xml
   def create
-    @home_about = HomeAbout.new(params[:home_about])
+    @home_about = HomeAbout.by_company(current_company.id).new(params[:home_about])
 
     respond_to do |format|
       if @home_about.save
@@ -58,7 +56,6 @@ class HomeAboutsController < ApplicationController
   # PUT /home_abouts/1
   # PUT /home_abouts/1.xml
   def update
-    @home_about = HomeAbout.find(params[:id])
 
     respond_to do |format|
       if @home_about.update_attributes(params[:home_about])
@@ -74,7 +71,6 @@ class HomeAboutsController < ApplicationController
   # DELETE /home_abouts/1
   # DELETE /home_abouts/1.xml
   def destroy
-    @home_about = HomeAbout.find(params[:id])
     @home_about.destroy
 
     respond_to do |format|
@@ -82,4 +78,8 @@ class HomeAboutsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def find_home_about
+      @home_about = HomeAbout.by_company(current_company.id).find(params[:id])
+  end
+
 end

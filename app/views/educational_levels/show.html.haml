@@ -3,5 +3,6 @@
 %p
   %b Detalle:
   = @educational_level.detalle
-= link_to 'Editar', edit_educational_level_path(@educational_level)
+= educational_level_links(@educational_level)
+|
 = link_to 'Volver', educational_levels_path

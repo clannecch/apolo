@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110513210029
+# Schema version: 20110721162735
 #
 # Table name: employments
 #
@@ -7,9 +7,13 @@
 #  detalle    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  company_id :integer
 #
 
 class Employment < ActiveRecord::Base
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
 	has_many :employees
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
+
 end

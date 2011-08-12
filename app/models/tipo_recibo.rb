@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: tipo_recibos
 #
@@ -7,8 +7,10 @@
 #  detalle    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  company_id :integer
 #
 
 class TipoRecibo < ActiveRecord::Base
+  scope :by_company, lambda {|company| where(:company_id => company) }
   has_many :liquidacions
 end

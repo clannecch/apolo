@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html xml:lang="es-AR" xmlns="http://www.w3.org/1999/xhtml" lang="es-AR"><head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="es-AR" name="language">
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width; initial-scale=1.0" name="viewport">
+    <title>AP Manager ::</title>
+    <link href="edit_files/jquery.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="edit_files/apslabs.css" media="screen" rel="stylesheet" type="text/css">
+    <!--[if IE]>
+      <link href="/stylesheets/apslabs-ie.css?1310141500" media="screen" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <link href="edit_files/uniform.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="edit_files/application.css" media="screen" rel="stylesheet" type="text/css">
+    <script src="edit_files/jquery_004.js" type="text/javascript"></script>
+      <script src="edit_files/jquery-ui.js" type="text/javascript"></script>
+      <script src="edit_files/jquery_ujs.js" type="text/javascript"></script>
+      <script src="edit_files/application.js" type="text/javascript"></script>
+    <script src="edit_files/cocoon.js" type="text/javascript"></script>
+    <script src="edit_files/jquery_003.js" type="text/javascript"></script>
+    <script src="edit_files/jquery_005.js" type="text/javascript"></script>
+    <script src="edit_files/jquery.js" type="text/javascript"></script>
+    <script src="edit_files/jquery_002.js" type="text/javascript"></script>
+    <meta name="csrf-param" content="authenticity_token">
+      <meta name="csrf-token" content="gCJWwVjAPByQCc/ZrxTBIyggV92gWysQWc0U7YPAtDM=">
+    
+    <style>
+        /*<![CDATA[*/
+          .field{
+              float:left;
+              width:33%;
+          }
+          
+           .actions{
+              clear:both;
+          }
+        /*]]>*/
+      </style>
+      <script type="text/javascript">
+      //<![CDATA[
+      $( "#employee_fecha_nacimiento" ).datepicker({
+      defaultDate: -49078379520000.0,
+      changeMonth: true,
+      changeYear: true,
+      minDate: new Date(1901, 1 - 1, 1),
+      maxDate: (new Date).setFullYear("1993")
+      });
+      
+      //]]>
+      </script>
+      <script type="text/javascript">
+      //<![CDATA[
+      $( function() {	$("ul.tabs").tabs("div.panels > div");
+      });
+      
+      //]]>
+      </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="status">
+          <h5>Conectado como info@apslabs.com.ar</h5>
+          <div class="" id="user-navigation"><ul class="wat-cf"><li class="first"><a href="http://localhost:3000/"><img alt="Home" src="edit_files/home.png"></a></li><li class=""><a href="http://localhost:3000/"><img alt="Account" src="edit_files/account.png"></a></li><li class=""><a href="http://localhost:3000/"><img alt="Logout" src="edit_files/logout.png"></a></li></ul></div>
+            <br>
+            <br>
+        </div>
+        <h1 style="margin-left:0px;height:75px;padding: 10px 0px;">
+          AP Manager
+           » Coca Cola
+            <a href="http://localhost:3000/" style="float: right;"><img alt="Application edit" src="edit_files/application_edit.png" title="Administración de Companías"></a>
+            <div style="float:right;margin-top:11px;">
+              <select id="company_id" name="company[id]" onchange='location.href="?cc="+$(this).val();'><option selected="selected" value="">-- Cambiar de Companía --</option>
+              <option value="1">Coca Cola</option>
+              <option value="2">Pepsi</option></select>
+            </div>
+        </h1>
+        <div class="" id="main-navigation"><ul class="wat-cf"><li class="first"><a href="http://localhost:3000/">Asientos</a></li><li class=""><a href="http://localhost:3000/">Ejercicios</a></li><li class=""><a href="http://localhost:3000/">Clientes</a></li></ul></div>
+      </div>
+      <div class="wat-cf" id="wrapper">
+        <div id="full-main">
+          <div class="flash">
+          </div>
+          <div class="block">
+            <div class="content">
+              
+              
+              <h2 class="title"></h2>
+              <div class="inner">
+                
+                <h1>Edicion de Empleado</h1>
+                  localizacion: es-AR
+                  <form accept-charset="UTF-8" action="/employees/1" class="edit_employee" id="edit_employee_1" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="_method" value="put" type="hidden"><input name="authenticity_token" value="gCJWwVjAPByQCc/ZrxTBIyggV92gWysQWc0U7YPAtDM=" type="hidden"></div>
+                    <ul class="tabs">
+                      <li>
+                        <a href="#">Personales</a>
+                      </li>
+                      <li>
+                        <a href="#">Domicilio</a>
+                      </li>
+                      <li>
+                        <a href="#">Ocupacion</a>
+                      </li>
+                      <li>
+                        <a href="#">Filiacion</a>
+                      </li>
+                      <li>
+                        <a href="#">Contratacion</a>
+                      </li>
+                      <li>
+                        <a href="#">Banco-Seguro</a>
+                      </li>
+                      <li>
+                        <a href="#">Familiares</a>
+                      </li>
+                      <li>
+                        <a href="#">Benef.Seguro</a>
+                      </li>
+                      <li>
+                        <a href="#">Remuneraciones</a>
+                      </li>
+                      <li>
+                        <a href="#">Retenciones</a>
+                      </li>
+                    </ul>
+                    <div class="panels">
+                      <div class="panel">
+                        <h3>Datos Personales</h3>
+                        <div class="field">
+                          <label for="employee_Legajo">Legajo</label>
+                          <br>
+                          <input gtbfieldid="1404" id="employee_legajo" name="employee[legajo]" size="30" value="0001" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Nombre">Nombre</label>
+                          <br>
+                          <input gtbfieldid="1405" id="employee_nombre" name="employee[nombre]" size="30" value="Claudio Lorenzo kkkº" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Apellido">Apellido</label>
+                          <br>
+                          <input gtbfieldid="1406" id="employee_apellido" name="employee[apellido]" size="30" value="Annecchini" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Tipo Documento">Tipo documento</label>
+                          <br>
+                          <select gtbfieldid="1407" id="employee_document_type_id" name="employee[document_type_id]"><option value="1" selected="selected">D.N.I</option>
+                          <option value="2">C.I.</option>
+                          <option value="3">Pasaporte</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero de Documento">Numero de documento</label>
+                          <br>
+                          <input gtbfieldid="1408" id="employee_numero_documento" name="employee[numero_documento]" size="30" value="12792911" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Emitido por">Emitido por</label>
+                          <br>
+                          <select gtbfieldid="1409" id="employee_issued_id" name="employee[issued_id]"><option value="1" selected="selected">Capital Federal</option>
+                          <option value="2">Pcia. Bs. As.</option>
+                          <option value="3">La Pampa</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Sexo">Sexo</label>
+                          <br>
+                          <select gtbfieldid="1410" id="employee_sexo" name="employee[sexo]"><option value="M" selected="selected">Masculino</option>
+                          <option value="F">Femenino</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Nacionalidad">Nacionalidad</label>
+                          <br>
+                          <select gtbfieldid="1411" id="employee_nationality_id" name="employee[nationality_id]"><option value="1" selected="selected">Argentina</option>
+                          <option value="2">Italiana</option>
+                          <option value="3">Española</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Estado Civil">Estado civil</label>
+                          <br>
+                          <select gtbfieldid="1412" id="employee_marital_status_id" name="employee[marital_status_id]"><option value="1">Soltero</option>
+                          <option value="2" selected="selected">Casado</option>
+                          <option value="3">Viudo</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Fecha de Nacimiento">Fecha de nacimiento</label>
+                          <br>
+                          <input gtbfieldid="1413" class="datepicker" id="employee_fecha_nacimiento" name="employee[fecha_nacimiento]" size="30" value="1981-07-01" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Nivel de Estudios">Nivel de estudios</label>
+                          <br>
+                          <select gtbfieldid="1414" id="employee_educational_level_id" name="employee[educational_level_id]"><option value="1">Sin Educacion</option>
+                          <option value="2" selected="selected">Primaria -Incompleta</option>
+                          <option value="3">Primaria Completa</option>
+                          <option value="4">Primaria en Curso</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Tarjeta de Fichaje">Numero tarjeta de fichaje</label>
+                          <br>
+                          <input gtbfieldid="1415" id="employee_id_card" name="employee[id_card]" size="30" value="123" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero de Cofre">Numero de cofre</label>
+                          <br>
+                          <input gtbfieldid="1416" id="employee_numero_cofre" name="employee[numero_cofre]" size="30" value="321" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Matricula Nacional">Matricula nacional</label>
+                          <br>
+                          <input gtbfieldid="1417" id="employee_matricula_nacional" name="employee[matricula_nacional]" size="30" value="mn 1" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Matricula Provincial">Matricula provincial</label>
+                          <br>
+                          <input gtbfieldid="1418" id="employee_matricula_provincial" name="employee[matricula_provincial]" size="30" value="no 2" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Discapacidad">Discapacidad</label>
+                          <br>
+                          <select gtbfieldid="1419" id="employee_discapacidad" name="employee[discapacidad]"><option value="N" selected="selected">No</option>
+                          <option value="S">Si</option></select>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <label for="employee_"></label>
+                        <br>
+                        <h3>Domicilio</h3>
+                        <div class="field">
+                          <label for="employee_Telefono">Telefono</label>
+                          <br>
+                          <input gtbfieldid="1420" id="employee_telefono" name="employee[telefono]" size="30" value="4573-0413" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Calle">Calle</label>
+                          <br>
+                          <input gtbfieldid="1421" id="employee_calle" name="employee[calle]" size="30" value="Pje. Juan Pablo Duarte" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Puerta">Puerta</label>
+                          <br>
+                          <input gtbfieldid="1422" id="employee_puerta" name="employee[puerta]" size="30" value="4819" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Piso">Piso</label>
+                          <br>
+                          <input gtbfieldid="1423" id="employee_piso" name="employee[piso]" size="30" value="PB" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Departamento">Departamento</label>
+                          <br>
+                          <input gtbfieldid="1424" id="employee_departamento" name="employee[departamento]" size="30" value="No Aplica" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Localidad">Localidad</label>
+                          <br>
+                          <select gtbfieldid="1425" id="employee_location_id" name="employee[location_id]"><option value="1" selected="selected">Capital Federal</option>
+                          <option value="2">La Plata</option>
+                          <option value="3">San Martin</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Provincia">Provincia</label>
+                          <br>
+                          <select gtbfieldid="1426" id="employee_province_id" name="employee[province_id]"><option value="1" selected="selected">Buenos Aires</option>
+                          <option value="2">Santa Fé</option>
+                          <option value="3">Cordoba</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Pais">Pais</label>
+                          <br>
+                          <select gtbfieldid="1427" id="employee_country_id" name="employee[country_id]"><option value="1" selected="selected">Argentina</option>
+                          <option value="2">Italia</option>
+                          <option value="3">España</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Codigo Postal">Codigo postal</label>
+                          <br>
+                          <input gtbfieldid="1428" id="employee_codigo_postal" name="employee[codigo_postal]" size="30" value="1419" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Domicilio Sobre">Domicilio sobre</label>
+                          <br>
+                          <select gtbfieldid="1429" id="employee_home_about_id" name="employee[home_about_id]"><option value="1">Asfalto</option>
+                          <option value="2">Tierra</option>
+                          <option value="3" selected="selected">Mejorado</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Cuadras de Asfalto">Cuadras de asfalto</label>
+                          <br>
+                          <input gtbfieldid="1430" id="employee_cuadras_asfalto" name="employee[cuadras_asfalto]" size="30" value="2" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Entre Calle(izquierda)">Entre calle(izquierda)</label>
+                          <br>
+                          <input gtbfieldid="1431" id="employee_domicilio_entre_calle_izquierda" name="employee[domicilio_entre_calle_izquierda]" size="30" value="esta" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Entre Calle(Derecha)">Entre calle(derecha)</label>
+                          <br>
+                          <input gtbfieldid="1432" id="employee_domicilio_entre_calle_derecha" name="employee[domicilio_entre_calle_derecha]" size="30" value="aquella" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Entre Calle(detras)">Entre calle(detras)</label>
+                          <br>
+                          <input gtbfieldid="1433" id="employee_domicilio_entre_calles_detras" name="employee[domicilio_entre_calles_detras]" size="30" value="la otrA" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Avenida mas Cercana">Avenida mas cercana</label>
+                          <br>
+                          <input gtbfieldid="1434" id="employee_domicilio_avenida_cercana" name="employee[domicilio_avenida_cercana]" size="30" value="DE LOS DE ACA" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Altura Avenida mas Cercana">Altura avenida mas cercana</label>
+                          <br>
+                          <input gtbfieldid="1435" id="employee_domicilio_avenida_cercana_altura" name="employee[domicilio_avenida_cercana_altura]" size="30" value="1111" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Movil">Movil</label>
+                          <br>
+                          <input gtbfieldid="1436" id="employee_movil" name="employee[movil]" size="30" value="15-5858-7676" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Tipo de Email">Tipo de email</label>
+                          <br>
+                          <select gtbfieldid="1437" id="employee_email_type_id" name="employee[email_type_id]"><option value="1">Particular</option>
+                          <option value="2" selected="selected">Empresa</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Direccion eMail">Direccion email</label>
+                          <br>
+                          <input gtbfieldid="1438" id="employee_email" name="employee[email]" size="30" value="annecchini@gmail.com" type="text">
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <h3>Ocupacion</h3>
+                        <div class="field">
+                          <label for="employee_Categoria">Categoria</label>
+                          <br>
+                          <select gtbfieldid="1439" id="employee_category_id" name="employee[category_id]"><option value="1" selected="selected">Administrativo</option>
+                          <option value="2">Director</option>
+                          <option value="3">Enfermero</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Seccion">Seccion</label>
+                          <br>
+                          <select gtbfieldid="1440" id="employee_section_id" name="employee[section_id]"><option value="1" selected="selected">Pabellon 1</option>
+                          <option value="2">Administracion</option>
+                          <option value="3">Farmacia</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Tarea Desempeñada">Tarea desempeñada</label>
+                          <br>
+                          <select gtbfieldid="1441" id="employee_task_id" name="employee[task_id]"><option value="1" selected="selected">Director Administrativo</option>
+                          <option value="2">Enfermero </option>
+                          <option value="3">Administrativo</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Lugar de Trabajo">Lugar de trabajo</label>
+                          <br>
+                          <select gtbfieldid="1442" id="employee_place_id" name="employee[place_id]"><option value="1" selected="selected">Centro</option>
+                          <option value="2">Lujan</option>
+                          <option value="3">Hospital de Dia</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Ocupacion">Ocupacion</label>
+                          <br>
+                          <select gtbfieldid="1443" id="employee_employment_id" name="employee[employment_id]"><option value="1" selected="selected">Director Administrativo</option>
+                          <option value="2">Jardinero</option>
+                          <option value="3">enfermero/a</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Caracter de Servicio">Caracter de servicio</label>
+                          <br>
+                          <select gtbfieldid="1444" id="employee_character_service_id" name="employee[character_service_id]"><option value="1" selected="selected">Caracter 1</option>
+                          <option value="2">Caracter 2</option>
+                          <option value="3">Caracter 3</option></select>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <h3>Filiacion</h3>
+                        <div class="field">
+                          <label for="employee_Obra Social">Obra social</label>
+                          <br>
+                          <select gtbfieldid="1445" id="employee_health_insurance_id" name="employee[health_insurance_id]"><option value="1" selected="selected">OSDE</option>
+                          <option value="2">PAMI</option>
+                          <option value="3">Medicus</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Plan Obra Social">Plan obra social</label>
+                          <br>
+                          <input gtbfieldid="1446" id="employee_plan_osocial" name="employee[plan_osocial]" size="30" value="210" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Afiliado Obra Social">Numero afiliado obra social</label>
+                          <br>
+                          <input gtbfieldid="1447" id="employee_numero_afiliado_osocial" name="employee[numero_afiliado_osocial]" size="30" value="1234" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Cargas Extras Obra Social">Cargas extras obra social</label>
+                          <br>
+                          <input gtbfieldid="1448" id="employee_cargas_extras_osocial" name="employee[cargas_extras_osocial]" size="30" value="0" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Retencion Minima Obra Social">Retencion minima obra social</label>
+                          <br>
+                          <input gtbfieldid="1449" id="employee_retencion_minima_osocial" name="employee[retencion_minima_osocial]" size="30" value="22" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Sindicato">Sindicato</label>
+                          <br>
+                          <select gtbfieldid="1450" id="employee_labor_union_id" name="employee[labor_union_id]"><option value="1" selected="selected">Sin Sindicato</option>
+                          <option value="2">UOCRA</option>
+                          <option value="3">UOM</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Afiliado Sindicato">Numero afiliado sindicato</label>
+                          <br>
+                          <input gtbfieldid="1451" id="employee_numero_afiliado_sindicato" name="employee[numero_afiliado_sindicato]" size="30" value="567890" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero de Jubilacion">Numero de jubilacion</label>
+                          <br>
+                          <input gtbfieldid="1452" id="employee_numero_jubilacion" name="employee[numero_jubilacion]" size="30" value="1209" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Ganancias">Numero ganancias</label>
+                          <br>
+                          <input gtbfieldid="1453" id="employee_numero_ganancias" name="employee[numero_ganancias]" size="30" value="8734ºº" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_CUIT">Cuit</label>
+                          <br>
+                          <input gtbfieldid="1454" id="employee_cuit" name="employee[cuit]" size="30" value="30-" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_CUIL">Cuil</label>
+                          <br>
+                          <input gtbfieldid="1455" id="employee_cuil" name="employee[cuil]" size="30" value="20-" type="text">
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <h3>Contratacion</h3>
+                        <div class="field">
+                          <label for="employee_fecha_ingreso">Fecha ingreso</label>
+                          <br>
+                          <input gtbfieldid="1456" class="datepicker" id="employee_fecha_ingreso" name="employee[fecha_ingreso]" size="30" value="2001-11-11" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Modalidad de Contrato">Modalidad de contrato</label>
+                          <br>
+                          <select gtbfieldid="1457" id="employee_contract_mode_id" name="employee[contract_mode_id]"><option value="1">Personal Fijo</option>
+                          <option value="2" selected="selected">Contratado</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_fecha_egreso">Fecha egreso</label>
+                          <br>
+                          <input gtbfieldid="1458" class="datepicker" id="employee_fecha_egreso" name="employee[fecha_egreso]" size="30" value="2011-02-10" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Causa de Egreso">Causa de egreso</label>
+                          <br>
+                          <select gtbfieldid="1459" id="employee_causa_egreso_id" name="employee[causa_egreso_id]"><option value="1" selected="selected">Renuncia</option>
+                          <option value="2">Despido</option>
+                          <option value="3">Fallecimiento</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_horas_pactadas">Horas pactadas</label>
+                          <br>
+                          <input gtbfieldid="1460" id="employee_horas_pactadas" name="employee[horas_pactadas]" size="30" value="200" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_remuneracion_fuera_convenio">Remuneracion fuera convenio</label>
+                          <br>
+                          <input gtbfieldid="1461" id="employee_remuneracion_fuera_convenio" name="employee[remuneracion_fuera_convenio]" size="30" value="2000" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Tipo de Remuneracion">Tipo de remuneracion</label>
+                          <br>
+                          <select gtbfieldid="1462" id="employee_remuneration_type_id" name="employee[remuneration_type_id]"><option value="1">x Hora</option>
+                          <option value="2">x Dia</option>
+                          <option value="3" selected="selected">x Mes</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Grupo de Remuneraciones">Grupo de remuneraciones</label>
+                          <br>
+                          <select gtbfieldid="1463" id="employee_group_remuneration_id" name="employee[group_remuneration_id]"><option value="1" selected="selected">enfermeros</option>
+                          <option value="2">DETALLE1</option>
+                          <option value="3">UNO MAS</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Grupo de Retenciones">Grupo de retenciones</label>
+                          <br>
+                          <select gtbfieldid="1464" id="employee_group_retention_id" name="employee[group_retention_id]"><option value="1">Osde</option>
+                          <option value="2">UOM</option>
+                          <option value="3" selected="selected">UOCRA</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Grupo de Aportes Patronales">Grupo de aportes patronales</label>
+                          <br>
+                          <select gtbfieldid="1465" id="employee_group_employer_contribution_id" name="employee[group_employer_contribution_id]"><option value="1">OSDE</option>
+                          <option value="2" selected="selected">Osecac</option>
+                          <option value="3">Jubilados</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Centro de costo">Centro de costo</label>
+                          <br>
+                          <select gtbfieldid="1466" id="employee_cost_center_id" name="employee[cost_center_id]"><option value="1">Administracion</option>
+                          <option value="2">Pabellon 1</option>
+                          <option value="3" selected="selected">Pabellon 2</option>
+                          <option value="5"></option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Años de Antiguedad Reconocida">Años de antiguedad reconocida</label>
+                          <br>
+                          <input gtbfieldid="1467" id="employee_antiguedad_reconocida_anos" name="employee[antiguedad_reconocida_anos]" size="30" value="0" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Meses de Antiguedad Reconocida">Meses de antiguedad reconocida</label>
+                          <br>
+                          <input gtbfieldid="1468" id="employee_antiguedad_reconocida_meses" name="employee[antiguedad_reconocida_meses]" size="30" value="0" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Imputacion Contable">Imputacion contable</label>
+                          <br>
+                          <select gtbfieldid="1469" id="employee_accounting_imputation_id" name="employee[accounting_imputation_id]"><option value="1">sueldos pabellon 1</option>
+                          <option value="2" selected="selected">Sueldos Administracion</option>
+                          <option value="4">otra mas</option></select>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <h3>Aseguradora / Banco</h3>
+                        <div class="field">
+                          <label for="employee_Aseguradora">Aseguradora</label>
+                          <br>
+                          <select gtbfieldid="1470" id="employee_insurance_company_id" name="employee[insurance_company_id]"><option value="1">La Caja</option>
+                          <option value="2" selected="selected">La Segunda</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Seguro Conyuge">Seguro conyuge</label>
+                          <br>
+                          <input gtbfieldid="1471" id="employee_seguro_conyuge" name="employee[seguro_conyuge]" size="30" value="s" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Poliza de Seguro">Numero poliza de seguro</label>
+                          <br>
+                          <input gtbfieldid="1472" id="employee_Seguro_numero_poliza" name="employee[Seguro_numero_poliza]" size="30" value="932212" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Monto Asegurado">Monto asegurado</label>
+                          <br>
+                          <input gtbfieldid="1473" id="employee_seguro_monto_asegurado" name="employee[seguro_monto_asegurado]" size="30" value="2222.2" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_Banco Deposito Haberes">Banco deposito haberes</label>
+                          <br>
+                          <select gtbfieldid="1474" id="employee_bank_deposit_id" name="employee[bank_deposit_id]"><option value="1">Nacion</option>
+                          <option value="2" selected="selected">Provincia</option>
+                          <option value="3">Santander Rio</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Tipo Cuenta Bancaria">Tipo cuenta bancaria</label>
+                          <br>
+                          <select gtbfieldid="1475" id="employee_bank_deposit_account_type_id" name="employee[bank_deposit_account_type_id]"><option value="1">Caja de Ahorro</option>
+                          <option value="2" selected="selected">Cuenta Corriente</option></select>
+                        </div>
+                        <div class="field">
+                          <label for="employee_Numero Cuenta Bancaria">Numero cuenta bancaria</label>
+                          <br>
+                          <input gtbfieldid="1476" id="employee_deposito_banco_cuenta" name="employee[deposito_banco_cuenta]" size="30" value="cta1" type="text">
+                        </div>
+                        <div class="field">
+                          <label for="employee_CBU Cuenta Bancaria">Cbu cuenta bancaria</label>
+                          <br>
+                          <input gtbfieldid="1477" id="employee_deposito_banco_cbu" name="employee[deposito_banco_cbu]" size="30" value="cbu1" type="text">
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <div class="field-nested">
+                          <label for="employee_ "> </label>
+                          <br>
+                          <h3>Familiares</h3>
+                          <div id="employee_familiares">
+                            <div class="nested-fields">
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_apellido">Apellido</label>
+                                <br>
+                                <input gtbfieldid="1478" id="employee_employee_familiars_attributes_0_apellido" name="employee[employee_familiars_attributes][0][apellido]" size="30" value="a" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_nombre">Nombre</label>
+                                <br>
+                                <input gtbfieldid="1479" id="employee_employee_familiars_attributes_0_nombre" name="employee[employee_familiars_attributes][0][nombre]" size="30" value="b" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_fecha_nacimiento">Fecha nacimiento</label>
+                                <br>
+                                <input gtbfieldid="1480" class="datepicker" id="employee_employee_familiars_attributes_0_fecha_nacimiento" name="employee[employee_familiars_attributes][0][fecha_nacimiento]" size="30" value="2011-06-16" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Tipo de Documento">Tipo de documento</label>
+                                <br>
+                                <select gtbfieldid="1481" id="employee_employee_familiars_attributes_0_document_type_id" name="employee[employee_familiars_attributes][0][document_type_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">D.N.I</option>
+                                <option value="2">C.I.</option>
+                                <option value="3">Pasaporte</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Numero de documento">Numero de documento</label>
+                                <br>
+                                <input gtbfieldid="1482" id="employee_employee_familiars_attributes_0_numero_documento" name="employee[employee_familiars_attributes][0][numero_documento]" size="30" value="1" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Obra Social">Obra social</label>
+                                <br>
+                                <select gtbfieldid="1483" id="employee_employee_familiars_attributes_0_health_insurance_id" name="employee[employee_familiars_attributes][0][health_insurance_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">OSDE</option>
+                                <option value="2">PAMI</option>
+                                <option value="3">Medicus</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_CUIL">Cuil</label>
+                                <br>
+                                <input gtbfieldid="1484" id="employee_employee_familiars_attributes_0_cuil" name="employee[employee_familiars_attributes][0][cuil]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_CUIT">Cuit</label>
+                                <br>
+                                <input gtbfieldid="1485" id="employee_employee_familiars_attributes_0_cuit" name="employee[employee_familiars_attributes][0][cuit]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Tomo">Tomo</label>
+                                <br>
+                                <input gtbfieldid="1486" id="employee_employee_familiars_attributes_0_tomo" name="employee[employee_familiars_attributes][0][tomo]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Folio">Folio</label>
+                                <br>
+                                <input gtbfieldid="1487" id="employee_employee_familiars_attributes_0_folio" name="employee[employee_familiars_attributes][0][folio]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Acta">Acta</label>
+                                <br>
+                                <input gtbfieldid="1488" id="employee_employee_familiars_attributes_0_acta" name="employee[employee_familiars_attributes][0][acta]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Pais">Pais</label>
+                                <br>
+                                <select gtbfieldid="1489" id="employee_employee_familiars_attributes_0_country_id" name="employee[employee_familiars_attributes][0][country_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">Argentina</option>
+                                <option value="2">Italia</option>
+                                <option value="3">España</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Provincia">Provincia</label>
+                                <br>
+                                <select gtbfieldid="1490" id="employee_employee_familiars_attributes_0_province_id" name="employee[employee_familiars_attributes][0][province_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">Buenos Aires</option>
+                                <option value="2">Santa Fé</option>
+                                <option value="3">Cordoba</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Comuna">Comuna</label>
+                                <br>
+                                <input gtbfieldid="1491" id="employee_employee_familiars_attributes_0_comuna" name="employee[employee_familiars_attributes][0][comuna]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_0_Actividad">Actividad</label>
+                                <br>
+                              
+                              </div>
+                              <input id="employee_employee_familiars_attributes_0__destroy" name="employee[employee_familiars_attributes][0][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar Familiar</a>
+                              <hr>
+                            </div>
+                            <input id="employee_employee_familiars_attributes_0_id" name="employee[employee_familiars_attributes][0][id]" value="1" type="hidden"><div class="nested-fields">
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_apellido">Apellido</label>
+                                <br>
+                                <input gtbfieldid="1492" id="employee_employee_familiars_attributes_1_apellido" name="employee[employee_familiars_attributes][1][apellido]" size="30" value="guardiola" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_nombre">Nombre</label>
+                                <br>
+                                <input gtbfieldid="1493" id="employee_employee_familiars_attributes_1_nombre" name="employee[employee_familiars_attributes][1][nombre]" size="30" value="luis" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_fecha_nacimiento">Fecha nacimiento</label>
+                                <br>
+                                <input gtbfieldid="1494" class="datepicker" id="employee_employee_familiars_attributes_1_fecha_nacimiento" name="employee[employee_familiars_attributes][1][fecha_nacimiento]" size="30" value="2011-01-23" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Tipo de Documento">Tipo de documento</label>
+                                <br>
+                                <select gtbfieldid="1495" id="employee_employee_familiars_attributes_1_document_type_id" name="employee[employee_familiars_attributes][1][document_type_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">D.N.I</option>
+                                <option value="2">C.I.</option>
+                                <option value="3">Pasaporte</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Numero de documento">Numero de documento</label>
+                                <br>
+                                <input gtbfieldid="1496" id="employee_employee_familiars_attributes_1_numero_documento" name="employee[employee_familiars_attributes][1][numero_documento]" size="30" value="121212" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Obra Social">Obra social</label>
+                                <br>
+                                <select gtbfieldid="1497" id="employee_employee_familiars_attributes_1_health_insurance_id" name="employee[employee_familiars_attributes][1][health_insurance_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">OSDE</option>
+                                <option value="2">PAMI</option>
+                                <option value="3">Medicus</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_CUIL">Cuil</label>
+                                <br>
+                                <input gtbfieldid="1498" id="employee_employee_familiars_attributes_1_cuil" name="employee[employee_familiars_attributes][1][cuil]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_CUIT">Cuit</label>
+                                <br>
+                                <input gtbfieldid="1499" id="employee_employee_familiars_attributes_1_cuit" name="employee[employee_familiars_attributes][1][cuit]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Tomo">Tomo</label>
+                                <br>
+                                <input gtbfieldid="1500" id="employee_employee_familiars_attributes_1_tomo" name="employee[employee_familiars_attributes][1][tomo]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Folio">Folio</label>
+                                <br>
+                                <input gtbfieldid="1501" id="employee_employee_familiars_attributes_1_folio" name="employee[employee_familiars_attributes][1][folio]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Acta">Acta</label>
+                                <br>
+                                <input gtbfieldid="1502" id="employee_employee_familiars_attributes_1_acta" name="employee[employee_familiars_attributes][1][acta]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Pais">Pais</label>
+                                <br>
+                                <select gtbfieldid="1503" id="employee_employee_familiars_attributes_1_country_id" name="employee[employee_familiars_attributes][1][country_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">Argentina</option>
+                                <option value="2">Italia</option>
+                                <option value="3">España</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Provincia">Provincia</label>
+                                <br>
+                                <select gtbfieldid="1504" id="employee_employee_familiars_attributes_1_province_id" name="employee[employee_familiars_attributes][1][province_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">Buenos Aires</option>
+                                <option value="2">Santa Fé</option>
+                                <option value="3">Cordoba</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Comuna">Comuna</label>
+                                <br>
+                                <input gtbfieldid="1505" id="employee_employee_familiars_attributes_1_comuna" name="employee[employee_familiars_attributes][1][comuna]" size="30" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_1_Actividad">Actividad</label>
+                                <br>
+                              
+                              </div>
+                              <input id="employee_employee_familiars_attributes_1__destroy" name="employee[employee_familiars_attributes][1][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar Familiar</a>
+                              <hr>
+                            </div>
+                            <input id="employee_employee_familiars_attributes_1_id" name="employee[employee_familiars_attributes][1][id]" value="2" type="hidden"><div class="nested-fields">
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_apellido">Apellido</label>
+                                <br>
+                                <input gtbfieldid="1506" id="employee_employee_familiars_attributes_2_apellido" name="employee[employee_familiars_attributes][2][apellido]" size="30" value="otro" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_nombre">Nombre</label>
+                                <br>
+                                <input gtbfieldid="1507" id="employee_employee_familiars_attributes_2_nombre" name="employee[employee_familiars_attributes][2][nombre]" size="30" value="mas" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_fecha_nacimiento">Fecha nacimiento</label>
+                                <br>
+                                <input gtbfieldid="1508" class="datepicker" id="employee_employee_familiars_attributes_2_fecha_nacimiento" name="employee[employee_familiars_attributes][2][fecha_nacimiento]" size="30" value="2006-07-01" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Tipo de Documento">Tipo de documento</label>
+                                <br>
+                                <select gtbfieldid="1509" id="employee_employee_familiars_attributes_2_document_type_id" name="employee[employee_familiars_attributes][2][document_type_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                <option value="1">D.N.I</option>
+                                <option value="2">C.I.</option>
+                                <option value="3">Pasaporte</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Numero de documento">Numero de documento</label>
+                                <br>
+                                <input gtbfieldid="1510" id="employee_employee_familiars_attributes_2_numero_documento" name="employee[employee_familiars_attributes][2][numero_documento]" size="30" value="232" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Obra Social">Obra social</label>
+                                <br>
+                                <select gtbfieldid="1511" id="employee_employee_familiars_attributes_2_health_insurance_id" name="employee[employee_familiars_attributes][2][health_insurance_id]"><option value="1" selected="selected">OSDE</option>
+                                <option value="2">PAMI</option>
+                                <option value="3">Medicus</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_CUIL">Cuil</label>
+                                <br>
+                                <input gtbfieldid="1512" id="employee_employee_familiars_attributes_2_cuil" name="employee[employee_familiars_attributes][2][cuil]" size="30" value="dddd" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_CUIT">Cuit</label>
+                                <br>
+                                <input gtbfieldid="1513" id="employee_employee_familiars_attributes_2_cuit" name="employee[employee_familiars_attributes][2][cuit]" size="30" value="dd" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Tomo">Tomo</label>
+                                <br>
+                                <input gtbfieldid="1514" id="employee_employee_familiars_attributes_2_tomo" name="employee[employee_familiars_attributes][2][tomo]" size="30" value="222" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Folio">Folio</label>
+                                <br>
+                                <input gtbfieldid="1515" id="employee_employee_familiars_attributes_2_folio" name="employee[employee_familiars_attributes][2][folio]" size="30" value="444" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Acta">Acta</label>
+                                <br>
+                                <input gtbfieldid="1516" id="employee_employee_familiars_attributes_2_acta" name="employee[employee_familiars_attributes][2][acta]" size="30" value="sss" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Pais">Pais</label>
+                                <br>
+                                <select gtbfieldid="1517" id="employee_employee_familiars_attributes_2_country_id" name="employee[employee_familiars_attributes][2][country_id]"><option value="1" selected="selected">Argentina</option>
+                                <option value="2">Italia</option>
+                                <option value="3">España</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Provincia">Provincia</label>
+                                <br>
+                                <select gtbfieldid="1518" id="employee_employee_familiars_attributes_2_province_id" name="employee[employee_familiars_attributes][2][province_id]"><option value="1" selected="selected">Buenos Aires</option>
+                                <option value="2">Santa Fé</option>
+                                <option value="3">Cordoba</option></select>
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Comuna">Comuna</label>
+                                <br>
+                                <input gtbfieldid="1519" id="employee_employee_familiars_attributes_2_comuna" name="employee[employee_familiars_attributes][2][comuna]" size="30" value="dd" type="text">
+                              </div>
+                              <div class="field">
+                                <label for="employee_employee_familiars_attributes_2_Actividad">Actividad</label>
+                                <br>
+                              
+                              </div>
+                              <input id="employee_employee_familiars_attributes_2__destroy" name="employee[employee_familiars_attributes][2][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar Familiar</a>
+                              <hr>
+                            </div>
+                            <input id="employee_employee_familiars_attributes_2_id" name="employee[employee_familiars_attributes][2][id]" value="3" type="hidden">  
+                            <div class="links">
+                              <a href="#" class="add_fields" data-association="employee_familiar" data-associations="employee_familiars" data-template="&lt;div class='nested-fields'&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_apellido&quot;&gt;Apellido&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_apellido&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][apellido]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_nombre&quot;&gt;Nombre&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_nombre&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][nombre]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_fecha_nacimiento&quot;&gt;Fecha nacimiento&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input class=&quot;datepicker&quot; id=&quot;employee_employee_familiars_attributes_new_employee_familiars_fecha_nacimiento&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][fecha_nacimiento]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Tipo de Documento&quot;&gt;Tipo de documento&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;select id=&quot;employee_employee_familiars_attributes_new_employee_familiars_document_type_id&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][document_type_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;D.N.I&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;C.I.&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Pasaporte&lt;/option&gt;&lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Numero de documento&quot;&gt;Numero de documento&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_numero_documento&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][numero_documento]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Obra Social&quot;&gt;Obra social&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;select id=&quot;employee_employee_familiars_attributes_new_employee_familiars_health_insurance_id&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][health_insurance_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;OSDE&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;PAMI&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Medicus&lt;/option&gt;&lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_CUIL&quot;&gt;Cuil&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_cuil&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][cuil]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_CUIT&quot;&gt;Cuit&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_cuit&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][cuit]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Tomo&quot;&gt;Tomo&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_tomo&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][tomo]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Folio&quot;&gt;Folio&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_folio&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][folio]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Acta&quot;&gt;Acta&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_acta&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][acta]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Pais&quot;&gt;Pais&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;select id=&quot;employee_employee_familiars_attributes_new_employee_familiars_country_id&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][country_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;Argentina&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;Italia&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;España&lt;/option&gt;&lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Provincia&quot;&gt;Provincia&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;select id=&quot;employee_employee_familiars_attributes_new_employee_familiars_province_id&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][province_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;Buenos Aires&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;Santa Fé&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Cordoba&lt;/option&gt;&lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Comuna&quot;&gt;Comuna&lt;/label&gt;
+                                  &lt;br&gt;
+                                  &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars_comuna&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][comuna]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;
+                                &lt;/div&gt;
+                                &lt;div class='field'&gt;
+                                  &lt;label for=&quot;employee_employee_familiars_attributes_new_employee_familiars_Actividad&quot;&gt;Actividad&lt;/label&gt;
+                                  &lt;br&gt;
+                                
+                                &lt;/div&gt;
+                                &lt;input id=&quot;employee_employee_familiars_attributes_new_employee_familiars__destroy&quot; name=&quot;employee[employee_familiars_attributes][new_employee_familiars][_destroy]&quot; type=&quot;hidden&quot; /&gt;&lt;a href=&quot;#&quot; class=&quot;remove_fields dynamic&quot;&gt;Borrar Familiar&lt;/a&gt;
+                                &lt;hr&gt;
+                              &lt;/div&gt;
+                              ">Agregar Familiar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <div class="field">
+                          <h3>Benefiario Seguro</h3>
+                          <div id="Insurance_beneficiary">
+                            <table class="field">
+                              <tbody><tr>
+                                <th><label for="employee_Apellido">Apellido</label></th>
+                                <th><label for="employee_Nombre">Nombre</label></th>
+                                <th><label for="employee_Tipo documento">Tipo documento</label></th>
+                                <th><label for="employee_Numero de Documento">Numero de documento</label></th>
+                                <th><label for="employee_Fecha Nacimiento">Fecha nacimiento</label></th>
+                                <th>&nbsp;</th>
+                              </tr>
+                              </tbody><tbody id="nested-holder">
+                                <tr class="nested-fields">
+                                  <td><input gtbfieldid="1520" id="employee_insurance_beneficiaries_attributes_0_apellido" name="employee[insurance_beneficiaries_attributes][0][apellido]" size="30" value="ANNE" type="text"></td>
+                                  <td><input gtbfieldid="1521" id="employee_insurance_beneficiaries_attributes_0_nombre" name="employee[insurance_beneficiaries_attributes][0][nombre]" size="30" value="AGU" type="text"></td>
+                                  <td>
+                                    <select gtbfieldid="1522" id="employee_insurance_beneficiaries_attributes_0_document_type_id" name="employee[insurance_beneficiaries_attributes][0][document_type_id]"><option value="1" selected="selected">D.N.I</option>
+                                    <option value="2">C.I.</option>
+                                    <option value="3">Pasaporte</option></select>
+                                  </td>
+                                  <td><input gtbfieldid="1523" id="employee_insurance_beneficiaries_attributes_0_numero_documento" name="employee[insurance_beneficiaries_attributes][0][numero_documento]" size="30" value="12121" type="text"></td>
+                                  <td><input gtbfieldid="1524" class="datepicker" id="employee_insurance_beneficiaries_attributes_0_fecha_nacimiento" name="employee[insurance_beneficiaries_attributes][0][fecha_nacimiento]" size="30" value="2008-07-01" type="text"></td>
+                                  <td><input id="employee_insurance_beneficiaries_attributes_0__destroy" name="employee[insurance_beneficiaries_attributes][0][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar</a></td>
+                                </tr>
+                                <input id="employee_insurance_beneficiaries_attributes_0_id" name="employee[insurance_beneficiaries_attributes][0][id]" value="5" type="hidden">  
+                              </tbody>
+                            </table>
+                            <div class="links">
+                              <a href="#" class="add_fields" data-association-insertion-node="#nested-holder" data-association-insertion-position="before" data-association="insurance_beneficiary" data-associations="insurance_beneficiaries" data-template="&lt;tr class='nested-fields'&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries_apellido&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][apellido]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries_nombre&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][nombre]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;
+                                  &lt;select id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries_document_type_id&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][document_type_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;D.N.I&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;C.I.&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Pasaporte&lt;/option&gt;&lt;/select&gt;
+                                &lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries_numero_documento&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][numero_documento]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input class=&quot;datepicker&quot; id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries_fecha_nacimiento&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][fecha_nacimiento]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_insurance_beneficiaries_attributes_new_insurance_beneficiaries__destroy&quot; name=&quot;employee[insurance_beneficiaries_attributes][new_insurance_beneficiaries][_destroy]&quot; type=&quot;hidden&quot; /&gt;&lt;a href=&quot;#&quot; class=&quot;remove_fields dynamic&quot;&gt;Borrar&lt;/a&gt;&lt;/td&gt;
+                              &lt;/tr&gt;
+                              ">Agregar Beneficiario Seguro</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <div class="field">
+                          <h3>Conceptos remunerativos personalizados</h3>
+                          <div id="employee_remunerative_concept">
+                            <table class="field">
+                              <tbody><tr>
+                                <th><label for="employee_Concepto haber">Concepto haber</label></th>
+                                <th><label for="employee_Detalle Personalizado">Detalle personalizado</label></th>
+                                <th><label for="employee_Centro Costo">Centro costo</label></th>
+                                <th><label for="employee_Cantidad">Cantidad</label></th>
+                                <th><label for="employee_Importe">Importe</label></th>
+                                <th>&nbsp;</th>
+                              </tr>
+                              </tbody><tbody id="nested-holder2">
+                                <tr class="nested-fields">
+                                  <td>
+                                    <select gtbfieldid="1525" id="employee_employee_remunerative_concepts_attributes_0_remunerative_concept_id" name="employee[employee_remunerative_concepts_attributes][0][remunerative_concept_id]"><option value="1">Sueldo Basico</option>
+                                    <option value="2">Horas Normales</option>
+                                    <option value="3">Horas Extras al 50%</option>
+                                    <option value="4">premio asistencia</option>
+                                    <option value="5">Antiguedad</option>
+                                    <option value="6">Horas Extras al 100%</option>
+                                    <option value="7">Aguinaldo</option>
+                                    <option value="8">Dias Vacaciones</option>
+                                    <option value="9">Dias Vacaciones (MANUAL)</option>
+                                    <option value="10">Indemnizacion por despido </option>
+                                    <option value="11">Indemnizacion sustitutiva del Preaviso</option>
+                                    <option value="12">Integracion mes despido</option>
+                                    <option value="13">Proporcional del mes trabajado</option>
+                                    <option value="14">Indemnizacion por Vacaciones no Gozadas</option>
+                                    <option value="15">SAC proporcional</option>
+                                    <option value="16" selected="selected">SAC sobre Vacaciones no Gozadas</option>
+                                    <option value="17">SAC sobre Preaviso</option>
+                                    <option value="18">SAC sobre Integracion del mes de despido</option></select>
+                                  </td>
+                                  <td><input gtbfieldid="1526" id="employee_employee_remunerative_concepts_attributes_0_detalle" name="employee[employee_remunerative_concepts_attributes][0][detalle]" size="30" type="text"></td>
+                                  <td>
+                                    <select gtbfieldid="1527" id="employee_employee_remunerative_concepts_attributes_0_cost_center_id" name="employee[employee_remunerative_concepts_attributes][0][cost_center_id]"><option selected="selected" value="">Por favor selecciona</option>
+                                    <option value="1">Administracion</option>
+                                    <option value="2">Pabellon 1</option>
+                                    <option value="3">Pabellon 2</option>
+                                    <option value="5"></option></select>
+                                  </td>
+                                  <td><input gtbfieldid="1528" id="employee_employee_remunerative_concepts_attributes_0_cantidad" name="employee[employee_remunerative_concepts_attributes][0][cantidad]" size="30" type="text"></td>
+                                  <td><input gtbfieldid="1529" id="employee_employee_remunerative_concepts_attributes_0_importe" name="employee[employee_remunerative_concepts_attributes][0][importe]" size="30" type="text"></td>
+                                  <td><input id="employee_employee_remunerative_concepts_attributes_0__destroy" name="employee[employee_remunerative_concepts_attributes][0][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar</a></td>
+                                </tr>
+                                <input id="employee_employee_remunerative_concepts_attributes_0_id" name="employee[employee_remunerative_concepts_attributes][0][id]" value="4" type="hidden">  
+                              </tbody>
+                            </table>
+                            <div class="links">
+                              <a href="#" class="add_fields" data-association-insertion-node="#nested-holder2" data-association-insertion-position="before" data-association="employee_remunerative_concept" data-associations="employee_remunerative_concepts" data-template="&lt;tr class='nested-fields'&gt;
+                                &lt;td&gt;
+                                  &lt;select id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts_remunerative_concept_id&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][remunerative_concept_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;Sueldo Basico&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;Horas Normales&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Horas Extras al 50%&lt;/option&gt;
+                                  &lt;option value=&quot;4&quot;&gt;premio asistencia&lt;/option&gt;
+                                  &lt;option value=&quot;5&quot;&gt;Antiguedad&lt;/option&gt;
+                                  &lt;option value=&quot;6&quot;&gt;Horas Extras al 100%&lt;/option&gt;
+                                  &lt;option value=&quot;7&quot;&gt;Aguinaldo&lt;/option&gt;
+                                  &lt;option value=&quot;8&quot;&gt;Dias Vacaciones&lt;/option&gt;
+                                  &lt;option value=&quot;9&quot;&gt;Dias Vacaciones (MANUAL)&lt;/option&gt;
+                                  &lt;option value=&quot;10&quot;&gt;Indemnizacion por despido &lt;/option&gt;
+                                  &lt;option value=&quot;11&quot;&gt;Indemnizacion sustitutiva del Preaviso&lt;/option&gt;
+                                  &lt;option value=&quot;12&quot;&gt;Integracion mes despido&lt;/option&gt;
+                                  &lt;option value=&quot;13&quot;&gt;Proporcional del mes trabajado&lt;/option&gt;
+                                  &lt;option value=&quot;14&quot;&gt;Indemnizacion por Vacaciones no Gozadas&lt;/option&gt;
+                                  &lt;option value=&quot;15&quot;&gt;SAC proporcional&lt;/option&gt;
+                                  &lt;option value=&quot;16&quot;&gt;SAC sobre Vacaciones no Gozadas&lt;/option&gt;
+                                  &lt;option value=&quot;17&quot;&gt;SAC sobre Preaviso&lt;/option&gt;
+                                  &lt;option value=&quot;18&quot;&gt;SAC sobre Integracion del mes de despido&lt;/option&gt;&lt;/select&gt;
+                                &lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts_detalle&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][detalle]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;
+                                  &lt;select id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts_cost_center_id&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][cost_center_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;Administracion&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;Pabellon 1&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;Pabellon 2&lt;/option&gt;
+                                  &lt;option value=&quot;5&quot;&gt;&lt;/option&gt;&lt;/select&gt;
+                                &lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts_cantidad&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][cantidad]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts_importe&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][importe]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_remunerative_concepts_attributes_new_employee_remunerative_concepts__destroy&quot; name=&quot;employee[employee_remunerative_concepts_attributes][new_employee_remunerative_concepts][_destroy]&quot; type=&quot;hidden&quot; /&gt;&lt;a href=&quot;#&quot; class=&quot;remove_fields dynamic&quot;&gt;Borrar&lt;/a&gt;&lt;/td&gt;
+                              &lt;/tr&gt;
+                              ">Agregar Haber</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <div class="field">
+                          <h3>Conceptos de retenciones personalizados</h3>
+                          <div id="employee_retention_concept">
+                            <table class="field">
+                              <tbody><tr>
+                                <th><label for="employee_Concepto haber">Concepto haber</label></th>
+                                <th><label for="employee_Detalle Personalizado">Detalle personalizado</label></th>
+                                <th><label for="employee_Cantidad">Cantidad</label></th>
+                                <th><label for="employee_Importe">Importe</label></th>
+                                <th>&nbsp;</th>
+                              </tr>
+                              </tbody><tbody id="nested-holder3">
+                                <tr class="nested-fields">
+                                  <td>
+                                    <select gtbfieldid="1530" id="employee_employee_retention_concepts_attributes_0_retention_concept_id" name="employee[employee_retention_concepts_attributes][0][retention_concept_id]"><option value="1">Jubilacion</option>
+                                    <option value="2">Obra Social</option>
+                                    <option value="3">importe</option>
+                                    <option value="4" selected="selected">cantidad e importe</option></select>
+                                  </td>
+                                  <td><input gtbfieldid="1531" id="employee_employee_retention_concepts_attributes_0_detalle" name="employee[employee_retention_concepts_attributes][0][detalle]" size="30" type="text"></td>
+                                  <td><input gtbfieldid="1532" id="employee_employee_retention_concepts_attributes_0_cantidad" name="employee[employee_retention_concepts_attributes][0][cantidad]" size="30" type="text"></td>
+                                  <td><input gtbfieldid="1533" id="employee_employee_retention_concepts_attributes_0_importe" name="employee[employee_retention_concepts_attributes][0][importe]" size="30" type="text"></td>
+                                  <td><input id="employee_employee_retention_concepts_attributes_0__destroy" name="employee[employee_retention_concepts_attributes][0][_destroy]" type="hidden"><a href="#" class="remove_fields existing">Borrar</a></td>
+                                </tr>
+                                <input id="employee_employee_retention_concepts_attributes_0_id" name="employee[employee_retention_concepts_attributes][0][id]" value="1" type="hidden">  
+                              </tbody>
+                            </table>
+                            <div class="links">
+                              <a href="#" class="add_fields" data-association-insertion-node="#nested-holder3" data-association-insertion-position="before" data-association="employee_retention_concept" data-associations="employee_retention_concepts" data-template="&lt;tr class='nested-fields'&gt;
+                                &lt;td&gt;
+                                  &lt;select id=&quot;employee_employee_retention_concepts_attributes_new_employee_retention_concepts_retention_concept_id&quot; name=&quot;employee[employee_retention_concepts_attributes][new_employee_retention_concepts][retention_concept_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;Por favor selecciona&lt;/option&gt;
+                                  &lt;option value=&quot;1&quot;&gt;Jubilacion&lt;/option&gt;
+                                  &lt;option value=&quot;2&quot;&gt;Obra Social&lt;/option&gt;
+                                  &lt;option value=&quot;3&quot;&gt;importe&lt;/option&gt;
+                                  &lt;option value=&quot;4&quot;&gt;cantidad e importe&lt;/option&gt;&lt;/select&gt;
+                                &lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_retention_concepts_attributes_new_employee_retention_concepts_detalle&quot; name=&quot;employee[employee_retention_concepts_attributes][new_employee_retention_concepts][detalle]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_retention_concepts_attributes_new_employee_retention_concepts_cantidad&quot; name=&quot;employee[employee_retention_concepts_attributes][new_employee_retention_concepts][cantidad]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_retention_concepts_attributes_new_employee_retention_concepts_importe&quot; name=&quot;employee[employee_retention_concepts_attributes][new_employee_retention_concepts][importe]&quot; size=&quot;30&quot; type=&quot;text&quot; /&gt;&lt;/td&gt;
+                                &lt;td&gt;&lt;input id=&quot;employee_employee_retention_concepts_attributes_new_employee_retention_concepts__destroy&quot; name=&quot;employee[employee_retention_concepts_attributes][new_employee_retention_concepts][_destroy]&quot; type=&quot;hidden&quot; /&gt;&lt;a href=&quot;#&quot; class=&quot;remove_fields dynamic&quot;&gt;Borrar&lt;/a&gt;&lt;/td&gt;
+                              &lt;/tr&gt;
+                              ">Agregar retencion</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="actions">
+                      <input id="employee_submit" name="commit" value="Actualizar Employee" type="submit">
+                    </div>
+                  </form>
+                  <a href="http://localhost:3000/employees/1">Visualizar</a>
+                  |
+                  <a href="http://localhost:3000/employees">Volver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+</body></html>

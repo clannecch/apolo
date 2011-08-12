@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @task.detalle
-= link_to 'Editar', edit_task_path(@task)
+= task_links(@task)
 |
 \#{link_to 'Volver', tasks_path}

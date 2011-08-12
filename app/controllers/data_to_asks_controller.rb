@@ -1,9 +1,10 @@
 class DataToAsksController < ApplicationController
+  before_filter :find_data_to_ask, :except => [:index, :new, :create]
+
   # GET /data_to_asks
   # GET /data_to_asks.xml
   def index
-    #@data_to_asks = DataToAsk.all
-    @search = DataToAsk.search(params[:search])
+    @search = DataToAsk.by_company(current_company.id).search(params[:search])
     @data_to_asks = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -15,7 +16,6 @@ class DataToAsksController < ApplicationController
   # GET /data_to_asks/1
   # GET /data_to_asks/1.xml
   def show
-    @data_to_ask = DataToAsk.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +26,7 @@ class DataToAsksController < ApplicationController
   # GET /data_to_asks/new
   # GET /data_to_asks/new.xml
   def new
-    @data_to_ask = DataToAsk.new
+    @data_to_ask = DataToAsk.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +36,12 @@ class DataToAsksController < ApplicationController
 
   # GET /data_to_asks/1/edit
   def edit
-    @data_to_ask = DataToAsk.find(params[:id])
   end
 
   # POST /data_to_asks
   # POST /data_to_asks.xml
   def create
-    @data_to_ask = DataToAsk.new(params[:data_to_ask])
+    @data_to_ask = DataToAsk.by_company(current_company.id).new(params[:data_to_ask])
 
     respond_to do |format|
       if @data_to_ask.save
@@ -58,7 +57,6 @@ class DataToAsksController < ApplicationController
   # PUT /data_to_asks/1
   # PUT /data_to_asks/1.xml
   def update
-    @data_to_ask = DataToAsk.find(params[:id])
 
     respond_to do |format|
       if @data_to_ask.update_attributes(params[:data_to_ask])
@@ -74,7 +72,6 @@ class DataToAsksController < ApplicationController
   # DELETE /data_to_asks/1
   # DELETE /data_to_asks/1.xml
   def destroy
-    @data_to_ask = DataToAsk.find(params[:id])
     @data_to_ask.destroy
 
     respond_to do |format|
@@ -82,4 +79,8 @@ class DataToAsksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def find_data_to_ask
+      @data_to_ask = DataToAsk.by_company(current_company.id).find(params[:id])
+   end
 end

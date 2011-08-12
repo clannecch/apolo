@@ -24,8 +24,7 @@
       %td= employee.section.try(:detalle)
       %td= employee.task.try(:detalle)
       %td= employee.place.try(:detalle)
-      %td= link_to 'Visualizar', employee
-      %td= link_to 'Editar', edit_employee_path(employee)
-      %td= link_to 'Borrar', employee, :confirm => 'Esta Seguro?', :method => :delete
+      %td= employee_links(employee)
+
 %br/
 = link_to 'Nuevo Empleado', new_employee_path

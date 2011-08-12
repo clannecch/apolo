@@ -8,8 +8,6 @@
   - @employments.each do |employment|
     %tr
       %td= employment.detalle
-      %td= link_to 'Visualizar', employment
-      %td= link_to 'Editar', edit_employment_path(employment)
-      %td= link_to 'Borrar', employment, :confirm => 'Esta Seguro?', :method => :delete
+      %td= employment_links(employment)
 %br/
 = link_to 'Nueva Ocupacion', new_employment_path

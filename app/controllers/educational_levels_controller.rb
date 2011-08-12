@@ -1,9 +1,9 @@
 class EducationalLevelsController < ApplicationController
+before_filter :find_educational_level, :except => [:index, :new, :create]
   # GET /educational_levels
   # GET /educational_levels.xml
   def index
-    #@educational_levels = EducationalLevel.all
-    @search = EducationalLevel.search(params[:search])
+    @search = EducationalLevel.by_company(current_company.id).search(params[:search])
     @educational_levels = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +15,6 @@ class EducationalLevelsController < ApplicationController
   # GET /educational_levels/1
   # GET /educational_levels/1.xml
   def show
-    @educational_level = EducationalLevel.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +25,7 @@ class EducationalLevelsController < ApplicationController
   # GET /educational_levels/new
   # GET /educational_levels/new.xml
   def new
-    @educational_level = EducationalLevel.new
+    @educational_level = EducationalLevel.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +35,12 @@ class EducationalLevelsController < ApplicationController
 
   # GET /educational_levels/1/edit
   def edit
-    @educational_level = EducationalLevel.find(params[:id])
   end
 
   # POST /educational_levels
   # POST /educational_levels.xml
   def create
-    @educational_level = EducationalLevel.new(params[:educational_level])
+    @educational_level = EducationalLevel.by_company(current_company.id).new(params[:educational_level])
 
     respond_to do |format|
       if @educational_level.save
@@ -58,7 +56,6 @@ class EducationalLevelsController < ApplicationController
   # PUT /educational_levels/1
   # PUT /educational_levels/1.xml
   def update
-    @educational_level = EducationalLevel.find(params[:id])
 
     respond_to do |format|
       if @educational_level.update_attributes(params[:educational_level])
@@ -74,7 +71,6 @@ class EducationalLevelsController < ApplicationController
   # DELETE /educational_levels/1
   # DELETE /educational_levels/1.xml
   def destroy
-    @educational_level = EducationalLevel.find(params[:id])
     @educational_level.destroy
 
     respond_to do |format|
@@ -82,4 +78,9 @@ class EducationalLevelsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def find_educational_level
+      @educational_level = EducationalLevel.by_company(current_company.id).find(params[:id])
+  end
+
 end

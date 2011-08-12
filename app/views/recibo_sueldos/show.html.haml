@@ -15,3 +15,5 @@
 = link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo)
 |
 \#{link_to 'Volver', liquidacion_recibo_sueldos_path}
+|
+= link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf')

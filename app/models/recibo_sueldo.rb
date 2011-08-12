@@ -72,6 +72,8 @@ class ReciboSueldo < ActiveRecord::Base
     else
         self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
     end
+#       errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s)
+
     self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
     self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
     self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,
@@ -96,6 +98,10 @@ class ReciboSueldo < ActiveRecord::Base
       begin
 #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
         detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
+#                errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s+ ":cantidad" )
+#
+#                    errors.add(:base, detalle_recibo_haber.remunerative_concept.detalle+ " - calculo "+ prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor) + " $ "+detalle_recibo_haber.total.to_s)
+
         rescue => e
 #         apila el error (mostrando cual es) y continua
           errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
@@ -203,6 +209,7 @@ class ReciboSueldo < ActiveRecord::Base
   def prepare_calculo_for_evaluation(str_for_evaluation)
     return 'falta indicar calculo' if str_for_evaluation.blank?
     str_for_evaluation.gsub(/\:/,'self.').gsub(/@/, 'acumuladores.')
+
   end
 
   def calculo_antiguedad (fi, pl)
@@ -350,4 +357,5 @@ class ReciboSueldo < ActiveRecord::Base
     cantidad = (self.acumuladores.dias_vacaciones.to_f / 360) * cantidad
     return cantidad
   end
+
 end

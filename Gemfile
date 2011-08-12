@@ -10,6 +10,11 @@ gem 'jquery-rails'
 gem 'cocoon'
 gem 'formtastic'
 gem 'attrtastic'
+gem 'subexec'
+gem 'mini_magick'
+gem 'geocoder'
+#gem 'paperclip', '~> 2.3'
+gem 'paperclip', :git => "git://github.com/patshaughnessy/paperclip.git"
 
 # paginacion
 gem 'kaminari'

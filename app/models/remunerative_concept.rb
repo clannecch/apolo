@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: remunerative_concepts
 #
@@ -23,11 +23,12 @@
 #  calculo_cantidad                 :string(255)
 #  data_to_ask_id                   :integer
 #  cantidad_en_recibo               :string(255)
+#  company_id                       :integer
 #
 
 class RemunerativeConcept < ActiveRecord::Base
   paginates_per 10
-
+  scope :by_company, lambda {|company| where(:company_id => company) }
   belongs_to :concepto_asociado_haber, :class_name => "RemunerativeConcept"
   belongs_to :concepto_asociado_retencion, :class_name => "RetentionConcept"
   belongs_to :concepto_asociado_haber_2, :class_name => "RemunerativeConcept"

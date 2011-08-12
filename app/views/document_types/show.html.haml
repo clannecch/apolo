@@ -3,6 +3,7 @@
 %p
   %b Detalle:
   = @document_type.detalle
-= link_to 'Editar', edit_document_type_path(@document_type)
+= document_type_links(@document_type)
 |
+
 \#{link_to 'Volver', document_types_path}

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: liquidacions
 #
@@ -15,9 +15,11 @@
 #  tipo_recibo_id    :integer
 #  periodo           :date
 #  periodo_deposito  :date
+#  company_id        :integer
 #
 
 class Liquidacion < ActiveRecord::Base
+  scope :by_company, lambda {|company| where(:company_id => company) }
   has_many :recibo_sueldos
   belongs_to :tipo_recibo
   belongs_to :bank_deposit

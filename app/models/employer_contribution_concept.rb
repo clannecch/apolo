@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: employer_contribution_concepts
 #
@@ -13,9 +13,13 @@
 #  prioridad                :integer
 #  acumuladores_valor       :string(255)
 #  formula_calculo_valor    :string(255)
+#  company_id               :integer
 #
 
 class EmployerContributionConcept < ActiveRecord::Base
+
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
   has_and_belongs_to_many :group_employer_contribution
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 end

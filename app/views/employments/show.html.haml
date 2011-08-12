@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @employment.detalle
-= link_to 'Editar', edit_employment_path(@employment)
+= employment_links(@employment)
 |
 \#{link_to 'Volver', employments_path}

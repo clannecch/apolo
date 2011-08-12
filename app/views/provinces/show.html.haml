@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @province.detalle
-= link_to 'Editar', edit_province_path(@province)
+= province_links(@province)
 |
 \#{link_to 'Volver', provinces_path}

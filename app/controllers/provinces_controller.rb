@@ -1,9 +1,11 @@
 class ProvincesController < ApplicationController
+
+  before_filter :find_province, :except => [:index, :new, :create]
+
   # GET /provinces
   # GET /provinces.xml
   def index
-    #@provinces = Province.all
-    @search = Province.search(params[:search])
+    @search = Province.by_company(current_company.id).search(params[:search])
     @provinces = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,8 +17,6 @@ class ProvincesController < ApplicationController
   # GET /provinces/1
   # GET /provinces/1.xml
   def show
-    @province = Province.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @province }
@@ -26,7 +26,7 @@ class ProvincesController < ApplicationController
   # GET /provinces/new
   # GET /provinces/new.xml
   def new
-    @province = Province.new
+    @province = Province.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +36,12 @@ class ProvincesController < ApplicationController
 
   # GET /provinces/1/edit
   def edit
-    @province = Province.find(params[:id])
   end
 
   # POST /provinces
   # POST /provinces.xml
   def create
-    @province = Province.new(params[:province])
+    @province = Province.by_company(current_company.id).new(params[:province])
 
     respond_to do |format|
       if @province.save
@@ -58,7 +57,6 @@ class ProvincesController < ApplicationController
   # PUT /provinces/1
   # PUT /provinces/1.xml
   def update
-    @province = Province.find(params[:id])
 
     respond_to do |format|
       if @province.update_attributes(params[:province])
@@ -74,7 +72,6 @@ class ProvincesController < ApplicationController
   # DELETE /provinces/1
   # DELETE /provinces/1.xml
   def destroy
-    @province = Province.find(params[:id])
     @province.destroy
 
     respond_to do |format|
@@ -82,4 +79,8 @@ class ProvincesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def find_province
+      @province = Province.by_company(current_company.id).find(params[:id])
+  end
+
 end

@@ -1,4 +1,5 @@
 - content_for(:head) do
+  = stylesheet_link_tag 'tabs.css'
   :css
     .field{
         float:left;
@@ -9,17 +10,20 @@
         clear:both;
     }
   = javascript_tag do
-    $( "#employee_fecha_nacimiento" ).datepicker({
+    $(document).ready(function(){
+    $("#employee_fecha_nacimiento" ).datepicker({
     defaultDate: -#{18.years.days},
     changeMonth: true,
     changeYear: true,
     minDate: new Date(1901, 1 - 1, 1),
     maxDate: (new Date).setFullYear("#{Date.today.year - 18}")
     });
+    });
 
-localizacion: #{I18n.locale}
+  = javascript_tag do
+    $( function() {$("ul.tabs").tabs("div.panes > div"); });
 
-= form_for(@employee) do |f|
+= form_for @employee,  :html => { :multipart => true } do |f|
   - if @employee.errors.any?
     #error_explanation
       %h2
@@ -49,7 +53,9 @@ localizacion: #{I18n.locale}
       %a{:href => "#"} Remuneraciones
     %li
       %a{:href => "#"} Retenciones
-  .panels
+    %li
+      %a{:href => "#"} Documentos
+  .panes
     .panel
       = render :partial => 'datos_personales', :locals => {:f => f}
     .panel
@@ -122,6 +128,23 @@ localizacion: #{I18n.locale}
                 = render 'employee_retention_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
+    .panel
+      .field
+        %h3 Documentos Asociados
+        #adjuntos
+          %table.field{:width => "50%" ,:border => "1"}
+            %tr
+              %th= f.label "Tipo de Documento Asociado"
+              %th= f.label "Detalle"
+              %th= f.label "Fecha Recepcion Documentacion"
+              %th= f.label "Cambiar Adjunto"
+              %th &nbsp;
+            %tbody#nested-holder4
+              = f.fields_for :attachments do |a|
+                = render 'attachment_fields', :f => a
+          .links
+            = link_to_add_association 'Agregar Documento Asociado', f, :attachments
+
   .actions
     = f.submit
 

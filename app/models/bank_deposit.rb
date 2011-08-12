@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110513210029
+# Schema version: 20110721162735
 #
 # Table name: bank_deposits
 #
@@ -7,6 +7,7 @@
 #  detalle    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  company_id :integer
 #
 
 class BankDeposit < ActiveRecord::Base

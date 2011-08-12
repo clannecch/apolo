@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: data_to_asks
 #
@@ -9,6 +9,7 @@
 #  importe    :boolean
 #  created_at :datetime
 #  updated_at :datetime
+#  company_id :integer
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

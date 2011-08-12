@@ -8,8 +8,6 @@
   - @places.each do |place|
     %tr
       %td= place.detalle
-      %td= link_to 'Visualizar', place
-      %td= link_to 'Editar', edit_place_path(place)
-      %td= link_to 'Borrar', place, :confirm => 'Esta Seguro?', :method => :delete
+      %td= place_links(place)
 %br/
 = link_to 'Nuevo Lugar', new_place_path

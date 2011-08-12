@@ -1,8 +1,9 @@
 class EmploymentsController < ApplicationController
+  before_filter :find_employment, :except => [:index, :new, :create]
   # GET /employments
   # GET /employments.xml
   def index
-    @employments = Employment.all
+    @employments = Employment.by_company(current_company.id).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class EmploymentsController < ApplicationController
   # GET /employments/1
   # GET /employments/1.xml
   def show
-    @employment = Employment.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class EmploymentsController < ApplicationController
   # GET /employments/new
   # GET /employments/new.xml
   def new
-    @employment = Employment.new
+    @employment = Employment.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class EmploymentsController < ApplicationController
 
   # GET /employments/1/edit
   def edit
-    @employment = Employment.find(params[:id])
   end
 
   # POST /employments
   # POST /employments.xml
   def create
-    @employment = Employment.new(params[:employment])
+    @employment = Employment.by_company(current_company.id).new(params[:employment])
 
     respond_to do |format|
       if @employment.save
@@ -56,7 +55,6 @@ class EmploymentsController < ApplicationController
   # PUT /employments/1
   # PUT /employments/1.xml
   def update
-    @employment = Employment.find(params[:id])
 
     respond_to do |format|
       if @employment.update_attributes(params[:employment])
@@ -72,7 +70,6 @@ class EmploymentsController < ApplicationController
   # DELETE /employments/1
   # DELETE /employments/1.xml
   def destroy
-    @employment = Employment.find(params[:id])
     @employment.destroy
 
     respond_to do |format|
@@ -80,4 +77,10 @@ class EmploymentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def find_employment
+      @employment = Employment.by_company(current_company.id).find(params[:id])
+  end
+
+
 end

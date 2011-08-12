@@ -8,8 +8,6 @@
   - @group_remunerations.each do |group_remuneration|
     %tr
       %td= group_remuneration.detalle
-      %td= link_to 'Show', group_remuneration
-      %td= link_to 'Edit', edit_group_remuneration_path(group_remuneration)
-      %td= link_to 'Destroy', group_remuneration, :confirm => 'Are you sure?', :method => :delete
+      %td= group_remuneration_links(group_remuneration)
 %br/
-= link_to 'New Group remuneration', new_group_remuneration_path
+= link_to 'Nuevo Grupo de Remuneraciones', new_group_remuneration_path

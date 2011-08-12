@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: employees
 #
@@ -81,9 +81,28 @@
 #  group_employer_contribution_id   :integer
 #  causa_egreso_id                  :integer
 #  foto                             :binary
+#  company_id                       :integer
+#  latitude                         :float
+#  longitude                        :float
+#  avatar_file_name                 :string(255)
+#  avatar_content_type              :string(255)
+#  avatar_file_size                 :integer
+#  avatar_updated_at                :datetime
 #
 
+require 'paperclip'
 class Employee < ActiveRecord::Base
+
+#  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+##                :url  => "/system/products/:id/:style/:basename.:extension"
+
+  has_many :attachments, :as => :attachable
+
+  accepts_nested_attributes_for :attachments , :allow_destroy => true
+
+# validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  scope :by_company, lambda {|company| where(:company_id => company) }
+
   belongs_to :document_type
   belongs_to :educational_level
 	belongs_to :nationality
@@ -117,11 +136,18 @@ class Employee < ActiveRecord::Base
   has_many   :employee_familiars
   has_many   :employee_remunerative_concepts
   has_many   :employee_retention_concepts
+  has_many   :employee_documents
 
 	accepts_nested_attributes_for :employee_familiars, :allow_destroy => true
   accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
   accepts_nested_attributes_for :employee_remunerative_concepts, :allow_destroy => true
   accepts_nested_attributes_for :employee_retention_concepts, :allow_destroy => true
+  accepts_nested_attributes_for :employee_documents, :allow_destroy => true
+
+  geocoded_by :full_address
+  after_validation :geocode, :if => lambda{ |employee| :full_address_changed? }
+#  , :if => :address_changed?
+
 
 
 
@@ -230,4 +256,7 @@ class Employee < ActiveRecord::Base
    [apellido, nombre].compact.join(' ')
   end
 
+  def full_address
+   [calle, puerta, location.detalle, province.detalle , country.detalle].compact.join(', ')
+  end
 end

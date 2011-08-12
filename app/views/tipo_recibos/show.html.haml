@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @tipo_recibo.detalle
-= link_to 'Editar', edit_tipo_recibo_path(@tipo_recibo)
+= tipo_recibo_links(@tipo_recibo)
 |
 \#{link_to 'Volver', tipo_recibos_path}

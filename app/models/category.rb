@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20110721162735
 #
 # Table name: categories
 #
@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  importe    :decimal(, )
+#  company_id :integer
 #
 
 class Category < ActiveRecord::Base
@@ -16,4 +17,11 @@ class Category < ActiveRecord::Base
 
   scope :by_company, lambda {|company| where(:company_id => company) }
 
+ # def print
+ #   require 'prawn'
+ #   pdf = Prawn::Document.new
+ #   pdf.text("Prawn Rocks")
+ #   pdf.render_file('prawn.pdf')
+  #  end
 end
+

@@ -1,9 +1,10 @@
 class MaritalStatusesController < ApplicationController
+  before_filter :find_marital_status, :except => [:index, :new, :create]
+
   # GET /marital_statuses
   # GET /marital_statuses.xml
   def index
-    #@marital_statuses = MaritalStatus.all
-    @search = MaritalStatus.search(params[:search])
+    @search = MaritalStatus.by_company(current_company.id).search(params[:search])
     @marital_statuses = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +16,6 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses/1
   # GET /marital_statuses/1.xml
   def show
-    @marital_status = MaritalStatus.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +26,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses/new
   # GET /marital_statuses/new.xml
   def new
-    @marital_status = MaritalStatus.new
+    @marital_status = MaritalStatus.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +36,12 @@ class MaritalStatusesController < ApplicationController
 
   # GET /marital_statuses/1/edit
   def edit
-    @marital_status = MaritalStatus.find(params[:id])
   end
 
   # POST /marital_statuses
   # POST /marital_statuses.xml
   def create
-    @marital_status = MaritalStatus.new(params[:marital_status])
+    @marital_status = MaritalStatus.by_company(current_company.id).new(params[:marital_status])
 
     respond_to do |format|
       if @marital_status.save
@@ -58,7 +57,6 @@ class MaritalStatusesController < ApplicationController
   # PUT /marital_statuses/1
   # PUT /marital_statuses/1.xml
   def update
-    @marital_status = MaritalStatus.find(params[:id])
 
     respond_to do |format|
       if @marital_status.update_attributes(params[:marital_status])
@@ -74,12 +72,14 @@ class MaritalStatusesController < ApplicationController
   # DELETE /marital_statuses/1
   # DELETE /marital_statuses/1.xml
   def destroy
-    @marital_status = MaritalStatus.find(params[:id])
     @marital_status.destroy
 
     respond_to do |format|
       format.html { redirect_to(marital_statuses_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_marital_status
+      @marital_status = MaritalStatus.by_company(current_company.id).find(params[:id])
   end
 end

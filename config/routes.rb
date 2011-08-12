@@ -1,10 +1,23 @@
-APSSueldos::Application.routes.draw do
+APSSueldos::Application.routes.draw do |map|
+
+  resources :associated_document_types
+
+  resources :EmployeeDocumentsController
+
+  map.resources :attachments    , :only => :show
+
+  map.resources :my_images, :member => { :avatars => :get }
+#  map.resources :employee_documents, :member => { :documents => :get }
+
+  resources :my_images
 
   resources :causa_egresos
 
   resources :email_types
 
   resources :employees do
+    map.resources :employee_documents, :member => { :documents => :get }
+#    resources :employee_documents
     resources :employee_familiars
     resources :employee_retention_concepts
     resources :employee_remunerative_concepts
@@ -14,6 +27,12 @@ APSSueldos::Application.routes.draw do
   resources :tipo_recibos
 
 
+  resources :categories do
+    member do
+      get "imprimir", :action => :print
+    end
+  end
+
   resources :liquidacions do
     resources :recibo_sueldos do
       resources :detalle_recibo_retencions
@@ -21,6 +40,9 @@ APSSueldos::Application.routes.draw do
       member do
         get "calculo_recibo", :action => :calculo_recibo
       end
+      #member do
+      #  get "imprimir", :action => :print
+      #end
     end
   end
 
@@ -61,8 +83,6 @@ APSSueldos::Application.routes.draw do
   resources :group_retentions
 
   resources :remuneration_types
-
-  resources :categories
 
   resources :labor_unions
 

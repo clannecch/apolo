@@ -1,9 +1,12 @@
 class RemunerativeConceptsController < ApplicationController
+
+  before_filter :find_remunerative_concept , :except => [:index, :new, :create]
+
   # GET /remunerative_concepts
   # GET /remunerative_concepts.xml
   def index
     # la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
-    @search = RemunerativeConcept.search(params[:search])
+    @search = RemunerativeConcept.by_company(current_company.id).search(params[:search])
     @remunerative_concepts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +18,6 @@ class RemunerativeConceptsController < ApplicationController
   # GET /remunerative_concepts/1
   # GET /remunerative_concepts/1.xml
   def show
-    @remunerative_concept = RemunerativeConcept.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +28,7 @@ class RemunerativeConceptsController < ApplicationController
   # GET /remunerative_concepts/new
   # GET /remunerative_concepts/new.xml
   def new
-    @remunerative_concept = RemunerativeConcept.new
+    @remunerative_concept = RemunerativeConcept.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +38,12 @@ class RemunerativeConceptsController < ApplicationController
 
   # GET /remunerative_concepts/1/edit
   def edit
-    @remunerative_concept = RemunerativeConcept.find(params[:id])
   end
 
   # POST /remunerative_concepts
   # POST /remunerative_concepts.xml
   def create
-    @remunerative_concept = RemunerativeConcept.new(params[:remunerative_concept])
+    @remunerative_concept = RemunerativeConcept.by_company(current_company.id).new(params[:remunerative_concept])
 
     respond_to do |format|
       if @remunerative_concept.save
@@ -58,7 +59,6 @@ class RemunerativeConceptsController < ApplicationController
   # PUT /remunerative_concepts/1
   # PUT /remunerative_concepts/1.xml
   def update
-    @remunerative_concept = RemunerativeConcept.find(params[:id])
 
     respond_to do |format|
       if @remunerative_concept.update_attributes(params[:remunerative_concept])
@@ -74,7 +74,6 @@ class RemunerativeConceptsController < ApplicationController
   # DELETE /remunerative_concepts/1
   # DELETE /remunerative_concepts/1.xml
   def destroy
-    @remunerative_concept = RemunerativeConcept.find(params[:id])
     @remunerative_concept.destroy
 
     respond_to do |format|
@@ -82,4 +81,8 @@ class RemunerativeConceptsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def find_remunerative_concept
+      @remunerative_concept = RemunerativeConcept.by_company(current_company.id).find(params[:id])
+  end
+
 end

@@ -22,8 +22,6 @@
       %td= retention_concept.data_to_ask.try(:detalle)
       %td= retention_concept.statistical_value
       %td= retention_concept.accounting_imputation_id
-      %td= link_to 'Show', retention_concept
-      %td= link_to 'Edit', edit_retention_concept_path(retention_concept)
-      %td= link_to 'Destroy', retention_concept, :confirm => 'Are you sure?', :method => :delete
+      %td= retention_concept_links(retention_concept)
 %br/
-= link_to 'New Retention concept', new_retention_concept_path
+= link_to 'Nuevo concepto de Retencion', new_retention_concept_path

@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @labor_union.detalle
-= link_to 'Editar', edit_labor_union_path(@labor_union)
+= labor_union_links(@labor_union)
 |
 \#{link_to 'Volver', labor_unions_path}

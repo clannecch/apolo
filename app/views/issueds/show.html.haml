@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @issued.detalle
-= link_to 'Editar', edit_issued_path(@issued)
+= issued_links(@issued)
 |
 \#{link_to 'volver', issueds_path}

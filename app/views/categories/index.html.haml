@@ -11,3 +11,5 @@
       %td= category_links(category)
 %br/
 = link_to 'Nueva Categoria', new_category_path
+%br/
+= link_to icon('printer', :small, :title => 'Imprimir'), imprimir_category_path(@category)

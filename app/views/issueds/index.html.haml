@@ -8,8 +8,6 @@
   - @issueds.each do |issued|
     %tr
       %td= issued.detalle
-      %td= link_to 'Visualizar', issued
-      %td= link_to 'Editar', edit_issued_path(issued)
-      %td= link_to 'Borrar', issued, :confirm => 'Esta Seguro?', :method => :delete
+      %td= issued_links(issued)
 %br/
 = link_to 'Nuevo Lugar de EMision de Documento', new_issued_path

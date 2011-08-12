@@ -1,0 +1,28 @@
+
+
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), EmployeeDocument.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_employee_document_path(@employee_document), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@employee_document) do |s|
+  = s.attributes(EmployeeDocument.human_name + ' Info') do
+
+    = s.attribute :id_employee
+
+    = s.attribute :name
+
+    = s.attribute :associated_document_type_id
+
+    = image_tag @employee_document.document.url
+
+    = image_tag @employee_document.document.url(:medium)
+
+    = image_tag @employee_document.document.url(:thumb)
+
+
+
+.clear

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707192946) do
+ActiveRecord::Schema.define(:version => 20110801204306) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -23,6 +23,27 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "associated_document_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "associated_document_type_id"
+    t.string   "name"
+    t.date     "reception_date"
+    t.string   "adjunto_file_name"
+    t.string   "adjunto_content_type"
+    t.integer  "associated_document_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "adjunto_file"
   end
 
   create_table "bank_deposit_account_types", :force => true do |t|
@@ -171,6 +192,22 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.integer  "company_id"
   end
 
+  create_table "employee_documents", :force => true do |t|
+    t.string   "name"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.datetime "document_updated_at"
+    t.integer  "document_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "document_file"
+    t.binary   "document_thumb_file"
+    t.binary   "document_small_file"
+    t.integer  "asociate_document_type_id"
+    t.integer  "associated_document_type_id"
+    t.integer  "employee_id"
+  end
+
   create_table "employee_familiars", :force => true do |t|
     t.string   "apellido"
     t.string   "nombre"
@@ -296,6 +333,12 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.integer  "causa_egreso_id"
     t.binary   "foto"
     t.integer  "company_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -308,6 +351,7 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.integer  "prioridad"
     t.string   "acumuladores_valor"
     t.string   "formula_calculo_valor"
+    t.integer  "company_id"
   end
 
   create_table "employer_contribution_concepts_group_employer_contributions", :id => false, :force => true do |t|
@@ -328,6 +372,7 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "group_remunerations", :force => true do |t|
@@ -437,6 +482,19 @@ ActiveRecord::Schema.define(:version => 20110707192946) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "my_images", :force => true do |t|
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "detalle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "avatar_file"
+    t.binary   "avatar_thumb_file"
+    t.binary   "avatar_small_file"
   end
 
   create_table "nationalities", :force => true do |t|

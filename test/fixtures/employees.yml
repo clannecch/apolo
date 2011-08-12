@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20110721162735
 #
 # Table name: employees
 #
@@ -81,6 +81,13 @@
 #  group_employer_contribution_id   :integer
 #  causa_egreso_id                  :integer
 #  foto                             :binary
+#  company_id                       :integer
+#  latitude                         :float
+#  longitude                        :float
+#  avatar_file_name                 :string(255)
+#  avatar_content_type              :string(255)
+#  avatar_file_size                 :integer
+#  avatar_updated_at                :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

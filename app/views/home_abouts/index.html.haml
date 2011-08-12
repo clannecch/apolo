@@ -8,8 +8,6 @@
   - @home_abouts.each do |home_about|
     %tr
       %td= home_about.detalle
-      %td= link_to 'Visualizar', home_about
-      %td= link_to 'Editar', edit_home_about_path(home_about)
-      %td= link_to 'Borrar', home_about, :confirm => 'Esta Seguro?', :method => :delete
+      %td= home_about_links(home_about)
 %br/
 = link_to 'Nuevo Tipo de Calle', new_home_about_path

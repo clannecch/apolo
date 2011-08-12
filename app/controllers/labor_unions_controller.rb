@@ -1,9 +1,11 @@
 class LaborUnionsController < ApplicationController
+
+  before_filter :find_labor_union, :except => [:index, :new, :create]
+
   # GET /labor_unions
   # GET /labor_unions.xml
   def index
-    #@labor_unions = LaborUnion.all
-    @search = LaborUnion.search(params[:search])
+    @search = LaborUnion.by_company(current_company.id).search(params[:search])
     @labor_unions = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -15,7 +17,6 @@ class LaborUnionsController < ApplicationController
   # GET /labor_unions/1
   # GET /labor_unions/1.xml
   def show
-    @labor_union = LaborUnion.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class LaborUnionsController < ApplicationController
   # GET /labor_unions/new
   # GET /labor_unions/new.xml
   def new
-    @labor_union = LaborUnion.new
+    @labor_union = LaborUnion.by_company(current_company.id).new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,12 @@ class LaborUnionsController < ApplicationController
 
   # GET /labor_unions/1/edit
   def edit
-    @labor_union = LaborUnion.find(params[:id])
   end
 
   # POST /labor_unions
   # POST /labor_unions.xml
   def create
-    @labor_union = LaborUnion.new(params[:labor_union])
+    @labor_union = LaborUnion.by_company(current_company.id).new(params[:labor_union])
 
     respond_to do |format|
       if @labor_union.save
@@ -58,7 +58,6 @@ class LaborUnionsController < ApplicationController
   # PUT /labor_unions/1
   # PUT /labor_unions/1.xml
   def update
-    @labor_union = LaborUnion.find(params[:id])
 
     respond_to do |format|
       if @labor_union.update_attributes(params[:labor_union])
@@ -74,12 +73,14 @@ class LaborUnionsController < ApplicationController
   # DELETE /labor_unions/1
   # DELETE /labor_unions/1.xml
   def destroy
-    @labor_union = LaborUnion.find(params[:id])
     @labor_union.destroy
 
     respond_to do |format|
       format.html { redirect_to(labor_unions_url) }
       format.xml  { head :ok }
     end
+  end
+  def find_labor_union
+      @labor_union = LaborUnion.by_company(current_company.id).find(params[:id])
   end
 end

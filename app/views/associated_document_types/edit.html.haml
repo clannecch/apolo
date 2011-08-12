@@ -1,0 +1,10 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.edit', :item => AssociatedDocumentType.model_name.human).titlecase
+
+= render 'form'
+
+= link_to t('scaffold.actions.show').titlecase, @associated_document_type
+\|
+= link_to t('scaffold.actions.back').titlecase, associated_document_types_path
+

@@ -3,6 +3,6 @@
 %p
   %b Detalle:
   = @location.detalle
-= link_to 'Editar', edit_location_path(@location)
+= location_links(@location)
 |
 \#{link_to 'volver', locations_path}
