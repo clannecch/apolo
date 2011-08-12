@@ -7,8 +7,15 @@ class ReciboSueldosController < ApplicationController
     @recibo_sueldos = @liquidacion.recibo_sueldos.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @recibo_sueldos }
+      format.pdf do
+        dump_tmp_filename = Rails.root.join('tmp',@recibo_sueldos.first.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_libro_pdf(dump_tmp_filename,@liquidacion)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+          #File.delete(dump_tmp_filename)
+      end
     end
   end
 
@@ -393,10 +400,15 @@ class ReciboSueldosController < ApplicationController
     @recibo_sueldo.detalle_recibo_habers.each do |h|
       pdf.draw_text h.remunerative_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
       pdf.draw_text format_number(h.cantidad_recibo).rjust(8), :at => [195,offset],:style => :bold, :size => 10
-      pdf.draw_text format_number(h.total).rjust(15), :at => [245,offset],:style => :bold, :size => 10
+      if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
+        column = 340
+        total_remunerative_concept_sa += h.total
+      else
+        column = 245
+        total_remunerative_concept_ca += h.total
+      end
+      pdf.draw_text format_number(h.total).rjust(15), :at => [column,offset],:style => :bold, :size => 10
       offset = offset - 10
-      total_remunerative_concept_ca += h.total
-      total_remunerative_concept_sa += h.total
     end
     total_retention = 0
     @recibo_sueldo.detalle_recibo_retencions.each do |r|
@@ -418,14 +430,113 @@ class ReciboSueldosController < ApplicationController
                                 :at => [115,108],:style => :bold, :size => 10
     end
     pdf.draw_text format_number(total_remunerative_concept_ca).rjust(15), :at => [245,108],:style => :bold, :size => 10
-    pdf.draw_text format_number(total_remunerative_concept_ca).rjust(15), :at => [340,108],:style => :bold, :size => 10
+    pdf.draw_text format_number(total_remunerative_concept_sa).rjust(15), :at => [340,108],:style => :bold, :size => 10
     pdf.draw_text format_number(total_retention).rjust(15), :at => [435,108],:style => :bold, :size => 10
 
-    pdf.draw_text format_number(total_remunerative_concept_ca-total_retention).rjust(15), :at => [435,65],:style => :bold, :size => 10
-    pdf.draw_text numero_a_palabras(total_remunerative_concept_ca-total_retention) , :at => [8,60],:style => :bold, :size => 10
+    pdf.draw_text format_number(total_remunerative_concept_sa+total_remunerative_concept_ca-total_retention).rjust(15), :at => [435,65],:style => :bold, :size => 10
+    pdf.draw_text numero_a_palabras(total_remunerative_concept_sa+total_remunerative_concept_ca-total_retention).capitalize , :at => [8,60],:style => :bold, :size => 10
     pdf.render_file(filename)
   end
 
+# #################################################################################
+  def print_libro_pdf(filename,entity)
+    require 'prawn'
+    @recibo_sueldos = @liquidacion.recibo_sueldos.all
+
+
+    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+                                :page_layout => :landscape)
+    prawn_logo = "hsjd.jpg"
+    logo_empresa ="CASA NUESTA SRA. DEL PILAR"
+    logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
+    logo_cuit = "C.U.I.T.: "+"30-67932805-7"
+    logo_inscripcion = "Nro.Inscripcion: " + "21.757"
+    logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
+    hoja_inicial_pedida_en_vista = 101
+    offset = 0
+
+    hoja = hoja_inicial_pedida_en_vista
+
+    @recibo_sueldos.each do |r|
+      if offset < 20
+        if hoja != hoja_inicial_pedida_en_vista
+          pdf.start_new_page
+        end
+        pdf.bounding_box [1, 550], :width => 730, :height => 405 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "Libro de Sueldos y Jornales Ley 20.744".center(200), :at => [5,560],:style => :bold, :size => 11
+        pdf.draw_text ( logo_empresa.strip+" - "+logo_cuit.strip).center(250), :at => [5, 535], :size => 8, :style => :bold
+        pdf.draw_text "Periodo de Liquidacion :", :at => [10,530], :size => 8
+        pdf.draw_text @liquidacion.periodo.strftime("%m/%Y"), :at => [100, 530], :size => 8, :style => :bold
+        pdf.draw_text "Hoja :", :at => [680, 530], :size => 8
+        pdf.draw_text hoja.to_s.rjust(5,'0'), :at => [702, 530], :size => 8, :style => :bold
+        pdf.draw_text "Quincena:          -  Fecha de Liquidacion:", :at => [10, 520], :size => 8
+        pdf.draw_text @liquidacion.quincena.to_s , :at => [50 , 520], :size => 8, :style => :bold
+        pdf.draw_text @liquidacion.fecha_liquidacion.strftime("%d/%m/%Y") , :at => [160 , 520], :size => 8, :style => :bold
+
+        pdf.bounding_box [5, 515], :width => 722, :height => 30 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "Legajo", :at => [10, 498], :size => 10
+        pdf.bounding_box [45, 515], :width => 168, :height => 30 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "Apellido y nombre                   F. Ingreso", :at => [85, 505], :size => 10
+        pdf.draw_text "Remuneraciones c/desc        Remuneraciones s/desc                Retenciones", :at => [276, 505], :size => 8
+        pdf.bounding_box [45, 500], :width => 168, :height => 15 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "Documento  Nac.   E.Civ.   Categoria   F. Egreso", :at => [46, 490], :size => 10
+        pdf.bounding_box [98, 500], :width => 30, :height => 15 do
+            pdf.stroke_bounds
+        end
+        pdf.bounding_box [128, 500], :width => 30, :height => 15 do
+            pdf.stroke_bounds
+        end
+        pdf.bounding_box [213, 515], :width => 53, :height => 15 do
+              pdf.stroke_bounds
+        end
+        pdf.bounding_box [213, 500], :width => 53, :height => 15 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "Codigo        Importe          Codigo         Importe         Codigo        Importe", :at => [266, 490], :size => 9
+
+        pdf.bounding_box [266, 500], :width => 30, :height => 15 do
+            pdf.stroke_bounds
+        end
+
+        pdf.bounding_box [370, 515], :width => 105, :height => 30 do
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [370, 500], :width => 30, :height => 15 do
+            pdf.stroke_bounds
+        end
+
+        pdf.bounding_box [213, 500], :width => 362, :height => 15 do
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [575, 515], :width => 74, :height => 30 do
+            pdf.stroke_bounds
+        end
+        pdf.bounding_box [475, 500], :width => 30, :height => 15 do
+            pdf.stroke_bounds
+        end
+        pdf.draw_text "T o t a l", :at => [590, 505], :size => 10
+        pdf.draw_text "R e c i b o", :at => [587, 490], :size => 10
+        pdf.draw_text "A c u m u l a d o", :at => [652, 505], :size => 10
+        pdf.draw_text "    A n u a l    ", :at => [652, 490], :size => 10
+
+        pdf.draw_text "123456 123456789 12345 12345 1234567890 12/12/1234 12345 123,123,123,12 12345 123,123,123,12 12345 123,123,123,12 123,123,123.12  123,123,123.12", :at => [07, 475], :size => 10
+      end
+    end
+# Recuadro exterior
+
+
+    pdf.render_file(filename)
+  end
+
+# ###################################################################################
   def format_number(n)
     if n.nil?
       n = ""

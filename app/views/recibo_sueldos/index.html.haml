@@ -20,7 +20,7 @@
       %td= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo)
       %td= link_to 'Borrar', [@liquidacion, recibo_sueldo], :confirm => 'Esta Seguro?', :method => :delete
       %td= link_to 'Calcular', calculo_recibo_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo.id)
-      %td= link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldos_path(@liquidacion,recibo_sueldo, :format => 'pdf')
+      %td= link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldos_path(@liquidacion, :format => 'pdf')
 %br/
 = link_to 'Informar nuevo empleado', new_liquidacion_recibo_sueldo_path(@liquidacion)
 |
