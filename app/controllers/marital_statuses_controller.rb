@@ -8,7 +8,7 @@ class MaritalStatusesController < ApplicationController
     @marital_statuses = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @marital_statuses }
     end
   end

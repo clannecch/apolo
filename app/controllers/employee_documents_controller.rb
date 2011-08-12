@@ -8,7 +8,7 @@ class EmployeeDocumentsController < ApplicationController
     @employee_documents = @employee.employee_document.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @employee_documents }
     end
   end

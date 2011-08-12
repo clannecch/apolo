@@ -7,7 +7,7 @@ class HomeAboutsController < ApplicationController
     @home_abouts = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @home_abouts }
     end
   end

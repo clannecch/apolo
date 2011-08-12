@@ -10,7 +10,7 @@ class AccountingImputationsController < ApplicationController
     #@accounting_imputations = AccountingImputation.by_company(current_company.id).all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @accounting_imputations }
     end
   end

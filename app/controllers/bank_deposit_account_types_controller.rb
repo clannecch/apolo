@@ -6,10 +6,10 @@ class BankDepositAccountTypesController < ApplicationController
   def index
     #@bank_deposit_account_types = BankDepositAccountType.by_company(current_company.id).all
     @search = BankDepositAccountType.by_company(current_company.id).search(params[:search])
-    @bank_deposit_account_types = @search.page(params[:page])#.per(10)
+    @bank_deposit_account_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @bank_deposit_account_types }
     end
   end

@@ -3,10 +3,12 @@ class EmploymentsController < ApplicationController
   # GET /employments
   # GET /employments.xml
   def index
-    @employments = Employment.by_company(current_company.id).all
+#    @employments = Employment.by_company(current_company.id).all
+    @search = Employment.by_company(current_company.id).search(params[:search])
+    @employments = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @employments }
     end
   end

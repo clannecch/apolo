@@ -7,7 +7,7 @@ class EmployeeRetentionConceptsController < ApplicationController
     @employee_retention_concepts = @employee.employee_retention_concept.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @employee_retention_concepts }
     end
   end

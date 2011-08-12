@@ -15,6 +15,13 @@
 			<td style="width:70%">
 				<%= f.text_field :detalle %>
 			</td>
+        </tr>
+        <tr>
+            <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label "Composicion" %></strong></td>
+            <td style="width:70%">
+               <%= f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true%>
+            </td>
+
 		</tr>
 	</table>
 	<p><%= f.submit %></p>

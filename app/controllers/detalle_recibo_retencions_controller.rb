@@ -7,7 +7,7 @@ class DetalleReciboRetencionsController < ApplicationController
     @detalle_recibo_retencions = @recibo_sueldo.detalle_recibo_retencions.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @detalle_recibo_retencions }
     end
   end

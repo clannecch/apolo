@@ -3,16 +3,11 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.xml
   def index
-<<<<<<< HEAD
     #@employees = Employee.all
-    @search = Employee.search(params[:search])
-    @employees = @search.page(params[:page])#.per(10)
-=======
-    @employees = Employee.by_company(current_company.id).all
->>>>>>> 3988e2ee3a3cd5f1cf2fd6a95cf99d990b11218b
-
+    @search = Employee.by_company(current_company.id).search(params[:search])
+    @employees = @search.page(params[:page]).per(10)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @employees }
     end
   end

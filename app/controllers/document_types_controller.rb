@@ -7,7 +7,7 @@ class DocumentTypesController < ApplicationController
     @document_types = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @document_types }
     end
   end

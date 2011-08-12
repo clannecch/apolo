@@ -9,7 +9,7 @@ class ProvincesController < ApplicationController
     @provinces = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @provinces }
     end
   end

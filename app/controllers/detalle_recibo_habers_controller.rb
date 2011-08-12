@@ -8,7 +8,7 @@ class DetalleReciboHabersController < ApplicationController
     @detalle_recibo_habers = @recibo_sueldo.detalle_recibo_habers.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @detalle_recibo_habers }
     end
   end

@@ -7,7 +7,7 @@ class EmployeeRemunerativeConceptsController < ApplicationController
     @employee_remunerative_concepts = @employee.employee_remunerative_concept.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @employee_remunerative_concepts }
     end
   end

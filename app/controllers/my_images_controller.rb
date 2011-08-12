@@ -8,7 +8,7 @@ class MyImagesController < ApplicationController
     @my_images = MyImage.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @my_images }
     end
   end

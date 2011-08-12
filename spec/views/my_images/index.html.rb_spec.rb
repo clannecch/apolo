@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "my_images/index.html.erb" do
+describe "my_images/indexoo.html.erb" do
   before(:each) do
     assign(:my_images, [
       stub_model(MyImage,

@@ -5,16 +5,12 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations
   # GET /group_remunerations.xml
   def index
-<<<<<<< HEAD
     #@group_remunerations = GroupRemuneration.all
-    @search = GroupRemuneration.search(params[:search])
+    @search = GroupRemuneration.by_company(current_company.id).search(params[:search])
     @group_remunerations = @search.page(params[:page])#.per(10)
-=======
-    @group_remunerations = GroupRemuneration.by_company(current_company.id).all
->>>>>>> 3988e2ee3a3cd5f1cf2fd6a95cf99d990b11218b
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @group_remunerations }
     end
   end

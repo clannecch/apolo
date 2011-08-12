@@ -4,7 +4,9 @@ class ReciboSueldosController < ApplicationController
   # GET /recibo_sueldos
   # GET /recibo_sueldos.xml
   def index
-    @recibo_sueldos = @liquidacion.recibo_sueldos.all
+#    @recibo_sueldos = @liquidacion.recibo_sueldos.all
+    @search = @liquidacion.recibo_sueldos.search(params[:search])
+    @recibo_sueldos = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html
@@ -528,6 +530,8 @@ class ReciboSueldosController < ApplicationController
         pdf.draw_text "    A n u a l    ", :at => [652, 490], :size => 10
 
         pdf.draw_text "123456 123456789 12345 12345 1234567890 12/12/1234 12345 123,123,123,12 12345 123,123,123,12 12345 123,123,123,12 123,123,123.12  123,123,123.12", :at => [07, 475], :size => 10
+
+
       end
     end
 # Recuadro exterior

@@ -3,16 +3,12 @@ class HealthInsurancesController < ApplicationController
   # GET /health_insurances
   # GET /health_insurances.xml
   def index
-<<<<<<< HEAD
     #@health_insurances = HealthInsurance.all
-    @search = HealthInsurance.search(params[:search])
+    @search = HealthInsurance.by_company(current_company.id).search(params[:search])
     @health_insurances = @search.page(params[:page])#.per(10)
-=======
-    @health_insurances = HealthInsurance.by_company(current_company.id).all
->>>>>>> 3988e2ee3a3cd5f1cf2fd6a95cf99d990b11218b
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @health_insurances }
     end
   end
