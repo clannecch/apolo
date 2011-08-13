@@ -1,7 +1,7 @@
 <%= form_for @place do |f| %>
 	<% if @place.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@place.errors.count, "error") %> prohibido guardar Lugar:</h2>
+			<h2><%= pluralize(@place.errors.count, "error") %> prohibido guardar Lugar de Trabajo:</h2>
 			<ul>
 			<% @place.errors.full_messages.each do |msg| %>
 				<li><%= msg %></li>

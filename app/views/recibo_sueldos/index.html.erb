@@ -3,7 +3,7 @@
 <table class="tableStandard">
 	<tr>
 		<th><%= sort_link @search, :liquidacion_id, "Liquidacion" %></td>
-		<th><%= sort_link @search, :employee_id, "Employee" %></td>
+		<th><%= sort_link @search, :employee_id, ReciboSueldo.human_attribute_name('employee_id') %></td>
 		<th><%= sort_link @search, :fecha_recibo, "Fecha Recibo" %></td>
 		<th><%= sort_link @search, :observaciones, "Observaciones" %></td>
 		<th><%= sort_link @search, :mensaje_recibo, "Mensaje Recibo" %></td>
@@ -24,6 +24,6 @@
 		</tr>
 	<% end %>
 </table>
-<p><%= link_to "Nuevo Recibo de Sueldo", new_recibo_sueldo_path %></p>
+<p><%= link_to "Nuevo Recibo de Sueldo", new_liquidacion_recibo_sueldo_path %></p>
 
 <%= paginate @recibo_sueldos %>

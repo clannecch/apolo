@@ -4,7 +4,9 @@ class ReciboSueldosController < ApplicationController
   # GET /recibo_sueldos
   # GET /recibo_sueldos.xml
   def index
-    @recibo_sueldos = @liquidacion.recibo_sueldos.all
+    #@recibo_sueldos = @liquidacion.recibo_sueldos.all
+    @search = @liquidacion.recibo_sueldos.search(params[:search])
+    @recibo_sueldos = @search.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
