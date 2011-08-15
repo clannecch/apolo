@@ -260,3 +260,4 @@ class Employee < ActiveRecord::Base
    [calle, puerta, location.detalle, province.detalle , country.detalle].compact.join(', ')
   end
 end
+11
