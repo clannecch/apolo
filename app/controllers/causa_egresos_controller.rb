@@ -6,10 +6,10 @@ class CausaEgresosController < ApplicationController
   def index
     #@causa_egresos = CausaEgreso.by_company(current_company.id).all
     @search = CausaEgreso.by_company(current_company.id).search(params[:search])
-    @causa_egresos = @search.page(params[:page])#.per(10)
+    @causa_egresos = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @causa_egresos }
     end
   end

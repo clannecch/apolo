@@ -10,7 +10,7 @@ class AssociatedDocumentTypesController < ApplicationController
     @associated_document_types = AssociatedDocumentType.by_company(current_company.id).all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @associated_document_types }
     end
   end

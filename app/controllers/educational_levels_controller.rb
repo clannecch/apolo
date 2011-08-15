@@ -4,10 +4,10 @@ before_filter :find_educational_level, :except => [:index, :new, :create]
   # GET /educational_levels.xml
   def index
     @search = EducationalLevel.by_company(current_company.id).search(params[:search])
-    @educational_levels = @search.page(params[:page])#.per(10)
+    @educational_levels = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @educational_levels }
     end
   end

@@ -1,0 +1,16 @@
+<h1>User Authorization</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>User:</strong></td>
+		<td style="width:70%"><%= @user_authorization.user_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Authorization:</strong></td>
+		<td style="width:70%"><%= @user_authorization.authorization_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_user_authorization_path(@user_authorization) %> |
+	<%= link_to "Eliminar", @user_authorization, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "User Authorizations", user_authorizations_path %>
+</p>

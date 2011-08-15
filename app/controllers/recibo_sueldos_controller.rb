@@ -530,6 +530,8 @@ class ReciboSueldosController < ApplicationController
         pdf.draw_text "    A n u a l    ", :at => [652, 490], :size => 10
 
         pdf.draw_text "123456 123456789 12345 12345 1234567890 12/12/1234 12345 123,123,123,12 12345 123,123,123,12 12345 123,123,123,12 123,123,123.12  123,123,123.12", :at => [07, 475], :size => 10
+
+
       end
     end
 # Recuadro exterior

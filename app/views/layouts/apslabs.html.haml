@@ -13,6 +13,7 @@
     %title= ['AP Manager', yield(:title)].compact.join(' :: ')
     = stylesheet_link_tag 'jquery.tipsy', :media => 'screen'
     = stylesheet_link_tag 'apslabs', :media => 'screen'
+    = stylesheet_link_tag 'mainmenu/menu', :media => 'screen'
     /[if IE]
       = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
     = stylesheet_link_tag 'uniform.aristo', :media => 'screen'
@@ -25,6 +26,8 @@
     = javascript_include_tag 'jquery.tipsy.js'
     = javascript_include_tag('jquery.ui.datepicker-es')
     = javascript_include_tag('jquery.tools.min.js')
+    -#= javascript_include_tag('mainmenu/menu.js')
+    = javascript_include_tag('mainmenu/jquery.color.js')
     = csrf_meta_tag
     = head if respond_to? :head
     = yield :head
@@ -37,7 +40,11 @@
         %h1{:style => 'margin-left:0px;height:75px;padding: 10px 0px;'}
           AP Manager
           = render('shared/change_current_company')
-        = content_for?(:main_navigation) ? yield(:main_navigation) : render('shared/main_navigation')
+          = render('shared/mainmenu')
+          %p{:style => "display:none"}
+            Copyright © 2011
+            %a{:href => "http://apycom.com/"} Apycom jQuery Menus
+        -#= content_for?(:main_navigation) ? yield(:main_navigation) : render('shared/main_navigation')
       #wrapper.wat-cf
         %div{:id => content_for?(:sidebar) ? 'main':'full-main'}
           .flash

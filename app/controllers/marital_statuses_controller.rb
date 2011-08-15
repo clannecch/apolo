@@ -5,10 +5,10 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses.xml
   def index
     @search = MaritalStatus.by_company(current_company.id).search(params[:search])
-    @marital_statuses = @search.page(params[:page])#.per(10)
+    @marital_statuses = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @marital_statuses }
     end
   end

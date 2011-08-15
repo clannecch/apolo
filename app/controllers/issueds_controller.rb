@@ -6,10 +6,10 @@ class IssuedsController < ApplicationController
   # GET /issueds.xml
   def index
     @search = Issued.by_company(current_company.id).search(params[:search])
-    @issueds = @search.page(params[:page])#.per(10)
+    @issueds = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @issueds }
     end
   end

@@ -7,7 +7,7 @@ class InsuranceBeneficiariesController < ApplicationController
     @insurance_beneficiaries = @employee.insurance_beneficiary.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @insurance_beneficiaries }
     end
   end

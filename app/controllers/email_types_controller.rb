@@ -5,10 +5,10 @@ class EmailTypesController < ApplicationController
   # GET /email_types.xml
   def index
     @search = EmailType.by_company(current_company.id).search(params[:search])
-    @email_types = @search.page(params[:page])#.per(10)
+    @email_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @email_types }
     end
   end

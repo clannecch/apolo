@@ -4,10 +4,10 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts.xml
   def index
     @search = RetentionConcept.by_company(current_company.id).search(params[:search])
-    @retention_concepts = @search.page(params[:page])#.per(10)
+    @retention_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @retention_concepts }
     end
   end

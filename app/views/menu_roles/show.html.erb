@@ -1,0 +1,16 @@
+<h1>Menu Role</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Menu:</strong></td>
+		<td style="width:70%"><%= @menu_role.menu_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Rol:</strong></td>
+		<td style="width:70%"><%= @menu_role.rol_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_menu_role_path(@menu_role) %> |
+	<%= link_to "Eliminar", @menu_role, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Menu Roles", menu_roles_path %>
+</p>

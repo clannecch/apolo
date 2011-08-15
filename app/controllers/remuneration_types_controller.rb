@@ -6,10 +6,10 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types.xml
   def index
     @search = RemunerationType.by_company(current_company.id).search(params[:search])
-    @remuneration_types = @search.page(params[:page])#.per(10)
+    @remuneration_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @remuneration_types }
     end
   end

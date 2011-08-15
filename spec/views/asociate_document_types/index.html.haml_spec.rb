@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "associated_document_types/index.html.haml" do
+describe "associated_document_types/indexoo.html.haml" do
   before(:each) do
     assign(:asociate_document_types, [
       stub_model(AssociatedDocumentType,

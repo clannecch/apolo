@@ -9,7 +9,7 @@ class NationalitiesController < ApplicationController
     @nationalities = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @nationalities }
     end
   end

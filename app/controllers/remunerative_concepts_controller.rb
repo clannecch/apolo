@@ -7,10 +7,10 @@ class RemunerativeConceptsController < ApplicationController
   def index
     # la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
     @search = RemunerativeConcept.by_company(current_company.id).search(params[:search])
-    @remunerative_concepts = @search.page(params[:page])#.per(10)
+    @remunerative_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @remunerative_concepts }
     end
   end

@@ -1,0 +1,24 @@
+<h1>Menu</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Parent:</strong></td>
+		<td style="width:70%"><%= @menu.parent_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Name:</strong></td>
+		<td style="width:70%"><%= @menu.name %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Link Url:</strong></td>
+		<td style="width:70%"><%= @menu.link_url %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Order No:</strong></td>
+		<td style="width:70%"><%= @menu.order_no %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_menu_path(@menu) %> |
+	<%= link_to "Eliminar", @menu, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Menus", menus_path %>
+</p>

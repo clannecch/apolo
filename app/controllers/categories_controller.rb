@@ -10,10 +10,10 @@ class CategoriesController < ApplicationController
   def index
     #@categories = Category.by_company(current_company.id).all
     @search = Category.by_company(current_company.id).search(params[:search])
-    @categories = @search.page(params[:page])#.per(10)
+    @categories = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @categories }
     end
   end

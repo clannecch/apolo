@@ -1,14 +1,16 @@
-mclass EmployerContributionConceptsController < ApplicationController
+class EmployerContributionConceptsController < ApplicationController
   before_filter :find_employer_contribution_concept, :except => [:index, :new, :create]
 
   # GET /employer_contribution_concepts
   # GET /employer_contribution_concepts.xml
   def index
-    @employer_contribution_concepts = EmployerContributionConcept.by_company(current_company.id).all
+#    @employer_contribution_concepts = EmployerContributionConcept.by_company(current_company.id).all
+    @search = EmployerContributionConcept.by_company(current_company.id).search(params[:search])
+    @employer_contribution_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @employer_contribution_concepts }
+      format.html # index.html.erbb
+      format.xml  { render :xml => @eployer_contribution_concepts }
     end
   end
 
@@ -81,6 +83,6 @@ mclass EmployerContributionConceptsController < ApplicationController
 
   def find_employer_contribution_concept
     @employer_contribution_concept = EmployerContributionConcept.by_company(current_company.id).find(params[:id])
-end
+  end
 
 end

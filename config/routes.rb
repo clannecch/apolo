@@ -110,6 +110,14 @@ APSSueldos::Application.routes.draw do |map|
 
   resources :document_types
 
+  resources :menus
+  resources :menu_roles
+  resources :menu_users
+  resources :user_authorizations
+  resources :user_roles
+
+
+
   root :to => "liquidacions#index"
   
   # The priority is based upon order of creation:

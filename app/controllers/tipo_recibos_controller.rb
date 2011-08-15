@@ -5,10 +5,10 @@ class TipoRecibosController < ApplicationController
   # GET /tipo_recibos.xml
   def index
     @search = TipoRecibo.by_company(current_company.id).search(params[:search])
-    @tipo_recibos = @search.page(params[:page])#.per(10)
+    @tipo_recibos = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @tipo_recibos }
     end
   end

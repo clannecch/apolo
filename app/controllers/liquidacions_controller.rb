@@ -5,10 +5,10 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions.xml
   def index
     @search = Liquidacion.by_company(current_company.id).search(params[:search])
-    @liquidacions = @search.page(params[:page])#.per(10)
+    @liquidacions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @liquidacions }
     end
   end

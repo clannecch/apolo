@@ -6,11 +6,11 @@ class AccountingImputationsController < ApplicationController
   def index
     # TODO: mejorar la forma de traer este conjunto de registros!!! (se pueden usar optimize, :fixme, :todo) se llama con rake notes o rake notes:todo
     @search = AccountingImputation.search(params[:search])
-    @accounting_imputations = @search.page(params[:page])#.per(10)
+    @accounting_imputations = @search.page(params[:page]).per(10)
     #@accounting_imputations = AccountingImputation.by_company(current_company.id).all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @accounting_imputations }
     end
   end

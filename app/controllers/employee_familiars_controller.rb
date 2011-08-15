@@ -7,7 +7,7 @@ class EmployeeFamiliarsController < ApplicationController
     @employee_familiars = @employee.employee_familiar.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @employee_familiars }
     end
   end

@@ -4,10 +4,10 @@ class SectionsController < ApplicationController
   # GET /sections.xml
   def index
     @search = Section.by_company(current_company.id).search(params[:search])
-    @sections = @search.page(params[:page])#.per(10)
+    @sections = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @sections }
     end
   end

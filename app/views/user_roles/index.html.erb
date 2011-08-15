@@ -1,0 +1,23 @@
+<h1>User Roles</h1>
+
+<table>
+	<tr>
+		<th>User</th>
+		<th>Rol</th>
+		<th>Is Active</th>
+		<th colspan='3' style="text-align:center;">Acciones</th>
+	</tr>
+	<% for user_role in @user_roles %>
+		<tr>
+			<td><%= user_role.user_id %></td>
+			<td><%= user_role.rol_id %></td>
+			<td><%= check_box_tag "user_role_is_active", user_role.is_active, user_role.is_active, :disabled => true %></td>
+            <td><a href="/user_roles/<%= user_role.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+            <td><a href="/user_roles/<%= user_role.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+            <td><a href="/user_roles/<%= user_role.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+				<img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<p><%= link_to "Nuevo User Role", new_user_role_path %></p>

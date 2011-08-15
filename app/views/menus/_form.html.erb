@@ -1,0 +1,39 @@
+<%= form_for @menu do |f| %>
+	<% if @menu.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@menu.errors.count, "error") %> prohibido guardar Menu:</h2>
+			<ul>
+			<% @menu.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :parent_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :parent_id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :name %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :name %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :link_url %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :link_url %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :order_no %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :order_no %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

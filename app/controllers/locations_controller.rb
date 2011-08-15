@@ -4,10 +4,10 @@ class LocationsController < ApplicationController
   # GET /locations.xml
   def index
     @search = Location.by_company(current_company.id).search(params[:search])
-    @locations = @search.page(params[:page])#.per(10)
+    @locations = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @locations }
     end
   end

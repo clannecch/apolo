@@ -7,10 +7,10 @@ class CharacterServicesController < ApplicationController
   def index
     #@character_services = CharacterService.by_company(current_company.id).all
     @search = CharacterService.by_company(current_company.id).search(params[:search])
-    @character_services = @search.page(params[:page])#.per(10)
+    @character_services = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @character_services }
     end
   end

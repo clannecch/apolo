@@ -1,0 +1,33 @@
+<%= form_for @user_role do |f| %>
+	<% if @user_role.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@user_role.errors.count, "error") %> prohibido guardar User Role:</h2>
+			<ul>
+			<% @user_role.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :user_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :user_id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :rol_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :rol_id %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :is_active %></strong></td>
+			<td style="width:70%">
+				<%= f.check_box :is_active %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

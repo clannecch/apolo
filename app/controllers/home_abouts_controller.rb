@@ -4,10 +4,10 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts.xml
   def index
     @search = HomeAbout.by_company(current_company.id).search(params[:search])
-    @home_abouts = @search.page(params[:page])#.per(10)
+    @home_abouts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @home_abouts }
     end
   end

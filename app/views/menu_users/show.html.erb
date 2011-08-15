@@ -1,0 +1,16 @@
+<h1>Menu User</h1>
+<table class="data" style="width:50%">
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Menu:</strong></td>
+		<td style="width:70%"><%= @menu_user.menu_id %></td>
+	</tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>User:</strong></td>
+		<td style="width:70%"><%= @menu_user.user_id %></td>
+	</tr>
+</table>
+<p>
+	<%= link_to "Editar", edit_menu_user_path(@menu_user) %> |
+	<%= link_to "Eliminar", @menu_user, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Menu Users", menu_users_path %>
+</p>

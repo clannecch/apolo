@@ -5,16 +5,12 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions
   # GET /group_employer_contributions.xml
   def index
-<<<<<<< HEAD
     #@group_employer_contributions = GroupEmployerContribution.all
-    @search = GroupEmployerContribution.search(params[:search])
-    @group_employer_contributions = @search.page(params[:page])#.per(10)
-=======
-    @group_employer_contributions = GroupEmployerContribution.by_company(current_company.id).all
->>>>>>> 3988e2ee3a3cd5f1cf2fd6a95cf99d990b11218b
+    @search = GroupEmployerContribution.by_company(current_company.id).search(params[:search])
+    @group_employer_contributions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @group_employer_contributions }
     end
   end

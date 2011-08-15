@@ -5,16 +5,12 @@ class GroupRetentionsController < ApplicationController
   # GET /group_retentions
   # GET /group_retentions.xml
   def index
-<<<<<<< HEAD
     #@group_retentions = GroupRetention.all
-    @search = GroupRetention.search(params[:search])
-    @group_retentions = @search.page(params[:page])#.per(10)
-=======
-    @group_retentions = GroupRetention.by_company(current_company.id).all
->>>>>>> 3988e2ee3a3cd5f1cf2fd6a95cf99d990b11218b
+    @search = GroupRetention.by_company(current_company.id).search(params[:search])
+    @group_retentions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @group_retentions }
     end
   end

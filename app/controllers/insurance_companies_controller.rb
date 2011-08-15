@@ -4,10 +4,12 @@ class InsuranceCompaniesController < ApplicationController
   # GET /insurance_companies
   # GET /insurance_companies.xml
   def index
-    @insurance_companies = InsuranceCompany.by_company(current_company.id).all
+#    @insurance_companies = InsuranceCompany.by_company(current_company.id).all
+    @search = InsuranceCompany.by_company(current_company.id).search(params[:search])
+    @insurance_companies = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @insurance_companies }
     end
   end

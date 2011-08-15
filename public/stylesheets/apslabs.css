@@ -2505,7 +2505,7 @@ hr {
 
 /* line 51, ../../app/stylesheets/partials/_style.sass */
 #header {
-  background-color: #261f1f;
+  background-color: #34344b;
   background-repeat: no-repeat;
   background-position: 20px 20px;
 }
@@ -3238,4 +3238,19 @@ a.global_button img {
 /* line 22, ../../app/stylesheets/partials/_master.sass */
 .tableStandard tr:hover {
   background-color: #e8eef4;
+}
+
+/* line 25, ../../app/stylesheets/partials/_master.sass */
+table.data {
+  border-collapse: collapse;
+  border: solid 1px #e8eef4;
+}
+/* line 28, ../../app/stylesheets/partials/_master.sass */
+table.data td {
+  padding: 5px;
+  border: solid 1px #e8eef4;
+}
+/* line 31, ../../app/stylesheets/partials/_master.sass */
+table.data .checkbox {
+  margin-left: 10px;
 }

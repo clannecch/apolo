@@ -6,10 +6,10 @@ class DeduccionGananciasTablesController < ApplicationController
   def index
     #@deduccion_ganancias_tables = DeduccionGananciasTable.all
     @search = DeduccionGananciasTable.by_company(current_company.id).search(params[:search])
-    @deduccion_ganancias_tables = @search.page(params[:page])#.per(10)
+    @deduccion_ganancias_tables = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # indexoo.html.erb
       format.xml  { render :xml => @deduccion_ganancias_tables }
     end
   end

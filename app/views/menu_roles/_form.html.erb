@@ -1,0 +1,27 @@
+<%= form_for @menu_role do |f| %>
+	<% if @menu_role.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@menu_role.errors.count, "error") %> prohibido guardar Menu Role:</h2>
+			<ul>
+			<% @menu_role.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<table class="data" style="width:100%" >
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :menu_id %></strong></td>
+			<td style="width:70%">
+				<%= f.collection_select :menu_id, Menu.all, :id, :name %>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :rol_id %></strong></td>
+			<td style="width:70%">
+				<%= f.text_field :rol_id %>
+			</td>
+		</tr>
+	</table>
+	<p><%= f.submit %></p>
+<% end %>

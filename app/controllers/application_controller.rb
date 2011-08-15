@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_company
-
 # paperclip claudio
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -12,6 +11,7 @@ class ApplicationController < ActionController::Base
 
 
   before_filter :check_change_company
+  before_filter :before_all
 
   protected
 
@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
     session[:current_company] || Company.first
   end
 
-
+  def before_all
+    @menus = Menu.all
+  end
 end
 

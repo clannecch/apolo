@@ -1,5 +1,5 @@
 %h1 Listado de Empleados
-%table{:width => "50%"}
+%table.tableStandard{:width => "50%"}
   %tr
     %th Legajo
     %th Nombre
@@ -10,9 +10,7 @@
     %th Seccion
     %th Tarea
     %th Lugar
-    %th
-    %th
-    %th
+    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
   - @employees.each do |employee|
     %tr
       %td= employee.legajo
@@ -24,7 +22,15 @@
       %td= employee.section.try(:detalle)
       %td= employee.task.try(:detalle)
       %td= employee.place.try(:detalle)
-      %td= employee_links(employee)
-
+      -#%td= employee_links(employee)
+      %td
+        %a{ :href => "/employees/#{employee.id.to_s}" }
+          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
+      %td
+        %a{ :href => "/employees/#{employee.id.to_s}/edit" }
+          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
+      %td
+        %a{ :href => "/employees/#{employee.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
+          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
 %br/
 = link_to 'Nuevo Empleado', new_employee_path

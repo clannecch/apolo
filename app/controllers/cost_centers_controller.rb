@@ -8,7 +8,7 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
     @cost_centers = @search.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.xml  { render :xml => @cost_centers }
     end
   end
