@@ -337,6 +337,9 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def calculo_dias_trabajados_mes(fi,fe)
+     if fe.nil?
+       fe=fi.end_of_month()
+     end
      if fi.year == fe.year && fi.month == fe.month
        cantidad = fe.day - fi.month
      else
@@ -349,6 +352,9 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def calculo_dias_vacaciones_no_gozadas(fi,fe,pl)
+    if fe.nil?
+      fe=fi.end_of_month()
+    end
     if fi.year < pl.year
       fi =(pl.year.to_s + "01-01").to_date
     end

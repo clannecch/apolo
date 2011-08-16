@@ -2,6 +2,7 @@
 
 <table class="tableStandard">
 	<tr>
+        <th>Id</th>
 		<th>Parent</th>
 		<th>Name</th>
 		<th>Link Url</th>
@@ -10,7 +11,8 @@
 	</tr>
 	<% for menu in @menus %>
 		<tr>
-			<td><%= menu.parent_id %></td>
+            <td><%= menu.id %></td>
+            <td><%= menu.parent_id %></td>
 			<td><%= menu.name %></td>
 			<td><%= menu.link_url %></td>
 			<td><%= menu.order_no %></td>

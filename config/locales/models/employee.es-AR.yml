@@ -1,7 +1,5 @@
-'es-AR':
+es-AR:
   activerecord:
     models:
       employee: Empleado
     attributes:
-      employee:
-        employee_id: Empleado

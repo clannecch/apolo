@@ -492,7 +492,7 @@ class ReciboSueldosController < ApplicationController
           if retenciones > haberes_cd and retenciones > heberes_sd
             linea << ['','' , '','']
           end
-          linea[retenciones][3]   =    r.retention_concept.codigo.to_s + "  "+format_number(r.total).rjust(20)
+          linea[retenciones][3]   =    r.retention_concept.codigo.to_s + "  " +format_number(r.total).rjust(20)
           total_retention = total_retention + r.total
         end
       end
@@ -502,7 +502,7 @@ class ReciboSueldosController < ApplicationController
           if hoja != hoja_inicial_pedida_en_vista
             pdf.start_new_page
           end
-          pdf.bounding_box [1, 550], :width => 730, :height => 405 do
+          pdf.bounding_box [1, 550], :width => 730, :height => 550 do
               pdf.stroke_bounds
           end
           pdf.draw_text "Libro de Sueldos y Jornales Ley 20.744".center(200), :at => [5,560],:style => :bold, :size => 11
@@ -580,8 +580,13 @@ class ReciboSueldosController < ApplicationController
             " " + r.employee.numero_documento.to_i.to_s.strip.ljust(12)    +
              r.employee.nationality.detalle[0..3].ljust(6) +
              r.employee.marital_status.detalle[0..3].ljust(8) +
-            r.employee.category.detalle[0..9].ljust(11)            +
-            r.employee.fecha_egreso.strftime("%d/%m/%Y")
+            r.employee.category.detalle[0..9].ljust(11)
+
+        if r.employee.fecha_egreso.nil?
+
+        else
+           linea[1][0] = linea[1][0] + r.employee.fecha_egreso.strftime("%d/%m/%Y")
+        end
 
         linea.each do |l|
           offset = offset - 10
@@ -592,7 +597,7 @@ class ReciboSueldosController < ApplicationController
         end
         pdf.draw_text  format_number(total_haberes_sd+total_haberes_cd-total_retention).strip.rjust(20) , :at => [570, offset], :size => 10
         pdf.draw_text  format_number(acumulado_anual(@liquidacion_periodo, r.employee_id) ).strip.rjust(20) , :at => [645, offset], :size => 10
-
+        offset = offset -10
       end
     end
 # Recuadro exterior

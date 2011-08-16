@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110801204306) do
+ActiveRecord::Schema.define(:version => 20110812201543) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(:version => 20110801204306) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.binary   "adjunto_file"
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "code",       :limit => 16,  :null => false
+    t.string   "name",       :limit => 128, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "bank_deposit_account_types", :force => true do |t|
@@ -484,6 +491,29 @@ ActiveRecord::Schema.define(:version => 20110801204306) do
     t.integer  "company_id"
   end
 
+  create_table "menu_roles", :force => true do |t|
+    t.integer  "menu_id",    :null => false
+    t.integer  "rol_id",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menu_users", :force => true do |t|
+    t.integer  "menu_id",    :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "name",       :limit => 128, :null => false
+    t.string   "link_url",   :limit => 128
+    t.integer  "order_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "my_images", :force => true do |t|
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -591,6 +621,21 @@ ActiveRecord::Schema.define(:version => 20110801204306) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "user_authorizations", :force => true do |t|
+    t.integer  "user_id",          :null => false
+    t.integer  "authorization_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.integer  "rol_id",                        :null => false
+    t.boolean  "is_active",  :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

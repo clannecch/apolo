@@ -20,7 +20,7 @@
                 <!-- CUARTO NIVEL -->
             <li><a href="<%= level2.link_url %>"><%= level2.name %></a></li>
                 <% else %>
-            <li><a class="parent" href="<%= (level2.link_url.trim == "?" ? "/Home/MenuNavigation?id=" + level2.id.to_s : level2.link_url) %>"><span><%= level2.name %></span></a>
+            <li><a class="parent" href="<%= (level2.link_url == "?" ? "/Home/MenuNavigation?id=" + level2.id.to_s : level2.link_url) %>"><span><%= level2.name %></span></a>
               <div><ul>
                   <% @menus.select{|menu| menu[:parent_id] == level2.id }.each do |level3| %>
                 <li><a href="<%= level3.link_url %>"><%= level3.name %></a></li>
