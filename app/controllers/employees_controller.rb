@@ -22,7 +22,11 @@ class EmployeesController < ApplicationController
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@employee.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-          print_ficha_pdf(dump_tmp_filename,@employee)
+          file_map = Rails.root.join('tmp',rand.to_s[2..15]+'.png')
+          file_photo = Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+          Dir.mkdir(file_map.dirname) unless File.directory?(file_map.dirname)
+          Dir.mkdir(file_photo.dirname) unless File.directory?(file_map.dirname)
+          print_ficha_pdf(dump_tmp_filename,file_map,file_photo,@employee)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "Ficha_de_personal.pdf")
           #File.delete(dump_tmp_filename)
       end
@@ -91,7 +95,7 @@ class EmployeesController < ApplicationController
   end
 
 # #################################################################################
-  def print_ficha_pdf(filename,entity)
+  def print_ficha_pdf(filename, file_map , file_photo , entity)
     require 'prawn'
     @employee = entity
 
@@ -112,10 +116,17 @@ class EmployeesController < ApplicationController
         pdf.stroke_bounds
     end
 
-    foto = "moco.jpg"
     pdf.stroke_rectangle [400,710], 100, 100
-    pdf.image foto, :at => [405,705], :fit => [90,90]
 
+    photo = @employee.attachments.unscoped.where(:associated_document_type_id => 1).first()
+    if photo.adjunto_content_type[0..4] = "image"
+      open( file_photo, 'wb' ) { |file|
+          file.write(photo.adjunto_file)
+        }
+
+      foto = file_photo.to_s
+      pdf.image foto, :at => [405,705], :fit => [90,90]
+    end
     pdf.draw_text "Ficha de Personal", :at => [200,725],:style => :bold, :size => 13
     pdf.draw_text "Legajo :", :at => [435,725],:style => :bold, :size => 13
     pdf.draw_text @employee.legajo[0..9], :at => [485,725],:style => :bold, :size => 16
@@ -151,7 +162,17 @@ class EmployeesController < ApplicationController
 
     pdf.stroke_rectangle [10,610], 380, 3
 
-    foto = "staticmap.png"
+    require 'net/http'
+
+    Net::HTTP.start( 'maps.google.com' ) { |http|
+      resp = http.get( '/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=' + @employee.latitude.to_s + '%2C' +
+                      @employee.longitude.to_s )
+      open( file_map, 'wb' ) { |file|
+        file.write(resp.body)
+      }
+    }
+
+    foto = file_map.to_s
     pdf.stroke_rectangle [5,605], 156,106
     pdf.image foto, :at => [8,602], :fit => [150,150]
     pdf.draw_text "Domicilio", :at => [270,595], :size => 11, :style => :bold
@@ -181,7 +202,7 @@ class EmployeesController < ApplicationController
     pdf.draw_text @employee.codigo_postal, :at => [417,535],:style => :bold, :size => 10
 
     pdf.draw_text "Ubicado sobre:", :at => [170,520], :size => 9
-    pdf.draw_text @employee.home_about.detalle, :at => [230,520],:style => :bold, :size => 10
+    pdf.draw_text (@employee.home_about_id.blank? ? '' : @employee.home_about.detalle), :at => [230,520],:style => :bold, :size => 10
 
     pdf.draw_text "Cuadras Asfalto:", :at => [350,520], :size => 9
     pdf.draw_text @employee.cuadras_asfalto, :at => [417,520],:style => :bold, :size => 10
@@ -190,7 +211,7 @@ class EmployeesController < ApplicationController
     pdf.draw_text @employee.email, :at => [230,505],:style => :bold, :size => 10
 
     pdf.draw_text "Tipo E-Mail:", :at => [350,505], :size => 9
-    pdf.draw_text @employee.email_type.detalle, :at => [417,505],:style => :bold, :size => 10
+    pdf.draw_text (@employee.email_type_id.blank? ? '' : @employee.email_type.detalle), :at => [417,505],:style => :bold, :size => 10
 
     pdf.stroke_rectangle [170,500], 360, 3
 
@@ -301,7 +322,7 @@ class EmployeesController < ApplicationController
     pdf.stroke_rectangle [5,170], 527, 3
 
     pdf.draw_text "Aseguradora:", :at => [5,155], :size => 9
-    pdf.draw_text @employee.insurance_company.detalle, :at => [100,155],:style => :bold, :size => 10
+    pdf.draw_text (@employee.insurance_company_id.blank? ? '' : @employee.insurance_company.detalle), :at => [100,155],:style => :bold, :size => 10
 
     pdf.draw_text "Nro.Poliza:", :at => [300,155], :size => 9
     pdf.draw_text @employee.Seguro_numero_poliza, :at => [400,200],:style => :bold, :size => 10
@@ -351,4 +372,5 @@ class EmployeesController < ApplicationController
       n = n.truncate.to_s.gsub(/(.)(?=.{3}+$)/, %q(\1,))+"."+((n.abs-n.abs.truncate)*100).truncate.to_s.rjust(2,"0")
     end
   end
+
 end
