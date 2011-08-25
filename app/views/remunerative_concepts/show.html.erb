@@ -72,5 +72,6 @@
 <p>
 	<%= link_to "Editar", edit_remunerative_concept_path(@remunerative_concept) %> |
 	<%= link_to "Eliminar", @remunerative_concept, :confirm => 'Esta seguro?', :method => :delete %> |
+    <%= link_to icon('printer', :small, :title => 'Listado'), remunerative_concept_path(@remunerative_concept, :format => 'pdf') %>
 	<%= link_to "Codigos de Haberes", remunerative_concepts_path %>
 </p>

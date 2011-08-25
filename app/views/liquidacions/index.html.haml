@@ -15,15 +15,16 @@
     %th
   - @liquidacions.each do |liquidacion|
     %tr
-      %td= liquidacion.periodo.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s
-      %td= liquidacion.quincena
+      %td= liquidacion.periodo.strftime("%Y/%m")
+      %td{:style => "text-align:center"}= liquidacion.quincena
       %td= liquidacion.tipo_recibo.try(:detalle)
-      %td= liquidacion.fecha_liquidacion
+      %td{:style => "text-align:center"}= liquidacion.fecha_liquidacion.strftime("%d/%m/%Y")
       %td= liquidacion.bank_deposit.try(:detalle)
-      %td= liquidacion.periodo_deposito.year.to_s + '/' + liquidacion.periodo_deposito.month.to_s
-      %td= liquidacion.fecha_deposito
-      %td= liquidacion.fecha_cierre
+      %td= liquidacion.periodo_deposito.strftime("%Y/%m")
+      %td= liquidacion.fecha_deposito.strftime("%d/%m/%Y")
+      %td= liquidacion.fecha_cierre.strftime("%d/%m/%Y")
       %td= liquidacion.techo_retenciones
       %td= liquidacion_links(liquidacion)
+
 %br/
 = link_to 'Nueva Liquidacion', new_liquidacion_path

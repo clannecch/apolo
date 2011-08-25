@@ -214,7 +214,7 @@ class ReciboSueldo < ActiveRecord::Base
 
   def calculo_antiguedad (fi, pl)
       anos = pl.year.to_i - fi.year.to_i + employee.antiguedad_reconocida_anos.to_i
-      anos = anos - 1 if fi.month >  pl.month + employee.antiguedad_reconocida_meses
+      anos = anos - 1 if fi.month >  pl.month + employee.antiguedad_reconocida_meses.to_i
       return anos
   end
 
@@ -233,10 +233,13 @@ class ReciboSueldo < ActiveRecord::Base
         if (egreso.to_date > finicio.to_date) &&  (egreso.to_date < ffinal.to_date)
           ffinal=egreso
         end
+      else
+        egreso= pl.end_of_month
       end
       if ingreso > finicio
         finicio= ingreso
       end
+#errors.add(:base, "ingreso "+ingreso.to_s+" Egreso "+egreso.to_s)
       if (ingreso.year.to_i * 100) + ingreso.month.to_i > (pl.year * 100 + pl.month) ||
           (egreso.year.to_i * 100) + egreso.month.to_i  < (pl.year * 100 + pl.month)
          diastrabajados = 0
@@ -286,11 +289,12 @@ class ReciboSueldo < ActiveRecord::Base
 
   def calculo_dias_vacaciones(fi, pl)
     anos = calculo_antiguedad(fi, pl)
+    dias_vacaciones = 0
 
     if anos < 1
       dias_vacaciones = ( ( ( (pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi) +
                                 (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
-      errors.add(:base, "< anos "+dias_vacaciones.to_s)
+#errors.add(:base, "< anios "+dias_vacaciones.to_s)
     else
       case anos
         when 1..9
@@ -300,6 +304,9 @@ class ReciboSueldo < ActiveRecord::Base
         else
           dias_vacaciones = 35
       end
+    end
+    if dias_vacaciones < 0
+       dias_vacaciones = 0
     end
     return dias_vacaciones
   end

@@ -245,8 +245,11 @@ class Employee < ActiveRecord::Base
     #errors.add(:base, __method__.to_s+ " - "+fecha_nacimiento_change.to_s)
 
     #errors.add(:base, attributes.inspect)
-    if fecha_nacimiento >  18.years.ago.to_date
-      errors.add(:base, "Fecha de nacimiento erronea ")
+    if fecha_nacimiento.blank?
+    else
+      if fecha_nacimiento >  18.years.ago.to_date
+        errors.add(:base, "Fecha de nacimiento erronea ")
+      end
     end
   end
 
@@ -257,7 +260,8 @@ class Employee < ActiveRecord::Base
   end
 
   def full_address
-   [calle, puerta, location.detalle, province.detalle , country.detalle].compact.join(', ')
+   [(calle.blank? ? '' : calle), (puerta.blank? ? '' : puerta), (location_id.blank? ? '' : location.detalle),
+      (province_id.blank? ? '' : province.detalle) , (country_id.blank? ? '' : country.detalle)].compact.join(', ')
   end
 end
 11

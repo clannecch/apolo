@@ -243,10 +243,10 @@
       %td= attach.name
       %td= attach.reception_date
       %td= link_to 'Visualizar', attach
-      %td= link_to 'Visualizar', attach
 
 
 = employee_links(@employee)
 = link_to 'Editar', edit_employee_path(@employee)
 |
 \#{link_to 'Volver', employees_path}
+= link_to icon('printer', :small, :title => 'Ficha Empleado'), employee_path(@employee, :format => 'pdf')
