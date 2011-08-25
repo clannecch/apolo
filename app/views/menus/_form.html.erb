@@ -13,7 +13,7 @@
 		<tr>
 			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :parent_id %></strong></td>
 			<td style="width:70%">
-				<%= f.text_field :parent_id %>
+                <%= f.collection_select :parent_id, Menu.all, :id, :name, :include_blank => 'Menú Raiz' %>
 			</td>
 		</tr>
 		<tr>
