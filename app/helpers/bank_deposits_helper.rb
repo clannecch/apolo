@@ -8,4 +8,5 @@ module BankDepositsHelper
       links.compact.join( " | ").html_safe
 
   end
+
 end

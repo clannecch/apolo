@@ -10,9 +10,7 @@
     %th Fecha deposito
     %th Fecha cierre
     %th Techo retenciones
-    %th
-    %th
-    %th
+    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
   - @liquidacions.each do |liquidacion|
     %tr
       %td= liquidacion.periodo.strftime("%Y/%m")
@@ -24,7 +22,15 @@
       %td= liquidacion.fecha_deposito.strftime("%d/%m/%Y")
       %td= liquidacion.fecha_cierre.strftime("%d/%m/%Y")
       %td= liquidacion.techo_retenciones
-      %td= liquidacion_links(liquidacion)
-
+      -#%td= liquidacion_links(liquidacion)
+      %td.last
+        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}" }
+          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
+      %td.last
+        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}/edit" }
+          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
+      %td.last
+        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
+          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
 %br/
 = link_to 'Nueva Liquidacion', new_liquidacion_path

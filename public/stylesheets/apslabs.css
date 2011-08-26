@@ -3210,47 +3210,315 @@ a.global_button img {
   color: white;
 }
 
-/*  PEQL
- *
- *  -------------------------------------
- */
-/* line 9, ../../app/stylesheets/partials/_master.sass */
-.tableStandard {
-  border-collapse: collapse;
-  border: solid 1px #e8eef4;
+/*----------------------------------------------------------
+ *RUBY APS Web Deveopment
+ *Pablo van Diest, Sebastian Diaz, Claudio Annecchini, Luis Petek
+ *---------------------------------------------------------- */
+/* line 6, ../../app/stylesheets/partials/_master.sass */
+body {
+  background-color: #5c87b2;
+  font-size: 0.75em;
+  font-family: Verdana, Helvetica, Sans-Serif;
+  margin: 0;
+  padding: 0;
+  color: #696969;
 }
-/* line 12, ../../app/stylesheets/partials/_master.sass */
-.tableStandard th {
+
+/* line 15, ../../app/stylesheets/partials/_master.sass */
+a:link {
+  color: #034af3;
+  text-decoration: underline;
+}
+/* line 18, ../../app/stylesheets/partials/_master.sass */
+a:visited {
+  color: #505abc;
+}
+/* line 20, ../../app/stylesheets/partials/_master.sass */
+a:hover {
+  color: #1d60ff;
+  text-decoration: none;
+}
+/* line 23, ../../app/stylesheets/partials/_master.sass */
+a:active {
+  color: #12eb87;
+}
+
+/* line 26, ../../app/stylesheets/partials/_master.sass */
+p, ul {
+  margin-bottom: 20px;
+  line-height: 1.6em;
+}
+
+/* line 30, ../../app/stylesheets/partials/_master.sass */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.5em;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* line 35, ../../app/stylesheets/partials/_master.sass */
+h1 {
+  font-size: 2em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* line 40, ../../app/stylesheets/partials/_master.sass */
+h2 {
+  padding: 0 0 10px 0;
+}
+
+/* line 43, ../../app/stylesheets/partials/_master.sass */
+h3 {
+  font-size: 1.2em;
+}
+
+/* line 46, ../../app/stylesheets/partials/_master.sass */
+h4 {
+  font-size: 1.1em;
+}
+
+/* line 49, ../../app/stylesheets/partials/_master.sass */
+h5, h6 {
+  font-size: 1em;
+}
+
+/* line 53, ../../app/stylesheets/partials/_master.sass */
+.rightColumn > h1, .rightColumn > h2 {
+  margin-top: 0;
+}
+
+/* line 57, ../../app/stylesheets/partials/_master.sass */
+.leftColumn > h1, .leftColumn > h2 {
+  margin-top: 0;
+}
+
+/* line 60, ../../app/stylesheets/partials/_master.sass */
+.page {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 65, ../../app/stylesheets/partials/_master.sass */
+fieldset {
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid #cccccc;
+}
+/* line 69, ../../app/stylesheets/partials/_master.sass */
+fieldset p {
+  margin: 2px 12px 10px 10px;
+}
+
+/* line 72, ../../app/stylesheets/partials/_master.sass */
+legend {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 2px 4px 8px 4px;
+}
+
+/* line 77, ../../app/stylesheets/partials/_master.sass */
+table.tableStandard {
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+/* line 80, ../../app/stylesheets/partials/_master.sass */
+table.tableStandard th {
+  background-color: #c3d5d5;
   padding: 6px 5px;
   text-align: left;
-  background-color: #c3d5d5;
   border: solid 1px #e8eef4;
 }
-/* line 17, ../../app/stylesheets/partials/_master.sass */
-.tableStandard td {
+/* line 85, ../../app/stylesheets/partials/_master.sass */
+table.tableStandard td {
   padding: 5px;
   border: solid 1px #e8eef4;
 }
-/* line 20, ../../app/stylesheets/partials/_master.sass */
-.tableStandard .checkbox {
-  margin-left: 10px;
-}
-/* line 22, ../../app/stylesheets/partials/_master.sass */
-.tableStandard tr:hover {
+/* line 88, ../../app/stylesheets/partials/_master.sass */
+table.tableStandard tr:hover {
   background-color: #e8eef4;
 }
 
-/* line 25, ../../app/stylesheets/partials/_master.sass */
-table.data {
+/* line 92, ../../app/stylesheets/partials/_master.sass */
+input[type="text"] {
+  width: 200px;
+  border: 1px solid #cccccc;
+  font: Tahoma;
+  font-size: 12px;
+}
+/* line 97, ../../app/stylesheets/partials/_master.sass */
+input[type="password"] {
+  width: 200px;
+  border: 1px solid #cccccc;
+}
+/* line 100, ../../app/stylesheets/partials/_master.sass */
+input[type="submit"] {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: #95ff7a;
+  font: Tahoma;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 2px 10px 2px 10px;
+}
+
+/* line 110, ../../app/stylesheets/partials/_master.sass */
+imput.select {
+  color: black;
+  font: Tahoma;
+  font-size: 12px;
+  width: 90%;
+}
+/* line 115, ../../app/stylesheets/partials/_master.sass */
+imput.buttonStandard {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: white;
+}
+
+/* line 121, ../../app/stylesheets/partials/_master.sass */
+input.buttonSave {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: #95ff7a;
+  padding: 2px 10px 2px 10px;
+  width: 120px;
+}
+/* line 127, ../../app/stylesheets/partials/_master.sass */
+input.buttonCancel {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: #ffe600;
+  padding: 2px 10px 2px 10px;
+  width: 120px;
+}
+/* line 133, ../../app/stylesheets/partials/_master.sass */
+input.buttonGetData {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: #aaffff;
+  padding: 2px 10px 2px 10px;
+  width: 80px;
+}
+/* line 139, ../../app/stylesheets/partials/_master.sass */
+input.buttonPrint {
+  background-color: #00008b;
+  background-image: url("images/buttonBack.gif");
+  color: #1df281;
+  padding: 2px 10px 2px 10px;
+  width: 100px;
+}
+/* line 145, ../../app/stylesheets/partials/_master.sass */
+input[type="submit"]:hover {
+  font-weight: bold;
+}
+/* line 147, ../../app/stylesheets/partials/_master.sass */
+input.buttonStandard:hover, input.buttonGetData:hover {
+  font-weight: bold;
+  color: #00b8f5;
+}
+/* line 150, ../../app/stylesheets/partials/_master.sass */
+input.buttonSave:hover, input.buttonCancel:hover, input.buttonPrint:hover {
+  font-weight: bold;
+}
+
+/* line 153, ../../app/stylesheets/partials/_master.sass */
+ratio {
+  color: black;
+  font: Tahoma;
+  font-size: 12px;
+}
+
+/* line 158, ../../app/stylesheets/partials/_master.sass */
+hyperLink {
+  font: Tahoma;
+  font-size: 12px;
+}
+
+/* line 163, ../../app/stylesheets/partials/_master.sass */
+div.divStandard {
+  border-style: none;
   border-collapse: collapse;
-  border: solid 1px #e8eef4;
+  color: black;
+  empty-cells: show;
+  font: Tahoma;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+  width: 100%;
 }
-/* line 28, ../../app/stylesheets/partials/_master.sass */
-table.data td {
-  padding: 5px;
-  border: solid 1px #e8eef4;
+/* line 173, ../../app/stylesheets/partials/_master.sass */
+div.divCentered {
+  text-align: center;
 }
-/* line 31, ../../app/stylesheets/partials/_master.sass */
-table.data .checkbox {
-  margin-left: 10px;
+/* line 175, ../../app/stylesheets/partials/_master.sass */
+div.divData {
+  background-color: #c3d5d5;
+  border-style: solid;
+  border-width: 1px;
+}
+/* line 179, ../../app/stylesheets/partials/_master.sass */
+div.divLinks {
+  background-color: #c3d5d5;
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px 0px 5px 5px;
+}
+/* line 184, ../../app/stylesheets/partials/_master.sass */
+div.divFilter {
+  background-color: #c3d5d5;
+  border-style: inset;
+  border-width: 1px;
+  padding: 5px 0px 5px 5px;
+  vertical-align: bottom;
+}
+/* line 190, ../../app/stylesheets/partials/_master.sass */
+div.divFilter:hover {
+  background-color: #7ba3a3;
+}
+
+/* line 193, ../../app/stylesheets/partials/_master.sass */
+.checkbox {
+  background-color: Transparent;
+  font: Tahoma;
+  font-size: 12px;
+}
+
+/* line 198, ../../app/stylesheets/partials/_master.sass */
+.combobox, .editbox {
+  background-color: white;
+  font: Tahoma;
+  font-size: 12px;
+  width: 90%;
+}
+
+/* line 204, ../../app/stylesheets/partials/_master.sass */
+.label {
+  background-color: Transparent;
+  font: Tahoma;
+  font-size: 12px;
+}
+
+/* line 209, ../../app/stylesheets/partials/_master.sass */
+.labelCaption {
+  background-color: #c3d5d5;
+  font: Tahoma;
+  font-size: 10px;
+}
+
+/* line 214, ../../app/stylesheets/partials/_master.sass */
+.labelData {
+  background-color: Transparent;
+  font: Tahoma;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+/* line 220, ../../app/stylesheets/partials/_master.sass */
+.textbox {
+  background-color: white;
+  font: Tahoma;
+  font-size: 12px;
+  width: 90%;
 }

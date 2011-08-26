@@ -1,32 +1,224 @@
-/*
- *  PEQL
- *
- *  -------------------------------------
- */
+/*----------------------------------------------------------
+ *RUBY APS Web Deveopment
+ *Pablo van Diest, Sebastian Diaz, Claudio Annecchini, Luis Petek
+ *----------------------------------------------------------
 
-// Pablo van Diest
+body
+  background-color: #5c87b2
+  font-size: .75em
+  font-family: Verdana, Helvetica, Sans-Serif
+  margin: 0
+  padding: 0
+  color: #696969
 
-.tableStandard
-  border-collapse: collapse
+a
+  &:link
+    color: #034af3
+    text-decoration: underline
+  &:visited
+    color: #505abc
+  &:hover
+    color: #1d60ff
+    text-decoration: none
+  &:active
+    color: #12eb87
+
+p, ul
+  margin-bottom: 20px
+  line-height: 1.6em
+
+h1, h2, h3, h4, h5, h6
+  font-size: 1.5em
+  color: #000
+  font-family: Arial, Helvetica, sans-serif
+
+h1
+  font-size: 2em
+  padding-bottom: 0
+  margin-bottom: 0
+
+h2
+  padding: 0 0 10px 0
+
+h3
+  font-size: 1.2em
+
+h4
+  font-size: 1.1em
+
+h5, h6
+  font-size: 1em
+
+.rightColumn >
+  h1, h2
+    margin-top: 0
+
+.leftColumn >
+  h1, h2
+    margin-top: 0
+
+.page
+  width: 90%
+  margin-left: auto
+  margin-right: auto
+
+fieldset
+  margin: 1em 0
+  padding: 1em
+  border: 1px solid #ccc
+  p
+    margin: 2px 12px 10px 10px
+
+legend
+  font-size: 1.1em
+  font-weight: 600
+  padding: 2px 4px 8px 4px
+
+table.tableStandard
   border: solid 1px #e8eef4
+  border-collapse: collapse
   th
+    background-color: #c3d5d5
     padding: 6px 5px
     text-align: left
-    background-color: #c3d5d5
     border: solid 1px #e8eef4
   td
     padding: 5px
     border: solid 1px #e8eef4
-  .checkbox
-    margin-left: 10px
   tr:hover
     background-color: #e8eef4
 
-table.data
-  border-collapse: collapse
-  border: solid 1px #e8eef4
-  td
-    padding: 5px
-    border: solid 1px #e8eef4
-  .checkbox
-    margin-left: 10px
+input
+  &[type="text"]
+    width: 200px
+    border: 1px solid #ccc
+    font: Tahoma
+    font-size: 12px
+  &[type="password"]
+    width: 200px
+    border: 1px solid #ccc
+  &[type="submit"]
+    background-color: #00008B
+    background-image: url("images/buttonBack.gif")
+    color: #95FF7A
+    font: Tahoma
+    font-size: 12px
+    font-weight: normal
+    padding: 2px 10px 2px 10px
+
+imput
+  &.select
+    color: Black
+    font: Tahoma
+    font-size: 12px
+    width: 90%
+  &.buttonStandard
+    background-color: #00008b
+    background-image: url("images/buttonBack.gif")
+    color: White
+
+input
+  &.buttonSave
+    background-color: #00008b
+    background-image: url("images/buttonBack.gif")
+    color: #95ff7a
+    padding: 2px 10px 2px 10px
+    width: 120px
+  &.buttonCancel
+    background-color: #00008b
+    background-image: url("images/buttonBack.gif")
+    color: #ffe600
+    padding: 2px 10px 2px 10px
+    width: 120px
+  &.buttonGetData
+    background-color: #00008b
+    background-image: url("images/buttonBack.gif")
+    color: #aaffff
+    padding: 2px 10px 2px 10px
+    width: 80px
+  &.buttonPrint
+    background-color: #00008b
+    background-image: url("images/buttonBack.gif")
+    color: #1df281
+    padding: 2px 10px 2px 10px
+    width: 100px
+  &[type="submit"]:hover
+    font-weight: bold
+  &.buttonStandard:hover, &.buttonGetData:hover
+    font-weight: bold
+    color: #00b8f5
+  &.buttonSave:hover, &.buttonCancel:hover, &.buttonPrint:hover
+    font-weight: bold
+
+ratio
+  color: Black
+  font: Tahoma
+  font-size: 12px
+
+hyperLink
+  font: Tahoma
+  font-size: 12px
+
+div
+  &.divStandard
+    border-style: none
+    border-collapse: collapse
+    color: #000
+    empty-cells: show
+    font: Tahoma
+    font-size: 12px
+    font-weight: normal
+    text-align: left
+    width: 100%
+  &.divCentered
+    text-align: center
+  &.divData
+    background-color: #c3d5d5
+    border-style: solid
+    border-width: 1px
+  &.divLinks
+    background-color: #c3d5d5
+    border-style: solid
+    border-width: 1px
+    padding: 5px 0px 5px 5px
+  &.divFilter
+    background-color: #c3d5d5
+    border-style: inset
+    border-width: 1px
+    padding: 5px 0px 5px 5px
+    vertical-align: bottom
+    &:hover
+      background-color: #7BA3A3
+
+.checkbox
+  background-color: Transparent
+  font: Tahoma
+  font-size: 12px
+
+.combobox, .editbox
+  background-color: #fff
+  font: Tahoma
+  font-size: 12px
+  width: 90%
+
+.label
+  background-color: Transparent
+  font: Tahoma
+  font-size: 12px
+
+.labelCaption
+  background-color: #c3d5d5
+  font: Tahoma
+  font-size: 10px
+
+.labelData
+  background-color: Transparent
+  font: Tahoma
+  font-size: 12px
+  font-weight: bolder
+
+.textbox
+  background-color: #fff
+  font: Tahoma
+  font-size: 12px
+  width: 90%
