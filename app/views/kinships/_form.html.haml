@@ -1,0 +1,14 @@
+
+= semantic_form_for @kinship do |f|
+  = f.semantic_errors
+
+  = f.inputs do
+
+    = f.input :name
+
+    = f.label "Tipo de parentesco"
+    = select( "employee_familiar", "kinships", { "No corresponde" => " ", "Conyuge" => "C", "Hijo" => "H"})
+
+
+  = f.buttons
+

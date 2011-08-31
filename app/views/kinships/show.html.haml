@@ -1,0 +1,19 @@
+
+
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), Kinship.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_kinship_path(@kinship), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@kinship) do |s|
+  = s.attributes(Kinship.human_name + ' Info') do
+
+    = s.attribute :name
+
+    = s.attribute :hijo_conyugue
+
+
+.clear

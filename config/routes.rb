@@ -1,5 +1,9 @@
 APSSueldos::Application.routes.draw do |map|
 
+  resources :activities
+
+  resources :kinships
+
   resources :associated_document_types
 
   resources :EmployeeDocumentsController
