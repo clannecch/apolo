@@ -1,0 +1,3 @@
+class SicossCondition < ActiveRecord::Base
+  has_many :employees
+end

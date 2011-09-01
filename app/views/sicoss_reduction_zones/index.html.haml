@@ -1,0 +1,30 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => SicossReductionZone.model_name.human).titlecase
+
+%table
+  %tr
+
+    %th= SicossReductionZone.human_attribute_name('code')
+
+    %th= SicossReductionZone.human_attribute_name('name')
+
+    %th
+    %th
+    %th
+
+  - @sicoss_reduction_zones.each do |sicoss_reduction_zone|
+    %tr
+
+      %td= sicoss_reduction_zone.name
+
+      %td= sicoss_reduction_zone.company_id
+
+      %td= link_to t('scaffold.actions.show').titlecase, sicoss_reduction_zone
+      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_reduction_zone_path(sicoss_reduction_zone)
+      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_reduction_zone, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+
+%br
+
+= link_to t('scaffold.actions.new', :item => SicossReductionZone.model_name.human).titlecase, new_sicoss_reduction_zone_path
+

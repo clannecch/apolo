@@ -1,5 +1,9 @@
 .nested-fields
   .field
+    = f.label "Parentesco"
+    %br/
+    = f.collection_select :kinship_id,  Kinship.all, :id, :name, :prompt => true
+  .field
     = f.label :apellido
     %br/
     = f.text_field :apellido
@@ -58,6 +62,7 @@
   .field
     = f.label "Actividad"
     %br/
+    = f.collection_select :activity_id,  Activity.all, :id, :name, :prompt => true
     =# f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true
   = link_to_remove_association "Borrar Familiar", f
   %hr/

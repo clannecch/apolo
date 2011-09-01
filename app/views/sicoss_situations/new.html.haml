@@ -1,0 +1,8 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.new', :item => SicossSituation.model_name.human).titlecase
+
+= render 'form'
+
+= link_to t('scaffold.actions.back'), sicoss_situations_path
+

@@ -20,7 +20,7 @@ class ReciboSueldo < ActiveRecord::Base
   belongs_to              :employee
   belongs_to              :liquidacion
 
-  has_many                :detalle_recibos
+#ojo 29-08-2011   has_many                :detalle_recibos
 
   validates_presence_of		:employee_id ,	:message => "es un dato requerido"
   validates_uniqueness_of :employee_id ,  :message => "existe liquidacion activa", :scope => :liquidacion_id
@@ -191,6 +191,20 @@ class ReciboSueldo < ActiveRecord::Base
           detalle_recibo_habers.build(:remunerative_concept_id => drh.remunerative_concept.concepto_asociado_haber_id, :cost_center_id => employee.cost_center_id)
       end
     end
+  end
+
+  def total_haberes
+      detalle_recibo_habers.all.sum(&:total)
+  end
+
+  def total_haberes_con_descuento
+    total = 0
+    detalle_recibo_habers.each do |drh|
+      if drh.remunerative_concept.acumuladores_valor.include?("@haberescondescuento")
+        total += drh.total
+      end
+    end
+    return total
   end
 
 # reescrive el metodo method_missing que se ejecuta cuando no encuentra un metodo
@@ -370,5 +384,7 @@ class ReciboSueldo < ActiveRecord::Base
     cantidad = (self.acumuladores.dias_vacaciones.to_f / 360) * cantidad
     return cantidad
   end
+
+
 
 end

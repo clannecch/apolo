@@ -1,0 +1,2 @@
+module SicossDamagedsHelper
+end

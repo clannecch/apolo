@@ -134,9 +134,7 @@ class RemunerativeConceptsController < ApplicationController
                 r.calculo_valor,
                 r.calculo_cantidad
        ]
-#       pdf.move_down 200
     end
-#pdf.move_to 0,0
     pdf.table(data, :column_widths => [40, 155, 20, 40, 40, 40, 40, 60,60,100],
              :cell_style => { :font => "Times-Roman",:size => 10,:padding => [4, 04,04,4], :align => :center, :valign => :center },
              :header => true ,

@@ -1,0 +1,30 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => SicossLocation.model_name.human).titlecase
+
+%table
+  %tr
+
+    %th= SicossLocation.human_attribute_name('code')
+
+    %th= SicossLocation.human_attribute_name('name')
+
+    %th
+    %th
+    %th
+
+  - @sicoss_locations.each do |sicoss_location|
+    %tr
+
+      %td= sicoss_location.name
+
+      %td= sicoss_location.company_id
+
+      %td= link_to t('scaffold.actions.show').titlecase, sicoss_location
+      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_location_path(sicoss_location)
+      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_location, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+
+%br
+
+= link_to t('scaffold.actions.new', :item => SicossLocation.model_name.human).titlecase, new_sicoss_location_path
+

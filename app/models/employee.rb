@@ -132,6 +132,16 @@ class Employee < ActiveRecord::Base
 	belongs_to :insurance_company
 	belongs_to :bank_deposit_account_type
 	belongs_to :bank_deposit
+  belongs_to :siscoss_eployer_type
+  belongs_to :siscoss_situation_id
+  belongs_to :siscoss_condition_id
+  belongs_to :sicoss_activity_id
+  belongs_to :siscoss_contract_mode_id
+  belongs_to :siscoss_damaged_id
+  belongs_to :sicoss_location_id
+  belongs_to :siscoss_reduction_zone_id
+  belongs_to :siscos_seguro_obligatorio
+  belongs_to :siscoss_regimen_type_id
 	has_many   :insurance_beneficiaries
   has_many   :employee_familiars
   has_many   :employee_remunerative_concepts

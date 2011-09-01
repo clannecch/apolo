@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812201543) do
+ActiveRecord::Schema.define(:version => 20110901161102) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(:version => 20110812201543) do
   end
 
   create_table "activities", :force => true do |t|
-    t.string   "detalle"
+    t.string   "name"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20110812201543) do
     t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "kinship_id"
   end
 
   create_table "employee_remunerative_concepts", :force => true do |t|
@@ -346,6 +348,18 @@ ActiveRecord::Schema.define(:version => 20110812201543) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "sicoss_reduccion"
+    t.integer  "sicoss_employer_type_id"
+    t.integer  "sicoss_situation_id"
+    t.integer  "sicoss_condition_id"
+    t.integer  "sicoss_activity_id"
+    t.integer  "sicoss_contract_mode_id"
+    t.integer  "sicoss_damaged_id"
+    t.integer  "sicoss_location_id"
+    t.integer  "sicoss_reduction_zone_id"
+    t.string   "sicoss_en_convenio"
+    t.integer  "sicoss_regimen_type_id"
+    t.string   "sicoss_seguro_obligatorio",        :limit => nil
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -453,6 +467,13 @@ ActiveRecord::Schema.define(:version => 20110812201543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "kinships", :force => true do |t|
+    t.string   "name"
+    t.string   "hijo_conyugue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "labor_unions", :force => true do |t|
@@ -607,6 +628,77 @@ ActiveRecord::Schema.define(:version => 20110812201543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "sicoss_activities", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_conditions", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_contract_modes", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_damageds", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_employer_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sicoss_locations", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_reduction_zones", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_regimen_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_situations", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "tasks", :force => true do |t|

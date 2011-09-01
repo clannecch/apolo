@@ -1,0 +1,59 @@
+#   Detalle								Desde	tamaño
+01	CUIL								001		011
+02 	Apellido y nombre					012		030
+03	Conyuge								042		001
+04	Cantidad Hijos						043		002
+05	Codigo de Situacion					045		002
+06	Codigo de COndicion					047		002
+07	Codigo de Actividad					049		003
+08	Codigo de Zona						052		002
+09	Porcentaje de Aporte Acicional SS	054		005
+10	Codigo de Modalidad de Contratacion	059		003
+11	Codigo de Obra Social				062		006
+12	Cantidad de Adherentes				068		002
+13	Remuneracion Total					070		011
+14	Remuneracion Imponible 1			081		010
+15	Asignaciones Familiares Pagadas		091		009
+16	Importe Aporte Voluntario			100		009
+17	Importe Adicional OS				109		009
+18	Importe Exedentes Aportes SS		119		009
+19	Importe Exedentes Aportes OS		127		009
+20	Provincia Localidad					136		050
+21	Remuneracion Imponible 2			186		010
+22	Remuneracion Imponible 3			196		010
+23	Remuneracion Imponible 4			206		010
+24	Codigo de Siniestrado				216		002
+25	Marca de Corresponde Reduccion		218		001
+26	Capital de Recomposicion LRT		219		009
+27	Tipo de EMpresa						228		001
+28	Aporte Adicional de Obra Social		229		009
+29	Regimen								238		001
+30	Situacion de Revista 1				239		002
+31	Dia inicio Situacion de Revista 1	241		002
+32	Situacion de Revista 2				243		002
+33	Dia inicio Situacion de Revista 2	245		002
+34  Situacion de Revista 3				247		002
+35	Dia inicio Situacion de Revista 3	249		002
+36	Sueldo + Adicionales				251		010
+37	SAC									261		010
+38	Horas Extra							271		010
+39	Zona Desfavorable					281		010
+40	Vacaciones							291		010
+41	Cantidad de Dias trabajados			301		009
+42	Remuneracion Imponible 5			310		010
+43	Trabajador COnvencionado 0=N0 1=Si	320		001
+44	Remuneracion Imponible 6			321		010
+45	Tipo de Operacion					331		001
+46	Adicionales							332		010
+47	Premios								342		010
+48	Rem.Dec.788/5-Rem.Impon.8			352		010
+49	Remuneracion Imponible 7			362		010
+50  Cantidad de Horas Extras			372		003
+51	Conceptos No Remunerativos			375		010
+52	Maternidad							385		010
+53	Rectificacion de Remuneracion		395		009
+54	Remuneracion Imponible 9			404		010
+55	Contribucion Tarea Diferencial (%)	414		009
+56	Horas Trabajadas					423		003
+57	Seguro Colectivo de Vida Obligatorio426		001
+

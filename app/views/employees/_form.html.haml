@@ -53,6 +53,8 @@
     %li
       %a{:href => "#"} Retenciones
     %li
+      %a{:href => "#"} AFIP
+    %li
       %a{:href => "#"} Documentos
   .panes
     .panel
@@ -127,6 +129,8 @@
                 = render 'employee_retention_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
+    .panel
+      = render :partial => 'datos_siscoss', :locals => {:f => f}
     .panel
       .field
         %h3 Documentos Asociados

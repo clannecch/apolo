@@ -27,6 +27,13 @@ class LiquidacionsController < ApplicationController
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
           #File.delete(dump_tmp_filename)
       end
+      format.json do
+        dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+          #File.delete(dump_tmp_filename)
+      end
     end
   end
 
@@ -89,6 +96,82 @@ class LiquidacionsController < ApplicationController
   def find_liquidacion
       @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
   end
+
+# #################################################################################
+  def print_planilla_remuneraciones_pdf(filename,entity)
+  require 'prawn'
+  @recibo_sueldos = @liquidacion.recibo_sueldos.all
+  img = "hsjd2.jpg"
+
+  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+#                              :background => img,
+                            :page_layout => :portrait)
+  prawn_logo = "hsjd.jpg"
+  logo_empresa ="CASA NUESTA SRA. DEL PILAR"
+  logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
+  logo_cuit = "C.U.I.T.: "+"30-67932805-7"
+  logo_inscripcion = "Nro.Inscripcion: " + "21.757"
+  logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
+  offset = 0
+
+  pdf.repeat(:all, :dynamic => true) do
+    pdf.image prawn_logo, :at => [5,750], :width => 30
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+    pdf.draw_text (logo_empresa).center(200), :at => [100,745],:style => :bold, :size => 10
+    pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
+    pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, 725]
+  end
+  data = [["Legajo","N o m b r e","Categoria", "Remuneraciones Con Descuento", "Remuneraciones Sin Descuento","Retenciones","Total Recibo"],
+       [] ]
+  thaber_con_descuento = 0
+  thaber_sin_descuento = 0
+  tretencion = 0
+  @recibo_sueldos.each do |r|
+     retencion = ReciboSueldo.joins(:detalle_recibo_retencions).where(:id => r.id).sum(:total)
+
+     haber_total = r.total_haberes
+     haber_con_descuento = r.total_haberes_con_descuento
+     haber_sin_descuento = haber_total - r.total_haberes_con_descuento
+
+
+     # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
+     tretencion = tretencion + retencion
+     thaber_sin_descuento +=  haber_sin_descuento
+     thaber_con_descuento += haber_con_descuento
+     data << [r.legajo ,
+              r.employee.nombre,
+              r.employee.category.try(:detalle)[0..15],
+              format_number(haber_con_descuento),
+              format_number(haber_sin_descuento),
+              format_number(retencion),
+              format_number(haber_total-retencion)
+     ]
+  end
+  data << ["" ,
+           "T O T A L E S",
+           "",
+           format_number(thaber_con_descuento),
+           format_number(thaber_sin_descuento),
+           format_number(tretencion),
+           format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
+  ]
+
+  pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
+           :cell_style => { :font => "Times-Roman",
+                            :size => 9,:padding => [2,3,4,2],
+                            :align =>  :left,
+                            :valign => :center },
+           :header => true ,
+           :row_colors => ["F0F0F0", "FFFFCC"]
+            )   do
+    column(3..6).align = :right
+    row(0).column(0..6).align = :center
+  end
+
+
+  pdf.render_file(filename)
+
+end
 
 # #################################################################################
   def print_libro_pdf(filename,entity)
@@ -277,3 +360,65 @@ class LiquidacionsController < ApplicationController
   end
 
 end
+
+=begin
+#   Detalle								                  Desde	tamaño		Sale de
+01	CUIL								                    001		011			employee.cuil(0..10).rtrim(11)
+02 	Apellido y nombre					              012		030			(employee.Apellido.strip + ','+ employee.Nombre)(0..29).rtrim(30)
+03	Conyuge								                  042		001			employee.employee.familiar.conyugue_hijo
+04	Cantidad Hijos						              043		002			employee.employee.familiar.conyugue_hijo
+05	Codigo de Situacion					            045		002 ?
+06	Codigo de COndicion					            047		002  ?
+07	Codigo de Actividad					            049		003   ?
+08	Codigo de Zona						              052		002    ?
+09	Porcentaje de Aporte Acicional SS	      054		005    ACUMULADOR
+10	Codigo de Modalidad de Contratacion	    059		003    EMPLOYEE.MODALIDAD
+11	Codigo de Obra Social				            062		006    EMPLOYEE.HEALTH_INSURANCE.CODIGO
+12	Cantidad de Adherentes				          068		002    EMPPLOYEE.CARGAS_EXTRAS
+13	Remuneracion Total					            070		011    ACUMULADOR
+14	Remuneracion Imponible 1			          081		010     ACUMULADOR
+15	Asignaciones Familiares Pagadas		      091		009     ACUMULADOR
+16	Importe Aporte Voluntario			          100		009     ACUMULADOR
+17	Importe Adicional OS				            109		009     ACUMULADOR
+18	Importe Exedentes Aportes SS		        119		009     ACUMULADOR
+19	Importe Exedentes Aportes OS		        127		009     ACUMULADOR
+20	Provincia Localidad					            136		050     ?
+21	Remuneracion Imponible 2			          186		010     ACUMULADOR
+22	Remuneracion Imponible 3			          196		010     ACUMULADOR
+23	Remuneracion Imponible 4			          206		010     ACUMULADOR
+24	Codigo de Siniestrado				            216		002     ?
+25	Marca de Corresponde Reduccion		      218		001     ?
+26	Capital de Recomposicion LRT		        219		009     ACUMULADOR
+27	Tipo de EMpresa						              228		001     ?
+28	Aporte Adicional de Obra Social		      229		009     ACUMULADOR
+29	Regimen								                  238		001     ¿
+30	Situacion de Revista 1				          239		002   ?
+31	Dia inicio Situacion de Revista 1	      241		002   ?
+32	Situacion de Revista 2				          243		002   ?
+33	Dia inicio Situacion de Revista 2	      245		002   ?
+34  Situacion de Revista 3				          247		002     ?
+35	Dia inicio Situacion de Revista 3	      249		002   ?
+36	Sueldo + Adicionales				            251		010     ACUMULADOR
+37	SAC									                    261		010   ACUMULADOR
+38	Horas Extra							                271		010   ACUMULADOR
+39	Zona Desfavorable					              281		010   ¿
+40	Vacaciones							                291		010   ACUMULADOR
+41	Cantidad de Dias trabajados			        301		009   ACUMULADOR
+42	Remuneracion Imponible 5			          310		010   ACUMULADOR
+43	Trabajador COnvencionado 0=N0 1=Si	    320		001   ?
+44	Remuneracion Imponible 6			          321		010   ACUMULADOR
+45	Tipo de Operacion			                  331		001   ?
+46	Adicionales							                332		010   ACUMULADOR
+47	Premios								                  342		010   ACUMULADOR
+48	Rem.Dec.788/5-Rem.Impon.8			          352		010   ACUMULADOR
+49	Remuneracion Imponible 7			          362		010   ACUMULADOR
+50  Cantidad de Horas Extras			          372		003   ACUMULADOR
+51	Conceptos No Remunerativos			        375		010   ACUMULADOR
+52	Maternidad							                385		010   ACUMULADOR
+53	Rectificacion de Remuneracion		        395		009   ACUMULADOR
+54	Remuneracion Imponible 9			          404		010   ACUMULADOR
+55	Contribucion Tarea Diferencial (%)	    414		009   ACUMULADOR
+56	Horas Trabajadas					              423		003   ACUMULADOR
+57	Seguro Colectivo de Vida Obligatorio    426		001   ACUMULADOR
+
+=end
