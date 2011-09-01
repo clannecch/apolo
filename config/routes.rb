@@ -1,5 +1,63 @@
 APSSueldos::Application.routes.draw do |map|
 
+  resources :sicoss_regimen_types
+
+  resources :sicoss_reduction_zones
+
+  resources :sicoss_locations
+
+  resources :sicoss_damageds
+
+  resources :sicoss_contract_modes
+
+  resources :sicoss_activities
+
+  resources :sicoss_conditions
+
+  resources :sicoss_situations
+
+  resources :sicoss_employer_types
+
+  resources :siscoss_regimen_types
+
+  resources :siscoss_regimen
+
+  resources :siscoss_reduction_zones
+
+  resources :siscoss_locations
+
+  resources :siscoss_contract_modes
+
+  resources :siscoss_activities
+
+  resources :siscoss_conditions
+
+  resources :siscoss_situations
+
+  resources :siscoss_employer_types
+
+  resources :syscoss_regimen_types
+
+  resources :syscoss_regimen
+
+  resources :syscoss_reduction_zones
+
+  resources :syscoss_locations
+
+  resources :syscoss_damageds
+
+  resources :syscoss_contract_modes
+
+  resources :syscoss_activities
+
+  resources :syscoss_conditions
+
+  resources :syscoss_situations
+
+  resources :syscoss_employer_types
+
+  resources :employer_types
+
   resources :activities
 
   resources :kinships

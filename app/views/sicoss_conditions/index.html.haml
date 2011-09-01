@@ -1,0 +1,30 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => SicossCondition.model_name.human).titlecase
+
+%table
+  %tr
+
+    %th= SicossCondition.human_attribute_name('code')
+
+    %th= SicossCondition.human_attribute_name('name')
+
+    %th
+    %th
+    %th
+
+  - @sicoss_conditions.each do |sicoss_condition|
+    %tr
+
+      %td= sicoss_condition.name
+
+      %td= sicoss_condition.company_id
+
+      %td= link_to t('scaffold.actions.show').titlecase, sicoss_condition
+      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_condition_path(sicoss_condition)
+      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_condition, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+
+%br
+
+= link_to t('scaffold.actions.new', :item => SicossCondition.model_name.human).titlecase, new_sicoss_condition_path
+

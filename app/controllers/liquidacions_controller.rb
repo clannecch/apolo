@@ -23,7 +23,13 @@ class LiquidacionsController < ApplicationController
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-#          print_libro_pdf(dump_tmp_filename,@liquidacion)
+          print_libro_pdf(dump_tmp_filename,@liquidacion)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+          #File.delete(dump_tmp_filename)
+      end
+      format.json do
+        dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
           #File.delete(dump_tmp_filename)
@@ -110,7 +116,7 @@ class LiquidacionsController < ApplicationController
 
   pdf.repeat(:all, :dynamic => true) do
     pdf.image prawn_logo, :at => [5,750], :width => 30
-    pdf.draw_text "Libro de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
     pdf.draw_text (logo_empresa).center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
     pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, 725]

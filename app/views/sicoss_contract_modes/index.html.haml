@@ -1,0 +1,30 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => SicossContractMode.model_name.human).titlecase
+
+%table
+  %tr
+
+    %th= SicossContractMode.human_attribute_name('name')
+
+    %th= SicossContractMode.human_attribute_name('code')
+
+    %th
+    %th
+    %th
+
+  - @sicoss_contract_modes.each do |sicoss_contract_mode|
+    %tr
+
+      %td= sicoss_contract_mode.name
+
+      %td= sicoss_contract_mode.company_id
+
+      %td= link_to t('scaffold.actions.show').titlecase, sicoss_contract_mode
+      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_contract_mode_path(sicoss_contract_mode)
+      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_contract_mode, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+
+%br
+
+= link_to t('scaffold.actions.new', :item => SicossContractMode.model_name.human).titlecase, new_sicoss_contract_mode_path
+

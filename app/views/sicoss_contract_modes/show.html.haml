@@ -1,0 +1,19 @@
+
+
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), SicossContractMode.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_sicoss_contract_mode_path(@sicoss_contract_mode), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@sicoss_contract_mode) do |s|
+  = s.attributes(SicossContractMode.human_name + ' Info') do
+
+    = s.attribute :code
+
+    = s.attribute :name
+
+
+.clear
