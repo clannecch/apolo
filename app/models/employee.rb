@@ -146,13 +146,11 @@ class Employee < ActiveRecord::Base
   has_many   :employee_familiars
   has_many   :employee_remunerative_concepts
   has_many   :employee_retention_concepts
-  has_many   :employee_documents
 
 	accepts_nested_attributes_for :employee_familiars, :allow_destroy => true
   accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
   accepts_nested_attributes_for :employee_remunerative_concepts, :allow_destroy => true
   accepts_nested_attributes_for :employee_retention_concepts, :allow_destroy => true
-  accepts_nested_attributes_for :employee_documents, :allow_destroy => true
 
   geocoded_by :full_address
   after_validation :geocode, :if => lambda{ |employee| :full_address_changed? }

@@ -72,18 +72,11 @@ APSSueldos::Application.routes.draw do |map|
 
   map.resources :attachments    , :only => :show
 
-  map.resources :my_images, :member => { :avatars => :get }
-#  map.resources :employee_documents, :member => { :documents => :get }
-
-  resources :my_images
-
   resources :causa_egresos
 
   resources :email_types
 
   resources :employees do
-    map.resources :employee_documents, :member => { :documents => :get }
-#    resources :employee_documents
     resources :employee_familiars
     resources :employee_retention_concepts
     resources :employee_remunerative_concepts

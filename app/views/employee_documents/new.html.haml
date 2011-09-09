@@ -1,8 +1,0 @@
-
-- content_for(:title) do
-  %h1= t('scaffold.actions.new', :item => EmployeeDocument.model_name.human).titlecase
-
-= render 'form'
-
-= link_to t('scaffold.actions.back'), employee_documents_path
-
