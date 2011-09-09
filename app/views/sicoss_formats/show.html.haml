@@ -1,0 +1,31 @@
+
+
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), SicossFormat.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_sicoss_format_path(@sicoss_format), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@sicoss_format) do |s|
+  = s.attributes(SicossFormat.human_name + ' Info') do
+
+    = s.attribute :position
+
+    = s.attribute :name
+
+    = s.attribute :field_length
+
+    = s.attribute :number_of_decimals
+
+    = s.attribute :justifies
+
+    = s.attribute :fill_character
+
+    = s.attribute :formula
+
+    = s.attribute :modifiable
+
+
+.clear

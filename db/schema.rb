@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901161102) do
+ActiveRecord::Schema.define(:version => 20110908194415) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -667,6 +667,31 @@ ActiveRecord::Schema.define(:version => 20110901161102) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
+  end
+
+  create_table "sicoss_format_employers", :force => true do |t|
+    t.integer  "sicoss_format_id"
+    t.string   "field_type"
+    t.string   "formula"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sicoss_formats", :force => true do |t|
+    t.integer  "position"
+    t.string   "name"
+    t.integer  "field_length"
+    t.string   "justifies"
+    t.string   "fill_character"
+    t.string   "formula"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "field_type"
+    t.integer  "number_of_decimals"
+    t.boolean  "modifiable"
   end
 
   create_table "sicoss_locations", :force => true do |t|

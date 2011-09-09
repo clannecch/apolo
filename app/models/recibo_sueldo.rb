@@ -44,17 +44,25 @@ class ReciboSueldo < ActiveRecord::Base
   def calcular_recibo
 
     self.acumuladores = OpenStruct.new({
-          :sueldo                       => 0,
-          :valor_dia                    => 0,
-          :valor_hora                   => 0,
-          :mejor_remuneracion_semestre  => 0,
-          :remuneraciones_con_descuento => 0,
-          :remuneraciones_sin_descuento => 0,
-          :retenciones                  => 0,
-          :total_remuneraciones         => 0,
-          :total_retenciones            => 0,
-          :horas_tabajadas              => 0,
-          :antiguedad                   => calculo_antiguedad(self.employee.fecha_ingreso ,self.liquidacion.periodo)
+          :sueldo                                 => 0,
+          :valor_dia                              => 0,
+          :valor_hora                             => 0,
+          :mejor_remuneracion_semestre            => 0,
+          :mejor_remuneracion_habitual_semestre   => 0,
+          :dias_trabajados_semestre               => 0,
+          :dias_vacaciones                        => 0,
+          :cantidad_sueldos_indemnizacion_despido => 0,
+          :mejor_remuneracion_habitual_anual      => 0,
+          :cantidad_indemnizacion_falta_preaviso  => 0,
+          :dias_trabajados_mes                    => 0,
+          :dias_vacaciones_no_gozadas             => 0,
+          :remuneraciones_con_descuento           => 0,
+          :remuneraciones_sin_descuento           => 0,
+          :retenciones                            => 0,
+          :total_remuneraciones                   => 0,
+          :total_retenciones                      => 0,
+          :horas_tabajadas                        => 0,
+          :antiguedad                             => calculo_antiguedad(self.employee.fecha_ingreso ,self.liquidacion.periodo)
         })
 
 #   acumuladores predefinidos

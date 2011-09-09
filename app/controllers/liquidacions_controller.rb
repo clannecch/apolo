@@ -10,6 +10,9 @@ class LiquidacionsController < ApplicationController
     respond_to do |format|
       format.html # indexoo.html.erb
       format.xml  { render :xml => @liquidacions }
+#      format.text do
+#        render :text => @liquidacions.first.periodo
+#      end
     end
   end
 
@@ -33,6 +36,13 @@ class LiquidacionsController < ApplicationController
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
           #File.delete(dump_tmp_filename)
+      end
+
+      format.text  do
+        dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
+        Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+        prepara_sicoss(dump_tmp_filename,@liquidacion)
+        send_file(dump_tmp_filename, :type => :text, :disposition => 'attachment', :filename => "sicoss_interfase.txt")
       end
     end
   end
@@ -333,8 +343,6 @@ end
         offset = offset -10
       end
     end
-# Recuadro exterior
-
 
     pdf.render_file(filename)
   end
@@ -359,6 +367,57 @@ end
     return ntotalh - ntotalr
   end
 
+
+# ###################################################################################
+
+  def prepara_sicoss(filename,entity)
+    sicoss_file = File.open(filename, 'w')
+    offset =500
+    @liquidacion.recibo_sueldos.each do |r|
+      acumuladores = OpenStruct.new()
+      resultado    = OpenStruct.new()
+      registro = ""
+      r.detalle_recibo_habers.each do |dhr|
+        dhr.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
+          acumulador.gsub!('@', '')
+          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        end
+      end
+
+      r.detalle_recibo_retencions.each do |dhr|
+        dhr.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
+          acumulador.gsub!('@', '')
+          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        end
+      end
+      SicossFormat.all.sort_by{ |p| p.position}.each do |f|
+         formula = f.formula.strip.gsub(':', 'r.employee.').gsub('@', 'acumuladores.')
+        if f.field_type == "N"
+            multiplicador = (10 ** f.number_of_decimals).to_s # "1" + (f.number_of_decimals == 0 ? "" :  "0" * f.number_of_decimals)
+            formula ="(sprintf '%."+f.number_of_decimals.to_s+"f', ("+
+                      formula + "* "+ multiplicador + " - ("+
+                      formula +" * " + multiplicador +
+                      ").modulo(1)) / " + multiplicador +")"
+        end
+
+        if f.justifies == "C"
+          formula=formula+".center("
+        elsif f.justifies == "R"
+            formula=formula+".rjust("
+        else
+            formula=formula+".ljust("
+        end
+        formula += f.field_length.to_s  + (f.fill_character.blank? ? '' : ', "' + f.fill_character+'"') +  ")"
+        nombre = "posicion_"+f.position.to_s.rjust(2,"0")
+
+        resultado.send("#{nombre}=", instance_eval(formula) )
+        registro = registro +  instance_eval(formula).to_s
+
+      end
+      sicoss_file.puts registro
+    end
+    sicoss_file.close
+  end
 end
 
 =begin
@@ -421,4 +480,67 @@ end
 56	Horas Trabajadas					              423		003   ACUMULADOR
 57	Seguro Colectivo de Vida Obligatorio    426		001   ACUMULADOR
 
+formato = ""
+sicoss_format.all.each.order("position") do |f|
+  formula = f.formula.strip
+  if f.field_type == "N"
+     if f.number_of_decimals > 0
+       str = "( "+
+                  "(" + formula + " * " + (10 * f.number_of_decimals).to_s + ") "+
+              "- ( (" + formula + " * " + (10 * f.number_of_decimals).to_s + ").modulo(1) ) / " + (10 * f.number_of_decimals).to_s+
+              ")"
+     end
+    formula=".to_s"
+  end
+
+  if f.justifies == "C"
+    formula=formula+".center("
+  elseif f.justifies == "D"
+      formula=formula+".rjust("
+  else
+      formula=formula+".ljust("
+  end
+  formula += f.field_length.to_s  + (? f.fill_character.nil? ? '' : ', "'+f.fill_character+'"') +  ")"
+  formato += formula
+
+end
+
+self.acumuladores = OpenStruct.new()
+self.resultado    = OpenStruct.new()
+@Liquidacion.recibo_sueldo.each do "r"
+  r.detalle_recibo_haber.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
+    acumulador.gsub!('@', '')
+    self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+  end
+  r.detalle_recibo_retencion_concept.acumuladores_valor.split(' ').each do |acumulador|
+    acumulador.gsub!('@', '')
+    self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+  end
+  sicoss_format.all.each.order("position") do |f|
+    formula = f.formula.strip
+    if f.field_type == "N"
+       if f.number_of_decimals > 0
+         str = "( "+
+                    "(" + formula + " * " + (10 * f.number_of_decimals).to_s + ") "+
+                "- ( (" + formula + " * " + (10 * f.number_of_decimals).to_s + ").modulo(1) ) / " + (10 * f.number_of_decimals).to_s+
+                ")"
+       end
+      formula=".to_s"
+    end
+
+    if f.justifies == "C"
+      formula=formula+".center("
+    elseif f.justifies == "D"
+        formula=formula+".rjust("
+    else
+        formula=formula+".ljust("
+    end
+    formula += f.field_length.to_s  + (? f.fill_character.nil? ? '' : ', "'+f.fill_character+'"') +  ")"
+    nombre = "posicion_"+f.position.to_s.rtrim(2,"0")
+    errors.add(:base, "#{nombre}="+nombre+ " formula = "+formula)
+#    self.resultado.send("#{nombre}=", instance_eval(formula).to_f )
+
+  end
+
+end
 =end

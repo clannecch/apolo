@@ -1,0 +1,28 @@
+
+= semantic_form_for @sicoss_format do |f|
+  = f.semantic_errors
+
+  = f.inputs do
+
+    = f.input :position
+
+    = f.input :name
+
+    = f.label "Tipo de Dato "
+    = select( "sicoss_format", "field_type", {"Numerico" => "N", "Caracter" => "C"})
+
+    = f.input :field_length
+
+    = f.input :number_of_decimals
+
+    = f.label "Alineacion "
+    = select( "sicoss_format", "justifies", {"Derecha" => "R", "Izquierda" => "L", "Centrado" => "C"})
+
+    = f.input :fill_character
+
+    = f.input :formula
+
+    = f.input :modifiable
+
+  = f.buttons
+

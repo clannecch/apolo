@@ -1,5 +1,9 @@
 APSSueldos::Application.routes.draw do |map|
 
+  resources :sicoss_format_employers
+
+  resources :sicoss_formats
+
   resources :sicoss_regimen_types
 
   resources :sicoss_reduction_zones

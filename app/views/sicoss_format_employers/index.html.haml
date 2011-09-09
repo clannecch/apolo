@@ -1,0 +1,35 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => SicossFormatEmployer.model_name.human).titlecase
+
+%table
+  %tr
+
+    %th= SicossFormatEmployer.human_attribute_name('sicoss_format_id')
+
+    %th= SicossFormatEmployer.human_attribute_name('field_type')
+
+    %th= SicossFormatEmployer.human_attribute_name('formula')
+
+    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
+
+  - @sicoss_format_employers.each do |sicoss_format_employer|
+    %tr
+
+      %td= sicoss_format_employer.sicoss_format.try(:name)
+
+      %td= sicoss_format_employer.field_type
+
+      %td= sicoss_format_employer.formula
+
+      %td.last
+        %a{ :href => "/sicoss_format_employers/#{sicoss_format_employer.id.to_s}" }
+          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
+      %td.last
+        %a{ :href => "/sicoss_format_employers/#{sicoss_format_employer.id.to_s}/edit" }
+          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
+      %td.last
+
+%br
+
+

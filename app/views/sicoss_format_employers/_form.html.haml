@@ -1,0 +1,16 @@
+
+= semantic_form_for @sicoss_format_employer do |f|
+  = f.semantic_errors
+
+  = f.inputs do
+
+    %h3
+      Propiedad :    #{@sicoss_format_employer.sicoss_format.try(:name)}
+
+    = f.input :field_type
+
+    = f.input :formula
+
+
+  = f.buttons
+
