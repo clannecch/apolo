@@ -1,0 +1,25 @@
+- content_for(:title) do
+  %h1= t('scaffold.actions.list', :item => User.model_name.human).titlecase
+
+%table
+  %tr
+    %th= User.human_attribute_name('email')
+    %th= User.human_attribute_name('first_name')
+    %th= User.human_attribute_name('last_name')
+    %th
+    %th
+    %th
+
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= user.first_name
+      %td= user.last_name
+      %td= link_to t('scaffold.actions.show').titlecase, user
+      %td= link_to t('scaffold.actions.edit').titlecase, edit_user_path(user)
+      %td= link_to t('scaffold.actions.destroy').titlecase, user, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+
+%br
+
+= link_to t('scaffold.actions.new', :item => User.model_name.human).titlecase, new_user_path
+

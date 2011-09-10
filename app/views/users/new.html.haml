@@ -1,0 +1,7 @@
+- content_for(:title) do
+  %h1= t('scaffold.actions.new', :item => User.model_name.human).titlecase
+
+= render 'form'
+
+= link_to t('scaffold.actions.back'), users_path
+

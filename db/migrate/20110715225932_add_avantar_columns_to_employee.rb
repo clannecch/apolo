@@ -13,5 +13,3 @@ class AddAvantarColumnsToEmployee < ActiveRecord::Migration
     remove_column :employees, :avatar_updated_at
   end
 end
-
-rails g scaffold my_image avatar_file_name:string   avatar_content_type:string avatar_file_size:integer avatar_updated_at:datetime

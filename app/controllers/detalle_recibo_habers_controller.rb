@@ -1,5 +1,5 @@
 class DetalleReciboHabersController < ApplicationController
-  before filter :find_liquidacion
+  before_filter :find_liquidacion
   before_filter :find_recibo_Sueldo
 
   # GET /detalle_recibo_habers
@@ -89,8 +89,8 @@ class DetalleReciboHabersController < ApplicationController
     raise "Debe Ingresar con Liquidacion!!!!!!!!!!!" if params[:liquidacion_id].blank?
     @liquidacion = Liquidacion.find(params[:liquidacion_id])
   end
-  def find_recibo_sueldo
 
+  def find_recibo_sueldo
     raise "Debe ingresar un recibo_sueldo!!!!!!!!!!!" if params[:recibi_sueldo_id].blank?
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:recibo_sueldo_id])
   end

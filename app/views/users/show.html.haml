@@ -1,0 +1,15 @@
+- content_for(:title) do
+  %h1= [t('scaffold.actions.show'), User.model_name.human].join(' ').titlecase
+
+- content_for(:controls) do
+  = controls do |control|
+    - control.item t('scaffold.actions.edit').titlecase, edit_user_path(@user), :icon => 'application_edit'
+    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
+
+= semantic_attributes_for(@user) do |s|
+  = s.attributes(User.human_name + ' Info') do
+    = s.attribute :email
+    = s.attribute :first_name
+    = s.attribute :last_name
+
+.clear
