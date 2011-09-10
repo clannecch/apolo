@@ -1,5 +1,5 @@
 class EmployeeRetentionConceptsController < ApplicationController
-  before filter :find_employee
+  before_filter :find_employee
 
   # GET /employee_retention_concepts
   # GET /employee_retention_concepts.xml
