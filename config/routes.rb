@@ -1,6 +1,9 @@
 APSSueldos::Application.routes.draw do |map|
 
-  devise_for :users
+  devise_for :users do
+    get '/login' => 'devise/sessions#new', :as => :login
+    get '/logout' => 'devise/sessions#destroy', :as => :logout
+  end
 
   resources :users
 
