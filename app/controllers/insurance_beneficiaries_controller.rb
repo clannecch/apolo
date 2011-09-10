@@ -1,7 +1,7 @@
 class InsuranceBeneficiariesController < ApplicationController
   # GET /insurance_beneficiaries
   # GET /insurance_beneficiaries.xml
-  before filter :find_employee
+  before_filter :find_employee
 
   def index
     @insurance_beneficiaries = @employee.insurance_beneficiary.all
