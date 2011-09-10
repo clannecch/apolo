@@ -1,7 +1,7 @@
 class DetalleReciboRetencionsController < ApplicationController
   # GET /detalle_recibo_retencions
   # GET /detalle_recibo_retencions.xml
-  before filter :find_liquidacion
+  before_filter :find_liquidacion
   before_filter :find_recibo_Sueldo
   def index
     @detalle_recibo_retencions = @recibo_sueldo.detalle_recibo_retencions.all
