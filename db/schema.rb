@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -165,20 +166,6 @@ ActiveRecord::Schema.define(:version => 20110908194415) do
     t.datetime "updated_at"
   end
 
-  create_table "detalle_recibos", :force => true do |t|
-    t.integer  "recibo_sueldo_id"
-    t.integer  "remunerative_concept_id"
-    t.integer  "retention_concept_id"
-    t.string   "detalle"
-    t.string   "type"
-    t.integer  "cost_center_id"
-    t.decimal  "cantidad"
-    t.decimal  "importe"
-    t.decimal  "total"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "document_types", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
@@ -211,7 +198,6 @@ ActiveRecord::Schema.define(:version => 20110908194415) do
     t.binary   "document_file"
     t.binary   "document_thumb_file"
     t.binary   "document_small_file"
-    t.integer  "asociate_document_type_id"
     t.integer  "associated_document_type_id"
     t.integer  "employee_id"
   end
@@ -310,8 +296,9 @@ ActiveRecord::Schema.define(:version => 20110908194415) do
     t.decimal  "horas_pactadas"
     t.decimal  "remuneracion_fuera_convenio"
     t.integer  "remuneration_type_id"
-    t.integer  "group_remuneration_id"
+    t.integer  "group_renuneration_id"
     t.integer  "group_retention_id"
+    t.integer  "group_employercontribution_id"
     t.integer  "cost_center_id"
     t.integer  "antiguedad_reconocida_anos"
     t.integer  "antiguedad_reconocida_meses"
@@ -338,7 +325,6 @@ ActiveRecord::Schema.define(:version => 20110908194415) do
     t.integer  "bank_deposit_account_type_id"
     t.string   "deposito_banco_cuenta"
     t.string   "deposito_banco_cbu"
-    t.integer  "group_employer_contribution_id"
     t.integer  "causa_egreso_id"
     t.binary   "foto"
     t.integer  "company_id"
@@ -406,12 +392,6 @@ ActiveRecord::Schema.define(:version => 20110908194415) do
   create_table "group_remunerations_remunerative_concepts", :id => false, :force => true do |t|
     t.integer  "group_remuneration_id"
     t.integer  "remunerative_concept_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "group_renuneration", :force => true do |t|
-    t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
