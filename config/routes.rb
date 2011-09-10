@@ -1,5 +1,9 @@
 APSSueldos::Application.routes.draw do |map|
 
+  devise_for :users
+
+  resources :users
+
   resources :sicoss_format_employers
 
   resources :sicoss_formats
@@ -181,9 +185,6 @@ APSSueldos::Application.routes.draw do |map|
   resources :menu_users
   resources :user_authorizations
   resources :user_roles
-  resources :users
-
-
 
   root :to => "liquidacions#index"
   

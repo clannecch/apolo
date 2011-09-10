@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.10'
+
 #gem 'rake', '0.9.2'
 # fix rake version for DSL problem
 gem 'rake', '0.8.7'
@@ -16,6 +17,7 @@ gem 'subexec'
 gem 'mini_magick'
 gem 'geocoder'
 gem 'paperclip', :git => "git://github.com/patshaughnessy/paperclip.git"
+gem 'devise'
 
 # paginacion
 gem 'kaminari'
