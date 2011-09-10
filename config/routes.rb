@@ -181,6 +181,7 @@ APSSueldos::Application.routes.draw do |map|
   resources :menu_users
   resources :user_authorizations
   resources :user_roles
+  resources :users
 
 
 
