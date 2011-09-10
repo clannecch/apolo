@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   layout 'apslabs'
 
   protect_from_forgery
-
+  
+  #devise controller
   before_filter :authenticate_user!
 
   helper_method :current_company
