@@ -1,7 +1,5 @@
 class EmployeeFamiliarsController < ApplicationController
-
-
-  before filter :find_employee
+  before_filter :find_employee
 
   def index
     @employee_familiars = @employee.employee_familiar.all
