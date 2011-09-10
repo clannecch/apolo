@@ -145,7 +145,7 @@ class LiquidacionsController < ApplicationController
 
 
      # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
-     tretencion = tretencion + retencion.to_d
+     tretencion = tretencion + retencion
      thaber_sin_descuento +=  haber_sin_descuento
      thaber_con_descuento += haber_con_descuento
      data << [r.legajo ,
