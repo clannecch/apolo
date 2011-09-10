@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
-gem 'rake', '0.9.2'
+gem 'rails', '3.0.10'
+#gem 'rake', '0.9.2'
+# fix rake version for DSL problem
+gem 'rake', '0.8.7'
 
 # design
 gem 'compass'
@@ -13,7 +15,6 @@ gem 'attrtastic'
 gem 'subexec'
 gem 'mini_magick'
 gem 'geocoder'
-#gem 'paperclip', '~> 2.3'
 gem 'paperclip', :git => "git://github.com/patshaughnessy/paperclip.git"
 
 # paginacion
@@ -26,9 +27,10 @@ gem 'meta_search'
 gem 'prawn'
 gem 'wicked_pdf'
 
+gem 'sqlite3'
+
 group :development, :test do
   # database
-  gem 'sqlite3'
   # design depends
   #gem 'hpricot'
   #gem 'ruby_parser'
