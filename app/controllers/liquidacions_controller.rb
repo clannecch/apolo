@@ -111,12 +111,12 @@ class LiquidacionsController < ApplicationController
   def print_planilla_remuneraciones_pdf(filename,entity)
   require 'prawn'
   @recibo_sueldos = @liquidacion.recibo_sueldos.all
-  img = "hsjd2.jpg"
+  img = "public/images/hsjd2.jpg"
 
   pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
 #                              :background => img,
                             :page_layout => :portrait)
-  prawn_logo = "hsjd.jpg"
+  prawn_logo = img
   logo_empresa ="CASA NUESTA SRA. DEL PILAR"
   logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
   logo_cuit = "C.U.I.T.: "+"30-67932805-7"
@@ -188,12 +188,12 @@ end
     require 'prawn'
     @recibo_sueldos = @liquidacion.recibo_sueldos.all
 
-    img = "hsjd2.jpg"
+    img = "public/images/hsjd2.jpg"
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
                               :background => img,
                               :page_layout => :landscape)
-    prawn_logo = "hsjd.jpg"
+    prawn_logo = img      # "hsjd.jpg"
     logo_empresa ="CASA NUESTA SRA. DEL PILAR"
     logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
     logo_cuit = "C.U.I.T.: "+"30-67932805-7"
