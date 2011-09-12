@@ -126,7 +126,7 @@ class ReciboSueldosController < ApplicationController
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
-    prawn_logo = "hsjd.jpg"
+    prawn_logo = "public/images/hsjd.jpg"
     logo_empresa ="CASA NUESTA SRA. DEL PILAR"
     logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
     logo_cuit = "C.U.I.T.: "+"30-67932805-7"
