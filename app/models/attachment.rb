@@ -1,3 +1,22 @@
+# == Schema Information
+# Schema version: 20110910142220
+#
+# Table name: attachments
+#
+#  id                          :integer         not null, primary key
+#  attachable_id               :integer
+#  attachable_type             :string(255)
+#  associated_document_type_id :integer
+#  name                        :string(255)
+#  reception_date              :date
+#  adjunto_file_name           :string(255)
+#  adjunto_content_type        :string(255)
+#  associated_document_type    :integer
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  adjunto_file                :binary
+#
+
 class Attachment < ActiveRecord::Base
   has_attached_file :adjunto,
                     :storage => :database

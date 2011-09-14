@@ -20,7 +20,7 @@ class InsuranceBeneficiary < ActiveRecord::Base
 	
 	validates_presence_of		    :nombre,															                      :message => "es un dato requerido"
 	validates_presence_of		    :apellido,															                    :message => "es un dato requerido"
-	validates_presence_of		    :numero_documento,													                :message => "es un dato requerido"
+  validates_presence_of		    :numero_documento,													                :message => "es un dato requerido"
   validates_presence_of		    :fecha_nacimiento,													                :message => "es un dato requerido"
 
   validates_numericality_of 	:numero_documento, :greater_than_or_equal_to => 0,					:message => "acepta valores positivos"

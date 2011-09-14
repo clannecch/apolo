@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20110910142220
 #
 # Table name: employees
 #
@@ -88,6 +88,18 @@
 #  avatar_content_type              :string(255)
 #  avatar_file_size                 :integer
 #  avatar_updated_at                :datetime
+#  sicoss_reduccion                 :string(255)
+#  sicoss_employer_type_id          :integer
+#  sicoss_situation_id              :integer
+#  sicoss_condition_id              :integer
+#  sicoss_activity_id               :integer
+#  sicoss_contract_mode_id          :integer
+#  sicoss_damaged_id                :integer
+#  sicoss_location_id               :integer
+#  sicoss_reduction_zone_id         :integer
+#  sicoss_en_convenio               :string(255)
+#  sicoss_regimen_type_id           :integer
+#  sicoss_seguro_obligatorio        :string
 #
 
 require 'test_helper'

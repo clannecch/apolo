@@ -17,6 +17,13 @@
 #
 
 class EmployerContributionConcept < ActiveRecord::Base
+  belongs_to :employee
+  belongs_to :accounting_imputation
+  validates_presence_of		    :codigo ,															:message => "es un dato requerido"
+  validates_presence_of		    :detalle ,							  						:message => "es un dato requerido"
+  validates_presence_of		    :prioridad ,													:message => "es un dato requerido"
+  validates_presence_of		    :formula_calculo_valor ,							:message => "es un dato requerido"
+
 
   scope :by_company, lambda {|company| where(:company_id => company) }
 

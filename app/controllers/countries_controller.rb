@@ -3,6 +3,7 @@ class CountriesController < ApplicationController
   
   # GET /countries
   # GET /countries.xml
+
   def index
     # TODO: cambiar todo este controlador y el detodos los modelos que tengan company_id por lo siguiente
 

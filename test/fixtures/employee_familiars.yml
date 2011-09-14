@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110513210029
+# Schema version: 20110910142220
 #
 # Table name: employee_familiars
 #
@@ -22,6 +22,7 @@
 #  activity_id         :integer
 #  created_at          :datetime
 #  updated_at          :datetime
+#  kinship_id          :integer
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

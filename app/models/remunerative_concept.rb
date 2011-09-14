@@ -37,7 +37,7 @@ class RemunerativeConcept < ActiveRecord::Base
   belongs_to :accounting_imputation
   has_and_belongs_to_many :group_remunerations
   validate :cannot_asociate_iqual_concept
-  validates_presence_of :detalle, :codigo, :acumuladores_valor
+  validates_presence_of :detalle, :codigo, :acumuladores_valor, :calculo_valor
 
   def cannot_asociate_iqual_concept
     if (self.concepto_asociado_haber_id == self.concepto_asociado_haber_2_id) && !self.concepto_asociado_haber_id.nil?

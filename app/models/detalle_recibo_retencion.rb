@@ -18,6 +18,7 @@
 class DetalleReciboRetencion < ActiveRecord::Base
   belongs_to :retention_concept
   belongs_to :recibo_sueldo
+  belongs_to :cost_center
 
   delegate :employee, :to => :recibo_sueldo
   delegate :acumuladores, :to => :recibo_sueldo
