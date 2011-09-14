@@ -137,7 +137,7 @@ class LiquidacionsController < ApplicationController
   thaber_sin_descuento = 0
   tretencion = 0
   @recibo_sueldos.each do |r|
-     retencion = ReciboSueldo.joins(:detalle_recibo_retencions).where(:id => r.id).sum(:total)
+     retencion = ReciboSueldo.joins(:detalle_recibo_retencions).where(:id => r.id).sum(:total).to_f
      haber_total = r.total_haberes
      haber_con_descuento = r.total_haberes_con_descuento
      haber_sin_descuento = haber_total - r.total_haberes_con_descuento
