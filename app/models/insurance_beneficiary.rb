@@ -17,13 +17,16 @@
 class InsuranceBeneficiary < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :document_type
+  belongs_to :kinship
 	
-	validates_presence_of		    :nombre,															                      :message => "es un dato requerido"
-	validates_presence_of		    :apellido,															                    :message => "es un dato requerido"
-  validates_presence_of		    :numero_documento,													                :message => "es un dato requerido"
-  validates_presence_of		    :fecha_nacimiento,													                :message => "es un dato requerido"
+	validates_presence_of		    :nombre,															                :message => "es un dato requerido"
+	validates_presence_of		    :apellido,															              :message => "es un dato requerido"
+  validates_presence_of		    :fecha_nacimiento,													          :message => "es un dato requerido"
+  validates_presence_of		    :numero_documento,													          :message => "es un dato requerido"
 
-  validates_numericality_of 	:numero_documento, :greater_than_or_equal_to => 0,					:message => "acepta valores positivos"
+  validates_numericality_of 	:numero_documento, :greater_than_or_equal_to => 0,		:message => "acepta valores positivos"
+  validates_numericality_of 	:porcentual, :greater_than_or_equal_to => 0,
+                              :less__than_or_equal_to => 100 ,					            :message => "acepta valores positivos"
 
 
 	

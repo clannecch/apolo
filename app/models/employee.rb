@@ -191,7 +191,7 @@ class Employee < ActiveRecord::Base
                               :maximum => 30    ,
                               :minimum => 2	    , 							                              :message => "longitud invalida"
 
-  validate                    :fechanacimientovalida
+  validate                    :fechanacimientovalida, :control_porcentaje_seguro
 
 # Solapa Domicilio
   validates_presence_of		    :telefono         ,:calle               ,:puerta,
@@ -246,7 +246,6 @@ class Employee < ActiveRecord::Base
 
 
 
-
 # Otras formas mas faciles de validar
 #
 #  with_options :message => "es un dato requerido" do |defaults_options|
@@ -258,6 +257,17 @@ class Employee < ActiveRecord::Base
 #    validates_presence_of		    campito,														                    :message => "es un dato requerido"
 #    validates_numericality_of 	campito, :greater_than_or_equal_to => 0,					      :message => "acepta 0 o valores positivos"
 #  end
+
+
+  def control_porcentaje_seguro
+    porcentual = 0
+    insurance_beneficiaries.each do |i|
+      porcentual += i.porcentual
+    end
+    if porcentual != 100 && porcentual != 0
+      errors.add(:base, "La suma de los porcentualesde Beneficiario de Seguro debe ser = 100("+porcentual.to_s+")")
+    end
+  end
 
   def fechanacimientovalida
 #    fn =  ( (Date.today.year-18).to_s+"-01-01").to_date

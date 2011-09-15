@@ -18,7 +18,7 @@
 
       %td= kinship.name
 
-      %td= kinship.hijo_conyugue
+      %td= (kinship.hijo_conyugue =="C" ?  "Conyuge"  : (kinship.hijo_conyugue =="H" ? "Hijo" : ""))
 
       %td= link_to t('scaffold.actions.show').titlecase, kinship
       %td= link_to t('scaffold.actions.edit').titlecase, edit_kinship_path(kinship)

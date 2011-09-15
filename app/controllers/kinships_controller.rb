@@ -1,70 +1,94 @@
-
 class KinshipsController < ApplicationController
 
   before_filter :find_kinship, :except => [:index, :new, :create]
-
-  respond_to :html, :xml, :json
 
   # GET /kinships
   # GET /kinships.json
   # GET /kinships.xml
   def index
-    @kinships = Kinship.all
-    flash.now[:notice] = t('flash.actions.index.notice') if @kinships.empty?
-    respond_with(@kinships)
+    @search = Kinship.by_company(current_company.id).search(params[:search])
+    @kinships = @search.page(params[:page]).per(10)
+    respond_to do |format|
+       format.html # indexoo.html.erb
+       format.xml  { render :xml => @kinships }
+    end
   end
 
   # GET /kinships/1
   # GET /kinships/1.json
   # GET /kinships/1.xml
   def show
-    respond_with(@kinship)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @kinship }
+    end
   end
 
   # GET /kinships/new
   # GET /kinships/new.json
   # GET /kinships/new.xml
   def new
-    @kinship = Kinship.new
-    respond_with(@kinship)
+    @kinship = Kinship.by_company(current_company.id).new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @kinship }
+    end
   end
 
   # GET /kinships/1/edit
   # GET /kinships/1/edit.json
   # GET /kinships/1/edit.xml
   def edit
-    respond_with(@kinship)
   end
 
   # POST /kinships
   # POST /kinships.json
   # POST /kinships.xml
   def create
-    @kinship = Kinship.new(params[:kinship])
-    flash[:notice] = t('scaffold.notice.created', :item => Kinship.model_name.human) if @kinship.save
-    respond_with(@kinship, :location => kinships_path)
+
+    @kinship = Kinship.by_company(current_company.id).new(params[:kinship])
+
+    respond_to do |format|
+      if @kinship.save
+        format.html { redirect_to(@kinship, :notice => 'Kinship as successfully created.') }
+        format.xml  { render :xml => @kinship, :status => :created, :location => @kinship }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @kinship.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
   # PUT /kinships/1
   # PUT /kinships/1.json
   # PUT /kinships/1.xml
   def update
-    flash[:notice] = t('scaffold.notice.updated', :item => Kinship.model_name.human) if @kinship.update_attributes(params[:kinship])
-    respond_with(@kinship, :location => kinships_path)
+    respond_to do |format|
+      if @kinship.update_attributes(params[:kinship])
+        format.html { redirect_to(@kinship, :notice => 'kinship was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @kinship.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /kinships/1
   # DELETE /kinships/1.json
   # DELETE /kinships/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => Kinship.model_name.human) if @kinship.destroy
-    respond_with(@kinship)
+    @kinship.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(kinship_url) }
+      format.xml  { head :ok }
+    end
   end
 
-  protected
-
   def find_kinship
-    @kinship = Kinship.find(params[:id])
+      @kinship = Kinship.by_company(current_company.id).find(params[:id])
   end
 end
 

@@ -81,7 +81,7 @@
             = link_to_add_association 'Agregar Familiar', f, :employee_familiars
     .panel
       .field
-        %h3 Benefiario Seguro
+        %h3 Beneficiario Seguro
         #Insurance_beneficiary
           %table.field
             %tr
@@ -90,6 +90,9 @@
               %th= f.label "Tipo documento"
               %th= f.label "Numero de Documento"
               %th= f.label "Fecha Nacimiento"
+              %th= f.label "Direccion"
+              %th= f.label "Parentezco"
+              %th= f.label "% de la Poliza"
               %th &nbsp;
             %tbody#nested-holder
               = f.fields_for :insurance_beneficiaries do |insurance_beneficiary|

@@ -202,7 +202,11 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def total_haberes
-      detalle_recibo_habers.all.sum(&:total)
+      detalle_recibo_habers.all.sum(&:total).to_f
+  end
+
+  def total_retenciones
+    detalle_recibo_retencions.all.sum(&:total).to_f
   end
 
   def total_haberes_con_descuento
