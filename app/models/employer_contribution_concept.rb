@@ -19,6 +19,10 @@
 class EmployerContributionConcept < ActiveRecord::Base
   belongs_to :employee
   belongs_to :accounting_imputation
+  belongs_to :health_insurance
+  belongs_to :retention_concept
+  belongs_to :other_retention_concept, :foreign_key => "additional_health_insurance_id", :class_name => "RetentionConcept"
+
   validates_presence_of		    :codigo ,															:message => "es un dato requerido"
   validates_presence_of		    :detalle ,							  						:message => "es un dato requerido"
   validates_presence_of		    :prioridad ,													:message => "es un dato requerido"

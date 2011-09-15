@@ -14,7 +14,7 @@
 	</tr>
 	<tr>
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Accounting Imputation:</strong></td>
-		<td style="width:70%"><%= @employer_contribution_concept.accounting_imputation_id %></td>
+		<td style="width:70%"><%= @employer_contribution_concept.accounting_imputation.try(:detalle) %></td>
 	</tr>
 	<tr>
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Prioridad:</strong></td>
@@ -28,6 +28,19 @@
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Formula Calculo Valor:</strong></td>
 		<td style="width:70%"><%= @employer_contribution_concept.formula_calculo_valor %></td>
 	</tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Corresponde a Obra Social:</strong></td>
+        <td style="width:70%"><%= @employer_contribution_concept.health_insurance.try(:detalle) %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Retention Concept:</strong></td>
+        <td style="width:70%"><%= @employer_contribution_concept.retention_concept.try(:detalle) %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Codigo de Adicional Obra Social:</strong></td>
+        <td style="width:70%"><%= @employer_contribution_concept.other_retention_concept.try(:detalle) %></td>
+    </tr>
+
 </table>
 <p>
 	<%= link_to "Editar", edit_employer_contribution_concept_path(@employer_contribution_concept) %> |

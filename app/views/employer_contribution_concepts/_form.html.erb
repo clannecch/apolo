@@ -52,6 +52,24 @@
 				<%= f.text_field :formula_calculo_valor %>
 			</td>
 		</tr>
+        <tr>
+             <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :health_insurance_id %></strong></td>
+            <td style="width:70%">
+                <%= f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, :include_blank => 'Sin Relacion' %>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :retention_concept_id %></strong></td>
+            <td style="width:70%">
+                <%= f.collection_select :retention_concept_id, RetentionConcept.all, :id, :detalle, :include_blank => 'Sin Relacion' %>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :additional_heath_insurance_id %></strong></td>
+            <td style="width:70%">
+                <%= f.collection_select :additional_health_insurance_id, RetentionConcept.all, :id, :detalle, :include_blank => 'Sin Relacion' %>
+            </td>
+        </tr>
 	</table>
 	<p><%= f.submit %></p>
 <% end %>
