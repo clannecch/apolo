@@ -138,6 +138,7 @@ class ReciboSueldo < ActiveRecord::Base
 #        self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.cantidad.to_f)
 #      end
     end
+
     detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
 #      controla error
       begin
@@ -152,6 +153,9 @@ class ReciboSueldo < ActiveRecord::Base
         acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
         self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_retencion.total.to_f)
       end
+    end
+    if employee.retencion_minima_osocial != 0
+
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915154800) do
+ActiveRecord::Schema.define(:version => 20110915205123) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -438,6 +438,7 @@ ActiveRecord::Schema.define(:version => 20110915154800) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "home_abouts", :force => true do |t|

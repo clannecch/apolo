@@ -8,6 +8,11 @@
         - @health_insurance.errors.full_messages.each do |msg|
           %li= msg
   .field
+    = f.label :code
+    %br/
+    = f.text_field :code
+    %br/
+  .field
     = f.label :detalle
     %br/
     = f.text_field :detalle

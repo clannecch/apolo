@@ -9,13 +9,16 @@
 			</ul>
 		</div>
 	<% end %>
-	<table class="data" style="width:100%" >
-		<tr>
-			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
-			<td style="width:70%">
-				<%= f.text_field :detalle %>
-			</td>
-		</tr>
-	</table>
-	<p><%= f.submit %></p>
-<% end %>
+
+    <div class="field">
+      <%= f.label :code %><br />
+      <%= f.text_field :code %>
+    </div>
+    <div class="field">
+      <%= f.label :detalle %><br />
+      <%= f.text_field :detalle %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>

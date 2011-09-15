@@ -1,12 +1,14 @@
 %h1 Listado de Obras Sociales
 %table
   %tr
+    %th Code
     %th Detalle
     %th
     %th
     %th
   - @health_insurances.each do |health_insurance|
     %tr
+      %td= health_insurance.code
       %td= health_insurance.detalle
       %td= health_insurance_links(health_insurance)
 %br/
