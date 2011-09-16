@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915205123) do
+ActiveRecord::Schema.define(:version => 20110915225737) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -376,6 +376,10 @@ ActiveRecord::Schema.define(:version => 20110915205123) do
     t.string   "acumuladores_valor"
     t.string   "formula_calculo_valor"
     t.integer  "company_id"
+    t.integer  "aditional_halth_insurance_id"
+    t.integer  "retention_concept_id"
+    t.integer  "additional_health_insurance_id"
+    t.integer  "health_insurance_id"
   end
 
   create_table "employer_contribution_concepts_group_employer_contributions", :id => false, :force => true do |t|
