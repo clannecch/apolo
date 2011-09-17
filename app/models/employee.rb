@@ -105,14 +105,6 @@
 require 'paperclip'
 class Employee < ActiveRecord::Base
 
-#  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-##                :url  => "/system/products/:id/:style/:basename.:extension"
-
-  has_many :attachments, :as => :attachable
-
-  accepts_nested_attributes_for :attachments , :allow_destroy => true
-
-# validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   scope :by_company, lambda {|company| where(:company_id => company) }
 
   belongs_to :document_type
@@ -158,7 +150,12 @@ class Employee < ActiveRecord::Base
   has_many   :employee_familiars
   has_many   :employee_remunerative_concepts
   has_many   :employee_retention_concepts
+  has_many :attachments, :as => :attachable
+#  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+##                :url  => "/system/products/:id/:style/:basename.:extension"
+# validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
+  accepts_nested_attributes_for :attachments , :allow_destroy => true
 	accepts_nested_attributes_for :employee_familiars, :allow_destroy => true
   accepts_nested_attributes_for :insurance_beneficiaries, :allow_destroy => true
   accepts_nested_attributes_for :employee_remunerative_concepts, :allow_destroy => true
@@ -211,13 +208,9 @@ class Employee < ActiveRecord::Base
                               :labor_union_id        ,
                               :numero_afiliado_sindicato,	:cuil,												      :message => "es un dato requerido"
 
-  validates_numericality_of 	:retencion_minima_osocial,  :cargas_extras_osocial ,
+  validates_numericality_of 	:cargas_extras_osocial ,
                               :allow_nil => true,
                               :only_integer => true,                          					      :message => "acepta 0 o valores positivos"
-  validates_numericality_of 	:retencion_minima_osocial,
-                              :allow_nil => true,
-                              :greater_than_or_equal_to => 0,                          				:message => "acepta 0 o valores positivos"
-
 
 # Solapa Contratacion
   validates_presence_of		    :fecha_ingreso     , :contract_mode_id              , :fecha_ingreso,
@@ -226,6 +219,7 @@ class Employee < ActiveRecord::Base
                               :accounting_imputation_id,											                :message => "es un dato requerido"
   validates_presence_of		    :causa_egreso_id ,
                               :if => :fecha_egreso?
+
 
   validates_numericality_of 	:antiguedad_reconocida_anos , :horas_pactadas,
                               :remuneracion_fuera_convenio, :retencion_minima_osocial,

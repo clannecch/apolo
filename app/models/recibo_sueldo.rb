@@ -102,7 +102,7 @@ class ReciboSueldo < ActiveRecord::Base
     detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
 #      controla error
 #     graba en el log
-      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
+#      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
       begin
 #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
         detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
@@ -116,11 +116,9 @@ class ReciboSueldo < ActiveRecord::Base
         next
       end
       if detalle_recibo_haber.remunerative_concept.calculo_cantidad.present?
-#         controla error
         begin
           detalle_recibo_haber.update_attributes(:cantidad_recibo => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)))
-          rescue => e
-#           apila el error (mostrando cual es) y continua
+        rescue => e
           errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)}\n#{e.message}")
           next
         end
@@ -139,13 +137,16 @@ class ReciboSueldo < ActiveRecord::Base
 #      end
     end
 
+    aporteos =EmployerContributionConcept.where(:health_insurance_id => employee.health_insurance_id).first
+    begin
+      detalle_recibo_retencions.where(:retention_concept_id => aporteos.additional_health_insurance_id).first.delete
+    rescue
+    end
     detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
-#      controla error
       begin
 #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
         detalle_recibo_retencion.update_attributes(:total => detalle_recibo_retencion.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)))
       rescue => e
-#       apila el error (mostrando cual es) y continua
         errors.add(:base, "Error de calculo Retencion: #{prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)}\n#{e.message}")
         next
       end
@@ -154,8 +155,21 @@ class ReciboSueldo < ActiveRecord::Base
         self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_retencion.total.to_f)
       end
     end
-    if employee.retencion_minima_osocial != 0
 
+    if employee.retencion_minima_osocial != 0 && !employee.retencion_minima_osocial.blank?
+      retencionob = detalle_recibo_retencions.where(:retention_concept_id => aporteos.retention_concept_id).first.total.to_f
+      aporteob = instance_eval(prepare_calculo_for_evaluation(aporteos.formula_calculo_valor)).to_f
+
+      adicionalob = employee.retencion_minima_osocial - (retencionob + aporteob)
+      if adicionalob > 0
+
+        detalle_recibo_retencions.build(:retention_concept_id => aporteos.additional_health_insurance_id ,
+                                        :cost_center_id =>  employee.cost_center_id,
+                                        :total => adicionalob )
+        self.save
+
+#        Rails.logger.info("luego de new"+ detalle_recibo_retencions.count.to_s)
+      end
     end
   end
 
