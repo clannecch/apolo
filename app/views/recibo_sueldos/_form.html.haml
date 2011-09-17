@@ -13,7 +13,7 @@
     .field
       = f.label :employee_id
       %br/
-      = f.collection_select :employee_id, Employee.all, :id, :full_name , :prompt => true
+      = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos, :id, :full_name , :prompt => true
   - else
     %h4
       Empleado:

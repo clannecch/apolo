@@ -4,6 +4,10 @@
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
 		<td style="width:70%"><%= @tipo_recibo.detalle %></td>
 	</tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Recibo Principal:</strong></td>
+        <td style="width:70%"><%= @tipo_recibo.recibo_principal? ? 'Si' : 'No' %></td>
+    </tr>
 </table>
 <p>
 	<%= link_to "Editar", edit_tipo_recibo_path(@tipo_recibo) %> |

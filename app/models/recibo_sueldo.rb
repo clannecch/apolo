@@ -137,10 +137,13 @@ class ReciboSueldo < ActiveRecord::Base
 #      end
     end
 
-    aporteos =EmployerContributionConcept.where(:health_insurance_id => employee.health_insurance_id).first
-    begin
-      detalle_recibo_retencions.where(:retention_concept_id => aporteos.additional_health_insurance_id).first.delete
-    rescue
+    aporteos = nil
+    if liquidacion.tipo_recibo.recibo_principal?
+      aporteos =EmployerContributionConcept.where(:health_insurance_id => employee.health_insurance_id).first
+      begin
+        detalle_recibo_retencions.where(:retention_concept_id => aporteos.additional_health_insurance_id).first.delete
+      rescue
+      end
     end
     detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
       begin
@@ -156,8 +159,15 @@ class ReciboSueldo < ActiveRecord::Base
       end
     end
 
-    if employee.retencion_minima_osocial != 0 && !employee.retencion_minima_osocial.blank?
-      retencionob = detalle_recibo_retencions.where(:retention_concept_id => aporteos.retention_concept_id).first.total.to_f
+    if liquidacion.tipo_recibo.recibo_principal? &&
+          !aporteos.nil? &&
+          employee.retencion_minima_osocial != 0 &&
+          !employee.retencion_minima_osocial.blank?
+      begin
+        retencionob = detalle_recibo_retencions.where(:retention_concept_id => aporteos.retention_concept_id).first.total.to_f
+      rescue
+        retencionob = employee.retencion_minima_osocial + 1
+      end
       aporteob = instance_eval(prepare_calculo_for_evaluation(aporteos.formula_calculo_valor)).to_f
 
       adicionalob = employee.retencion_minima_osocial - (retencionob + aporteob)
@@ -167,7 +177,6 @@ class ReciboSueldo < ActiveRecord::Base
                                         :cost_center_id =>  employee.cost_center_id,
                                         :total => adicionalob )
         self.save
-
 #        Rails.logger.info("luego de new"+ detalle_recibo_retencions.count.to_s)
       end
     end

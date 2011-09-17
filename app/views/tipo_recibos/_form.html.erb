@@ -14,8 +14,13 @@
 			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
 			<td style="width:70%">
 				<%= f.text_field :detalle %>
-			</td>
 		</tr>
+        <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :recibo_principal %></strong></td>
+            <td style="width:70%">
+                <%= f.check_box :recibo_principal %>
+            </td>
+        </tr>
 	</table>
 	<p><%= f.submit %></p>
 <% end %>

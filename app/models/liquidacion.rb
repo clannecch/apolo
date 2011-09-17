@@ -37,6 +37,16 @@ class Liquidacion < ActiveRecord::Base
   default_scope order('periodo ASC') 
 
 #  validate                    :check_periodo
+  def retrieve_all_employee_with_recibo_sueldos
+      liquidados = []
+      recibo_sueldos.each do |r|
+        liquidados << r.employee
+      end
+      return liquidados
+  end
+  def retrieve_all_employee_without_recibo_sueldos
+    Employee.all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
+  end
 
   private
 #  def check_periodo

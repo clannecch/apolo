@@ -6,11 +6,11 @@
 	</tr>
 	<tr>
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Cantidad:</strong></td>
-		<td style="width:70%"><%= @data_to_ask.cantidad %></td>
+		<td style="width:70%"><%= @data_to_ask.cantidad? ? 'Si' : 'No' %></td>
 	</tr>
 	<tr>
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Importe:</strong></td>
-		<td style="width:70%"><%= @data_to_ask.importe %></td>
+		<td style="width:70%"><%= @data_to_ask.importe? ? 'Si' : 'No' %></td>
 	</tr>
 </table>
 <p>
