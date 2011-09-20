@@ -23,6 +23,6 @@ class EmployeeRetentionConcept < ActiveRecord::Base
   validates_numericality_of   :cantidad, :if => :cantidad?
   validates_numericality_of   :importe, :allow_blank => true
 
-  validates_with RetentionConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :remunerative_concept_id?
+  validates_with RetentionConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :retention_concept_id?
 
 end
