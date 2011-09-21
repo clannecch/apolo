@@ -1,4 +1,3 @@
-
 class SicossRegimenTypesController < ApplicationController
 
   before_filter :find_sicoss_regimen_type, :except => [:index, :new, :create]
@@ -57,8 +56,15 @@ class SicossRegimenTypesController < ApplicationController
   # DELETE /sicoss_regimen_types/1.json
   # DELETE /sicoss_regimen_types/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => SicossRegimenType.model_name.human) if @sicoss_regimen_type.destroy
-    respond_with(@sicoss_regimen_type)
+    begin
+      @sicoss_regimen_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @sicoss_regimen_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to sicoss_regimen_type_url
+    end
   end
 
   protected

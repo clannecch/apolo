@@ -78,10 +78,14 @@ class AssociatedDocumentTypesController < ApplicationController
   # DELETE /associated_document_types/1.json
   # DELETE /associated_document_types/1.xml
   def destroy
-    @associated_document_type.destroy
-    respond_to do |format|
-      format.html { redirect_to(associated_document_type_url) }
-      format.xml  { head :ok }
+    begin
+      @associated_document_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @associated_document_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to associated_document_type_url
     end
   end
 

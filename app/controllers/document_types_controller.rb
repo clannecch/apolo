@@ -1,4 +1,5 @@
 class DocumentTypesController < ApplicationController
+
   before_filter :find_document_type, :except => [:index, :new, :create]
   # GET /document_types
   # GET /document_types.xml
@@ -70,12 +71,16 @@ class DocumentTypesController < ApplicationController
 
   # DELETE /document_types/1
   # DELETE /document_types/1.xml
-  def destroy
-    @document_type.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(document_types_url) }
-      format.xml  { head :ok }
+  def destroy
+    begin
+      @document_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @document_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to document_type_url
     end
   end
 

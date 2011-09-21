@@ -57,8 +57,15 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1.json
   # DELETE /activities/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => Activity.model_name.human) if @activity.destroy
-    respond_with(@activity)
+    begin
+      @activity.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @activity.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to activity_url
+    end
   end
 
   protected

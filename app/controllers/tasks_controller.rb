@@ -71,13 +71,17 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.xml
   def destroy
-    @task.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(tasks_url) }
-      format.xml  { head :ok }
+    begin
+      @task.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @task.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to task_url
     end
   end
+
   def find_task
       @task = Task.by_company(current_company.id).find(params[:id])
   end

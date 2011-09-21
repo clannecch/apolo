@@ -115,11 +115,14 @@ class BankDepositsController < ApplicationController
   # DELETE /bank_deposits/1
   # DELETE /bank_deposits/1.xml
   def destroy
-    @bank_deposit.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(bank_deposits_url) }
-      format.xml  { head :ok }
+    begin
+      @bank_deposit.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @bank_deposit.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to bank_deposit_url
     end
   end
 

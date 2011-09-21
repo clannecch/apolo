@@ -71,13 +71,17 @@ class SectionsController < ApplicationController
   # DELETE /sections/1
   # DELETE /sections/1.xml
   def destroy
-    @section.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(sections_url) }
-      format.xml  { head :ok }
+    begin
+      @section.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @section.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to section_url
     end
   end
+
   def find_section
       @section = Section.by_company(current_company.id).find(params[:id])
   end

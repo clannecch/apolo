@@ -79,11 +79,14 @@ class KinshipsController < ApplicationController
   # DELETE /kinships/1.json
   # DELETE /kinships/1.xml
   def destroy
-    @kinship.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(kinship_url) }
-      format.xml  { head :ok }
+    begin
+      @kinship.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @kinship.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to kinship_url
     end
   end
 

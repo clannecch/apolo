@@ -73,13 +73,17 @@ class LaborUnionsController < ApplicationController
   # DELETE /labor_unions/1
   # DELETE /labor_unions/1.xml
   def destroy
-    @labor_union.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(labor_unions_url) }
-      format.xml  { head :ok }
+    begin
+      @labor_union.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @labor_union.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to labor_union_url
     end
   end
+
   def find_labor_union
       @labor_union = LaborUnion.by_company(current_company.id).find(params[:id])
   end

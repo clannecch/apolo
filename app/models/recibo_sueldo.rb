@@ -25,10 +25,10 @@ class ReciboSueldo < ActiveRecord::Base
   validates_presence_of		:employee_id ,	:message => "es un dato requerido"
   validates_uniqueness_of :employee_id ,  :message => "existe liquidacion activa", :scope => :liquidacion_id
 
-  has_many                :detalle_recibo_habers
+  has_many                :detalle_recibo_habers, :dependent =>  :delete_all
   accepts_nested_attributes_for :detalle_recibo_habers, :allow_destroy => true
 
-  has_many                :detalle_recibo_retencions
+  has_many                :detalle_recibo_retencions, :dependent =>  :delete_all
   accepts_nested_attributes_for :detalle_recibo_retencions, :allow_destroy => true
 
   after_validation        :carga_codigo_predefinido_create, :on => :create, :if => :employee_id?

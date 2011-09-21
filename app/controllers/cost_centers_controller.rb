@@ -71,13 +71,17 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   # DELETE /cost_centers/1
   # DELETE /cost_centers/1.xml
   def destroy
-    @cost_center.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(cost_centers_url) }
-      format.xml  { head :ok }
+    begin
+      @cost_center.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @cost_center.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to cost_center_url
     end
   end
+
   def find_cost_center
     @cost_center = CostCenter.by_company(current_company.id).find(params[:id])
   end

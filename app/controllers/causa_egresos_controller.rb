@@ -71,13 +71,17 @@ class CausaEgresosController < ApplicationController
   # DELETE /causa_egresos/1
   # DELETE /causa_egresos/1.xml
   def destroy
-    @causa_egreso.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(causa_egresos_url) }
-      format.xml  { head :ok }
+    begin
+      @causa_egreso.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @causa_egreso.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to causa_egreso_url
     end
   end
+
 
   protected
 

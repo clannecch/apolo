@@ -72,13 +72,17 @@ class TipoRecibosController < ApplicationController
   # DELETE /tipo_recibos/1
   # DELETE /tipo_recibos/1.xml
   def destroy
-    @tipo_recibo.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(tipo_recibos_url) }
-      format.xml  { head :ok }
+    begin
+      @tipo_recibo.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @tipo_recibo.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to tipo_recibo_url
     end
   end
+
   def find_tipo_recibo
       @tipo_recibo = TipoRecibo.by_company(current_company.id).find(params[:id])
   end

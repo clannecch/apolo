@@ -147,10 +147,10 @@ class Employee < ActiveRecord::Base
   belongs_to :sicos_seguro_obligatorio
   belongs_to :sicoss_regimen_type
 	has_many   :insurance_beneficiaries
-  has_many   :employee_familiars
-  has_many   :employee_remunerative_concepts
-  has_many   :employee_retention_concepts
-  has_many :attachments, :as => :attachable
+  has_many   :employee_familiars, :dependent => :restrict
+  has_many   :employee_remunerative_concepts, :dependent => :restrict
+  has_many   :employee_retention_concepts, :dependent => :restrict
+  has_many   :attachments, :as => :attachable, :dependent => :restrict
 #  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 ##                :url  => "/system/products/:id/:style/:basename.:extension"
 # validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']

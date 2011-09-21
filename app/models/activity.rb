@@ -11,6 +11,6 @@
 #
 
 class Activity < ActiveRecord::Base
-  has_many :employee_familiars
+  has_many :employee_familiars, :dependent => :restrict
   validates_presence_of		    :detalle,									  :message => "es un dato requerido"
 end

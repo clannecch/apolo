@@ -73,13 +73,17 @@ class InsuranceCompaniesController < ApplicationController
   # DELETE /insurance_companies/1
   # DELETE /insurance_companies/1.xml
   def destroy
-    @insurance_company.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(insurance_companies_url) }
-      format.xml  { head :ok }
+    begin
+      @insurance_company.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @insurance_company.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to insurance_company_url
     end
   end
+
   def find_insurance_company
       @insurance_company = InsuranceCompany.by_company(current_company.id).find(params[:id])
   end

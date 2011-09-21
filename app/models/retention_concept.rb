@@ -20,6 +20,8 @@
 class RetentionConcept < ActiveRecord::Base
   scope :by_company, lambda {|company| where(:company_id => company) }
   has_and_belongs_to_many :group_retentions
+  has_many :detalle_recibo_retencions , :dependent => :restrict
+
   belongs_to :accounting_imputation
   belongs_to :data_to_ask
   validates_presence_of		    :detalle,	:acumuladores_valor, :formula_calculo_valor	, :message => "es un dato requerido"

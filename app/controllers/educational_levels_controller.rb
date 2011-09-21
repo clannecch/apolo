@@ -71,11 +71,14 @@ before_filter :find_educational_level, :except => [:index, :new, :create]
   # DELETE /educational_levels/1
   # DELETE /educational_levels/1.xml
   def destroy
-    @educational_level.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(educational_levels_url) }
-      format.xml  { head :ok }
+    begin
+      @educational_level.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @educational_level.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to educational_level_url
     end
   end
 

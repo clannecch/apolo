@@ -1,7 +1,7 @@
 <%= form_for @contract_mode do |f| %>
 	<% if @contract_mode.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@contract_mode.errors.count, "error") %> prohibido guardar Modalidad de Cotratacion:</h2>
+			<h2><%= pluralize(@contract_mode.errors.count, "error") %> prohibido guardar Modalidad de Contratacion:</h2>
 			<ul>
 			<% @contract_mode.errors.full_messages.each do |msg| %>
 				<li><%= msg %></li>

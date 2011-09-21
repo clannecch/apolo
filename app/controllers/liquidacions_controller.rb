@@ -96,13 +96,17 @@ class LiquidacionsController < ApplicationController
   # DELETE /liquidacions/1
   # DELETE /liquidacions/1.xml
   def destroy
-    @liquidacion.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(liquidacions_url) }
-      format.xml  { head :ok }
+    begin
+      @liquidacion.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @liquidacion.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to liquidacion_url
     end
   end
+
   def find_liquidacion
       @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
   end

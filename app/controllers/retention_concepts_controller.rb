@@ -71,13 +71,17 @@ class RetentionConceptsController < ApplicationController
   # DELETE /retention_concepts/1
   # DELETE /retention_concepts/1.xml
   def destroy
-    @retention_concept.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(retention_concepts_url) }
-      format.xml  { head :ok }
+    begin
+      @retention_concept.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @retention_concept.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to retention_concept_url
     end
   end
+
   def find_retention_concept
       @retention_concept = RetentionConcept.by_company(current_company.id).find(params[:id])
   end

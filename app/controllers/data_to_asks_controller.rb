@@ -72,11 +72,14 @@ class DataToAsksController < ApplicationController
   # DELETE /data_to_asks/1
   # DELETE /data_to_asks/1.xml
   def destroy
-    @data_to_ask.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(data_to_asks_url) }
-      format.xml  { head :ok }
+    begin
+      @data_to_ask.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @data_to_ask.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to data_to_ask_url
     end
   end
 

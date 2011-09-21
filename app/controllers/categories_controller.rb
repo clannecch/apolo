@@ -76,11 +76,14 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.xml
   def destroy
-    @category.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(categories_url) }
-      format.xml  { head :ok }
+    begin
+      @category.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @category.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to category_url
     end
   end
 

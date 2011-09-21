@@ -72,13 +72,17 @@ class MaritalStatusesController < ApplicationController
   # DELETE /marital_statuses/1
   # DELETE /marital_statuses/1.xml
   def destroy
-    @marital_status.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(marital_statuses_url) }
-      format.xml  { head :ok }
+    begin
+      @marital_status.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @marital_status.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to marital_status_url
     end
   end
+
   def find_marital_status
       @marital_status = MaritalStatus.by_company(current_company.id).find(params[:id])
   end

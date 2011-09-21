@@ -34,10 +34,16 @@ class MenusController < ApplicationController
 		respond_with(@menu)
 	end
 
-	def destroy
-		@menu = Menu.find(params[:id])
-		@menu.destroy
-		flash[:notice] = "Menu borrado con exito." if @menu.destroy
-		respond_with(@menu)
-	end
+  def destroy
+    begin
+      @menu.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @menu.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to @menu_url
+    end
+  end
+
 end

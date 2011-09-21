@@ -74,11 +74,14 @@ class AccountingImputationsController < ApplicationController
   # DELETE /accounting_imputations/1
   # DELETE /accounting_imputations/1.xml
   def destroy
-    @accounting_imputation.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(accounting_imputations_url) }
-      format.xml  { head :ok }
+    begin
+      @accounting_imputation.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @accounting_imputation.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to accounting_imputation_url
     end
   end
 

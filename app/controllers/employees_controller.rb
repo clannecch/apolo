@@ -83,13 +83,17 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.xml
   def destroy
-    @employee.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(employees_url) }
-      format.xml  { head :ok }
+    begin
+      @employee.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @employee.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to employee_url
     end
   end
+
   def find_employee
       @employee = Employee.by_company(current_company.id).find(params[:id])
   end

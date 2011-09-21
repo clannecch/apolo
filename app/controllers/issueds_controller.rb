@@ -73,13 +73,17 @@ class IssuedsController < ApplicationController
   # DELETE /issueds/1
   # DELETE /issueds/1.xml
   def destroy
-    @issued.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(issueds_url) }
-      format.xml  { head :ok }
+    begin
+      @issued.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @issued.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to issued_url
     end
   end
+
   def find_issued
       @issued = Issued.by_company(current_company.id).find(params[:id])
   end

@@ -73,13 +73,17 @@ class CharacterServicesController < ApplicationController
   # DELETE /character_services/1
   # DELETE /character_services/1.xml
   def destroy
-    @character_service.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(character_services_url) }
-      format.xml  { head :ok }
+    begin
+      @character_service.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @character_service.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to character_service_url
     end
   end
+
   def find_character_service
       @character_service = CharacterService.by_company(current_company.id).find(params[:id])
   end

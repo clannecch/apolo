@@ -73,11 +73,14 @@ class NationalitiesController < ApplicationController
   # DELETE /nationalities/1
   # DELETE /nationalities/1.xml
   def destroy
-    @nationality.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(nationalities_url) }
-      format.xml  { head :ok }
+    begin
+      @nationality.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @nationality.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to nationality_url
     end
   end
 

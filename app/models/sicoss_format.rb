@@ -19,7 +19,7 @@
 #
 
 class SicossFormat < ActiveRecord::Base
-  has_many :sicoss_format_employers
+  has_many :sicoss_format_employers, :dependent => :restrict
   validates_presence_of		    :name,:field_length,:justifies,:field_type,       :message => "es un dato requerido"
 
 end

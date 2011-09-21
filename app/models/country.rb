@@ -11,7 +11,7 @@
 #
 
 class Country < ActiveRecord::Base
-  has_many :employees
+  has_many :employees, :dependent => :restrict
   validates_presence_of		    :detalle, :message => "es un dato requerido"
   #belongs_to :company
 

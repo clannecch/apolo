@@ -81,13 +81,17 @@ class RemunerativeConceptsController < ApplicationController
   # DELETE /remunerative_concepts/1
   # DELETE /remunerative_concepts/1.xml
   def destroy
-    @remunerative_concept.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(remunerative_concepts_url) }
-      format.xml  { head :ok }
+    begin
+      @remunerative_concept.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @remunerative_concept.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to remunerative_concept_url
     end
   end
+
   def find_remunerative_concept
       @remunerative_concept = RemunerativeConcept.by_company(current_company.id).find(params[:id])
   end

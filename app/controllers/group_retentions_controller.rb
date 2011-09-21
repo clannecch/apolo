@@ -74,13 +74,17 @@ class GroupRetentionsController < ApplicationController
   # DELETE /group_retentions/1
   # DELETE /group_retentions/1.xml
   def destroy
-    @group_retention.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(group_retentions_url) }
-      format.xml  { head :ok }
+    begin
+      @group_retention.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @group_retention.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to group_retention_url
     end
   end
+
   def find_group_retention
       @group_retention = GroupRetention.by_company(current_company.id).find(params[:id])
   end

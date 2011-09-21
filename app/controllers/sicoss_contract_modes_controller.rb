@@ -57,8 +57,15 @@ class SicossContractModesController < ApplicationController
   # DELETE /sicoss_contract_modes/1.json
   # DELETE /sicoss_contract_modes/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => SicossContractMode.model_name.human) if @sicoss_contract_mode.destroy
-    respond_with(@sicoss_contract_mode)
+    begin
+      @sicoss_contract_mode.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @sicoss_contract_mode.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to sicoss_contract_mode_url
+    end
   end
 
   protected

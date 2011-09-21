@@ -74,13 +74,17 @@ class GroupEmployerContributionsController < ApplicationController
   # DELETE /group_employer_contributions/1
   # DELETE /group_employer_contributions/1.xml
   def destroy
-    @group_employer_contribution.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(group_employer_contributions_url) }
-      format.xml  { head :ok }
+    begin
+      @group_employer_contribution.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @group_employer_contribution.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to group_employer_contribution_url
     end
   end
+
   def find_group_employer_contribution
       @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).find(params[:id])
   end

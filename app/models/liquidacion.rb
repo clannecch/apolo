@@ -20,7 +20,7 @@
 
 class Liquidacion < ActiveRecord::Base
   scope :by_company, lambda {|company| where(:company_id => company) }
-  has_many :recibo_sueldos
+  has_many :recibo_sueldos, :dependent => :restrict
   belongs_to :tipo_recibo
   belongs_to :bank_deposit
 

@@ -73,11 +73,14 @@ class RemunerationTypesController < ApplicationController
   # DELETE /remuneration_types/1
   # DELETE /remuneration_types/1.xml
   def destroy
-    @remuneration_type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(remuneration_types_url) }
-      format.xml  { head :ok }
+    begin
+      @remuneration_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @remuneration_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to remuneration_type_url
     end
   end
 

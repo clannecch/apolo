@@ -74,14 +74,17 @@ class InsuranceBeneficiariesController < ApplicationController
   # DELETE /insurance_beneficiaries/1
   # DELETE /insurance_beneficiaries/1.xml
   def destroy
-    @insurance_beneficiary =  @employee.insurance_beneficiary.find(params[:id])
-    @insurance_beneficiary.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(insurance_beneficiaries_url) }
-      format.xml  { head :ok }
+    begin
+      @insurance_beneficiary.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @insurance_beneficiary.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to insurance_beneficiary_url
     end
   end
+
 
   protected
   def find_employee

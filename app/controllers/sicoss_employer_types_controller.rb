@@ -57,8 +57,15 @@ class SicossEmployerTypesController < ApplicationController
   # DELETE /sicoss_employer_types/1.json
   # DELETE /sicoss_employer_types/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => SicossEmployerType.model_name.human) if @sicoss_employer_type.destroy
-    respond_with(@sicoss_employer_type)
+    begin
+      @sicoss_employer_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @sicoss_employer_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to sicoss_employer_type_url
+    end
   end
 
   protected

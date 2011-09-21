@@ -73,13 +73,17 @@ class PlacesController < ApplicationController
   # DELETE /places/1
   # DELETE /places/1.xml
   def destroy
-    @place.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(places_url) }
-      format.xml  { head :ok }
+    begin
+      @place.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @place.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to place_url
     end
   end
+
   def find_place
       @place = Place.by_company(current_company.id).find(params[:id])
   end

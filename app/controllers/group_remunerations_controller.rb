@@ -74,11 +74,14 @@ class GroupRemunerationsController < ApplicationController
   # DELETE /group_remunerations/1
   # DELETE /group_remunerations/1.xml
   def destroy
-    @group_remuneration.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(group_remunerations_url) }
-      format.xml  { head :ok }
+    begin
+      @group_remuneration.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @group_remuneration.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to group_remuneration_url
     end
   end
 

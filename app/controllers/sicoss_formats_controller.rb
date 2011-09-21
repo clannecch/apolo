@@ -57,8 +57,15 @@ class SicossFormatsController < ApplicationController
   # DELETE /sicoss_formats/1.json
   # DELETE /sicoss_formats/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => SicossFormat.model_name.human) if @sicoss_format.destroy
-    respond_with(@sicoss_format)
+    begin
+      @sicoss_format.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @sicoss_format.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to sicoss_format_url
+    end
   end
 
   protected

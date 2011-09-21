@@ -12,6 +12,6 @@
 #
 
 class SicossEmployerType < ActiveRecord::Base
-  has_many :employees
+  has_many :employees, :dependent => :restrict
   validates_presence_of		    :name,															                          :message => "es un dato requerido"
 end

@@ -72,13 +72,17 @@ class EmailTypesController < ApplicationController
   # DELETE /email_types/1
   # DELETE /email_types/1.xml
   def destroy
-    @email_type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(email_types_url) }
-      format.xml  { head :ok }
+    begin
+      @email_type.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @email_type.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to email_type_url
     end
   end
+
   def find_email_type
       @email_type = EmailType.by_company(current_company.id).find(params[:id])
   end

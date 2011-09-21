@@ -12,7 +12,7 @@
 
 class TipoRecibo < ActiveRecord::Base
   scope :by_company, lambda {|company| where(:company_id => company) }
-  has_many :liquidacions
+  has_many :liquidacions, :dependent => :restrict
   validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
 
 end

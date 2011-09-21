@@ -72,13 +72,17 @@ class ProvincesController < ApplicationController
   # DELETE /provinces/1
   # DELETE /provinces/1.xml
   def destroy
-    @province.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(provinces_url) }
-      format.xml  { head :ok }
+    begin
+      @province.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @province.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to province_url
     end
   end
+
   def find_province
       @province = Province.by_company(current_company.id).find(params[:id])
   end

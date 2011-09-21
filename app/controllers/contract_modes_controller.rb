@@ -70,14 +70,17 @@ before_filter :find_contract_mode, :except => [:index, :new, :create]
 
   # DELETE /contract_modes/1
   # DELETE /contract_modes/1.xml
-  def destroy
+def destroy
+  begin
     @contract_mode.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(contract_modes_url) }
-      format.xml  { head :ok }
-    end
+    flash[:success] = "successfully destroyed."
+  rescue ActiveRecord::DeleteRestrictionError => e
+    @contract_mode.errors.add(:base, e)
+    flash[:error] = "#{e}"
+  ensure
+    redirect_to contract_mode_url
   end
+end
 
 protected
 

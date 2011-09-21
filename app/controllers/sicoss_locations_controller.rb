@@ -57,8 +57,15 @@ class SicossLocationsController < ApplicationController
   # DELETE /sicoss_locations/1.json
   # DELETE /sicoss_locations/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => SicossLocation.model_name.human) if @sicoss_location.destroy
-    respond_with(@sicoss_location)
+    begin
+      @sicoss_location.destroy
+      flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @sicoss_location.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to sicoss_location_url
+    end
   end
 
   protected
