@@ -566,9 +566,12 @@ def print_libro_pdf(filename,entity)
   logo_cuit = "C.U.I.T.: "+"30-67932805-7"
   logo_inscripcion = "Nro.Inscripcion: " + "21.757"
   logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
-  offset = 0
 
+  offset = 0
   numero_de_hoja = logo_hoja
+  left = 10
+  top = 670
+
   linea_nombre = true
   linea_documento = true
   @recibo_sueldos.each do |r|
@@ -626,7 +629,6 @@ def print_libro_pdf(filename,entity)
           numero_de_hoja = 1
         end
         top = 670
-        left = 10
         pdf.draw_text "Registro Individual de Sueldos".center(170), :at => [5, top],:style => :bold, :size => 10
         top=top - 10
         pdf.draw_text "Ley 20.744-Art. 52".center(200), :at => [5, top], :size => 9
