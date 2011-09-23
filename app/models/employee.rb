@@ -256,7 +256,7 @@ class Employee < ActiveRecord::Base
   def control_porcentaje_seguro
     porcentual = 0
     insurance_beneficiaries.each do |i|
-      porcentual += i.porcentual
+      porcentual += i.porcentual.to_f
     end
     if porcentual != 100 && porcentual != 0
       errors.add(:base, "La suma de los porcentualesde Beneficiario de Seguro debe ser = 100("+porcentual.to_s+")")

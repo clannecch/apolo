@@ -1,0 +1,10 @@
+
+- content_for(:title) do
+  %h1= t('scaffold.actions.edit', :item => Numerador.model_name.human).titlecase
+
+= render 'form'
+
+= link_to t('scaffold.actions.show').titlecase, @numerador
+\|
+= link_to t('scaffold.actions.back').titlecase, numeradors_path
+

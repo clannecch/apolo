@@ -5,8 +5,8 @@ class NationalitiesController < ApplicationController
   # GET /nationalities
   # GET /nationalities.xml
   def index
-    @search = Nationality.by_company(current_company.id).search(params[:search])
-    @nationalities = @search.page(params[:page])#.per(10)
+  @search = Nationality.by_company(current_company.id).search(params[:search])
+  @nationalities = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
       format.html # index.html.erbb
@@ -58,7 +58,6 @@ class NationalitiesController < ApplicationController
   # PUT /nationalities/1
   # PUT /nationalities/1.xml
   def update
-
     respond_to do |format|
       if @nationality.update_attributes(params[:nationality])
         format.html { redirect_to(@nationality, :notice => 'Nationality was successfully updated.') }

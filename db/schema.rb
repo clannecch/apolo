@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110917144754) do
+ActiveRecord::Schema.define(:version => 20110923184024) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -552,6 +552,15 @@ ActiveRecord::Schema.define(:version => 20110917144754) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "numeradors", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.decimal  "number"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "places", :force => true do |t|

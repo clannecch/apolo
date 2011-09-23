@@ -187,6 +187,7 @@ class LiquidacionsController < ApplicationController
 end
 
 # #################################################################################
+=begin
   def print_libro_pdf(filename,entity)
     require 'prawn'
     @recibo_sueldos = @liquidacion.recibo_sueldos.all
@@ -349,7 +350,7 @@ end
 
     pdf.render_file(filename)
   end
-
+=end
 # ###################################################################################
   def format_number(n)
     if n.nil?
@@ -547,3 +548,211 @@ self.resultado    = OpenStruct.new()
 
 end
 =end
+def print_libro_pdf(filename,entity)
+  require 'prawn'
+  @recibo_sueldos = @liquidacion.recibo_sueldos.all
+
+  img = "public/images/hsjd2.jpg"
+
+  pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
+                            :page_layout => :portrait)
+  logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
+  logo_imprimir_hasta_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_imprimir_hasta_hoja"}).number.to_i
+
+  logo_empresa   = "CASA NUESTA SRA. DEL PILAR"
+  logo_domicilio = "    Julio A. Roca 501"
+  logo_localidad = "    6700 - Lujan (BA)"
+  logo_cuit = "C.U.I.T.: "+"30-67932805-7"
+  logo_inscripcion = "Nro.Inscripcion: " + "21.757"
+  logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
+  offset = 0
+
+  numero_de_hoja = logo_hoja
+  linea_nombre = true
+  linea_documento = true
+  @recibo_sueldos.each do |r|
+    linea = []
+
+    haberes_cd= -1
+    haberes_sd=-1
+    retenciones= -1
+
+    total_retention = 0
+    total_haberes_cd = 0
+    total_haberes_sd = 0
+
+    r.detalle_recibo_habers.each do |h|
+      if h.total.to_f != 0
+        if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
+          haberes_sd = haberes_sd + 1
+          if haberes_sd >= linea.count
+            linea << [ '', '','','','','','','']
+          end
+           linea[haberes_sd][4]   =    h.remunerative_concept.codigo
+           linea[haberes_sd][5]   =    format_number(h.total).strip
+           total_haberes_sd = total_haberes_sd + h.total
+        else
+           haberes_cd = haberes_cd + 1
+           if haberes_cd >= linea.count
+             linea << [ '', '','','','','','','']
+           end
+           linea[haberes_cd][2]   =    h.remunerative_concept.codigo
+           linea[haberes_cd][3]   =    format_number(h.total).strip
+           total_haberes_cd = total_haberes_cd + h.total
+        end
+      end
+    end
+
+    r.detalle_recibo_retencions.each do |r|
+      if r.total.to_f != 0
+        retenciones = retenciones + 1
+        if retenciones >= linea.count
+          linea << ['','','','','','','','']
+        end
+        linea[retenciones][6]    =    r.retention_concept.codigo.strip
+        linea[retenciones][7]    =    format_number(r.total).strip
+        total_retention = total_retention + r.total
+      end
+    end
+
+    if haberes_cd + haberes_sd  +  retenciones >= 0
+      if offset-((linea.count+4))*10 < 20
+        if numero_de_hoja != logo_hoja
+          pdf.start_new_page
+        end
+        numero_de_hoja += 1
+        if numero_de_hoja >  logo_imprimir_hasta_hoja
+          numero_de_hoja = 1
+        end
+        top = 670
+        left = 10
+        pdf.draw_text "Registro Individual de Sueldos".center(170), :at => [5, top],:style => :bold, :size => 10
+        top=top - 10
+        pdf.draw_text "Ley 20.744-Art. 52".center(200), :at => [5, top], :size => 9
+        top=top - 10
+
+        pdf.draw_text "Hoja Nro:", :at => [460, top], :size => 8
+        pdf.draw_text numero_de_hoja.to_s.rjust(logo_imprimir_hasta_hoja.to_s.length,'0'), :at => [500, top], :size => 10, :style => :bold
+        pdf.draw_text logo_empresa.strip, :at => [left, top], :size => 8, :style => :bold
+        top = top - 15
+        pdf.draw_text "Periodo de Liquidacion :", :at => [200,top], :size => 8
+        pdf.draw_text @liquidacion.periodo.strftime("%B de %Y"), :at => [300, top], :size => 8, :style => :bold
+        pdf.draw_text logo_domicilio.strip, :at => [left, top], :size => 8, :style => :bold
+        top = top - 15
+        pdf.draw_text logo_localidad.strip, :at => [left, top], :size => 8, :style => :bold
+        pdf.draw_text "Fecha :", :at => [430, top], :size => 8
+        pdf.draw_text Time.now.strftime("%d/%m/%Y %H:%M hs."), :at => [460, top], :size => 8, :style => :bold
+        pdf.draw_text "Quincena:", :at => [230, top], :size => 8
+        pdf.draw_text @liquidacion.quincena.to_s , :at => [270 , top], :size => 8, :style => :bold
+        top=top - 10
+        pdf.bounding_box [left, top], :width => 530, :height => 30 do # legajo
+            pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+28, top], :width => 122, :height => 30 do # apellido ynombre cut y categoria
+            pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+190, top], :width => 90, :height => 30 do # remuneraciones con descuento
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+280, top], :width => 90, :height => 30 do   # remiuneraciones sin descto
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+370, top], :width => 90, :height => 30 do   # Total Neto
+           pdf.stroke_bounds
+        end
+        top=top - 10
+        pdf.draw_text "Apellido y nombre                   F. Ingreso", :at => [left+47, top], :size => 8 # linea 505
+        pdf.draw_text "  Remuneraciones c/desc       Remuneraciones s/desc                Retenciones", :at => [left+192, top], :size => 7 # linea 505
+        pdf.draw_text "T o t a l", :at => [left+480, top], :size => 8
+        top = top - 5
+        # 500
+        pdf.bounding_box [left+28, top], :width => 60, :height => 15 do
+            pdf.stroke_bounds
+        end
+                            1
+#          pdf.bounding_box [98, 500], :width => 30, :height => 15 do
+#              pdf.stroke_bounds
+#          end
+        pdf.bounding_box [left+88, top], :width => 62, :height => 15 do
+            pdf.stroke_bounds
+        end
+#          pdf.bounding_box [213, 515], :width => 53, :height => 15 do
+#                pdf.stroke_bounds
+#          end
+        pdf.bounding_box [left+150, top], :width => 40, :height => 15 do
+            pdf.stroke_bounds
+        end
+
+
+        pdf.bounding_box [left+190, top], :width => 27, :height => 15 do
+            pdf.stroke_bounds
+        end
+
+        pdf.bounding_box [left+217, top], :width => 92, :height => 15 do # importe remuneraciones c/des + codigo de remuneraciones s/desc
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+309, top], :width => 92, :height => 15 do # importe remuneraciones s/des + codigo de remuneraciones s/desc
+           pdf.stroke_bounds
+        end
+        pdf.bounding_box [left+401, top], :width => 59, :height => 15 do # box de importe retenciones
+            pdf.stroke_bounds
+        end
+        top = top -2
+        pdf.draw_text "Legajo", :at => [left+2, top ], :size => 8  # linea 498
+        top=top -10
+        pdf.draw_text "    C.U.I.L            Categoria          F. Egreso", :at => [46, top], :size => 8
+
+        pdf.draw_text " N e t o", :at => [left+480, top], :size => 8
+        pdf.draw_text "Codigo        Importe         Codigo         Importe        Codigo         Importe", :at => [left+190, top], :size => 8
+
+
+        offset = top - 5
+        linea_nombre = true
+      end
+
+      linea[0][0] = r.employee.legajo.ljust(9) + " " +  (r.employee.apellido.strip+", "+r.employee.nombre.strip).ljust(30)
+      linea[0][1] = r.employee.fecha_ingreso.strftime("%d/%m/%Y")
+      if linea.count < 1
+        linea << ['','','','','','','','']
+      end
+      if linea.count < 2 && !r.employee.fecha_egreso.nil?
+        linea << ['','','','','','','','']
+      end
+      linea[1][0] = "             " + # r.employee.document_type.detalle[0..2].center(3) +
+           r.employee.cuil.strip.ljust(14)    +
+           r.employee.category.detalle[0..16].ljust(16)
+
+      if r.employee.fecha_egreso.nil?
+        linea[1][0] =  "E.Civil : "+r.employee.marital_status.try(:detalle)
+      else
+         linea[1][1] =  r.employee.fecha_egreso.strftime("%d/%m/%Y")
+         linea[2][0] =  "             E.Civil : "+r.employee.marital_status.try(:detalle)
+      end
+
+      first_line = true
+      linea.each do |l|
+        offset = offset - 10
+        pdf.draw_text  l[0] , :at => [left, offset], :size => 8
+        pdf.draw_text  l[1] , :at => [left+150, offset], :size => 8
+        pdf.draw_text  l[2] , :at => [left+193, offset], :size => 8
+        pdf.text_box  l[3] , :at => [left+223, offset+7], :size => 8, :align => :right, :width => 50
+        pdf.draw_text  l[4] , :at => [left+283, offset], :size => 8
+        pdf.text_box  l[5] , :at => [left+313, offset+7], :size => 8, :align => :right, :width => 50,:height => 10
+        pdf.draw_text  l[6] , :at => [left+373, offset], :size => 8
+        pdf.text_box  l[7] , :at => [left+403, offset+7], :size => 8, :align => :right, :width => 50,:height => 10
+      end
+      offset = offset - 3
+      pdf.text_box  format_number(total_haberes_sd).strip , :at => [left+223, offset], :size => 8, :align => :right, :width => 50,:height => 10
+      pdf.text_box  format_number(total_haberes_cd).strip , :at => [left+313, offset], :size => 8, :align => :right, :width => 50,:height => 10
+      pdf.text_box  format_number(total_retention).strip , :at => [left+403, offset], :size => 8, :align => :right, :width => 50,:height => 10
+      pdf.text_box  format_number(total_haberes_sd+total_haberes_cd-total_retention).strip , :at => [left+480, offset], :size => 8, :align => :right, :width => 50,:height => 10
+      offset = offset -10
+      pdf.bounding_box [left, offset], :width => 530, :height => 2 do
+          pdf.stroke_bounds
+      end
+      offset = offset -5
+    end
+  end
+
+  pdf.render_file(filename)
+end

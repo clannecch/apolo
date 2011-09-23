@@ -1,5 +1,7 @@
 APSSueldos::Application.routes.draw do |map|
 
+  resources :numeradors
+
   devise_for :users do
     get '/login' => 'devise/sessions#new', :as => :login
     get '/logout' => 'devise/sessions#destroy', :as => :logout
