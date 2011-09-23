@@ -80,8 +80,9 @@ class GroupRemunerationsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @group_remuneration.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to group_remuneration_url
+    else
+      redirect_to group_remunerations_url
     end
   end
 

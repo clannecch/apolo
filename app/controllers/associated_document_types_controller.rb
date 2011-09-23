@@ -84,8 +84,9 @@ class AssociatedDocumentTypesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @associated_document_type.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to associated_document_type_url
+    else
+      redirect_to associated_document_types_url
     end
   end
 

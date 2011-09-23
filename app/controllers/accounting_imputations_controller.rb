@@ -80,8 +80,9 @@ class AccountingImputationsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @accounting_imputation.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to accounting_imputation_url
+    else
+      redirect_to accounting_imputations_url
     end
   end
 

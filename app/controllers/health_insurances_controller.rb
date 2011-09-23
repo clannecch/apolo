@@ -78,8 +78,9 @@ class HealthInsurancesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @health_insurance.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to health_insurance_url
+    else
+      redirect_to health_insurances_url
     end
   end
 

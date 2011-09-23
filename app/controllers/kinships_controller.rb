@@ -85,8 +85,9 @@ class KinshipsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @kinship.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to kinship_url
+    else
+      redirect_to kinships_url
     end
   end
 

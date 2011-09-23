@@ -78,8 +78,9 @@ class MaritalStatusesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @marital_status.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to marital_status_url
+    else
+      redirect_to marital_statuses_url
     end
   end
 

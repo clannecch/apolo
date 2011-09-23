@@ -80,8 +80,9 @@ class GroupRetentionsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @group_retention.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to group_retention_url
+    else
+      redirect_to group_retentions_url
     end
   end
 

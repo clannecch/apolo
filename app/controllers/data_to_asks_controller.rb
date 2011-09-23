@@ -78,8 +78,9 @@ class DataToAsksController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @data_to_ask.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to data_to_ask_url
+    else
+      redirect_to data_to_asks_url
     end
   end
 

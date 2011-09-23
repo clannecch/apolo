@@ -88,8 +88,9 @@ class NumeradorsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @numerador.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to numerador_url
+    else
+      redirect_to numeradors_url
     end
   end
 

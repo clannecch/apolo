@@ -79,8 +79,9 @@ class CharacterServicesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @character_service.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to character_service_url
+    else
+      redirect_to character_services_url
     end
   end
 

@@ -102,8 +102,9 @@ class LiquidacionsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @liquidacion.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to liquidacion_url
+    else
+      redirect_to liquidacions_url
     end
   end
 

@@ -79,8 +79,9 @@ class PlacesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @place.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to place_url
+    else
+      redirect_to places_url
     end
   end
 

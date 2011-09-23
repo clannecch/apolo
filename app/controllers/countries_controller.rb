@@ -86,8 +86,9 @@ class CountriesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @country.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to country_url
+    else
+      redirect_to countries_url
     end
   end
 

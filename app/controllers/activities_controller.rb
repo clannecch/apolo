@@ -63,8 +63,9 @@ class ActivitiesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @activity.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to activity_url
+    else
+      redirect_to activities_url
     end
   end
 

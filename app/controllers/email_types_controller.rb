@@ -78,8 +78,9 @@ class EmailTypesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @email_type.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to email_type_url
+    else
+      redirect_to email_types_url
     end
   end
 

@@ -77,8 +77,9 @@ class SectionsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @section.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to section_url
+    else
+      redirect_to sections_url
     end
   end
 

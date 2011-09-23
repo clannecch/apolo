@@ -78,8 +78,9 @@ class EmploymentsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @employment.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to employment_url
+    else
+      redirect_to employments_url
     end
   end
 

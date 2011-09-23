@@ -82,8 +82,9 @@ class CategoriesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @category.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to category_url
+    else
+      redirect_to categories_url
     end
   end
 

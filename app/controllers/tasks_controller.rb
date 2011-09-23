@@ -77,8 +77,9 @@ class TasksController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @task.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to task_url
+    else
+      redirect_to tasks_url
     end
   end
 

@@ -63,8 +63,9 @@ class SicossLocationsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_location.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_location_url
+    else
+      redirect_to sicoss_locations_url
     end
   end
 

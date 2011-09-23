@@ -121,8 +121,9 @@ class BankDepositsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @bank_deposit.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to bank_deposit_url
+    else
+      redirect_to bank_deposits_url
     end
   end
 

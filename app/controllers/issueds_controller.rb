@@ -79,8 +79,9 @@ class IssuedsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @issued.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to issued_url
+    else
+      redirect_to issueds_url
     end
   end
 

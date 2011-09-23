@@ -63,8 +63,9 @@ class SicossActivitiesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_activity.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_activity_url
+    else
+      redirect_to sicoss_activities_url
     end
   end
 

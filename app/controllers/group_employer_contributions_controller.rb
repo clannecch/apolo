@@ -80,8 +80,9 @@ class GroupEmployerContributionsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @group_employer_contribution.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to group_employer_contribution_url
+    else
+      redirect_to group_employer_contributions_url
     end
   end
 

@@ -77,8 +77,9 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
     rescue ActiveRecord::DeleteRestrictionError => e
       @cost_center.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to cost_center_url
+    else
+      redirect_to cost_centers_url
     end
   end
 

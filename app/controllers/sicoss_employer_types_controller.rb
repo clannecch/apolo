@@ -63,8 +63,9 @@ class SicossEmployerTypesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_employer_type.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_employer_type_url
+    else
+      redirect_to sicoss_employer_types_url
     end
   end
 

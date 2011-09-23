@@ -79,8 +79,9 @@ class LaborUnionsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @labor_union.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to labor_union_url
+    else
+      redirect_to labor_unions_url
     end
   end
 

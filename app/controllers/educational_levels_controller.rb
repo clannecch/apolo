@@ -77,8 +77,8 @@ before_filter :find_educational_level, :except => [:index, :new, :create]
     rescue ActiveRecord::DeleteRestrictionError => e
       @educational_level.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to educational_level_url
+      redirect_to educational_levels_url
     end
   end
 

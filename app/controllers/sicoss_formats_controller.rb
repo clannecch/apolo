@@ -63,8 +63,9 @@ class SicossFormatsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_format.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_format_url
+    else
+      redirect_to sicoss_formats_url
     end
   end
 

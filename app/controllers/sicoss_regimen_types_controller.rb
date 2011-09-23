@@ -62,8 +62,9 @@ class SicossRegimenTypesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_regimen_type.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_regimen_type_url
+    else
+      redirect_to sicoss_regimen_types_url
     end
   end
 

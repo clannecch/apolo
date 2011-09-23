@@ -63,8 +63,9 @@ class SicossContractModesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_contract_mode.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_contract_mode_url
+    else
+      redirect_to sicoss_contract_modes_url
     end
   end
 

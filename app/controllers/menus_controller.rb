@@ -41,8 +41,9 @@ class MenusController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @menu.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to @menu_url
+    else
+      redirect_to @menus_url
     end
   end
 

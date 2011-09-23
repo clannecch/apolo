@@ -77,8 +77,9 @@ class RetentionConceptsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @retention_concept.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to retention_concept_url
+    else
+      redirect_to retention_concepts_url
     end
   end
 

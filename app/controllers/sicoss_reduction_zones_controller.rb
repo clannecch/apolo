@@ -63,8 +63,9 @@ class SicossReductionZonesController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @sicoss_reduction_zone.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to sicoss_reduction_zone_url
+    else
+      redirect_to sicoss_reduction_zones_url
     end
   end
 

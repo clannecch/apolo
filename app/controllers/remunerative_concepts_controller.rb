@@ -87,8 +87,9 @@ class RemunerativeConceptsController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @remunerative_concept.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to remunerative_concept_url
+    else
+      redirect_to remunerative_concepts_url
     end
   end
 

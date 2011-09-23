@@ -78,8 +78,9 @@ class TipoRecibosController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @tipo_recibo.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to tipo_recibo_url
+    else
+      redirect_to tipo_recibos_url
     end
   end
 

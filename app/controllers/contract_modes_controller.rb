@@ -77,8 +77,9 @@ def destroy
   rescue ActiveRecord::DeleteRestrictionError => e
     @contract_mode.errors.add(:base, e)
     flash[:error] = "#{e}"
-  ensure
     redirect_to contract_mode_url
+  else
+    redirect_to contract_modes_url
   end
 end
 

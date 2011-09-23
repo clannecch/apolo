@@ -77,8 +77,9 @@ class CausaEgresosController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @causa_egreso.errors.add(:base, e)
       flash[:error] = "#{e}"
-    ensure
       redirect_to causa_egreso_url
+    else
+      redirect_to causa_egresos_url
     end
   end
 
