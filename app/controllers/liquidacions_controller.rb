@@ -28,7 +28,7 @@ class LiquidacionsController < ApplicationController
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
-            File.delete(dump_tmp_filename)
+            File.delete(dump_tmp_filename) unless Rails.env.development?
           else
             redirect_to :action => 'show'
           end
@@ -555,9 +555,9 @@ self.resultado    = OpenStruct.new()
 
 end
 =end
-def print_libro_pdf(filename,entity)
+def print_libro_pdf(filename,liquidacion_actual)
   require 'prawn'
-  @recibo_sueldos = @liquidacion.recibo_sueldos.all
+  @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
   img = "public/images/hsjd2.jpg"
 
