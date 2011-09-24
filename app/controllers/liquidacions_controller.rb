@@ -26,8 +26,12 @@ class LiquidacionsController < ApplicationController
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-          print_libro_pdf(dump_tmp_filename,@liquidacion)
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+          if print_libro_pdf(dump_tmp_filename,@liquidacion)
+            send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+            File.delete(dump_tmp_filename)
+          else
+            redirect_to :action => 'show'
+          end
           #File.delete(dump_tmp_filename)
       end
       format.json do
@@ -107,6 +111,8 @@ class LiquidacionsController < ApplicationController
       redirect_to liquidacions_url
     end
   end
+
+  protected
 
   def find_liquidacion
       @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
@@ -557,8 +563,20 @@ def print_libro_pdf(filename,entity)
 
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
-  logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
-  logo_imprimir_hasta_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_imprimir_hasta_hoja"}).number.to_i
+  begin
+    logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
+  rescue
+    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores"
+#    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
+    return
+  end
+  begin
+    logo_imprimir_hasta_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_imprimir_hasta_hoja"}).number.to_i
+  rescue
+    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_imprimir_hasta_hoja' en la tabla de numeradores"
+#    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
+    return
+  end
 
   logo_empresa   = "CASA NUESTA SRA. DEL PILAR"
   logo_domicilio = "    Julio A. Roca 501"

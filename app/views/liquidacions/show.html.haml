@@ -1,5 +1,13 @@
 %h1 Visualizacion de Liquidacion
 %p#notice= notice
+- if @liquidacion.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@liquidacion.errors.count, "error")
+      prohibited this liquidacion from being saved:
+    %ul
+      - @liquidacion.errors.full_messages.each do |msg|
+        %li= msg
 %p
   %b Periodo de liquidacion:
   = @liquidacion.periodo.month
