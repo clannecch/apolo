@@ -24,7 +24,7 @@ class DetalleReciboHaber < ActiveRecord::Base
   belongs_to :recibo_sueldo
 
 # indica que acumuladores y employee los tome de  :recibo_sueldo
-  delegate :employee, :to => :recibo_sueldo
+  delegate :employee, :to => :recibo_sueldo, :allow_nil => true
   # hace esto
 
 #  include MultiplicacionPorOcho

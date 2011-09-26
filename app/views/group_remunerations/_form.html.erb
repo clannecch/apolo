@@ -1,3 +1,11 @@
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag('chosen') %>
+  <%= javascript_include_tag('chosen.jquery.min.js')	  %>
+  <%= javascript_tag do %>
+    $(".chosen_multi_select").chosen();
+  <% end %>
+<% end %>
+
 <%= form_for @group_remuneration do |f| %>
 	<% if @group_remuneration.errors.any? %>
 		<div id="error_explanation">
@@ -19,9 +27,8 @@
         <tr>
             <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :composicion %></strong></td>
             <td style="width:70%">
-               <%= f.collection_select :remunerative_concept_ids, RemunerativeConcept.all, :id, :detalle, {}, :multiple => true%>
+               <%= f.collection_select :remunerative_concept_ids, RemunerativeConcept.all, :id, :detalle, {}, :multiple => true, :class => "chosen_multi_select" %>
             </td>
-
         </tr>
 	</table>
 	<p><%= f.submit %></p>

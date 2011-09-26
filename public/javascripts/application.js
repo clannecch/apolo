@@ -2,10 +2,13 @@
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function()
 {
-  // jqeury uniform
+  // jquery uniform
   //$("select, input:checkbox, input:radio, input:file").uniform();
   //$("input, textarea, select, button").uniform();
   $("select#company_current").uniform();
+
+  // chosen multiple seleccion
+  //$(".chosen_multi_select").chosen();
 
   // jQuery datepicker for formtastic (see http://gist.github.com/271377)
   $('input.ui-datepicker').datepicker({ dateFormat: 'yy-mm-dd'});

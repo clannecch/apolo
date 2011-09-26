@@ -1,11 +1,8 @@
-<div class="nested-fields">
-
-      <tr>
+<tr class="nested-fields">
         <td><%= f.collection_select :associated_document_type_id, AssociatedDocumentType.all, :id, :name, :prompt => true %></td>
         <td><%= f.text_field :name %></td>
         <td><%=  f.date_select :reception_date %></td>
         <td><%= f.file_field :adjunto %></td>
         <td><%= link_to_remove_association "Borrar Adjunto", f %></td>
-      </tr>
-</div>
+</tr>
 
