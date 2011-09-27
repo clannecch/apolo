@@ -25,7 +25,7 @@ class ReciboSueldo < ActiveRecord::Base
   validates_presence_of		:employee_id ,	:message => "es un dato requerido"
   validates_uniqueness_of :employee_id ,  :message => "existe liquidacion activa", :scope => :liquidacion_id
 
-  has_many                :detalle_recibo_habers, :dependent =>  :destroy
+  has_many                :detalle_recibo_habers, :dependent =>  :delete_all  # destroy
   accepts_nested_attributes_for :detalle_recibo_habers, :allow_destroy => true
 
   has_many                :detalle_recibo_retencions, :dependent =>  :destroy
