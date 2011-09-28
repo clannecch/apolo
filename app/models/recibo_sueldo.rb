@@ -210,7 +210,7 @@ class ReciboSueldo < ActiveRecord::Base
     self.employee.employee_retention_concepts.each do |rc|
       detalle_recibo_retencions.build(:retention_concept_id => rc.retention_concept_id,
                                       :cost_center_id => employee.cost_center_id,
-                                      :detalle => (rc.detalle.blank? ? rc.retention_concept.detalle : rc:detalle))
+                                      :detalle => (rc.detalle.blank? ? rc.retention_concept.detalle : rc.detalle))
     end
 
     detalle_recibo_haber_adicionados.each do |rc|
