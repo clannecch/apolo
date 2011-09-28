@@ -204,13 +204,17 @@ class ReciboSueldo < ActiveRecord::Base
     detalle_recibo_haber_adicionados = self.employee.employee_remunerative_concepts.map do |rc|
       detalle_recibo_habers.build(:remunerative_concept_id => rc.remunerative_concept_id,
                                   :cost_center_id => rc.cost_center_id,
-                                  :detalle => (rc.detalle.blank? ? rc.remunerative_concept.detalle : rc.detalle))
+                                  :detalle => (rc.detalle.blank? ? rc.remunerative_concept.detalle : rc.detalle),
+                                  :importe => rc.importe,
+                                  :cantidad => rc.cantidad)
     end
 
     self.employee.employee_retention_concepts.each do |rc|
       detalle_recibo_retencions.build(:retention_concept_id => rc.retention_concept_id,
                                       :cost_center_id => employee.cost_center_id,
-                                      :detalle => (rc.detalle.blank? ? rc.retention_concept.detalle : rc.detalle))
+                                      :detalle => (rc.detalle.blank? ? rc.retention_concept.detalle : rc.detalle),
+                                      :importe => rc.importe,
+                                      :cantidad => rc.cantidad)
     end
 
     detalle_recibo_haber_adicionados.each do |rc|
