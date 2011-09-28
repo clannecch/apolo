@@ -20,8 +20,8 @@ class DetalleReciboRetencion < ActiveRecord::Base
   belongs_to :recibo_sueldo
   belongs_to :cost_center
 
-  delegate :employee, :to => :recibo_sueldo       #, :allow_nil => true
-  delegate :acumuladores, :to => :recibo_sueldo   #, :allow_nil => true
+  delegate :employee,     :to => :recibo_sueldo   , :allow_nil => true
+  delegate :acumuladores, :to => :recibo_sueldo   , :allow_nil => true
 
   validates_presence_of :retention_concept_id
 #  validates_numericality_of :cantidad, :if => :cantidad?

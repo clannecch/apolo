@@ -347,7 +347,7 @@ class ReciboSueldo < ActiveRecord::Base
     begin
       if anos < 1
         dias_vacaciones = ( ( ( (pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi) +
-                                  (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
+                                  (employee.antiguedad_reconocida_meses.to_i * 30) ) / 20).to_i
   #errors.add(:base, "< anios "+dias_vacaciones.to_s)
       else
         case anos
