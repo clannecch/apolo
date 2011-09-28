@@ -344,19 +344,24 @@ class ReciboSueldo < ActiveRecord::Base
     anos = calculo_antiguedad(fi, pl)
     dias_vacaciones = 0
 
-    if anos < 1
-      dias_vacaciones = ( ( ( (pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi) +
-                                (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
-#errors.add(:base, "< anios "+dias_vacaciones.to_s)
-    else
-      case anos
-        when 1..9
-          dias_vacaciones = 14 +  7 if anos > 5
-        when 10..19
-          dias_vacaciones = 28
-        else
-          dias_vacaciones = 35
+    begin
+      if anos < 1
+        dias_vacaciones = ( ( ( (pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi) +
+                                  (employee.antiguedad_reconocida_meses * 30) ) / 20).to_i
+  #errors.add(:base, "< anios "+dias_vacaciones.to_s)
+      else
+        case anos
+          when 1..9
+            dias_vacaciones = 14 +  7 if anos > 5
+          when 10..19
+            dias_vacaciones = 28
+          else
+            dias_vacaciones = 35
+        end
       end
+    rescue
+      errors.add(:base, "fecha="+(pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi).to_s + " Antiguedad_meses ="+employee.antiguedad_reconocida_meses.to_s)
+
     end
     if dias_vacaciones < 0
        dias_vacaciones = 0
