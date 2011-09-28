@@ -360,8 +360,7 @@ class ReciboSueldo < ActiveRecord::Base
         end
       end
     rescue
-      errors.add(:base, "fecha="+(pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi).to_s + " Antiguedad_meses ="+employee.antiguedad_reconocida_meses.to_s)
-
+      errors.add(:base, "fecha="+((pl.year.to_s+'-'+pl.month.to_s+"-01").to_date - fi).to_s + " Antiguedad_meses ="+employee.antiguedad_reconocida_meses.to_s)
     end
     if dias_vacaciones < 0
        dias_vacaciones = 0
