@@ -19,6 +19,7 @@
 require 'custom_validators'
 
 class DetalleReciboHaber < ActiveRecord::Base
+
 # has_many   :remunerative_concepts
   belongs_to :remunerative_concept
   belongs_to :recibo_sueldo
@@ -49,4 +50,5 @@ class DetalleReciboHaber < ActiveRecord::Base
       super
     end
   end
+
 end

@@ -27,5 +27,5 @@ class EmployeeRemunerativeConcept < ActiveRecord::Base
   validates_numericality_of   :cantidad, :if => :cantidad?
   validates_numericality_of   :importe, :allow_blank => true
 
-  validates_with RemunerativeConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :remunerative_concept_id?
+#  validates_with RemunerativeConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :remunerative_concept_id?
 end

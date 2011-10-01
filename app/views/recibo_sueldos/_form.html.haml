@@ -16,9 +16,8 @@
       = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos, :id, :full_name , :prompt => true
   - else
     %h4
-      Empleado:
-      - @recibo_sueldo.employee.apellido
-      , #{@recibo_sueldo.employee.nombre}
+
+      Empleado: #{@recibo_sueldo.employee.apellido}, #{@recibo_sueldo.employee.nombre}
   %table.field
     %tr
       %th= f.label "Fecha Recibo"

@@ -54,7 +54,8 @@ class ReciboSueldosController < ApplicationController
 
     respond_to do |format|
       if @recibo_sueldo.save
-        format.html { redirect_to([@liquidacion, @recibo_sueldo], :notice => 'Recibo sueldo was successfully created.') }
+#        format.html { redirect_to([@liquidacion, @recibo_sueldo], :notice => 'Recibo sueldo was successfully created.') }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @recibo_sueldo, :status => :created, :location => @recibo_sueldo }
       else
         format.html { render :action => "new" }
@@ -393,7 +394,7 @@ class ReciboSueldosController < ApplicationController
     total_remunerative_concept_sa = 0
 
     @recibo_sueldo.detalle_recibo_habers.each do |h|
-      pdf.draw_text h.remunerative_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
+      pdf.draw_text (h.detalle.blank? ? h.remunerative_concept.detalle[0..31] :h.detalle[1..31]), :at => [8,offset],:style => :bold, :size => 10
       pdf.draw_text format_number(h.cantidad_recibo).rjust(8), :at => [195,offset],:style => :bold, :size => 10
       if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
         column = 340

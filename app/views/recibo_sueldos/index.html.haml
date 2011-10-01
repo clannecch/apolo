@@ -6,6 +6,7 @@
     %th Fecha recibo
     %th Observaciones
     %th Mensaje recibo
+    %th Fecha de Calculo
     %th
     %th
     %th
@@ -16,6 +17,7 @@
       %td= recibo_sueldo.fecha_recibo
       %td= recibo_sueldo.observaciones
       %td= recibo_sueldo.mensaje_recibo
+      %td= recibo_sueldo.fecha_calculo.blank? ? '' : recibo_sueldo.fecha_calculo.strftime("%d/%m/%y - %H:%M")
       %td= link_to 'Visualzar', [@liquidacion, recibo_sueldo]
       %td= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,recibo_sueldo)
       %td= link_to 'Borrar', [@liquidacion, recibo_sueldo], :confirm => 'Esta Seguro?', :method => :delete

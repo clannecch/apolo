@@ -16,6 +16,7 @@
 #
 
 class DetalleReciboRetencion < ActiveRecord::Base
+
   belongs_to :retention_concept
   belongs_to :recibo_sueldo
   belongs_to :cost_center
