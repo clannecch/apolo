@@ -63,6 +63,7 @@ class RemunerativeConcept < ActiveRecord::Base
         Rails.logger.info("Periodo=: "+l.periodo_deposito.to_s)
         recibos=ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => self.id)
         recibos.each do |r|
+          Rails.logger.info("Recibo: "+r.id.to_s)
           r.calcular_recibo
         end
       end
