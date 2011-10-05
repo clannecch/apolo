@@ -27,7 +27,7 @@ class ReciboSueldosController < ApplicationController
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_to_pdf(dump_tmp_filename,@recibo_sueldo)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
-          #File.delete(dump_tmp_filename)
+          File.delete(dump_tmp_filename) unless Rails.env.development?
       end
     end
   end
@@ -45,6 +45,30 @@ class ReciboSueldosController < ApplicationController
   # GET /recibo_sueldos/1/edit
   def edit
     @recibo_sueldo =  @liquidacion.recibo_sueldos.find(params[:id])
+    @recibo_sueldo.detalle_recibo_habers.each do |x|
+      if x.remunerative_concept.data_to_ask.cantidad?
+        if x.cantidad.to_f == 0
+          x.cantidad = (x.cantidad == 0 ? nil : 0)
+        end
+      end
+      if x.remunerative_concept.data_to_ask.importe?
+        if x.importe.to_f == 0
+          x.importe =  (x.importe == 0 ? nil : 0)
+        end
+      end
+    end
+    @recibo_sueldo.detalle_recibo_retencions.each do |x|
+      if x.retention_concept.data_to_ask.cantidad?
+        if x._cantidad.to_f == 0
+          x.cantidad = (x.cantidad == 0 ? nil : 0)
+        end
+      end
+      if x.retention_concept.data_to_ask.importe?
+        if x.importe.to_f == 0
+          x.importe = (x.importe == 0 ? nil : 0)
+        end
+      end
+    end
   end
 
   # POST /recibo_sueldos
@@ -54,6 +78,30 @@ class ReciboSueldosController < ApplicationController
 
     respond_to do |format|
       if @recibo_sueldo.save
+        @recibo_sueldo.detalle_recibo_habers.each do |x|
+          if x.remunerative_concept.data_to_ask.cantidad?
+            if x.cantidad.to_f == 0
+              x.cantidad = (x.cantidad == 0 ? nil : 0)
+            end
+          end
+          if x.remunerative_concept.data_to_ask.importe?
+            if x.importe.to_f == 0
+              x.importe =  (x.importe == 0 ? nil : 0)
+            end
+          end
+        end
+        @recibo_sueldo.detalle_recibo_retencions.each do |x|
+          if x.retention_concept.data_to_ask.cantidad?
+            if x._cantidad.to_f == 0
+              x.cantidad = (x.cantidad == 0 ? nil : 0)
+            end
+          end
+          if x.retention_concept.data_to_ask.importe?
+            if x.importe.to_f == 0
+              x.importe = (x.importe == 0 ? nil : 0)
+            end
+          end
+        end
 #        format.html { redirect_to([@liquidacion, @recibo_sueldo], :notice => 'Recibo sueldo was successfully created.') }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @recibo_sueldo, :status => :created, :location => @recibo_sueldo }
@@ -78,6 +126,11 @@ class ReciboSueldosController < ApplicationController
         format.xml  { render :xml => @recibo_sueldo.errors, :status => :unprocessable_entity }
       end
     end
+    @recibo_sueldo.fecha_calculo = DateTime.now
+    # Rails.logger.info(">>>> antes de calcular "+@recibo_sueldo.fecha_calculo.to_s)
+
+    @recibo_sueldo.calcular_recibo
+
   end
 
   # DELETE /recibo_sueldos/1

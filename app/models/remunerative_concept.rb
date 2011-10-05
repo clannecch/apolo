@@ -40,6 +40,35 @@ class RemunerativeConcept < ActiveRecord::Base
   validate :cannot_asociate_iqual_concept
   validates_presence_of :detalle, :codigo, :acumuladores_valor, :calculo_valor
 
+  before_save :controlar_cambios
+
+  @Recalcular = false
+
+  def controlar_cambios
+    @Recalcular = ( calculo_valor         != calculo_valor_was          ) ||
+                  ( calculo_cantidad      != calculo_cantidad_was       ) ||
+                  ( prioridad_calculo     != prioridad_calculo_was      ) ||
+                  ( acumuladores_valor    != acumuladores_valor_was     ) ||
+                  ( acumuladores_cantidad != acumuladores_cantidad_was  ) ||
+                  ( data_to_ask_id        != data_to_ask_id_was)
+    return true
+  end
+
+  def cambio_algo
+    return @Recalcular
+  end
+
+  def calculate_changes
+      Liquidacion.where(:fecha_cierre.nil?).each do |l|
+        Rails.logger.info("Periodo=: "+l.periodo_deposito.to_s)
+        recibos=ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => self.id)
+        recibos.each do |r|
+          r.calcular_recibo
+        end
+      end
+  end
+
+
   def cannot_asociate_iqual_concept
     if (self.concepto_asociado_haber_id == self.concepto_asociado_haber_2_id) && !self.concepto_asociado_haber_id.nil?
       errors.add(:base, 'No puede asociar 2 veces el mismo haber')

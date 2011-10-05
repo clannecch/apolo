@@ -1,7 +1,6 @@
 class RemunerativeConceptsController < ApplicationController
 
   before_filter :find_remunerative_concept , :except => [:index, :new, :create]
-
   # GET /remunerative_concepts
   # GET /remunerative_concepts.xml
   def index
@@ -27,8 +26,16 @@ class RemunerativeConceptsController < ApplicationController
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
-          #File.delete(dump_tmp_filename)
+          File.delete(dump_tmp_filename) unless Rails.env.development?
       end
+      format.json do
+        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          recibos_afectados_pdf(dump_tmp_filename,@remunerative_concept)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibos_afectados.pdf")
+          File.delete(dump_tmp_filename) unless Rails.env.development?
+      end
+
     end
   end
 
@@ -66,16 +73,20 @@ class RemunerativeConceptsController < ApplicationController
   # PUT /remunerative_concepts/1
   # PUT /remunerative_concepts/1.xml
   def update
-
     respond_to do |format|
       if @remunerative_concept.update_attributes(params[:remunerative_concept])
-        format.html { redirect_to(@remunerative_concept, :notice => 'Remunerative concept was successfully updated.') }
-        format.xml  { head :ok }
+        if @remunerative_concept.cambio_algo
+          format.html {redirect_to notify_changes_remunerative_concept_url}
+        else
+          format.html { redirect_to(@remunerative_concept, :notice => 'Remunerative concept was successfully updated.') }
+          format.xml  { head :ok }
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @remunerative_concept.errors, :status => :unprocessable_entity }
       end
     end
+    Rails.logger.info("salio Cambio algokk=")
   end
 
   # DELETE /remunerative_concepts/1
@@ -97,6 +108,50 @@ class RemunerativeConceptsController < ApplicationController
       @remunerative_concept = RemunerativeConcept.by_company(current_company.id).find(params[:id])
   end
 
+
+  def calculate_changes
+    @remunerative_concept.calculate_changes
+    flash[:success] = "Calculado correctamente"
+    respond_to do |format|
+      format.html {redirect_to notify_changes_remunerative_concept_url}
+    end
+  end
+# ----
+# #################################################################################
+  def recibos_afectados_pdf(filename,entity)
+    require 'prawn'
+
+    img = "hsjd2.jpg"
+
+    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+#                              :background => img,
+                              :page_layout => :landscape)
+
+    pdf.repeat(:all, :dynamic => true) do
+      pdf.draw_text ("Legajos afectados por el cambio de calculo del concepto "+entity.codigo+" - "+entity.detalle).center(200), :at => [5,560],:style => :bold, :size => 11
+      pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [610, 550]
+    end
+    data = [["Periodo","legajo","Apellido y nombre"],
+         [] ]
+
+    Liquidacion.where(:fecha_cierre.nil?).each do |l|
+      recibos=ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => entity.id)
+      recibos.each do |r|
+        data << [l.periodo.strftime("%m/%Y") ,
+                 r.legajo,
+                 r.employee.full_name
+                 ]
+      end
+    end
+
+    pdf.table(data, :column_widths => [40, 100, 250],
+             :cell_style => { :font => "Times-Roman",:size => 10,:padding => [4, 04,04,4], :align => :center, :valign => :center },
+             :header => true ,
+             :row_colors => ["F0F0F0", "FFFFCC"])
+
+
+    pdf.render_file(filename)
+  end
 
 # #################################################################################
   def print_remunerative_concepts_pdf(filename,entity)

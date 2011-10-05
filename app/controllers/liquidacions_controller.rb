@@ -32,14 +32,13 @@ class LiquidacionsController < ApplicationController
           else
             redirect_to :action => 'show'
           end
-          #File.delete(dump_tmp_filename)
       end
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
-          #File.delete(dump_tmp_filename)
+          File.delete(dump_tmp_filename) unless Rails.env.development?
       end
 
       format.text  do
@@ -47,6 +46,7 @@ class LiquidacionsController < ApplicationController
         Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
         prepara_sicoss(dump_tmp_filename,@liquidacion)
         send_file(dump_tmp_filename, :type => :text, :disposition => 'attachment', :filename => "sicoss_interfase.txt")
+        File.delete(dump_tmp_filename) unless Rails.env.development?
       end
     end
   end

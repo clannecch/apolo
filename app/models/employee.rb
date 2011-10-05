@@ -277,11 +277,12 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  private
   def full_name
 #    apellido + ', '+nombre
    [apellido, nombre].compact.join(' ')
   end
+
+  private
 
   def full_address
    [(calle.blank? ? '' : calle), (puerta.blank? ? '' : puerta), (location_id.blank? ? '' : location.detalle),

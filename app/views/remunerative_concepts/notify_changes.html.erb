@@ -1,0 +1,7 @@
+<h1>Su modificacion afectara el calculo de recibos</h1>
+
+<p>
+	<%= link_to "Calcular", calculate_changes_remunerative_concept_path(@remunerative_concept.id)%> |
+    <%= link_to icon('printer', :small, :title => 'Imprimir'), remunerative_concept_path(@remunerative_concept_id, :format => 'json')%> |
+	<%= link_to "Codigos de Haberes", remunerative_concepts_path %>
+</p>

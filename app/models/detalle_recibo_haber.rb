@@ -35,7 +35,7 @@ class DetalleReciboHaber < ActiveRecord::Base
   end
 
   validates_presence_of     :remunerative_concept_id
-  validates_uniqueness_of   :remunerative_concept_id, :scope => [:cost_center_id, :recibo_sueldo_id]
+  validates_uniqueness_of   :remunerative_concept_id, :scope => [:cost_center_id, :recibo_sueldo_id],	:message => "Concepto Haber + Centro de Costos duplicado"
   validates_numericality_of :cantidad, :if => :cantidad?
   validates_numericality_of :importe, :allow_blank => true
   validates_with RemunerativeConceptsDataToAskValidator, :campos => [:cantidad, :importe], :if => :remunerative_concept_id?

@@ -25,14 +25,14 @@ class Liquidacion < ActiveRecord::Base
   belongs_to :bank_deposit
 
   validates_uniqueness_of     :periodo,
-                              :scope => [:quincena, :tipo_recibo_id],            :message => "+quincena+tipo recibo duplicado"
+                              :scope => [:quincena, :tipo_recibo_id],           :message => "+quincena+tipo recibo duplicado"
 
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 
 	validates_presence_of		    :periodo, :quincena,
                               :fecha_liquidacion,															  :message => "es un dato requerido"
   validates_presence_of		    :fecha_deposito,
-                              :if => :periodo_deposito?,					          :message => "es un dato requerido"
+                              :if => :periodo_deposito?,		    			          :message => "es un dato requerido"
 
   default_scope order('periodo ASC') 
 

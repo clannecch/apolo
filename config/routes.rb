@@ -122,7 +122,12 @@ APSSueldos::Application.routes.draw do |map|
 
   resources :retention_concepts
 
-  resources :remunerative_concepts
+  resources :remunerative_concepts do
+    member do
+      get "notify_changes", :action => :notify_changes
+      get "calculate_changes", :action => :calculate_changes
+    end
+  end
 
   resources :activities, :path => 'Actividades'
 
