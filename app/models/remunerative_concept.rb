@@ -60,11 +60,11 @@ class RemunerativeConcept < ActiveRecord::Base
 
   def calculate_changes
       Liquidacion.where(:fecha_cierre.nil?).each do |l|
-        Rails.logger.info("Periodo=: "+l.periodo_deposito.to_s)
         recibos=ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => self.id)
         recibos.each do |r|
-          Rails.logger.info("Recibo: "+r.id.to_s)
+          Rails.logger.info("Recibo: "+r.employee.legajo+" - "+r.employee.full_name)
           r.calcular_recibo
+          Rails.logger.info("Recibo: ok"+r.id.to_s)
         end
       end
   end
