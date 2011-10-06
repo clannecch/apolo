@@ -86,7 +86,6 @@ class RemunerativeConceptsController < ApplicationController
         format.xml  { render :xml => @remunerative_concept.errors, :status => :unprocessable_entity }
       end
     end
-    Rails.logger.info("salio Cambio algokk=")
   end
 
   # DELETE /remunerative_concepts/1
@@ -111,12 +110,10 @@ class RemunerativeConceptsController < ApplicationController
 
   def calculate_changes
     @remunerative_concept.calculate_changes
-    flash[:success] = "Calculado correctamente"
     respond_to do |format|
-      format.html {redirect_to notify_changes_remunerative_concept_url}
+      format.html {redirect_to notify_changes_remunerative_concept_url, :notice => "Calculado correctamente"}
     end
   end
-# ----
 # #################################################################################
   def recibos_afectados_pdf(filename,entity)
     require 'prawn'
@@ -125,11 +122,12 @@ class RemunerativeConceptsController < ApplicationController
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
 #                              :background => img,
-                              :page_layout => :landscape)
+                              :page_layout => :portrait)
 
     pdf.repeat(:all, :dynamic => true) do
-      pdf.draw_text ("Legajos afectados por el cambio de calculo del concepto "+entity.codigo+" - "+entity.detalle).center(200), :at => [5,560],:style => :bold, :size => 11
-      pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [610, 550]
+      pdf.draw_text ("Legajos afectados por el cambio de calculo del concepto "+
+          entity.codigo+" - "+entity.detalle), :at => [5,745],:style => :bold, :size => 11
+      pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [735, 550]
     end
     data = [["Periodo","legajo","Apellido y nombre"],
          [] ]

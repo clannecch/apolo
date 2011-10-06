@@ -1,5 +1,9 @@
 <h1>Categoria</h1>
 <table class="data" style="width:50%">
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Codigo:</strong></td>
+        <td style="width:70%"><%= @category.codigo %></td>
+    </tr>
 	<tr>
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
 		<td style="width:70%"><%= @category.detalle %></td>
@@ -8,6 +12,10 @@
 		<td style="width:30%;background-color: #C3D5D5;"><strong>Importe:</strong></td>
 		<td style="width:70%"><%= @category.importe %></td>
 	</tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Horas Mensuales:</strong></td>
+        <td style="width:70%"><%= @category.horas %></td>
+    </tr>
 </table>
 <p>
 	<%= link_to "Editar", edit_category_path(@category) %> |

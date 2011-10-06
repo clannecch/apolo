@@ -19,6 +19,6 @@
 |
 \#{link_to 'Volver', liquidacion_recibo_sueldos_path}
 
-- if !@recibo_sueldo.fecha_calculo.blank?
-  |
-  = link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf')
+/- if !@recibo_sueldo.fecha_calculo.blank?
+|
+= link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf')

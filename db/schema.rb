@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929211047) do
+ActiveRecord::Schema.define(:version => 20111005215403) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "updated_at"
     t.decimal  "importe"
     t.integer  "company_id"
+    t.decimal  "horas"
+    t.string   "codigo"
   end
 
   create_table "causa_egresos", :force => true do |t|
@@ -616,6 +618,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.integer  "data_to_ask_id"
     t.string   "cantidad_en_recibo"
     t.integer  "company_id"
+    t.boolean  "auxiliar"
   end
 
   create_table "retention_concepts", :force => true do |t|
@@ -630,6 +633,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.string   "acumuladores_valor"
     t.integer  "data_to_ask_id"
     t.integer  "company_id"
+    t.boolean  "auxiliar"
   end
 
   create_table "sections", :force => true do |t|

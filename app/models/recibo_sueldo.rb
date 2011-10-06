@@ -62,12 +62,14 @@ class ReciboSueldo < ActiveRecord::Base
           :total_remuneraciones                   => 0,
           :total_retenciones                      => 0,
           :horas_tabajadas                        => 0,
+          :horas_pactadas                         => 0,
           :antiguedad                             => calculo_antiguedad(self.employee.fecha_ingreso ,self.liquidacion.periodo)
         })
 
 #   acumuladores predefinidos
 
     begin
+      self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
       if employee.remuneration_type_id = 3
           if self.employee.remuneracion_fuera_convenio != 0
             self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
@@ -75,10 +77,10 @@ class ReciboSueldo < ActiveRecord::Base
             self.acumuladores.sueldo = self.employee.category.importe
           end
           self.acumuladores.valor_dia = self.acumuladores.sueldo / 30
-          self.acumuladores.valor_hora= self.acumuladores.sueldo / self.employee.horas_pactadas
+          self.acumuladores.valor_hora= self.acumuladores.sueldo / self.acumuladores.horas_pactadas
       elsif employee.remuneration_type_id = 2
           self.acumuladores.valor_dia = self.employee.remuneracion_fuera_convenio
-          self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio / self.employee.horas_pactadas  / 30
+          self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio / self.acumuladores.horas_pactadas  / 30
       else
           self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
       end
@@ -242,11 +244,13 @@ class ReciboSueldo < ActiveRecord::Base
   end
 
   def total_haberes
-      detalle_recibo_habers.all.sum(&:total).to_f
+#      detalle_recibo_habers.all.sum(&:total).to_f
+     DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).where("remunerative_concepts.auxiliar" => nil).all.sum(&:total).to_f
   end
 
   def total_retenciones
-    detalle_recibo_retencions.all.sum(&:total).to_f
+#    detalle_recibo_retencions.all.sum(&:total).to_f
+    DetalleReciboRetencion.joins(:retention_concept).where(:recibo_sueldo_id => self.id).where("retention_concepts.auxiliar" => nil).all.sum(&:total).to_f
   end
 
   def total_haberes_con_descuento

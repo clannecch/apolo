@@ -22,6 +22,12 @@
 				<%= f.text_field :detalle %>
 			</td>
 		</tr>
+        <tr>
+            <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label "Es Auxiliar de Calculo" %></strong></td>
+            <td style="width:70%">
+                <%= f.check_box :auxiliar %>
+            </td>
+        </tr>
 		<tr>
 			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :statistical_value %></strong></td>
 			<td style="width:70%">

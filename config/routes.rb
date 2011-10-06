@@ -98,6 +98,8 @@ APSSueldos::Application.routes.draw do |map|
   resources :categories do
     member do
       get "imprimir", :action => :print
+      get "notify_changes", :action => :notify_changes
+      get "calculate_changes", :action => :calculate_changes
     end
   end
 
@@ -120,7 +122,13 @@ APSSueldos::Application.routes.draw do |map|
 
   resources :employer_contribution_concepts
 
-  resources :retention_concepts
+  resources :retention_concepts do
+    member do
+      get "notify_changes", :action => :notify_changes
+      get "calculate_changes", :action => :calculate_changes
+    end
+  end
+
 
   resources :remunerative_concepts do
     member do

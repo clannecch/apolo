@@ -389,16 +389,20 @@ end
       resultado    = OpenStruct.new()
       registro = ""
       r.detalle_recibo_habers.each do |dhr|
-        dhr.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
-          acumulador.gsub!('@', '')
-          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        if !dhr.remunerative_concept.auxiliar
+          dhr.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
+            acumulador.gsub!('@', '')
+            acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+          end
         end
       end
 
       r.detalle_recibo_retencions.each do |dhr|
-        dhr.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
-          acumulador.gsub!('@', '')
-          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        if !dhr.retention_concept.auxiliar
+          dhr.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
+            acumulador.gsub!('@', '')
+            acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+          end
         end
       end
       SicossFormat.all.sort_by{ |p| p.position}.each do |f|
@@ -604,7 +608,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     total_haberes_sd = 0
 
     r.detalle_recibo_habers.each do |h|
-      if h.total.to_f != 0
+      if h.total.to_f != 0 && !h.remunerative_concept.auxiliar
         if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
           haberes_sd = haberes_sd + 1
           if haberes_sd >= linea.count
@@ -626,7 +630,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
 
     r.detalle_recibo_retencions.each do |r|
-      if r.total.to_f != 0
+      if r.total.to_f != 0 && !r.retention_concept.auxiliar
         retenciones = retenciones + 1
         if retenciones >= linea.count
           linea << ['','','','','','','','']

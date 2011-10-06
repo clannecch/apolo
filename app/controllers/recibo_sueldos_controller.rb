@@ -449,23 +449,27 @@ class ReciboSueldosController < ApplicationController
     @recibo_sueldo.detalle_recibo_habers.each do |h|
       pdf.draw_text (h.detalle.blank? ? h.remunerative_concept.detalle[0..31] :h.detalle[1..31]), :at => [8,offset],:style => :bold, :size => 10
       pdf.draw_text format_number(h.cantidad_recibo).rjust(8), :at => [195,offset],:style => :bold, :size => 10
-      if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
-        column = 340
-        total_remunerative_concept_sa += h.total
-      else
-        column = 245
-        total_remunerative_concept_ca += h.total
+      if !h.remunerative_concept.auxiliar
+        if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
+          column = 340
+          total_remunerative_concept_sa += h.total
+        else
+          column = 245
+          total_remunerative_concept_ca += h.total
+        end
+        pdf.draw_text format_number(h.total).rjust(15), :at => [column,offset],:style => :bold, :size => 10
+        offset = offset - 10
       end
-      pdf.draw_text format_number(h.total).rjust(15), :at => [column,offset],:style => :bold, :size => 10
-      offset = offset - 10
     end
     total_retention = 0
     @recibo_sueldo.detalle_recibo_retencions.each do |r|
-      pdf.draw_text r.retention_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
-      pdf.draw_text format_number(r.cantidad).rjust(8), :at => [195,offset],:style => :bold, :size => 10
-      pdf.draw_text format_number(r.total).rjust(15), :at => [435,offset],:style => :bold, :size => 10
-      offset = offset - 10
-      total_retention += r.total
+      if !r.retention_concept.auxiliar
+        pdf.draw_text r.retention_concept.detalle[0..31], :at => [8,offset],:style => :bold, :size => 10
+        pdf.draw_text format_number(r.cantidad).rjust(8), :at => [195,offset],:style => :bold, :size => 10
+        pdf.draw_text format_number(r.total).rjust(15), :at => [435,offset],:style => :bold, :size => 10
+        offset = offset - 10
+        total_retention += r.total
+      end
     end
     pdf.draw_text @liquidacion.periodo_deposito.strftime("%m/%Y").rjust(6),
                                   :at => [7,108],:style => :bold, :size => 10

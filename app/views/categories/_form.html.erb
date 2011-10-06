@@ -10,18 +10,30 @@
 		</div>
 	<% end %>
 	<table class="data" style="width:100%" >
-		<tr>
-			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
-			<td style="width:70%">
-				<%= f.text_field :detalle %>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :importe %></strong></td>
-			<td style="width:70%">
-				<%= f.text_field :importe %>
-			</td>
-		</tr>
+      <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :codigo %></strong></td>
+          <td style="width:70%">
+              <%= f.text_field :codigo %>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :detalle %></strong></td>
+          <td style="width:70%">
+              <%= f.text_field :detalle %>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label :importe %></strong></td>
+          <td style="width:70%">
+              <%= f.text_field :importe %>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label 'Horas Mensuales' %></strong></td>
+          <td style="width:70%">
+              <%= f.text_field :horas %>
+          </td>
+      </tr>
 	</table>
 	<p><%= f.submit %></p>
 <% end %>

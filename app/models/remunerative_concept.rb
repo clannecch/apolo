@@ -55,6 +55,15 @@ class RemunerativeConcept < ActiveRecord::Base
   end
 
   def cambio_algo
+    if @Recalcular
+      total = 0
+      Liquidacion.where(:fecha_cierre.nil?).each do |l|
+        total += ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => self.id).count
+      end
+      if total < 1
+        @Recalcular = false
+      end
+    end
     return @Recalcular
   end
 
@@ -64,7 +73,6 @@ class RemunerativeConcept < ActiveRecord::Base
         recibos.each do |r|
           Rails.logger.info("Recibo: "+r.employee.legajo+" - "+r.employee.full_name)
           r.calcular_recibo
-          Rails.logger.info("Recibo: ok"+r.id.to_s)
         end
       end
   end
