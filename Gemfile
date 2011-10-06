@@ -30,6 +30,7 @@ gem 'prawn'
 gem 'wicked_pdf'
 
 gem 'sqlite3'
+gem 'pg'
 
 group :development, :test do
   # database
