@@ -278,7 +278,14 @@ class ReciboSueldo < ActiveRecord::Base
   #reemplaza del parametro los : por el nombre del modelo y el @ por el nombre de la colecicon de acumuladores
   def prepare_calculo_for_evaluation(str_for_evaluation)
     return 'falta indicar calculo' if str_for_evaluation.blank?
-    str_for_evaluation.gsub(/\:/,'self.').gsub(/@/, 'acumuladores.')
+    str_for_evaluation.gsub(/\:/,'self.').
+                        gsub(/@/, 'acumuladores.').
+                        gsub(/ entonces /,' ? ').
+                        gsub(/ sino /,' : ').
+                        gsub(/=/,'==').
+                        gsub(/ y /, ' && ').
+                        gsub(/ o /,' || ').
+                        gsub(' # ',' != ')
 
   end
 
