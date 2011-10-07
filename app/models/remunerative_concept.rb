@@ -38,6 +38,7 @@ class RemunerativeConcept < ActiveRecord::Base
   has_many :detalle_recibo_habers, :dependent => :restrict
   has_and_belongs_to_many :group_remunerations
   validate :cannot_asociate_iqual_concept
+#  validate :control_formula
   validates_presence_of :detalle, :codigo, :acumuladores_valor, :calculo_valor
 
   before_save :controlar_cambios
@@ -67,6 +68,77 @@ class RemunerativeConcept < ActiveRecord::Base
     return @Recalcular
   end
 
+  def control_formula
+    formula = self.calculo_valor.gsub(",",".")
+
+    esvalido = (formula.gsub('(').count == formula.gsub(')').count)
+    if !esvalido
+      errors.add(:base, 'Parentesis no balanceados (Abren '+formula.gsub('(').count.to_s+
+                ' y cierran '+formula.gsub('(').count.to_s+')' )
+    else
+      esvalido = (formula.gsub(' entonces ').count == formula.gsub(' sino ').count)
+      if !esvalido
+        errors.add(:base, 'Estructura de consulta no balanceada (entonces '+formula.gsub(' entonces ').count.to_s+
+                  ' y sino '+formula.gsub(' sino ').count.to_s+')' )
+      else
+        esvalido = formula.gsub('==').count == 0
+        if !esvalido
+          errors.add(:base, 'No puede utilizar "==" o ".."')
+        end
+      end
+    end
+    if esvalido
+      while formula.include?(".")
+
+        position = formula.index(".")
+        if position > 0
+          if !(formula[position-1] >="0" && formula[position-1] <= "9")
+            formula[position]=('0,')
+          else
+            formula[position]=(',')
+          end
+        else
+          formula[position]=('0,')
+        end
+
+      end
+      formula = formula.gsub(/,/,".")
+      xaeval = formula
+      len = formula.length
+      position = 0
+      while position < len
+        if ":@".include?(formula[position])
+          variable = ""
+          while position < len && " -+()*/".exclude?(formula[position])
+            variable = variable + formula[position]
+            position =  position + 1
+#            Rails.logger.info('variable: '+variable)
+          end
+#          Rails.logger.info('Paso2: '+variable+ " - "+position.to_s)
+          position = position - 1
+          xaeval = xaeval.gsub(variable,position.to_s)
+        end
+        position = position +1
+      end
+
+      begin
+        x=eval(xaeval)
+      rescue SyntaxError => se
+        errors.add(:base, 'formula inconsistente : '+formula)
+        errors.add(:base, 'Expresion evaluada : '+xaeval)
+      rescue ZeroDivisionError => zd
+        errors.add(:base, 'formula con Division por 0(cero). Formula : '+formula)
+      end
+
+    end
+    self.calculo_valor = formula
+    if !esvalido
+      errors.add(:base, 'formula invalida')
+    end
+
+  end
+
+
   def calculate_changes
       Liquidacion.where(:fecha_cierre.nil?).each do |l|
         recibos=ReciboSueldo.joins(:detalle_recibo_habers).where(:liquidacion_id => l.id).where("detalle_recibo_habers.remunerative_concept_id" => self.id)
@@ -82,6 +154,7 @@ class RemunerativeConcept < ActiveRecord::Base
     if (self.concepto_asociado_haber_id == self.concepto_asociado_haber_2_id) && !self.concepto_asociado_haber_id.nil?
       errors.add(:base, 'No puede asociar 2 veces el mismo haber')
     end
+    return control_formula
   end
 
   def all_without_myself
