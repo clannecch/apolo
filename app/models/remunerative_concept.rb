@@ -69,6 +69,9 @@ class RemunerativeConcept < ActiveRecord::Base
   end
 
   def control_formula
+    modelos = ["novedad_haber", "empleado", "categoria" ]
+    models = ["detalle_recibo_haber", "employee", "category" ]
+
     formula = self.calculo_valor.gsub(",",".")
 
     esvalido = (formula.gsub('(').count == formula.gsub(')').count)
@@ -106,9 +109,19 @@ class RemunerativeConcept < ActiveRecord::Base
       xaeval = formula
       len = formula.length
       position = 0
-      while position < len
+      entidad = ""
+      initial_position = 0
+      while position < len && esvalido
+        if " -+()*/@".include?(formula[position])
+          entidad = ""
+        else
+          if formula[position] != ":"
+            entidad = entidad + formula[position]
+          end
+        end
         if ":@".include?(formula[position])
           variable = ""
+          initial_position = position
           while position < len && " -+()*/".exclude?(formula[position])
             variable = variable + formula[position]
             position =  position + 1
@@ -116,20 +129,35 @@ class RemunerativeConcept < ActiveRecord::Base
           end
 #          Rails.logger.info('Paso2: '+variable+ " - "+position.to_s)
           position = position - 1
+          if formula[initial_position]==":"
+            if modelos.index(entidad).nil?
+              errors.add(:base, 'Entidad no soportada : '+entidad+'.'+variable.gsub(":",""))
+              esvalido = false
+            else
+              Rails.logger.info("eval: "+entidad[modelos.index(entidad)].classify+".column_names.index('"+variable.gsub(":","")+"').to_i")
+
+              if !(eval(models[modelos.index(entidad)].classify+".column_names.index('"+variable.gsub(":","")+"').to_i") > 0)
+                errors.add(:base, 'No pude resolver la entidad.columna '+entidad+'.'+variable.gsub(":",""))
+                esvalido = false
+              else
+                variable = entidad+variable
+              end
+            end
+          end
           xaeval = xaeval.gsub(variable,position.to_s)
         end
         position = position +1
       end
-
-      begin
-        x=eval(xaeval)
-      rescue SyntaxError => se
-        errors.add(:base, 'formula inconsistente : '+formula)
-        errors.add(:base, 'Expresion evaluada : '+xaeval)
-      rescue ZeroDivisionError => zd
-        errors.add(:base, 'formula con Division por 0(cero). Formula : '+formula)
+      if esvalido
+        begin
+          x=eval(xaeval)
+        rescue SyntaxError => se
+          errors.add(:base, 'formula inconsistente : '+formula)
+          errors.add(:base, 'Expresion evaluada : '+xaeval)
+        rescue ZeroDivisionError => zd
+          errors.add(:base, 'formula con Division por 0(cero). Formula : '+formula)
+        end
       end
-
     end
     self.calculo_valor = formula
     if !esvalido
@@ -138,6 +166,7 @@ class RemunerativeConcept < ActiveRecord::Base
 
   end
 
+#Employee.columns_hash["legajo"].type
 
   def calculate_changes
       Liquidacion.where(:fecha_cierre.nil?).each do |l|
@@ -166,38 +195,3 @@ class RemunerativeConcept < ActiveRecord::Base
   end
 
 end
-
-
-=begin
-
-belongs_to :author
-
-obj.author
-
-asumo que
-- guardaste en RemunerativeConcept campo author_id el numero de referencia
-- El objeto en cuestion sera Autor.find(el numero de referencia almacenado)
-
-
-belongs_to :author, :class_name => "Person"
-
-obj.author
-
-asumo que
-- guardaste en RemunerativeConcept campo author_id el numero de referencia
-- El objeto en cuestion sera Person.find(el numero de referencia almacenado)
-
-
-
-belongs_to :author, :class_name => "Person", :foreign_key => "REF_PERSONA_ASOCIADA_ID"
-
-obj.author
-
-asumo que
-- guardaste en RemunerativeConcept campo REF_PERSONA_ASOCIADA_ID el numero de referencia
-- El objeto en cuestion sera Person.find(el numero de referencia almacenado)
-
-
-has_many :authors, :class_name => "Person"#, :foreign_key => "remunerative_concept_id"
-
-=end
