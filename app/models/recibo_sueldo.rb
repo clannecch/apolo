@@ -116,7 +116,7 @@ class ReciboSueldo < ActiveRecord::Base
 
           rescue => e
   #         apila el error (mostrando cual es) y continua
-            errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
+            errors.add(:base, "Error de calculo Haber(1) #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
           next
         end
         if detalle_recibo_haber.remunerative_concept.calculo_cantidad.present?
@@ -277,15 +277,26 @@ class ReciboSueldo < ActiveRecord::Base
 
   #reemplaza del parametro los : por el nombre del modelo y el @ por el nombre de la colecicon de acumuladores
   def prepare_calculo_for_evaluation(str_for_evaluation)
+    modelos = ["novedad_haber", "empleado", "categoria" ]
+    models = ["detalle_recibo_haber", "self.employee", "self.employee.category" ]
+
     return 'falta indicar calculo' if str_for_evaluation.blank?
-    str_for_evaluation.gsub(/\:/,'self.').
-                        gsub(/@/, 'acumuladores.').
+    # ver modelos ":"
+    str_for_evaluation = str_for_evaluation.gsub(/@/, 'acumuladores.').
                         gsub(/ entonces /,' ? ').
                         gsub(/ sino /,' : ').
                         gsub(/=/,'==').
                         gsub(/ y /, ' && ').
                         gsub(/ o /,' || ').
                         gsub(' # ',' != ')
+    if str_for_evaluation.gsub(":").count.to_i > 0
+      modelos.each do |ent|
+#        Rails.logger.info("formula antes => "+str_for_evaluation + "ENT: "+ent)
+        str_for_evaluation = str_for_evaluation.gsub(ent+":", models[modelos.index(ent)]+".")
+      end
+    end
+    Rails.logger.info("formula luedo => "+str_for_evaluation)
+    return str_for_evaluation
 
   end
 

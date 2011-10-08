@@ -84,7 +84,7 @@ class RemunerativeConcept < ActiveRecord::Base
         errors.add(:base, 'Estructura de consulta no balanceada (entonces '+formula.gsub(' entonces ').count.to_s+
                   ' y sino '+formula.gsub(' sino ').count.to_s+')' )
       else
-        esvalido = formula.gsub('==').count == 0
+        esvalido = (formula.gsub('==').count == 0 && formula.gsub('==').count == 0)
         if !esvalido
           errors.add(:base, 'No puede utilizar "==" o ".."')
         end
@@ -106,7 +106,7 @@ class RemunerativeConcept < ActiveRecord::Base
 
       end
       formula = formula.gsub(/,/,".")
-      xaeval = formula
+      xaeval = formula.gsub(" entonces ", " ? ").gsub(" sino "," : ")
       len = formula.length
       position = 0
       entidad = ""
@@ -140,17 +140,29 @@ class RemunerativeConcept < ActiveRecord::Base
                 errors.add(:base, 'No pude resolver la entidad.columna '+entidad+'.'+variable.gsub(":",""))
                 esvalido = false
               else
-                variable = entidad+variable
+                case eval(models[modelos.index(entidad)].classify+".columns_hash['"+
+                                variable.gsub(":","")+
+                                "'].type")
+                  when :date
+                    xaeval = xaeval.gsub(entidad+variable, '"' + Date.today.to_param+ '"')
+                  when :string
+                    xaeval = xaeval.gsub(entidad+variable, '"' + position.to_s + '"')
+                  when :boolean
+                    xaeval = xaeval.gsub(entidad+variable, ' true ')
+                  else
+                    xaeval = xaeval.gsub(entidad+variable, position.to_s )
+                end
               end
             end
+          else
+            xaeval = xaeval.gsub(variable,position.to_s)
           end
-          xaeval = xaeval.gsub(variable,position.to_s)
         end
         position = position +1
       end
       if esvalido
         begin
-          x=eval(xaeval)
+          eval(xaeval)
         rescue SyntaxError => se
           errors.add(:base, 'formula inconsistente : '+formula)
           errors.add(:base, 'Expresion evaluada : '+xaeval)
@@ -195,3 +207,17 @@ class RemunerativeConcept < ActiveRecord::Base
   end
 
 end
+
+=begin
+                if eval(models[modelos.index(entidad)].classify+".columns_hash['"+
+                                variable.gsub(":","")+
+                                "'].type == :date")
+                  xaeval = xaeval.gsub(entidad+variable, '"' + Date.today.to_param+ '"')
+                else
+                  if eval(models[modelos.index(entidad)].classify+".columns_hash['"+
+                                  variable.gsub(":","")+
+                                  "'].type == :string")
+                    xaeval = xaeval.gsub(entidad+variable, '"' + position.to_s + '"')
+                  else
+                    xaeval = xaeval.gsub(entidad+variable, position.to_s )
+=end

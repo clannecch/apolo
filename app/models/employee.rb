@@ -228,8 +228,6 @@ class Employee < ActiveRecord::Base
 
   validates_inclusion_of		  :antiguedad_reconocida_meses, :in => 0..11, :allow_nil => true, 							      :message => "acepta valores del 0 al 11"
 
-
-
 # Aseguradora / Banco
   validates_presence_of		    :deposito_banco_cuenta, :bank_deposit_id,
                               :bank_deposit_account_type_id,                                  :message => "es un dato requerido"
