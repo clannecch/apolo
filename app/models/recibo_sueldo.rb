@@ -67,145 +67,145 @@ class ReciboSueldo < ActiveRecord::Base
         })
 
 #   acumuladores predefinidos
-
-    begin
-      self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
-      if employee.remuneration_type_id = 3
-          if self.employee.remuneracion_fuera_convenio != 0
-            self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
-          else
-            self.acumuladores.sueldo = self.employee.category.importe
-          end
-          self.acumuladores.valor_dia = self.acumuladores.sueldo / 30
-          self.acumuladores.valor_hora= self.acumuladores.sueldo / self.acumuladores.horas_pactadas
-      elsif employee.remuneration_type_id = 2
-          self.acumuladores.valor_dia = self.employee.remuneracion_fuera_convenio
-          self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio / self.acumuladores.horas_pactadas  / 30
-      else
-          self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
-      end
-  #       errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s)
-
-      self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
-      self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
-      self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,
-                                                                    self.employee.fecha_ingreso, self.employee.fecha_egreso)
-      self.acumuladores.dias_vacaciones                          = calculo_dias_vacaciones(self.employee.fecha_ingreso ,
-                                                                    self.liquidacion.periodo)
-      self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(
-                                                                    self.employee.fecha_ingreso, self.liquidacion.periodo)
-      self.acumuladores.mejor_remuneracion_habitual_anual        = calculo_mejor_remuneracion_habitual_anual
-        self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
-      self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso,
-                                                                    self.employee.fecha_egreso)
-      self.acumuladores.dias_vacaciones_no_gozadas               = calculo_dias_vacaciones_no_gozadas(self.employee.fecha_ingreso,
-                                                                    self.employee.fecha_egreso, self.liquidacion.periodo)
-    rescue
-      errors.add(:base, "Error definiendo acumuladores predefinidos\n#{e.message}")
-    end
-
-#   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
-#   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
-    detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
-#      controla error
-#     graba en el log
-#      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
+   begin
       begin
-#       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
-        detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
-#                errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s+ ":cantidad" )
-#
-#                    errors.add(:base, detalle_recibo_haber.remunerative_concept.detalle+ " - calculo "+ prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor) + " $ "+detalle_recibo_haber.total.to_s)
+        self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
+        if employee.remuneration_type_id = 3
+            if self.employee.remuneracion_fuera_convenio != 0
+              self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
+            else
+              self.acumuladores.sueldo = self.employee.category.importe
+            end
+            self.acumuladores.valor_dia = self.acumuladores.sueldo / 30
+            self.acumuladores.valor_hora= self.acumuladores.sueldo / self.acumuladores.horas_pactadas
+        elsif employee.remuneration_type_id = 2
+            self.acumuladores.valor_dia = self.employee.remuneracion_fuera_convenio
+            self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio / self.acumuladores.horas_pactadas  / 30
+        else
+            self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
+        end
+    #       errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s)
 
-        rescue => e
-#         apila el error (mostrando cual es) y continua
-          errors.add(:base, "Error de calculo Haber(1) #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
-        next
+        self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
+        self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
+        self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,
+                                                                      self.employee.fecha_ingreso, self.employee.fecha_egreso)
+        self.acumuladores.dias_vacaciones                          = calculo_dias_vacaciones(self.employee.fecha_ingreso ,
+                                                                      self.liquidacion.periodo)
+        self.acumuladores.cantidad_sueldos_indemnizacion_despido   = calculo_cantidad_sueldos_indemnizacion_despido(
+                                                                      self.employee.fecha_ingreso, self.liquidacion.periodo)
+        self.acumuladores.mejor_remuneracion_habitual_anual        = calculo_mejor_remuneracion_habitual_anual
+          self.acumuladores.cantidad_indemnizacion_falta_preaviso    = calculo_cantidad_indemnizacion_falta_preaviso
+        self.acumuladores.dias_trabajados_mes                      = calculo_dias_trabajados_mes(self.employee.fecha_ingreso,
+                                                                      self.employee.fecha_egreso)
+        self.acumuladores.dias_vacaciones_no_gozadas               = calculo_dias_vacaciones_no_gozadas(self.employee.fecha_ingreso,
+                                                                      self.employee.fecha_egreso, self.liquidacion.periodo)
+      rescue
+        errors.add(:base, "Error definiendo acumuladores predefinidos\n#{e.message}")
       end
-      if detalle_recibo_haber.remunerative_concept.calculo_cantidad.present?
+
+  #   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
+  #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
+      detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
+  #      controla error
+  #     graba en el log
+  #      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
         begin
-          detalle_recibo_haber.update_attributes(:cantidad_recibo => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)))
-        rescue => e
-          errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)}\n#{e.message}")
+  #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
+          detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
+  #                errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s+ ":cantidad" )
+  #
+  #                    errors.add(:base, detalle_recibo_haber.remunerative_concept.detalle+ " - calculo "+ prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor) + " $ "+detalle_recibo_haber.total.to_s)
+
+          rescue => e
+  #         apila el error (mostrando cual es) y continua
+            errors.add(:base, "Error de calculo Haber(1) #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
           next
         end
+        if detalle_recibo_haber.remunerative_concept.calculo_cantidad.present?
+          begin
+            detalle_recibo_haber.update_attributes(:cantidad_recibo => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)))
+          rescue => e
+            errors.add(:base, "Error de calculo Haber #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_cantidad)}\n#{e.message}")
+            next
+          end
+        end
+
+  #     acumula en cada uno de los acumuladores de remunerative_concepts.acumuladores el split separa por palabra el default de separador es ' '
+        detalle_recibo_haber.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
+          acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+  #       acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
+  #       al ejecutarse el send aacumularia en acumuladores.sueldo_basico
+          begin
+            self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+          rescue
+            errors.add(:base, "Error acumulando haber\n#{e.message}")
+          end
+        end
+  #      detalle_recibo_haber.remunerative_concept.acumuladores_cantidad_valor.split(' ').each do |acumulador|
+  #        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+  #        self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.cantidad.to_f)
+  #      end
       end
 
-#     acumula en cada uno de los acumuladores de remunerative_concepts.acumuladores el split separa por palabra el default de separador es ' '
-      detalle_recibo_haber.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
-        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
-#       acumula total, para eso arma con send la posicion donde debe acumular(el si el acumulador contiene sueldo_basico,
-#       al ejecutarse el send aacumularia en acumuladores.sueldo_basico
+      aporteos = nil
+      if liquidacion.tipo_recibo.recibo_principal?
+        aporteos =EmployerContributionConcept.where(:health_insurance_id => employee.health_insurance_id).first
         begin
-          self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.total.to_f)
+          detalle_recibo_retencions.where(:retention_concept_id => aporteos.additional_health_insurance_id).first.delete
         rescue
-          errors.add(:base, "Error acumulando haber\n#{e.message}")
         end
       end
-#      detalle_recibo_haber.remunerative_concept.acumuladores_cantidad_valor.split(' ').each do |acumulador|
-#        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
-#        self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_haber.cantidad.to_f)
-#      end
-    end
-
-    aporteos = nil
-    if liquidacion.tipo_recibo.recibo_principal?
-      aporteos =EmployerContributionConcept.where(:health_insurance_id => employee.health_insurance_id).first
-      begin
-        detalle_recibo_retencions.where(:retention_concept_id => aporteos.additional_health_insurance_id).first.delete
-      rescue
-      end
-    end
-    detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
-      begin
-#       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
-        detalle_recibo_retencion.update_attributes(:total => detalle_recibo_retencion.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)))
-      rescue => e
-        errors.add(:base, "Error de calculo Retencion: #{prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)}\n#{e.message}")
-        next
-      end
-      detalle_recibo_retencion.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
-        acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+      detalle_recibo_retencions.joins(:retention_concept).order("retention_concepts.prioridad").each do |detalle_recibo_retencion|
         begin
-          self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_retencion.total.to_f)
-        rescue
-          errors.add(:base, "Error acumulando retencion\n#{e.message}")
+  #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
+          detalle_recibo_retencion.update_attributes(:total => detalle_recibo_retencion.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)))
+        rescue => e
+          errors.add(:base, "Error de calculo Retencion: #{prepare_calculo_for_evaluation(detalle_recibo_retencion.retention_concept.formula_calculo_valor)}\n#{e.message}")
+          next
+        end
+        detalle_recibo_retencion.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
+          acumulador.gsub!('@', '') # el ! en el gsub es lo mismo que "acumulador = acumulador.gsub('@', '')"
+          begin
+            self.acumuladores.send("#{acumulador}=", self.acumuladores.send(acumulador).to_f + detalle_recibo_retencion.total.to_f)
+          rescue
+            errors.add(:base, "Error acumulando retencion\n#{e.message}")
+          end
         end
       end
-    end
 
-    if liquidacion.tipo_recibo.recibo_principal? &&
-          !aporteos.nil? &&
-          employee.retencion_minima_osocial != 0 &&
-          !employee.retencion_minima_osocial.blank?
-      begin
-        retencionob = detalle_recibo_retencions.where(:retention_concept_id => aporteos.retention_concept_id).first.total.to_f
-      rescue
-        retencionob = employee.retencion_minima_osocial + 1
-      end
-      begin
-        aporteob = instance_eval(prepare_calculo_for_evaluation(aporteos.formula_calculo_valor)).to_f
-      rescue
-        errors.add(:base, "Error al calcular aporte patronal\n#{e.message}")
-      end
-
-      adicionalob = employee.retencion_minima_osocial - (retencionob + aporteob)
-      if adicionalob > 0
+      if liquidacion.tipo_recibo.recibo_principal? &&
+            !aporteos.nil? &&
+            employee.retencion_minima_osocial != 0 &&
+            !employee.retencion_minima_osocial.blank?
         begin
-          detalle_recibo_retencions.build(:retention_concept_id => aporteos.additional_health_insurance_id ,
-                                          :cost_center_id =>  employee.cost_center_id,
-                                          :total => adicionalob )
-          self.save
+          retencionob = detalle_recibo_retencions.where(:retention_concept_id => aporteos.retention_concept_id).first.total.to_f
         rescue
-          errors.add(:base, "Error al generar adicional obra social (retencion)\n#{e.message}")
+          retencionob = employee.retencion_minima_osocial + 1
         end
-#        Rails.logger.info("luego de new"+ detalle_recibo_retencions.count.to_s)
-      end
-    end
+        begin
+          aporteob = instance_eval(prepare_calculo_for_evaluation(aporteos.formula_calculo_valor)).to_f
+        rescue
+          errors.add(:base, "Error al calcular aporte patronal\n#{e.message}")
+        end
 
-  #  rescue
-  #    errors.add(:base, "Error en Calculo de Recibos. Legajo: "+self.employee.legajo+" - "+ self.employee.full_name)
-  #  end
+        adicionalob = employee.retencion_minima_osocial - (retencionob + aporteob)
+        if adicionalob > 0
+          begin
+            detalle_recibo_retencions.build(:retention_concept_id => aporteos.additional_health_insurance_id ,
+                                            :cost_center_id =>  employee.cost_center_id,
+                                            :total => adicionalob )
+            self.save
+          rescue
+            errors.add(:base, "Error al generar adicional obra social (retencion)\n#{e.message}")
+          end
+  #        Rails.logger.info("luego de new"+ detalle_recibo_retencions.count.to_s)
+        end
+      end
+
+    rescue
+      errors.add(:base, "Error en Calculo de Recibos. Legajo: "+self.employee.legajo+" - "+ self.employee.full_name)
+    end
   end
 
   def carga_codigo_predefinido_create
