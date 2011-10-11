@@ -67,7 +67,7 @@ class ReciboSueldo < ActiveRecord::Base
         })
 
 #   acumuladores predefinidos
-   begin
+    begin
       begin
         self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
         if employee.remuneration_type_id = 3
@@ -84,8 +84,11 @@ class ReciboSueldo < ActiveRecord::Base
         else
             self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
         end
+      rescue
+        errors.add(:base, "Error al calcular valor hora / dia"+self.acumuladores.horas_pactadas.to_s)
+      end
     #       errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s)
-
+      begin
         self.acumuladores.mejor_remuneracion_semestre              = mejor_remuneracion_semestre
         self.acumuladores.mejor_remuneracion_habitual_semestre     = mejor_remuneracion_habitual_semestre
         self.acumuladores.dias_trabajados_semestre                 = calculo_dias_trabajados_semestre(self.liquidacion.periodo,
@@ -107,16 +110,10 @@ class ReciboSueldo < ActiveRecord::Base
   #   ejecuta una select sobre recibo_habers haciendo un join con remunerative concepts para traer prioridad de calculo
   #   toma cada elemento del array y lo deja en detalle_recibo_haber y lo ordena por prioridad
       detalle_recibo_habers.joins(:remunerative_concept).order("remunerative_concepts.prioridad_calculo").each do |detalle_recibo_haber|
-  #      controla error
-  #     graba en el log
   #      Rails.logger.info("procesando calculo: #{detalle_recibo_haber.remunerative_concept.calculo_valor}")
         begin
   #       actualiza la propiedad total de detelle_recibo_haber conel resultado de la evaluacion de la transformacion del calculo
           detalle_recibo_haber.update_attributes(:total => detalle_recibo_haber.instance_eval(prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)))
-  #                errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s+ ":cantidad" )
-  #
-  #                    errors.add(:base, detalle_recibo_haber.remunerative_concept.detalle+ " - calculo "+ prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor) + " $ "+detalle_recibo_haber.total.to_s)
-
           rescue => e
   #         apila el error (mostrando cual es) y continua
             errors.add(:base, "Error de calculo Haber(1) #{detalle_recibo_haber.remunerative_concept.codigo}: #{prepare_calculo_for_evaluation(detalle_recibo_haber.remunerative_concept.calculo_valor)}\n#{e.message}")
@@ -301,24 +298,26 @@ class ReciboSueldo < ActiveRecord::Base
   def prepare_calculo_for_evaluation(str_for_evaluation)
     modelos = ["novedad_haber", "empleado", "categoria" ]
     models = ["detalle_recibo_haber", "self.employee", "self.employee.category" ]
-
-    return 'falta indicar calculo' if str_for_evaluation.blank?
-    # ver modelos ":"
-    str_for_evaluation = str_for_evaluation.gsub(/@/, 'acumuladores.').
-                        gsub(/ entonces /,' ? ').
-                        gsub(/ sino /,' : ').
-                        gsub(/=/,'==').
-                        gsub(/ y /, ' && ').
-                        gsub(/ o /,' || ').
-                        gsub(' # ',' != ')
-    if str_for_evaluation.gsub(":").count.to_i > 0
-      modelos.each do |ent|
-#        Rails.logger.info("formula antes => "+str_for_evaluation + "ENT: "+ent)
-        str_for_evaluation = str_for_evaluation.gsub(ent+":", models[modelos.index(ent)]+".")
+    begin
+      return 'falta indicar calculo' if str_for_evaluation.blank?
+      # ver modelos ":"
+      str_for_evaluation = str_for_evaluation.gsub(/@/, 'acumuladores.').
+                          gsub(/ entonces /,' ? ').
+                          gsub(/ sino /,' : ').
+                          gsub(/=/,'==').
+                          gsub(/ y /, ' && ').
+                          gsub(/ o /,' || ').
+                          gsub(' # ',' != ')
+      if str_for_evaluation.gsub(":").count.to_i > 0
+        modelos.each do |ent|
+  #        Rails.logger.info("formula antes => "+str_for_evaluation + "ENT: "+ent)
+          str_for_evaluation = str_for_evaluation.gsub(ent+":", models[modelos.index(ent)]+".")
+        end
       end
+    rescue
+      errors.add(:base, "Error en Calculo de Recibos. Legajo: "+str_for_evaluation)
+      Rails.logger.info("formula luedo => "+str_for_evaluation)
     end
-    errors.add(:base, "Error en Calculo de Recibos. Legajo: "+str_for_evaluation)
-    Rails.logger.info("formula luedo => "+str_for_evaluation)
     return str_for_evaluation
 
   end
