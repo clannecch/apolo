@@ -71,7 +71,7 @@ class ReciboSueldo < ActiveRecord::Base
       begin
         self.acumuladores.horas_pactadas =self.employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
         if employee.remuneration_type_id = 3
-            if self.employee.remuneracion_fuera_convenio != 0
+            if self.employee.remuneracion_fuera_convenio.to_f != 0
               self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
             else
               self.acumuladores.sueldo = self.employee.category.importe
