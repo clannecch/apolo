@@ -284,6 +284,7 @@ class ReciboSueldo < ActiveRecord::Base
 
 # reescrive el metodo method_missing que se ejecuta cuando no encuentra un metodo
 # si existe en employee ese metodo lo retorna, caso contrario continua con el default del method_missing
+=begin
   def method_missing(method, *args, &block)
     Rails.logger.info("Missing=> "+method.to_s)
     if employee.attribute_names.reject{|attr| attr =~ /^id$/}.include?(method.to_s)
@@ -292,6 +293,7 @@ class ReciboSueldo < ActiveRecord::Base
       super
     end
   end
+=end
 
   private
 
