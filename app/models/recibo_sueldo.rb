@@ -67,7 +67,7 @@ class ReciboSueldo < ActiveRecord::Base
         })
 
 #   acumuladores predefinidos
-   begin
+#   begin
       begin
         self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
         if employee.remuneration_type_id = 3
@@ -203,9 +203,9 @@ class ReciboSueldo < ActiveRecord::Base
         end
       end
 
-    rescue
-      errors.add(:base, "Error en Calculo de Recibos. Legajo: "+self.employee.legajo+" - "+ self.employee.full_name)
-    end
+#    rescue
+#      errors.add(:base, "Error en Calculo de Recibos. Legajo: "+self.employee.legajo+" - "+ self.employee.full_name)
+#    end
   end
 
   def carga_codigo_predefinido_create
