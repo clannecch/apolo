@@ -452,10 +452,10 @@ class ReciboSueldosController < ApplicationController
       if !h.remunerative_concept.auxiliar
         if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
           column = 340
-          total_remunerative_concept_sa += h.total
+          total_remunerative_concept_sa += h.total.to_f
         else
           column = 245
-          total_remunerative_concept_ca += h.total
+          total_remunerative_concept_ca += h.total.to_f
         end
         pdf.draw_text format_number(h.total).rjust(15), :at => [column,offset],:style => :bold, :size => 10
         offset = offset - 10
