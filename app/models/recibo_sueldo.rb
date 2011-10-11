@@ -69,7 +69,7 @@ class ReciboSueldo < ActiveRecord::Base
 #   acumuladores predefinidos
     begin
       begin
-        self.acumuladores.horas_pactadas = employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
+        self.acumuladores.horas_pactadas =self.employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
         if employee.remuneration_type_id = 3
             if self.employee.remuneracion_fuera_convenio != 0
               self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
@@ -85,7 +85,9 @@ class ReciboSueldo < ActiveRecord::Base
             self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
         end
       rescue
-        errors.add(:base, "Error al calcular valor hora / dia"+self.acumuladores.horas_pactadas.to_s+" category:"+self.employee.category.codigo+" Hs: "+self.employee.category.horas.to_s)
+        errors.add(:base, "Error al calcular valor hora / dia"+self.acumuladores.horas_pactadas.to_s+
+            " category: "+self.employee.category.codigo+" Hs: "+self.employee.category.horas.to_s+
+            "Horas empleado =" +self.employee.horas_pactadas.to_s)
       end
     #       errors.add(:base, "valor hora "+self.acumuladores.valor_hora.to_s)
       begin
