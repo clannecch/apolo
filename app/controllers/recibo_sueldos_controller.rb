@@ -427,7 +427,7 @@ class ReciboSueldosController < ApplicationController
     pdf.draw_text @recibo_sueldo.employee.category.detalle[0..28].strip.center(28), :at => [136,653],:style => :bold, :size => 10
     pdf.draw_text @recibo_sueldo.employee.task.detalle[0..328].strip.center(28), :at => [136,613],:style => :bold, :size => 10
     pdf.draw_text @recibo_sueldo.employee.legajo.strip.center(11), :at => [307,693],:style => :bold, :size =>10
-    if @recibo_sueldo.employee.remuneracion_fuera_convenio != 0
+    if @recibo_sueldo.employee.remuneracion_fuera_convenio.to_f != 0
       @basico = @recibo_sueldo.employee.remuneracion_fuera_convenio
     else
       @basico = @recibo_sueldo.employee.category.importe

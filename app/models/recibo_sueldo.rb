@@ -70,7 +70,7 @@ class ReciboSueldo < ActiveRecord::Base
     begin
       begin
         self.acumuladores.horas_pactadas =self.employee.horas_pactadas.blank? ? self.employee.category.horas : self.employee.horas_pactadas
-        if employee.remuneration_type_id = 3
+        if employee.remuneration_type.hora_dia_mes == "M"
             if self.employee.remuneracion_fuera_convenio.to_f != 0
               self.acumuladores.sueldo = self.employee.remuneracion_fuera_convenio
             else
@@ -78,7 +78,7 @@ class ReciboSueldo < ActiveRecord::Base
             end
             self.acumuladores.valor_dia = self.acumuladores.sueldo / 30
             self.acumuladores.valor_hora= self.acumuladores.sueldo / self.acumuladores.horas_pactadas
-        elsif employee.remuneration_type_id = 2
+        elsif employee.remuneration_type_id .hora_dia_mes == "D"
             self.acumuladores.valor_dia = self.employee.remuneracion_fuera_convenio
             self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio / self.acumuladores.horas_pactadas  / 30
         else
