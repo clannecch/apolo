@@ -468,7 +468,7 @@ class ReciboSueldosController < ApplicationController
         pdf.draw_text format_number(r.cantidad).rjust(8), :at => [195,offset],:style => :bold, :size => 10
         pdf.draw_text format_number(r.total).rjust(15), :at => [435,offset],:style => :bold, :size => 10
         offset = offset - 10
-        total_retention += r.total
+        total_retention += r.total.to_f
       end
     end
     pdf.draw_text @liquidacion.periodo_deposito.strftime("%m/%Y").rjust(6),
