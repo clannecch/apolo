@@ -40,7 +40,7 @@ class LiquidacionsController < ApplicationController
         Rails.logger.info(">>>>>> 11")
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
         Rails.logger.info(">>>>>> 12")
-#          File.delete(dump_tmp_filename) unless Rails.env.development?
+          File.delete(dump_tmp_filename) unless Rails.env.development?
         Rails.logger.info(">>>>>> 13")
 
       end
@@ -863,7 +863,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
       end
       linea[1][0] = "             " + # r.employee.document_type.detalle[0..2].center(3) +
            r.employee.cuil.strip.ljust(14)    +
-           r.employee.category.detalle[0..16].ljust(16)
+           r.employee.category.try(:detalle)[0..16].ljust(16)
 
       if r.employee.fecha_egreso.nil?
         linea[1][0] =  "E.Civil : "+r.employee.marital_status.try(:detalle)
