@@ -136,11 +136,11 @@ class LiquidacionsController < ApplicationController
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
-  @logo_id = AssociatedDocumentType.where(:document_type => "L").first
+  logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
-    if !@logo_id.nil?
-      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => @logo_id.id).first()
+    if !logo_id.nil?
+      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.name
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
@@ -154,8 +154,8 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
-    if !@logo_id.nil?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => @logo_id).first
+    if !logo_id.nil?
+      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
