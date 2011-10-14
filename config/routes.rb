@@ -1,5 +1,7 @@
 APSSueldos::Application.routes.draw do |map|
 
+  devise_for :users
+
   resources :numeradors
 
   devise_for :users do

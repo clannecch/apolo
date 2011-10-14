@@ -1,19 +1,31 @@
 class ApplicationController < ActionController::Base
-  layout 'apslabs'
-
   protect_from_forgery
-  
-  #devise controller
-  before_filter :authenticate_user!
 
   helper_method :current_company
-# paperclip claudio
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-# fin paperclip claudio
 
+  # custom layout
+  layout :layout_by_resource
+
+  # devise close for all!
+  before_filter :authenticate_user!
   before_filter :check_change_company
   before_filter :before_all
+
+
+#  layout 'apslabs'
+
+#  protect_from_forgery
+  
+  #devise controller
+#  before_filter :authenticate_user!
+
+#  helper_method :current_company
+# paperclip claudio
+  helper :all # include all helpers, all the time
+#  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+# fin paperclip claudio
+#  before_filter :check_change_company
+#  before_filter :before_all
 
   protected
 
@@ -27,9 +39,26 @@ class ApplicationController < ActionController::Base
     session[:current_company] || Company.first
   end
 
-  def before_all
-    @menus = Menu.all
+#  def before_all
+#    @menus = []
+#    @menus = Menu.all if user_signed_in?
+#  end
+
+  def layout_by_resource
+    if devise_controller?
+      'application'
+    else
+      'apslabs'
+    end
   end
+
+  def before_all
+    unless devise_controller?
+      # @system_menus = Menu.all.select{|x| x.modulo.blank? || current_company.engines.to_s.include?(x.modulo)}
+      @system_menus = Menu.all
+    end  
+  end
+
 
   # los dos metodos para impresion (ficha y lista) se basan en attr_accessible
   # y en los archivos yml para i18n de cada modelo
