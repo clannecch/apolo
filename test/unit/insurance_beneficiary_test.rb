@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706162424
+# Schema version: 20111013184648
 #
 # Table name: insurance_beneficiaries
 #
@@ -12,6 +12,9 @@
 #  updated_at       :datetime
 #  employee_id      :integer
 #  fecha_nacimiento :date
+#  address          :string(255)
+#  kinship_id       :integer
+#  porcentual       :decimal(, )
 #
 
 require 'test_helper'

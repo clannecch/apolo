@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110910142220
+# Schema version: 20111013184648
 #
 # Table name: employees
 #
@@ -99,7 +99,8 @@
 #  sicoss_reduction_zone_id         :integer
 #  sicoss_en_convenio               :string(255)
 #  sicoss_regimen_type_id           :integer
-#  sicoss_seguro_obligatorio        :string
+#  sicoss_seguro_obligatorio        :string(255)
+#  consortium_id                    :integer
 #
 
 require 'paperclip'

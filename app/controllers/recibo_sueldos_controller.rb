@@ -215,8 +215,18 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = current_company.numero_inscripcion
       empresa.caja        = current_company.caja
     end
+
+
+
+---
+  dump_tmp_filename = Rails.root.join('tmp',@recibo_sueldo.cache_key)
+  Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+  print_to_pdf(dump_tmp_filename,@recibo_sueldo)
+  send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
+  File.delete(dump_tmp_filename) unless Rails.env.development?
+---
     if attach.adjunto_content_type[0..4] = "image"
-      file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+      file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
       Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
       open( file_logo, 'wb' ) { |file|

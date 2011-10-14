@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111013184648
 #
 # Table name: remunerative_concepts
 #
@@ -24,6 +24,7 @@
 #  data_to_ask_id                   :integer
 #  cantidad_en_recibo               :string(255)
 #  company_id                       :integer
+#  auxiliar                         :boolean
 #
 
 require 'test_helper'
