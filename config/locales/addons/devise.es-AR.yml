@@ -1,26 +1,45 @@
 es-AR:
+  errors:
+    messages:
+        expired: "expirado, por favor solicite una nueva"
+        not_found: "no encontrado"
+        already_confirmed: "ya esta confirmado, por favor pruebe ingresa nuevamente"
+        not_locked: "no esta lockeado"
+        not_saved:
+          one: "1 error prohibe este %{resource} desde la grabacion:"
+          other: "%{count} errores prohiben este %{resource} desde la grabacion:"
+      
   devise:
+    failure:
+      already_authenticated: 'Usted ya a ingresado.'
+      unauthenticated: 'Usted necesita ingresar o darse de alta para después continuar.'
+      unconfirmed: 'Usted debe confirmar su cuenta para después continuar.'
+      locked: 'Su cuenta esta bloqueada.'
+      invalid: 'email o clave invalida.'
+      invalid_token: 'Token de autenticacion invalido.'
+      timeout: 'Su sesion expiro, por favor ingrese nueva para continuar.'
+      inactive: 'Su cuenta aun no esta activada.'
     sessions:
-      link: 'Sign in'
-      signed_in: 'Signed in successfully.'
-      signed_out: 'Signed out successfully.'
-      unauthenticated: 'You need to sign in or sign up before continuing.'
-      unconfirmed: 'You have to confirm your account before continuing.'
-      locked: 'Your account is locked.'
-      invalid: 'Invalid email or password.'
-      invalid_token: 'Invalid authentication token.'
-      timeout: 'Your session expired, please sign in again to continue.'
-      inactive: 'Your account was not activated yet.'
+      link: 'Ingreso'
+      signed_in: 'Ingreso autorizado.'
+      signed_out: 'Salida satisfactoria.'
+      unauthenticated: 'Usted necesita ingresar o darse de alta para después continuar.'
+      unconfirmed: 'Usted debe confirmar su cuenta para después continuar.'
+      locked: 'Su cuenta esta bloqueada.'
+      invalid: 'email o clave invalida.'
+      invalid_token: 'Token de autenticacion invalida.'
+      timeout: 'Su sesion expiro, por favor ingrese nueva para continuar.'
+      inactive: 'Su cuenta aun no esta activada.'
     passwords:
-      link: 'Forgot password?'
-      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
-      updated: 'Your password was changed successfully. You are now signed in.'
+      link: 'Olvido su clave?'
+      send_instructions: 'Usted recibira un email con instrucciones sobre como hacer para inicializar su clave en unos minutos.'
+      updated: 'Su clave ha cambiado satisfactoriamente. Usted ahora puede ingresar.'
     confirmations:
-      link: "Didn't receive confirmation instructions?"
-      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
-      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+      link: "no ha recibido las instrucciones de confirmación?"
+      send_instructions: 'Usted recibira un email con instrucciones sobre como hacer para inicializar su clave en unos minutos.'
+      confirmed: 'Su clave ha cambiado satisfactoriamente. Usted ahora puede ingresar.'
     registrations:
-      link: 'Sign up'
+      link: 'Salir'
       signed_up: 'You have signed up successfully. If enabled, a confirmation was sent to your e-mail.'
       updated: 'You updated your account successfully.'
       destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
@@ -29,7 +48,9 @@ es-AR:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
     mailer:
-      confirmation_instructions: 'Confirmation instructions'
-      reset_password_instructions: 'Reset password instructions'
-      unlock_instructions: 'Unlock Instructions'
-
+      confirmation_instructions:
+        subject: 'Instrucciones para confirmar'
+      reset_password_instructions:
+        subject: 'Instrucciones para inicializar su clave' 
+      unlock_instructions:
+        subject: 'Instrucciones para desbloquear'
