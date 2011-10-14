@@ -196,7 +196,7 @@ class ReciboSueldosController < ApplicationController
       if !logo_id.nil?
  #       attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
-      empresa.empresa     = @recibo_sueldo.employee.consortium.name
+      empresa.empresa     = @recibo_sueldo.employee.consortium.razon_social
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
                             @recibo_sueldo.employee.consortium.altura
       empresa.domicilio2  = @recibo_sueldo.employee.consortium.codigo_postal+' '+
@@ -209,7 +209,7 @@ class ReciboSueldosController < ApplicationController
       if !logo_id.nil?
 #        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
-      empresa.empresa     = current_company.name
+      empresa.empresa     = current_company.razon_social
       empresa.domicilio   = current_company.calle + ' ' +
                             current_company.altura
       empresa.domicilio2  = current_company.codigo_postal+' '+
