@@ -123,7 +123,7 @@ class EmployeesController < ApplicationController
 
     pdf.stroke_rectangle [400,710], 100, 100
 
-    foto_principal = AssociatedDocumentType.where(:document_type => "F").first.id
+    foto_principal_id = AssociatedDocumentType.where(:document_type => "F").first.id
     if !@foto_principal.nil?
       photo = @employee.attachments.unscoped.where(:associated_document_type_id => foto_principal_id).first()
       if photo.adjunto_content_type[0..4] = "image"
