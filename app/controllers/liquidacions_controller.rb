@@ -169,6 +169,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -179,7 +180,7 @@ class LiquidacionsController < ApplicationController
 
     empresa.logo = file_logo.to_s
   end
-
+=end
   pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
 #                              :background => img,
                             :page_layout => :portrait)
