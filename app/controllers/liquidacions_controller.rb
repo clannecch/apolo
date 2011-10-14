@@ -227,6 +227,7 @@ class LiquidacionsController < ApplicationController
               format_number(haber_total-retencion)
      ]
   end
+  Rails.logger.info(">>>>>> 8")
   data << ["" ,
            "T O T A L E S",
            "",
@@ -235,6 +236,7 @@ class LiquidacionsController < ApplicationController
            format_number(tretencion),
            format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
   ]
+  Rails.logger.info(">>>>>> 9")
 
   pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
            :cell_style => { :font => "Times-Roman",
@@ -247,6 +249,7 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
+  Rails.logger.info(">>>>>> 10")
 
 
   pdf.render_file(filename)
