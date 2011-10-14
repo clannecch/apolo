@@ -176,11 +176,11 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
-=begin
     if !logo_id.nil?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+
+  Rails.logger.info("logo_id="+logo_id.to_s)
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
-=end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
                                   current_company.altura
