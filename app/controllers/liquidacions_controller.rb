@@ -180,6 +180,7 @@ class LiquidacionsController < ApplicationController
     if !logo_id.nil?
       attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
+=end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
                                   current_company.altura
@@ -191,7 +192,6 @@ class LiquidacionsController < ApplicationController
     empresa.caja                = current_company.caja
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
-=end
   end
 =begin
   if attach.adjunto_content_type[0..4] = "image"
@@ -204,6 +204,7 @@ class LiquidacionsController < ApplicationController
 
     empresa.logo = file_logo.to_s
   end
+=end
   pdf.repeat(:all, :dynamic => true) do
 #    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
@@ -269,7 +270,6 @@ class LiquidacionsController < ApplicationController
   end
   Rails.logger.info(">>>>>> 10")
 
-=end
   pdf.render_file(filename)
 
 end
