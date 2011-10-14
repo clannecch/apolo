@@ -203,7 +203,7 @@ class ReciboSueldosController < ApplicationController
       empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
       if !logo_id.nil?
-        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
       empresa.empresa     = current_company.name
       empresa.domicilio   = current_company.calle + ' ' +
