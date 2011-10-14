@@ -36,6 +36,15 @@ class LiquidacionsController < ApplicationController
             redirect_to :action => 'show'
           end
       end
+=begin
+      format.pdf do
+        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
+          File.delete(dump_tmp_filename) unless Rails.env.development?
+      end
+=end
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
@@ -192,7 +201,9 @@ class LiquidacionsController < ApplicationController
 #                              :background => img,
                             :page_layout => :portrait)
   offset = 0
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
 
+=begin
   pdf.repeat(:all, :dynamic => true) do
 #    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
@@ -258,7 +269,7 @@ class LiquidacionsController < ApplicationController
   end
   Rails.logger.info(">>>>>> 10")
 
-
+=end
   pdf.render_file(filename)
 
 end
