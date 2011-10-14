@@ -176,6 +176,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
+=begin
     if !logo_id.nil?
       attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
@@ -190,6 +191,7 @@ class LiquidacionsController < ApplicationController
     empresa.caja                = current_company.caja
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
+=end
   end
 =begin
   if attach.adjunto_content_type[0..4] = "image"
