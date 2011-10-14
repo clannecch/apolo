@@ -182,7 +182,7 @@ class RemunerativeConceptsController < ApplicationController
        data << [r.codigo ,
                 r.detalle,
                 r.prioridad_calculo,
-                r.data_to_ask.detalle,
+                r.data_to_ask.try(:detalle),
                 r.statistical_value,
                 r.accounting_imputation.try(:detalle),
                 (r.concepto_asociado_haber.nil? ? "" : "H "+r.concepto_asociado_haber.try(:detalle).to_s)+

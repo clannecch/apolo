@@ -291,7 +291,7 @@ class ReciboSueldo < ActiveRecord::Base
     total = 0
     detalle_recibo_habers.each do |drh|
       if drh.remunerative_concept.acumuladores_valor.include?("@haberescondescuento")
-        total += drh.total
+        total += drh.total.to_f
       end
     end
     return total

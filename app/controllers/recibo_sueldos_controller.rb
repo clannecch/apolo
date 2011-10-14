@@ -187,10 +187,15 @@ class ReciboSueldosController < ApplicationController
 
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
 
-    @logo_id = AssociatedDocumentType.where(:document_type => "L").first
+    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
+                                #  :page_layout => :portrait)
+
+    pdf.draw_text "APELLIDO Y NOMBRES".center(55), :at => [136,713], :size => 5  # columna, linea, tamaño estilo
+
+    logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     if @recibo_sueldo.employee.consortium_id.to_f > 0
-      if !@logo_id.nil?
-        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => @logo_id.id).first()
+      if !logo_id.nil?
+ #       attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
       empresa.empresa     = @recibo_sueldo.employee.consortium.name
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
@@ -202,8 +207,8 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
       empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
-      if !@logo_id.nil?
-        attach = current_company.attachments.unscoped.where(:associated_document_type_id => @logo_id).first
+      if !logo_id.nil?
+#        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
       empresa.empresa     = current_company.name
       empresa.domicilio   = current_company.calle + ' ' +
@@ -215,7 +220,7 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = current_company.numero_inscripcion
       empresa.caja        = current_company.caja
     end
-
+=begin
     if attach.adjunto_content_type[0..4] = "image"
       file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
       Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -227,9 +232,6 @@ class ReciboSueldosController < ApplicationController
       empresa.logo = file_logo.to_s
     end
 
-    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
-                                #  :page_layout => :portrait)
-
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
         pdf.stroke_bounds
@@ -239,7 +241,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [1, 720], :width => 135, :height => 120 do
         pdf.stroke_bounds
     end
-    pdf.image empresa.logo, :at => [27,715], :width => 75
+#    pdf.image empresa.logo, :at => [27,715], :width => 75
 
     pdf.font("Courier", :style => :bold)
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
@@ -531,6 +533,7 @@ class ReciboSueldosController < ApplicationController
 
     pdf.draw_text format_number(total_remunerative_concept_sa+total_remunerative_concept_ca-total_retention).rjust(15), :at => [435,65],:style => :bold, :size => 10
     pdf.draw_text numero_a_palabras(total_remunerative_concept_sa+total_remunerative_concept_ca-total_retention).capitalize , :at => [8,60],:style => :bold, :size => 10
+=end
     pdf.render_file(filename)
   end
 

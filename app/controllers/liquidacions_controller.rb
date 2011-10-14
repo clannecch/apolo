@@ -29,16 +29,32 @@ class LiquidacionsController < ApplicationController
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
             File.delete(dump_tmp_filename) unless Rails.env.development?
+            Rails.logger.info(">>>>>> 14")
           else
+            Rails.logger.info(">>>>>> 15")
+
             redirect_to :action => 'show'
           end
       end
+=begin
+      format.pdf do
+        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
+          File.delete(dump_tmp_filename) unless Rails.env.development?
+      end
+=end
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
+        Rails.logger.info(">>>>>> 11")
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+        Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
+        Rails.logger.info(">>>>>> 13")
+
       end
 
       format.text  do
@@ -122,6 +138,12 @@ class LiquidacionsController < ApplicationController
   def print_planilla_remuneraciones_pdf(filename,liquidacion_actual)
   require 'prawn'
 
+  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+#                              :background => img,
+                            :page_layout => :portrait)
+  offset = 0
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+
 
   empresa = OpenStruct.new({
                   :logo                   => "",
@@ -155,7 +177,9 @@ class LiquidacionsController < ApplicationController
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
     if !logo_id.nil?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+
+  Rails.logger.info("logo_id="+logo_id.to_s)
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
@@ -169,7 +193,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
-
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -180,14 +204,9 @@ class LiquidacionsController < ApplicationController
 
     empresa.logo = file_logo.to_s
   end
-
-  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
-#                              :background => img,
-                            :page_layout => :portrait)
-  offset = 0
-
+=end
   pdf.repeat(:all, :dynamic => true) do
-    pdf.image empresa.logo, :at => [5,750], :width => 30
+#    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
     pdf.draw_text empresa.empresa.center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
@@ -198,7 +217,7 @@ class LiquidacionsController < ApplicationController
   thaber_con_descuento = 0
   thaber_sin_descuento = 0
   tretencion = 0
-  Rails.logger.info("rs id 1= #{@recibo_sueldos.count }")
+  Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
     Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
@@ -227,6 +246,7 @@ class LiquidacionsController < ApplicationController
               format_number(haber_total-retencion)
      ]
   end
+  Rails.logger.info(">>>>>> 8")
   data << ["" ,
            "T O T A L E S",
            "",
@@ -235,6 +255,7 @@ class LiquidacionsController < ApplicationController
            format_number(tretencion),
            format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
   ]
+  Rails.logger.info(">>>>>> 9")
 
   pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
            :cell_style => { :font => "Times-Roman",
@@ -247,7 +268,7 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
-
+  Rails.logger.info(">>>>>> 10")
 
   pdf.render_file(filename)
 
@@ -635,11 +656,11 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
-  @logo_id = AssociatedDocumentType.where(:document_type => "L").first
+logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
-    if !@logo_id.nil?
-      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => @logo_id.id).first()
+    if !logo_id.nil?
+#      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.name
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
@@ -653,8 +674,8 @@ def print_libro_pdf(filename,liquidacion_actual)
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
-    if !@logo_id.nil?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => @logo_id).first
+    if !logo_id.nil?
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
@@ -668,6 +689,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -678,10 +700,9 @@ def print_libro_pdf(filename,liquidacion_actual)
 
     empresa.logo = file_logo.to_s
   end
-
+=end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
-=begin
   begin
     logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
   rescue
@@ -695,7 +716,6 @@ def print_libro_pdf(filename,liquidacion_actual)
 #    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
     return
   end
-=end
 
   offset = 0
   numero_de_hoja = empresa.hoja
@@ -848,7 +868,7 @@ def print_libro_pdf(filename,liquidacion_actual)
 
       linea[0][0] = r.employee.legajo.ljust(9) + " " +  (r.employee.apellido.strip+", "+r.employee.nombre.strip).ljust(30)
       linea[0][1] = r.employee.fecha_ingreso.strftime("%d/%m/%Y")
-      if linea.count < 1
+      if linea.count < 2 #OJO
         linea << ['','','','','','','','']
       end
       if linea.count < 2 && !r.employee.fecha_egreso.nil?
@@ -856,7 +876,7 @@ def print_libro_pdf(filename,liquidacion_actual)
       end
       linea[1][0] = "             " + # r.employee.document_type.detalle[0..2].center(3) +
            r.employee.cuil.strip.ljust(14)    +
-           r.employee.category.detalle[0..16].ljust(16)
+           r.employee.category.try(:detalle)[0..16].ljust(16)
 
       if r.employee.fecha_egreso.nil?
         linea[1][0] =  "E.Civil : "+r.employee.marital_status.try(:detalle)
