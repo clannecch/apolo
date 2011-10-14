@@ -205,7 +205,7 @@ class LiquidacionsController < ApplicationController
   thaber_con_descuento = 0
   thaber_sin_descuento = 0
   tretencion = 0
-  Rails.logger.info("rs id 1= #{@recibo_sueldos.count }")
+  Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
     Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
