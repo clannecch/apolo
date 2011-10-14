@@ -157,7 +157,6 @@ class LiquidacionsController < ApplicationController
                   })
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
-=begin
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
@@ -192,6 +191,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
