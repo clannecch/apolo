@@ -176,7 +176,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
-
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -187,14 +187,14 @@ class LiquidacionsController < ApplicationController
 
     empresa.logo = file_logo.to_s
   end
-
+=end
   pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
 #                              :background => img,
                             :page_layout => :portrait)
   offset = 0
 
   pdf.repeat(:all, :dynamic => true) do
-    pdf.image empresa.logo, :at => [5,750], :width => 30
+#    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
     pdf.draw_text empresa.empresa.center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
