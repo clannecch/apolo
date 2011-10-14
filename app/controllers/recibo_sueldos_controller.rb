@@ -187,10 +187,10 @@ class ReciboSueldosController < ApplicationController
 
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
 
-    @logo_id = AssociatedDocumentType.where(:document_type => "L").first
+    logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     if @recibo_sueldo.employee.consortium_id.to_f > 0
-      if !@logo_id.nil?
-        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => @logo_id.id).first()
+      if !logo_id.nil?
+        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
       empresa.empresa     = @recibo_sueldo.employee.consortium.name
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
@@ -202,8 +202,8 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
       empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
-      if !@logo_id.nil?
-        attach = current_company.attachments.unscoped.where(:associated_document_type_id => @logo_id).first
+      if !logo_id.nil?
+        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
       empresa.empresa     = current_company.name
       empresa.domicilio   = current_company.calle + ' ' +
