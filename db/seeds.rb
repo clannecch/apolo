@@ -15,8 +15,8 @@ Country.create({"detalle"=>"Italia"})
 Country.create({"detalle"=>"Espana"})
 
 =begin
-Country.all.each do |country|
-  Employee.create(:name => 'zarasa', :country_id => country.id)
+Country.all.each do |company|
+  Employee.create(:name => 'zarasa', :country_id => company.id)
 end
 =end
 

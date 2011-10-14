@@ -16,6 +16,12 @@
 				<%= f.text_field :detalle %>
 			</td>
 		</tr>
+      <tr>
+          <td style="width:30%;background-color: #C3D5D5;"><strong><%= f.label "Tipo Salario" %></strong></td>
+          <td style="width:70%">
+              <%= f.select :hora_dia_mes,{"Hora" => "H","Dia" => "D","Mes" => "M"} %>
+          </td>
+      </tr>
 	</table>
 	<p><%= f.submit %></p>
 <% end %>

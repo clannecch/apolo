@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111013184648
 #
 # Table name: retention_concepts
 #
@@ -15,6 +15,7 @@
 #  acumuladores_valor       :string(255)
 #  data_to_ask_id           :integer
 #  company_id               :integer
+#  auxiliar                 :boolean
 #
 
 require 'test_helper'

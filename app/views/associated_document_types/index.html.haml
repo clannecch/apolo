@@ -6,6 +6,7 @@
   %tr
 
     %th= AssociatedDocumentType.human_attribute_name('name')
+    %th= AssociatedDocumentType.human_attribute_name('document_type')
 
     %th
     %th
@@ -15,6 +16,8 @@
     %tr
 
       %td= associated_document_type.name
+      %td= associated_document_type.document_type
+
 
       %td= link_to t('scaffold.actions.show').titlecase, associated_document_type
       %td= link_to t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(associated_document_type)

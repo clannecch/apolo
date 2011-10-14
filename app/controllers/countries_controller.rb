@@ -49,7 +49,7 @@ class CountriesController < ApplicationController
   # POST /countries
   # POST /countries.xml
   def create
-    #raise params[:country].inspect
+    #raise params[:company].inspect
     @country = Country.by_company(current_company.id).new(params[:country])
 
     respond_to do |format|
@@ -66,7 +66,7 @@ class CountriesController < ApplicationController
   # PUT /countries/1
   # PUT /countries/1.xml
   def update
-      respond_to do |format|
+    respond_to do |format|
       if @country.update_attributes(params[:country])
         format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
         format.xml  { head :ok }

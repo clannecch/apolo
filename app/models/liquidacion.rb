@@ -30,7 +30,7 @@ class Liquidacion < ActiveRecord::Base
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 
 	validates_presence_of		    :periodo, :quincena,
-                              :fecha_liquidacion,															  :message => "es un dato requerido"
+                              :fecha_liquidacion, :bank_deposit_id, 					  :message => "es un dato requerido"
   validates_presence_of		    :fecha_deposito,
                               :if => :periodo_deposito?,		    			          :message => "es un dato requerido"
 

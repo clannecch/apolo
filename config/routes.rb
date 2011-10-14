@@ -1,6 +1,8 @@
 APSSueldos::Application.routes.draw do |map|
 
-  devise_for :users
+  resources :companies
+
+  resources :consortia
 
   resources :numeradors
 

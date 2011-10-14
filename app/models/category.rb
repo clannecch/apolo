@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111013184648
 #
 # Table name: categories
 #
@@ -9,6 +9,8 @@
 #  updated_at :datetime
 #  importe    :decimal(, )
 #  company_id :integer
+#  horas      :decimal(, )
+#  codigo     :string(255)
 #
 
 class Category < ActiveRecord::Base

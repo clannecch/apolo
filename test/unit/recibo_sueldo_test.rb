@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110621182933
+# Schema version: 20111013184648
 #
 # Table name: recibo_sueldos
 #
@@ -11,6 +11,7 @@
 #  mensaje_recibo :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  fecha_calculo  :datetime
 #
 
 require 'test_helper'

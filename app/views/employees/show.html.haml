@@ -1,6 +1,9 @@
 %h1 Visualizacion de Empleado
 %p#notice= notice
 %p
+  %b Consorcio:
+  = @employee.consortium.try(:name)
+%p
   %b Legajo:
   = @employee.legajo
 %p

@@ -1,5 +1,9 @@
 %h3 Contratacion
 .field
+  = f.label "Consorcio"
+  %br/
+  = f.collection_select :consortium_id, Consortium.all, :id, :name, :prompt => true
+.field
   = f.label "fecha_ingreso"
   %br/
   = f.text_field :fecha_ingreso, :class => :datepicker

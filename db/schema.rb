@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20111014122652) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "document_type"
   end
 
 # Could not dump table "attachments" because of following StandardError
@@ -84,6 +85,49 @@ ActiveRecord::Schema.define(:version => 20111014122652) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+    t.string   "razon_social"
+    t.string   "calle"
+    t.string   "altura"
+    t.string   "codigo_postal"
+    t.integer  "location_id"
+    t.integer  "province_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "telefono"
+    t.string   "contacto"
+    t.string   "email"
+    t.string   "cuit"
+    t.string   "numero_inscripcion"
+    t.string   "caja"
+    t.integer  "ultima_hoja_libro"
+    t.integer  "imprimir_hasta_hoja_libro"
+    t.text     "observaciones"
+  end
+
+  create_table "consortia", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "razon_social"
+    t.string   "calle"
+    t.string   "altura"
+    t.string   "codigo_postal"
+    t.integer  "location_id"
+    t.integer  "province_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "telefono"
+    t.string   "contacto"
+    t.string   "email"
+    t.string   "cuit"
+    t.string   "numero_inscripcion"
+    t.string   "caja"
+    t.string   "ultima_hoja_libro"
+    t.string   "imprimir_hasta_hoja_libro"
+    t.text     "observaciones"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -322,7 +366,8 @@ ActiveRecord::Schema.define(:version => 20111014122652) do
     t.integer  "sicoss_reduction_zone_id"
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
-    t.string   "sicoss_seguro_obligatorio",        :limit => nil
+    t.string   "sicoss_seguro_obligatorio"
+    t.integer  "consortium_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -545,6 +590,7 @@ ActiveRecord::Schema.define(:version => 20111014122652) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "hora_dia_mes"
   end
 
   create_table "remunerative_concepts", :force => true do |t|

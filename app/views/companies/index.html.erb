@@ -1,0 +1,54 @@
+<h1>Administradoras</h1>
+
+<table class="tableStandard">
+  <tr>
+    <th>Code</th>
+    <th>Detalle</th>
+    <th>Razon Social</th>
+    <th>Calle</th>
+    <th>Altura</th>
+    <th>Codigo Postal</th>
+    <th>Localidad</th>
+    <th>Provincia</th>
+    <th>Telefono</th>
+    <th>Contacto</th>
+    <th>email</th>
+    <th>CUIT</th>
+    <th>Numero de Inscripcion</th>
+    <th>Ultima Hoja Libro de Sueldos</th>
+    <th>Imprimir Hasta Hoja Libro de Sueldos</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% for company in @companies %>
+    <tr>
+      <td><%= company.code %></td>
+      <td><%= company.name %></td>
+      <td><%= company.razon_social %></td>
+      <td><%= company.calle %></td>
+      <td><%= company.altura %></td>
+      <td><%= company.codigo_postal %></td>
+      <td><%= company.location.try(:detalle) %></td>
+      <td><%= company.province.try(:detalle) %></td>
+      <td><%= company.telefono %></td>
+      <td><%= company.contacto %></td>
+      <td><%= company.email %></td>
+      <td><%= company.cuit %></td>
+      <td><%= company.numero_inscripcion %></td>
+      <td><%= company.ultima_hoja_libro %></td>
+      <td><%= company.imprimir_hasta_hoja_libro %></td>
+
+      <td><a href="/companies/<%= company.id.to_s %>"><img alt="Ver" src="images/icons/16x16/application_get.png" title="Ver" /></a></td>
+      <td><a href="/companies/<%= company.id.to_s %>/edit"><img alt="Editar" src="images/icons/16x16/application_edit.png" title="Editar" /></a></td>
+      <td><a href="/company/<%= company.id.to_s %>" data-confirm="Esta ud. seguro?" data-method="delete" rel="nofollow">
+          <img alt="Eliminar" src="images/icons/16x16/application_delete.png" title="Eliminar" /></a>
+      </td>
+
+    </tr>
+  <% end %>
+</table>
+<p><%= link_to 'New company', new_company_path %></p>
+
+<%= paginate @companies %>
