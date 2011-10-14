@@ -200,16 +200,23 @@ class LiquidacionsController < ApplicationController
   tretencion = 0
   Rails.logger.info("rs id 1= #{@recibo_sueldos.count }")
   @recibo_sueldos.each do |r|
+    Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
      haber_total = r.total_haberes
+    Rails.logger.info(">>>>>> 2")
      haber_con_descuento = r.total_haberes_con_descuento
+    Rails.logger.info(">>>>>> 3")
      haber_sin_descuento = haber_total - r.total_haberes_con_descuento
+    Rails.logger.info(">>>>>> 4")
 
 
      # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
      tretencion = tretencion + retencion
+    Rails.logger.info(">>>>>> 5")
      thaber_sin_descuento +=  haber_sin_descuento
+    Rails.logger.info(">>>>>> 6")
      thaber_con_descuento += haber_con_descuento
+    Rails.logger.info(">>>>>> 7")
 
      data << [r.employee.legajo ,
               r.employee.nombre,
