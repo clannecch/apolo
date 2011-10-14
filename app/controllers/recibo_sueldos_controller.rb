@@ -190,7 +190,7 @@ class ReciboSueldosController < ApplicationController
     logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     if @recibo_sueldo.employee.consortium_id.to_f > 0
       if !logo_id.nil?
-        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+ #       attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
       empresa.empresa     = @recibo_sueldo.employee.consortium.name
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
@@ -215,7 +215,7 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = current_company.numero_inscripcion
       empresa.caja        = current_company.caja
     end
-
+=begin
     if attach.adjunto_content_type[0..4] = "image"
       file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
       Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -226,7 +226,7 @@ class ReciboSueldosController < ApplicationController
 
       empresa.logo = file_logo.to_s
     end
-
+=end
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
 
@@ -239,7 +239,7 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [1, 720], :width => 135, :height => 120 do
         pdf.stroke_bounds
     end
-    pdf.image empresa.logo, :at => [27,715], :width => 75
+#    pdf.image empresa.logo, :at => [27,715], :width => 75
 
     pdf.font("Courier", :style => :bold)
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
