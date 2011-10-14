@@ -660,7 +660,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil?
-      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+#      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.name
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
@@ -675,7 +675,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
     if !logo_id.nil?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
     empresa.empresa             = current_company.name
     empresa.domicilio           = current_company.calle + ' ' +
@@ -689,6 +689,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
@@ -699,10 +700,9 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
 
     empresa.logo = file_logo.to_s
   end
-
+=end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
-=begin
   begin
     logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
   rescue
@@ -716,7 +716,6 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
 #    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
     return
   end
-=end
 
   offset = 0
   numero_de_hoja = empresa.hoja
