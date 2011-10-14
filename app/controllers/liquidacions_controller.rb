@@ -144,7 +144,6 @@ class LiquidacionsController < ApplicationController
   offset = 0
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
 
-=begin
 
   empresa = OpenStruct.new({
                   :logo                   => "",
@@ -192,6 +191,7 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
+=begin
   if attach.adjunto_content_type[0..4] = "image"
     file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
     Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
