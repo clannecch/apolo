@@ -855,7 +855,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
 
       linea[0][0] = r.employee.legajo.ljust(9) + " " +  (r.employee.apellido.strip+", "+r.employee.nombre.strip).ljust(30)
       linea[0][1] = r.employee.fecha_ingreso.strftime("%d/%m/%Y")
-      if linea.count < 1
+      if linea.count < 2 #OJO
         linea << ['','','','','','','','']
       end
       if linea.count < 2 && !r.employee.fecha_egreso.nil?
