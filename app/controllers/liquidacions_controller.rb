@@ -29,7 +29,10 @@ class LiquidacionsController < ApplicationController
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
             File.delete(dump_tmp_filename) unless Rails.env.development?
+            Rails.logger.info(">>>>>> 14")
           else
+            Rails.logger.info(">>>>>> 15")
+
             redirect_to :action => 'show'
           end
       end
