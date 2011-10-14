@@ -37,8 +37,12 @@ class LiquidacionsController < ApplicationController
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
+        Rails.logger.info(">>>>>> 11")
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+        Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
+        Rails.logger.info(">>>>>> 13")
+
       end
 
       format.text  do
