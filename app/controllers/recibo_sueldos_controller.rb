@@ -175,17 +175,59 @@ class ReciboSueldosController < ApplicationController
 
   def print_to_pdf(filename,entity)
     require 'prawn'
+
+    empresa = OpenStruct.new({
+                    :logo                   => "",
+                    :empresa                => "",
+                    :domicilio              => "",
+                    :cuit                   => "",
+                    :inscripcion            => "",
+                    :caja                   => ""
+                    })
+
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
 
+    @logo_id = AssociatedDocumentType.where(:document_type => "L").first
+    if @recibo_sueldo.employee.consortium_id.to_f > 0
+      if !@logo_id.nil?
+        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => @logo_id.id).first()
+      end
+      empresa.empresa     = @recibo_sueldo.employee.consortium.name
+      empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
+                            @recibo_sueldo.employee.consortium.altura
+      empresa.domicilio2  = @recibo_sueldo.employee.consortium.codigo_postal+' '+
+                            @recibo_sueldo.employee.consortium.location.detalle+' ('+
+                            @recibo_sueldo.employee.consortium.province.detalle+")"
+      empresa.cuit        = @recibo_sueldo.employee.consortium.cuit
+      empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
+      empresa.caja        = @recibo_sueldo.employee.consortium.caja
+    else
+      if !@logo_id.nil?
+        attach = current_company.attachments.unscoped.where(:associated_document_type_id => @logo_id).first
+      end
+      empresa.empresa     = current_company.name
+      empresa.domicilio   = current_company.calle + ' ' +
+                            current_company.altura
+      empresa.domicilio2  = current_company.codigo_postal+' '+
+                            current_company.location.detalle+' ('+
+                            current_company.province.detalle+")"
+      empresa.cuit        = current_company.cuit
+      empresa.inscripcion = current_company.numero_inscripcion
+      empresa.caja        = current_company.caja
+    end
+    if attach.adjunto_content_type[0..4] = "image"
+      file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+
+      open( file_logo, 'wb' ) { |file|
+          file.write(attach.adjunto_file)
+        }
+
+      empresa.logo = file_logo.to_s
+    end
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
-    prawn_logo = "public/images/hsjd.jpg"
-    logo_empresa ="CASA NUESTA SRA. DEL PILAR"
-    logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
-    logo_cuit = "C.U.I.T.: "+"30-67932805-7"
-    logo_inscripcion = "Nro.Inscripcion: " + "21.757"
-    logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
 
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
@@ -196,15 +238,15 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [1, 720], :width => 135, :height => 120 do
         pdf.stroke_bounds
     end
-    pdf.image prawn_logo, :at => [27,715], :width => 75
+    pdf.image empresa.logo, :at => [27,715], :width => 75
 
     pdf.font("Courier", :style => :bold)
-    pdf.draw_text logo_empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
-    pdf.draw_text logo_domicilio, :at => [7,631], :size => 5
-    @len = logo_domicilio.length
-    pdf.draw_text logo_cuit.center(@len), :at => [7,623], :size => 5
-    pdf.draw_text logo_inscripcion.center(@len), :at => [7,615], :size => 5
-    pdf.draw_text logo_caja.center(@len), :at => [7,609], :size => 5
+    pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
+    pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
+    pdf.draw_text empresa.domicilio2.center(40), :at => [7,623], :size => 5
+    pdf.draw_text ("C.U.I.T.: "+empresa.cuit).center(40), :at => [7,615], :size => 5
+    pdf.draw_text ("Nro.Inscripcion: " +empresa.inscripcion).center(40), :at => [7,609], :size => 5
+    pdf.draw_text ("Caja: " + empresa.caja).center(40), :at => [7,602], :size => 5
 
 # Primer columna
     pdf.bounding_box [136, 720], :width => 170, :height => 10 do

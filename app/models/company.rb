@@ -1,14 +1,15 @@
-# == Schema Information
-# Schema version: 20110721162735
-#
-# Table name: companies
-#
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
+require 'paperclip'
 
 class Company < ActiveRecord::Base
-	#has_many :countries
+  belongs_to :province
+  belongs_to :location
+
+  validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
+                               :razon_social, :province_id, :location_id , :telefono, :razon_social,
+                               :cuit, :email, :message => "es un dato requerido"
+
+  has_many   :attachments, :as => :attachable, :dependent => :restrict
+
+  accepts_nested_attributes_for :attachments , :allow_destroy => true
+
 end

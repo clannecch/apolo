@@ -124,6 +124,7 @@ class Employee < ActiveRecord::Base
 	belongs_to :task
   belongs_to :causa_egreso
 	belongs_to :category
+  belongs_to :consortium
 	belongs_to :remuneration_type
 	belongs_to :group_remuneration
 	belongs_to :group_employer_contribution

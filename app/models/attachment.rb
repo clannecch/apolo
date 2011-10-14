@@ -25,13 +25,15 @@ class Attachment < ActiveRecord::Base
   default_scope select_without_file_columns_for(:adjunto)
 #  validates_attachment_size :adjunto, :less_than => 2.megabytes
   validates_attachment_presence :adjunto
+=begin
   validates_attachment_content_type :adjunto, :less_than => 1.megabytes,
                         :content_type => ['image/jpeg', 'image/jpg', 'application/zip',
                                           'application/xls', 'application/xlsx', 'application/pdf'],
-                        :message => 'Solo permite JPG /JPEG / ZIP / PDF'
-
+                        :message => 'Solo permite JPG /JPEG / ZIP / PDF / XLS / XLSX'
+=end
 end
 
 #Attachment.all.each {|a| link_to("Ver el #{a.attachable.class}", a.attachable)}
 
 
+#=> ['text/csv','text/comma-separated-values','text/csv','application/csv','application/excel','application/vnd.ms-excel','application/vnd.msexcel','text/anytext','text/plain']

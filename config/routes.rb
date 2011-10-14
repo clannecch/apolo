@@ -1,5 +1,35 @@
 APSSueldos::Application.routes.draw do |map|
 
+  resources :companies
+
+  get "company/domicilio"
+
+  get "company/telefono"
+
+  get "company/contacto"
+
+  get "company/observaciones"
+
+  get "company/email"
+
+  get "company/cuit"
+
+  get "company/razon_social"
+
+  get "domicilio/telefono"
+
+  get "domicilio/contacto"
+
+  get "domicilio/observaciones"
+
+  get "domicilio/email"
+
+  get "domicilio/cuit"
+
+  get "domicilio/razon_social"
+
+  resources :consortia
+
   resources :numeradors
 
   devise_for :users do
@@ -8,6 +38,8 @@ APSSueldos::Application.routes.draw do |map|
   end
 
   resources :users
+
+  resources :companies
 
   resources :sicoss_format_employers
 

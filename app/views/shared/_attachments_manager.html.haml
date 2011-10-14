@@ -1,0 +1,15 @@
+.field
+  %h3 Documentos Asociados
+  #adjuntos
+    %table.field{:width => "50%" ,:border => "1"}
+      %tr
+        %th= f.label "Tipo de Documento Asociado"
+        %th= f.label "Detalle"
+        %th= f.label "Fecha Recepcion Documentacion"
+        %th= f.label "Cambiar Adjunto"
+        %th &nbsp;
+      %tbody#nested-holder4
+        = f.fields_for :attachments do |a|
+          = render 'shared/attachment_fields', :f => a
+    .links
+      = link_to_add_association 'Agregar Documento Asociado', f, :attachments,  'data-association-insertion-node' => '#nested-holder4', 'data-association-insertion-position' => :before

@@ -1,6 +1,7 @@
 %h1 Listado de Empleados
 %table.tableStandard{:width => "50%"}
   %tr
+    %th Consorcio
     %th Legajo
     %th Nombre
     %th Apellido
@@ -13,6 +14,7 @@
     %th{ :colspan => '3', :style => "text-align:center;"} Acciones
   - @employees.each do |employee|
     %tr
+      %td= employee.consortium.try(:name)
       %td= employee.legajo
       %td= employee.nombre
       %td= employee.apellido
