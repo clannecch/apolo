@@ -164,7 +164,7 @@ class LiquidacionsController < ApplicationController
     if !logo_id.nil?
       attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
     end
-    empresa.empresa             = @recibo_sueldos.first.employee.consortium.name
+    empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
                                   @recibo_sueldos.first.employee.consortium.altura
     empresa.domicilio2          = @recibo_sueldos.first.employee.consortium.codigo_postal+' '+
@@ -181,7 +181,7 @@ class LiquidacionsController < ApplicationController
   Rails.logger.info("logo_id="+logo_id.to_s)
 #      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
-    empresa.empresa             = current_company.name
+    empresa.empresa             = current_company.razon_social
     empresa.domicilio           = current_company.calle + ' ' +
                                   current_company.altura
     empresa.domicilio2          = current_company.codigo_postal+' '+
@@ -662,7 +662,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     if !logo_id.nil?
 #      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
     end
-    empresa.empresa             = @recibo_sueldos.first.employee.consortium.name
+    empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
                                   @recibo_sueldos.first.employee.consortium.altura
     empresa.domicilio2          = @recibo_sueldos.first.employee.consortium.codigo_postal+' '+
@@ -677,7 +677,7 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     if !logo_id.nil?
 #      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
     end
-    empresa.empresa             = current_company.name
+    empresa.empresa             = current_company.razon_social
     empresa.domicilio           = current_company.calle + ' ' +
                                   current_company.altura
     empresa.domicilio2          = current_company.codigo_postal+' '+
