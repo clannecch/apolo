@@ -165,8 +165,8 @@ class LiquidacionsController < ApplicationController
 
     if !logo_id.nil? && !Rails.env.development?
 
-      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
-      con_logo = true
+#      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+#      con_logo = true
 
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
@@ -181,10 +181,10 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
-    if !logo_id.nil? && !Rails.env.development?
+    if !logo_id.nil?
   Rails.logger.info("logo_id="+logo_id.to_s)
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
-      con_logo = true
+#     attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#     con_logo = true
 
     end
     empresa.empresa             = current_company.razon_social
@@ -669,8 +669,9 @@ def print_libro_pdf(filename,liquidacion_actual)
   con_logo = false
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
-    if !logo_id.nil? && !Rails.env.development?
-      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+    if !logo_id.nil?
+#        attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+#       con_logo = true
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
@@ -684,9 +685,9 @@ def print_libro_pdf(filename,liquidacion_actual)
     empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
-    if !logo_id.nil? && !Rails.env.development?
-      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
-      con_logo = true
+    if !logo_id.nil?
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#      con_logo = true
     end
     empresa.empresa             = current_company.razon_social
     empresa.domicilio           = current_company.calle + ' ' +
