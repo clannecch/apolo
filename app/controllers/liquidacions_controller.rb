@@ -159,10 +159,14 @@ class LiquidacionsController < ApplicationController
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+  con_logo = false
+
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil?
       attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+      con_logo = true
+
     end
     empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
     empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
@@ -179,7 +183,9 @@ class LiquidacionsController < ApplicationController
     if !logo_id.nil?
 
   Rails.logger.info("logo_id="+logo_id.to_s)
-#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+      con_logo = true
+
     end
     empresa.empresa             = current_company.razon_social
     empresa.domicilio           = current_company.calle + ' ' +
@@ -193,20 +199,20 @@ class LiquidacionsController < ApplicationController
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
-=begin
-  if attach.adjunto_content_type[0..4] = "image"
-    file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
-    Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+  if con_logo
+    if attach.adjunto_content_type[0..4] = "image"
+      file_logo= Rails.root.join('tmp',attach.adjunto_file_name)
+      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
-    open( file_logo, 'wb' ) { |file|
-        file.write(attach.adjunto_file)
-      }
+      open( file_logo, 'wb' ) { |file|
+          file.write(attach.adjunto_file)
+        }
 
-    empresa.logo = file_logo.to_s
+      empresa.logo = file_logo.to_s
+    end
   end
-=end
   pdf.repeat(:all, :dynamic => true) do
-#    pdf.image empresa.logo, :at => [5,750], :width => 30
+    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
     pdf.draw_text empresa.empresa.center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
@@ -656,7 +662,8 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
-logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+  logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+  con_logo = false
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil?
@@ -675,7 +682,8 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
     if !logo_id.nil?
-#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+      con_logo = true
     end
     empresa.empresa             = current_company.razon_social
     empresa.domicilio           = current_company.calle + ' ' +
@@ -689,18 +697,18 @@ logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     empresa.hoja                = current_company.ultima_hoja_libro.to_i
     empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
   end
-=begin
-  if attach.adjunto_content_type[0..4] = "image"
-    file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
-    Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+  if con_logo
+    if attach.adjunto_content_type[0..4] = "image"
+      file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
-    open( file_logo, 'wb' ) { |file|
-        file.write(attach.adjunto_file)
-      }
+      open( file_logo, 'wb' ) { |file|
+          file.write(attach.adjunto_file)
+        }
 
-    empresa.logo = file_logo.to_s
+      empresa.logo = file_logo.to_s
+    end
   end
-=end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
   begin
