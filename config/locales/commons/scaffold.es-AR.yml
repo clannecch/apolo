@@ -4,13 +4,17 @@ es-AR:
       index:
         notice: no hay registros aún.
       create:
-        notice: "%{resource_name} creado/a satisfactoriamente."
+        notice: "%{resource_name} creado/a satisfactoriamente"
       update:
-        notice: "%{resource_name} actualizado/a satisfactoriamente."
+        notice: "%{resource_name} actualizado/a satisfactoriamente"
       destroy:
-        notice: "%{resource_name} eliminado/a satisfactoriamente."
-        alert: "%{resource_name} no pudo ser eliminado/a."
-  scaffold:
+        notice: "%{resource_name} eliminado/a satisfactoriamente"
+        error: "%{resource_name} no pudo ser eliminado/a"
+    scaffold:
+    notice:
+      updated: "Actualizado correctamente"
+      destroyed: "Borrado correctamente"
+      created: "Creado satisfactoriamente"
     actions_label: Acciones
     actions:
       show: mostrar
@@ -20,4 +24,5 @@ es-AR:
       new: "crear %{item}"
       list: "listar %{item}"
       back: volver
-
+      export: exportar a PDF
+      main: principal
