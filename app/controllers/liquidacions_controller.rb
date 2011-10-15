@@ -212,7 +212,7 @@ class LiquidacionsController < ApplicationController
     end
   end
   pdf.repeat(:all, :dynamic => true) do
-    pdf.image empresa.logo, :at => [5,750], :width => 30
+#    pdf.image empresa.logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
     pdf.draw_text empresa.empresa.center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
@@ -279,7 +279,7 @@ class LiquidacionsController < ApplicationController
   pdf.render_file(filename)
   if con_logo
     File.delete(file_logo) unless Rails.env.development?
-  endif
+  end
 
 end
 
@@ -924,6 +924,6 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   if con_logo
     File.delete(file_logo) unless Rails.env.development?
-  endif
+  end
   pdf.render_file(filename)
 end
