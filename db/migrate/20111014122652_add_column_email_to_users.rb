@@ -4,6 +4,6 @@ class AddColumnEmailToUsers < ActiveRecord::Migration
   end
 
   def self.down
-    #remove_column :users, :email
+    remove_column :users, :email
   end
 end
