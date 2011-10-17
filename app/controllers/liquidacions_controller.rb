@@ -534,9 +534,8 @@ end
       sicoss_file.puts registro
     end
 =end
-    entidadc = "category".camelize
 
-    ["company","category","remunerative_concept","retention_concept","employee","group_remuneration","group_retention"].each do |entidadc|
+    ["menu","company","category","remunerative_concept","retention_concept","employee","group_remuneration","group_retention"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
       data = entidad.all
