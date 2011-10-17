@@ -50,7 +50,7 @@ class LiquidacionsController < ApplicationController
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
         Rails.logger.info(">>>>>> 11")
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "planilla_remuneraciones.pdf")
         Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
         Rails.logger.info(">>>>>> 13")
@@ -91,6 +91,7 @@ class LiquidacionsController < ApplicationController
       if @liquidacion.save
         format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully created.') }
         format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
+        liquidar_employee
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @liquidacion.errors, :status => :unprocessable_entity }
@@ -132,6 +133,16 @@ class LiquidacionsController < ApplicationController
 
   def find_liquidacion
       @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
+  end
+
+  def liquidar_employee
+    @employees = Employee.where(:company_id => current_company.id).where(:fecha_egreso.blank?)
+    @employees.each do |employee|
+      Rails.logger.info("employee="+employee.id.to_s)
+     @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
+     @recibo_sueldo.save
+     @recibo_sueldo.calcular_recibo
+    end
   end
 
 # #################################################################################
@@ -244,7 +255,7 @@ class LiquidacionsController < ApplicationController
     Rails.logger.info(">>>>>> 7")
 
      data << [r.employee.legajo ,
-              r.employee.nombre,
+              r.employee.full_name,
               r.employee.category.try(:detalle)[0..15],
               format_number(haber_con_descuento),
               format_number(haber_sin_descuento),

@@ -279,7 +279,7 @@ class Employee < ActiveRecord::Base
 
   def full_name
 #    apellido + ', '+nombre
-   [apellido, nombre].compact.join(' ')
+   [apellido, nombre].compact.join(', ')
   end
 
   private

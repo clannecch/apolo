@@ -101,7 +101,7 @@ class ReciboSueldo < ActiveRecord::Base
             self.acumuladores.valor_hora= self.employee.remuneracion_fuera_convenio
         end
       rescue
-        errors.add(:base, "Error al calcular valor hora / dia"+self.acumuladores.horas_pactadas.to_s+
+        errors.add(:base, "Error al calcular valor hora / dia "+self.acumuladores.horas_pactadas.to_s+
             " category: "+self.employee.category.codigo+" Hs: "+self.employee.category.horas.to_s+
             "Horas empleado =" +self.employee.horas_pactadas.to_s)
       end
@@ -279,7 +279,8 @@ class ReciboSueldo < ActiveRecord::Base
 
   def total_haberes
 #      detalle_recibo_habers.all.sum(&:total).to_f
-     DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).where("remunerative_concepts.auxiliar" => nil).all.sum(&:total).to_f
+     DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).
+         where("remunerative_concepts.auxiliar" <=> true).all.sum(&:total).to_f
   end
 
   def total_retenciones
