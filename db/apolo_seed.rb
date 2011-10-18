@@ -284,23 +284,20 @@ Location.delete_all()
 
 id_location_old = []
 id_location_new = []
-new_reg=Location.create!(:detalle => "Capital Federal", :company_id => id_company_new[ id_company_old.index(1)])
+new_reg=Location.create!(:detalle => "Capital Federal", :company_id => Company.find(1).id)
 id_location_old << [1]
 id_location_new << [new_reg.id]
-new_reg=Location.create!(:detalle => "La Plata", :company_id => id_company_new[ id_company_old.index(1)])
+new_reg=Location.create!(:detalle => "La Plata", :company_id => Company.find(1).id)
 id_location_old << [2]
 id_location_new << [new_reg.id]
-new_reg=Location.create!(:detalle => "San Martin", :company_id => id_company_new[ id_company_old.index(1)])
+new_reg=Location.create!(:detalle => "San Martin", :company_id => Company.find(1).id)
 id_location_old << [3]
 id_location_new << [new_reg.id]
-new_reg=Location.create!(:detalle => "San Martin", :company_id => id_company_new[ id_company_old.index(1)])
+new_reg=Location.create!(:detalle => "San Isidro", :company_id => Company.find(1).id)
 id_location_old << [4]
 id_location_new << [new_reg.id]
-new_reg=Location.create!(:detalle => "San Isidro", :company_id => id_company_new[ id_company_old.index(1)])
+new_reg=Location.create!(:detalle => "Mi Localidad", :company_id => Company.find(1).id)
 id_location_old << [5]
-id_location_new << [new_reg.id]
-new_reg=Location.create!(:detalle => "Mi Localidad", :company_id => id_company_new[ id_company_old.index(1)])
-id_location_old << [6]
 id_location_new << [new_reg.id]
 
 =begin
