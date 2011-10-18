@@ -6,6 +6,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+=begin
 Country.create!(:code => 'AR', :detalle => 'Argentina')
 
 ar_country_id = Country.where(:code => 'AR').first.id
@@ -41,15 +42,16 @@ ar_provincies.each do |province|
                :detalle => province[:detalle],
                :country_id => province[:country_id])
 end
+=end
 
 province1 = Province.find(1)
 
-company1 = Company.create(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
+company1 = Company.create!(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
  :calle => "", :altura => "", :codigo_postal => "", :location_id => nil, :province_id => province1,
  :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "",
  :ultima_hoja_libro => 0, :imprimir_hasta_hoja_libro => 0, :observaciones => "")
  
-company2 = Company.create(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA",
+company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA",
  :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => nil, :province_id => province1,
  :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1",
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
