@@ -570,9 +570,13 @@ end
               case eval(entidadc+".columns_hash['"+col+"'].type")
                 when :date
                   pedazo =  eval("reg."+col).nil? ? 'nil' : '"' +eval("reg."+col+".to_s")+ '"'
-                when :string || :text
+                when :string
                   pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
-                when :decimal || :integer
+                when :text
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
+                when :decimal
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :integer
                   pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
                 when :boolean
                   pedazo = eval("reg."+col+"? ? 'true' : 'false'")
