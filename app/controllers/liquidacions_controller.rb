@@ -535,7 +535,7 @@ end
     end
 =end
 
-    ["menu","company","category","remunerative_concept","retention_concept","employee","group_remuneration","group_retention"].each do |entidadc|
+    ["menu","company","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept","employee"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
       data = entidad.all
