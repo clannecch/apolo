@@ -535,7 +535,7 @@ end
     end
 =end
 
-    ["menu","company","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept","employee"].each do |entidadc|
+    ["menu","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept","employee"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
       data = entidad.all
@@ -554,6 +554,8 @@ end
                   pedazo =  '"' +eval("reg."+col+".to_s")+ '"'
                 when :string
                   pedazo = '"' + eval("reg."+col+".to_s") + '"'
+                when :text
+                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
                 else
                   pedazo = eval("reg."+col+".to_s")
               end
@@ -561,7 +563,7 @@ end
             str=str+":"+col+" => "+pedazo+", "
           end
         end
-        sicoss_file.puts "new_reg="+entidadc.underscore+'.create('+str[0, str.length - 2]+")"
+        sicoss_file.puts "new_reg="+entidad.capitalize+'.create!('+str[0, str.length - 2]+")"
         sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
         sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
       end
