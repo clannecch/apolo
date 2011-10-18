@@ -393,13 +393,13 @@ id_category_new << [new_reg.id]
 
 id_retention_concept_old = []
 id_retention_concept_new = []
-new_reg=RetentionConcept.create!(:codigo => "002", :detalle => "Obra Social", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => nil, :formula_calculo_valor => "0.03 * @haberescondescuento", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(1)], :company_id => Company.find(1).id, :auxiliar => false)
+new_reg=RetentionConcept.create!(:codigo => "002", :detalle => "Obra Social", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => 1, :formula_calculo_valor => "0.03 * @haberescondescuento", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(1)], :company_id => Company.find(1).id, :auxiliar => false)
 id_retention_concept_old << [2]
 id_retention_concept_new << [new_reg.id]
-new_reg=RetentionConcept.create!(:codigo => "003", :detalle => "importe", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => nil, :formula_calculo_valor => "@haberescondescuento * 0.02", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(3)], :company_id => Company.find(1).id, :auxiliar => false)
+new_reg=RetentionConcept.create!(:codigo => "003", :detalle => "importe", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => 1, :formula_calculo_valor => "@haberescondescuento * 0.02", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(3)], :company_id => Company.find(1).id, :auxiliar => false)
 id_retention_concept_old << [3]
 id_retention_concept_new << [new_reg.id]
-new_reg=RetentionConcept.create!(:codigo => "004", :detalle => "cantidad e importe", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => nil, :formula_calculo_valor => "importe *  cantidad", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(4)], :company_id => Company.find(1).id, :auxiliar => false)
+new_reg=RetentionConcept.create!(:codigo => "004", :detalle => "cantidad e importe", :statistical_value => nil, :accounting_imputation_id => nil, :prioridad => 1, :formula_calculo_valor => "importe *  cantidad", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(4)], :company_id => Company.find(1).id, :auxiliar => false)
 id_retention_concept_old << [4]
 id_retention_concept_new << [new_reg.id]
 new_reg=RetentionConcept.create!(:codigo => "888", :detalle => "Adicional Obra Social", :statistical_value => 1, :accounting_imputation_id => id_accounting_imputation_new[ id_accounting_imputation_old.index(4)], :prioridad => 99, :formula_calculo_valor => "1", :acumuladores_valor => "1", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.index(1)], :company_id => Company.find(1).id, :auxiliar => false)
