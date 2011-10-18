@@ -542,6 +542,7 @@ end
       entidad = eval(entidadc)
       data = entidad.all
       columnas = entidad.column_names
+      sicoss_file.puts entidadc.camelize+".delete_all"
       sicoss_file.puts "id_"+entidadc.underscore+"_old = []"
       sicoss_file.puts "id_"+entidadc.underscore+"_new = []"
       data.each do |reg|
@@ -577,8 +578,8 @@ end
           end
         end
         sicoss_file.puts "new_reg="+entidadc.camelize+'.create!('+str[0, str.length - 2]+")"
-        sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
-        sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
+        sicoss_file.puts "id_"+entidadc.underscore+"_old << " + reg.id.to_s
+        sicoss_file.puts "id_"+entidadc.underscore+"_new << new_reg.id"
       end
       procesadas<< entidadc.underscore
       primer_parent_id = true
