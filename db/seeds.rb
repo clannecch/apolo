@@ -6,19 +6,148 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+Country.create!(:code => 'AR', :detalle => 'Argentina')
 
-Company.create(:name => 'Coca Cola')
-Company.create(:name => 'Pepsi')
+ar_country_id = Country.where(:code => 'AR').first.id
 
+ar_provincies = [{:code => 'AR01',:detalle => 'Buenos Aires',:country_id => ar_country_id},
+  {:code => 'AR02',:detalle => 'Catamarca',:country_id => ar_country_id},
+  {:code => 'AR03',:detalle => 'Chaco',:country_id => ar_country_id},
+  {:code => 'AR04',:detalle => 'Chubut',:country_id => ar_country_id},
+  {:code => 'AR05',:detalle => 'Cordoba',:country_id => ar_country_id},
+  {:code => 'AR06',:detalle => 'Corrientes',:country_id => ar_country_id},
+  {:code => 'AR07',:detalle => 'Distrito Federal',:country_id => ar_country_id},
+  {:code => 'AR08',:detalle => 'Entre Rios',:country_id => ar_country_id},
+  {:code => 'AR09',:detalle => 'Formosa',:country_id => ar_country_id},
+  {:code => 'AR10',:detalle => 'Jujuy',:country_id => ar_country_id},
+  {:code => 'AR11',:detalle => 'La Pampa',:country_id => ar_country_id},
+  {:code => 'AR12',:detalle => 'La Rioja',:country_id => ar_country_id},
+  {:code => 'AR13',:detalle => 'Medoza',:country_id => ar_country_id},
+  {:code => 'AR14',:detalle => 'Misiones',:country_id => ar_country_id},
+  {:code => 'AR15',:detalle => 'Neuquen',:country_id => ar_country_id},
+  {:code => 'AR16',:detalle => 'Rio Negro',:country_id => ar_country_id},
+  {:code => 'AR17',:detalle => 'Salta',:country_id => ar_country_id},
+  {:code => 'AR18',:detalle => 'San Juan',:country_id => ar_country_id},
+  {:code => 'AR19',:detalle => 'San Luis',:country_id => ar_country_id},
+  {:code => 'AR20',:detalle => 'Santa Cruz',:country_id => ar_country_id},
+  {:code => 'AR21',:detalle => 'Santa Fe',:country_id => ar_country_id},
+  {:code => 'AR22',:detalle => 'Santiago del Estero',:country_id => ar_country_id},
+  {:code => 'AR23',:detalle => 'Tierra del Fuego, Antartida e Islas del Atlantico',:country_id => ar_country_id},
+  {:code => 'AR24',:detalle => 'Tucuman',:country_id => ar_country_id}]
+
+ar_provincies.each do |province|
+  $stderr.puts("create province #{province[:detalle]}...")
+  Province.create!(:code => province[:code],
+               :detalle => province[:detalle],
+               :country_id => province[:country_id])
+end
+
+province1 = Province.find(1)
+
+company1 = Company.create(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
+ :calle => "", :altura => "", :codigo_postal => "", :location_id => nil, :province_id => province1,
+ :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "",
+ :ultima_hoja_libro => 0, :imprimir_hasta_hoja_libro => 0, :observaciones => "")
+ 
+company2 = Company.create(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA",
+ :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => nil, :province_id => province1,
+ :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1",
+ :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
+ :observaciones => "sfdfd")
+
+ menu1=Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu1, :name => "Empleados", :link_url => "/employees", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu1, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
+
+ menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3)
+ new_reg=Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu2, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
+ new_reg=Menu.create(:parent_id => menu2, :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
+
+ menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu3, :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
+
+ menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu4, :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
+
+ menu5 = Menu.create(:parent_id => menu1, :name => "Bancos", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu5, :name => "Bancos", :link_url => "/bank_deposits", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu5, :name => "Tipos de Cuentas", :link_url => "/bank_deposit_account_types", :order_no => 2)
+
+ menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Calle", :link_url => "/home_abouts", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Lugares de emision de Documentos", :link_url => "/issueds", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Estados Civil", :link_url => "/marital_statuses", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Nacionalidades", :link_url => "/nationalities", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Lugares de Trabajo", :link_url => "/places", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Cuentas Contables", :link_url => "/accounting_imputations", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Obras Sociales", :link_url => "/health_insurances", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Aseguradoras", :link_url => "/insurance_companies", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "menus", :link_url => "/menus", :order_no => 99)
+ 
+ menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu7, :name => "Paises", :link_url => "/countries", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu7, :name => "Provincias", :link_url => "/provinces", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu7, :name => "Localidades", :link_url => "/locations", :order_no => 1)
+
+ new_reg=Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Graficas", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Parentesco", :link_url => "/kinships", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Codigo de Siniestrado", :link_url => "/sicoss_damageds", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Localidad", :link_url => "/sicoss_locations", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Zona / Reduccion", :link_url => "/sicoss_reduction_zones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Regimen", :link_url => "/sicoss_regimen_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Situacion", :link_url => "/sicoss_situations", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Empleador", :link_url => "/sicoss_employer_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Formato de Transferecia SiCOSS", :link_url => "/sicoss_formats", :order_no => 99)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Complemento SICOSS Empresa", :link_url => "/sicoss_format_employers", :order_no => 77)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Codigos", :link_url => "/employer_contribution_concepts", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Consorcios", :link_url => "/consortia", :order_no => 99)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Recibos", :link_url => "/tipo_recibos", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Grupo de retenciones", :link_url => "/group_retentions", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Actividad", :link_url => "/activities", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Causa de egreso", :link_url => "/causa_egresos", :order_no => 88)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Email", :link_url => "/email_types", :order_no => 85)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Numeradores", :link_url => "/numeradors", :order_no => 99)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Remuneraciones", :link_url => "/remuneration_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Modalidades de Contratacion", :link_url => "/contract_modes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tablas de Contratacion", :link_url => "?", :order_no => 3)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Centros de Costos", :link_url => "/cost_centers", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tareas", :link_url => "/tasks", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Categorias", :link_url => "/categories", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Secciones", :link_url => "/sections", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Ocupacion", :link_url => "/employments", :order_no => 84)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Administradoras", :link_url => "/companies", :order_no => 98)
+
+=begin
 Country.create({"detalle"=>"Argentina"})
 Country.create({"detalle"=>"Italia"})
 Country.create({"detalle"=>"Espana"})
+=end
 
 =begin
 Country.all.each do |company|
   Employee.create(:name => 'zarasa', :country_id => company.id)
 end
-=end
 
 Issued.create({"detalle"=>"Capital Federal"})
 Issued.create({"detalle"=>"Pcia. Bs. As."})
@@ -266,3 +395,4 @@ BankDepositAccountType.create({"detalle"=>"Cuenta Corriente"})
 MaritalStatus.create({"detalle"=>"Soltero"})
 MaritalStatus.create({"detalle"=>"Casado"})
 MaritalStatus.create({"detalle"=>"Viudo"})
+=end
