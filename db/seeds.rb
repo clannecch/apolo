@@ -63,19 +63,22 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
  :observaciones => "sfdfd")
 =end
+ Menu.delete_all
 
-=begin
  menu1 = Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu1, :name => "Empleados", :link_url => "/employees", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu1, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
 
- menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3).id
- new_reg=Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
+ menu2  =Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3).id
+ menu22 =Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu22, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
+ 
  new_reg=Menu.create(:parent_id => menu2, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
  new_reg=Menu.create(:parent_id => menu2, :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
 
  menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu3, :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
+ #new_reg=Menu.create(:parent_id => menu3, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
 
  menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu4, :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
@@ -109,31 +112,29 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  
  menu9 = Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu9, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
- 
- menu10 =Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1).id
- new_reg=Menu.create(:parent_id => menu10, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu10, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
- 
+  
  menu11 =Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu11, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu11, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
  
- new_reg=Menu.create(:parent_id => menu6, :name => "Graficas", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => nil, :name => "Graficas", :link_url => "?", :order_no => 1)
+
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Parentesco", :link_url => "/kinships", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Codigo de Siniestrado", :link_url => "/sicoss_damageds", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Localidad", :link_url => "/sicoss_locations", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Zona / Reduccion", :link_url => "/sicoss_reduction_zones", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Regimen", :link_url => "/sicoss_regimen_types", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Situacion", :link_url => "/sicoss_situations", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Empleador", :link_url => "/sicoss_employer_types", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Formato de Transferecia SiCOSS", :link_url => "/sicoss_formats", :order_no => 99)
- new_reg=Menu.create(:parent_id => menu6, :name => "Complemento SICOSS Empresa", :link_url => "/sicoss_format_employers", :order_no => 77)
+
+ menu61=Menu.create(:parent_id => nil, :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Codigo de Siniestrado", :link_url => "/sicoss_damageds", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Localidad", :link_url => "/sicoss_locations", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Zona / Reduccion", :link_url => "/sicoss_reduction_zones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Tipo de Regimen", :link_url => "/sicoss_regimen_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Situacion", :link_url => "/sicoss_situations", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Tipo de Empleador", :link_url => "/sicoss_employer_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Formato de Transferecia SiCOSS", :link_url => "/sicoss_formats", :order_no => 99)
+ new_reg=Menu.create(:parent_id => menu61, :name => "Complemento SICOSS Empresa", :link_url => "/sicoss_format_employers", :order_no => 77)
+ 
  new_reg=Menu.create(:parent_id => menu6, :name => "Codigos", :link_url => "/employer_contribution_concepts", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Consorcios", :link_url => "/consortia", :order_no => 99)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Recibos", :link_url => "/tipo_recibos", :order_no => 1)
@@ -151,14 +152,15 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Secciones", :link_url => "/sections", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Ocupacion", :link_url => "/employments", :order_no => 84)
  new_reg=Menu.create(:parent_id => menu6, :name => "Administradoras", :link_url => "/companies", :order_no => 98)
-=end
+
+
 =begin
  new_reg=Category.create!(:detalle => "Administrativo", :importe => 6000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "ADM")
  new_reg=Category.create!(:detalle => "Mi Categoria", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "c3")
  new_reg=Category.create!(:detalle => "Director", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "dr")
  new_reg=Category.create!(:detalle => "Enfermero", :importe => 3000.0, :company_id => Company.find(1).id , :horas => 180.0, :codigo => "enf")
 =end 
-
+=begin
  account = AccountingImputation.create!(:detalle => "Sueldos").id
 
  id_data_to_ask_old = []
