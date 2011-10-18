@@ -535,7 +535,9 @@ end
     end
 =end
 
-    ["menu","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept","employee"].each do |entidadc|
+    procesadas = []
+    primer_parent_id = true
+    ["menu","country","province","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
       data = entidad.all
@@ -547,17 +549,28 @@ end
         columnas.each do |col|
           if ["created_at", "updated_at", "id"].exclude?(col)
             if col[col.length-3..col.length]=="_id"
-              pedazo = "id_"+col.gsub("-id","")+"_new[ id_"+col.gsub("-id","")+"_old.index["+reg.id.to_s+"]]"
+              if col == "parent_id"
+                pedazo = (primer_parent_id == true ? "nil" : "1")
+                primer_parent_id = false
+              else
+                if procesadas.index(col.gsub("_id","")).nil?
+                  pedazo = "nil"
+                else
+                  pedazo = eval("reg."+col).nil? ? 'nil' : "id_"+col.gsub("_id","")+"_new[ id_"+col.gsub("_id","")+"_old.index("+eval("reg."+col+".to_s")+")]"
+                end
+              end
             else
               case eval(entidadc+".columns_hash['"+col+"'].type")
                 when :date
-                  pedazo =  '"' +eval("reg."+col+".to_s")+ '"'
-                when :string
-                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
-                when :text
-                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
+                  pedazo =  eval("reg."+col).nil? ? 'nil' : '"' +eval("reg."+col+".to_s")+ '"'
+                when :string || :text
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
+                when :decimal || :integer
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :boolean
+                  pedazo = eval("reg."+col+"? ? 'true' : 'false'")
                 else
-                  pedazo = eval("reg."+col+".to_s")
+                  pedazo = eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
               end
             end
             str=str+":"+col+" => "+pedazo+", "
@@ -567,6 +580,8 @@ end
         sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
         sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
       end
+      procesadas<< entidadc.underscore
+      primer_parent_id = true
     end
     sicoss_file.close
   end
