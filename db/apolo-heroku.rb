@@ -2,7 +2,7 @@
 =begin
 Execute:
   heroku console
-  load Rails.root.join('db/seeds-aps.rb').to_s
+  load Rails.root.join('db/apolo-heroku.rb').to_s
 =end
 id_menu_old = []
 id_menu_new = []
@@ -368,13 +368,13 @@ id_remunerative_concept_old << [21]
 id_remunerative_concept_new << [new_reg.id]
 id_retention_concept_old = []
 id_retention_concept_new = []
-new_reg=Retention_concept.create(:codigo => "002", :detalle => "Obra Social", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[2]], :prioridad => , :formula_calculo_valor => "0.03 * @haberescondescuento", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[2]], :company_id => id_company_id_new[ id_company_id_old.index[2]], :auxiliar => false)
+new_reg=Retention_concept.create(:codigo => "002", :detalle => "Obra Social", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[2]], :prioridad => 99, :formula_calculo_valor => "0.03 * @haberescondescuento", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[2]], :company_id => id_company_id_new[ id_company_id_old.index[2]], :auxiliar => false)
 id_retention_concept_old << [2]
 id_retention_concept_new << [new_reg.id]
-new_reg=Retention_concept.create(:codigo => "003", :detalle => "importe", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[3]], :prioridad => , :formula_calculo_valor => "@haberescondescuento * 0.02", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[3]], :company_id => id_company_id_new[ id_company_id_old.index[3]], :auxiliar => false)
+new_reg=Retention_concept.create(:codigo => "003", :detalle => "importe", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[3]], :prioridad => 99, :formula_calculo_valor => "@haberescondescuento * 0.02", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[3]], :company_id => id_company_id_new[ id_company_id_old.index[3]], :auxiliar => false)
 id_retention_concept_old << [3]
 id_retention_concept_new << [new_reg.id]
-new_reg=Retention_concept.create(:codigo => "004", :detalle => "cantidad e importe", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[4]], :prioridad => , :formula_calculo_valor => "importe *  cantidad", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[4]], :company_id => id_company_id_new[ id_company_id_old.index[4]], :auxiliar => false)
+new_reg=Retention_concept.create(:codigo => "004", :detalle => "cantidad e importe", :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[4]], :prioridad => 99, :formula_calculo_valor => "importe *  cantidad", :acumuladores_valor => "@retenciones", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[4]], :company_id => id_company_id_new[ id_company_id_old.index[4]], :auxiliar => false)
 id_retention_concept_old << [4]
 id_retention_concept_new << [new_reg.id]
 new_reg=Retention_concept.create(:codigo => "888", :detalle => "Adicional Obra Social", :statistical_value => 1, :accounting_imputation_id => id_accounting_imputation_id_new[ id_accounting_imputation_id_old.index[5]], :prioridad => 99, :formula_calculo_valor => "1", :acumuladores_valor => "1", :data_to_ask_id => id_data_to_ask_id_new[ id_data_to_ask_id_old.index[5]], :company_id => id_company_id_new[ id_company_id_old.index[5]], :auxiliar => false)
