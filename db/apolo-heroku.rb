@@ -233,10 +233,10 @@ id_menu_old << [76]
 id_menu_new << [new_reg.id]
 id_company_old = []
 id_company_new = []
-new_reg=company.create(:name => "Pepsi", :code => "", :razon_social => "", :calle => "", :altura => "", :codigo_postal => "", :location_id => id_location_id_new[ id_location_id_old.index[2]], :province_id => id_province_id_new[ id_province_id_old.index[2]], :latitude => , :longitude => , :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "", :ultima_hoja_libro => , :imprimir_hasta_hoja_libro => , :observaciones => )
+new_reg=company.create(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL", :calle => "", :altura => "", :codigo_postal => "", :location_id => id_location_id_new[ id_location_id_old.index[2]], :province_id => id_province_id_new[ id_province_id_old.index[2]], :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "", :ultima_hoja_libro => 0, :imprimir_hasta_hoja_libro => 0, :observaciones => "")
 id_company_old << [2]
 id_company_new << [new_reg.id]
-new_reg=company.create(:name => "Coca Cola", :code => "koke", :razon_social => "The Coca-Cola Company", :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => id_location_id_new[ id_location_id_old.index[1]], :province_id => id_province_id_new[ id_province_id_old.index[1]], :latitude => , :longitude => , :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1", :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100, :observaciones => sfdfd)
+new_reg=company.create(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA", :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => id_location_id_new[ id_location_id_old.index[1]], :province_id => id_province_id_new[ id_province_id_old.index[1]], :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1", :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100, :observaciones => "sfdfd")
 id_company_old << [1]
 id_company_new << [new_reg.id]
 id_category_old = []
