@@ -563,7 +563,7 @@ end
             str=str+":"+col+" => "+pedazo+", "
           end
         end
-        sicoss_file.puts "new_reg="+entidad.capitalize+'.create!('+str[0, str.length - 2]+")"
+        sicoss_file.puts "new_reg="+entidadc.camelize+'.create!('+str[0, str.length - 2]+")"
         sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
         sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
       end
