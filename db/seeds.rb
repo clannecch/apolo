@@ -14,7 +14,6 @@ Execute:
 =end
 =begin
 Country.create!(:code => 'AR', :detalle => 'Argentina')
-
 ar_country_id = Country.where(:code => 'AR').first.id
 
 ar_provincies = [{:code => 'AR01',:detalle => 'Buenos Aires',:country_id => ar_country_id},
