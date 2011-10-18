@@ -48,7 +48,7 @@ ar_provincies.each do |province|
                :detalle => province[:detalle],
                :country_id => province[:country_id])
 end
-=end
+
 province1 = Province.find(1).id
 
 location1 = Location.create!(:detalle => "Villa Pueyrredon", :company_id => 1).id
@@ -63,27 +63,28 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  :telefono => "45551234", :contacto => "pablo", :email => "esta@pro.com", :cuit => "3012345671",
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
  :observaciones => "sfdfd")
+=end
 
- menu1=Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1)
+ menu1 = Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu1, :name => "Empleados", :link_url => "/employees", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu1, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
 
- menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3)
+ menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3).id
  new_reg=Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu2, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
  new_reg=Menu.create(:parent_id => menu2, :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
 
- menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1)
+ menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu3, :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
 
- menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1)
+ menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu4, :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
 
- menu5 = Menu.create(:parent_id => menu1, :name => "Bancos", :link_url => "?", :order_no => 1)
+ menu5 = Menu.create(:parent_id => menu1, :name => "Bancos", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu5, :name => "Bancos", :link_url => "/bank_deposits", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu5, :name => "Tipos de Cuentas", :link_url => "/bank_deposit_account_types", :order_no => 2)
 
- menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0)
+ menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0).id
  new_reg=Menu.create(:parent_id => menu6, :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
@@ -98,22 +99,22 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "menus", :link_url => "/menus", :order_no => 99)
  
- menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1)
+ menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu7, :name => "Paises", :link_url => "/countries", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu7, :name => "Provincias", :link_url => "/provinces", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu7, :name => "Localidades", :link_url => "/locations", :order_no => 1)
 
- menu8 = Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1)
+ menu8 = Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu8, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
  
- menu9 = Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1)
+ menu9 = Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu9, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
  
- menu10 =Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
+ menu10 =Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu10, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu10, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
  
- menu11 =Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1)
+ menu11 =Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu11, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu11, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
  
