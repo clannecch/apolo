@@ -6,9 +6,14 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+#encoding: utf-8
+=begin
+Execute:
+  heroku console
+  load Rails.root.join('db/apolo-heroku.rb').to_s
+=end
 =begin
 Country.create!(:code => 'AR', :detalle => 'Argentina')
-
 ar_country_id = Country.where(:code => 'AR').first.id
 
 ar_provincies = [{:code => 'AR01',:detalle => 'Buenos Aires',:country_id => ar_country_id},
@@ -42,41 +47,44 @@ ar_provincies.each do |province|
                :detalle => province[:detalle],
                :country_id => province[:country_id])
 end
-=end
 
-province1 = Province.find(1)
+province1 = Province.find(1).id
+
+location1 = Location.create!(:detalle => "Villa Pueyrredon", :company_id => 1).id
 
 company1 = Company.create!(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
- :calle => "", :altura => "", :codigo_postal => "", :location_id => nil, :province_id => province1,
- :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "",
+ :calle => "calle", :altura => "1234", :codigo_postal => "1419", :location_id => location1, :province_id => province1,
+ :telefono => "44445555", :contacto => "", :email => "admin1@admin.com.ar", :cuit => "30123456780", :numero_inscripcion => "", :caja => "",
  :ultima_hoja_libro => 0, :imprimir_hasta_hoja_libro => 0, :observaciones => "")
  
 company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA",
- :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => nil, :province_id => province1,
- :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1",
+ :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => location1, :province_id => province1,
+ :telefono => "45551234", :contacto => "pablo", :email => "esta@pro.com", :cuit => "3012345671",
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
  :observaciones => "sfdfd")
+=end
 
- menu1=Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1)
+=begin
+ menu1 = Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu1, :name => "Empleados", :link_url => "/employees", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu1, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
 
- menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3)
+ menu2 = Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3).id
  new_reg=Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu2, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
  new_reg=Menu.create(:parent_id => menu2, :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
 
- menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1)
+ menu3 = Menu.create(:parent_id => menu1, :name => "Retenciones", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu3, :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
 
- menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1)
+ menu4 = Menu.create(:parent_id => menu1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu4, :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
 
- menu5 = Menu.create(:parent_id => menu1, :name => "Bancos", :link_url => "?", :order_no => 1)
+ menu5 = Menu.create(:parent_id => menu1, :name => "Bancos", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu5, :name => "Bancos", :link_url => "/bank_deposits", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu5, :name => "Tipos de Cuentas", :link_url => "/bank_deposit_account_types", :order_no => 2)
 
- menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0)
+ menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0).id
  new_reg=Menu.create(:parent_id => menu6, :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
@@ -91,21 +99,25 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "menus", :link_url => "/menus", :order_no => 99)
  
- menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1)
+ menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu7, :name => "Paises", :link_url => "/countries", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu7, :name => "Provincias", :link_url => "/provinces", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu7, :name => "Localidades", :link_url => "/locations", :order_no => 1)
 
- new_reg=Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+ menu8 = Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1).id
+ new_reg=Menu.create(:parent_id => menu8, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
+ 
+ menu9 = Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1).id
+ new_reg=Menu.create(:parent_id => menu9, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
+ 
+ menu10 =Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1).id
+ new_reg=Menu.create(:parent_id => menu10, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu10, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
+ 
+ menu11 =Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1).id
+ new_reg=Menu.create(:parent_id => menu11, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu11, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+ 
  new_reg=Menu.create(:parent_id => menu6, :name => "Graficas", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
@@ -139,18 +151,73 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Secciones", :link_url => "/sections", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Ocupacion", :link_url => "/employments", :order_no => 84)
  new_reg=Menu.create(:parent_id => menu6, :name => "Administradoras", :link_url => "/companies", :order_no => 98)
-
-=begin
-Country.create({"detalle"=>"Argentina"})
-Country.create({"detalle"=>"Italia"})
-Country.create({"detalle"=>"Espana"})
 =end
+=begin
+ new_reg=Category.create!(:detalle => "Administrativo", :importe => 6000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "ADM")
+ new_reg=Category.create!(:detalle => "Mi Categoria", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "c3")
+ new_reg=Category.create!(:detalle => "Director", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "dr")
+ new_reg=Category.create!(:detalle => "Enfermero", :importe => 3000.0, :company_id => Company.find(1).id , :horas => 180.0, :codigo => "enf")
+=end 
+
+ account = AccountingImputation.create!(:detalle => "Sueldos").id
+
+ id_data_to_ask_old = []
+ id_data_to_ask_new = []
+ new_reg=DataToAsk.create!(:detalle => "Ninguno", :cantidad => false, :importe => false, :company_id => nil)
+ id_data_to_ask_old << [1]
+ id_data_to_ask_new << [new_reg.id]
+ new_reg=DataToAsk.create!(:detalle => "Cantidad", :cantidad => true, :importe => false, :company_id => nil)
+ id_data_to_ask_old << [2]
+ id_data_to_ask_new << [new_reg.id]
+ new_reg=DataToAsk.create!(:detalle => "Importe", :cantidad => false, :importe => true, :company_id => nil)
+ id_data_to_ask_old << [3]
+ id_data_to_ask_new << [new_reg.id]
+ new_reg=DataToAsk.create!(:detalle => "Cantidad e Importe", :cantidad => true, :importe => true, :company_id => nil)
+ id_data_to_ask_old << [4]
+ id_data_to_ask_new << [new_reg.id]
+
+ id_company_new = Company.find(1).id
+ 
+ new_reg=RemunerativeConcept.create!(:codigo => "004", :detalle => "premio asistencia", :porcentual_asistencia => false, :prioridad_calculo => 2,  :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@basico @haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => " @basico * 0.2", :calculo_cantidad => "", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "603", :detalle => "Proporcional del mes trabajado", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 30) * (30 - @dias_trabajados_mes)", :calculo_cantidad => "30 - @dias_trabajados_mes", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "605", :detalle => "SAC proporcional", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account , :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 360) * @dias_trabajados_semestre", :calculo_cantidad => "@dias_trabajados_semestre", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "606", :detalle => "SAC sobre Vacaciones no Gozadas", :porcentual_asistencia => false, :prioridad_calculo => 2, :grupo_ganancias_id => nil , :accounting_imputation_id => :account , :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 360) * @dias_vacaciones_no_gozadas", :calculo_cantidad => "@dias_vacaciones_no_gozadas", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "607", :detalle => "SAC sobre Preaviso", :porcentual_asistencia => false, :prioridad_calculo => 2, :grupo_ganancias_id => nil, :accounting_imputation_id => :account , :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 360) * @cantidad_indemnizacion_falta_preaviso", :calculo_cantidad => "@cantidad_indemnizacion_falta_preaviso", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "608", :detalle => "SAC sobre Integracion del mes de despido", :porcentual_asistencia => false, :prioridad_calculo => 2, :grupo_ganancias_id => nil, :accounting_imputation_id => :account , :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_semestre / 360) * (30 - @dias_trabajados_mes)", :calculo_cantidad => "30 - @dias_trabajados_mes", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "005", :detalle => "Antiguedad", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => " @haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "@antiguedad * 69.06", :calculo_cantidad => "@antiguedad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
+ new_reg=RemunerativeConcept.create!(:codigo => "162", :detalle => "Hotas Extras al 100% Sabados", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 2 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "110", :detalle => "Dia Feriado Nacional", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil , :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 153.72", :calculo_cantidad => "novedad_haber:cantidd", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "150", :detalle => "Dias Vacaciones", :porcentual_asistencia => false, :prioridad_calculo => 30, :grupo_ganancias_id => nil , :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "( @haberescondescuento / 25) * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "601", :detalle => "Preaviso", :porcentual_asistencia => false, :prioridad_calculo => 90, :grupo_ganancias_id => nil , :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberessindescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad *  @mejor_remuneracion_habitual_anual", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "401", :detalle => "Aguinaldo", :porcentual_asistencia => false, :prioridad_calculo => 99, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "@mejor_remuneracion_semestre / 180 * @dias_trabajados_semestre", :calculo_cantidad => "@dias_trabajados_semestre", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "605", :detalle => "Indemnizacion por despido ", :porcentual_asistencia => false, :prioridad_calculo => 90, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "@cantidad_sueldos_indemnizacion_despido *  @mejor_remuneracion_habitual_anual", :calculo_cantidad => "@cantidad_sueldos_indemnizacion_despido", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "600", :detalle => "Integracion mes despido", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberessindecuentos", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 30) * @dias_trabajados_mes", :calculo_cantidad => "@dias_trabajados_mes", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "610", :detalle => "Vacaciones no Gozadas", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberessindescuento", :acumuladores_cantidad => "", :calculo_valor => "@dias_vacaciones_no_gozadas * (@mejor_remuneracion_habitual_anual / 25)", :calculo_cantidad => "@dias_vacaciones_no_gozadas", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "007", :detalle => "que es este codigo?", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:importe", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "001", :detalle => "Sueldo Basico", :porcentual_asistencia => false, :prioridad_calculo => 1, :statistical_value => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@basico   @haberescondescuento @remuneracion_habitual", :acumuladores_cantidad => "", :calculo_valor => "@sueldo", :calculo_cantidad => "1", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "115", :detalle => "Horas Feriados Nacionales", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 2 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "163", :detalle => "Hotas Extras al 100% Domingos", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 2 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "015", :detalle => "Adicional", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:importe ", :calculo_cantidad => "", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "499", :detalle => "Dias Vacaciones", :porcentual_asistencia => false, :prioridad_calculo => 0, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@basico @haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "@sueldo / 25 * novedad_haber:cantidad", :calculo_cantidad => "@dias_vacaciones", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "700", :detalle => "Adicional Personalizado", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberessindescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:importe ", :calculo_cantidad => "", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "010", :detalle => "Plus Retiro de Residuos", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 6.29", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "011", :detalle => "Plus Mantenimiento Jardin", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 85.95", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "012", :detalle => "Plus Limpieza Cocheras", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 85.95", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "006", :detalle => "Valor Vivienda", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "novedad_haber:cantidad", :calculo_valor => "novedad_haber:cantidad * 23.14", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "015", :detalle => "Plus Movimientos de Coches", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 127.28", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "101", :detalle => "Dias Inasistencia", :porcentual_asistencia => false, :prioridad_calculo => 10, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "novedad_haber:cantidad", :calculo_valor => "(@haberescondescuento / 30) * novedad_haber:cantidad * -1", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "120", :detalle => "Dias de suplencia", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 153.72", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "123", :detalle => "Dias de suplencia al 100%", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 307.44", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "125", :detalle => "Dias media suplencia", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "novedad_haber:cantidad * 76.86", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "167", :detalle => "Horas Extras al 50%", :porcentual_asistencia => false, :prioridad_calculo => 10, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 1.5 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "168", :detalle => "Horas Extras al 100%", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 2 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "105", :detalle => "Dia del Encargado (2 de Oct)", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 25) * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "160", :detalle => "Horas Simples", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200)  * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "169", :detalle => "Horas Extras al 50% Sabados", :porcentual_asistencia => false, :prioridad_calculo => 20, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@haberesparaextras / 200) * 1.5 * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+ new_reg=RemunerativeConcept.create!(:codigo => "151", :detalle => "Inasistencia p/Vacaciones", :porcentual_asistencia => false, :prioridad_calculo => 30, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "( @haberescondescuento / 30) * novedad_haber:cantidad", :calculo_cantidad => "novedad_haber:cantidad", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "novedad_haber:cantidad", :company_id => id_company_new, :auxiliar => false)
+
 
 =begin
-Country.all.each do |company|
-  Employee.create(:name => 'zarasa', :country_id => company.id)
-end
-
 Issued.create({"detalle"=>"Capital Federal"})
 Issued.create({"detalle"=>"Pcia. Bs. As."})
 Issued.create({"detalle"=>"La Pampa"})
