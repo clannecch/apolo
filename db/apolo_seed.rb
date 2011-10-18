@@ -273,6 +273,12 @@ new_reg=Company.create!(:name => "Coca Cola", :code => "koke", :razon_social => 
 id_company_old << [1]
 id_company_new << [new_reg.id]
 =end
+
+id_company_old = []
+id_company_new = []
+id_company_old << [1]
+id_company_new << [Company.find(1).id]
+
 Location.delete_all()
 
 id_location_old = []
