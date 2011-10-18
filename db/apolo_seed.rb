@@ -281,6 +281,7 @@ id_company_new << [Company.find(1).id]
 
 Location.delete_all()
 
+
 id_location_old = []
 id_location_new = []
 new_reg=Location.create!(:detalle => "Capital Federal", :company_id => id_company_new[ id_company_old.index(1)])
