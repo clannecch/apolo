@@ -6,6 +6,12 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+#encoding: utf-8
+=begin
+Execute:
+  heroku console
+  load Rails.root.join('db/apolo-heroku.rb').to_s
+=end
 =begin
 Country.create!(:code => 'AR', :detalle => 'Argentina')
 
@@ -43,16 +49,18 @@ ar_provincies.each do |province|
                :country_id => province[:country_id])
 end
 =end
-province1 = Province.find(1)
+province1 = Province.find(1).id
+
+location1 = Location.create!(:detalle => "Villa Pueyrredon", :company_id => 1).id
 
 company1 = Company.create!(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
- :calle => "", :altura => "", :codigo_postal => "", :location_id => nil, :province_id => province1,
- :telefono => "", :contacto => "", :email => "", :cuit => "", :numero_inscripcion => "", :caja => "",
+ :calle => "calle", :altura => "1234", :codigo_postal => "1419", :location_id => location1, :province_id => province1,
+ :telefono => "44445555", :contacto => "", :email => "admin1@admin.com.ar", :cuit => "30123456780", :numero_inscripcion => "", :caja => "",
  :ultima_hoja_libro => 0, :imprimir_hasta_hoja_libro => 0, :observaciones => "")
  
 company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_social => "Administracion SA",
- :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => nil, :province_id => province1,
- :telefono => "4573-4409", :contacto => "pablo", :email => "esta@pro.com", :cuit => "30-1234567-1",
+ :calle => "Helguera", :altura => "4847", :codigo_postal => "1419", :location_id => location1, :province_id => province1,
+ :telefono => "45551234", :contacto => "pablo", :email => "esta@pro.com", :cuit => "3012345671",
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
  :observaciones => "sfdfd")
 
@@ -95,16 +103,20 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu7, :name => "Provincias", :link_url => "/provinces", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu7, :name => "Localidades", :link_url => "/locations", :order_no => 1)
 
- new_reg=Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+ menu8 = Menu.create(:parent_id => menu6, :name => "Exportaciones", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu8, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
+ 
+ menu9 = Menu.create(:parent_id => menu6, :name => "Estadisticas", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu9, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
+ 
+ menu10 =Menu.create(:parent_id => menu6, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu10, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu10, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
+ 
+ menu11 =Menu.create(:parent_id => menu6, :name => "Empleados", :link_url => "?", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu11, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu11, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+ 
  new_reg=Menu.create(:parent_id => menu6, :name => "Graficas", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
