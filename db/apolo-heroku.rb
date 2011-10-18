@@ -6,229 +6,229 @@ Execute:
 =end
 id_menu_old = []
 id_menu_new = []
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[1]], :name => "Maestros", :link_url => "", :order_no => 1)
+new_reg=Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1)
 id_menu_old << [1]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[2]], :name => "Empleados", :link_url => "/employees", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Empleados", :link_url => "/employees", :order_no => 1)
 id_menu_old << [2]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[3]], :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
+new_reg=Menu.create(:parent_id => nil, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
 id_menu_old << [3]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[4]], :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3)
+new_reg=Menu.create(:parent_id => 1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3)
 id_menu_old << [4]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[5]], :name => "Haberes", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Haberes", :link_url => "?", :order_no => 1)
 id_menu_old << [5]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[6]], :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
+new_reg=Menu.create(:parent_id => 1, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
 id_menu_old << [6]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[7]], :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Codigos", :link_url => "/remunerative_concepts", :order_no => 1)
 id_menu_old << [7]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[8]], :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Retenciones", :link_url => "/retention_concepts", :order_no => 1)
 id_menu_old << [8]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[9]], :name => "Retenciones", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Retenciones", :link_url => "?", :order_no => 1)
 id_menu_old << [9]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[11]], :name => "Aportes Patronales", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Aportes Patronales", :link_url => "?", :order_no => 1)
 id_menu_old << [11]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[12]], :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
+new_reg=Menu.create(:parent_id => 1, :name => "Grupo de Aportes Patronales", :link_url => "/group_employer_contributions", :order_no => 3)
 id_menu_old << [12]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[14]], :name => "Bancos", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Bancos", :link_url => "?", :order_no => 1)
 id_menu_old << [14]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[15]], :name => "Bancos", :link_url => "/bank_deposits", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Bancos", :link_url => "/bank_deposits", :order_no => 1)
 id_menu_old << [15]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[16]], :name => "Tipos de Cuentas", :link_url => "/bank_deposit_account_types", :order_no => 2)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Cuentas", :link_url => "/bank_deposit_account_types", :order_no => 2)
 id_menu_old << [16]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[17]], :name => "Tablas Varias", :link_url => "?", :order_no => 0)
+new_reg=Menu.create(:parent_id => 1, :name => "Tablas Varias", :link_url => "?", :order_no => 0)
 id_menu_old << [17]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[18]], :name => "Ubicacion", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Ubicacion", :link_url => "?", :order_no => 1)
 id_menu_old << [18]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[21]], :name => "Paises", :link_url => "/countries", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Paises", :link_url => "/countries", :order_no => 1)
 id_menu_old << [21]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[22]], :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
 id_menu_old << [22]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[23]], :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
 id_menu_old << [23]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[24]], :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
 id_menu_old << [24]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[25]], :name => "Tipo de Calle", :link_url => "/home_abouts", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipo de Calle", :link_url => "/home_abouts", :order_no => 1)
 id_menu_old << [25]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[26]], :name => "Lugares de emision de Documentos", :link_url => "/issueds", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Lugares de emision de Documentos", :link_url => "/issueds", :order_no => 1)
 id_menu_old << [26]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[27]], :name => "Localidades", :link_url => "/locations", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Localidades", :link_url => "/locations", :order_no => 1)
 id_menu_old << [27]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[28]], :name => "Estados Civil", :link_url => "/marital_statuses", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Estados Civil", :link_url => "/marital_statuses", :order_no => 1)
 id_menu_old << [28]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[29]], :name => "Nacionalidades", :link_url => "/nationalities", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Nacionalidades", :link_url => "/nationalities", :order_no => 1)
 id_menu_old << [29]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[30]], :name => "Lugares de Trabajo", :link_url => "/places", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Lugares de Trabajo", :link_url => "/places", :order_no => 1)
 id_menu_old << [30]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[31]], :name => "Provincias", :link_url => "/provinces", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Provincias", :link_url => "/provinces", :order_no => 1)
 id_menu_old << [31]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[36]], :name => "Cuentas Contables", :link_url => "/accounting_imputations", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Cuentas Contables", :link_url => "/accounting_imputations", :order_no => 1)
 id_menu_old << [36]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[38]], :name => "Obras Sociales", :link_url => "/health_insurances", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Obras Sociales", :link_url => "/health_insurances", :order_no => 1)
 id_menu_old << [38]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[39]], :name => "Aseguradoras", :link_url => "/insurance_companies", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Aseguradoras", :link_url => "/insurance_companies", :order_no => 1)
 id_menu_old << [39]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[40]], :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
 id_menu_old << [40]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[41]], :name => "menus", :link_url => "/menus", :order_no => 99)
+new_reg=Menu.create(:parent_id => 1, :name => "menus", :link_url => "/menus", :order_no => 99)
 id_menu_old << [41]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[42]], :name => "Exportaciones", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Exportaciones", :link_url => "?", :order_no => 1)
 id_menu_old << [42]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[43]], :name => "SIJP", :link_url => "/sijp", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "SIJP", :link_url => "/sijp", :order_no => 1)
 id_menu_old << [43]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[44]], :name => "Estadisticas", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Estadisticas", :link_url => "?", :order_no => 1)
 id_menu_old << [44]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[45]], :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Centros de Costos", :link_url => "/centro_costos", :order_no => 1)
 id_menu_old << [45]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[46]], :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 1)
 id_menu_old << [46]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[47]], :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
 id_menu_old << [47]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[48]], :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Retenciones", :link_url => "/retenciones", :order_no => 1)
 id_menu_old << [48]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[49]], :name => "Empleados", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Empleados", :link_url => "?", :order_no => 1)
 id_menu_old << [49]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[50]], :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
 id_menu_old << [50]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[51]], :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
 id_menu_old << [51]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[52]], :name => "Graficas", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Graficas", :link_url => "?", :order_no => 1)
 id_menu_old << [52]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[53]], :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Liquidacion Automatica", :link_url => "?", :order_no => 1)
 id_menu_old << [53]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[55]], :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
 id_menu_old << [55]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[56]], :name => "Parentesco", :link_url => "/kinships", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Parentesco", :link_url => "/kinships", :order_no => 1)
 id_menu_old << [56]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[58]], :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
 id_menu_old << [58]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[59]], :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
 id_menu_old << [59]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[60]], :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
 id_menu_old << [60]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[61]], :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
 id_menu_old << [61]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[62]], :name => "Codigo de Siniestrado", :link_url => "/sicoss_damageds", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Codigo de Siniestrado", :link_url => "/sicoss_damageds", :order_no => 1)
 id_menu_old << [62]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[63]], :name => "Localidad", :link_url => "/sicoss_locations", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Localidad", :link_url => "/sicoss_locations", :order_no => 1)
 id_menu_old << [63]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[64]], :name => "Zona / Reduccion", :link_url => "/sicoss_reduction_zones", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Zona / Reduccion", :link_url => "/sicoss_reduction_zones", :order_no => 1)
 id_menu_old << [64]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[65]], :name => "Tipo de Regimen", :link_url => "/sicoss_regimen_types", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipo de Regimen", :link_url => "/sicoss_regimen_types", :order_no => 1)
 id_menu_old << [65]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[67]], :name => "Situacion", :link_url => "/sicoss_situations", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Situacion", :link_url => "/sicoss_situations", :order_no => 1)
 id_menu_old << [67]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[68]], :name => "Tipo de Empleador", :link_url => "/sicoss_employer_types", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipo de Empleador", :link_url => "/sicoss_employer_types", :order_no => 1)
 id_menu_old << [68]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[69]], :name => "Formato de Transferecia SiCOSS", :link_url => "/sicoss_formats", :order_no => 99)
+new_reg=Menu.create(:parent_id => 1, :name => "Formato de Transferecia SiCOSS", :link_url => "/sicoss_formats", :order_no => 99)
 id_menu_old << [69]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[71]], :name => "Complemento SICOSS Empresa", :link_url => "/sicoss_format_employers", :order_no => 77)
+new_reg=Menu.create(:parent_id => 1, :name => "Complemento SICOSS Empresa", :link_url => "/sicoss_format_employers", :order_no => 77)
 id_menu_old << [71]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[13]], :name => "Codigos", :link_url => "/employer_contribution_concepts", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Codigos", :link_url => "/employer_contribution_concepts", :order_no => 1)
 id_menu_old << [13]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[77]], :name => "Consorcios", :link_url => "/consortia", :order_no => 99)
+new_reg=Menu.create(:parent_id => 1, :name => "Consorcios", :link_url => "/consortia", :order_no => 99)
 id_menu_old << [77]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[35]], :name => "Tipos de Recibos", :link_url => "/tipo_recibos", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Recibos", :link_url => "/tipo_recibos", :order_no => 1)
 id_menu_old << [35]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[10]], :name => "Grupo de retenciones", :link_url => "/group_retentions", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Grupo de retenciones", :link_url => "/group_retentions", :order_no => 1)
 id_menu_old << [10]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[57]], :name => "Actividad", :link_url => "/activities", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Actividad", :link_url => "/activities", :order_no => 1)
 id_menu_old << [57]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[70]], :name => "Causa de egreso", :link_url => "/causa_egresos", :order_no => 88)
+new_reg=Menu.create(:parent_id => 1, :name => "Causa de egreso", :link_url => "/causa_egresos", :order_no => 88)
 id_menu_old << [70]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[72]], :name => "Tipos de Email", :link_url => "/email_types", :order_no => 85)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Email", :link_url => "/email_types", :order_no => 85)
 id_menu_old << [72]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[74]], :name => "Numeradores", :link_url => "/numeradors", :order_no => 99)
+new_reg=Menu.create(:parent_id => 1, :name => "Numeradores", :link_url => "/numeradors", :order_no => 99)
 id_menu_old << [74]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[32]], :name => "Tipos de Remuneraciones", :link_url => "/remuneration_types", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tipos de Remuneraciones", :link_url => "/remuneration_types", :order_no => 1)
 id_menu_old << [32]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[19]], :name => "Modalidades de Contratacion", :link_url => "/contract_modes", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Modalidades de Contratacion", :link_url => "/contract_modes", :order_no => 1)
 id_menu_old << [19]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[75]], :name => "Tablas de Contratacion", :link_url => "?", :order_no => 3)
+new_reg=Menu.create(:parent_id => 1, :name => "Tablas de Contratacion", :link_url => "?", :order_no => 3)
 id_menu_old << [75]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[20]], :name => "Centros de Costos", :link_url => "/cost_centers", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Centros de Costos", :link_url => "/cost_centers", :order_no => 1)
 id_menu_old << [20]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[34]], :name => "Tareas", :link_url => "/tasks", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Tareas", :link_url => "/tasks", :order_no => 1)
 id_menu_old << [34]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[37]], :name => "Categorias", :link_url => "/categories", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Categorias", :link_url => "/categories", :order_no => 1)
 id_menu_old << [37]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[33]], :name => "Secciones", :link_url => "/sections", :order_no => 1)
+new_reg=Menu.create(:parent_id => 1, :name => "Secciones", :link_url => "/sections", :order_no => 1)
 id_menu_old << [33]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[73]], :name => "Ocupacion", :link_url => "/employments", :order_no => 84)
+new_reg=Menu.create(:parent_id => 1, :name => "Ocupacion", :link_url => "/employments", :order_no => 84)
 id_menu_old << [73]
 id_menu_new << [new_reg.id]
-new_reg=Menu.create(:parent_id => id_parent_id_new[ id_parent_id_old.index[76]], :name => "Administradoras", :link_url => "/companies", :order_no => 98)
+new_reg=Menu.create(:parent_id => 1, :name => "Administradoras", :link_url => "/companies", :order_no => 98)
 id_menu_old << [76]
 id_menu_new << [new_reg.id]
 id_company_old = []
