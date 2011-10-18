@@ -484,6 +484,7 @@ end
 
   def prepara_sicoss(filename,entity)
     sicoss_file = File.open(filename, 'w')
+=begin
     offset =500
     @liquidacion.recibo_sueldos.each do |r|
       acumuladores = OpenStruct.new()
@@ -531,6 +532,39 @@ end
 
       end
       sicoss_file.puts registro
+    end
+=end
+
+    ["menu","company","category","remunerative_concept","retention_concept","employee","group_remuneration","group_retention"].each do |entidadc|
+      entidadc=entidadc.camelize
+      entidad = eval(entidadc)
+      data = entidad.all
+      columnas = entidad.column_names
+      sicoss_file.puts "id_"+entidadc.underscore+"_old = []"
+      sicoss_file.puts "id_"+entidadc.underscore+"_new = []"
+      data.each do |reg|
+        str= ""
+        columnas.each do |col|
+          if ["created_at", "updated_at", "id"].exclude?(col)
+            if col[col.length-3..col.length]=="_id"
+              pedazo = "id_"+col.gsub("-id","")+"_new[ id_"+col.gsub("-id","")+"_old.index["+reg.id.to_s+"]]"
+            else
+              case eval(entidadc+".columns_hash['"+col+"'].type")
+                when :date
+                  pedazo =  '"' +eval("reg."+col+".to_s")+ '"'
+                when :string
+                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
+                else
+                  pedazo = eval("reg."+col+".to_s")
+              end
+            end
+            str=str+":"+col+" => "+pedazo+", "
+          end
+        end
+        sicoss_file.puts "new_reg="+entidadc.underscore+'.create('+str[0, str.length - 2]+")"
+        sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
+        sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
+      end
     end
     sicoss_file.close
   end
