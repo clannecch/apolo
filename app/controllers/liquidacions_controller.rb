@@ -537,6 +537,12 @@ end
 
     procesadas = []
     primer_parent_id = true
+    sicoss_file.puts "=begin"
+    sicoss_file.puts Execute:"
+    sicoss_file.puts   heroku console"
+    sicoss_file.puts " load Rails.root.join('db/apolo-heroku.rb').to_s"
+    sicoss_file.puts "=end"
+
     ["menu","country","province","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
