@@ -43,7 +43,6 @@ ar_provincies.each do |province|
                :country_id => province[:country_id])
 end
 =end
-
 province1 = Province.find(1)
 
 company1 = Company.create!(:name => "Administracion 1", :code => "adm1", :razon_social => "Administracion SRL",
