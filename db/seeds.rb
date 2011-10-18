@@ -70,7 +70,7 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu1, :name => "liquidaciones", :link_url => "/liquidacions", :order_no => 2)
 
  menu2  =Menu.create(:parent_id => menu1, :name => "Conceptos de liquidacion", :link_url => "?", :order_no => 3).id
- menu22 =Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1)
+ menu22 =Menu.create(:parent_id => menu2, :name => "Haberes", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu22, :name => "Haberes", :link_url => "/estadistica_haberes", :order_no => 1)
  
  new_reg=Menu.create(:parent_id => menu2, :name => "Grupo de Remuneraciones", :link_url => "/group_remunerations", :order_no => 2)
@@ -100,7 +100,7 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Obras Sociales", :link_url => "/health_insurances", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Aseguradoras", :link_url => "/insurance_companies", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Sindicatos", :link_url => "/labor_unions", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "menus", :link_url => "/menus", :order_no => 99)
+ new_reg=Menu.create(:parent_id => menu6, :name => "menus", :link_url => "/menus", :order_no => 0)
  
  menu7 = Menu.create(:parent_id => menu6, :name => "Ubicacion", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu7, :name => "Paises", :link_url => "/countries", :order_no => 1)
@@ -117,12 +117,12 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu11, :name => "Resumen de liquidaciones", :link_url => "/resumen_liquidaciones", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu11, :name => "Conceptos de liquidacion", :link_url => "/estaditica_empleado_concepto", :order_no => 1)
  
- new_reg=Menu.create(:parent_id => nil, :name => "Graficas", :link_url => "?", :order_no => 1)
+ menu71=Menu.create(:parent_id => nil, :name => "Graficas", :link_url => "?", :order_no => 1).id
 
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documento Adjunto", :link_url => "/associated_document_types", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Parentesco", :link_url => "/kinships", :order_no => 1)
 
- menu61=Menu.create(:parent_id => nil, :name => "Tablas AFIP", :link_url => "?", :order_no => 1)
+ menu61=Menu.create(:parent_id => nil, :name => "Tablas AFIP", :link_url => "?", :order_no => 1).id
  new_reg=Menu.create(:parent_id => menu61, :name => "Actividades", :link_url => "/sicoss_activities", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu61, :name => "Condicion", :link_url => "/sicoss_conditions", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu61, :name => "Modalidad de Contrato", :link_url => "/sicoss_contract_modes", :order_no => 1)
