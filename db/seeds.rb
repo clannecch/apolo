@@ -36,9 +36,9 @@ ar_provincies = [{:code => 'AR01',:detalle => 'Buenos Aires',:country_id => ar_c
   {:code => 'AR24',:detalle => 'Tucuman',:country_id => ar_country_id}]
 
 ar_provincies.each do |province|
-  $stderr.puts("create province #{province[:name]}...")
+  $stderr.puts("create province #{province[:detalle]}...")
   Province.create!(:code => province[:code],
-               :name => province[:name],
+               :detalle => province[:detalle],
                :country_id => province[:country_id])
 end
 

@@ -11,6 +11,8 @@
 #
 
 class Province < ActiveRecord::Base
+  belongs_to :country, :class_name => "Country", :foreign_key => "country_id"
+  
   scope :by_company, lambda {|company| where(:company_id => company) }
 	has_many :employees, :dependent => :restrict
   has_many :employee_familiars , :dependent => :restrict
