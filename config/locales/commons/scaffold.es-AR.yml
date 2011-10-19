@@ -10,11 +10,14 @@
       destroy:
         notice: "%{resource_name} eliminado/a satisfactoriamente"
         error: "%{resource_name} no pudo ser eliminado/a"
-    scaffold:
+  scaffold:
     notice:
-      updated: "Actualizado correctamente"
-      destroyed: "Borrado correctamente"
-      created: "Creado satisfactoriamente"
+        updated: "Actualizado correctamente"
+        destroyed: "Borrado correctamente"
+        created: "Creado satisfactoriamente"
+    filters:
+        from_date: "Desde fecha"
+        to_date: "Hasta fecha"
     actions_label: Acciones
     actions:
       show: mostrar
