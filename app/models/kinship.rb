@@ -12,8 +12,9 @@
 #
 
 class Kinship < ActiveRecord::Base
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  
   has_many :employee_familiars, :dependent => :restrict
 	has_many :insurance_beneficiaries, :dependent => :restrict
-  validates_presence_of		    :name,															                          :message => "es un dato requerido"
+  validates_presence_of	:name, :message => "es un dato requerido"
 end
