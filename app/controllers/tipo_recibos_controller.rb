@@ -4,7 +4,7 @@ class TipoRecibosController < ApplicationController
   # GET /tipo_recibos
   # GET /tipo_recibos.xml
   def index
-    @search = TipoRecibo.by_company(current_company.id).search(params[:search])
+    @search = TipoRecibo.search(params[:search])
     @tipo_recibos = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class TipoRecibosController < ApplicationController
   # GET /tipo_recibos/new
   # GET /tipo_recibos/new.xml
   def new
-    @tipo_recibo = TipoRecibo.by_company(current_company.id).new
+    @tipo_recibo = TipoRecibo.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class TipoRecibosController < ApplicationController
   # POST /tipo_recibos
   # POST /tipo_recibos.xml
   def create
-    @tipo_recibo = TipoRecibo.by_company(current_company.id).new(params[:tipo_recibo])
+    @tipo_recibo = TipoRecibo.new(params[:tipo_recibo])
 
     respond_to do |format|
       if @tipo_recibo.save
@@ -85,6 +85,6 @@ class TipoRecibosController < ApplicationController
   end
 
   def find_tipo_recibo
-      @tipo_recibo = TipoRecibo.by_company(current_company.id).find(params[:id])
+      @tipo_recibo = TipoRecibo.find(params[:id])
   end
 end

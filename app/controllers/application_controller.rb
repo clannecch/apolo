@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
   def check_change_company
     return if params[:cc].blank?
     session[:current_company] = Company.find(params[:cc])
+    $CURRENT_COMPANY = current_company
     redirect_to :back
   end
 

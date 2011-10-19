@@ -6,7 +6,7 @@ class KinshipsController < ApplicationController
   # GET /kinships.json
   # GET /kinships.xml
   def index
-    @search = Kinship.by_company(current_company.id).search(params[:search])
+    @search = Kinship.search(params[:search])
     @kinships = @search.page(params[:page]).per(10)
     respond_to do |format|
        format.html # indexoo.html.erb
@@ -28,7 +28,7 @@ class KinshipsController < ApplicationController
   # GET /kinships/new.json
   # GET /kinships/new.xml
   def new
-    @kinship = Kinship.by_company(current_company.id).new
+    @kinship = Kinship.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,7 +47,7 @@ class KinshipsController < ApplicationController
   # POST /kinships.xml
   def create
 
-    @kinship = Kinship.by_company(current_company.id).new(params[:kinship])
+    @kinship = Kinship.new(params[:kinship])
 
     respond_to do |format|
       if @kinship.save
@@ -92,7 +92,7 @@ class KinshipsController < ApplicationController
   end
 
   def find_kinship
-      @kinship = Kinship.by_company(current_company.id).find(params[:id])
+      @kinship = Kinship.find(params[:id])
   end
 end
 

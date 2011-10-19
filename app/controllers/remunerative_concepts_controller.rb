@@ -5,7 +5,7 @@ class RemunerativeConceptsController < ApplicationController
   # GET /remunerative_concepts.xml
   def index
     # la docu general de todo esto esta en http://metautonomo.us/projects/metasearch/
-    @search = RemunerativeConcept.by_company(current_company.id).search(params[:search])
+    @search = RemunerativeConcept.search(params[:search])
     @remunerative_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -42,7 +42,7 @@ class RemunerativeConceptsController < ApplicationController
   # GET /remunerative_concepts/new
   # GET /remunerative_concepts/new.xml
   def new
-    @remunerative_concept = RemunerativeConcept.by_company(current_company.id).new
+    @remunerative_concept = RemunerativeConcept.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,7 +57,7 @@ class RemunerativeConceptsController < ApplicationController
   # POST /remunerative_concepts
   # POST /remunerative_concepts.xml
   def create
-    @remunerative_concept = RemunerativeConcept.by_company(current_company.id).new(params[:remunerative_concept])
+    @remunerative_concept = RemunerativeConcept.new(params[:remunerative_concept])
 
     respond_to do |format|
       if @remunerative_concept.save
@@ -104,7 +104,7 @@ class RemunerativeConceptsController < ApplicationController
   end
 
   def find_remunerative_concept
-      @remunerative_concept = RemunerativeConcept.by_company(current_company.id).find(params[:id])
+      @remunerative_concept = RemunerativeConcept.find(params[:id])
   end
 
 
@@ -154,7 +154,7 @@ class RemunerativeConceptsController < ApplicationController
 # #################################################################################
   def print_remunerative_concepts_pdf(filename,entity)
     require 'prawn'
-    @remunerative_concepts = RemunerativeConcept.by_company(current_company.id).all
+    @remunerative_concepts = RemunerativeConcept.all
     img = "hsjd2.jpg"
 
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",

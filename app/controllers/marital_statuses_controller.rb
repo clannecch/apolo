@@ -4,7 +4,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses
   # GET /marital_statuses.xml
   def index
-    @search = MaritalStatus.by_company(current_company.id).search(params[:search])
+    @search = MaritalStatus.search(params[:search])
     @marital_statuses = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class MaritalStatusesController < ApplicationController
   # GET /marital_statuses/new
   # GET /marital_statuses/new.xml
   def new
-    @marital_status = MaritalStatus.by_company(current_company.id).new
+    @marital_status = MaritalStatus.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class MaritalStatusesController < ApplicationController
   # POST /marital_statuses
   # POST /marital_statuses.xml
   def create
-    @marital_status = MaritalStatus.by_company(current_company.id).new(params[:marital_status])
+    @marital_status = MaritalStatus.new(params[:marital_status])
 
     respond_to do |format|
       if @marital_status.save
@@ -85,6 +85,6 @@ class MaritalStatusesController < ApplicationController
   end
 
   def find_marital_status
-      @marital_status = MaritalStatus.by_company(current_company.id).find(params[:id])
+      @marital_status = MaritalStatus.find(params[:id])
   end
 end

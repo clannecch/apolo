@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
-    @search = Task.by_company(current_company.id).search(params[:search])
+    @search = Task.search(params[:search])
     @tasks = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   # GET /tasks/new.xml
   def new
-    @task = Task.by_company(current_company.id).new
+    @task = Task.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.xml
   def create
-    @task = Task.by_company(current_company.id).new(params[:task])
+    @task = Task.new(params[:task])
 
     respond_to do |format|
       if @task.save
@@ -84,6 +84,6 @@ class TasksController < ApplicationController
   end
 
   def find_task
-      @task = Task.by_company(current_company.id).find(params[:id])
+      @task = Task.find(params[:id])
   end
 end

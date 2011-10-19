@@ -4,7 +4,7 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions
   # GET /liquidacions.xml
   def index
-    @search = Liquidacion.by_company(current_company.id).search(params[:search])
+    @search = Liquidacion.search(params[:search])
     @liquidacions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -70,7 +70,7 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions/new
   # GET /liquidacions/new.xml
   def new
-    @liquidacion = Liquidacion.by_company(current_company.id).new
+    @liquidacion = Liquidacion.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -85,7 +85,7 @@ class LiquidacionsController < ApplicationController
   # POST /liquidacions
   # POST /liquidacions.xml
   def create
-    @liquidacion = Liquidacion.by_company(current_company.id).new(params[:liquidacion])
+    @liquidacion = Liquidacion.new(params[:liquidacion])
 
     respond_to do |format|
       if @liquidacion.save
@@ -132,7 +132,7 @@ class LiquidacionsController < ApplicationController
   protected
 
   def find_liquidacion
-      @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
+      @liquidacion = Liquidacion.find(params[:id])
   end
 
   def liquidar_employee

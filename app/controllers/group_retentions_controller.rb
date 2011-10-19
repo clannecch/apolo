@@ -6,7 +6,7 @@ class GroupRetentionsController < ApplicationController
   # GET /group_retentions.xml
   def index
     #@group_retentions = GroupRetention.all
-    @search = GroupRetention.by_company(current_company.id).search(params[:search])
+    @search = GroupRetention.search(params[:search])
     @group_retentions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -28,7 +28,7 @@ class GroupRetentionsController < ApplicationController
   # GET /group_retentions/new
   # GET /group_retentions/new.xml
   def new
-    @group_retention = GroupRetention.by_company(current_company.id).new
+    @group_retention = GroupRetention.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,7 @@ class GroupRetentionsController < ApplicationController
   # POST /group_retentions
   # POST /group_retentions.xml
   def create
-    @group_retention = GroupRetention.by_company(current_company.id).new(params[:group_retention])
+    @group_retention = GroupRetention.new(params[:group_retention])
 
     respond_to do |format|
       if @group_retention.save
@@ -87,6 +87,6 @@ class GroupRetentionsController < ApplicationController
   end
 
   def find_group_retention
-      @group_retention = GroupRetention.by_company(current_company.id).find(params[:id])
+      @group_retention = GroupRetention.find(params[:id])
   end
 end

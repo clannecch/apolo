@@ -6,7 +6,7 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations.xml
   def index
     #@group_remunerations = GroupRemuneration.all
-    @search = GroupRemuneration.by_company(current_company.id).search(params[:search])
+    @search = GroupRemuneration.search(params[:search])
     @group_remunerations = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -28,7 +28,7 @@ class GroupRemunerationsController < ApplicationController
   # GET /group_remunerations/new
   # GET /group_remunerations/new.xml
   def new
-    @group_remuneration = GroupRemuneration.by_company(current_company.id).new
+    @group_remuneration = GroupRemuneration.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,7 @@ class GroupRemunerationsController < ApplicationController
   # POST /group_remunerations
   # POST /group_remunerations.xml
   def create
-    @group_remuneration = GroupRemuneration.by_company(current_company.id).new(params[:group_remuneration])
+    @group_remuneration = GroupRemuneration.new(params[:group_remuneration])
 
     respond_to do |format|
       if @group_remuneration.save
@@ -87,6 +87,6 @@ class GroupRemunerationsController < ApplicationController
   end
 
   def find_group_remuneration
-      @group_remuneration = GroupRemuneration.by_company(current_company.id).find(params[:id])
+      @group_remuneration = GroupRemuneration.find(params[:id])
   end
 end

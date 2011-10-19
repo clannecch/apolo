@@ -7,7 +7,7 @@ class AssociatedDocumentTypesController < ApplicationController
   # GET /associated_document_types.json
   # GET /associated_document_types.xml
   def index
-    @associated_document_types = AssociatedDocumentType.by_company(current_company.id).all
+    @associated_document_types = AssociatedDocumentType.all
 
     respond_to do |format|
       format.html # index.html.erbb
@@ -28,7 +28,7 @@ class AssociatedDocumentTypesController < ApplicationController
   # GET /associated_document_types/new
   # GET /associated_document_types/new.xml
   def new
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).new
+    @associated_document_type = AssociatedDocumentType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +46,7 @@ class AssociatedDocumentTypesController < ApplicationController
   # POST /associated_document_types.json
   # POST /associated_document_types.xml
   def create
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).new(params[:associated_document_type])
+    @associated_document_type = AssociatedDocumentType.new(params[:associated_document_type])
 
     respond_to do |format|
       if @associated_document_type.save
@@ -93,7 +93,7 @@ class AssociatedDocumentTypesController < ApplicationController
   protected
 
   def find_associated_document_type
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).find(params[:id])
+    @associated_document_type = AssociatedDocumentType.find(params[:id])
   end
 end
 

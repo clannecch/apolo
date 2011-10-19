@@ -8,7 +8,7 @@ class SicossFormatEmployersController < ApplicationController
   # GET /sicoss_format_employers.json
   # GET /sicoss_format_employers.xml
   def index
-    @search = SicossFormatEmployer.by_company(current_company.id).search(params[:search])
+    @search = SicossFormatEmployer.search(params[:search])
     @sicoss_format_employers = @search.page(params[:page]).per(10)
 
 
@@ -29,7 +29,7 @@ class SicossFormatEmployersController < ApplicationController
   # GET /sicoss_format_employers/new.json
   # GET /sicoss_format_employers/new.xml
   def new
-    @sicoss_format_employer = SicossFormatEmployer.by_company(current_company.id).new
+    @sicoss_format_employer = SicossFormatEmployer.new
     respond_with(@sicoss_format_employer)
   end
 
@@ -43,7 +43,7 @@ class SicossFormatEmployersController < ApplicationController
   # POST /sicoss_format_employers.json
   # POST /sicoss_format_employers.xml
   def create
-    @sicoss_format_employer = SicossFormatEmployer.by_company(current_company.id).new(params[:sicoss_format_employer])
+    @sicoss_format_employer = SicossFormatEmployer.new(params[:sicoss_format_employer])
     respond_to do |format|
       if @sicoss_format_employer.save
         format.html { redirect_to(@sicoss_format_employer, :notice => 'Sicoss Format by employer successfully created.') }
@@ -85,7 +85,7 @@ class SicossFormatEmployersController < ApplicationController
 
    def print
     require 'prawn'
-    @sicoss_format_employe = SicossFormatEmployer.by_company(current_company.id).all
+    @sicoss_format_employe = SicossFormatEmployer.all
     pdf = Prawn::Document.new
     pdf.draw_text "Formato para SICOSS", :at => [100,740], :size => 16, :style => :bold
     pdf.bounding_box [10, 730], :width => 300, :height => 20 do
@@ -108,7 +108,7 @@ class SicossFormatEmployersController < ApplicationController
     end
   end
   def find_sicoss_format_employer
-     @sicoss_format_employer = SicossFormatEmployer.by_company(current_company.id).find(params[:id])
+     @sicoss_format_employer = SicossFormatEmployer.find(params[:id])
   end
 
 end

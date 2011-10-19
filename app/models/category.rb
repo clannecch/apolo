@@ -18,7 +18,8 @@ class Category < ActiveRecord::Base
   validates_presence_of		    :detalle,	:codigo, :importe,			              :message => "es un dato requerido"
   validates_numericality_of   :horas,:importe,                                :message => "requiere dato numerico"
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
 
   before_save :controlar_cambios
 

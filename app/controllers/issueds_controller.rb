@@ -5,7 +5,7 @@ class IssuedsController < ApplicationController
   # GET /issueds
   # GET /issueds.xml
   def index
-    @search = Issued.by_company(current_company.id).search(params[:search])
+    @search = Issued.search(params[:search])
     @issueds = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class IssuedsController < ApplicationController
   # GET /issueds/new
   # GET /issueds/new.xml
   def new
-    @issued = Issued.by_company(current_company.id).new
+    @issued = Issued.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class IssuedsController < ApplicationController
   # POST /issueds
   # POST /issueds.xml
   def create
-    @issued = Issued.by_company(current_company.id).new(params[:issued])
+    @issued = Issued.new(params[:issued])
 
     respond_to do |format|
       if @issued.save
@@ -86,6 +86,6 @@ class IssuedsController < ApplicationController
   end
 
   def find_issued
-      @issued = Issued.by_company(current_company.id).find(params[:id])
+      @issued = Issued.find(params[:id])
   end
 end

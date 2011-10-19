@@ -106,7 +106,8 @@
 require 'paperclip'
 class Employee < ActiveRecord::Base
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope where(:company_id => $CURRENT_COMPANY)
 
   belongs_to :document_type
   belongs_to :educational_level

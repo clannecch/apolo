@@ -4,8 +4,8 @@ class InsuranceCompaniesController < ApplicationController
   # GET /insurance_companies
   # GET /insurance_companies.xml
   def index
-#    @insurance_companies = InsuranceCompany.by_company(current_company.id).all
-    @search = InsuranceCompany.by_company(current_company.id).search(params[:search])
+#    @insurance_companies = InsuranceCompany.all
+    @search = InsuranceCompany.search(params[:search])
     @insurance_companies = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class InsuranceCompaniesController < ApplicationController
   # GET /insurance_companies/new
   # GET /insurance_companies/new.xml
   def new
-    @insurance_company = InsuranceCompany.by_company(current_company.id).new
+    @insurance_company = InsuranceCompany.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class InsuranceCompaniesController < ApplicationController
   # POST /insurance_companies
   # POST /insurance_companies.xml
   def create
-    @insurance_company = InsuranceCompany.by_company(current_company.id).new(params[:insurance_company])
+    @insurance_company = InsuranceCompany.new(params[:insurance_company])
 
     respond_to do |format|
       if @insurance_company.save
@@ -86,6 +86,6 @@ class InsuranceCompaniesController < ApplicationController
   end
 
   def find_insurance_company
-      @insurance_company = InsuranceCompany.by_company(current_company.id).find(params[:id])
+      @insurance_company = InsuranceCompany.find(params[:id])
   end
 end

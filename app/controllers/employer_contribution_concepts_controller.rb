@@ -4,8 +4,8 @@ class EmployerContributionConceptsController < ApplicationController
   # GET /employer_contribution_concepts
   # GET /employer_contribution_concepts.xml
   def index
-#    @employer_contribution_concepts = EmployerContributionConcept.by_company(current_company.id).all
-    @search = EmployerContributionConcept.by_company(current_company.id).search(params[:search])
+#    @employer_contribution_concepts = EmployerContributionConcept.all
+    @search = EmployerContributionConcept.search(params[:search])
     @employer_contribution_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class EmployerContributionConceptsController < ApplicationController
   # GET /employer_contribution_concepts/new
   # GET /employer_contribution_concepts/new.xml
   def new
-    @employer_contribution_concept = EmployerContributionConcept.by_company(current_company.id).new
+    @employer_contribution_concept = EmployerContributionConcept.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class EmployerContributionConceptsController < ApplicationController
   # POST /employer_contribution_concepts
   # POST /employer_contribution_concepts.xml
   def create
-    @employer_contribution_concept = EmployerContributionConcept.by_company(current_company.id).new(params[:employer_contribution_concept])
+    @employer_contribution_concept = EmployerContributionConcept.new(params[:employer_contribution_concept])
 
     respond_to do |format|
       if @employer_contribution_concept.save
@@ -82,7 +82,7 @@ class EmployerContributionConceptsController < ApplicationController
   end
 
   def find_employer_contribution_concept
-    @employer_contribution_concept = EmployerContributionConcept.by_company(current_company.id).find(params[:id])
+    @employer_contribution_concept = EmployerContributionConcept.find(params[:id])
   end
 
 end

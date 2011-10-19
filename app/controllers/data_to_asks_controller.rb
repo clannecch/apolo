@@ -4,7 +4,7 @@ class DataToAsksController < ApplicationController
   # GET /data_to_asks
   # GET /data_to_asks.xml
   def index
-    @search = DataToAsk.by_company(current_company.id).search(params[:search])
+    @search = DataToAsk.search(params[:search])
     @data_to_asks = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class DataToAsksController < ApplicationController
   # GET /data_to_asks/new
   # GET /data_to_asks/new.xml
   def new
-    @data_to_ask = DataToAsk.by_company(current_company.id).new
+    @data_to_ask = DataToAsk.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class DataToAsksController < ApplicationController
   # POST /data_to_asks
   # POST /data_to_asks.xml
   def create
-    @data_to_ask = DataToAsk.by_company(current_company.id).new(params[:data_to_ask])
+    @data_to_ask = DataToAsk.new(params[:data_to_ask])
 
     respond_to do |format|
       if @data_to_ask.save
@@ -85,6 +85,6 @@ class DataToAsksController < ApplicationController
   end
 
   def find_data_to_ask
-      @data_to_ask = DataToAsk.by_company(current_company.id).find(params[:id])
+      @data_to_ask = DataToAsk.find(params[:id])
    end
 end

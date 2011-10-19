@@ -4,7 +4,7 @@ class EmailTypesController < ApplicationController
   # GET /email_types
   # GET /email_types.xml
   def index
-    @search = EmailType.by_company(current_company.id).search(params[:search])
+    @search = EmailType.search(params[:search])
     @email_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class EmailTypesController < ApplicationController
   # GET /email_types/new
   # GET /email_types/new.xml
   def new
-    @email_type = EmailType.by_company(current_company.id).new
+    @email_type = EmailType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class EmailTypesController < ApplicationController
   # POST /email_types
   # POST /email_types.xml
   def create
-    @email_type = EmailType.by_company(current_company.id).new(params[:email_type])
+    @email_type = EmailType.new(params[:email_type])
 
     respond_to do |format|
       if @email_type.save
@@ -85,6 +85,6 @@ class EmailTypesController < ApplicationController
   end
 
   def find_email_type
-      @email_type = EmailType.by_company(current_company.id).find(params[:id])
+      @email_type = EmailType.find(params[:id])
   end
 end

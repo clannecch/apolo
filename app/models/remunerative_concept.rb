@@ -29,7 +29,9 @@
 
 class RemunerativeConcept < ActiveRecord::Base
   paginates_per 10
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+
   belongs_to :concepto_asociado_haber, :class_name => "RemunerativeConcept"
   belongs_to :concepto_asociado_retencion, :class_name => "RetentionConcept"
   belongs_to :concepto_asociado_haber_2, :class_name => "RemunerativeConcept"

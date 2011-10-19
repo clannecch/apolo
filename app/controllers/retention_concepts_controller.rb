@@ -3,7 +3,7 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts
   # GET /retention_concepts.xml
   def index
-    @search = RetentionConcept.by_company(current_company.id).search(params[:search])
+    @search = RetentionConcept.search(params[:search])
     @retention_concepts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -32,7 +32,7 @@ class RetentionConceptsController < ApplicationController
   # GET /retention_concepts/new
   # GET /retention_concepts/new.xml
   def new
-    @retention_concept = RetentionConcept.by_company(current_company.id).new
+    @retention_concept = RetentionConcept.new
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @retention_concept }
@@ -46,7 +46,7 @@ class RetentionConceptsController < ApplicationController
   # POST /retention_concepts
   # POST /retention_concepts.xml
   def create
-    @retention_concept = RetentionConcept.by_company(current_company.id).new(params[:retention_concept])
+    @retention_concept = RetentionConcept.new(params[:retention_concept])
 
     respond_to do |format|
       if @retention_concept.save
@@ -94,7 +94,7 @@ class RetentionConceptsController < ApplicationController
   end
 
   def find_retention_concept
-      @retention_concept = RetentionConcept.by_company(current_company.id).find(params[:id])
+      @retention_concept = RetentionConcept.find(params[:id])
   end
 
   def calculate_changes

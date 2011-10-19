@@ -42,7 +42,8 @@ class Consortium < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments , :allow_destroy => true
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope where(:company_id => $CURRENT_COMPANY)
 
 
   def full_address

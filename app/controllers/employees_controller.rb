@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees.xml
   def index
     #@employees = Employee.all
-    @search = Employee.by_company(current_company.id).search(params[:search])
+    @search = Employee.search(params[:search])
     @employees = @search.page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erbb
@@ -36,7 +36,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.by_company(current_company.id).new
+    @employee = Employee.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,7 +51,7 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.xml
   def create
-    @employee = Employee.by_company(current_company.id).new(params[:employee])
+    @employee = Employee.new(params[:employee])
 
     respond_to do |format|
       if @employee.save
@@ -96,7 +96,7 @@ class EmployeesController < ApplicationController
   end
 
   def find_employee
-      @employee = Employee.by_company(current_company.id).find(params[:id])
+      @employee = Employee.find(params[:id])
   end
 
 # #################################################################################

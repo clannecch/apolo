@@ -2,7 +2,7 @@ class ConsortiaController < ApplicationController
   before_filter :find_consortium, :except => [:index, :new, :create]
 
   def index
-    @search = Consortium.by_company(current_company.id).search(params[:search])
+    @search = Consortium.search(params[:search])
     @consortia = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class ConsortiaController < ApplicationController
   # GET /consortia/new.json
   # GET /consortia/new.xml
   def new
-    @consortium = Consortium.by_company(current_company.id).new
+    @consortium = Consortium.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,7 @@ class ConsortiaController < ApplicationController
   # POST /consortia.json
   # POST /consortia.xml
   def create
-    @consortium = Consortium.by_company(current_company.id).new(params[:consortium])
+    @consortium = Consortium.new(params[:consortium])
 
     respond_to do |format|
       if @consortium.save
@@ -90,7 +90,7 @@ class ConsortiaController < ApplicationController
   protected
 
   def find_consortium
-    @consortium = Consortium.by_company(current_company.id).find(params[:id])
+    @consortium = Consortium.find(params[:id])
   end
 end
 
