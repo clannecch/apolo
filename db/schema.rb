@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111019235816) do
+ActiveRecord::Schema.define(:version => 20111020010341) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -370,6 +370,7 @@ ActiveRecord::Schema.define(:version => 20111019235816) do
     t.string   "sicoss_seguro_obligatorio",        :limit => nil
     t.integer  "consortium_id"
     t.integer  "group_remuneration_id"
+    t.integer  "group_employer_contribution_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
