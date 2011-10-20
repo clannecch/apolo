@@ -1,0 +1,90 @@
+<h1>Consorcio</h1>
+<table class="data" style="width:50%">
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Codigo:</strong></td>
+        <td style="width:70%"><%= @consortium.code %></td>
+    </tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Detalle:</strong></td>
+		<td style="width:70%"><%= @consortium.name %></td>
+	</tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Razon Social:</strong></td>
+        <td style="width:70%"><%= @consortium.razon_social %></td>
+    </tr>
+	<tr>
+		<td style="width:30%;background-color: #C3D5D5;"><strong>Calle:</strong></td>
+		<td style="width:70%"><%= @consortium.calle %></td>
+	</tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Altura:</strong></td>
+        <td style="width:70%"><%= @consortium.altura %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Localidad:</strong></td>
+        <td style="width:70%"><%= @consortium.location.try(:detalle) %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Provincia:</strong></td>
+        <td style="width:70%"><%= @consortium.province.try(:detalle) %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Contacto:</strong></td>
+        <td style="width:70%"><%= @consortium.contacto %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Telefono:</strong></td>
+        <td style="width:70%"><%= @consortium.telefono %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Email:</strong></td>
+        <td style="width:70%"><%= @consortium.email %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>CUIT:</strong></td>
+        <td style="width:70%"><%= @consortium.cuit %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Numero Inscripcion:</strong></td>
+        <td style="width:70%"><%= @consortium.numero_inscripcion %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Caja:</strong></td>
+        <td style="width:70%"><%= @consortium.caja %></td>
+    </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Ultima Hoja Libro de Sueldos:</strong></td>
+        <td style="width:70%"><%= @consortium.ultima_hoja_libro %></td>
+    </tr>
+  <tr>
+      <td style="width:30%;background-color: #C3D5D5;"><strong>Imprimir Hasta Hoja Libro de Sueldos:</strong></td>
+      <td style="width:70%"><%= @consortium.imprimir_hasta_hoja_libro %></td>
+  </tr>
+    <tr>
+        <td style="width:30%;background-color: #C3D5D5;"><strong>Observaciones:</strong></td>
+        <td style="width:70%"><%= @consortium.observaciones %></td>
+    </tr>
+</table>
+<h3> Documentos Asociados</h3>
+<table>
+  <tr>
+    <th> Tipo de Documento </th>
+    <th> Nombre</th>
+    <th> Fecha de recepcion documentacion</th>
+    <th>
+  </tr>
+  <% @consortium.attachments.each do |attach|%>
+    <tr>
+      <td><%= attach.associated_document_type.try(:name)%></td>
+      <td><%=  attach.name%></td>
+      <td><%= attach.reception_date%></td>
+      <td><%= link_to 'Visualizar', attach%></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>
+	<%= link_to "Editar", edit_consortium_path(@category) %> |
+	<%= link_to "Eliminar", @consortium, :confirm => 'Esta seguro?', :method => :delete %> |
+	<%= link_to "Consorcios", consortia_path %>
+</p>

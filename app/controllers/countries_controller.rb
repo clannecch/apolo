@@ -9,8 +9,8 @@ class CountriesController < ApplicationController
 
     # reemplazar para cambio a modelo con compania compania
     #@countries = current_company.countries.all
-    #@countries = Country.by_company(current_company.id).all
-    @search = Country.by_company(current_company.id).search(params[:search])
+    #@countries = Country.all
+    @search = Country.search(params[:search])
     @countries = @search.page(params[:page]).per(10)
 
     # comentar para el cambio a modelo con compania
@@ -34,7 +34,7 @@ class CountriesController < ApplicationController
   # GET /countries/new
   # GET /countries/new.xml
   def new
-    @country = Country.by_company(current_company.id).new
+    @country = Country.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -49,8 +49,8 @@ class CountriesController < ApplicationController
   # POST /countries
   # POST /countries.xml
   def create
-    #raise params[:country].inspect
-    @country = Country.by_company(current_company.id).new(params[:country])
+    #raise params[:company].inspect
+    @country = Country.new(params[:country])
 
     respond_to do |format|
       if @country.save
@@ -66,7 +66,7 @@ class CountriesController < ApplicationController
   # PUT /countries/1
   # PUT /countries/1.xml
   def update
-      respond_to do |format|
+    respond_to do |format|
       if @country.update_attributes(params[:country])
         format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
         format.xml  { head :ok }
@@ -95,7 +95,7 @@ class CountriesController < ApplicationController
   protected
 
   def find_country
-    @country = Country.by_company(current_company.id).find(params[:id])
+    @country = Country.find(params[:id])
   end
 
 end

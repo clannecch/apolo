@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees.xml
   def index
     #@employees = Employee.all
-    @search = Employee.by_company(current_company.id).search(params[:search])
+    @search = Employee.search(params[:search])
     @employees = @search.page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erbb
@@ -36,7 +36,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.by_company(current_company.id).new
+    @employee = Employee.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,7 +51,7 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.xml
   def create
-    @employee = Employee.by_company(current_company.id).new(params[:employee])
+    @employee = Employee.new(params[:employee])
 
     respond_to do |format|
       if @employee.save
@@ -96,7 +96,7 @@ class EmployeesController < ApplicationController
   end
 
   def find_employee
-      @employee = Employee.by_company(current_company.id).find(params[:id])
+      @employee = Employee.find(params[:id])
   end
 
 # #################################################################################
@@ -123,15 +123,19 @@ class EmployeesController < ApplicationController
 
     pdf.stroke_rectangle [400,710], 100, 100
 
-    photo = @employee.attachments.unscoped.where(:associated_document_type_id => 1).first()
-    if photo.adjunto_content_type[0..4] = "image"
-      open( file_photo, 'wb' ) { |file|
-          file.write(photo.adjunto_file)
-        }
+    foto_principal_id = AssociatedDocumentType.where(:document_type => "F").first.id
+    if !@foto_principal.nil?
+      photo = @employee.attachments.unscoped.where(:associated_document_type_id => foto_principal_id).first()
+      if photo.adjunto_content_type[0..4] = "image"
+        open( file_photo, 'wb' ) { |file|
+            file.write(photo.adjunto_file)
+          }
 
-      foto = file_photo.to_s
-      pdf.image foto, :at => [405,705], :fit => [90,90]
+        foto = file_photo.to_s
+        pdf.image foto, :at => [405,705], :fit => [90,90]
+      end
     end
+
     pdf.draw_text "Ficha de Personal", :at => [200,725],:style => :bold, :size => 13
     pdf.draw_text "Legajo :", :at => [435,725],:style => :bold, :size => 13
     pdf.draw_text @employee.legajo[0..9], :at => [485,725],:style => :bold, :size => 16

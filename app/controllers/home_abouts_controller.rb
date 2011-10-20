@@ -3,7 +3,7 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts
   # GET /home_abouts.xml
   def index
-    @search = HomeAbout.by_company(current_company.id).search(params[:search])
+    @search = HomeAbout.search(params[:search])
     @home_abouts = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class HomeAboutsController < ApplicationController
   # GET /home_abouts/new
   # GET /home_abouts/new.xml
   def new
-    @home_about = HomeAbout.by_company(current_company.id).new
+    @home_about = HomeAbout.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class HomeAboutsController < ApplicationController
   # POST /home_abouts
   # POST /home_abouts.xml
   def create
-    @home_about = HomeAbout.by_company(current_company.id).new(params[:home_about])
+    @home_about = HomeAbout.new(params[:home_about])
 
     respond_to do |format|
       if @home_about.save
@@ -79,7 +79,7 @@ class HomeAboutsController < ApplicationController
     end
   end
   def find_home_about
-      @home_about = HomeAbout.by_company(current_company.id).find(params[:id])
+      @home_about = HomeAbout.find(params[:id])
   end
 
 end

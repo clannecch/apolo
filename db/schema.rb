@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929211047) do
+ActiveRecord::Schema.define(:version => 20111018122150) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -32,21 +32,11 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "document_type"
   end
 
-  create_table "attachments", :force => true do |t|
-    t.integer  "attachable_id"
-    t.string   "attachable_type"
-    t.integer  "associated_document_type_id"
-    t.string   "name"
-    t.date     "reception_date"
-    t.string   "adjunto_file_name"
-    t.string   "adjunto_content_type"
-    t.integer  "associated_document_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.binary   "adjunto_file"
-  end
+# Could not dump table "attachments" because of following StandardError
+#   Unknown type 'oid' for column 'adjunto_file'
 
   create_table "authorizations", :force => true do |t|
     t.string   "code",       :limit => 16,  :null => false
@@ -75,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "updated_at"
     t.decimal  "importe"
     t.integer  "company_id"
+    t.decimal  "horas"
+    t.string   "codigo"
   end
 
   create_table "causa_egresos", :force => true do |t|
@@ -93,6 +85,49 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+    t.string   "razon_social"
+    t.string   "calle"
+    t.string   "altura"
+    t.string   "codigo_postal"
+    t.integer  "location_id"
+    t.integer  "province_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "telefono"
+    t.string   "contacto"
+    t.string   "email"
+    t.string   "cuit"
+    t.string   "numero_inscripcion"
+    t.string   "caja"
+    t.integer  "ultima_hoja_libro"
+    t.integer  "imprimir_hasta_hoja_libro"
+    t.text     "observaciones"
+  end
+
+  create_table "consortia", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "razon_social"
+    t.string   "calle"
+    t.string   "altura"
+    t.string   "codigo_postal"
+    t.integer  "location_id"
+    t.integer  "province_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "telefono"
+    t.string   "contacto"
+    t.string   "email"
+    t.string   "cuit"
+    t.string   "numero_inscripcion"
+    t.string   "caja"
+    t.string   "ultima_hoja_libro"
+    t.string   "imprimir_hasta_hoja_libro"
+    t.text     "observaciones"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "data_to_asks", :force => true do |t|
@@ -166,20 +202,6 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "updated_at"
   end
 
-  create_table "detalle_recibos", :force => true do |t|
-    t.integer  "recibo_sueldo_id"
-    t.integer  "remunerative_concept_id"
-    t.integer  "retention_concept_id"
-    t.string   "detalle"
-    t.string   "type"
-    t.integer  "cost_center_id"
-    t.decimal  "cantidad"
-    t.decimal  "importe"
-    t.decimal  "total"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "document_types", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
@@ -199,22 +221,6 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
-  end
-
-  create_table "employee_documents", :force => true do |t|
-    t.string   "name"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.datetime "document_updated_at"
-    t.integer  "document_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.binary   "document_file"
-    t.binary   "document_thumb_file"
-    t.binary   "document_small_file"
-    t.integer  "asociate_document_type_id"
-    t.integer  "associated_document_type_id"
-    t.integer  "employee_id"
   end
 
   create_table "employee_familiars", :force => true do |t|
@@ -313,8 +319,9 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.decimal  "horas_pactadas"
     t.decimal  "remuneracion_fuera_convenio"
     t.integer  "remuneration_type_id"
-    t.integer  "group_remuneration_id"
+    t.integer  "group_renuneration_id"
     t.integer  "group_retention_id"
+    t.integer  "group_employercontribution_id"
     t.integer  "cost_center_id"
     t.integer  "antiguedad_reconocida_anos"
     t.integer  "antiguedad_reconocida_meses"
@@ -341,9 +348,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.integer  "bank_deposit_account_type_id"
     t.string   "deposito_banco_cuenta"
     t.string   "deposito_banco_cbu"
-    t.integer  "group_employer_contribution_id"
     t.integer  "causa_egreso_id"
-    t.binary   "foto"
     t.integer  "company_id"
     t.float    "latitude"
     t.float    "longitude"
@@ -363,6 +368,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
     t.string   "sicoss_seguro_obligatorio",        :limit => nil
+    t.integer  "consortium_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -376,7 +382,6 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.string   "acumuladores_valor"
     t.string   "formula_calculo_valor"
     t.integer  "company_id"
-    t.integer  "aditional_halth_insurance_id"
     t.integer  "retention_concept_id"
     t.integer  "additional_health_insurance_id"
     t.integer  "health_insurance_id"
@@ -413,12 +418,6 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
   create_table "group_remunerations_remunerative_concepts", :id => false, :force => true do |t|
     t.integer  "group_remuneration_id"
     t.integer  "remunerative_concept_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "group_renuneration", :force => true do |t|
-    t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -485,7 +484,6 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.string   "hijo_conyugue"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "company_id"
   end
 
   create_table "labor_unions", :force => true do |t|
@@ -575,6 +573,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "recibo_sueldos", :force => true do |t|
@@ -593,6 +592,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "hora_dia_mes"
   end
 
   create_table "remunerative_concepts", :force => true do |t|
@@ -616,6 +616,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.integer  "data_to_ask_id"
     t.string   "cantidad_en_recibo"
     t.integer  "company_id"
+    t.boolean  "auxiliar"
   end
 
   create_table "retention_concepts", :force => true do |t|
@@ -630,6 +631,7 @@ ActiveRecord::Schema.define(:version => 20110929211047) do
     t.string   "acumuladores_valor"
     t.integer  "data_to_ask_id"
     t.integer  "company_id"
+    t.boolean  "auxiliar"
   end
 
   create_table "sections", :force => true do |t|

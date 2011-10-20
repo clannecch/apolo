@@ -1,0 +1,87 @@
+<%= form_for @consortium, :html => { :multipart => true }  do |f|%>
+
+  <% if @consortium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@consortium.errors.count, "error") %> prohibited this consortium from being saved:</h2>
+
+      <ul>
+      <% @consortium.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :razon_social %><br />
+    <%= f.text_field :razon_social %>
+  </div>
+  <div class="field">
+    <%= f.label :calle %><br />
+    <%= f.text_field :calle %>
+  </div>
+  <div class="field">
+    <%= f.label :altura %><br />
+    <%= f.text_field :altura %>
+  </div>
+  <div class="field">
+    <%= f.label :codigo_postal %><br />
+    <%= f.text_field :codigo_postal %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br />
+    <%= f.collection_select :location_id, Location.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :province_id %><br />
+    <%= f.collection_select :province_id, Province.all, :id, :detalle, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto %><br />
+    <%= f.text_field :contacto %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br />
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :cuit %><br />
+    <%= f.text_field :cuit %>
+  </div>
+  <div class="field">
+    <%= f.label :numero_inscripcion %><br />
+    <%= f.text_field :numero_inscripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :caja %><br />
+    <%= f.text_field :caja %>
+  </div>
+  <div class="field">
+    <%= f.label :ultima_hoja_libro %><br />
+    <%= f.text_field :ultima_hoja_libro %>
+  </div>
+    <div class="field">
+      <%= f.label :imprimir_hasta_hoja_libro %><br />
+      <%= f.text_field :imprimir_hasta_hoja_libro %>
+    </div>
+  <div class="field">
+    <%= f.label :observaciones %><br />
+    <%= f.text_field :observaciones %>
+  </div>
+  <%= render 'shared/attachments_manager', :f => f %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

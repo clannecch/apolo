@@ -4,7 +4,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types
   # GET /document_types.xml
   def index
-    @search = DocumentType.by_company(current_company.id).search(params[:search])
+    @search = DocumentType.search(params[:search])
     @document_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/new
   # GET /document_types/new.xml
   def new
-    @document_type = DocumentType.by_company(current_company.id).new
+    @document_type = DocumentType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class DocumentTypesController < ApplicationController
   # POST /document_types
   # POST /document_types.xml
   def create
-    @document_type = DocumentType.by_company(current_company.id).new(params[:document_type])
+    @document_type = DocumentType.new(params[:document_type])
 
     respond_to do |format|
       if @document_type.save
@@ -86,6 +86,6 @@ class DocumentTypesController < ApplicationController
   end
 
   def find_document_type
-      @document_type = DocumentType.by_company(current_company.id).find(params[:id])
+      @document_type = DocumentType.find(params[:id])
   end
 end

@@ -1,29 +1,39 @@
-<% if @menus.count > 0 %>
+<% if @system_menus.count > 0 %>
 <div id="menu">
   <ul class="menu">
-  <% @menus.select{|menu| menu[:parent_id] == nil }.sort_by{|s| s.order_no}.each do |level0| %>
+  <% @system_menus.select{|menu| menu[:parent_id] == nil }.sort_by{|s| s.order_no}.each do |level0| %>
     <li><a class="parent" href="<%= (level0.link_url == "?" ? "#" : level0.link_url) %>"><span><%= level0.name %></span></a>
-    <% if @menus.select{|menu| menu[:parent_id] == level0.id }.count > 0 %>
+    <% if @system_menus.select{|menu| menu[:parent_id] == level0.id }.count > 0 %>
     <!-- SEGUNDO NIVEL -->
       <div><ul>
-      <% @menus.select{|menu| menu[:parent_id] == level0.id }.sort_by{|s| s.order_no}.each do |level1| %>
+      <% @system_menus.select{|menu| menu[:parent_id] == level0.id }.sort_by{|s| s.order_no}.each do |level1| %>
         <% if !level1.link_url.blank? %>
+<<<<<<< HEAD
           <% if @menus.select{|menu| menu[:parent_id] == level1.id }.count == 0 %>
         <li><a style="text-align:left;padding-left:5px;" href="<%= level1.link_url %>"><span><%= level1.name%></span></a></li>
+=======
+          <% if @system_menus.select{|menu| menu[:parent_id] == level1.id }.count == 0 %>
+        <li><a href="<%= level1.link_url %>"><span><%= level1.name%></span></a></li>
+>>>>>>> f0086d53cf8cd12be14cbf1242ae189e81e60d8a
           <% else %>
         <!-- TERCER NIVEL -->
         <li><a class="parent" href="<%= (level1.link_url == "?" ? "#" : level1.link_url) %>"><span><%= level1.name %></span></a>
           <div><ul>
-            <% @menus.select{|menu| menu[:parent_id] == level1.id }.sort_by{|s| s.order_no}.each do |level2| %>
+            <% @system_menus.select{|menu| menu[:parent_id] == level1.id }.sort_by{|s| s.order_no}.each do |level2| %>
               <% if !level2.link_url.blank? %>
-                <% if @menus.select{|menu| menu[:parent_id] == level2.id }.count == 0 %>
+                <% if @system_menus.select{|menu| menu[:parent_id] == level2.id }.count == 0 %>
                 <!-- CUARTO NIVEL -->
             <li><a style="text-align:left;padding-left:20px;" href="<%= level2.link_url %>"><%= level2.name %></a></li>
                 <% else %>
             <li><a class="parent" href="<%= (level2.link_url == "?" ? "#" : level2.link_url) %>"><span><%= level2.name %></span></a>
               <div><ul>
+<<<<<<< HEAD
                   <% @menus.select{|menu| menu[:parent_id] == level2.id }.sort_by{|s| s.order_no}.each do |level3| %>
                 <li><a style="text-align:left;" href="<%= level3.link_url %>"><%= level3.name %></a></li>
+=======
+                  <% @system_menus.select{|menu| menu[:parent_id] == level2.id }.sort_by{|s| s.order_no}.each do |level3| %>
+                <li><a href="<%= level3.link_url %>"><%= level3.name %></a></li>
+>>>>>>> f0086d53cf8cd12be14cbf1242ae189e81e60d8a
                   <% end %>
               </ul></div>
             </li>

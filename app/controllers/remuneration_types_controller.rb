@@ -5,7 +5,7 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types
   # GET /remuneration_types.xml
   def index
-    @search = RemunerationType.by_company(current_company.id).search(params[:search])
+    @search = RemunerationType.search(params[:search])
     @remuneration_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class RemunerationTypesController < ApplicationController
   # GET /remuneration_types/new
   # GET /remuneration_types/new.xml
   def new
-    @remuneration_type = RemunerationType.by_company(current_company.id).new
+    @remuneration_type = RemunerationType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class RemunerationTypesController < ApplicationController
   # POST /remuneration_types
   # POST /remuneration_types.xml
   def create
-    @remuneration_type = RemunerationType.by_company(current_company.id).new(params[:remuneration_type])
+    @remuneration_type = RemunerationType.new(params[:remuneration_type])
 
     respond_to do |format|
       if @remuneration_type.save
@@ -86,6 +86,6 @@ class RemunerationTypesController < ApplicationController
   end
 
   def find_remuneration_type
-      @remuneration_type = RemunerationType.by_company(current_company.id).find(params[:id])
+      @remuneration_type = RemunerationType.find(params[:id])
   end
 end

@@ -1,6 +1,6 @@
 = raw " &raquo; #{current_company.name.titlecase}" unless current_company.blank?
-= link_to(icon('application_edit', :small, :title => 'Administración de Companías'), root_path, :style => 'float:right;')
+= link_to(icon('application_edit', :small, :title => 'Administración de Administradoras'), companies_path, :style => 'float:right;')
 - if Company.all.many?
   %div{:style => 'float:right;margin-top:11px;'}
-    = collection_select(:company, :id, Company.all, :id, :name, { :include_blank => '-- Cambiar de Companía --'}, :onchange => 'location.href="?cc="+$(this).val();')
+    = collection_select(:company, :id, Company.all, :id, :name, { :include_blank => '-- Cambiar Administradora --'}, :onchange => 'location.href="?cc="+$(this).val();')
 

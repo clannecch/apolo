@@ -4,7 +4,7 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions
   # GET /liquidacions.xml
   def index
-    @search = Liquidacion.by_company(current_company.id).search(params[:search])
+    @search = Liquidacion.search(params[:search])
     @liquidacions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -29,16 +29,32 @@ class LiquidacionsController < ApplicationController
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
             File.delete(dump_tmp_filename) unless Rails.env.development?
+            Rails.logger.info(">>>>>> 14")
           else
+            Rails.logger.info(">>>>>> 15")
+
             redirect_to :action => 'show'
           end
       end
+=begin
+      format.pdf do
+        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
+          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+          print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
+          File.delete(dump_tmp_filename) unless Rails.env.development?
+      end
+=end
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
+        Rails.logger.info(">>>>>> 11")
+          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "planilla_remuneraciones.pdf")
+        Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
+        Rails.logger.info(">>>>>> 13")
+
       end
 
       format.text  do
@@ -54,7 +70,7 @@ class LiquidacionsController < ApplicationController
   # GET /liquidacions/new
   # GET /liquidacions/new.xml
   def new
-    @liquidacion = Liquidacion.by_company(current_company.id).new
+    @liquidacion = Liquidacion.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -69,12 +85,13 @@ class LiquidacionsController < ApplicationController
   # POST /liquidacions
   # POST /liquidacions.xml
   def create
-    @liquidacion = Liquidacion.by_company(current_company.id).new(params[:liquidacion])
+    @liquidacion = Liquidacion.new(params[:liquidacion])
 
     respond_to do |format|
       if @liquidacion.save
         format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully created.') }
         format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
+        liquidar_employee
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @liquidacion.errors, :status => :unprocessable_entity }
@@ -115,30 +132,100 @@ class LiquidacionsController < ApplicationController
   protected
 
   def find_liquidacion
-      @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
+      @liquidacion = Liquidacion.find(params[:id])
+  end
+
+  def liquidar_employee
+    @employees = Employee.where(:company_id => current_company.id).where(:fecha_egreso.blank?)
+    @employees.each do |employee|
+      Rails.logger.info("employee="+employee.id.to_s)
+     @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
+     @recibo_sueldo.save
+     @recibo_sueldo.calcular_recibo
+    end
   end
 
 # #################################################################################
-  def print_planilla_remuneraciones_pdf(filename,entity)
+  def print_planilla_remuneraciones_pdf(filename,liquidacion_actual)
   require 'prawn'
-  @recibo_sueldos = @liquidacion.recibo_sueldos.all
-  img = "public/images/hsjd2.jpg"
 
   pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
 #                              :background => img,
                             :page_layout => :portrait)
-  prawn_logo = img
-  logo_empresa ="CASA NUESTA SRA. DEL PILAR"
-  logo_domicilio = "Julio A. Roca 501 - 6700-Lujan (BA)"
-  logo_cuit = "C.U.I.T.: "+"30-67932805-7"
-  logo_inscripcion = "Nro.Inscripcion: " + "21.757"
-  logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
   offset = 0
-
-  pdf.repeat(:all, :dynamic => true) do
-    pdf.image prawn_logo, :at => [5,750], :width => 30
     pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
-    pdf.draw_text (logo_empresa).center(200), :at => [100,745],:style => :bold, :size => 10
+
+
+  empresa = OpenStruct.new({
+                  :logo                   => "",
+                  :empresa                => "",
+                  :domicilio              => "",
+                  :cuit                   => "",
+                  :inscripcion            => "",
+                  :caja                   => "",
+                  :hoja                   => 0,
+                  :imprimir_hasta_hoja    => 0
+                  })
+
+  @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
+
+  logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+  con_logo = false
+
+  if @recibo_sueldos.first.employee.consortium_id.to_i > 0
+
+    if !logo_id.nil? && !Rails.env.development?
+
+#      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+#      con_logo = true
+
+    end
+    empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
+    empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
+                                  @recibo_sueldos.first.employee.consortium.altura
+    empresa.domicilio2          = @recibo_sueldos.first.employee.consortium.codigo_postal+' '+
+                                  @recibo_sueldos.first.employee.consortium.location.detalle+' ('+
+                                  @recibo_sueldos.first.employee.consortium.province.detalle+")"
+    empresa.cuit                = @recibo_sueldos.first.employee.consortium.cuit
+    empresa.inscripcion         = @recibo_sueldos.first.employee.consortium.numero_inscripcion
+    empresa.caja                = @recibo_sueldos.first.employee.consortium.caja
+    empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
+    empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
+  else
+    if !logo_id.nil?
+  Rails.logger.info("logo_id="+logo_id.to_s)
+#     attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#     con_logo = true
+
+    end
+    empresa.empresa             = current_company.razon_social
+    empresa.domicilio           = current_company.calle + ' ' +
+                                  current_company.altura
+    empresa.domicilio2          = current_company.codigo_postal+' '+
+                                  current_company.location.detalle+' ('+
+                                  current_company.province.detalle+")"
+    empresa.cuit                = current_company.cuit
+    empresa.inscripcion         = current_company.numero_inscripcion
+    empresa.caja                = current_company.caja
+    empresa.hoja                = current_company.ultima_hoja_libro.to_i
+    empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
+  end
+  if con_logo
+    if attach.adjunto_content_type[0..4] = "image"
+      file_logo= Rails.root.join('tmp',attach.adjunto_file_name)
+      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+
+      open( file_logo, 'wb' ) { |file|
+          file.write(attach.adjunto_file)
+        }
+
+      empresa.logo = file_logo.to_s
+    end
+  end
+  pdf.repeat(:all, :dynamic => true) do
+#    pdf.image empresa.logo, :at => [5,750], :width => 30
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+    pdf.draw_text empresa.empresa.center(200), :at => [100,745],:style => :bold, :size => 10
     pdf.draw_text "Periodo de Liquidacion: " + @liquidacion.periodo.strftime("%m/%Y"), :at => [40, 725]
     pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, 725]
   end
@@ -147,19 +234,28 @@ class LiquidacionsController < ApplicationController
   thaber_con_descuento = 0
   thaber_sin_descuento = 0
   tretencion = 0
+  Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
+    Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
      haber_total = r.total_haberes
+    Rails.logger.info(">>>>>> 2")
      haber_con_descuento = r.total_haberes_con_descuento
+    Rails.logger.info(">>>>>> 3")
      haber_sin_descuento = haber_total - r.total_haberes_con_descuento
+    Rails.logger.info(">>>>>> 4")
 
 
      # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
      tretencion = tretencion + retencion
+    Rails.logger.info(">>>>>> 5")
      thaber_sin_descuento +=  haber_sin_descuento
+    Rails.logger.info(">>>>>> 6")
      thaber_con_descuento += haber_con_descuento
-     data << [r.legajo ,
-              r.employee.nombre,
+    Rails.logger.info(">>>>>> 7")
+
+     data << [r.employee.legajo ,
+              r.employee.full_name,
               r.employee.category.try(:detalle)[0..15],
               format_number(haber_con_descuento),
               format_number(haber_sin_descuento),
@@ -167,6 +263,7 @@ class LiquidacionsController < ApplicationController
               format_number(haber_total-retencion)
      ]
   end
+  Rails.logger.info(">>>>>> 8")
   data << ["" ,
            "T O T A L E S",
            "",
@@ -175,6 +272,7 @@ class LiquidacionsController < ApplicationController
            format_number(tretencion),
            format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
   ]
+  Rails.logger.info(">>>>>> 9")
 
   pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
            :cell_style => { :font => "Times-Roman",
@@ -187,9 +285,12 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
-
+  Rails.logger.info(">>>>>> 10")
 
   pdf.render_file(filename)
+  if con_logo
+    File.delete(file_logo) unless Rails.env.development?
+  end
 
 end
 
@@ -383,22 +484,27 @@ end
 
   def prepara_sicoss(filename,entity)
     sicoss_file = File.open(filename, 'w')
+=begin
     offset =500
     @liquidacion.recibo_sueldos.each do |r|
       acumuladores = OpenStruct.new()
       resultado    = OpenStruct.new()
       registro = ""
       r.detalle_recibo_habers.each do |dhr|
-        dhr.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
-          acumulador.gsub!('@', '')
-          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        if !dhr.remunerative_concept.auxiliar
+          dhr.remunerative_concept.acumuladores_valor.split(' ').each do |acumulador|
+            acumulador.gsub!('@', '')
+            acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+          end
         end
       end
 
       r.detalle_recibo_retencions.each do |dhr|
-        dhr.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
-          acumulador.gsub!('@', '')
-          acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+        if !dhr.retention_concept.auxiliar
+          dhr.retention_concept.acumuladores_valor.split(' ').each do |acumulador|
+            acumulador.gsub!('@', '')
+            acumuladores.send("#{acumulador}=", acumuladores.send(acumulador).to_f + dhr.total.to_f)
+          end
         end
       end
       SicossFormat.all.sort_by{ |p| p.position}.each do |f|
@@ -426,6 +532,67 @@ end
 
       end
       sicoss_file.puts registro
+    end
+=end
+
+    procesadas = []
+    primer_parent_id = true
+    sicoss_file.puts "=begin"
+    sicoss_file.puts Execute:"
+    sicoss_file.puts   heroku console"
+    sicoss_file.puts " load Rails.root.join('db/apolo-heroku.rb').to_s"
+    sicoss_file.puts "=end"
+
+    ["menu","country","province","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept"].each do |entidadc|
+      entidadc=entidadc.camelize
+      entidad = eval(entidadc)
+      data = entidad.all
+      columnas = entidad.column_names
+      sicoss_file.puts entidadc.camelize+".delete_all"
+      sicoss_file.puts "id_"+entidadc.underscore+"_old = []"
+      sicoss_file.puts "id_"+entidadc.underscore+"_new = []"
+      data.each do |reg|
+        str= ""
+        columnas.each do |col|
+          if ["created_at", "updated_at", "id"].exclude?(col)
+            if col[col.length-3..col.length]=="_id"
+              if col == "parent_id"
+                pedazo = (primer_parent_id == true ? "nil" : "1")
+                primer_parent_id = false
+              else
+                if procesadas.index(col.gsub("_id","")).nil?
+                  pedazo = "nil"
+                else
+                  pedazo = eval("reg."+col).nil? ? 'nil' : "id_"+col.gsub("_id","")+"_new[ id_"+col.gsub("_id","")+"_old.index("+eval("reg."+col+".to_s")+")]"
+                end
+              end
+            else
+              case eval(entidadc+".columns_hash['"+col+"'].type")
+                when :date
+                  pedazo =  eval("reg."+col).nil? ? 'nil' : '"' +eval("reg."+col+".to_s")+ '"'
+                when :string
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
+                when :text
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
+                when :decimal
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :integer
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :boolean
+                  pedazo = eval("reg."+col+"? ? 'true' : 'false'")
+                else
+                  pedazo = eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+              end
+            end
+            str=str+":"+col+" => "+pedazo+", "
+          end
+        end
+        sicoss_file.puts "new_reg="+entidadc.camelize+'.create!('+str[0, str.length - 2]+")"
+        sicoss_file.puts "id_"+entidadc.underscore+"_old << " + reg.id.to_s
+        sicoss_file.puts "id_"+entidadc.underscore+"_new << new_reg.id"
+      end
+      procesadas<< entidadc.underscore
+      primer_parent_id = true
     end
     sicoss_file.close
   end
@@ -557,17 +724,74 @@ end
 =end
 def print_libro_pdf(filename,liquidacion_actual)
   require 'prawn'
+
+  empresa = OpenStruct.new({
+                  :logo                   => "",
+                  :empresa                => "",
+                  :domicilio              => "",
+                  :cuit                   => "",
+                  :inscripcion            => "",
+                  :caja                   => "",
+                  :hoja                   => 0,
+                  :imprimir_hasta_hoja    => 0
+                  })
+
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
 
-  img = "public/images/hsjd2.jpg"
+  logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+  con_logo = false
+  if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
+    if !logo_id.nil?
+#        attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+#       con_logo = true
+    end
+    empresa.empresa             = @recibo_sueldos.first.employee.consortium.razon_social
+    empresa.domicilio           = @recibo_sueldos.first.employee.consortium.calle + ' ' +
+                                  @recibo_sueldos.first.employee.consortium.altura
+    empresa.domicilio2          = @recibo_sueldos.first.employee.consortium.codigo_postal+' '+
+                                  @recibo_sueldos.first.employee.consortium.location.detalle+' ('+
+                                  @recibo_sueldos.first.employee.consortium.province.detalle+")"
+    empresa.cuit                = @recibo_sueldos.first.employee.consortium.cuit
+    empresa.inscripcion         = @recibo_sueldos.first.employee.consortium.numero_inscripcion
+    empresa.caja                = @recibo_sueldos.first.employee.consortium.caja
+    empresa.hoja                = @recibo_sueldos.first.employee.consortium.ultima_hoja_libro.to_i
+    empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
+  else
+    if !logo_id.nil?
+#      attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+#      con_logo = true
+    end
+    empresa.empresa             = current_company.razon_social
+    empresa.domicilio           = current_company.calle + ' ' +
+                                  current_company.altura
+    empresa.domicilio2          = current_company.codigo_postal+' '+
+                                  current_company.location.detalle+' ('+
+                                  current_company.province.detalle+")"
+    empresa.cuit                = current_company.cuit
+    empresa.inscripcion         = current_company.numero_inscripcion
+    empresa.caja                = current_company.caja
+    empresa.hoja                = current_company.ultima_hoja_libro.to_i
+    empresa.imprimir_hasta_hoja = current_company.imprimir_hasta_hoja_libro.to_i
+  end
+  if con_logo
+    if attach.adjunto_content_type[0..4] = "image"
+      file_logo= Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+
+      open( file_logo, 'wb' ) { |file|
+          file.write(attach.adjunto_file)
+        }
+
+      empresa.logo = file_logo.to_s
+    end
+  end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
   begin
     logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
   rescue
     flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores"
-#    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
     return
   end
   begin
@@ -578,15 +802,10 @@ def print_libro_pdf(filename,liquidacion_actual)
     return
   end
 
-  logo_empresa   = "CASA NUESTA SRA. DEL PILAR"
-  logo_domicilio = "    Julio A. Roca 501"
-  logo_localidad = "    6700 - Lujan (BA)"
-  logo_cuit = "C.U.I.T.: "+"30-67932805-7"
-  logo_inscripcion = "Nro.Inscripcion: " + "21.757"
-  logo_caja = "Caja: 11" + "Ex Caja Serv. Publico"
-
   offset = 0
-  numero_de_hoja = logo_hoja
+  numero_de_hoja = empresa.hoja
+#  Rails.logger.info("numero_de_hoja 1= #{numero_de_hoja }")
+
   left = 10
   top = 670
 
@@ -604,7 +823,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     total_haberes_sd = 0
 
     r.detalle_recibo_habers.each do |h|
-      if h.total.to_f != 0
+      if h.total.to_f != 0 && !h.remunerative_concept.auxiliar
         if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
           haberes_sd = haberes_sd + 1
           if haberes_sd >= linea.count
@@ -626,7 +845,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
 
     r.detalle_recibo_retencions.each do |r|
-      if r.total.to_f != 0
+      if r.total.to_f != 0 && !r.retention_concept.auxiliar
         retenciones = retenciones + 1
         if retenciones >= linea.count
           linea << ['','','','','','','','']
@@ -639,11 +858,12 @@ def print_libro_pdf(filename,liquidacion_actual)
 
     if haberes_cd + haberes_sd  +  retenciones >= 0
       if offset-((linea.count+4))*10 < 20
-        if numero_de_hoja != logo_hoja
+        if numero_de_hoja != empresa.hoja
           pdf.start_new_page
         end
+
         numero_de_hoja += 1
-        if numero_de_hoja >  logo_imprimir_hasta_hoja
+        if numero_de_hoja >  empresa.imprimir_hasta_hoja
           numero_de_hoja = 1
         end
         top = 670
@@ -653,14 +873,14 @@ def print_libro_pdf(filename,liquidacion_actual)
         top=top - 10
 
         pdf.draw_text "Hoja Nro:", :at => [460, top], :size => 8
-        pdf.draw_text numero_de_hoja.to_s.rjust(logo_imprimir_hasta_hoja.to_s.length,'0'), :at => [500, top], :size => 10, :style => :bold
-        pdf.draw_text logo_empresa.strip, :at => [left, top], :size => 8, :style => :bold
+        pdf.draw_text numero_de_hoja.to_s.rjust(empresa.imprimir_hasta_hoja.to_s.length,'0'), :at => [500, top], :size => 10, :style => :bold
+        pdf.draw_text empresa.empresa.strip, :at => [left, top], :size => 8, :style => :bold
         top = top - 15
         pdf.draw_text "Periodo de Liquidacion :", :at => [200,top], :size => 8
         pdf.draw_text @liquidacion.periodo.strftime("%B de %Y"), :at => [300, top], :size => 8, :style => :bold
-        pdf.draw_text logo_domicilio.strip, :at => [left, top], :size => 8, :style => :bold
+        pdf.draw_text empresa.domicilio.strip, :at => [left, top], :size => 8, :style => :bold
         top = top - 15
-        pdf.draw_text logo_localidad.strip, :at => [left, top], :size => 8, :style => :bold
+        pdf.draw_text empresa.domicilio2.strip, :at => [left, top], :size => 8, :style => :bold
         pdf.draw_text "Fecha :", :at => [430, top], :size => 8
         pdf.draw_text Time.now.strftime("%d/%m/%Y %H:%M hs."), :at => [460, top], :size => 8, :style => :bold
         pdf.draw_text "Quincena:", :at => [230, top], :size => 8
@@ -733,7 +953,7 @@ def print_libro_pdf(filename,liquidacion_actual)
 
       linea[0][0] = r.employee.legajo.ljust(9) + " " +  (r.employee.apellido.strip+", "+r.employee.nombre.strip).ljust(30)
       linea[0][1] = r.employee.fecha_ingreso.strftime("%d/%m/%Y")
-      if linea.count < 1
+      if linea.count < 2 #OJO
         linea << ['','','','','','','','']
       end
       if linea.count < 2 && !r.employee.fecha_egreso.nil?
@@ -741,7 +961,7 @@ def print_libro_pdf(filename,liquidacion_actual)
       end
       linea[1][0] = "             " + # r.employee.document_type.detalle[0..2].center(3) +
            r.employee.cuil.strip.ljust(14)    +
-           r.employee.category.detalle[0..16].ljust(16)
+           r.employee.category.try(:detalle)[0..16].ljust(16)
 
       if r.employee.fecha_egreso.nil?
         linea[1][0] =  "E.Civil : "+r.employee.marital_status.try(:detalle)
@@ -775,5 +995,8 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
   end
 
+  if con_logo
+    File.delete(file_logo) unless Rails.env.development?
+  end
   pdf.render_file(filename)
 end

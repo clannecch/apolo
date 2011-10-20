@@ -4,8 +4,8 @@ class BankDepositsController < ApplicationController
   # GET /bank_deposits
   # GET /bank_deposits.xml
   def index
-    #@bank_deposits = BankDeposit.by_company(current_company.id).all
-    @search = BankDeposit.by_company(current_company.id).search(params[:search])
+#    @search = BankDeposit.by_company(current_company.id).search(params[:search])
+    @search = BankDeposit.search(params[:search])
     @bank_deposits = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -70,7 +70,8 @@ class BankDepositsController < ApplicationController
   # GET /bank_deposits/new
   # GET /bank_deposits/new.xml
   def new
-    @bank_deposit = BankDeposit.by_company(current_company.id).new
+#    @bank_deposit = BankDeposit.by_company(current_company.id).new
+    @bank_deposit = BankDeposit.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -85,7 +86,8 @@ class BankDepositsController < ApplicationController
   # POST /bank_deposits
   # POST /bank_deposits.xml
   def create
-    @bank_deposit = BankDeposit.by_company(current_company.id).new(params[:bank_deposit])
+#    @bank_deposit = BankDeposit.by_company(current_company.id).new(params[:bank_deposit])
+    @bank_deposit = BankDeposit.new(params[:bank_deposit])
 
     respond_to do |format|
       if @bank_deposit.save
@@ -128,7 +130,8 @@ class BankDepositsController < ApplicationController
   end
 
   def find_bank_deposit
-    @bank_deposit = BankDeposit.by_company(current_company.id).find(params[:id])
+#    @bank_deposit = BankDeposit.by_company(current_company.id).find(params[:id])
+    @bank_deposit = BankDeposit.find(params[:id])
   end
 
 end

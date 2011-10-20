@@ -5,7 +5,7 @@ class LaborUnionsController < ApplicationController
   # GET /labor_unions
   # GET /labor_unions.xml
   def index
-    @search = LaborUnion.by_company(current_company.id).search(params[:search])
+    @search = LaborUnion.search(params[:search])
     @labor_unions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class LaborUnionsController < ApplicationController
   # GET /labor_unions/new
   # GET /labor_unions/new.xml
   def new
-    @labor_union = LaborUnion.by_company(current_company.id).new
+    @labor_union = LaborUnion.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class LaborUnionsController < ApplicationController
   # POST /labor_unions
   # POST /labor_unions.xml
   def create
-    @labor_union = LaborUnion.by_company(current_company.id).new(params[:labor_union])
+    @labor_union = LaborUnion.new(params[:labor_union])
 
     respond_to do |format|
       if @labor_union.save
@@ -86,6 +86,6 @@ class LaborUnionsController < ApplicationController
   end
 
   def find_labor_union
-      @labor_union = LaborUnion.by_company(current_company.id).find(params[:id])
+      @labor_union = LaborUnion.find(params[:id])
   end
 end

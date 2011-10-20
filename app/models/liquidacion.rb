@@ -19,7 +19,9 @@
 #
 
 class Liquidacion < ActiveRecord::Base
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope where(:company_id => $CURRENT_COMPANY)
+
   has_many :recibo_sueldos, :dependent => :restrict
   belongs_to :tipo_recibo
   belongs_to :bank_deposit
@@ -30,7 +32,7 @@ class Liquidacion < ActiveRecord::Base
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 
 	validates_presence_of		    :periodo, :quincena,
-                              :fecha_liquidacion,															  :message => "es un dato requerido"
+                              :fecha_liquidacion, :bank_deposit_id, 					  :message => "es un dato requerido"
   validates_presence_of		    :fecha_deposito,
                               :if => :periodo_deposito?,		    			          :message => "es un dato requerido"
 

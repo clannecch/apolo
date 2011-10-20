@@ -5,7 +5,7 @@ class NationalitiesController < ApplicationController
   # GET /nationalities
   # GET /nationalities.xml
   def index
-    @search = Nationality.by_company(current_company.id).search(params[:search])
+    @search = Nationality.search(params[:search])
     @nationalities = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class NationalitiesController < ApplicationController
   # GET /nationalities/new
   # GET /nationalities/new.xml
   def new
-    @nationality = Nationality.by_company(current_company.id).new
+    @nationality = Nationality.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class NationalitiesController < ApplicationController
   # POST /nationalities
   # POST /nationalities.xml
   def create
-    @nationality = Nationality.by_company(current_company.id).new(params[:nationality])
+    @nationality = Nationality.new(params[:nationality])
 
     respond_to do |format|
       if @nationality.save
@@ -86,7 +86,7 @@ class NationalitiesController < ApplicationController
   end
 
   def find_nationality
-      @nationality = Nationality.by_company(current_company.id).find(params[:id])
+      @nationality = Nationality.find(params[:id])
   end
 
 end

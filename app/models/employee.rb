@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110910142220
+# Schema version: 20111013184648
 #
 # Table name: employees
 #
@@ -99,13 +99,15 @@
 #  sicoss_reduction_zone_id         :integer
 #  sicoss_en_convenio               :string(255)
 #  sicoss_regimen_type_id           :integer
-#  sicoss_seguro_obligatorio        :string
+#  sicoss_seguro_obligatorio        :string(255)
+#  consortium_id                    :integer
 #
 
 require 'paperclip'
 class Employee < ActiveRecord::Base
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope where(:company_id => $CURRENT_COMPANY)
 
   belongs_to :document_type
   belongs_to :educational_level
@@ -124,6 +126,7 @@ class Employee < ActiveRecord::Base
 	belongs_to :task
   belongs_to :causa_egreso
 	belongs_to :category
+  belongs_to :consortium
 	belongs_to :remuneration_type
 	belongs_to :group_remuneration
 	belongs_to :group_employer_contribution
@@ -228,8 +231,6 @@ class Employee < ActiveRecord::Base
 
   validates_inclusion_of		  :antiguedad_reconocida_meses, :in => 0..11, :allow_nil => true, 							      :message => "acepta valores del 0 al 11"
 
-
-
 # Aseguradora / Banco
   validates_presence_of		    :deposito_banco_cuenta, :bank_deposit_id,
                               :bank_deposit_account_type_id,                                  :message => "es un dato requerido"
@@ -279,7 +280,7 @@ class Employee < ActiveRecord::Base
 
   def full_name
 #    apellido + ', '+nombre
-   [apellido, nombre].compact.join(' ')
+   [apellido, nombre].compact.join(', ')
   end
 
   private

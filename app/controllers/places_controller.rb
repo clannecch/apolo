@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.xml
   def index
-    @search = Place.by_company(current_company.id).search(params[:search])
+    @search = Place.search(params[:search])
     @places = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class PlacesController < ApplicationController
   # GET /places/new
   # GET /places/new.xml
   def new
-    @place = Place.by_company(current_company.id).new
+    @place = Place.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.xml
   def create
-    @place = Place.by_company(current_company.id).new(params[:place])
+    @place = Place.new(params[:place])
 
     respond_to do |format|
       if @place.save
@@ -86,6 +86,6 @@ class PlacesController < ApplicationController
   end
 
   def find_place
-      @place = Place.by_company(current_company.id).find(params[:id])
+      @place = Place.find(params[:id])
   end
 end

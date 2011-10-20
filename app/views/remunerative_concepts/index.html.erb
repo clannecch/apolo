@@ -6,7 +6,7 @@
 		<th><%= sort_link @search, :detalle, "Detalle" %></td>
 		<th>Porcentual Asistencia</th>
 		<th><%= sort_link @search, :prioridad_calculo, "Prioridad Calculo" %></td>
-		<th><%= sort_link @search, :statistical_value, "Statistical Value" %></td>
+		<th><%= sort_link @search, :statistical_value, "Auxiliar" %></td>
 		<th><%= sort_link @search, :grupo_ganancias_id, "Grupo Ganancias" %></td>
 		<th><%= sort_link @search, :accounting_imputation_id, "Accounting Imputation" %></td>
 		<th><%= sort_link @search, :concepto_asociado_haber_id, "Concepto Asociado Haber" %></td>
@@ -25,9 +25,9 @@
 		<tr>
 			<td><%= remunerative_concept.codigo %></td>
 			<td><%= remunerative_concept.detalle %></td>
-			<td><%= check_box_tag "remunerative_concept_porcentual_asistencia", remunerative_concept.porcentual_asistencia, remunerative_concept.porcentual_asistencia, :disabled => true %></td>
+			<td><%= check_box_tag "remunerative_concept_auxiliar", remunerative_concept.auxiliar, remunerative_concept.auxiliar, :disabled => true %></td>
 			<td><%= remunerative_concept.prioridad_calculo %></td>
-			<td><%= remunerative_concept.statistical_value %></td>
+            <td><%= remunerative_concept.statistical_value %></td>
 			<td><%= remunerative_concept.grupo_ganancias_id %></td>
 			<td><%= remunerative_concept.accounting_imputation_id %></td>
 			<td><%= remunerative_concept.concepto_asociado_haber_id %></td>

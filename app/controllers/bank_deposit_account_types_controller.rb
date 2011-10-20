@@ -4,8 +4,8 @@ class BankDepositAccountTypesController < ApplicationController
   # GET /bank_deposit_account_types
   # GET /bank_deposit_account_types.xml
   def index
-    #@bank_deposit_account_types = BankDepositAccountType.by_company(current_company.id).all
-    @search = BankDepositAccountType.by_company(current_company.id).search(params[:search])
+    #@bank_deposit_account_types = BankDepositAccountType.all
+    @search = BankDepositAccountType.search(params[:search])
     @bank_deposit_account_types = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class BankDepositAccountTypesController < ApplicationController
   # GET /bank_deposit_account_types/new
   # GET /bank_deposit_account_types/new.xml
   def new
-    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).new
+    @bank_deposit_account_type = BankDepositAccountType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class BankDepositAccountTypesController < ApplicationController
   # POST /bank_deposit_account_types
   # POST /bank_deposit_account_types.xml
   def create
-    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).new(params[:bank_deposit_account_type])
+    @bank_deposit_account_type = BankDepositAccountType.new(params[:bank_deposit_account_type])
 
     respond_to do |format|
       if @bank_deposit_account_type.save
@@ -86,7 +86,7 @@ class BankDepositAccountTypesController < ApplicationController
   end
 
   def bank_deposit_account_type
-    @bank_deposit_account_type = BankDepositAccountType.by_company(current_company.id).find(params[:id])
+    @bank_deposit_account_type = BankDepositAccountType.find(params[:id])
   end
 
 end

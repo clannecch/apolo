@@ -17,7 +17,9 @@ class DocumentType < ActiveRecord::Base
 #  before_destroy :no_referenced_data
   validates_presence_of		    :detalle,															                :message => "es un dato requerido"
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+
   def no_referenced_data
     return if employee.empty?
     errors.add(:base, "Este Tipo de documento tiene "+employee.count.to_s+" referencias a Empleado")

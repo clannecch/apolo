@@ -1,0 +1,7 @@
+<h1>Su modificacion afectara el calculo de recibos</h1>
+
+<p>
+	<%= link_to "Calcular", calculate_changes_retention_concept_path(@retention_concept.id)%> |
+    <%= link_to icon('printer', :small, :title => 'Imprimir'), retention_concept_path(@retention_concept_id, :format => 'json')%> |
+	<%= link_to "Codigos de Retencion", retention_concepts_path %>
+</p>
