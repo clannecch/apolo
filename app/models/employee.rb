@@ -216,9 +216,13 @@ class Employee < ActiveRecord::Base
 
 # Solapa Contratacion
   validates_presence_of		    :fecha_ingreso     , :contract_mode_id              , :fecha_ingreso,
-                              :remuneration_type_id          , :group_remuneration_id,
+                              :remuneration_type_id          ,
                               :group_retention_id, :group_employer_contribution_id,	:cost_center_id,
                               :accounting_imputation_id,											                :message => "es un dato requerido"
+
+#                              :group_remuneration_id,
+
+                              
   validates_presence_of		    :causa_egreso_id ,
                               :if => :fecha_egreso?
 
