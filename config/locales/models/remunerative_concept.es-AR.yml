@@ -1,26 +1,26 @@
 es-AR:
   activerecord:
     models:
-      remunerative_concept: Concepto de Haber
+      remunerative_concept: Remunerative Concept
     attributes:
       remunerative_concept:
         codigo: Codigo
         detalle: Detalle
-        porcentual_asistencia: Interviene % Asistencia
+        porcentual_asistencia: Porcentual Asistencia
         prioridad_calculo: Prioridad Calculo
-        statistical_value: Valor Estadistico
-        grupo_ganancias_id: Grupo de Ganancias
-        accounting_imputation_id: Cuenta Contble
-        concepto_asociado_haber_id: Concepto de Haber Asociado
-        concepto_asociado_retencion_id: Concepto de Retencion Asociado
-        concepto_asociado_haber_2_id: Concepto de Haber Asociado 2
-        concepto_asociado_retencion_2_id: Concepto de Retencion Asociado 2
+        statistical_value: Statistical Value
+        grupo_ganancias_id: Grupo Ganancias
+        accounting_imputation_id: Accounting Imputation
+        concepto_asociado_haber_id: Concepto Asociado Haber
+        concepto_asociado_retencion_id: Concepto Asociado Retencion
+        concepto_asociado_haber_2_id: Concepto Asociado Haber 2
+        concepto_asociado_retencion_2_id: Concepto Asociado Retencion 2
         created_at: Creado el
         updated_at: Actualizado el
-        acumuladores_valor: Acumula Valor en
-        acumuladores_cantidad: Acumula Cantidad en
-        calculo_valor: Formula del Calculo del Valor
-        calculo_cantidad: Formula del Calculo de Cantidad
-        data_to_ask_id: Dato a Solicitar
-        cantidad_en_recibo: Cantidad en Recibo
+        acumuladores_valor: Acumuladores Valor
+        acumuladores_cantidad: Acumuladores Cantidad
+        calculo_valor: Calculo Valor
+        calculo_cantidad: Calculo Cantidad
+        data_to_ask_id: Data To Ask
+        cantidad_en_recibo: Cantidad En Recibo
         company_id: Empresa

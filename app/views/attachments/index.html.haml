@@ -1,0 +1,43 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Attachment.model_name.human, attachments_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Attachment.model_name.human).titlecase , new_attachment_path(@attachment), :class => "btn success" 
+  - if @attachments.any?
+    = link_to t('scaffold.actions.export').titlecase, attachments_path( :format => 'pdf'), :class => "btn info"
+
+- if @attachments.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :attachable_id, @attachments.human_attribute_name('attachable_id')
+      %th= sort_link @search, :attachable_type, @attachments.human_attribute_name('attachable_type')
+      %th= sort_link @search, :associated_document_type_id, @attachments.human_attribute_name('associated_document_type_id')
+      %th= sort_link @search, :name, @attachments.human_attribute_name('name')
+      %th= sort_link @search, :reception_date, @attachments.human_attribute_name('reception_date')
+      %th= sort_link @search, :adjunto_file_name, @attachments.human_attribute_name('adjunto_file_name')
+      %th= sort_link @search, :adjunto_content_type, @attachments.human_attribute_name('adjunto_content_type')
+      %th= sort_link @search, :associated_document_type, @attachments.human_attribute_name('associated_document_type')
+      %th= sort_link @search, :adjunto_file, @attachments.human_attribute_name('adjunto_file')
+      %th.last
+
+    - @attachments.each do |item|
+      %tr
+        %td= item.attachable_id
+        %td= item.attachable_type
+        %td= item.associated_document_type_id
+        %td= item.name
+        %td= item.reception_date
+        %td= item.adjunto_file_name
+        %td= item.adjunto_content_type
+        %td= item.associated_document_type
+        %td= item.adjunto_file
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_attachment_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@attachments)
+  .clear
+.clear

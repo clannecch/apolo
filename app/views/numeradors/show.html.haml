@@ -1,21 +1,36 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Numerador.model_name.human, numeradors_path 
+    - breadcrumb.item "#{@numerador.name.titlecase}", numerador_path(@numerador), :active => true
 
-
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), Numerador.model_name.human].join(' ').titlecase
-
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_numerador_path(@numerador), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@numerador) do |s|
-  = s.attributes(Numerador.human_name + ' Info') do
-
-    = s.attribute :code
-
-    = s.attribute :name
-
-    = s.attribute :number
-
-
+= link_to t('scaffold.actions.edit').titlecase, edit_numerador_path(@numerador), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @numerador, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@numerador) do |f|
+  - if @numerador.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@numerador.errors.count, "error")
+        prohibited this numerador from being saved:
+      %ul
+        - @numerador.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @numerador.code
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @numerador.name
+    %tr
+      %td.columnLabel
+        = f.label :number, :class => "apsLabel"
+      %td.columnData
+        = @numerador.number
 .clear

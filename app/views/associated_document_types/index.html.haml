@@ -1,29 +1,27 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AssociatedDocumentType.model_name.human, associated_document_types_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => AssociatedDocumentType.model_name.human).titlecase , new_associated_document_type_path(@associated_document_type), :class => "btn success" 
+  - if @associated_document_types.any?
+    = link_to t('scaffold.actions.export').titlecase, associated_document_types_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => AssociatedDocumentType.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= AssociatedDocumentType.human_attribute_name('name')
-    %th= AssociatedDocumentType.human_attribute_name('document_type')
-
-    %th
-    %th
-    %th
-
-  - @associated_document_types.each do |associated_document_type|
+- if @associated_document_types.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @associated_document_types.human_attribute_name('name')
+      %th.last
 
-      %td= associated_document_type.name
-      %td= associated_document_type.document_type
-
-
-      %td= link_to t('scaffold.actions.show').titlecase, associated_document_type
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(associated_document_type)
-      %td= link_to t('scaffold.actions.destroy').titlecase, associated_document_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => AssociatedDocumentType.model_name.human).titlecase, new_associated_document_type_path
-
+    - @associated_document_types.each do |item|
+      %tr
+        %td= item.name
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_associated_document_type_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@associated_document_types)
+  .clear
+.clear

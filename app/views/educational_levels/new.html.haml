@@ -1,4 +1,7 @@
-%h1
-  %h1 Nuevo Nivel de Educacion
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EducationalLevel.model_name.human, educational_levels_path
+    - breadcrumb.item t('scaffold.actions.new', :item => EducationalLevel.model_name.human).titlecase , educational_levels_path, :active => true
+
 = render 'form'
-= link_to 'Volver', educational_levels_path

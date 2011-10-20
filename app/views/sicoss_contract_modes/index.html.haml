@@ -1,30 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossContractMode.model_name.human, sicoss_contract_modes_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossContractMode.model_name.human).titlecase , new_sicoss_contract_mode_path(@sicoss_contract_mode), :class => "btn success" 
+  - if @sicoss_contract_modes.any?
+    = link_to t('scaffold.actions.export').titlecase, sicoss_contract_modes_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossContractMode.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossContractMode.human_attribute_name('name')
-
-    %th= SicossContractMode.human_attribute_name('code')
-
-    %th
-    %th
-    %th
-
-  - @sicoss_contract_modes.each do |sicoss_contract_mode|
+- if @sicoss_contract_modes.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @sicoss_contract_modes.human_attribute_name('name')
+      %th= sort_link @search, :code, @sicoss_contract_modes.human_attribute_name('code')
+      %th.last
 
-      %td= sicoss_contract_mode.name
-
-      %td= sicoss_contract_mode.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, sicoss_contract_mode
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_contract_mode_path(sicoss_contract_mode)
-      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_contract_mode, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossContractMode.model_name.human).titlecase, new_sicoss_contract_mode_path
-
+    - @sicoss_contract_modes.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_contract_mode_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_contract_modes)
+  .clear
+.clear

@@ -1,8 +1,26 @@
-%h1 Visualizacion de Pais
-%p#notice= notice
-%p
-  %b Detalle:
-  = @country.detalle
-= country_links(@country)
-|
-\#{link_to 'Volver', countries_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Country.model_name.human, countries_path 
+    - breadcrumb.item "#{@country.detalle.titlecase}", country_path(@country), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_country_path(@country), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @country, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@country) do |f|
+  - if @country.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@country.errors.count, "error")
+        prohibited this country from being saved:
+      %ul
+        - @country.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @country.detalle
+.clear

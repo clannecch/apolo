@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      kinship: Kinship
+    attributes:
+      kinship:
+        name: Nombre
+        hijo_conyugue: Hijo Conyugue
+        created_at: Creado el
+        updated_at: Actualizado el

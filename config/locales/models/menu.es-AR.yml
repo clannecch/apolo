@@ -1,0 +1,12 @@
+es-AR:
+  activerecord:
+    models:
+      menu: Menu
+    attributes:
+      menu:
+        parent_id: Parent
+        name: Nombre
+        link_url: Link Url
+        order_no: Order No
+        created_at: Creado el
+        updated_at: Actualizado el

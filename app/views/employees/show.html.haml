@@ -1,5 +1,21 @@
-%h1 Visualizacion de Empleado
-%p#notice= notice
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employee.model_name.human, employees_path
+    - breadcrumb.item "#{@employee.full_name.titlecase}", employee_path(@employee), :active => true
+
+/%h1 Visualizacion de Empleado
+= link_to t('scaffold.actions.edit').titlecase, edit_employee_path(@employee), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employee, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+/= employee_links(@employee)
+/= link_to 'Editar', edit_employee_path(@employee)
+/|
+/#{link_to 'Volver', employees_path}
+/= link_to icon('printer', :small, :title => 'Ficha Empleado'), employee_path(@employee, :format => 'pdf'
+= link_to "Ficha Empleado", employee_path(@employees, :format => "pdf"), :class => "btn standard"
+.clear
+%br/
+/%p#notice= notice
 %p
   %b Consorcio:
   = @employee.consortium.try(:name)
@@ -248,8 +264,3 @@
       %td= link_to 'Visualizar', attach
 
 
-= employee_links(@employee)
-= link_to 'Editar', edit_employee_path(@employee)
-|
-\#{link_to 'Volver', employees_path}
-= link_to icon('printer', :small, :title => 'Ficha Empleado'), employee_path(@employee, :format => 'pdf')

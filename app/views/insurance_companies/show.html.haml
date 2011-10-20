@@ -1,8 +1,26 @@
-%h1 Visualizar Aseguradora
-%p#notice= notice
-%p
-  %b Detalle:
-  = @insurance_company.detalle
-= insurance_company_links(@insurance_company)
-|
-\#{link_to 'Volver', insurance_companies_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceCompany.model_name.human, insurance_companies_path 
+    - breadcrumb.item "#{@insurance_company.detalle.titlecase}", insurance_company_path(@insurance_company), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_insurance_company_path(@insurance_company), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @insurance_company, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@insurance_company) do |f|
+  - if @insurance_company.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@insurance_company.errors.count, "error")
+        prohibited this insurance_company from being saved:
+      %ul
+        - @insurance_company.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @insurance_company.detalle
+.clear

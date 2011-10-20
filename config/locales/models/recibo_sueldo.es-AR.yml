@@ -1,0 +1,14 @@
+es-AR:
+  activerecord:
+    models:
+      recibo_sueldo: Recibo Sueldo
+    attributes:
+      recibo_sueldo:
+        liquidacion_id: Liquidacion
+        employee_id: Employee
+        fecha_recibo: Fecha Recibo
+        observaciones: Observaciones
+        mensaje_recibo: Mensaje Recibo
+        created_at: Creado el
+        updated_at: Actualizado el
+        fecha_calculo: Fecha Calculo

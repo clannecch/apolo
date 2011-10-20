@@ -1,3 +1,7 @@
-%h1 Nuevo Banco
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDeposit.model_name.human, bank_deposits_path
+    - breadcrumb.item t('scaffold.actions.new', :item => BankDeposit.model_name.human).titlecase , bank_deposits_path, :active => true
+
 = render 'form'
-= link_to 'Volver', bank_deposits_path

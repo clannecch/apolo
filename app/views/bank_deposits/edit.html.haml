@@ -1,5 +1,10 @@
-%h1 Edicion de Banco
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDeposit.model_name.human, bank_deposits_path 
+    - breadcrumb.item "#{@bank_deposit.detalle.titlecase}", bank_deposit_path(@bank_deposit), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, bank_deposit_path(@bank_deposit), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @bank_deposit
-|
-\#{link_to 'Volver', bank_deposits_path}

@@ -1,27 +1,41 @@
-%h1 Listado de tabla de deduccion ganancias
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DeduccionGananciasTable.model_name.human, deduccion_ganancias_tables_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => DeduccionGananciasTable.model_name.human).titlecase , new_deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn success" 
+  - if @deduccion_ganancias_tables.any?
+    = link_to t('scaffold.actions.export').titlecase, deduccion_ganancias_tables_path( :format => 'pdf'), :class => "btn info"
 
-%table
-  %tr
-    %th Periodo
-    %th No imponibles
-    %th Conyuge
-    %th Hijo
-    %th Otras
-    %th Especial inciso e
-    %th Especial inciso abc
-    %th
-    %th
-
-  - @deduccion_ganancias_tables.each do |deduccion_ganancias_table|
+- if @deduccion_ganancias_tables.any?
+  %table.tableStandard
     %tr
-      %td= deduccion_ganancias_table.periodo_ano.to_s
-      %td= deduccion_ganancias_table.periodo_mes.to_s
-      %td= deduccion_ganancias_table.no_imponibles
-      %td= deduccion_ganancias_table.conyuge
-      %td= deduccion_ganancias_table.hijo
-      %td= deduccion_ganancias_table.otras
-      %td= deduccion_ganancias_table.especial_inciso_e
-      %td= deduccion_ganancias_table.especial_inciso_abc
-      %td= deduccion_ganancias_table_links(deduccion_ganancias_table)
-%br/
-= link_to 'New Deduccion ganancias table', new_deduccion_ganancias_table_path
+      %th= sort_link @search, :no_imponibles, @deduccion_ganancias_tables.human_attribute_name('no_imponibles')
+      %th= sort_link @search, :conyuge, @deduccion_ganancias_tables.human_attribute_name('conyuge')
+      %th= sort_link @search, :hijo, @deduccion_ganancias_tables.human_attribute_name('hijo')
+      %th= sort_link @search, :otras, @deduccion_ganancias_tables.human_attribute_name('otras')
+      %th= sort_link @search, :especial_inciso_e, @deduccion_ganancias_tables.human_attribute_name('especial_inciso_e')
+      %th= sort_link @search, :especial_inciso_abc, @deduccion_ganancias_tables.human_attribute_name('especial_inciso_abc')
+      %th= sort_link @search, :periodo_ano, @deduccion_ganancias_tables.human_attribute_name('periodo_ano')
+      %th= sort_link @search, :periodo_mes, @deduccion_ganancias_tables.human_attribute_name('periodo_mes')
+      %th.last
+
+    - @deduccion_ganancias_tables.each do |item|
+      %tr
+        %td= item.no_imponibles
+        %td= item.conyuge
+        %td= item.hijo
+        %td= item.otras
+        %td= item.especial_inciso_e
+        %td= item.especial_inciso_abc
+        %td= item.periodo_ano
+        %td= item.periodo_mes
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_deduccion_ganancias_table_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@deduccion_ganancias_tables)
+  .clear
+.clear

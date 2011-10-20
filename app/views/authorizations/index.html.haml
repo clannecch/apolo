@@ -1,0 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Authorization.model_name.human, authorizations_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Authorization.model_name.human).titlecase , new_authorization_path(@authorization), :class => "btn success" 
+  - if @authorizations.any?
+    = link_to t('scaffold.actions.export').titlecase, authorizations_path( :format => 'pdf'), :class => "btn info"
+
+- if @authorizations.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :code, @authorizations.human_attribute_name('code')
+      %th= sort_link @search, :name, @authorizations.human_attribute_name('name')
+      %th.last
+
+    - @authorizations.each do |item|
+      %tr
+        %td= item.code
+        %td= item.name
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_authorization_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@authorizations)
+  .clear
+.clear

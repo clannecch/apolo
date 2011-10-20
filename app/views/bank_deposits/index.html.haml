@@ -1,13 +1,27 @@
-%h1 Listado de Bancos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @bank_deposits.each do |bank_deposit|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDeposit.model_name.human, bank_deposits_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => BankDeposit.model_name.human).titlecase , new_bank_deposit_path(@bank_deposit), :class => "btn success" 
+  - if @bank_deposits.any?
+    = link_to t('scaffold.actions.export').titlecase, bank_deposits_path( :format => 'pdf'), :class => "btn info"
+
+- if @bank_deposits.any?
+  %table.tableStandard
     %tr
-      %td= bank_deposit.detalle
-      %td= bank_deposit_links(bank_deposit)
-%br/
-= link_to 'Nuevo Banco', new_bank_deposit_path
+      %th= sort_link @search, :detalle, @bank_deposits.human_attribute_name('detalle')
+      %th.last
+
+    - @bank_deposits.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_bank_deposit_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@bank_deposits)
+  .clear
+.clear

@@ -1,8 +1,26 @@
-%h1 Visualizar Lugar de Emision de Documento
-%p#notice= notice
-%p
-  %b Detalle:
-  = @issued.detalle
-= issued_links(@issued)
-|
-\#{link_to 'volver', issueds_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Issued.model_name.human, issueds_path 
+    - breadcrumb.item "#{@issued.detalle.titlecase}", issued_path(@issued), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_issued_path(@issued), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @issued, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@issued) do |f|
+  - if @issued.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@issued.errors.count, "error")
+        prohibited this issued from being saved:
+      %ul
+        - @issued.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @issued.detalle
+.clear

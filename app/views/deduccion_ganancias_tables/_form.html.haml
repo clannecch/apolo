@@ -1,0 +1,52 @@
+= form_for(@deduccion_ganancias_table) do |f|
+  - if @deduccion_ganancias_table.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@deduccion_ganancias_table.errors.count, "error")
+        prohibited this deduccion_ganancias_table from being saved:
+      %ul
+        - @deduccion_ganancias_table.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :no_imponibles, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :no_imponibles, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :conyuge, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :conyuge, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :hijo, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :hijo, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :otras, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :otras, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :especial_inciso_e, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :especial_inciso_e, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :especial_inciso_abc, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :especial_inciso_abc, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :periodo_ano, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :periodo_ano, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :periodo_mes, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :periodo_mes, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

@@ -35,8 +35,7 @@ class Consortium < ActiveRecord::Base
   belongs_to :location
 
   validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
-                               :cuit, :numero_inscripcion,
-                               :caja, :ultima_hoja_libro, :message => "es un dato requerido"
+                               :cuit, :ultima_hoja_libro, :message => "es un dato requerido"
 
   has_many   :attachments, :as => :attachable, :dependent => :restrict
 

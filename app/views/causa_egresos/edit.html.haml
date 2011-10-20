@@ -1,0 +1,10 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CausaEgreso.model_name.human, causa_egresos_path 
+    - breadcrumb.item "#{@causa_egreso.detalle.titlecase}", causa_egreso_path(@causa_egreso), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, causa_egreso_path(@causa_egreso), :class => "btn info" 
+.clear
+%br/
+= render 'form'

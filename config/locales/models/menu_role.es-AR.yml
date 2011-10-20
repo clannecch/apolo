@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      menu_role: Menu Role
+    attributes:
+      menu_role:
+        menu_id: Menu
+        rol_id: Rol
+        created_at: Creado el
+        updated_at: Actualizado el

@@ -1,3 +1,8 @@
-%h1 Nuevo Empleado
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employee.model_name.human, employees_path
+    - breadcrumb.item t('scaffold.actions.new', :item => Employee.model_name.human).titlecase , employees_path, :active => true
+
+/%h1 Nuevo Empleado
 = render 'form'
-= link_to 'Volver', employees_path

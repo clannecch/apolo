@@ -1,45 +1,63 @@
-%h1 Listado de Familiares
-%table
-  %tr
-    %th Apellido
-    %th Nombre
-    %th Fecha nacimiento
-    %th Numero documento
-    %th Obra Sociale
-    %th Cuil
-    %th Cuit
-    %th Tomo
-    %th Folio
-    %th Acta
-    %th Pais
-    %th Provincia
-    %th Comuna
-    %th Employee
-    %th tipo de documento
-    %th Ocupacion
-    %th
-    %th
-    %th
-  - @employee_familiars.each do |employee_familiar|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeFamiliar.model_name.human, employee_familiars_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EmployeeFamiliar.model_name.human).titlecase , new_employee_familiar_path(@employee_familiar), :class => "btn success" 
+  - if @employee_familiars.any?
+    = link_to t('scaffold.actions.export').titlecase, employee_familiars_path( :format => 'pdf'), :class => "btn info"
+
+- if @employee_familiars.any?
+  %table.tableStandard
     %tr
-      %td= employee_familiar.apellido
-      %td= employee_familiar.nombre
-      %td= employee_familiar.fecha_nacimiento
-      %td= employee_familiar.numero_documento
-      %td= employee_familiar.health_insurance_id
-      %td= employee_familiar.cuil
-      %td= employee_familiar.cuit
-      %td= employee_familiar.tomo
-      %td= employee_familiar.folio
-      %td= employee_familiar.acta
-      %td= employee_familiar.country_id
-      %td= employee_familiar.province_id
-      %td= employee_familiar.comuna
-      %td= employee_familiar.document_type_id
-      %td= employee_familiar.activity_id
-      %td= employee_familiar.employee_id
-      %td= link_to 'Visualizar', employee_familiar
-      %td= link_to 'Editas', edit_employee_familiar_path(employee_familiar)
-      %td= link_to 'Borrar', employee_familiar, :confirm => 'Esta Seguro?', :method => :delete
-%br/
-= link_to 'Nuevo Familiar', new_employee_familiar_path
+      %th= sort_link @search, :apellido, @employee_familiars.human_attribute_name('apellido')
+      %th= sort_link @search, :nombre, @employee_familiars.human_attribute_name('nombre')
+      %th= sort_link @search, :fecha_nacimiento, @employee_familiars.human_attribute_name('fecha_nacimiento')
+      %th= sort_link @search, :numero_documento, @employee_familiars.human_attribute_name('numero_documento')
+      %th= sort_link @search, :health_insurance_id, @employee_familiars.human_attribute_name('health_insurance_id')
+      %th= sort_link @search, :cuil, @employee_familiars.human_attribute_name('cuil')
+      %th= sort_link @search, :cuit, @employee_familiars.human_attribute_name('cuit')
+      %th= sort_link @search, :tomo, @employee_familiars.human_attribute_name('tomo')
+      %th= sort_link @search, :folio, @employee_familiars.human_attribute_name('folio')
+      %th= sort_link @search, :acta, @employee_familiars.human_attribute_name('acta')
+      %th= sort_link @search, :country_id, @employee_familiars.human_attribute_name('country_id')
+      %th= sort_link @search, :province_id, @employee_familiars.human_attribute_name('province_id')
+      %th= sort_link @search, :comuna, @employee_familiars.human_attribute_name('comuna')
+      %th= sort_link @search, :employee_id, @employee_familiars.human_attribute_name('employee_id')
+      %th= sort_link @search, :document_type_id, @employee_familiars.human_attribute_name('document_type_id')
+      %th= sort_link @search, :activity_id, @employee_familiars.human_attribute_name('activity_id')
+      %th= sort_link @search, :kinship_id, @employee_familiars.human_attribute_name('kinship_id')
+      %th= sort_link @search, :address, @employee_familiars.human_attribute_name('address')
+      %th= sort_link @search, :porcentual, @employee_familiars.human_attribute_name('porcentual')
+      %th.last
+
+    - @employee_familiars.each do |item|
+      %tr
+        %td= item.apellido
+        %td= item.nombre
+        %td= item.fecha_nacimiento
+        %td= item.numero_documento
+        %td= item.health_insurance_id
+        %td= item.cuil
+        %td= item.cuit
+        %td= item.tomo
+        %td= item.folio
+        %td= item.acta
+        %td= item.country_id
+        %td= item.province_id
+        %td= item.comuna
+        %td= item.employee_id
+        %td= item.document_type_id
+        %td= item.activity_id
+        %td= item.kinship_id
+        %td= item.address
+        %td= item.porcentual
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_familiar_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@employee_familiars)
+  .clear
+.clear

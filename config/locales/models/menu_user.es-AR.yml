@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      menu_user: Menu User
+    attributes:
+      menu_user:
+        menu_id: Menu
+        user_id: User
+        created_at: Creado el
+        updated_at: Actualizado el

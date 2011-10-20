@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      group_employer_contribution: Grupo de Aporte
+      group_employer_contribution: Group Employer Contribution
     attributes:
       group_employer_contribution:
         detalle: Detalle

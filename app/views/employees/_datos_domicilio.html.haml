@@ -1,80 +1,79 @@
-= f.label ""
 %br/
 %h3 Domicilio
 .field
-  = f.label "Telefono"
+  = f.label "Telefono", :class => "tab_label"
   %br/
   = f.text_field :telefono
 .field
-  = f.label "Calle"
+  = f.label "Calle", :class => "tab_label"
   %br/
   = f.text_field :calle
 .field
-  = f.label "Puerta"
+  = f.label "Puerta", :class => "tab_label"
   %br/
   = f.text_field :puerta
 .field
-  = f.label "Piso"
+  = f.label "Piso", :class => "tab_label"
   %br/
   = f.text_field :piso
 .field
-  = f.label "Departamento"
+  = f.label "Departamento", :class => "tab_label"
   %br/
   = f.text_field :departamento
 .field
-  = f.label "Localidad"
+  = f.label "Localidad", :class => "tab_label"
   %br/
   = f.collection_select :location_id, Location.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Provincia"
+  = f.label "Provincia", :class => "tab_label"
   %br/
   = f.collection_select :province_id, Province.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Pais"
+  = f.label "Pais", :class => "tab_label"
   %br/
   = f.collection_select :country_id, Country.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Codigo Postal"
+  = f.label "Codigo Postal", :class => "tab_label"
   %br/
   = f.text_field :codigo_postal
 
 .field
-  = f.label "Domicilio Sobre"
+  = f.label "Domicilio Sobre", :class => "tab_label"
   %br/
   = f.collection_select :home_about_id, HomeAbout.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Cuadras de Asfalto"
+  = f.label "Cuadras de Asfalto", :class => "tab_label"
   %br/
   = f.text_field :cuadras_asfalto
 .field
-  = f.label "Entre Calle(izquierda)"
+  = f.label "Entre Calle(izquierda)", :class => "tab_label"
   %br/
   = f.text_field :domicilio_entre_calle_izquierda
 .field
-  = f.label "Entre Calle(Derecha)"
+  = f.label "Entre Calle(Derecha)", :class => "tab_label"
   %br/
   = f.text_field :domicilio_entre_calle_derecha
 .field
-  = f.label "Entre Calle(detras)"
+  = f.label "Entre Calle(detras)", :class => "tab_label"
   %br/
   = f.text_field :domicilio_entre_calles_detras
 .field
-  = f.label "Avenida mas Cercana"
+  = f.label "Avenida mas Cercana", :class => "tab_label"
   %br/
   = f.text_field :domicilio_avenida_cercana
 .field
-  = f.label "Altura Avenida mas Cercana"
+  = f.label "Altura Avenida mas Cercana", :class => "tab_label"
   %br/
   = f.text_field :domicilio_avenida_cercana_altura
 .field
-  = f.label "Movil"
+  = f.label "Movil", :class => "tab_label"
   %br/
   = f.text_field :movil
 .field
-  = f.label "Tipo de Email"
+  = f.label "Tipo de Email", :class => "tab_label"
   %br/
   = f.collection_select :email_type_id, EmailType.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Direccion eMail"
+  = f.label "Direccion eMail", :class => "tab_label"
   %br/
   = f.text_field :email

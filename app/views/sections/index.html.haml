@@ -1,13 +1,27 @@
-%h1 Listado de secciones
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @sections.each do |section|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Section.model_name.human, sections_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Section.model_name.human).titlecase , new_section_path(@section), :class => "btn success" 
+  - if @sections.any?
+    = link_to t('scaffold.actions.export').titlecase, sections_path( :format => 'pdf'), :class => "btn info"
+
+- if @sections.any?
+  %table.tableStandard
     %tr
-      %td= section.detalle
-      %td= section_links(section)
-%br/
-= link_to 'Nueva Seccion', new_section_path
+      %th= sort_link @search, :detalle, @sections.human_attribute_name('detalle')
+      %th.last
+
+    - @sections.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_section_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sections)
+  .clear
+.clear

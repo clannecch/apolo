@@ -1,3 +1,7 @@
-%h1 Nuevo Caracter de Servicio
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CharacterService.model_name.human, character_services_path
+    - breadcrumb.item t('scaffold.actions.new', :item => CharacterService.model_name.human).titlecase , character_services_path, :active => true
+
 = render 'form'
-= link_to 'Volver', character_services_path

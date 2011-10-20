@@ -9,7 +9,8 @@ class SicossActivitiesController < ApplicationController
   # GET /sicoss_activities.json
   # GET /sicoss_activities.xml
   def index
-    @sicoss_activities = SicossActivity.all
+    @search = SicossActivity.search(params[:search])
+    @sicoss_activities = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_activities.empty?
     respond_with(@sicoss_activities)
   end

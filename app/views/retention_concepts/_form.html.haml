@@ -7,45 +7,46 @@
       %ul
         - @retention_concept.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    %br/
-    = f.label :codigo
-    %br/
-    = f.text_field :codigo
-  .field
-    %br/
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
-  .field
-    %br/
-    = f.label :formula_calculo_valor
-    %br/
-    = f.text_field :formula_calculo_valor
-  .field
-    %br/
-    = f.label :acumuladores_valor
-    %br/
-    = f.text_field :acumuladores_valor
-  .field
-    %br/
-    = f.label :prioridad
-    %br/
-    = f.text_field :prioridad
-  .field
-    %br/
-    = f.label "data_to_ask"
-    %br/
-    = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
-  .field
-    %br/
-    = f.label :statistical_value
-    %br/
-    = f.text_field :statistical_value
-  .field
-    %br/
-    = f.label :accounting_imputation_id
-    %br/
-    = f.text_field :accounting_imputation_id
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :codigo, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :codigo, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :detalle, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :statistical_value, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :statistical_value, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :accounting_imputation_id, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :accounting_imputation_id, AccountingImputation.by_company(current_company.id), :id, :detalle, {:class => "apsSelect"}
+    %tr
+      %td.columnLabel
+        = f.label :prioridad, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :prioridad, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :formula_calculo_valor, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :formula_calculo_valor, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :acumuladores_valor, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :acumuladores_valor, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :data_to_ask_id, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :data_to_ask_id, DataToAsk.by_company(current_company.id), :id, :detalle, {:class => "apsSelect"}
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

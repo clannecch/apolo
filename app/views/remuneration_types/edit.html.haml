@@ -1,5 +1,10 @@
-%h1 Edicion Tipo de Remuneracion
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RemunerationType.model_name.human, remuneration_types_path 
+    - breadcrumb.item "#{@remuneration_type.detalle.titlecase}", remuneration_type_path(@remuneration_type), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, remuneration_type_path(@remuneration_type), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @remuneration_type
-|
-\#{link_to 'Volver', remuneration_types_path}

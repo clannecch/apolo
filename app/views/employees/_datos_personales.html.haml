@@ -1,65 +1,65 @@
 %h3 Datos Personales
 .field
-  = f.label "Legajo"
+  = f.label "Legajo", :class => "tab_label"
   %br/
   = f.text_field :legajo
 .field
-  = f.label "Nombre"
+  = f.label "Nombre", :class => "tab_label"
   %br/
   = f.text_field :nombre
 .field
-  = f.label "Apellido"
+  = f.label "Apellido", :class => "tab_label"
   %br/
   = f.text_field :apellido
 .field
-  = f.label "Tipo Documento"
+  = f.label "Tipo Documento", :class => "tab_label"
   %br/
   = f.collection_select :document_type_id, DocumentType.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Numero de Documento"
+  = f.label "Numero de Documento", :class => "tab_label"
   %br/
   = f.text_field :numero_documento
 .field
-  = f.label "Emitido por"
+  = f.label "Emitido por", :class => "tab_label"
   %br/
   = f.collection_select :issued_id, Issued.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Sexo"
+  = f.label "Sexo", :class => "tab_label"
   %br/
   = select( "employee", "sexo", { "Masculino" => "M", "Femenino" => "F"})
 .field
-  = f.label "Nacionalidad"
+  = f.label "Nacionalidad", :class => "tab_label"
   %br/
   = f.collection_select :nationality_id, Nationality.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Estado Civil"
+  = f.label "Estado Civil", :class => "tab_label"
   %br/
   = f.collection_select :marital_status_id, MaritalStatus.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Fecha de Nacimiento"
+  = f.label "Fecha de Nacimiento", :class => "tab_label"
   %br/
-  = f.text_field :fecha_nacimiento, :class => "datetimepicker"
+  = f.text_field :fecha_nacimiento, :class => "apsDatetime"
 .field
-  = f.label "Nivel de Estudios"
+  = f.label "Nivel de Estudios", :class => "tab_label"
   %br/
   = f.collection_select :educational_level_id, EducationalLevel.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Numero Tarjeta de Fichaje"
+  = f.label "Numero Tarjeta de Fichaje", :class => "tab_label"
   %br/
   = f.text_field :id_card
 .field
-  = f.label "Numero de Cofre"
+  = f.label "Numero de Cofre", :class => "tab_label"
   %br/
   = f.text_field :numero_cofre
 .field
-  = f.label "Matricula Nacional"
+  = f.label "Matricula Nacional", :class => "tab_label"
   %br/
   = f.text_field :matricula_nacional
 .field
-  = f.label "Matricula Provincial"
+  = f.label "Matricula Provincial", :class => "tab_label"
   %br/
   = f.text_field :matricula_provincial
 .field
-  = f.label "Discapacidad"
+  = f.label "Discapacidad", :class => "tab_label"
   %br/
   = select( "employee", "discapacidad", { "No" => "N", "Si" => "S"})

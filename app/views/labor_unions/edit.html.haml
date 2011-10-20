@@ -1,5 +1,10 @@
-%h1 Edicion de Sindicato
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item LaborUnion.model_name.human, labor_unions_path 
+    - breadcrumb.item "#{@labor_union.detalle.titlecase}", labor_union_path(@labor_union), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, labor_union_path(@labor_union), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @labor_union
-|
-\#{link_to 'Volver', labor_unions_path}

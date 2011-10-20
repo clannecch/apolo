@@ -1,0 +1,30 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item UserRole.model_name.human, user_roles_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_user_role_path(@user_role), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @user_role, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@user_role) do |f|
+  - if @user_role.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user_role.errors.count, "error")
+        prohibited this user_role from being saved:
+      %ul
+        - @user_role.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :user_id, :class => "apsLabel"
+      %td.columnData
+        = @user_role.user_id
+    %tr
+      %td.columnLabel
+        = f.label :rol_id, :class => "apsLabel"
+      %td.columnData
+        = @user_role.rol_id
+.clear

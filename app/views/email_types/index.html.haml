@@ -1,16 +1,27 @@
-%h1 Listing email_types
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmailType.model_name.human, email_types_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EmailType.model_name.human).titlecase , new_email_type_path(@email_type), :class => "btn success" 
+  - if @email_types.any?
+    = link_to t('scaffold.actions.export').titlecase, email_types_path( :format => 'pdf'), :class => "btn info"
 
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-
-  - @email_types.each do |email_type|
+- if @email_types.any?
+  %table.tableStandard
     %tr
-      %td= email_type.detalle
-      %td= email_type_links(email_type)
+      %th= sort_link @search, :detalle, @email_types.human_attribute_name('detalle')
+      %th.last
 
-%br/
-
-= link_to 'Nuevo tipo de Email', new_email_type_path
+    - @email_types.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_email_type_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@email_types)
+  .clear
+.clear

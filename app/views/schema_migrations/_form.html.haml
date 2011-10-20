@@ -1,0 +1,17 @@
+= form_for(@schema_migration) do |f|
+  - if @schema_migration.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@schema_migration.errors.count, "error")
+        prohibited this schema_migration from being saved:
+      %ul
+        - @schema_migration.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :version, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :version, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

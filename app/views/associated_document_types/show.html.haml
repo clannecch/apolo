@@ -1,15 +1,26 @@
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), AssociatedDocumentType.model_name.human].join(' ').titlecase
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AssociatedDocumentType.model_name.human, associated_document_types_path 
+    - breadcrumb.item "#{@associated_document_type.name.titlecase}", associated_document_type_path(@associated_document_type), :active => true
 
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(@associated_document_type), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@associated_document_type) do |s|
-  = s.attributes(AssociatedDocumentType.human_name + ' Info') do
-
-    = s.attribute :name
-    = s.attribute :document_type
-
+= link_to t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(@associated_document_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @associated_document_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@associated_document_type) do |f|
+  - if @associated_document_type.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@associated_document_type.errors.count, "error")
+        prohibited this associated_document_type from being saved:
+      %ul
+        - @associated_document_type.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @associated_document_type.name
 .clear

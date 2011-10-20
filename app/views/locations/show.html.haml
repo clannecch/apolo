@@ -1,8 +1,26 @@
-%h1 Listado de Localidades
-%p#notice= notice
-%p
-  %b Detalle:
-  = @location.detalle
-= location_links(@location)
-|
-\#{link_to 'volver', locations_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Location.model_name.human, locations_path 
+    - breadcrumb.item "#{@location.detalle.titlecase}", location_path(@location), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_location_path(@location), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @location, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@location) do |f|
+  - if @location.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@location.errors.count, "error")
+        prohibited this location from being saved:
+      %ul
+        - @location.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @location.detalle
+.clear

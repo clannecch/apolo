@@ -1,13 +1,27 @@
-%h1 Listado de Cuentas Contables
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @accounting_imputations.each do |accounting_imputation|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AccountingImputation.model_name.human, accounting_imputations_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => AccountingImputation.model_name.human).titlecase , new_accounting_imputation_path(@accounting_imputation), :class => "btn success" 
+  - if @accounting_imputations.any?
+    = link_to t('scaffold.actions.export').titlecase, accounting_imputations_path( :format => 'pdf'), :class => "btn info"
+
+- if @accounting_imputations.any?
+  %table.tableStandard
     %tr
-      %td= accounting_imputation.detalle
-      %td= accounting_imputation_links(accounting_imputation)
-%br/
-= link_to 'Nueva Cuenta Contable', new_accounting_imputation_path
+      %th= sort_link @search, :detalle, @accounting_imputations.human_attribute_name('detalle')
+      %th.last
+
+    - @accounting_imputations.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_accounting_imputation_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@accounting_imputations)
+  .clear
+.clear

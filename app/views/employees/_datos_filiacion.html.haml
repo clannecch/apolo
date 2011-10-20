@@ -1,45 +1,45 @@
 %h3 Filiacion
 .field
-  = f.label "Obra Social"
+  = f.label "Obra Social", :class => "tab_label"
   %br/
   = f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Plan Obra Social"
+  = f.label "Plan Obra Social", :class => "tab_label"
   %br/
   = f.text_field :plan_osocial
 .field
-  = f.label "Numero Afiliado Obra Social"
+  = f.label "Numero Afiliado Obra Social", :class => "tab_label"
   %br/
   = f.text_field :numero_afiliado_osocial
 .field
-  = f.label "Cargas Extras Obra Social"
+  = f.label "Cargas Extras Obra Social", :class => "tab_label"
   %br/
   = f.text_field :cargas_extras_osocial
 .field
-  = f.label "Cuota Obra Social(Solo si el Plan es superior al cubierto x empresa)"
+  = f.label "Cuota Obra Social(Solo si el Plan es superior al cubierto x empresa)", :class => "tab_label"
   %br/
   = f.text_field :retencion_minima_osocial
 .field
-  = f.label "Sindicato"
+  = f.label "Sindicato", :class => "tab_label"
   %br/
   = f.collection_select :labor_union_id, LaborUnion.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Numero Afiliado Sindicato"
+  = f.label "Numero Afiliado Sindicato", :class => "tab_label"
   %br/
   = f.text_field :numero_afiliado_sindicato
 .field
-  = f.label "Numero de Jubilacion"
+  = f.label "Numero de Jubilacion", :class => "tab_label"
   %br/
   = f.text_field :numero_jubilacion
 .field
-  = f.label "Numero Ganancias"
+  = f.label "Numero Ganancias", :class => "tab_label"
   %br/
   = f.text_field :numero_ganancias
 .field
-  = f.label "CUIT"
+  = f.label "CUIT", :class => "tab_label"
   %br/
   = f.text_field :cuit
 .field
-  = f.label "CUIL"
+  = f.label "CUIL", :class => "tab_label"
   %br/
   = f.text_field :cuil

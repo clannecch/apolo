@@ -7,9 +7,11 @@
       %ul
         - @contract_mode.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :detalle, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

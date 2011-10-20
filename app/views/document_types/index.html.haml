@@ -1,13 +1,27 @@
-%h1 Listado de Tipo de Documentos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @document_types.each do |document_type|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DocumentType.model_name.human, document_types_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => DocumentType.model_name.human).titlecase , new_document_type_path(@document_type), :class => "btn success" 
+  - if @document_types.any?
+    = link_to t('scaffold.actions.export').titlecase, document_types_path( :format => 'pdf'), :class => "btn info"
+
+- if @document_types.any?
+  %table.tableStandard
     %tr
-      %td= document_type.detalle
-      %td= document_type_links(document_type)
-%br/
-= link_to 'Nuevo Tipo de Documento', new_document_type_path
+      %th= sort_link @search, :detalle, @document_types.human_attribute_name('detalle')
+      %th.last
+
+    - @document_types.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_document_type_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@document_types)
+  .clear
+.clear

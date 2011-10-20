@@ -1,0 +1,18 @@
+es-AR:
+  activerecord:
+    models:
+      liquidacion: Liquidacion
+    attributes:
+      liquidacion:
+        fecha_liquidacion: Fecha Liquidacion
+        fecha_deposito: Fecha Deposito
+        bank_deposit_id: Bank Deposit
+        fecha_cierre: Fecha Cierre
+        quincena: Quincena
+        techo_retenciones: Techo Retenciones
+        created_at: Creado el
+        updated_at: Actualizado el
+        tipo_recibo_id: Tipo Recibo
+        periodo: Periodo
+        periodo_deposito: Periodo Deposito
+        company_id: Empresa

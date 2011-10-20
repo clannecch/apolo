@@ -27,7 +27,7 @@ class Liquidacion < ActiveRecord::Base
   belongs_to :bank_deposit
 
   validates_uniqueness_of     :periodo,
-                              :scope => [:quincena, :tipo_recibo_id],           :message => "+quincena+tipo recibo duplicado"
+                              :scope => [:quincena, :tipo_recibo_id,:company_id],           :message => "+quincena+tipo recibo duplicado"
 
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 

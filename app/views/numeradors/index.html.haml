@@ -1,34 +1,31 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Numerador.model_name.human, numeradors_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Numerador.model_name.human).titlecase , new_numerador_path(@numerador), :class => "btn success" 
+  - if @numeradors.any?
+    = link_to t('scaffold.actions.export').titlecase, numeradors_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => Numerador.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= Numerador.human_attribute_name('code')
-
-    %th= Numerador.human_attribute_name('name')
-
-    %th= Numerador.human_attribute_name('number')
-
-    %th
-    %th
-    %th
-
-  - @numeradors.each do |numerador|
+- if @numeradors.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :code, @numeradors.human_attribute_name('code')
+      %th= sort_link @search, :name, @numeradors.human_attribute_name('name')
+      %th= sort_link @search, :number, @numeradors.human_attribute_name('number')
+      %th.last
 
-      %td= numerador.code
-
-      %td= numerador.name
-
-      %td= numerador.number
-
-      %td= link_to t('scaffold.actions.show').titlecase, numerador
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_numerador_path(numerador)
-      %td= link_to t('scaffold.actions.destroy').titlecase, numerador, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => Numerador.model_name.human).titlecase, new_numerador_path
-
+    - @numeradors.each do |item|
+      %tr
+        %td= item.code
+        %td= item.name
+        %td= item.number
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_numerador_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@numeradors)
+  .clear
+.clear

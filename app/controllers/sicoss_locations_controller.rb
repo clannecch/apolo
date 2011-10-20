@@ -9,7 +9,9 @@ class SicossLocationsController < ApplicationController
   # GET /sicoss_locations.json
   # GET /sicoss_locations.xml
   def index
-    @sicoss_locations = SicossLocation.all
+    @search = SicossLocation.search(params[:search])
+    @sicoss_locations = @search.page(params[:page]).per(10)
+
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_locations.empty?
     respond_with(@sicoss_locations)
   end

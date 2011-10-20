@@ -1,13 +1,27 @@
-%h1 Listado de Caracter de Servicio
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @character_services.each do |character_service|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CharacterService.model_name.human, character_services_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => CharacterService.model_name.human).titlecase , new_character_service_path(@character_service), :class => "btn success" 
+  - if @character_services.any?
+    = link_to t('scaffold.actions.export').titlecase, character_services_path( :format => 'pdf'), :class => "btn info"
+
+- if @character_services.any?
+  %table.tableStandard
     %tr
-      %td= character_service.detalle
-      %td= character_service_links(character_service)
-%br/
-= link_to 'Nuevo Caracter de Servicio', new_character_service_path
+      %th= sort_link @search, :detalle, @character_services.human_attribute_name('detalle')
+      %th.last
+
+    - @character_services.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_character_service_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@character_services)
+  .clear
+.clear

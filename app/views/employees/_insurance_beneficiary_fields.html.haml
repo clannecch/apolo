@@ -3,7 +3,7 @@
   %td= f.text_field :nombre
   %td= f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true
   %td= f.text_field :numero_documento
-  %td= f.text_field :fecha_nacimiento, :class => :datepicker
+  %td= f.text_field :fecha_nacimiento, :class => "apsDatetime"
   %td= f.text_field :address
   %td= f.collection_select :kinship_id,  Kinship.all, :id, :name, :prompt => true
   %td= f.text_field :porcentual

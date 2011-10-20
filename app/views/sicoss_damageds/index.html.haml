@@ -1,30 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossDamaged.model_name.human, sicoss_damageds_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossDamaged.model_name.human).titlecase , new_sicoss_damaged_path(@sicoss_damaged), :class => "btn success" 
+  - if @sicoss_damageds.any?
+    = link_to t('scaffold.actions.export').titlecase, sicoss_damageds_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossDamaged.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossDamaged.human_attribute_name('code')
-
-    %th= SicossDamaged.human_attribute_name('name')
-
-    %th
-    %th
-    %th
-
-  - @sicoss_damageds.each do |sicoss_damaged|
+- if @sicoss_damageds.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @sicoss_damageds.human_attribute_name('name')
+      %th= sort_link @search, :code, @sicoss_damageds.human_attribute_name('code')
+      %th.last
 
-      %td= sicoss_damaged.name
-
-      %td= sicoss_damaged.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, sicoss_damaged
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_damaged_path(sicoss_damaged)
-      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_damaged, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossDamaged.model_name.human).titlecase, new_sicoss_damaged_path
-
+    - @sicoss_damageds.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_damaged_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_damageds)
+  .clear
+.clear

@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      associated_document_type: Associated Document Type
+    attributes:
+      associated_document_type:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el

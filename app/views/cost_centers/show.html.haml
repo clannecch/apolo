@@ -1,8 +1,26 @@
-%h1 Visualizacion de Centros de Costos
-%p#notice= notice
-%p
-  %b Detalle:
-  = @cost_center.detalle
-= cost_center_links(@cost_center)
-|
-\#{link_to 'Volver', cost_centers_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CostCenter.model_name.human, cost_centers_path 
+    - breadcrumb.item "#{@cost_center.detalle.titlecase}", cost_center_path(@cost_center), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_cost_center_path(@cost_center), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @cost_center, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@cost_center) do |f|
+  - if @cost_center.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@cost_center.errors.count, "error")
+        prohibited this cost_center from being saved:
+      %ul
+        - @cost_center.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @cost_center.detalle
+.clear

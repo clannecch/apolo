@@ -1,5 +1,10 @@
-%h1 Edicion Tipo de Documento
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DocumentType.model_name.human, document_types_path 
+    - breadcrumb.item "#{@document_type.detalle.titlecase}", document_type_path(@document_type), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, document_type_path(@document_type), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @document_type
-|
-\#{link_to 'Volver', document_types_path}

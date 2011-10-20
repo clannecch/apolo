@@ -1,0 +1,14 @@
+%li
+  %a.parent{:href => (top_level.link_url == "?" ? "#" : top_level.link_url)}
+    %span= top_level.name
+  - if @user_menu.select{|menu| menu[:parent_id] == top_level.id }.count > 0
+    %div
+      %ul
+        - @user_menu.select{|menu| menu[:parent_id] == top_level.id }.sort_by{|s| s.order_no}.each do |cur_level|
+          - if !cur_level.link_url.blank?
+            - if @user_menu.select{|menu| menu[:parent_id] == cur_level.id }.count == 0
+              %li
+                %a{:href => cur_level.link_url, :class => "menu_level"}
+                  %span= cur_level.name
+            - else
+              = render 'shared/main_menu_level', :top_level => cur_level

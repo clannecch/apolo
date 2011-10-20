@@ -1,13 +1,27 @@
-%h1 Listado de Localidades
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @locations.each do |location|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Location.model_name.human, locations_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Location.model_name.human).titlecase , new_location_path(@location), :class => "btn success" 
+  - if @locations.any?
+    = link_to t('scaffold.actions.export').titlecase, locations_path( :format => 'pdf'), :class => "btn info"
+
+- if @locations.any?
+  %table.tableStandard
     %tr
-      %td= location.detalle
-      %td= location_links(location)
-%br/
-= link_to 'Nueva Localidad', new_location_path
+      %th= sort_link @search, :detalle, @locations.human_attribute_name('detalle')
+      %th.last
+
+    - @locations.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_location_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@locations)
+  .clear
+.clear

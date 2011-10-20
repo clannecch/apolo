@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      home_about: Habita Sobre
+      home_about: Home About
     attributes:
       home_about:
         detalle: Detalle

@@ -1,0 +1,17 @@
+es-AR:
+  activerecord:
+    models:
+      deduccion_ganancias_table: Deduccion Ganancias Table
+    attributes:
+      deduccion_ganancias_table:
+        no_imponibles: No Imponibles
+        conyuge: Conyuge
+        hijo: Hijo
+        otras: Otras
+        especial_inciso_e: Especial Inciso E
+        especial_inciso_abc: Especial Inciso Abc
+        created_at: Creado el
+        updated_at: Actualizado el
+        periodo_ano: Periodo Ano
+        periodo_mes: Periodo Mes
+        company_id: Empresa

@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      nationality: Nacionalidad
+      nationality: Nationality
     attributes:
       nationality:
         detalle: Detalle

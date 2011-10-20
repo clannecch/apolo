@@ -1,5 +1,9 @@
-%h1 Edicion de novedades
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item ReciboSueldo.model_name.human, recibo_sueldos_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, recibo_sueldo_path(@recibo_sueldo), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', [@liquidacion, @recibo_sueldo]
-|
-\#{link_to 'Volver', liquidacion_recibo_sueldos_path(@liquidacion)}

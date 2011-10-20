@@ -1,27 +1,41 @@
-%h1 Listing retention_concepts
-%table
-  %tr
-    %th Codigo
-    %th Detalle
-    %th Formula de Calculo Valor
-    %th Acumuladores
-    %th Prioridad de calculo
-    %th datos_a_pedir
-    %th Statistical value
-    %th Accounting imputation
-    %th
-    %th
-    %th
-  - @retention_concepts.each do |retention_concept|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RetentionConcept.model_name.human, retention_concepts_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => RetentionConcept.model_name.human).titlecase , new_retention_concept_path(@retention_concept), :class => "btn success" 
+  - if @retention_concepts.any?
+    = link_to t('scaffold.actions.export').titlecase, retention_concepts_path( :format => 'pdf'), :class => "btn info"
+
+- if @retention_concepts.any?
+  %table.tableStandard
     %tr
-      %td= retention_concept.codigo
-      %td= retention_concept.detalle
-      %td= retention_concept.formula_calculo_valor
-      %td= retention_concept.acumuladores_valor
-      %td= retention_concept.prioridad
-      %td= retention_concept.data_to_ask.try(:detalle)
-      %td= retention_concept.statistical_value
-      %td= retention_concept.accounting_imputation_id
-      %td= retention_concept_links(retention_concept)
-%br/
-= link_to 'Nuevo concepto de Retencion', new_retention_concept_path
+      %th= sort_link @search, :codigo, @retention_concepts.human_attribute_name('codigo')
+      %th= sort_link @search, :detalle, @retention_concepts.human_attribute_name('detalle')
+      %th= sort_link @search, :statistical_value, @retention_concepts.human_attribute_name('statistical_value')
+      %th= sort_link @search, :accounting_imputation_id, @retention_concepts.human_attribute_name('accounting_imputation_id')
+      %th= sort_link @search, :prioridad, @retention_concepts.human_attribute_name('prioridad')
+      %th= sort_link @search, :formula_calculo_valor, @retention_concepts.human_attribute_name('formula_calculo_valor')
+      %th= sort_link @search, :acumuladores_valor, @retention_concepts.human_attribute_name('acumuladores_valor')
+      %th= sort_link @search, :data_to_ask_id, @retention_concepts.human_attribute_name('data_to_ask_id')
+      %th.last
+
+    - @retention_concepts.each do |item|
+      %tr
+        %td= item.codigo
+        %td= item.detalle
+        %td= item.statistical_value
+        %td= item.accounting_imputation_id
+        %td= item.prioridad
+        %td= item.formula_calculo_valor
+        %td= item.acumuladores_valor
+        %td= item.data_to_ask_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_retention_concept_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@retention_concepts)
+  .clear
+.clear

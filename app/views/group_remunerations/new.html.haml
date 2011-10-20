@@ -1,3 +1,7 @@
-%h1 New group_remuneration
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRemuneration.model_name.human, group_remunerations_path
+    - breadcrumb.item t('scaffold.actions.new', :item => GroupRemuneration.model_name.human).titlecase , group_remunerations_path, :active => true
+
 = render 'form'
-= link_to 'Back', group_remunerations_path

@@ -1,33 +1,33 @@
 %h3 Aseguradora / Banco
 .field
-  = f.label "Aseguradora"
+  = f.label "Aseguradora", :class => "tab_label"
   %br/
   = f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Seguro Conyuge"
+  = f.label "Seguro Conyuge", :class => "tab_label"
   %br/
   = f.text_field :seguro_conyuge
 .field
-  = f.label "Numero Poliza de Seguro"
+  = f.label "Numero Poliza de Seguro", :class => "tab_label"
   %br/
   = f.text_field :Seguro_numero_poliza
 .field
-  = f.label "Monto Asegurado"
+  = f.label "Monto Asegurado", :class => "tab_label"
   %br/
   = f.text_field :seguro_monto_asegurado
 .field
-  = f.label "Banco Deposito Haberes"
+  = f.label "Banco Deposito Haberes", :class => "tab_label"
   %br/
   = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Tipo Cuenta Bancaria"
+  = f.label "Tipo Cuenta Bancaria", :class => "tab_label"
   %br/
   = f.collection_select :bank_deposit_account_type_id, BankDepositAccountType.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Numero Cuenta Bancaria"
+  = f.label "Numero Cuenta Bancaria", :class => "tab_label"
   %br/
   = f.text_field :deposito_banco_cuenta
 .field
-  = f.label "CBU Cuenta Bancaria"
+  = f.label "CBU Cuenta Bancaria", :class => "tab_label"
   %br/
   = f.text_field :deposito_banco_cbu

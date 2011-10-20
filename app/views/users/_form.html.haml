@@ -1,10 +1,57 @@
-= semantic_form_for @user do |f|
-  = f.semantic_errors
-
-  = f.inputs do
-    = f.input :email
-    = f.input :first_name
-    = f.input :last_name
-
-  = f.buttons
-
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :first_name, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :first_name, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :last_name, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :last_name, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :email, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :email, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :encrypted_password, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :encrypted_password, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :current_sign_in_ip, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :current_sign_in_ip, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :last_sign_in_ip, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :last_sign_in_ip, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :sign_in_count, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :sign_in_count, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :current_sign_in_at, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :current_sign_in_at, :class => "apsDatetime"
+    %tr
+      %td.columnLabel
+        = f.label :last_sign_in_at, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :last_sign_in_at, :class => "apsDatetime"
+  .actions
+    = f.submit :class => "btn success"

@@ -1,10 +1,11 @@
 es-AR:
   activerecord:
     models:
-      tipo_recibo: Tipo de Recibo
+      tipo_recibo: Tipo Recibo
     attributes:
       tipo_recibo:
         detalle: Detalle
         created_at: Creado el
         updated_at: Actualizado el
         company_id: Empresa
+        recibo_principal: Recibo Principal

@@ -1,9 +1,26 @@
-%h1 Visualizar Tipo de Documento
-%p#notice= notice
-%p
-  %b Detalle:
-  = @document_type.detalle
-= document_type_links(@document_type)
-|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DocumentType.model_name.human, document_types_path 
+    - breadcrumb.item "#{@document_type.detalle.titlecase}", document_type_path(@document_type), :active => true
 
-\#{link_to 'Volver', document_types_path}
+= link_to t('scaffold.actions.edit').titlecase, edit_document_type_path(@document_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @document_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@document_type) do |f|
+  - if @document_type.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@document_type.errors.count, "error")
+        prohibited this document_type from being saved:
+      %ul
+        - @document_type.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @document_type.detalle
+.clear

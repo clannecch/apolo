@@ -1,5 +1,10 @@
-%h1 Edicion Tipo de Cuenta Bancaria
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDepositAccountType.model_name.human, bank_deposit_account_types_path 
+    - breadcrumb.item "#{@bank_deposit_account_type.detalle.titlecase}", bank_deposit_account_type_path(@bank_deposit_account_type), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, bank_deposit_account_type_path(@bank_deposit_account_type), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @bank_deposit_account_type
-|
-\#{link_to 'Volver', bank_deposit_account_types_path}

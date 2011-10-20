@@ -1,0 +1,42 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Menu.model_name.human, menus_path 
+    - breadcrumb.item "#{@menu.name.titlecase}", menu_path(@menu), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_menu_path(@menu), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @menu, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+/= link_to "Mostrar ventana", "javascript:ShowModalAlert('text', 'Title')", :class => "btn standard"
+.clear
+%br/
+= form_for(@menu) do |f|
+  - if @menu.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@menu.errors.count, "error")
+        prohibited this menu from being saved:
+      %ul
+        - @menu.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :parent_id, :class => "apsLabel"
+      %td.columnData
+        = @menu.parent_id
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @menu.name
+    %tr
+      %td.columnLabel
+        = f.label :link_url, :class => "apsLabel"
+      %td.columnData
+        = @menu.link_url
+    %tr
+      %td.columnLabel
+        = f.label :order_no, :class => "apsLabel"
+      %td.columnData
+        = @menu.order_no
+.clear

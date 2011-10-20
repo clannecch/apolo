@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      email_type: Email Type
+    attributes:
+      email_type:
+        detalle: Detalle
+        created_at: Creado el
+        updated_at: Actualizado el
+        company_id: Empresa

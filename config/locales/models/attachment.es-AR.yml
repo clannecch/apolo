@@ -1,0 +1,17 @@
+es-AR:
+  activerecord:
+    models:
+      attachment: Attachment
+    attributes:
+      attachment:
+        attachable_id: Attachable
+        attachable_type: Attachable Type
+        associated_document_type_id: Associated Document Type
+        name: Nombre
+        reception_date: Reception Date
+        adjunto_file_name: Adjunto File Name
+        adjunto_content_type: Adjunto Content Type
+        associated_document_type: Associated Document Type
+        created_at: Creado el
+        updated_at: Actualizado el
+        adjunto_file: Adjunto File
