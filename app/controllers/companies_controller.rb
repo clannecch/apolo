@@ -57,10 +57,8 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.xml
   def destroy
     flash[:notice] = t('scaffold.notice.destroyed', :item => Company.model_name.human) if @company.destroy
-
-    redirect_to(companies_path)
-
-#    respond_with(@companies, :location => companies_path)
+#    redirect_to(companies_path)
+    respond_with(@company, :location => companies_path)
   end
 
   protected
