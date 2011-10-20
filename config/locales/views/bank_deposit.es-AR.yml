@@ -1,0 +1,20 @@
+es-AR:
+  bank_deposits:
+    index:
+      title: Bancos
+    show:
+      title: Banco
+    edit:
+      title: Editando Banco
+    new:
+      title: Nuevo Banco
+  flash:
+    bank_deposits:
+      create:
+        notice: "%{resource_name} was successfully created."
+      update:
+        notice: "%{resource_name} fue actualizado satisfactoriamente (BD)."
+      destroy:
+        notice: "%{resource_name} was successfully deleted."
+        alert: "%{resource_name} could not be deleted."
+

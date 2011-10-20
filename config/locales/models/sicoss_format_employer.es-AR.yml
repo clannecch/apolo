@@ -1,0 +1,12 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_format_employer: Sicoss Format Employer
+    attributes:
+      sicoss_format_employer:
+        sicoss_format_id: Sicoss Format
+        field_type: Field Type
+        formula: Formula
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el

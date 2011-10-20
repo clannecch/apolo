@@ -9,7 +9,8 @@ class SicossDamagedsController < ApplicationController
   # GET /sicoss_damageds.json
   # GET /sicoss_damageds.xml
   def index
-    @sicoss_damageds = SicossDamaged.all
+    @search = SicossDamaged.search(params[:search])
+    @sicoss_damageds = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_damageds.empty?
     respond_with(@sicoss_damageds)
   end

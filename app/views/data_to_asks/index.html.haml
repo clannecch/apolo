@@ -1,17 +1,31 @@
-%h1 Listing data_to_asks
-%table
-  %tr
-    %th Detalle
-    %th Cantidad
-    %th Importe
-    %th
-    %th
-    %th
-  - @data_to_asks.each do |data_to_ask|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DataToAsk.model_name.human, data_to_asks_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => DataToAsk.model_name.human).titlecase , new_data_to_ask_path(@data_to_ask), :class => "btn success" 
+  - if @data_to_asks.any?
+    = link_to t('scaffold.actions.export').titlecase, data_to_asks_path( :format => 'pdf'), :class => "btn info"
+
+- if @data_to_asks.any?
+  %table.tableStandard
     %tr
-      %td= data_to_ask.detalle
-      %td= data_to_ask.cantidad
-      %td= data_to_ask.importe
-      %td= data_to_ask_links(data_to_ask)
-%br/
-= link_to 'New Data to ask', new_data_to_ask_path
+      %th= sort_link @search, :detalle, @data_to_asks.human_attribute_name('detalle')
+      %th= sort_link @search, :cantidad, @data_to_asks.human_attribute_name('cantidad')
+      %th= sort_link @search, :importe, @data_to_asks.human_attribute_name('importe')
+      %th.last
+
+    - @data_to_asks.each do |item|
+      %tr
+        %td= item.detalle
+        %td= check_box_tag "data_to_ask_cantidad", data_to_ask.cantidad, data_to_ask.cantidad, :disabled => true
+        %td= check_box_tag "data_to_ask_importe", data_to_ask.importe, data_to_ask.importe, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_data_to_ask_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@data_to_asks)
+  .clear
+.clear

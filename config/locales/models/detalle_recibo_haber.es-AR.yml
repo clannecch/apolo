@@ -1,0 +1,16 @@
+es-AR:
+  activerecord:
+    models:
+      detalle_recibo_haber: Detalle Recibo Haber
+    attributes:
+      detalle_recibo_haber:
+        recibo_sueldo_id: Recibo Sueldo
+        remunerative_concept_id: Remunerative Concept
+        detalle: Detalle
+        cost_center_id: Cost Center
+        cantidad: Cantidad
+        importe: Importe
+        total: Total
+        created_at: Creado el
+        updated_at: Actualizado el
+        cantidad_recibo: Cantidad Recibo

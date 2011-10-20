@@ -7,9 +7,16 @@
       %ul
         - @category.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :detalle, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :importe, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :importe, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

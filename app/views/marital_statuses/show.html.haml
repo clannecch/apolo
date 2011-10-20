@@ -1,8 +1,26 @@
-%h1 Visualizacion de Estado Civil
-%p#notice= notice
-%p
-  %b Detalle:
-  = @marital_status.detalle
-= marital_status_links(@marital_status)
-|
-\#{link_to 'Volver', marital_statuses_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MaritalStatus.model_name.human, marital_statuses_path 
+    - breadcrumb.item "#{@marital_status.detalle.titlecase}", marital_status_path(@marital_status), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_marital_status_path(@marital_status), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @marital_status, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@marital_status) do |f|
+  - if @marital_status.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@marital_status.errors.count, "error")
+        prohibited this marital_status from being saved:
+      %ul
+        - @marital_status.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @marital_status.detalle
+.clear

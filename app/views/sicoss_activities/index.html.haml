@@ -1,30 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossActivity.model_name.human, sicoss_activities_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossActivity.model_name.human).titlecase , new_sicoss_activity_path(@sicoss_activity), :class => "btn success" 
+  - if @sicoss_activities.any?
+    = link_to t('scaffold.actions.export').titlecase, sicoss_activities_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossActivity.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossActivity.human_attribute_name('code')
-
-    %th= SicossActivity.human_attribute_name('name')
-
-    %th
-    %th
-    %th
-
-  - @sicoss_activities.each do |sicoss_activity|
+- if @sicoss_activities.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @sicoss_activities.human_attribute_name('name')
+      %th= sort_link @search, :code, @sicoss_activities.human_attribute_name('code')
+      %th.last
 
-      %td= sicoss_activity.name
-
-      %td= sicoss_activity.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, sicoss_activity
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_activity_path(sicoss_activity)
-      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_activity, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossActivity.model_name.human).titlecase, new_sicoss_activity_path
-
+    - @sicoss_activities.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_activity_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_activities)
+  .clear
+.clear

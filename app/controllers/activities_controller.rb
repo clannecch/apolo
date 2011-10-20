@@ -9,7 +9,8 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   # GET /activities.xml
   def index
-    @activities = Activity.all
+    @search = Activity.search(params[:search])
+    @activities = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @activities.empty?
     respond_with(@activities)
   end

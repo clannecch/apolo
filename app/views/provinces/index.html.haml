@@ -1,13 +1,27 @@
-%h1 Listado de Provincias
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @provinces.each do |province|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Province.model_name.human, provinces_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Province.model_name.human).titlecase , new_province_path(@province), :class => "btn success" 
+  - if @provinces.any?
+    = link_to t('scaffold.actions.export').titlecase, provinces_path( :format => 'pdf'), :class => "btn info"
+
+- if @provinces.any?
+  %table.tableStandard
     %tr
-      %td= province.detalle
-      %td= province_links(province)
-%br/
-= link_to 'Nueva Provincia', new_province_path
+      %th= sort_link @search, :detalle, @provinces.human_attribute_name('detalle')
+      %th.last
+
+    - @provinces.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_province_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@provinces)
+  .clear
+.clear

@@ -2,25 +2,29 @@ es-AR:
   flash:
     actions:
       index:
-        notice: no hay registros aún.
+        notice: No hay registros aún.
       create:
         notice: "%{resource_name} creado/a satisfactoriamente"
       update:
         notice: "%{resource_name} actualizado/a satisfactoriamente"
+        message: "%{resource_name} actualizado/a satisfactoriamente (2)"
       destroy:
         notice: "%{resource_name} eliminado/a satisfactoriamente"
         error: "%{resource_name} no pudo ser eliminado/a"
-    scaffold:
+  scaffold:
     notice:
       updated: "Actualizado correctamente"
       destroyed: "Borrado correctamente"
       created: "Creado satisfactoriamente"
+    filters:
+      from_date: "Desde fecha"
+      to_date: "Hasta fecha"
     actions_label: Acciones
     actions:
       show: mostrar
       edit: editar
       destroy: eliminar
-      destroy_confirm: está seguro?
+      destroy_confirm: estÃ¡ seguro?
       new: "crear %{item}"
       list: "listar %{item}"
       back: volver

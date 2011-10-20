@@ -1,0 +1,27 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SchemaMigration.model_name.human, schema_migrations_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SchemaMigration.model_name.human).titlecase , new_schema_migration_path(@schema_migration), :class => "btn success" 
+  - if @schema_migrations.any?
+    = link_to t('scaffold.actions.export').titlecase, schema_migrations_path( :format => 'pdf'), :class => "btn info"
+
+- if @schema_migrations.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :version, @schema_migrations.human_attribute_name('version')
+      %th.last
+
+    - @schema_migrations.each do |item|
+      %tr
+        %td= item.version
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_schema_migration_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@schema_migrations)
+  .clear
+.clear

@@ -1,27 +1,39 @@
-%h1 Listing detalle_recibo_retencions
-%table
-  %tr
-    %th Recibo sueldo
-    %th Retention concept
-    %th Detalle
-    %th Cost center
-    %th Cantidad
-    %th Importe
-    %th Total
-    %th
-    %th
-    %th
-  - @detalle_recibo_retencions.each do |detalle_recibo_retencion|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DetalleReciboRetencion.model_name.human, detalle_recibo_retencions_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => DetalleReciboRetencion.model_name.human).titlecase , new_detalle_recibo_retencion_path(@detalle_recibo_retencion), :class => "btn success" 
+  - if @detalle_recibo_retencions.any?
+    = link_to t('scaffold.actions.export').titlecase, detalle_recibo_retencions_path( :format => 'pdf'), :class => "btn info"
+
+- if @detalle_recibo_retencions.any?
+  %table.tableStandard
     %tr
-      %td= detalle_recibo_retencion.recibo_sueldo_id
-      %td= detalle_recibo_retencion.retention_concept_id
-      %td= detalle_recibo_retencion.detalle
-      %td= detalle_recibo_retencion.cost_center_id
-      %td= detalle_recibo_retencion.cantidad
-      %td= detalle_recibo_retencion.importe
-      %td= detalle_recibo_retencion.total
-      %td= link_to 'Show', detalle_recibo_retencion
-      %td= link_to 'Edit', edit_detalle_recibo_retencion_path(detalle_recibo_retencion)
-      %td= link_to 'Destroy', detalle_recibo_retencion, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New Detalle recibo retencion', new_detalle_recibo_retencion_path
+      %th= sort_link @search, :recibo_sueldo_id, @detalle_recibo_retencions.human_attribute_name('recibo_sueldo_id')
+      %th= sort_link @search, :retention_concept_id, @detalle_recibo_retencions.human_attribute_name('retention_concept_id')
+      %th= sort_link @search, :detalle, @detalle_recibo_retencions.human_attribute_name('detalle')
+      %th= sort_link @search, :cost_center_id, @detalle_recibo_retencions.human_attribute_name('cost_center_id')
+      %th= sort_link @search, :cantidad, @detalle_recibo_retencions.human_attribute_name('cantidad')
+      %th= sort_link @search, :importe, @detalle_recibo_retencions.human_attribute_name('importe')
+      %th= sort_link @search, :total, @detalle_recibo_retencions.human_attribute_name('total')
+      %th.last
+
+    - @detalle_recibo_retencions.each do |item|
+      %tr
+        %td= item.recibo_sueldo_id
+        %td= item.retention_concept_id
+        %td= item.detalle
+        %td= item.cost_center_id
+        %td= item.cantidad
+        %td= item.importe
+        %td= item.total
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_detalle_recibo_retencion_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@detalle_recibo_retencions)
+  .clear
+.clear

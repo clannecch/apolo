@@ -1,30 +1,27 @@
-%h1 Lugares de Trabajo
-
-= paginate @places
-
-%table.tableStandard
-  %tr
-    %th= sort_link @search, :detalle, "Detalle"
-    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
-  - @places.each do |item|
-    %tr
-      %td= item.detalle
-      %td
-        %a{ :href => "/places/#{item.id.to_s}" }
-          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
-      %td
-        %a{ :href => "/places/#{item.id.to_s}/edit" }
-          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
-      %td
-        %a{ :href => "/places/#{item.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
-          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
-%br/
-= paginate @places
-
-= link_to "Nuevo Lugar de Trabajo", new_place_path
-
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Place.model_name.human, places_path, :active => true
 .clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Place.model_name.human).titlecase , new_place_path(@place), :class => "btn success" 
+  - if @places.any?
+    = link_to t('scaffold.actions.export').titlecase, places_path( :format => 'pdf'), :class => "btn info"
 
-%br/
+- if @places.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :detalle, @places.human_attribute_name('detalle')
+      %th.last
 
+    - @places.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_place_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@places)
+  .clear
 .clear

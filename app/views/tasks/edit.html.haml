@@ -1,5 +1,10 @@
-%h1 Edicion Tarea
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Task.model_name.human, tasks_path 
+    - breadcrumb.item "#{@task.detalle.titlecase}", task_path(@task), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, task_path(@task), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @task
-|
-\#{link_to 'Volver', tasks_path}

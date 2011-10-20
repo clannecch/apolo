@@ -1,4 +1,10 @@
-%h1 Edicion de Modalidad de Contrato
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item ContractMode.model_name.human, contract_modes_path 
+    - breadcrumb.item "#{@contract_mode.detalle.titlecase}", contract_mode_path(@contract_mode), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, contract_mode_path(@contract_mode), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @contract_mode
-= link_to 'Volver', contract_modes_path

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang='es-AR' xml:lang='es-AR' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta content='es-AR' name='language'>
+    <meta charset='utf-8'>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+    <meta content='width=device-width; initial-scale=1.0' name='viewport'>
+    <title>Apolus ::</title>
+    <link href="stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/docs.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/prettify.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/jquery.jdpicker.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/jquery.chosen.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/apslabs.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/mainmenu/menu.css" media="screen" rel="stylesheet" type="text/css" />
+    <!-- = stylesheet_link_tag 'scaffold', :media => 'screen' -->
+    <!--[if IE]>
+      <link href="/stylesheets/apslabs-ie.css?1317998590" media="screen" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!-- = stylesheet_link_tag 'uniform.aristo', :media => 'screen' -->
+    <link href="stylesheets/application.css?1318889118" media="screen" rel="stylesheet" type="text/css" />
+    <script src="javascripts/jquery.js?1318081272" type="text/javascript"></script>
+      <script src="javascripts/jquery_ujs.js?1317911954" type="text/javascript"></script>
+      <script src="javascripts/application.js?1318880728" type="text/javascript"></script>
+    <script src="javascripts/cocoon.js?1317911954" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-modal.js?1316882017" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-alerts.js?1316882018" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-twipsy.js?1316879794" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-popover.js?1316882018" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-dropdown.js?1316879794" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-scrollspy.js?1316879794" type="text/javascript"></script>
+    <script src="javascripts/bootstrap/bootstrap-tabs.js?1316882018" type="text/javascript"></script>
+    <script src="javascripts/mainmenu/jquery.color.js?1317911954" type="text/javascript"></script>
+    <script src="javascripts/jquery.jdpicker.js?1317911954" type="text/javascript"></script>
+    <script src="javascripts/jquery.chosen.min.js?1317911954" type="text/javascript"></script>
+    <meta name="csrf-param" content="authenticity_token"/>
+      <meta name="csrf-token" content="n9IEEZZfFxmL6pa3DlGM/gAdNRSeqTIQkmipsYRFmUg="/>
+    
+    
+  </head>
+  <body>
+    <div id='container'>
+      <div id='header'>
+        <div id='status'></div>
+        <h1 style='margin-left:0px;padding: 0px 0px;'>
+          Apolo
+           &raquo; Coca Cola
+            <a href="/" style="float:right;"><img alt="Application edit" src="/images/icons/16x16/application_edit.png?1317911954" title="Administración de Companías" /></a>
+            <div id='change_current_company' style='float:right;'>
+              <select id="company_id" name="company[id]" onchange="location.href=&quot;?cc=&quot;+$(this).val();"><option value="">-- Cambiar de Companía --</option>
+              <option value="1">Coca Cola</option>
+              <option value="2">Pepsi</option></select>
+            </div>
+            <!-- %br -->
+          <div class="user_navigation" id="user-navigation"><ul class="wat-cf"><li class="first"><a href="/"><img alt="Home" src="/images/session/home.png?1317911954" /></a></li><li class=""><a href="/"><img alt="Account" src="/images/session/account.png?1317911954" /></a></li><li class=""><a href="/logout"><img alt="Logout" src="/images/session/logout.png?1317911954" /></a></li></ul></div>
+            <!-- %br -->
+            <!-- %br -->
+          <!-- %br -->
+          <div id="menu">
+              <ul class="menu">
+                <li><a class="parent" href=""><span>Maestros</span></a>
+                <!-- SEGUNDO NIVEL -->
+                  <div><ul>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="#"><span>Tablas Varias</span></a>
+                      <div><ul>
+                        <li><a class="parent" href="#"><span>Bancos</span></a>
+                          <div><ul>
+                            <li><a style="text-align:left;padding-left:20px" href="/bank_deposits">Bancos</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/bank_deposit_account_types">Tipos de Cuentas</a></li>
+                          </ul></div>
+                        </li>
+                        <li><a class="parent" href="#"><span>Ubicacion</span></a>
+                          <div><ul>
+                            <li><a style="text-align:left;padding-left:20px" href="/cost_centers">Centros de Costos</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/countries">Paises</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/home_abouts">Tipo de Calle</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/issueds">Lugares de emision de Documentos</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/locations">Localidades</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/places">Lugares de Trabajo</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/provinces">Provincias</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/sections">Secciones</a></li>
+                          </ul></div>
+                        </li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/contract_modes">Modalidades de Contratacion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/data_to_asks">Datos a Solicitar</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/document_types">Tipos de Documentos</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/educational_levels">Niveles de Educacion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/marital_statuses">Estados Civil</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/nationalities">Nacionalidades</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/remuneration_types">Tipos de Remuneraciones</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/tasks">Tareas</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/activities">Actividad</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/accounting_imputations">Cuentas Contables</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/categories">Categorias</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/associated_document_types">Tipos de Documento Adjunto</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/kinships">Parentesco</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/tipo_recibos">Tipos de Recibos</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/employments">Ocupacion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/email_types">Tipos de Mail</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/causa_egresos">Causa de Egreso</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/numeradors">Numeradores</a></li>
+                      </ul></div>
+                    </li>
+                    <li><a style="text-align:left;padding-left:5px" href="/employees"><span>Empleados</span></a></li>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="#"><span>Tablas AFIP</span></a>
+                      <div><ul>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_activities">Actividades</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_conditions">Condicion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_contract_modes">Modalidad de Contrato</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_damageds">Codigo de Siniestrado</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_locations">Localidad</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_employer_types">Tipo de Empleador</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_regimen_types">Tipo de Regimen</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_situations">Situacion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_reduction_zones">Zona / Reduccion</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_format_employers">Complemento SICOSS Empresa</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_formats">formato sicoss</a></li>
+                      </ul></div>
+                    </li>
+                    <li><a style="text-align:left;padding-left:5px" href="/health_insurances"><span>Obras Sociales</span></a></li>
+                    <li><a style="text-align:left;padding-left:5px" href="/labor_unions"><span>Sindicatos</span></a></li>
+                    <li><a style="text-align:left;padding-left:5px" href="/insurance_companies"><span>Aseguradoras</span></a></li>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="#"><span>Conceptos de liquidacion</span></a>
+                      <div><ul>
+                        <li><a class="parent" href="#"><span>Haberes</span></a>
+                          <div><ul>
+                            <li><a style="text-align:left;padding-left:20px" href="/remunerative_concepts">Codigos</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/group_remunerations">Grupo de Remuneraciones</a></li>
+                          </ul></div>
+                        </li>
+                        <li><a class="parent" href="#"><span>Retenciones</span></a>
+                          <div><ul>
+                            <li><a style="text-align:left;padding-left:20px" href="/retention_concepts">Retenciones</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/group_retentions">Grupo de retenciones</a></li>
+                          </ul></div>
+                        </li>
+                        <li><a class="parent" href="#"><span>Aportes Patronales</span></a>
+                          <div><ul>
+                            <li><a style="text-align:left;padding-left:20px" href="/employer_contribution_concepts">Codigos</a></li>
+                            <li><a style="text-align:left;padding-left:20px" href="/group_employer_contributions">Grupo de Aportes Patronales</a></li>
+                          </ul></div>
+                        </li>
+                      </ul></div>
+                    </li>
+                    <li><a style="text-align:left;padding-left:5px" href="/menus"><span>menus</span></a></li>
+                  </ul></div>
+                </li>
+                <li><a class="parent" href="#"><span>Liquidacion Automatica</span></a>
+                </li>
+                <li><a class="parent" href="#"><span>Exportaciones</span></a>
+                <!-- SEGUNDO NIVEL -->
+                  <div><ul>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="/sijp"><span>SIJP</span></a>
+                      <div><ul>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/sicoss_formats">Formato de Transferecia SiCOSS</a></li>
+                      </ul></div>
+                    </li>
+                  </ul></div>
+                </li>
+                <li><a class="parent" href="#"><span>Graficas</span></a>
+                </li>
+                <li><a class="parent" href="#"><span>Estadisticas</span></a>
+                <!-- SEGUNDO NIVEL -->
+                  <div><ul>
+                    <li><a style="text-align:left;padding-left:5px" href="/centro_costos"><span>Centros de Costos</span></a></li>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="#"><span>Conceptos de liquidacion</span></a>
+                      <div><ul>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/estadistica_haberes">Haberes</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/retenciones">Retenciones</a></li>
+                      </ul></div>
+                    </li>
+                    <!-- TERCER NIVEL -->
+                    <li><a class="parent" href="#"><span>Empleados</span></a>
+                      <div><ul>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/resumen_liquidaciones">Resumen de liquidaciones</a></li>
+                            <!-- CUARTO NIVEL -->
+                        <li><a style="text-align:left;padding-left:20px" href="/estaditica_empleado_concepto">Conceptos de liquidacion</a></li>
+                      </ul></div>
+                    </li>
+                  </ul></div>
+                </li>
+                <li><a class="parent" href="/liquidacions"><span>liquidaciones</span></a>
+                </li>
+              <!-- <li class="last"><a href="/"><span>LogOut</span></a></li> -->
+              </ul>
+            </div>
+        </h1>
+      </div>
+      <div class='wat-cf' id='wrapper'>
+        <div id='full-main'>
+<!--
+          <div class='flash'>
+          </div>
+          <div class='block'>
+            <div class='content'>
+-->
+          <div class='block'>
+            <div class='content'>
+              <div class="breadcrumb">
+				<ul>
+					<li class="first"><a href="/">Coca Cola</a></li>
+					<li class=""><a href="/bank_deposits">Banco</a></li>
+					<li class="active">Banco Frances</li>
+				</ul>
+			  </div>
+              
+              <h2 class='title'></h2>
+              <div class='inner'>
+                
+                <a href="/bank_deposits/10/edit" class="btn success">Editar</a>
+                  <a href="/bank_deposits/10" class="btn danger" data-confirm="está seguro?" data-method="delete" rel="nofollow">Eliminar</a>
+                  <div class='clear'></div>
+                  <br>
+                  <form accept-charset="UTF-8" action="/bank_deposits/10" class="edit_bank_deposit" id="edit_bank_deposit_10" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="n9IEEZZfFxmL6pa3DlGM/gAdNRSeqTIQkmipsYRFmUg=" /></div>
+                    <table class='tableForm'>
+                      <tr>
+                        <td class='columnLabel'>
+                          <label class="apsLabel" for="bank_deposit_detalle">Detalle</label>
+                        </td>
+                        <td class='columnData'>
+                          Banco Frances
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                  <div class='clear'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='modal hide fade' id='modal-alert'>
+        <div class='modal-header'>
+          <a class='close' href='#'>&times;</a>
+          <h3>
+            <span id='ModalTitle'>Beware</span>
+          </h3>
+        </div>
+        <div class='modal-body'>
+          <p>
+            <span id='ModalText'>Messsage text...</span>
+          </p>
+          <a class='btn small info close' href='#'>Cerrar</a>
+        </div>
+        <div class='modal-footer'></div>
+      </div>
+    </div>
+          <p style='display:none'>
+            Copyright © 2011
+            <a href='http://apycom.com/'>Apycom jQuery Menus</a>
+          </p>
+  </body>
+</html>
+<script>
+  //<![CDATA[
+    function ShowModalAlert(texto,titulo){
+    	$("#ModalText").text(texto);
+    	if (titulo != null) $("#ModalTitle").text(titulo);
+    	$("#modal-alert").modal({
+    		show: true,
+    		backdrop: true,
+    		closeOnEscape: true
+    	});
+    }
+  //]]>
+</script>

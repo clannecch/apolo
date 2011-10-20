@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      remuneration_type: Tipo de Remuneracion
+      remuneration_type: Remuneration Type
     attributes:
       remuneration_type:
         detalle: Detalle

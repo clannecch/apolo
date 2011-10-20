@@ -1,0 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MenuRole.model_name.human, menu_roles_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => MenuRole.model_name.human).titlecase , new_menu_role_path(@menu_role), :class => "btn success" 
+  - if @menu_roles.any?
+    = link_to t('scaffold.actions.export').titlecase, menu_roles_path( :format => 'pdf'), :class => "btn info"
+
+- if @menu_roles.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :menu_id, @menu_roles.human_attribute_name('menu_id')
+      %th= sort_link @search, :rol_id, @menu_roles.human_attribute_name('rol_id')
+      %th.last
+
+    - @menu_roles.each do |item|
+      %tr
+        %td= item.menu_id
+        %td= item.rol_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_menu_role_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@menu_roles)
+  .clear
+.clear

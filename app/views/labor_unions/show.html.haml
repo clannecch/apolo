@@ -1,8 +1,26 @@
-%h1 Visualizacion de Sindicatos
-%p#notice= notice
-%p
-  %b Detalle:
-  = @labor_union.detalle
-= labor_union_links(@labor_union)
-|
-\#{link_to 'Volver', labor_unions_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item LaborUnion.model_name.human, labor_unions_path 
+    - breadcrumb.item "#{@labor_union.detalle.titlecase}", labor_union_path(@labor_union), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_labor_union_path(@labor_union), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @labor_union, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@labor_union) do |f|
+  - if @labor_union.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@labor_union.errors.count, "error")
+        prohibited this labor_union from being saved:
+      %ul
+        - @labor_union.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @labor_union.detalle
+.clear

@@ -1,0 +1,11 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_condition: Sicoss Condition
+    attributes:
+      sicoss_condition:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el
+        code: Codigo

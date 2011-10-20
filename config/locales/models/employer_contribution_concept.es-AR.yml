@@ -4,13 +4,16 @@ es-AR:
       employer_contribution_concept: Employer Contribution Concept
     attributes:
       employer_contribution_concept:
-        codigo: codigo
-        detalle: detalle
-        statistical_value: statistical_value
+        codigo: Codigo
+        detalle: Detalle
+        statistical_value: Statistical Value
         accounting_imputation_id: Accounting Imputation
         created_at: Creado el
         updated_at: Actualizado el
-        prioridad: prioridad
-        acumuladores_valor: acumuladores_valor
-        formula_calculo_valor: formula_calculo_valor
+        prioridad: Prioridad
+        acumuladores_valor: Acumuladores Valor
+        formula_calculo_valor: Formula Calculo Valor
         company_id: Empresa
+        retention_concept_id: Retention Concept
+        additional_health_insurance_id: Additional Health Insurance
+        health_insurance_id: Health Insurance

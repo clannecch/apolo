@@ -20,4 +20,7 @@ en:
       new: "new %{item}"
       list: "list %{item}"
       back: back
+      export: export
+    errors:
+      message: errors found trying to save data...
 

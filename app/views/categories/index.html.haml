@@ -1,15 +1,29 @@
-%h1 Listado de Categorias
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @categories.each do |category|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Category.model_name.human, categories_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Category.model_name.human).titlecase , new_category_path(@category), :class => "btn success" 
+  - if @categories.any?
+    = link_to t('scaffold.actions.export').titlecase, categories_path( :format => 'pdf'), :class => "btn info"
+
+- if @categories.any?
+  %table.tableStandard
     %tr
-      %td= category.detalle
-      %td= category_links(category)
-%br/
-= link_to 'Nueva Categoria', new_category_path
-%br/
-= link_to icon('printer', :small, :title => 'Imprimir'), imprimir_category_path(@category)
+      %th= sort_link @search, :detalle, @categories.human_attribute_name('detalle')
+      %th= sort_link @search, :importe, @categories.human_attribute_name('importe')
+      %th.last
+
+    - @categories.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.importe
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_category_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@categories)
+  .clear
+.clear

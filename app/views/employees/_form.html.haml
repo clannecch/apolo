@@ -6,21 +6,24 @@
         width:33%;
         padding: 5px 0px 5px 0px;
     }
+    .tab_label{
+        padding: 20px;
+    }
 
      .actions{
         clear:both;
     }
   = javascript_tag do
     $(document).ready(function(){
-    $(".datepicker" ).datepicker({
-    defaultDate: -#{18.years.days},
-    changeMonth: true,
-    changeYear: true
-    });
+    /$(".datepicker" ).datepicker({
+    /defaultDate: -#{18.years.days},
+    /changeMonth: true,
+    /changeYear: true
+    /});
     });
 
   = javascript_tag do
-    $( function() {$("ul.tabs").tabs("div.panes > div"); });
+    /$( function() {$("ul.tabs").tabs("div.panes > div"); });
 
 = form_for @employee,  :html => { :multipart => true } do |f|
   - if @employee.errors.any?
@@ -31,45 +34,45 @@
       %ul
         - @employee.errors.full_messages.each do |msg|
           %li= msg
-  %ul.tabs
+  %ul.tabs{"data-tabs" => "tabs"}
+    %li.active
+      %a{:href => "#personales"} Personales
     %li
-      %a{:href => "#"} Personales
+      %a{:href => "#domicilio"} Domicilio
     %li
-      %a{:href => "#"} Domicilio
+      %a{:href => "#ocupacion"} Ocupacion
     %li
-      %a{:href => "#"} Ocupacion
+      %a{:href => "#filiacion"} Filiacion
     %li
-      %a{:href => "#"} Filiacion
+      %a{:href => "#contratacion"} Contratacion
     %li
-      %a{:href => "#"} Contratacion
+      %a{:href => "#banco-seguro"} Banco-Seguro
     %li
-      %a{:href => "#"} Banco-Seguro
+      %a{:href => "#familiares"} Familiares
     %li
-      %a{:href => "#"} Familiares
+      %a{:href => "#beneficiarios"} Benef.Seguro
     %li
-      %a{:href => "#"} Benef.Seguro
+      %a{:href => "#remuneraciones"} Remuneraciones
     %li
-      %a{:href => "#"} Remuneraciones
+      %a{:href => "#retenciones"} Retenciones
     %li
-      %a{:href => "#"} Retenciones
+      %a{:href => "#afip"} AFIP
     %li
-      %a{:href => "#"} AFIP
-    %li
-      %a{:href => "#"} Documentos
-  .panes
-    .panel
+      %a{:href => "#documentos"} Documentos
+  .tab-content
+    #personales.active
       = render :partial => 'datos_personales', :locals => {:f => f}
-    .panel
+    #domicilio
       = render :partial => 'datos_domicilio', :locals => {:f => f}
-    .panel
+    #ocupacion
       = render :partial => 'datos_ocupacion', :locals => {:f => f}
-    .panel
+    #filiacion
       = render :partial => 'datos_filiacion', :locals => {:f => f}
-    .panel
+    #contratacion
       = render :partial => 'datos_contratacion', :locals => {:f => f}
-    .panel
+    #banco-seguro
       = render :partial => 'datos_seguro_banco', :locals => {:f => f}
-    .panel
+    #familiares
       .field-nested
         = f.label " "
         %br/
@@ -79,7 +82,7 @@
             = render 'employee_familiar_fields', :f => employee_familiar
           .links
             = link_to_add_association 'Agregar Familiar', f, :employee_familiars
-    .panel
+    #beneficiarios
       .field
         %h3 Beneficiario Seguro
         #Insurance_beneficiary
@@ -99,7 +102,7 @@
                 = render 'insurance_beneficiary_fields', :f => insurance_beneficiary
           .links
             = link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries, 'data-association-insertion-node' => '#nested-holder', 'data-association-insertion-position' => :before
-    .panel
+    #remuneraciones
       .field
         %h3 Conceptos remunerativos personalizados
         #employee_remunerative_concept
@@ -116,7 +119,7 @@
                 = render 'employee_remunerative_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts, 'data-association-insertion-node' => '#nested-holder2', 'data-association-insertion-position' => :before
-    .panel
+    #retenciones
       .field
         %h3 Conceptos de retenciones personalizados
         #employee_retention_concept
@@ -132,11 +135,11 @@
                 = render 'employee_retention_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
-    .panel
+    #afip
       = render :partial => 'datos_siscoss', :locals => {:f => f}
-    .panel
+    #documentos
       = render 'shared/attachments_manager', :f => f
 
   .actions
-    = f.submit
+    = f.submit :class => "btn success"
 

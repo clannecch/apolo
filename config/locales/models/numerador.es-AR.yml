@@ -1,0 +1,12 @@
+es-AR:
+  activerecord:
+    models:
+      numerador: Numerador
+    attributes:
+      numerador:
+        code: Codigo
+        name: Nombre
+        number: Number
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el

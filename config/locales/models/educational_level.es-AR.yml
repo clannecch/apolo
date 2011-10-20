@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      educational_level: Nivel de Educacion
+      educational_level: Educational Level
     attributes:
       educational_level:
         detalle: Detalle

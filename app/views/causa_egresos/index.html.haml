@@ -1,14 +1,27 @@
-%h1 Listing causa_egresos
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CausaEgreso.model_name.human, causa_egresos_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => CausaEgreso.model_name.human).titlecase , new_causa_egreso_path(@causa_egreso), :class => "btn success" 
+  - if @causa_egresos.any?
+    = link_to t('scaffold.actions.export').titlecase, causa_egresos_path( :format => 'pdf'), :class => "btn info"
 
-%table
-  %tr
-    %th Detalle
-    %th
-- @causa_egresos.each do |causa_egreso|
-  %tr
-    %td= causa_egreso.detalle
-    %td= causa_egreso_links(causa_egreso)
+- if @causa_egresos.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :detalle, @causa_egresos.human_attribute_name('detalle')
+      %th.last
 
-%br
-
-= link_to 'New Causa egreso', new_causa_egreso_path
+    - @causa_egresos.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_causa_egreso_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@causa_egresos)
+  .clear
+.clear

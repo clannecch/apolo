@@ -1,3 +1,7 @@
-%h1 Nuevo Familiar
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeFamiliar.model_name.human, employee_familiars_path
+    - breadcrumb.item t('scaffold.actions.new', :item => EmployeeFamiliar.model_name.human).titlecase , employee_familiars_path, :active => true
+
 = render 'form'
-= link_to 'Volver', employee_familiars_path

@@ -1,19 +1,31 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Kinship.model_name.human, kinships_path 
+    - breadcrumb.item "#{@kinship.name.titlecase}", kinship_path(@kinship), :active => true
 
-
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), Kinship.model_name.human].join(' ').titlecase
-
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_kinship_path(@kinship), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@kinship) do |s|
-  = s.attributes(Kinship.human_name + ' Info') do
-
-    = s.attribute :name
-
-    = s.attribute :hijo_conyugue
-
-
+= link_to t('scaffold.actions.edit').titlecase, edit_kinship_path(@kinship), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @kinship, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@kinship) do |f|
+  - if @kinship.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@kinship.errors.count, "error")
+        prohibited this kinship from being saved:
+      %ul
+        - @kinship.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @kinship.name
+    %tr
+      %td.columnLabel
+        = f.label :hijo_conyugue, :class => "apsLabel"
+      %td.columnData
+        = @kinship.hijo_conyugue
 .clear

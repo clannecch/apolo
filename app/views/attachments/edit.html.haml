@@ -1,0 +1,10 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Attachment.model_name.human, attachments_path 
+    - breadcrumb.item "#{@attachment.name.titlecase}", attachment_path(@attachment), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, attachment_path(@attachment), :class => "btn info" 
+.clear
+%br/
+= render 'form'

@@ -1,28 +1,57 @@
-
-= semantic_form_for @sicoss_format do |f|
-  = f.semantic_errors
-
-  = f.inputs do
-
-    = f.input :position
-
-    = f.input :name
-
-    = f.label "Tipo de Dato "
-    = select( "sicoss_format", "field_type", {"Numerico" => "N", "Caracter" => "C"})
-
-    = f.input :field_length
-
-    = f.input :number_of_decimals
-
-    = f.label "Alineacion "
-    = select( "sicoss_format", "justifies", {"Derecha" => "R", "Izquierda" => "L", "Centrado" => "C"})
-
-    = f.input :fill_character
-
-    = f.input :formula
-
-    = f.input :modifiable
-
-  = f.buttons
-
+= form_for(@sicoss_format) do |f|
+  - if @sicoss_format.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@sicoss_format.errors.count, "error")
+        prohibited this sicoss_format from being saved:
+      %ul
+        - @sicoss_format.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :position, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :position, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :name, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :field_length, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :field_length, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :justifies, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :justifies, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :fill_character, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :fill_character, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :formula, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :formula, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :field_type, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :field_type, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :number_of_decimals, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :number_of_decimals, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :modifiable, :class => "apsLabel"
+      %td.columnData
+        = f.check_box :modifiable, :class => "apsCheckbox"
+  .actions
+    = f.submit :class => "btn success"

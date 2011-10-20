@@ -1,5 +1,10 @@
-%h1 Edicion de Obra Social
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item HealthInsurance.model_name.human, health_insurances_path 
+    - breadcrumb.item "#{@health_insurance.detalle.titlecase}", health_insurance_path(@health_insurance), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, health_insurance_path(@health_insurance), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @health_insurance
-|
-\#{link_to 'Volver', health_insurances_path}

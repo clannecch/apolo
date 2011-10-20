@@ -1,0 +1,22 @@
+= form_for(@authorization) do |f|
+  - if @authorization.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@authorization.errors.count, "error")
+        prohibited this authorization from being saved:
+      %ul
+        - @authorization.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :code, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :name, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

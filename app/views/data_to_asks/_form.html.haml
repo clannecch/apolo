@@ -7,17 +7,21 @@
       %ul
         - @data_to_ask.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
-  .field
-    = f.label :cantidad
-    %br/
-    = f.check_box :cantidad
-  .field
-    = f.label :importe
-    %br/
-    = f.check_box :importe
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :detalle, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :cantidad, :class => "apsLabel"
+      %td.columnData
+        = f.check_box :cantidad, :class => "apsCheckbox"
+    %tr
+      %td.columnLabel
+        = f.label :importe, :class => "apsLabel"
+      %td.columnData
+        = f.check_box :importe, :class => "apsCheckbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

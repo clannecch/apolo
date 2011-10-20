@@ -1,5 +1,9 @@
-%h1 Edicion de Beneficiario de seguro
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceBeneficiary.model_name.human, insurance_beneficiaries_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, insurance_beneficiary_path(@insurance_beneficiary), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @insurance_beneficiary
-|
-\#{link_to 'Volver', insurance_beneficiaries_path}

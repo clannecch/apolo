@@ -1,0 +1,11 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_activity: Sicoss Activity
+    attributes:
+      sicoss_activity:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el
+        code: Codigo

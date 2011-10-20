@@ -1,15 +1,27 @@
-%h1
-  %h1 Listado de Niveles de Educacion
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @educational_levels.each do |educational_level|
-    %tr
-      %td= educational_level.detalle
-      %td= educational_level_links(educational_level)
-%br/
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EducationalLevel.model_name.human, educational_levels_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EducationalLevel.model_name.human).titlecase , new_educational_level_path(@educational_level), :class => "btn success" 
+  - if @educational_levels.any?
+    = link_to t('scaffold.actions.export').titlecase, educational_levels_path( :format => 'pdf'), :class => "btn info"
 
-= link_to 'Nuevo Nivel de Educacion', new_educational_level_path
+- if @educational_levels.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :detalle, @educational_levels.human_attribute_name('detalle')
+      %th.last
+
+    - @educational_levels.each do |item|
+      %tr
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_educational_level_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@educational_levels)
+  .clear
+.clear

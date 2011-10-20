@@ -1,51 +1,50 @@
-= f.label ""
 %br/
 %h3 SI.S.C.O.S.S.
 .field
-  = f.label "Corresponde Reduccion"
+  = f.label "Corresponde Reduccion", :class => "tab_label"
   %br/
   = select( "employee", "sicoss_reduccion", {"No" => "N", "Si" => "S"})
 .field
-  = f.label "Tipo de Empleador"
+  = f.label "Tipo de Empleador", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_employer_type_id, SicossEmployerType.all, :id, :name, :prompt => true
 .field
-  = f.label "Situacion"
+  = f.label "Situacion", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_situation_id, SicossSituation.all, :id, :name, :prompt => true
 .field
-  = f.label "Condicion"
+  = f.label "Condicion", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_condition_id, SicossCondition.all, :id, :name, :prompt => true
 .field
-  = f.label "Actvidad"
+  = f.label "Actvidad", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_activity_id, SicossActivity.all, :id, :name, :prompt => true
 .field
-  = f.label "Modalidad de Contrato"
+  = f.label "Modalidad de Contrato", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_contract_mode_id, SicossContractMode.all, :id, :name, :prompt => true
 .field
-  = f.label "Codigo de Siniestrado"
+  = f.label "Codigo de Siniestrado", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_damaged_id, SicossDamaged.all, :id, :name, :prompt => true
 .field
-  = f.label "Localidad"
+  = f.label "Localidad", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_location_id, SicossLocation.all, :id, :name, :prompt => true
 .field
-  = f.label "Zona / Reduccion"
+  = f.label "Zona / Reduccion", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_reduction_zone_id, SicossReductionZone.all, :id, :name, :prompt => true
 .field
-  = f.label "Trabajador en Convenio Colectivo de Trabajo"
+  = f.label "Trabajador en Convenio Colectivo de Trabajo", :class => "tab_label"
   %br/
   = select( "employee", "sicoss_en_convenio", {"Si" => "S", "No" => "N"})
 .field
-  = f.label "Con Covertura de Seguro Colectivo de Vida Obligatorio"
+  = f.label "Con Covertura de Seguro Colectivo de Vida Obligatorio", :class => "tab_label"
   %br/
   = select( "employee", "sicoss_seguro_obligatorio", {"No" => "N", "Si" => "S"})
 .field
-  = f.label "Regimen"
+  = f.label "Regimen", :class => "tab_label"
   %br/
   = f.collection_select :sicoss_regimen_type_id, SicossRegimenType.all, :id, :name, :prompt => true

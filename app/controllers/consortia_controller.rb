@@ -83,7 +83,7 @@ class ConsortiaController < ApplicationController
       flash[:error] = "#{e}"
       redirect_to consortiun_url
     else
-      redirect_to consortiun_url
+      redirect_to consortia_url
     end
   end
 

@@ -44,7 +44,7 @@ $(document).ready(function() {
     if(insertionCallback){
       insertionCallback.call(contentNode);
     }
-    
+    $(".remove_fields").addClass("btn danger");
     return false;
   });
 

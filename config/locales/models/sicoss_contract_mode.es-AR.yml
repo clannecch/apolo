@@ -1,0 +1,11 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_contract_mode: Sicoss Contract Mode
+    attributes:
+      sicoss_contract_mode:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el
+        code: Codigo

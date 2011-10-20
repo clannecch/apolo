@@ -1,0 +1,66 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Attachment.model_name.human, attachments_path 
+    - breadcrumb.item "#{@attachment.name.titlecase}", attachment_path(@attachment), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_attachment_path(@attachment), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @attachment, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@attachment) do |f|
+  - if @attachment.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@attachment.errors.count, "error")
+        prohibited this attachment from being saved:
+      %ul
+        - @attachment.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :attachable_id, :class => "apsLabel"
+      %td.columnData
+        = @attachment.attachable_id
+    %tr
+      %td.columnLabel
+        = f.label :attachable_type, :class => "apsLabel"
+      %td.columnData
+        = @attachment.attachable_type
+    %tr
+      %td.columnLabel
+        = f.label :associated_document_type_id, :class => "apsLabel"
+      %td.columnData
+        = @attachment.associated_document_type.name
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @attachment.name
+    %tr
+      %td.columnLabel
+        = f.label :reception_date, :class => "apsLabel"
+      %td.columnData
+        = @attachment.reception_date
+    %tr
+      %td.columnLabel
+        = f.label :adjunto_file_name, :class => "apsLabel"
+      %td.columnData
+        = @attachment.adjunto_file_name
+    %tr
+      %td.columnLabel
+        = f.label :adjunto_content_type, :class => "apsLabel"
+      %td.columnData
+        = @attachment.adjunto_content_type
+    %tr
+      %td.columnLabel
+        = f.label :associated_document_type, :class => "apsLabel"
+      %td.columnData
+        = @attachment.associated_document_type
+    %tr
+      %td.columnLabel
+        = f.label :adjunto_file, :class => "apsLabel"
+      %td.columnData
+        = @attachment.adjunto_file
+.clear

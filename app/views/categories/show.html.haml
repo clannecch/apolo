@@ -1,9 +1,31 @@
-%h1 Visualizacion de Categorias
-%p#notice= notice
-%p
-  %b Detalle:
-  = @category.detalle
-= category_links(@category)
-|
-\#{link_to 'Volver', category_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Category.model_name.human, categories_path 
+    - breadcrumb.item "#{@category.detalle.titlecase}", category_path(@category), :active => true
 
+= link_to t('scaffold.actions.edit').titlecase, edit_category_path(@category), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @category, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@category) do |f|
+  - if @category.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@category.errors.count, "error")
+        prohibited this category from being saved:
+      %ul
+        - @category.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @category.detalle
+    %tr
+      %td.columnLabel
+        = f.label :importe, :class => "apsLabel"
+      %td.columnData
+        = @category.importe
+.clear

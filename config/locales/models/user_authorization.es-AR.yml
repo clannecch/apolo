@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      user_authorization: User Authorization
+    attributes:
+      user_authorization:
+        user_id: User
+        authorization_id: Authorization
+        created_at: Creado el
+        updated_at: Actualizado el

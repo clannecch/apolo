@@ -1,0 +1,30 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MenuUser.model_name.human, menu_users_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_menu_user_path(@menu_user), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @menu_user, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@menu_user) do |f|
+  - if @menu_user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@menu_user.errors.count, "error")
+        prohibited this menu_user from being saved:
+      %ul
+        - @menu_user.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :menu_id, :class => "apsLabel"
+      %td.columnData
+        = @menu_user.menu.name
+    %tr
+      %td.columnLabel
+        = f.label :user_id, :class => "apsLabel"
+      %td.columnData
+        = @menu_user.user_id
+.clear

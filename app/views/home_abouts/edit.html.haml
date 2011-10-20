@@ -1,5 +1,10 @@
-%h1 Edicion de Tipos de Calle
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item HomeAbout.model_name.human, home_abouts_path 
+    - breadcrumb.item "#{@home_about.detalle.titlecase}", home_about_path(@home_about), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, home_about_path(@home_about), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @home_about
-|
-\#{link_to 'Volver', home_abouts_path}

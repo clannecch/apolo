@@ -7,21 +7,51 @@
       %ul
         - @insurance_beneficiary.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label "Apellido"
-    %br/
-    = f.text_field :apellido
-  .field
-    = f.label "Nombre"
-    %br/
-    = f.text_field :nombre
-  .field
-    = f.label "Tipo de documento"
-    %br/
-    = f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true
-  .field
-    = f.label "Numero de Documento"
-    %br/
-    = f.text_field :numero_documento
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :nombre, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :nombre, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :apellido, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :apellido, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :document_type_id, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :document_type_id, DocumentType.all, :id, :detalle, {:class => "apsSelect"}
+    %tr
+      %td.columnLabel
+        = f.label :numero_documento, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :numero_documento, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :employee_id, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :employee_id, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :fecha_nacimiento, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :fecha_nacimiento, :class => "apsDatetime"
+    %tr
+      %td.columnLabel
+        = f.label :address, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :address, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :kinship_id, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :kinship_id, Kinship.all, :id, :name, {:class => "apsSelect"}
+    %tr
+      %td.columnLabel
+        = f.label :porcentual, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :porcentual, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

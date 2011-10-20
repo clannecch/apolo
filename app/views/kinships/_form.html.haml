@@ -1,14 +1,22 @@
-
-= semantic_form_for @kinship do |f|
-  = f.semantic_errors
-
-  = f.inputs do
-
-    = f.input :name
-
-    = f.label "Tipo de parentesco"
-    = select( "kinship", "hijo_conyugue", { "No corresponde" => " ", "Conyuge" => "C", "Hijo" => "H"})
-
-
-  = f.buttons
-
+= form_for(@kinship) do |f|
+  - if @kinship.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@kinship.errors.count, "error")
+        prohibited this kinship from being saved:
+      %ul
+        - @kinship.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :name, :class => "apsTextbox"
+    %tr
+      %td.columnLabel
+        = f.label :hijo_conyugue, :class => "apsLabel"
+      %td.columnData
+        = f.text_field :hijo_conyugue, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

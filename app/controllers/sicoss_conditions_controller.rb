@@ -9,7 +9,8 @@ class SicossConditionsController < ApplicationController
   # GET /sicoss_conditions.json
   # GET /sicoss_conditions.xml
   def index
-    @sicoss_conditions = SicossCondition.all
+    @search = SicossCondition.search(params[:search])
+    @sicoss_conditions = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_conditions.empty?
     respond_with(@sicoss_conditions)
   end

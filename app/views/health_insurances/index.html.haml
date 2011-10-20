@@ -1,15 +1,29 @@
-%h1 Listado de Obras Sociales
-%table
-  %tr
-    %th Code
-    %th Detalle
-    %th
-    %th
-    %th
-  - @health_insurances.each do |health_insurance|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item HealthInsurance.model_name.human, health_insurances_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => HealthInsurance.model_name.human).titlecase , new_health_insurance_path(@health_insurance), :class => "btn success" 
+  - if @health_insurances.any?
+    = link_to t('scaffold.actions.export').titlecase, health_insurances_path( :format => 'pdf'), :class => "btn info"
+
+- if @health_insurances.any?
+  %table.tableStandard
     %tr
-      %td= health_insurance.code
-      %td= health_insurance.detalle
-      %td= health_insurance_links(health_insurance)
-%br/
-= link_to 'Nueva Obra Social', new_health_insurance_path
+      %th= sort_link @search, :detalle, @health_insurances.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @health_insurances.human_attribute_name('code')
+      %th.last
+
+    - @health_insurances.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_health_insurance_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@health_insurances)
+  .clear
+.clear

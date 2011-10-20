@@ -1,38 +1,48 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employee.model_name.human, employees_path, :active => true
+
 %h1 Listado de Empleados
-%table.tableStandard{:width => "50%"}
-  %tr
-    %th Consorcio
-    %th Legajo
-    %th Nombre
-    %th Apellido
-    %th Telefono
-    %th Movil
-    %th Categoria
-    %th Seccion
-    %th Tarea
-    %th Lugar
-    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
-  - @employees.each do |employee|
+
+- if true
+  = link_to 'Nuevo Empleado', new_employee_path, :class => "btn success"
+  - if @employees.any?
+    = link_to t('scaffold.actions.export').titlecase, employees_path( :format => 'pdf'), :class => "btn info"
+
+- if @employees.any?
+  %table.tableStandard{:width => "50%"}
     %tr
-      %td= employee.consortium.try(:name)
-      %td= employee.legajo
-      %td= employee.nombre
-      %td= employee.apellido
-      %td= employee.telefono
-      %td= employee.movil
-      %td= employee.category.try(:detalle)
-      %td= employee.section.try(:detalle)
-      %td= employee.task.try(:detalle)
-      %td= employee.place.try(:detalle)
-      -#%td= employee_links(employee)
-      %td.last
-        %a{ :href => "/employees/#{employee.id.to_s}" }
-          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
-      %td.last
-        %a{ :href => "/employees/#{employee.id.to_s}/edit" }
-          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
-      %td.last
-        %a{ :href => "/employees/#{employee.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
-          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
+      /%th= sort_link @search, :detalle, @bank_deposits.human_attribute_name('detalle')
+      %th= sort_link @search, :consortium_id, Consortium.model_name.human
+      %th= sort_link @search, :legajo, @employees.human_attribute_name('legajo')
+      %th= sort_link @search, :nombre, @employees.human_attribute_name('nombre')
+      %th= sort_link @search, :apellido, @employees.human_attribute_name('apellido')
+      %th Telefono
+      %th Movil
+      %th= sort_link @search, :category_id, Category.model_name.human
+      %th= sort_link @search, :section_id, Section.model_name.human
+      %th= sort_link @search, :task_id, Task.model_name.human
+      %th= sort_link @search, :place_id, Place.model_name.human
+      %th.last
+    - @employees.each do |item|
+      %tr
+        %td= item.consortium.try(:name)
+        %td= item.legajo
+        %td= item.nombre
+        %td= item.apellido
+        %td= item.telefono
+        %td= item.movil
+        %td= item.category.try(:detalle)
+        %td= item.section.try(:detalle)
+        %td= item.task.try(:detalle)
+        %td= item.place.try(:detalle)
+        -#%td= employee_links(employee)
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .block{:style => 'margin:20px;'}= paginate(@employees)
+  .clear
+.clear
 %br/
-= link_to 'Nuevo Empleado', new_employee_path

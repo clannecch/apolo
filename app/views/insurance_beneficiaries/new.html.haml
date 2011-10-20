@@ -1,3 +1,7 @@
-%h1 Nuevo Beneficiario de Seguro
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceBeneficiary.model_name.human, insurance_beneficiaries_path
+    - breadcrumb.item t('scaffold.actions.new', :item => InsuranceBeneficiary.model_name.human).titlecase , insurance_beneficiaries_path, :active => true
+
 = render 'form'
-= link_to 'Volver', insurance_beneficiaries_path

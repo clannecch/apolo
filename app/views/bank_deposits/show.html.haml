@@ -1,9 +1,26 @@
-%h1 Visualizacion de Banco
-%p#notice= notice
-%p
-  %b Detalle:
-  = @bank_deposit.detalle
-= bank_deposit_links(@bank_deposit)
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDeposit.model_name.human, bank_deposits_path 
+    - breadcrumb.item "#{@bank_deposit.detalle.titlecase}", bank_deposit_path(@bank_deposit), :active => true
 
-|
-\#{link_to 'Volver', bank_deposits_path}
+= link_to t('scaffold.actions.edit').titlecase, edit_bank_deposit_path(@bank_deposit), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @bank_deposit, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@bank_deposit) do |f|
+  - if @bank_deposit.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@bank_deposit.errors.count, "error")
+        prohibited this bank_deposit from being saved:
+      %ul
+        - @bank_deposit.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @bank_deposit.detalle
+.clear

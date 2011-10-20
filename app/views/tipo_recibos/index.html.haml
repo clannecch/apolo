@@ -1,13 +1,29 @@
-%h1 Listado de tipos de recibos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @tipo_recibos.each do |tipo_recibo|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item TipoRecibo.model_name.human, tipo_recibos_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => TipoRecibo.model_name.human).titlecase , new_tipo_recibo_path(@tipo_recibo), :class => "btn success" 
+  - if @tipo_recibos.any?
+    = link_to t('scaffold.actions.export').titlecase, tipo_recibos_path( :format => 'pdf'), :class => "btn info"
+
+- if @tipo_recibos.any?
+  %table.tableStandard
     %tr
-      %td= tipo_recibo.detalle
-      %td= tipo_recibo_links(tipo_recibo)
-%br/
-= link_to 'Nuevo Tipo recibo', new_tipo_recibo_path
+      %th= sort_link @search, :detalle, @tipo_recibos.human_attribute_name('detalle')
+      %th= sort_link @search, :recibo_principal, @tipo_recibos.human_attribute_name('recibo_principal')
+      %th.last
+
+    - @tipo_recibos.each do |item|
+      %tr
+        %td= item.detalle
+        %td= check_box_tag "tipo_recibo_recibo_principal", tipo_recibo.recibo_principal, tipo_recibo.recibo_principal, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_tipo_recibo_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@tipo_recibos)
+  .clear
+.clear

@@ -1,10 +1,10 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossContractMode.model_name.human, sicoss_contract_modes_path 
+    - breadcrumb.item "#{@sicoss_contract_mode.name.titlecase}", sicoss_contract_mode_path(@sicoss_contract_mode), :active => true
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.edit', :item => SicossContractMode.model_name.human).titlecase
-
+= link_to t('scaffold.actions.show').titlecase, sicoss_contract_mode_path(@sicoss_contract_mode), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-
-= link_to t('scaffold.actions.show').titlecase, @sicoss_contract_mode
-\|
-= link_to t('scaffold.actions.back').titlecase, sicoss_contract_modes_path
-

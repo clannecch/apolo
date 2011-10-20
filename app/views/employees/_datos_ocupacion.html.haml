@@ -1,25 +1,25 @@
 %h3 Ocupacion
 .field
-  = f.label "Categoria"
+  = f.label "Categoria", :class => "tab_label"
   %br/
   = f.collection_select :category_id, Category.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Seccion"
+  = f.label "Seccion", :class => "tab_label"
   %br/
   = f.collection_select :section_id, Section.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Tarea Desempeñada"
+  = f.label "Tarea Desempeñada", :class => "tab_label"
   %br/
   = f.collection_select :task_id, Task.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Lugar de Trabajo"
+  = f.label "Lugar de Trabajo", :class => "tab_label"
   %br/
   = f.collection_select :place_id, Place.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Ocupacion"
+  = f.label "Ocupacion", :class => "tab_label"
   %br/
   = f.collection_select :employment_id, Employment.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Caracter de Servicio"
+  = f.label "Caracter de Servicio", :class => "tab_label"
   %br/
   = f.collection_select :character_service_id, CharacterService.all, :id, :detalle, :prompt => true

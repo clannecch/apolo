@@ -1,30 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossEmployerType.model_name.human, sicoss_employer_types_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossEmployerType.model_name.human).titlecase , new_sicoss_employer_type_path(@sicoss_employer_type), :class => "btn success" 
+  - if @sicoss_employer_types.any?
+    = link_to t('scaffold.actions.export').titlecase, sicoss_employer_types_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossEmployerType.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossEmployerType.human_attribute_name('code')
-
-    %th= SicossEmployerType.human_attribute_name('name')
-
-    %th
-    %th
-    %th
-
-  - @sicoss_employer_types.each do |sicoss_employer_type|
+- if @sicoss_employer_types.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @sicoss_employer_types.human_attribute_name('name')
+      %th= sort_link @search, :code, @sicoss_employer_types.human_attribute_name('code')
+      %th.last
 
-      %td= sicoss_employer_type.name
-
-      %td= sicoss_employer_type.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, sicoss_employer_type
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_employer_type_path(sicoss_employer_type)
-      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_employer_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossEmployerType.model_name.human).titlecase, new_sicoss_employer_type_path
-
+    - @sicoss_employer_types.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_employer_type_path(item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_employer_types)
+  .clear
+.clear

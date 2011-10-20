@@ -7,3 +7,121 @@
 form.formtastic fieldset > ol > li label {
   float: none;
 }
+
+/* line 7, ../../app/stylesheets/application.sass */
+ul.wat-cf {
+  list-style-type: none;
+  position: static;
+  text-align: left;
+}
+/* line 11, ../../app/stylesheets/application.sass */
+ul.wat-cf li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 0px;
+}
+
+/* line 16, ../../app/stylesheets/application.sass */
+.user_navigation {
+  text-align: left;
+  position: static;
+  padding: 0px 10px 0px 0px;
+}
+
+/* line 21, ../../app/stylesheets/application.sass */
+.block {
+  text-align: left;
+  padding: 0px 0px 0px 0px;
+}
+
+/* line 25, ../../app/stylesheets/application.sass */
+.content {
+  text-align: left;
+  padding: 0px 0px 0px 0px;
+}
+
+/* line 29, ../../app/stylesheets/application.sass */
+.breadcrumb {
+  position: relative;
+  height: 30px;
+  width: 100%;
+  margin: 0px 0px 30px 0px;
+}
+/* line 34, ../../app/stylesheets/application.sass */
+.breadcrumb ul {
+  position: relative;
+  margin: 0 5px 0 5px;
+  padding: 0;
+  height: 30px;
+  background: url("../images/breadcrumbImage.png") 0px -30px repeat-x;
+}
+/* line 40, ../../app/stylesheets/application.sass */
+.breadcrumb ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  float: left;
+  height: 30px;
+  display: inline;
+}
+/* line 47, ../../app/stylesheets/application.sass */
+.breadcrumb ul li a {
+  color: blue;
+  text-decoration: none;
+  line-height: 30px;
+  display: block;
+  background: url("../images/breadcrumbImage.png") 100% -60px no-repeat;
+  padding: 0 17px 0 15px;
+  outline: none;
+}
+/* line 55, ../../app/stylesheets/application.sass */
+.breadcrumb ul li a:hover {
+  text-decoration: underline;
+  background-color: white;
+  color: blue;
+}
+/* line 59, ../../app/stylesheets/application.sass */
+.breadcrumb ul li a.active {
+  background: none;
+  color: black;
+}
+/* line 62, ../../app/stylesheets/application.sass */
+.breadcrumb ul li a.active:hover {
+  text-decoration: none;
+}
+/* line 64, ../../app/stylesheets/application.sass */
+.breadcrumb ul li.active {
+  color: black;
+  text-decoration: none;
+  line-height: 30px;
+  display: block;
+  background: url("../images/breadcrumbImage.png") 100% -60px no-repeat;
+  padding: 0 17px 0 15px;
+  outline: none;
+}
+/* line 72, ../../app/stylesheets/application.sass */
+.breadcrumb ul li.active.active {
+  background: none;
+}
+/* line 74, ../../app/stylesheets/application.sass */
+.breadcrumb .left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 10px;
+  height: 30px;
+  display: block;
+  z-index: 1;
+  background: url("../images/breadcrumbImage.png") 0% 0px no-repeat;
+}
+/* line 83, ../../app/stylesheets/application.sass */
+.breadcrumb .right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 10px;
+  height: 30px;
+  display: block;
+  z-index: 1;
+  background: url("../images/breadcrumbImage.png") 100% -90px no-repeat;
+}

@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      activity: Actividad
+    attributes:
+      activity:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el

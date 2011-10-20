@@ -9,7 +9,9 @@ class SicossEmployerTypesController < ApplicationController
   # GET /sicoss_employer_types.json
   # GET /sicoss_employer_types.xml
   def index
-    @sicoss_employer_types = SicossEmployerType.all
+    @search = SicossEmployerType(params[:search])
+    @sicoss_employer_types = @search.page(params[:page]).per(10)
+
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_employer_types.empty?
     respond_with(@sicoss_employer_types)
   end

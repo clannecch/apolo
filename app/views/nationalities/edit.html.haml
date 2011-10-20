@@ -1,5 +1,10 @@
-%h1 Edicion nacionalidad
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Nationality.model_name.human, nationalities_path 
+    - breadcrumb.item "#{@nationality.detalle.titlecase}", nationality_path(@nationality), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, nationality_path(@nationality), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @nationality
-|
-\#{link_to 'Volver', nationalities_path}

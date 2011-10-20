@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   def before_all
     unless devise_controller?
       # @system_menus = Menu.all.select{|x| x.modulo.blank? || current_company.engines.to_s.include?(x.modulo)}
-      @system_menus = Menu.all
+      @user_menu = Menu.all
     end  
   end
 

@@ -1,8 +1,26 @@
-%h1 Visualizacion de Cuentas Contables
-%p#notice= notice
-%p
-  %b Detalle:
-  = @accounting_imputation.detalle
-= accounting_imputation_links(@accounting_imputation)
-|
-\#{link_to 'Volver', accounting_imputations_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AccountingImputation.model_name.human, accounting_imputations_path 
+    - breadcrumb.item "#{@accounting_imputation.detalle.titlecase}", accounting_imputation_path(@accounting_imputation), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_accounting_imputation_path(@accounting_imputation), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @accounting_imputation, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@accounting_imputation) do |f|
+  - if @accounting_imputation.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@accounting_imputation.errors.count, "error")
+        prohibited this accounting_imputation from being saved:
+      %ul
+        - @accounting_imputation.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @accounting_imputation.detalle
+.clear

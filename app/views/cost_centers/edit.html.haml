@@ -1,5 +1,10 @@
-%h1 Edicion de Centro de Costo
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CostCenter.model_name.human, cost_centers_path 
+    - breadcrumb.item "#{@cost_center.detalle.titlecase}", cost_center_path(@cost_center), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, cost_center_path(@cost_center), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @cost_center
-|
-\#{link_to 'Volver', cost_centers_path}

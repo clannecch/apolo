@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      user_role: User Role
+    attributes:
+      user_role:
+        user_id: User
+        rol_id: Rol
+        created_at: Creado el
+        updated_at: Actualizado el

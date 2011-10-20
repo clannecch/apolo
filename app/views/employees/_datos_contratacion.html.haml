@@ -1,61 +1,61 @@
 %h3 Contratacion
 .field
-  = f.label "Consorcio"
+  = f.label "Consorcio", :class => "tab_label"
   %br/
   = f.collection_select :consortium_id, Consortium.all, :id, :name, :prompt => true
 .field
-  = f.label "fecha_ingreso"
+  = f.label "fecha_ingreso", :class => "tab_label"
   %br/
-  = f.text_field :fecha_ingreso, :class => :datepicker
+  = f.text_field :fecha_ingreso, :class => "apsDatetime"
 .field
-  = f.label "Modalidad de Contrato"
+  = f.label "Modalidad de Contrato", :class => "tab_label"
   %br/
   = f.collection_select :contract_mode_id, ContractMode.all, :id, :detalle, :prompt => true
 .field
-  = f.label "fecha_egreso"
+  = f.label "fecha_egreso", :class => "tab_label"
   %br/
-  = f.text_field :fecha_egreso, :class => :datepicker
+  = f.text_field :fecha_egreso, :class => "apsDatetime"
 .field
-  = f.label "Causa de Egreso"
+  = f.label "Causa de Egreso", :class => "tab_label"
   %br/
   = f.collection_select :causa_egreso_id, CausaEgreso.all, :id, :detalle, :prompt => true
 .field
-  = f.label "horas_pactadas"
+  = f.label "horas_pactadas", :class => "tab_label"
   %br/
   = f.text_field :horas_pactadas
 .field
-  = f.label "remuneracion_fuera_convenio"
+  = f.label "remuneracion_fuera_convenio", :class => "tab_label"
   %br/
   = f.text_field :remuneracion_fuera_convenio
 .field
-  = f.label "Tipo de Remuneracion"
+  = f.label "Tipo de Remuneracion", :class => "tab_label"
   %br/
   = f.collection_select :remuneration_type_id, RemunerationType.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Grupo de Remuneraciones"
+  = f.label "Grupo de Remuneraciones", :class => "tab_label"
   %br/
   = f.collection_select :group_remuneration_id, GroupRemuneration.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Grupo de Retenciones"
+  = f.label "Grupo de Retenciones", :class => "tab_label"
   %br/
   = f.collection_select :group_retention_id, GroupRetention.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Grupo de Aportes Patronales"
+  = f.label "Grupo de Aportes Patronales", :class => "tab_label"
   %br/
   = f.collection_select :group_employer_contribution_id, GroupEmployerContribution.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Centro de costo"
+  = f.label "Centro de costo", :class => "tab_label"
   %br/
   = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, :prompt => true
 .field
-  = f.label "Años de Antiguedad Reconocida"
+  = f.label "Años de Antiguedad Reconocida", :class => "tab_label"
   %br/
   = f.text_field :antiguedad_reconocida_anos
 .field
-  = f.label "Meses de Antiguedad Reconocida"
+  = f.label "Meses de Antiguedad Reconocida", :class => "tab_label"
   %br/
   = f.text_field :antiguedad_reconocida_meses
 .field
-  = f.label "Imputacion Contable"
+  = f.label "Imputacion Contable", :class => "tab_label"
   %br/
   = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, :prompt => true
