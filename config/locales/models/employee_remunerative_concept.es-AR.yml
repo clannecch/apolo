@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      employee_remunerative_concept: Employee Remunerative Concept
+      employee_remunerative_concept: Concepto de remuneración del empleador
     attributes:
       employee_remunerative_concept:
         employee_id: Employee

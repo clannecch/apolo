@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      section: Section
+      section: Sección
     attributes:
       section:
         detalle: Detalle

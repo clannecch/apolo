@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_regimen_type: Sicoss Regimen Type
+      sicoss_regimen_type: Tipo de regimen (AFIP)
     attributes:
       sicoss_regimen_type:
         name: Nombre

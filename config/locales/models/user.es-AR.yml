@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      user: User
+      user: Ususario
     attributes:
       user:
         first_name: First Name
@@ -9,7 +9,7 @@ es-AR:
         created_at: Creado el
         updated_at: Actualizado el
         email: Email
-        encrypted_password: Encrypted Password
+        encrypted_password: Clave encriptada
         current_sign_in_ip: Current Sign In Ip
         last_sign_in_ip: Last Sign In Ip
         sign_in_count: Sign In Count

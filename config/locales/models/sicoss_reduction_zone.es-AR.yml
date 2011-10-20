@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_reduction_zone: Sicoss Reduction Zone
+      sicoss_reduction_zone: Zona / Reducción (AFIP)
     attributes:
       sicoss_reduction_zone:
         name: Nombre

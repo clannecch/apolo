@@ -125,3 +125,79 @@ ul.wat-cf li {
   z-index: 1;
   background: url("../images/breadcrumbImage.png") 100% -90px no-repeat;
 }
+
+/* line 93, ../../app/stylesheets/application.sass */
+#box {
+  width: 500px;
+  margin: 50px auto;
+  background-color: #dedede;
+}
+/* line 97, ../../app/stylesheets/application.sass */
+#box .block {
+  margin-bottom: 20px;
+}
+/* line 99, ../../app/stylesheets/application.sass */
+#box .block h2 {
+  padding: 10px 15px;
+  margin: 0;
+  background-color: #00264d;
+  color: white;
+}
+/* line 104, ../../app/stylesheets/application.sass */
+#box .block .content {
+  padding: 10px 20px;
+}
+
+/* line 108, ../../app/stylesheets/application.sass */
+#main .block {
+  margin-bottom: 20px;
+  padding-top: 1px;
+}
+/* line 111, ../../app/stylesheets/application.sass */
+#main .block .content .inner {
+  padding: 0 15px 15px;
+}
+/* line 113, ../../app/stylesheets/application.sass */
+#main .main p.first {
+  margin-top: 0;
+}
+
+/* line 117, ../../app/stylesheets/application.sass */
+.flash .message {
+  text-align: center;
+  margin: 0 auto 15px;
+}
+/* line 121, ../../app/stylesheets/application.sass */
+.flash .message p {
+  margin: 8px;
+}
+/* line 124, ../../app/stylesheets/application.sass */
+.flash .error, .flash .error-list {
+  border: 1px solid #ffbbbb;
+  background-color: #ffdddd;
+}
+/* line 128, ../../app/stylesheets/application.sass */
+.flash .warning {
+  background-color: #ffffcc;
+}
+/* line 132, ../../app/stylesheets/application.sass */
+.flash .notice {
+  border: 1px solid #1fdf00;
+  background-color: #bbffb6;
+}
+/* line 136, ../../app/stylesheets/application.sass */
+.flash .error-list {
+  text-align: left;
+}
+/* line 138, ../../app/stylesheets/application.sass */
+.flash .error-list h2 {
+  font-size: 16px;
+  text-align: center;
+}
+/* line 141, ../../app/stylesheets/application.sass */
+.flash .error-list ul {
+  padding-left: 22px;
+  line-height: 18px;
+  list-style-type: square;
+  margin-bottom: 15px;
+}

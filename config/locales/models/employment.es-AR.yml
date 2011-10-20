@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      employment: Employment
+      employment: Empleador
     attributes:
       employment:
         detalle: Detalle

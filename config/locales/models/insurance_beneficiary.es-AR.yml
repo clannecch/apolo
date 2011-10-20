@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      insurance_beneficiary: Insurance Beneficiary
+      insurance_beneficiary: Beneficiario de seguro
     attributes:
       insurance_beneficiary:
         nombre: Nombre

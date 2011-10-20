@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      health_insurance: Health Insurance
+      health_insurance: Obra social
     attributes:
       health_insurance:
         detalle: Detalle

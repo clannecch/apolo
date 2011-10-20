@@ -1,45 +1,71 @@
-%h1 Visualizacion de Liquidacion
-%p#notice= notice
-- if @liquidacion.errors.any?
-  #error_explanation
-    %h2
-      = pluralize(@liquidacion.errors.count, "error")
-      prohibited this liquidacion from being saved:
-    %ul
-      - @liquidacion.errors.full_messages.each do |msg|
-        %li= msg
-%p
-  %b Periodo de liquidacion:
-  = @liquidacion.periodo.month
-  \/ #{@liquidacion.periodo.year}
-%p
-  %b Tipo de Recibo:
-  = @liquidacion.tipo_recibo.try(:detalle)
-%p
-  %b Quincena:
-  = @liquidacion.quincena
-%p
-  %b Fecha liquidacion:
-  = @liquidacion.fecha_liquidacion
-%p
-  %b Banco ultimo deposito:
-  = @liquidacion.bank_deposit.try(:detalle)
-%p
-  %b Periodo deposito:
-  = @liquidacion.periodo_deposito.month
-  \/  #{@liquidacion.periodo_deposito.year}
-%p
-  %b Fecha deposito:
-  = @liquidacion.fecha_deposito
-%p
-  %b Fecha cierre:
-  = @liquidacion.fecha_cierre
-%p
-  %b Techo retenciones:
-  = @liquidacion.techo_retenciones
-= liquidacion_links(@liquidacion)
-|
-\#{link_to 'Volver', liquidacions_path}
-= link_to icon('printer', :small, :title => 'Libro Sueldos'), liquidacion_path(@liquidacion, :format => 'pdf'), :onclick => "$('.flash').hide()"
-= link_to icon('printer', :small, :title => 'Planilla de Remuneraciones'), liquidacion_path(@liquidacion, :format => 'json')
-= link_to icon('sicoss', :small, :title => 'Interfase Sicoss'), liquidacion_path(@liquidacion, :format => 'text')
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+/    - breadcrumb.item "#{@liquidacion.detalle.titlecase}", liquidacion_path(@liquidacion), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_liquidacion_path(@liquidacion), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @liquidacion, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+= link_to 'Libro Sueldos', liquidacion_path(@liquidacion, :format => 'pdf'), :class => "btn standard"
+= link_to 'Planilla de Remuneraciones', liquidacion_path(@liquidacion, :format => 'json'), :class => "btn standard"
+= link_to 'Interfase Sicoss', liquidacion_path(@liquidacion, :format => 'text'), :class => "btn standard"
+.clear
+%br/
+/%h1 Visualizacion de Liquidacion
+/%p#notice= notice
+= form_for(@liquidacion) do |f|
+  - if @liquidacion.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@liquidacion.errors.count, "error")
+        prohibited this bank_deposit from being saved:
+      %ul
+        - @liquidacion.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :periodo, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.periodo.month
+    %tr
+      %td.columnLabel
+        = f.label :tipo_recibo, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.tipo_recibo.try(:detalle)
+    %tr
+      %td.columnLabel
+        = f.label :quincena, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.quincena
+    %tr
+      %td.columnLabel
+        = f.label :fecha_liquidacion, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.fecha_liquidacion
+    %tr
+      %td.columnLabel
+        = f.label :bank_deposit, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.bank_deposit.try(:detalle)
+    %tr
+      %td.columnLabel
+        = f.label :periodo_deposito, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.periodo_deposito.month
+    %tr
+      %td.columnLabel
+        = f.label :fecha_deposito, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.fecha_deposito
+    %tr
+      %td.columnLabel
+        = f.label :fecha_cierre, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.fecha_cierre
+    %tr
+      %td.columnLabel
+        = f.label :techo_retenciones, :class => "apsLabel"
+      %td.columnData
+        = @liquidacion.techo_retenciones
+.clear

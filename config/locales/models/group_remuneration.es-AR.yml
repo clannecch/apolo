@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      group_remuneration: Group Remuneration
+      group_remuneration: Grupo de remuneración
     attributes:
       group_remuneration:
         detalle: Detalle

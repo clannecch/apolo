@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      home_about: Home About
+      home_about: Tipo de calle
     attributes:
       home_about:
         detalle: Detalle

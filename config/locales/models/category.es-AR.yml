@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      category: Category
+      category: Categoria
     attributes:
       category:
         detalle: Detalle

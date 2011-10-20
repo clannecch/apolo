@@ -1,7 +1,7 @@
 !!!
-%html
+%html{:style => "background-color: #00264d"}
   %head
-    %title APSSueldos
+    %title Apolo Login
     /= stylesheet_link_tag 'jquery.tipsy', :media => 'screen'
     = stylesheet_link_tag 'apslabs', :media => 'screen'
     /[if IE]
@@ -9,8 +9,8 @@
     /= stylesheet_link_tag 'uniform.aristo', :media => 'screen'
     = stylesheet_link_tag 'application', :media => 'screen'
     = stylesheet_link_tag 'bootstrap', :media => 'screen'
-    = stylesheet_link_tag 'docs', :media => 'screen'
-    = stylesheet_link_tag 'prettify', :media => 'screen'
+    /= stylesheet_link_tag 'docs', :media => 'screen'
+    /= stylesheet_link_tag 'prettify', :media => 'screen'
     /%link{:href => "http://static.flowplayer.org/tools/css/tabs.css", :rel => "stylesheet", :type => "text/css"}/
     :css
       /* tab pane styling */
@@ -34,13 +34,15 @@
     /= javascript_include_tag 'jquery.tipsy.js'
     = csrf_meta_tag
     = yield(:head)
-  %body
+  %body{:style => "background-color: #00264d"}
     .main
       .sidebar
-        = render('shared/main_menu')
-      .content
-        %h1
-          Companía:
-          = current_company.name
-        = yield
-
+    #box
+      .block
+        %h2= yield(:title) if content_for?(:title)
+        .content.login
+          .flash
+            - flash.each do |type, message|
+              .message{:class => type.to_s}
+                %p= message
+          = yield

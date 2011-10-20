@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      employer_contribution_concept: Employer Contribution Concept
+      employer_contribution_concept: Concepto de contrubución del empleador
     attributes:
       employer_contribution_concept:
         codigo: Codigo

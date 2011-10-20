@@ -24,7 +24,7 @@ es-AR:
       show: mostrar
       edit: editar
       destroy: eliminar
-      destroy_confirm: estÃ¡ seguro?
+      destroy_confirm: Está seguro?
       new: "crear %{item}"
       list: "listar %{item}"
       back: volver

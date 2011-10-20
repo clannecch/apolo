@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      employee_familiar: Employee Familiar
+      employee_familiar: Familiar del empleado
     attributes:
       employee_familiar:
         apellido: Apellido
@@ -14,14 +14,14 @@ es-AR:
         tomo: Tomo
         folio: Folio
         acta: Acta
-        country_id: Country
-        province_id: Province
+        country_id: Pais
+        province_id: Provincia
         comuna: Comuna
-        employee_id: Employee
+        employee_id: Empleador
         document_type_id: Document Type
-        activity_id: Activity
+        activity_id: Actividad
         created_at: Creado el
         updated_at: Actualizado el
         kinship_id: Kinship
-        address: Address
+        address: Domicilio
         porcentual: Porcentual

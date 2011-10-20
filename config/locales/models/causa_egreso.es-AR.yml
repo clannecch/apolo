@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      causa_egreso: Causa Egreso
+      causa_egreso: Causa de Egreso
     attributes:
       causa_egreso:
         detalle: Detalle

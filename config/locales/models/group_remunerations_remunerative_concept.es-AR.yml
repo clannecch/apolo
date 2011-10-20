@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      group_remunerations_remunerative_concept: Group Remunerations Remunerative Concept
+      group_remunerations_remunerative_concept: Concepto de grupo de remuneración
     attributes:
       group_remunerations_remunerative_concept:
         group_remuneration_id: Group Remuneration

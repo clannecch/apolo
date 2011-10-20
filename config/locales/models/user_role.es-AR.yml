@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      user_role: User Role
+      user_role: Rol
     attributes:
       user_role:
         user_id: User

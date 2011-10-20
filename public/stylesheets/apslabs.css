@@ -104,33 +104,3 @@ div.inner {
   text-align: left;
   width: 100%;
 }
-
-/* line 72, ../../app/stylesheets/partials/_apolo.sass */
-.flash {
-  text-align: center;
-  padding: 0px 5px 0px 5px;
-  margin: 0 auto 0.5em;
-  clear: both;
-  /* 610/13 */
-  /* 610/13.3333 - for IE */
-}
-
-/* line 94, ../../app/stylesheets/partials/_apolo.sass */
-.message {
-  margin: 0px auto;
-  padding: 5px 0px 0px 0px;
-  border: 1px solid #26722d;
-  width: 100%;
-}
-
-/* line 100, ../../app/stylesheets/partials/_apolo.sass */
-.notice {
-  background-color: #a4e7a0;
-  text-align: center;
-}
-
-/* line 104, ../../app/stylesheets/partials/_apolo.sass */
-.error, .alert {
-  background-color: #f0a8a8;
-  border: 1px solid #990000;
-}

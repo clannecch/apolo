@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      authorization: Authorization
+      authorization: Autorización
     attributes:
       authorization:
         code: Codigo

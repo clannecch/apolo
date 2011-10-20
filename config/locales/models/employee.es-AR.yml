@@ -1,36 +1,36 @@
 es-AR:
   activerecord:
     models:
-      employee: Employee
+      employee: Empleado
     attributes:
       employee:
         legajo: Legajo
         nombre: Nombre
         apellido: Apellido
         telefono: Telefono
-        document_type_id: Document Type
-        numero_documento: Numero Documento
-        issued_id: Issued
+        document_type_id: Tipo de documento
+        numero_documento: Número de Documento
+        issued_id: Emitido
         sexo: Sexo
-        nationality_id: Nationality
-        marital_status_id: Marital Status
+        nationality_id: Nationalidad
+        marital_status_id: Estado civil
         fecha_nacimiento: Fecha Nacimiento
         calle: Calle
         puerta: Puerta
         piso: Piso
         departamento: Departamento
-        location_id: Location
-        province_id: Province
-        country_id: Country
+        location_id: Ubicacion
+        province_id: Provincia
+        country_id: Pais
         codigo_postal: Codigo Postal
         created_at: Creado el
         updated_at: Actualizado el
         movil: Movil
         email: Email
-        category_id: Category
-        section_id: Section
-        task_id: Task
-        place_id: Place
+        category_id: Categoria
+        section_id: Seccion
+        task_id: Tarea
+        place_id: Lugar
         character_service_id: Character Service
         matricula_nacional: Matricula Nacional
         matricula_provincial: Matricula Provincial

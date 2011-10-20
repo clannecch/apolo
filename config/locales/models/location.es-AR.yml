@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      location: Location
+      location: Localidad
     attributes:
       location:
         detalle: Detalle

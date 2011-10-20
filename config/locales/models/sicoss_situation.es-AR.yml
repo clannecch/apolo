@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_situation: Sicoss Situation
+      sicoss_situation: Situacion (AFIP)
     attributes:
       sicoss_situation:
         name: Nombre

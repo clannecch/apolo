@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      email_type: Email Type
+      email_type: Tipo de mail
     attributes:
       email_type:
         detalle: Detalle

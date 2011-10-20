@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      accounting_imputation: Accounting Imputation
+      accounting_imputation: Cuenta imputable
     attributes:
       accounting_imputation:
         detalle: Detalle

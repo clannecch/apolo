@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      cost_center: Cost Center
+      cost_center: Centro de Costo
     attributes:
       cost_center:
         detalle: Detalle
