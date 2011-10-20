@@ -34,9 +34,10 @@ class Consortium < ActiveRecord::Base
   belongs_to :province
   belongs_to :location
 
-  validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
-                               :cuit, :numero_inscripcion,
-                               :caja, :ultima_hoja_libro, :message => "es un dato requerido"
+  validates_presence_of	:name, :code, :calle, :altura, :codigo_postal,
+                        :cuit, :ultima_hoja_libro, :message => "es un dato requerido"
+
+#                               , :numero_inscripcion, :caja,
 
   has_many   :attachments, :as => :attachable, :dependent => :restrict
 
@@ -48,6 +49,5 @@ class Consortium < ActiveRecord::Base
   def full_address
 #    apellido + ', '+nombre
     return calle + ' ' +altura+' -'+codigo_postal+' '+location.detalle+' ('+province.detalle+")"
-
   end
 end
