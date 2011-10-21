@@ -773,7 +773,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     linea = []
 
     haberes_cd= -1
-    haberes_sd=-1
+    haberes_sd= -1
     retenciones= -1
 
     total_retention = 0
@@ -809,7 +809,7 @@ def print_libro_pdf(filename,liquidacion_actual)
           linea << ['','','','','','','','']
         end
         linea[retenciones][6]    =    rr.retention_concept.codigo.strip
-        linea[retenciones][7]    =    format_number(r.total).strip
+        linea[retenciones][7]    =    format_number(rr.total).strip
         total_retention = total_retention + rr.total
       end
     end
@@ -817,7 +817,7 @@ def print_libro_pdf(filename,liquidacion_actual)
 
     pdf.draw_text (haberes_cd + haberes_sd + retenciones).to_s, :at => [5, 685], :size => 5
 
-    if haberes_cd + haberes_sd  +  retenciones >= 0
+    if haberes_cd != -1 || haberes_sd != -1 || retenciones != -1
       if offset-((linea.count+4))*10 < 20
         if numero_de_hoja != empresa.hoja
           pdf.start_new_page
