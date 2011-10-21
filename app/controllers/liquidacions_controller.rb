@@ -802,15 +802,15 @@ def print_libro_pdf(filename,liquidacion_actual)
       end
     end
 
-    r.detalle_recibo_retencions.each do |r|
-      if r.total.to_f != 0 && !r.retention_concept.auxiliar
+    r.detalle_recibo_retencions.each do |rr|
+      if rr.total.to_f != 0 && !rr.retention_concept.auxiliar
         retenciones = retenciones + 1
         if retenciones >= linea.count
           linea << ['','','','','','','','']
         end
-        linea[retenciones][6]    =    r.retention_concept.codigo.strip
+        linea[retenciones][6]    =    rr.retention_concept.codigo.strip
         linea[retenciones][7]    =    format_number(r.total).strip
-        total_retention = total_retention + r.total
+        total_retention = total_retention + rr.total
       end
     end
 
