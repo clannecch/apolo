@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_contract_mode: Sicoss Contract Mode
+      sicoss_contract_mode: Modalidad de contrato (AFIP)
     attributes:
       sicoss_contract_mode:
         name: Nombre

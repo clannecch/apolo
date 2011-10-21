@@ -1,0 +1,34 @@
+#box
+  width: 500px
+  margin: 50px auto
+  background-color: #dedede
+  @include rounded-corners(9px)
+  .block
+    margin-bottom: 20px
+    background-repeat: repeat-x
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#c3d5d5), to(#6c9999))
+    background-image: -moz-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -ms-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c3d5d5), color-stop(100%, #6c9999))
+    background-image: -webkit-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -o-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: linear-gradient(top, #c3d5d5, #6c9999)
+    //@include rounded-corners(9px)
+    h2
+      background-color: #00264D
+      color: #fff
+      margin: 0
+      padding: 10px 15px
+      //@include rounded-corners(9px)
+    .content
+      padding: 10px 20px
+      @include rounded-corners(9px)
+
+#main
+  .block
+    margin-bottom: 20px
+    padding-top: 1px
+    .content .inner
+      padding: 0 15px 15px
+  .main p.first
+    margin-top: 0

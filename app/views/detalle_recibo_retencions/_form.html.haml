@@ -7,41 +7,46 @@
       %ul
         - @detalle_recibo_retencion.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :recibo_sueldo_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :recibo_sueldo_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :retention_concept_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :retention_concept_id, RetentionConcept.all, :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :detalle, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :cost_center_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :cantidad, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :cantidad, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :importe, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :importe, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :total, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :total, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= DetalleReciboRetencion.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :recibo_sueldo_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :recibo_sueldo_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :retention_concept_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :retention_concept_id, RetentionConcept.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :cost_center_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :importe, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :total, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :total, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      retention_concept: Retention Concept
+      retention_concept: Concepto de retencion
     attributes:
       retention_concept:
         codigo: Codigo

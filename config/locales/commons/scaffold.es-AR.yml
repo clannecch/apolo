@@ -13,9 +13,9 @@ es-AR:
         error: "%{resource_name} no pudo ser eliminado/a"
   scaffold:
     notice:
-      updated: "Actualizado correctamente"
-      destroyed: "Borrado correctamente"
-      created: "Creado satisfactoriamente"
+      updated: "%{resource_name} actualizado/a correctamente"
+      destroyed: "%{resource_name} borrado/a correctamente"
+      created: "%{resource_name} creado/a satisfactoriamente"
     filters:
       from_date: "Desde fecha"
       to_date: "Hasta fecha"

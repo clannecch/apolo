@@ -2,6 +2,13 @@
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function()
 {
+  var max = 0;
+  $(".columnLabel").each(function(){
+    if ($(this).width() > max)
+        max = $(this).width();
+  });
+  $(".apsLabel").width(max);
+
   $(".apsDatetime").jdPicker({
     month_names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     short_month_names: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],

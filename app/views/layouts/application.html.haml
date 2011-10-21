@@ -6,32 +6,8 @@
     = stylesheet_link_tag 'apslabs', :media => 'screen'
     /[if IE]
       = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
-    /= stylesheet_link_tag 'uniform.aristo', :media => 'screen'
-    = stylesheet_link_tag 'application', :media => 'screen'
     = stylesheet_link_tag 'bootstrap', :media => 'screen'
-    /= stylesheet_link_tag 'docs', :media => 'screen'
-    /= stylesheet_link_tag 'prettify', :media => 'screen'
-    /%link{:href => "http://static.flowplayer.org/tools/css/tabs.css", :rel => "stylesheet", :type => "text/css"}/
-    :css
-      /* tab pane styling */
-      .panes div {
-          display:none;
-          padding:15px 10px;
-          border:1px solid #999;
-          border-top:0;
-          height:100px;
-          font-size:14px;
-          background-color:#fff;
-      }
-    = javascript_include_tag :defaults
-    = javascript_include_tag :cocoon
-    /= javascript_include_tag('jquery.tools.min.js')
-    /= javascript_include_tag('ui.spinner.js')
-    /= javascript_include_tag('jquery.ui.datepicker-es')
-    /= javascript_include_tag 'jquery.uniform'
-    /= javascript_include_tag 'jquery.scrollTo.js'
-    /= javascript_include_tag 'jquery.localscroll.js'
-    /= javascript_include_tag 'jquery.tipsy.js'
+    = stylesheet_link_tag 'application', :media => 'screen'
     = csrf_meta_tag
     = yield(:head)
   %body{:style => "background-color: #00264d"}

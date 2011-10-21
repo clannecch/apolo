@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_format: Sicoss Format
+      sicoss_format: Formato (AFIP)
     attributes:
       sicoss_format:
         position: Position

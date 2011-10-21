@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_activity: Sicoss Activity
+      sicoss_activity: Actividad (AFIP)
     attributes:
       sicoss_activity:
         name: Nombre

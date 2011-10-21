@@ -7,91 +7,96 @@
       %ul
         - @remunerative_concept.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :codigo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :codigo, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :detalle, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :porcentual_asistencia, :class => "apsLabel"
-      %td.columnData
-        = f.check_box :porcentual_asistencia, :class => "apsCheckbox"
-    %tr
-      %td.columnLabel
-        = f.label :prioridad_calculo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :prioridad_calculo, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :statistical_value, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :statistical_value, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :grupo_ganancias_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :grupo_ganancias_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :accounting_imputation_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :accounting_imputation_id, AccountingImputation.by_company(current_company.id), :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :concepto_asociado_haber_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :concepto_asociado_haber_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :concepto_asociado_retencion_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :concepto_asociado_retencion_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :concepto_asociado_haber_2_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :concepto_asociado_haber_2_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :concepto_asociado_retencion_2_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :concepto_asociado_retencion_2_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :acumuladores_valor, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :acumuladores_valor, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :acumuladores_cantidad, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :acumuladores_cantidad, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :calculo_valor, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :calculo_valor, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :calculo_cantidad, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :calculo_cantidad, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :data_to_ask_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :data_to_ask_id, DataToAsk.by_company(current_company.id), :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :cantidad_en_recibo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :cantidad_en_recibo, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= RemunerativeConcept.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :porcentual_asistencia, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :porcentual_asistencia, :class => "apsCheckbox"
+      %tr
+        %td.columnLabel
+          = f.label :prioridad_calculo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :prioridad_calculo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :statistical_value, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :grupo_ganancias_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :grupo_ganancias_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_haber_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_retencion_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_2_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_haber_2_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_2_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_retencion_2_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acumuladores_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acumuladores_cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :calculo_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :calculo_cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :calculo_cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :data_to_ask_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :cantidad_en_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cantidad_en_recibo, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

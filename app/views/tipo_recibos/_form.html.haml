@@ -7,16 +7,21 @@
       %ul
         - @tipo_recibo.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :detalle, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :recibo_principal, :class => "apsLabel"
-      %td.columnData
-        = f.check_box :recibo_principal, :class => "apsCheckbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= TipoRecibo.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :recibo_principal, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :recibo_principal, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

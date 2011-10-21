@@ -7,33 +7,61 @@
       %ul
         - @employer_contribution_concept.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :codigo
-    %br/
-    = f.text_field :codigo
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
-  .field
-    = f.label :formula_calculo_valor
-    %br/
-    = f.text_field :formula_calculo_valor
-  .field
-    = f.label :acumuladores_valor
-    %br/
-    = f.text_field :acumuladores_valor
-  .field
-    = f.label :prioridad
-    %br/
-    = f.text_field :prioridad
-  .field
-    = f.label :statistical_value
-    %br/
-    = f.text_field :statistical_value
-  .field
-    = f.label :accounting_imputation_id
-    %br/
-    = f.text_field :accounting_imputation_id
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= EmployerContributionConcept.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :statistical_value, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :prioridad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :prioridad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acumuladores_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :formula_calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :formula_calculo_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :retention_concept_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :retention_concept_id, RetentionConcept.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :additional_health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :additional_health_insurance_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, {:class => "apsSelect"}
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

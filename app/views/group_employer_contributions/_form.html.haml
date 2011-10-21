@@ -7,15 +7,16 @@
       %ul
         - @group_employer_contribution.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    %h3 Codigos de Aportes Patronales
-    .field
-      = f.label :detalle
-      %br/
-      = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= GroupEmployerContribution.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

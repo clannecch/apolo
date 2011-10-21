@@ -7,26 +7,31 @@
       %ul
         - @menu.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :parent_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :parent_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :name, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :link_url, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :link_url, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :order_no, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :order_no, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= Menu.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :parent_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :parent_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :link_url, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :link_url, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :order_no, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :order_no, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

@@ -7,15 +7,16 @@
       %ul
         - @group_retention.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
-  .field
-    %h3 Codigos de Retenciones
-    .field
-      = f.label :detalle
-      %br/
-      = f.collection_select :retention_concept_ids, RetentionConcept.all, :id, :detalle, {}, :multiple => true
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= GroupRetention.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

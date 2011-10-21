@@ -7,21 +7,26 @@
       %ul
         - @sicoss_format_employer.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :sicoss_format_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :sicoss_format_id, SicossFormat.all, :id, :name, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :field_type, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :field_type, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :formula, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :formula, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= SicossFormatEmployer.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :sicoss_format_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :sicoss_format_id, SicossFormat.all, :id, :name, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :field_type, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :field_type, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :formula, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :formula, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

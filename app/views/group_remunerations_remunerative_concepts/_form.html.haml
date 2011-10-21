@@ -1,0 +1,27 @@
+= form_for(@group_remunerations_remunerative_concept) do |f|
+  - if @group_remunerations_remunerative_concept.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_remunerations_remunerative_concept.errors.count, "error")
+        prohibited this group_remunerations_remunerative_concept from being saved:
+      %ul
+        - @group_remunerations_remunerative_concept.errors.full_messages.each do |msg|
+          %li= msg
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= GroupRemunerationsRemunerativeConcept.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :group_remuneration_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :group_remuneration_id, GroupRemuneration.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :remunerative_concept_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, {:class => "apsSelect"}
+  .actions
+    = f.submit :class => "btn success"

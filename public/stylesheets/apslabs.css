@@ -43,64 +43,88 @@ table.tableStandard tr:hover {
 
 /* line 26, ../../app/stylesheets/partials/_apolo.sass */
 table.tableForm {
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(white), to(#c3c3c3));
+  background-image: -moz-linear-gradient(top, white, #c3c3c3);
+  background-image: -ms-linear-gradient(top, white, #c3c3c3);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #c3c3c3));
+  background-image: -webkit-linear-gradient(top, white, #c3c3c3);
+  background-image: -o-linear-gradient(top, white, #c3c3c3);
+  background-image: linear-gradient(top, #ffffff, #c3c3c3);
   border: none 0px #e8eef4;
   border-collapse: collapse;
   width: 100%;
 }
 
-/* line 31, ../../app/stylesheets/partials/_apolo.sass */
+/* line 40, ../../app/stylesheets/partials/_apolo.sass */
 table.tableForm td.columnLabel {
-  width: 20%;
-  background-color: #c3d5d5;
+  width: 30%;
   padding: 5px 2px 5px 5px;
   font-size: 12px;
-}
-
-/* line 37, ../../app/stylesheets/partials/_apolo.sass */
-table.tableForm td.columnData {
-  width: 80%;
-  padding: 5px 2px 5px 5px;
-  font-size: 12px;
-}
-
-/* line 42, ../../app/stylesheets/partials/_apolo.sass */
-.labelForm {
-  padding: 0px 0px 0px 0px;
-  text-align: left;
 }
 
 /* line 46, ../../app/stylesheets/partials/_apolo.sass */
-.apsLabel {
-  padding: 0px 0px 0px 0px;
-  text-align: left;
+table.tableForm td.columnData {
+  width: 70%;
+  padding: 5px 2px 5px 5px;
   font-size: 12px;
 }
 
 /* line 51, ../../app/stylesheets/partials/_apolo.sass */
-.apsTextbox {
+.labelForm {
   padding: 0px 0px 0px 0px;
   text-align: left;
   font-size: 12px;
-  color: black;
 }
 
-/* line 57, ../../app/stylesheets/partials/_apolo.sass */
-.apsDatetime {
-  padding: 0px 0px 0px 0px;
-  text-align: left;
+/* line 56, ../../app/stylesheets/partials/_apolo.sass */
+.apsLabel {
+  color: #696969;
   font-size: 12px;
-  width: 80px;
+  font-weight: bold;
+  padding: 2px 5px 0px 0px;
+  text-align: right;
 }
 
 /* line 63, ../../app/stylesheets/partials/_apolo.sass */
+.apsTextbox {
+  color: black;
+  font-size: 12px;
+  padding: 2px 0px 0px 5px;
+  text-align: left;
+}
+/* line 68, ../../app/stylesheets/partials/_apolo.sass */
+.apsTextbox:hover {
+  background-color: #c3d5d5;
+}
+/* line 70, ../../app/stylesheets/partials/_apolo.sass */
+.apsTextbox:focus {
+  background-color: #c3d5d5;
+  border: solid 1px #00264d;
+}
+
+/* line 74, ../../app/stylesheets/partials/_apolo.sass */
+.apsDatetime {
+  font-size: 12px;
+  padding: 0px 0px 0px 0px;
+  text-align: left;
+  width: 80px;
+}
+
+/* line 80, ../../app/stylesheets/partials/_apolo.sass */
 .apsSelect {
   padding: 0px 0px 0px 0px;
   text-align: left;
   font-size: 12px;
 }
 
-/* line 68, ../../app/stylesheets/partials/_apolo.sass */
+/* line 85, ../../app/stylesheets/partials/_apolo.sass */
 div.inner {
   text-align: left;
   width: 100%;
 }
+
+/*  Cross-browser mixins
+ *
+ *  -------------------------------------
+ */

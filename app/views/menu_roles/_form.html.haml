@@ -7,16 +7,21 @@
       %ul
         - @menu_role.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :menu_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :menu_id, Menu.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
-    %tr
-      %td.columnLabel
-        = f.label :rol_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :rol_id, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= MenuRole.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :menu_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :menu_id, Menu.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :rol_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :rol_id, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

@@ -7,16 +7,21 @@
       %ul
         - @sicoss_contract_mode.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :name, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :code, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= SicossContractMode.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

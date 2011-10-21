@@ -7,16 +7,21 @@
       %ul
         - @health_insurance.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :detalle, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :code, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= HealthInsurance.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_employer_type: Sicoss Employer Type
+      sicoss_employer_type: Tipo de empleador (AFIP)
     attributes:
       sicoss_employer_type:
         name: Nombre

@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      remunerative_concept: Remunerative Concept
+      remunerative_concept: Concepto remunerativo
     attributes:
       remunerative_concept:
         codigo: Codigo

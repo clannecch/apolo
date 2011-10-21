@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      sicoss_format_employer: Sicoss Format Employer
+      sicoss_format_employer: Formato empleador (AFIP)
     attributes:
       sicoss_format_employer:
         sicoss_format_id: Sicoss Format

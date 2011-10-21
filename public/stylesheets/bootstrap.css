@@ -1776,7 +1776,7 @@ footer {
 }
 .btn.info, .alert-message.info {
   /*background-color: #c3d5d5;*/
-  background-color: #00384D;
+  background-color: #00384d;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#005E80), to(#00384D));
   background-image: -moz-linear-gradient(top, #005E80, #00384D);

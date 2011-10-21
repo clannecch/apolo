@@ -7,36 +7,41 @@
       %ul
         - @recibo_sueldo.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :liquidacion_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :liquidacion_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :employee_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :employee_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :fecha_recibo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :fecha_recibo, :class => "apsDatetime"
-    %tr
-      %td.columnLabel
-        = f.label :observaciones, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :observaciones, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :mensaje_recibo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :mensaje_recibo, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :fecha_calculo, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :fecha_calculo, :class => "apsDatetime"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= ReciboSueldo.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :liquidacion_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :liquidacion_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :employee_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_recibo, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :observaciones, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :observaciones, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :mensaje_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :mensaje_recibo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_calculo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_calculo, :class => "apsDatetime"
   .actions
     = f.submit :class => "btn success"

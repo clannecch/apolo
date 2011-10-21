@@ -7,46 +7,51 @@
       %ul
         - @employee_remunerative_concept.errors.full_messages.each do |msg|
           %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :employee_id, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :employee_id, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :remunerative_concept_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :cantidad, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :cantidad, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :importe, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :importe, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :fecha_inicio, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :fecha_inicio, :class => "apsDatetime"
-    %tr
-      %td.columnLabel
-        = f.label :fecha_final, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :fecha_final, :class => "apsDatetime"
-    %tr
-      %td.columnLabel
-        = f.label :cost_center_id, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = f.text_field :detalle, :class => "apsTextbox"
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+      %span.title= EmployeeRemunerativeConcept.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :employee_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :remunerative_concept_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :importe, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_inicio, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_inicio, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_final, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_final, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :cost_center_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"
