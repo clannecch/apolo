@@ -144,8 +144,7 @@ class LiquidacionsController < ApplicationController
 #                              :background => img,
                             :page_layout => :portrait)
   offset = 0
-    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
-
+  pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
 
   empresa = OpenStruct.new({
                   :logo                   => "",
@@ -227,23 +226,15 @@ class LiquidacionsController < ApplicationController
   tretencion = 0
   Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
-    Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
      haber_total = r.total_haberes
-    Rails.logger.info(">>>>>> 2")
      haber_con_descuento = r.total_haberes_con_descuento
-    Rails.logger.info(">>>>>> 3")
      haber_sin_descuento = haber_total - r.total_haberes_con_descuento
-    Rails.logger.info(">>>>>> 4")
-
 
      # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
      tretencion = tretencion + retencion
-    Rails.logger.info(">>>>>> 5")
      thaber_sin_descuento +=  haber_sin_descuento
-    Rails.logger.info(">>>>>> 6")
      thaber_con_descuento += haber_con_descuento
-    Rails.logger.info(">>>>>> 7")
 
      data << [r.employee.legajo ,
               r.employee.full_name,
@@ -254,7 +245,6 @@ class LiquidacionsController < ApplicationController
               format_number(haber_total-retencion)
      ]
   end
-  Rails.logger.info(">>>>>> 8")
   data << ["" ,
            "T O T A L E S",
            "",
@@ -263,7 +253,6 @@ class LiquidacionsController < ApplicationController
            format_number(tretencion),
            format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
   ]
-  Rails.logger.info(">>>>>> 9")
 
   pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
            :cell_style => { :font => "Times-Roman",
@@ -276,13 +265,10 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
-  Rails.logger.info(">>>>>> 10")
-
   pdf.render_file(filename)
   if con_logo
     File.delete(file_logo) unless Rails.env.development?
   end
-
 end
 
 # #################################################################################
@@ -753,7 +739,7 @@ def print_libro_pdf(filename,liquidacion_actual)
   end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)           
-  pdf.draw_text "...", :at => [5, 700],:style => :bold, :size => 5
+  pdf.draw_text "...", :at => [5, 700], :size => 5
                             
 =begin
   begin
@@ -776,10 +762,13 @@ def print_libro_pdf(filename,liquidacion_actual)
 #  Rails.logger.info("numero_de_hoja 1= #{numero_de_hoja }")
 
   left = 10
-  top = 670
+  top  = 670
 
   linea_nombre = true
   linea_documento = true
+  
+  pdf.draw_text @recibo_sueldos.count.to_s, :at => [5, 690], :size => 5
+  
   @recibo_sueldos.each do |r|
     linea = []
 
