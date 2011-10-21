@@ -738,9 +738,7 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
   end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
-                            :page_layout => :portrait)           
-  pdf.draw_text "...", :at => [5, 700], :size => 5
-                            
+                            :page_layout => :portrait)                            
 =begin
   begin
     logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
@@ -766,9 +764,7 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   linea_nombre = true
   linea_documento = true
-  
-  pdf.draw_text @recibo_sueldos.count.to_s, :at => [5, 695], :size => 5
-  
+    
   @recibo_sueldos.each do |r|
     linea = []
 
@@ -813,9 +809,6 @@ def print_libro_pdf(filename,liquidacion_actual)
         total_retention = total_retention + rr.total
       end
     end
-
-
-    pdf.draw_text (haberes_cd + haberes_sd + retenciones).to_s, :at => [5, 685], :size => 5
 
     if haberes_cd != -1 || haberes_sd != -1 || retenciones != -1
       if offset-((linea.count+4))*10 < 20
