@@ -752,12 +752,8 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
   end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
-                            :page_layout => :portrait)
-                            
-                            
-  top = 700
-  pdf.draw_text "Libro de ??????", :at => [5, top],:style => :bold, :size => 10
-                            
+                            :page_layout => :portrait)           
+  pdf.draw_text "...", :at => [5, 700],:style => :bold, :size => 5
                             
 =begin
   begin
@@ -844,7 +840,6 @@ def print_libro_pdf(filename,liquidacion_actual)
         top=top - 10
         pdf.draw_text "Ley 20.744-Art. 52".center(200), :at => [5, top], :size => 9
         top=top - 10
-
         pdf.draw_text "Hoja Nro:", :at => [460, top], :size => 8
         pdf.draw_text numero_de_hoja.to_s.rjust(empresa.imprimir_hasta_hoja.to_s.length,'0'), :at => [500, top], :size => 10, :style => :bold
         pdf.draw_text empresa.empresa.strip, :at => [left, top], :size => 8, :style => :bold
