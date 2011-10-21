@@ -780,8 +780,6 @@ def print_libro_pdf(filename,liquidacion_actual)
     total_haberes_cd = 0
     total_haberes_sd = 0
 
-    pdf.draw_text @r.detalle_recibo_habers.count.to_s, :at => [5, 690], :size => 5
-
     r.detalle_recibo_habers.each do |h|
       if h.total.to_f != 0 && !h.remunerative_concept.auxiliar
         if h.remunerative_concept.acumuladores_valor.upcase.include?("SINDESCUENTO")
@@ -804,8 +802,6 @@ def print_libro_pdf(filename,liquidacion_actual)
       end
     end
 
-    pdf.draw_text @r.detalle_recibo_retencions.count.to_s, :at => [5, 685], :size => 5
-
     r.detalle_recibo_retencions.each do |r|
       if r.total.to_f != 0 && !r.retention_concept.auxiliar
         retenciones = retenciones + 1
@@ -817,6 +813,9 @@ def print_libro_pdf(filename,liquidacion_actual)
         total_retention = total_retention + r.total
       end
     end
+
+
+    pdf.draw_text (haberes_cd + haberes_sd + retenciones).to_s, :at => [5, 685], :size => 5
 
     if haberes_cd + haberes_sd  +  retenciones >= 0
       if offset-((linea.count+4))*10 < 20
