@@ -767,7 +767,7 @@ def print_libro_pdf(filename,liquidacion_actual)
   linea_nombre = true
   linea_documento = true
   
-  pdf.draw_text @recibo_sueldos.count.to_s, :at => [5, 690], :size => 5
+  pdf.draw_text @recibo_sueldos.count.to_s, :at => [5, 695], :size => 5
   
   @recibo_sueldos.each do |r|
     linea = []
@@ -779,6 +779,8 @@ def print_libro_pdf(filename,liquidacion_actual)
     total_retention = 0
     total_haberes_cd = 0
     total_haberes_sd = 0
+
+    pdf.draw_text @r.detalle_recibo_habers.count.to_s, :at => [5, 690], :size => 5
 
     r.detalle_recibo_habers.each do |h|
       if h.total.to_f != 0 && !h.remunerative_concept.auxiliar
@@ -801,6 +803,8 @@ def print_libro_pdf(filename,liquidacion_actual)
         end
       end
     end
+
+    pdf.draw_text @r.detalle_recibo_retencions.count.to_s, :at => [5, 685], :size => 5
 
     r.detalle_recibo_retencions.each do |r|
       if r.total.to_f != 0 && !r.retention_concept.auxiliar
