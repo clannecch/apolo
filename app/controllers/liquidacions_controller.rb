@@ -753,6 +753,12 @@ def print_libro_pdf(filename,liquidacion_actual)
   end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
                             :page_layout => :portrait)
+                            
+                            
+  top = 700
+  pdf.draw_text "Libro de ??????", :at => [5, top],:style => :bold, :size => 10
+                            
+                            
 =begin
   begin
     logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
