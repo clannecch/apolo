@@ -30,7 +30,7 @@
         %td= liquidacion.tipo_recibo.try(:detalle)
         %td{:style => "text-align:center"}= liquidacion.fecha_liquidacion.strftime("%d/%m/%Y")
         %td= liquidacion.bank_deposit.try(:detalle)
-        %td= liquidacion.periodo_deposito.strftime("%Y/%m")
+        %td= (liquidacion.periodo_deposito.blank? ? '  /  ' :liquidacion.periodo_deposito.strftime("%Y/%m"))
         %td= liquidacion.fecha_deposito.strftime("%d/%m/%Y")
         %td= (liquidacion.fecha_cierre.blank? ? '  /  /' : liquidacion.fecha_cierre.strftime("%d/%m/%Y"))
         %td= liquidacion.techo_retenciones
