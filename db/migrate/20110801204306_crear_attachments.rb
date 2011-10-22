@@ -11,7 +11,9 @@ class CrearAttachments < ActiveRecord::Migration
       t.integer :associated_document_type
       t.timestamps
     end
-    execute 'ALTER TABLE attachments ADD COLUMN  adjunto_file oid'
+#    execute 'ALTER TABLE attachments ADD COLUMN  adjunto_file oid'
+    execute 'ALTER TABLE attachments REMOVE COLUMN  adjunto'
+    execute 'ALTER TABLE attachments ADD COLUMN  adjunto_file bytea'
   end
 
   def self.down

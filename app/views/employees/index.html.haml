@@ -3,7 +3,7 @@
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Employee.model_name.human, employees_path, :active => true
 
-/%h1 Listado de Empleados
+%h1 Listado de Empleados
 
 - if true
   = link_to 'Nuevo Empleado', new_employee_path, :class => "btn success"

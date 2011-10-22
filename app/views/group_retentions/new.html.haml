@@ -1,3 +1,7 @@
-%h1 Nuevo Grupo de Retenciones
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRetention.model_name.human, group_retentions_path
+    - breadcrumb.item t('scaffold.actions.new', :item => GroupRetention.model_name.human).titlecase , group_retentions_path, :active => true
+
 = render 'form'
-= link_to 'Volver', group_retentions_path
