@@ -1,4 +1,5 @@
 class AccountingImputationsController < ApplicationController
+  respond_to :html, :xml, :json
   before_filter :find_accounting_imputation, :except => [:index, :new, :create]
 
   # GET /accounting_imputations
@@ -7,12 +8,8 @@ class AccountingImputationsController < ApplicationController
     # TODO: mejorar la forma de traer este conjunto de registros!!! (se pueden usar optimize, :fixme, :todo) se llama con rake notes o rake notes:todo
     @search = AccountingImputation.search(params[:search])
     @accounting_imputations = @search.page(params[:page]).per(10)
-    #@accounting_imputations = AccountingImputation.all
-
-    respond_to do |format|
-      format.html # indexoo.html.erb
-      format.xml  { render :xml => @accounting_imputations }
-    end
+    flash.now[:notice] = t('flash.actions.index.notice') if @accounting_imputations.empty?
+    respond_with(@accounting_imputations)
   end
 
   # GET /accounting_imputations/1

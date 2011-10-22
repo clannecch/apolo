@@ -478,5 +478,10 @@
           = f.label :group_remuneration_id, :class => "apsLabel"
         %td.columnData
           = f.collection_select :group_remuneration_id, GroupRemuneration.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :consortium_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :consortium_id, Consortium.all, :id, :name, {:class => "apsSelect"}
   .actions
     = f.submit :class => "btn success"

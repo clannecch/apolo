@@ -1,9 +1,6 @@
-
 class ActivitiesController < ApplicationController
-
-  before_filter :find_activity, :except => [:index, :new, :create]
-
   respond_to :html, :xml, :json
+  before_filter :find_activity, :except => [:index, :new, :create]
 
   # GET /activities
   # GET /activities.json

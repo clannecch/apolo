@@ -10,15 +10,19 @@ ul.wat-cf
   list-style-type: none
   position: static
   text-align: left
+  display: inline
+  margin: 0px 0px 0px 0px
   li
     display: inline
-    list-style-type: none
+    //list-style-type: none
     padding-right: 0px
 
 .user_navigation
   text-align: left
   position: static
   padding: 0px 10px 0px 0px
+  display: inline
+  width: 30px
 
 .block
   text-align: left
@@ -153,13 +157,15 @@ ul.wat-cf
   position: relative
   height: 30px
   width: 100%
-  margin: 0px 0px 30px 0px
+  //margin: 0px 0px 30px 200px
+  //display: inline
   ul
     position: relative
-    margin: 0 5px 0 5px
+    margin: 0 5px 0 5px 0px
     padding: 0
     height: 30px
     background: url('../images/breadcrumbImage.png') 0px -30px repeat-x
+    //display: inline
     li
       padding: 0
       margin: 0
@@ -248,4 +254,8 @@ ul.wat-cf
       list-style-type: square
       margin-bottom: 15px
 
-
+table tr
+  td.actions a
+    visibility: hidden
+  &:hover td.actions a
+    visibility: visible

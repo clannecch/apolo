@@ -31,6 +31,7 @@ $(document).ready(function()
   // Bootsrap
   //$("a[rel=twipsy]").twipsy( {live: true} );
   $(".tabs").tabs();
+  $("a[rel=twipsy]").twipsy( {live: true} );
 
   // chosen multiple seleccion
   $(".apsSelect").chosen();
@@ -39,16 +40,16 @@ $(document).ready(function()
   //[PVD]$('input.ui-datepicker').datepicker({ dateFormat: 'yy-mm-dd'});
 
   // Tooltips (see http://onehackoranother.com/projects/jquery/tipsy)
-  $('img').each( function() {
-    if ($(this).get(0).title != '') {
+  //$('img').each( function() {
+  //  if ($(this).get(0).title != '') {
       //[PVD]$(this).tipsy();
-        $(this).twipsy( {live: true} );
-    }
-  });
-  $('select[title]').each( function() {
-      //[PVD]$(this).tipsy();
-      $(this).twipsy( {live: true} );
-  });
+  //      $(this).twipsy( {live: true} );
+  //  }
+  //});
+  //$('select[title]').each( function() {
+  //    //[PVD]$(this).tipsy();
+  //    $(this).twipsy( {live: true} );
+  //});
 
   $('.flash').ajaxStart(function() {
     $(this).append("<p class=\"message warning ajax\"><img style=\"vertical-align:middle;margin-right:5px;\" src=\"/images/spinner.gif\"><strong>Cargando ...</strong></p>");

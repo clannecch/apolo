@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018122150) do
+ActiveRecord::Schema.define(:version => 20111018123941) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -35,8 +35,19 @@ ActiveRecord::Schema.define(:version => 20111018122150) do
     t.string   "document_type"
   end
 
-# Could not dump table "attachments" because of following StandardError
-#   Unknown type 'oid' for column 'adjunto_file'
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "associated_document_type_id"
+    t.string   "name"
+    t.date     "reception_date"
+    t.string   "adjunto_file_name"
+    t.string   "adjunto_content_type"
+    t.integer  "associated_document_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "adjunto_file"
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "code",       :limit => 16,  :null => false
@@ -319,7 +330,6 @@ ActiveRecord::Schema.define(:version => 20111018122150) do
     t.decimal  "horas_pactadas"
     t.decimal  "remuneracion_fuera_convenio"
     t.integer  "remuneration_type_id"
-    t.integer  "group_renuneration_id"
     t.integer  "group_retention_id"
     t.integer  "group_employercontribution_id"
     t.integer  "cost_center_id"
@@ -367,7 +377,9 @@ ActiveRecord::Schema.define(:version => 20111018122150) do
     t.integer  "sicoss_reduction_zone_id"
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
-    t.string   "sicoss_seguro_obligatorio",        :limit => nil
+    t.string   "sicoss_seguro_obligatorio",        :limit => 1
+    t.integer  "group_employer_contribution_id"
+    t.integer  "group_remuneration_id"
     t.integer  "consortium_id"
   end
 
@@ -574,6 +586,7 @@ ActiveRecord::Schema.define(:version => 20111018122150) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "code"
+    t.integer  "country_id"
   end
 
   create_table "recibo_sueldos", :force => true do |t|

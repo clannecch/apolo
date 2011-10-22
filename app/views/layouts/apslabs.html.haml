@@ -49,6 +49,7 @@
         %p
           = render('shared/main_menu')
           /%div{:style => "text-align: center; font-weight: normal; font-size: 14px; width: 100% "}
+        = content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
         = yield(:breadcrumbs) if content_for?(:breadcrumbs)
       #wrapper.wat-cf
         %div{:id => content_for?(:sidebar) ? 'main':'full-main'}
