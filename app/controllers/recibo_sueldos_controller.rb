@@ -177,7 +177,7 @@ class ReciboSueldosController < ApplicationController
     require 'prawn'
 
     empresa = OpenStruct.new({
-                    :logo                   => "",
+                    :logo                   => nil,
                     :empresa                => "",
                     :domicilio              => "",
                     :cuit                   => "",
@@ -192,9 +192,10 @@ class ReciboSueldosController < ApplicationController
 
 
     logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+    attach = nil
     if @recibo_sueldo.employee.consortium_id.to_f > 0
       if !logo_id.nil?
- #       attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
       empresa.empresa     = @recibo_sueldo.employee.consortium.razon_social
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
@@ -207,7 +208,7 @@ class ReciboSueldosController < ApplicationController
       empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
       if !logo_id.nil?
-#        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
       empresa.empresa     = current_company.razon_social
       empresa.domicilio   = current_company.calle + ' ' +
@@ -219,18 +220,18 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = current_company.numero_inscripcion
       empresa.caja        = current_company.caja
     end
-=begin
-    if attach.adjunto_content_type[0..4] = "image"
-      file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
-      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+    if !attach.nil?
+      if attach.adjunto_content_type[0..4] = "image"
+        file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
+        Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
-      open( file_logo, 'wb' ) { |file|
-          file.write(attach.adjunto_file)
-        }
+        open( file_logo, 'wb' ) { |file|
+            file.write(attach.adjunto_file)
+          }
 
-      empresa.logo = file_logo.to_s
+        empresa.logo = file_logo.to_s
+      end
     end
-=end
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
         pdf.stroke_bounds
@@ -240,8 +241,9 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [1, 720], :width => 135, :height => 120 do
         pdf.stroke_bounds
     end
-#    pdf.image empresa.logo, :at => [27,715], :width => 75
-
+    if !empresa.logo.nil?
+      pdf.image empresa.logo, :at => [27,715], :width => 75
+    end
     pdf.font("Courier", :style => :bold)
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5

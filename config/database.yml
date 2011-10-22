@@ -6,7 +6,7 @@ development:
   username: postgres
   password: apsystem
   host: localhost
-  port: 5433
+  port: 5432
   encoding: UTF8
 
 # Warning: The database defined as "test" will be erased and

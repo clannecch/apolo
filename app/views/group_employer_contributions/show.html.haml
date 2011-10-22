@@ -1,8 +1,31 @@
-%h1 Visualizacion de Grupo de Aportes Patronales
-%p#notice= notice
-%p
-  %b Detalle:
-  = @group_employer_contribution.detalle
-= group_employer_contribution_links(@group_employer_contribution)
-|
-\#{link_to 'Volver', group_employer_contributions_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupEmployerContribution.model_name.human, group_employer_contribution_path
+    - breadcrumb.item "#{@group_employer_contribution.detalle.titlecase}", group_employer_contribution_path(@group_remuneration), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_group_employer_contribution_path(@group_remuneration), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @group_employer_contribution, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@group_employer_contribution) do |f|
+  - if @group_employer_contribution.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_employer_contribution.errors.count, "error")
+        prohibited this group_employer_contribution from being saved:
+      %ul
+        - @group_employer_contribution.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @group_employer_contribution.detalle
+    %tr
+      %td.columnLabel
+        = f.label :composicion, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect", :disabled => "disabled"
+.clear

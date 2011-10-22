@@ -1,4 +1,30 @@
-= form_for(@employee) do |f|
+- content_for(:head) do
+  :css
+    .field{
+        float:left;
+        width:33%;
+        padding: 5px 0px 5px 0px;
+    }
+    .tab_label{
+        padding: 20px;
+    }
+
+     .actions{
+        clear:both;
+    }
+  = javascript_tag do
+    $(document).ready(function(){
+    /$(".datepicker" ).datepicker({
+    /defaultDate: -#{18.years.days},
+    /changeMonth: true,
+    /changeYear: true
+    /});
+    });
+
+  = javascript_tag do
+    /$( function() {$("ul.tabs").tabs("div.panes > div"); });
+
+= form_for @employee,  :html => { :multipart => true } do |f|
   - if @employee.errors.any?
     #error_explanation
       %h2
@@ -7,481 +33,112 @@
       %ul
         - @employee.errors.full_messages.each do |msg|
           %li= msg
-  .clear
-  %br/
-  .form_box
-    .form_box_title
-      %span.title= Employee.model_name.human
-    %table.tableForm
-      %tr
-        %td.columnLabel
-          = f.label :legajo, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :legajo, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :nombre, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :nombre, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :apellido, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :apellido, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :telefono, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :telefono, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :document_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :document_type_id, DocumentType.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :numero_documento, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_documento, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :issued_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :issued_id, Issued.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sexo, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :sexo, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :nationality_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :nationality_id, Nationality.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :marital_status_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :marital_status_id, MaritalStatus.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :fecha_nacimiento, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :fecha_nacimiento, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
-          = f.label :calle, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :calle, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :puerta, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :puerta, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :piso, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :piso, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :departamento, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :departamento, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :location_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :location_id, Location.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :province_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :province_id, Province.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :country_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :country_id, Country.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :codigo_postal, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :codigo_postal, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :movil, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :movil, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :email, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :email, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :category_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :category_id, Category.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :section_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :section_id, Section.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :task_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :task_id, Task.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :place_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :place_id, Place.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :character_service_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :character_service_id, CharacterService.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :matricula_nacional, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :matricula_nacional, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :matricula_provincial, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :matricula_provincial, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :discapacidad, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :discapacidad, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :health_insurance_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :plan_osocial, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :plan_osocial, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :numero_afiliado_osocial, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_afiliado_osocial, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :cargas_extras_osocial, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :cargas_extras_osocial, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :labor_union_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :labor_union_id, LaborUnion.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :numero_afiliado_sindicato, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_afiliado_sindicato, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :numero_jubilacion, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_jubilacion, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :numero_ganancias, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_ganancias, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :cuit, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :cuit, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :cuil, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :cuil, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :fecha_ingreso, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :fecha_ingreso, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
-          = f.label :fecha_egreso, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :fecha_egreso, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
-          = f.label :horas_pactadas, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :horas_pactadas, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :remuneracion_fuera_convenio, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :remuneracion_fuera_convenio, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :remuneration_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :remuneration_type_id, RemunerationType.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :group_retention_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :group_retention_id, GroupRetention.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :group_employercontribution_id, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :group_employercontribution_id, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :cost_center_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :antiguedad_reconocida_anos, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :antiguedad_reconocida_anos, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :antiguedad_reconocida_meses, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :antiguedad_reconocida_meses, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :retencion_minima_osocial, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :retencion_minima_osocial, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :educational_level_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :educational_level_id, EducationalLevel.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :id_card, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :id_card, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :numero_cofre, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_cofre, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :contract_mode_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :contract_mode_id, ContractMode.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :home_about_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :home_about_id, HomeAbout.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :cuadras_asfalto, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :cuadras_asfalto, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :domicilio_entre_calle_izquierda, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :domicilio_entre_calle_izquierda, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :domicilio_entre_calle_derecha, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :domicilio_entre_calle_derecha, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :domicilio_entre_calles_detras, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :domicilio_entre_calles_detras, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :domicilio_avenida_cercana, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :domicilio_avenida_cercana, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :domicilio_avenida_cercana_altura, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :domicilio_avenida_cercana_altura, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :email_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :email_type_id, EmailType.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :employment_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :employment_id, Employment.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :accounting_imputation_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :insurance_company_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :seguro_conyuge, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :seguro_conyuge, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :Seguro_numero_poliza, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :Seguro_numero_poliza, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :seguro_monto_asegurado, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :seguro_monto_asegurado, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :bank_deposit_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :bank_deposit_account_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :bank_deposit_account_type_id, BankDepositAccountType.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :deposito_banco_cuenta, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :deposito_banco_cuenta, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :deposito_banco_cbu, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :deposito_banco_cbu, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :causa_egreso_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :causa_egreso_id, CausaEgreso.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :latitude, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :latitude, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :longitude, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :longitude, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :avatar_file_name, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :avatar_file_name, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :avatar_content_type, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :avatar_content_type, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :avatar_file_size, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :avatar_file_size, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :avatar_updated_at, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :avatar_updated_at, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_reduccion, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :sicoss_reduccion, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_employer_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_employer_type_id, SicossEmployerType.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_situation_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_situation_id, SicossSituation.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_condition_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_condition_id, SicossCondition.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_activity_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_activity_id, SicossActivity.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_contract_mode_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_contract_mode_id, SicossContractMode.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_damaged_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_damaged_id, SicossDamaged.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_location_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_location_id, SicossLocation.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_reduction_zone_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_reduction_zone_id, SicossReductionZone.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_en_convenio, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :sicoss_en_convenio, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_regimen_type_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :sicoss_regimen_type_id, SicossRegimenType.all, :id, :name, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :sicoss_seguro_obligatorio, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :sicoss_seguro_obligatorio, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :group_employer_contribution_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :group_employer_contribution_id, GroupEmployerContribution.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :group_remuneration_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :group_remuneration_id, GroupRemuneration.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :consortium_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :consortium_id, Consortium.all, :id, :name, {:class => "apsSelect"}
+
+  %ul.tabs{"data-tabs" => "tabs"}
+    %li.active
+      %a{:href => "#personales"} Personales
+    %li
+      %a{:href => "#domicilio"} Domicilio
+    %li
+      %a{:href => "#ocupacion"} Ocupacion
+    %li
+      %a{:href => "#filiacion"} Filiacion
+    %li
+      %a{:href => "#contratacion"} Contratacion
+    %li
+      %a{:href => "#banco-seguro"} Banco-Seguro
+    %li
+      %a{:href => "#familiares"} Familiares
+    %li
+      %a{:href => "#beneficiarios"} Benef.Seguro
+    %li
+      %a{:href => "#remuneraciones"} Remuneraciones
+    %li
+      %a{:href => "#retenciones"} Retenciones
+    %li
+      %a{:href => "#afip"} AFIP
+    %li
+      %a{:href => "#documentos"} Documentos
+  .tab-content
+    #personales.active
+      = render :partial => 'datos_personales', :locals => {:f => f}
+    #domicilio
+      = render :partial => 'datos_domicilio', :locals => {:f => f}
+    #ocupacion
+      = render :partial => 'datos_ocupacion', :locals => {:f => f}
+    #filiacion
+      = render :partial => 'datos_filiacion', :locals => {:f => f}
+    #contratacion
+      = render :partial => 'datos_contratacion', :locals => {:f => f}
+    #banco-seguro
+      = render :partial => 'datos_seguro_banco', :locals => {:f => f}
+    #familiares
+      .field-nested
+        = f.label " "
+        %br/
+        %h3 Familiares
+        #employee_familiares
+          = f.fields_for :employee_familiars do |employee_familiar|
+            = render 'employee_familiar_fields', :f => employee_familiar
+          .links
+            = link_to_add_association 'Agregar Familiar', f, :employee_familiars
+    #beneficiarios
+      .field
+        %h3 Beneficiario Seguro
+        #Insurance_beneficiary
+          %table.field
+            %tr
+              %th= f.label "Apellido"
+              %th= f.label "Nombre"
+              %th= f.label "Tipo documento"
+              %th= f.label "Numero de Documento"
+              %th= f.label "Fecha Nacimiento"
+              %th= f.label "Direccion"
+              %th= f.label "Parentezco"
+              %th= f.label "% de la Poliza"
+              %th &nbsp;
+            %tbody#nested-holder
+              = f.fields_for :insurance_beneficiaries do |insurance_beneficiary|
+                = render 'insurance_beneficiary_fields', :f => insurance_beneficiary
+          .links
+            = link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries, 'data-association-insertion-node' => '#nested-holder', 'data-association-insertion-position' => :before
+    #remuneraciones
+      .field
+        %h3 Conceptos remunerativos personalizados
+        #employee_remunerative_concept
+          %table.field
+            %tr
+              %th= f.label "Concepto haber"
+              %th= f.label "Detalle Personalizado"
+              %th= f.label "Centro Costo"
+              %th= f.label "Cantidad"
+              %th= f.label "Importe"
+              %th &nbsp;
+            %tbody#nested-holder2
+              = f.fields_for :employee_remunerative_concepts do |erc|
+                = render 'employee_remunerative_concept_fields', :f => erc
+          .links
+            = link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts, 'data-association-insertion-node' => '#nested-holder2', 'data-association-insertion-position' => :before
+    #retenciones
+      .field
+        %h3 Conceptos de retenciones personalizados
+        #employee_retention_concept
+          %table.field
+            %tr
+              %th= f.label "Concepto Retencion"
+              %th= f.label "Detalle Personalizado"
+              %th= f.label "Cantidad"
+              %th= f.label "Importe"
+              %th &nbsp;
+            %tbody#nested-holder3
+              = f.fields_for :employee_retention_concepts do |erc|
+                = render 'employee_retention_concept_fields', :f => erc
+          .links
+            = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
+    #afip
+      = render :partial => 'datos_siscoss', :locals => {:f => f}
+    #documentos
+      = render 'shared/attachments_manager', :f => f
+
   .actions
     = f.submit :class => "btn success"

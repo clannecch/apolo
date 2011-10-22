@@ -11,13 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018123941) do
+
+ActiveRecord::Schema.define(:version => 20111021133046) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "activities", :force => true do |t|
@@ -25,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "associated_document_types", :force => true do |t|
@@ -33,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "document_type"
+    t.string   "code"
   end
 
   create_table "attachments", :force => true do |t|
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "bank_deposits", :force => true do |t|
@@ -68,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "categories", :force => true do |t|
@@ -85,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "character_services", :force => true do |t|
@@ -92,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "companies", :force => true do |t|
@@ -148,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "cost_centers", :force => true do |t|
@@ -155,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "countries", :force => true do |t|
@@ -218,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "educational_levels", :force => true do |t|
@@ -225,6 +236,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "email_types", :force => true do |t|
@@ -232,6 +244,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "employee_familiars", :force => true do |t|
@@ -411,6 +424,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "group_employer_contributions", :force => true do |t|
@@ -418,6 +432,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "group_remunerations", :force => true do |t|
@@ -425,6 +440,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "group_remunerations_remunerative_concepts", :id => false, :force => true do |t|
@@ -439,6 +455,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "group_retentions_retention_concepts", :id => false, :force => true do |t|
@@ -461,6 +478,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "insurance_beneficiaries", :force => true do |t|
@@ -482,6 +500,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "issueds", :force => true do |t|
@@ -489,6 +508,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "kinships", :force => true do |t|
@@ -496,6 +516,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.string   "hijo_conyugue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "labor_unions", :force => true do |t|
@@ -503,6 +524,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "liquidacions", :force => true do |t|
@@ -525,6 +547,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "marital_statuses", :force => true do |t|
@@ -532,6 +555,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "menu_roles", :force => true do |t|
@@ -562,6 +586,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "numeradors", :force => true do |t|
@@ -578,6 +603,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "provinces", :force => true do |t|
@@ -606,6 +632,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "hora_dia_mes"
+    t.string   "code"
   end
 
   create_table "remunerative_concepts", :force => true do |t|
@@ -652,6 +679,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "sicoss_activities", :force => true do |t|
@@ -755,6 +783,7 @@ ActiveRecord::Schema.define(:version => 20111018123941) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
   end
 
   create_table "tipo_recibos", :force => true do |t|

@@ -29,32 +29,17 @@ class LiquidacionsController < ApplicationController
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
             File.delete(dump_tmp_filename) unless Rails.env.development?
-            Rails.logger.info(">>>>>> 14")
           else
-            Rails.logger.info(">>>>>> 15")
-
             redirect_to :action => 'show'
           end
       end
-=begin
-      format.pdf do
-        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
-          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-          print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
-          File.delete(dump_tmp_filename) unless Rails.env.development?
-      end
-=end
+
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
-        Rails.logger.info(">>>>>> 11")
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "planilla_remuneraciones.pdf")
-        Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
-        Rails.logger.info(">>>>>> 13")
-
       end
 
       format.text  do
@@ -138,10 +123,9 @@ class LiquidacionsController < ApplicationController
   def liquidar_employee
     @employees = Employee.where(:company_id => current_company.id).where(:fecha_egreso.blank?)
     @employees.each do |employee|
-      Rails.logger.info("employee="+employee.id.to_s)
-     @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
-     @recibo_sueldo.save
-     @recibo_sueldo.calcular_recibo
+      @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
+      @recibo_sueldo.save
+      @recibo_sueldo.calcular_recibo
     end
   end
 
@@ -175,7 +159,6 @@ class LiquidacionsController < ApplicationController
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil? && !Rails.env.development?
-
 #      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
 #      con_logo = true
 
@@ -193,7 +176,6 @@ class LiquidacionsController < ApplicationController
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
     if !logo_id.nil?
-  Rails.logger.info("logo_id="+logo_id.to_s)
 #     attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
 #     con_logo = true
 
@@ -234,25 +216,15 @@ class LiquidacionsController < ApplicationController
   thaber_con_descuento = 0
   thaber_sin_descuento = 0
   tretencion = 0
-  Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
-    Rails.logger.info(">>>>>> 1")
      retencion = r.total_retenciones
      haber_total = r.total_haberes
-    Rails.logger.info(">>>>>> 2")
      haber_con_descuento = r.total_haberes_con_descuento
-    Rails.logger.info(">>>>>> 3")
      haber_sin_descuento = haber_total - r.total_haberes_con_descuento
-    Rails.logger.info(">>>>>> 4")
-
-
      # haber = ReciboSueldo.joins(:detalle_recibo_habers).where(:id => r.id).sum(:total)
      tretencion = tretencion + retencion
-    Rails.logger.info(">>>>>> 5")
      thaber_sin_descuento +=  haber_sin_descuento
-    Rails.logger.info(">>>>>> 6")
      thaber_con_descuento += haber_con_descuento
-    Rails.logger.info(">>>>>> 7")
 
      data << [r.employee.legajo ,
               r.employee.full_name,
@@ -263,7 +235,6 @@ class LiquidacionsController < ApplicationController
               format_number(haber_total-retencion)
      ]
   end
-  Rails.logger.info(">>>>>> 8")
   data << ["" ,
            "T O T A L E S",
            "",
@@ -272,7 +243,6 @@ class LiquidacionsController < ApplicationController
            format_number(tretencion),
            format_number(thaber_con_descuento + thaber_sin_descuento - tretencion)
   ]
-  Rails.logger.info(">>>>>> 9")
 
   pdf.table(data, :column_widths => [40, 170, 65, 65, 65, 65, 65],
            :cell_style => { :font => "Times-Roman",
@@ -285,7 +255,6 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
-  Rails.logger.info(">>>>>> 10")
 
   pdf.render_file(filename)
   if con_logo
@@ -804,8 +773,6 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   offset = 0
   numero_de_hoja = empresa.hoja
-#  Rails.logger.info("numero_de_hoja 1= #{numero_de_hoja }")
-
   left = 10
   top = 670
 
@@ -856,7 +823,7 @@ def print_libro_pdf(filename,liquidacion_actual)
       end
     end
 
-    if haberes_cd + haberes_sd  +  retenciones >= 0
+    if haberes_cd != -1 || haberes_sd != -1 || retenciones != -1
       if offset-((linea.count+4))*10 < 20
         if numero_de_hoja != empresa.hoja
           pdf.start_new_page
@@ -910,7 +877,6 @@ def print_libro_pdf(filename,liquidacion_actual)
         pdf.bounding_box [left+28, top], :width => 60, :height => 15 do
             pdf.stroke_bounds
         end
-                            1
 #          pdf.bounding_box [98, 500], :width => 30, :height => 15 do
 #              pdf.stroke_bounds
 #          end
