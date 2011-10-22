@@ -26,6 +26,7 @@ $(document).ready(function()
   // jQuery datepicker for formtastic (see http://gist.github.com/271377)
   //[PVD]$('input.ui-datepicker').datepicker({ dateFormat: 'yy-mm-dd'});
 
+/*
     $(".apsDatetime").jdPicker({
       month_names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
       short_month_names: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -38,7 +39,7 @@ $(document).ready(function()
       select_week: false,
       show_week: true
     });
-
+*/
   // Tooltips (see http://onehackoranother.com/projects/jquery/tipsy)
   $('img').each( function() {
     if ($(this).get(0).title != '') {
