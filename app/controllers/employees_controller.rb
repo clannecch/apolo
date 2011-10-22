@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
   def index
     #@employees = Employee.all
     @search = Employee.search(params[:search])
-    @employees = @search.page(params[:page]).per(10)
+    @employees = @search.order("consortium_id, legajo").page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erbb
       format.xml  { render :xml => @employees }
