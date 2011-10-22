@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111022100000) do
+ActiveRecord::Schema.define(:version => 20111021133046) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20111022100000) do
     t.integer  "associated_document_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.binary   "adjunto_file"
   end
 
   create_table "authorizations", :force => true do |t|
@@ -388,10 +389,10 @@ ActiveRecord::Schema.define(:version => 20111022100000) do
     t.integer  "sicoss_reduction_zone_id"
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
-    t.string   "sicoss_seguro_obligatorio"
-    t.integer  "consortium_id"
-    t.integer  "group_remuneration_id"
+    t.string   "sicoss_seguro_obligatorio",        :limit => 1
     t.integer  "group_employer_contribution_id"
+    t.integer  "group_remuneration_id"
+    t.integer  "consortium_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
