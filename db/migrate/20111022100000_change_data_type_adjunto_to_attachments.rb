@@ -5,7 +5,7 @@ class ChangeDataTypeAdjuntoToAttachments < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :attachments, :adjunto_file
+#    remove_column :attachments, :adjunto_file
     add_column :attachments, :adjunto_file, :bytea
   end
 end
