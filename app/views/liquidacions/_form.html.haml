@@ -10,9 +10,25 @@
   .clear
   %br/
   .form_box
-    .form_box_title
-      %span.title= Liquidacion.model_name.human
     %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :periodo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :periodo, :class => "apsDatetime" if @liquidacion.new_record?
+          = @liquidacion.periodo unless @liquidacion.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :quincena, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :quincena, :class => "apsTextbox" if @liquidacion.new_record?
+          = @liquidacion.quincena unless @liquidacion.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :tipo_recibo_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, {:class => "apsSelect"} if @liquidacion.new_record?
+          = @liquidacion.tipo_recibo.try(:detalle) unless @liquidacion.new_record?
       %tr
         %td.columnLabel
           = f.label :fecha_liquidacion, :class => "apsLabel"
@@ -30,33 +46,18 @@
           = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, {:class => "apsSelect"}
       %tr
         %td.columnLabel
-          = f.label :fecha_cierre, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :fecha_cierre, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
-          = f.label :quincena, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :quincena, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
           = f.label :techo_retenciones, :class => "apsLabel"
         %td.columnData
           = f.text_field :techo_retenciones, :class => "apsTextbox"
       %tr
         %td.columnLabel
-          = f.label :tipo_recibo_id, :class => "apsLabel"
-        %td.columnData
-          = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, {:class => "apsSelect"}
-      %tr
-        %td.columnLabel
-          = f.label :periodo, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :periodo, :class => "apsDatetime"
-      %tr
-        %td.columnLabel
           = f.label :periodo_deposito, :class => "apsLabel"
         %td.columnData
           = f.text_field :periodo_deposito, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_cierre, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_cierre, :class => "apsDatetime"
   .actions
     = f.submit :class => "btn success"

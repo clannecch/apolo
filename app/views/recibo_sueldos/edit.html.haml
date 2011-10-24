@@ -1,9 +1,9 @@
 - content_for(:breadcrumbs) do
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
-    - breadcrumb.item ReciboSueldo.model_name.human, recibo_sueldos_path , :active => true
+    - breadcrumb.item ReciboSueldo.model_name.human, liquidacion_recibo_sueldos_path(@liquidacion) , :active => true
 
-= link_to t('scaffold.actions.show').titlecase, recibo_sueldo_path(@recibo_sueldo), :class => "btn info" 
+= link_to t('scaffold.actions.show').titlecase, liquidacion_recibo_sueldo_path(@liquidacion, @recibo_sueldo), :class => "btn info"
 .clear
 %br/
 = render 'form'

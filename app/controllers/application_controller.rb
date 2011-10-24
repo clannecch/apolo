@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
 
   def current_company
     session[:current_company] || Company.first
+    $CURRENT_COMPANY = session[:current_company]
   end
 
 #  def before_all
