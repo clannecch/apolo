@@ -1,0 +1,116 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Consortium.model_name.human, consortia_path 
+    - breadcrumb.item "#{@consortium.name.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_consortium_path(@consortium), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, [@, @consortium], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@consortium) do |f|
+  - if @consortium.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@consortium.errors.count, "error")
+        prohibited this consortium from being saved:
+      %ul
+        - @consortium.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @consortium.code
+    %tr
+      %td.columnLabel
+        = f.label :name, :class => "apsLabel"
+      %td.columnData
+        = @consortium.name
+    %tr
+      %td.columnLabel
+        = f.label :razon_social, :class => "apsLabel"
+      %td.columnData
+        = @consortium.razon_social
+    %tr
+      %td.columnLabel
+        = f.label :calle, :class => "apsLabel"
+      %td.columnData
+        = @consortium.calle
+    %tr
+      %td.columnLabel
+        = f.label :altura, :class => "apsLabel"
+      %td.columnData
+        = @consortium.altura
+    %tr
+      %td.columnLabel
+        = f.label :codigo_postal, :class => "apsLabel"
+      %td.columnData
+        = @consortium.codigo_postal
+    %tr
+      %td.columnLabel
+        = f.label :location_id, :class => "apsLabel"
+      %td.columnData
+        = @consortium.location.detalle
+    %tr
+      %td.columnLabel
+        = f.label :province_id, :class => "apsLabel"
+      %td.columnData
+        = @consortium.province.detalle
+    %tr
+      %td.columnLabel
+        = f.label :latitude, :class => "apsLabel"
+      %td.columnData
+        = @consortium.latitude
+    %tr
+      %td.columnLabel
+        = f.label :longitude, :class => "apsLabel"
+      %td.columnData
+        = @consortium.longitude
+    %tr
+      %td.columnLabel
+        = f.label :telefono, :class => "apsLabel"
+      %td.columnData
+        = @consortium.telefono
+    %tr
+      %td.columnLabel
+        = f.label :contacto, :class => "apsLabel"
+      %td.columnData
+        = @consortium.contacto
+    %tr
+      %td.columnLabel
+        = f.label :email, :class => "apsLabel"
+      %td.columnData
+        = @consortium.email
+    %tr
+      %td.columnLabel
+        = f.label :cuit, :class => "apsLabel"
+      %td.columnData
+        = @consortium.cuit
+    %tr
+      %td.columnLabel
+        = f.label :numero_inscripcion, :class => "apsLabel"
+      %td.columnData
+        = @consortium.numero_inscripcion
+    %tr
+      %td.columnLabel
+        = f.label :caja, :class => "apsLabel"
+      %td.columnData
+        = @consortium.caja
+    %tr
+      %td.columnLabel
+        = f.label :ultima_hoja_libro, :class => "apsLabel"
+      %td.columnData
+        = @consortium.ultima_hoja_libro
+    %tr
+      %td.columnLabel
+        = f.label :imprimir_hasta_hoja_libro, :class => "apsLabel"
+      %td.columnData
+        = @consortium.imprimir_hasta_hoja_libro
+    %tr
+      %td.columnLabel
+        = f.label :observaciones, :class => "apsLabel"
+      %td.columnData
+        = @consortium.observaciones
+.clear
