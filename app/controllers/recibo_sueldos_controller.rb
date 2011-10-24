@@ -179,7 +179,7 @@ class ReciboSueldosController < ApplicationController
 #  numero.truncate parte entera
   #"456778904".gsub(/(.)(?=.{3}+$)/, %q(\1,))
 
-  def print_to_pdf(filename,entity)
+  def print_to_pdf(filename,file_photo,entity)
     require 'prawn'
 
     empresa = OpenStruct.new({
@@ -231,14 +231,14 @@ class ReciboSueldosController < ApplicationController
 Rails.logger.info("10")
     if !attach.nil?
       if attach.adjunto_content_type[0..4] = "image"
-        file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
-        Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+#        file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
+#        Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
-        open( file_logo, 'wb' ) { |file|
+        open( file_photo, 'wb' ) { |file|
             file.write(attach.adjunto_file)
           }
 
-        empresa.logo = file_logo.to_s
+        empresa.logo = file_photo.to_s
       end
     end
     Rails.logger.info("11")
