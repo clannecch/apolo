@@ -863,7 +863,7 @@ def print_libro_pdf(filename,liquidacion_actual)
         pdf.bounding_box [left+28, top], :width => 60, :height => 15 do
             pdf.stroke_bounds
         end
-                            1
+                            
 #          pdf.bounding_box [98, 500], :width => 30, :height => 15 do
 #              pdf.stroke_bounds
 #          end
