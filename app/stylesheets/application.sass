@@ -3,6 +3,15 @@
 #ui-datepicker-div
   display: none
 
+#main
+  .block
+    margin-bottom: 20px
+    padding-top: 1px
+    .content .inner
+      padding: 0 15px 15px
+  .main p.first
+    margin-top: 0
+
 form.formtastic fieldset > ol > li label
   float: none
 
@@ -17,12 +26,14 @@ ul.wat-cf
     //list-style-type: none
     padding-right: 0px
 
-.user_navigation
-  text-align: left
-  position: static
-  padding: 0px 10px 0px 0px
-  display: inline
-  width: 30px
+table tr
+  td.actions a
+    visibility: hidden
+  &:hover td.actions a
+    visibility: visible
+
+.clear
+  margin: 10px 10px 10px 10px
 
 .block
   text-align: left
@@ -141,14 +152,22 @@ ul.wat-cf
       padding: 10px 20px
       @include rounded-corners(9px)
 
-#main
-  .block
-    margin-bottom: 20px
-    padding-top: 1px
-    .content .inner
-      padding: 0 15px 15px
-  .main p.first
-    margin-top: 0
+.user_navigation
+  text-align: left
+  display: block
+  float: right
+  margin:  0px 10px 50px 0px
+  padding: 0px 10px 0px 0px
+  position: relative
+  width: 50px
+  ul
+    position: relative
+    padding: 0
+    height: 30px
+    li
+      padding: 0px 2px
+      margin: 0
+      list-style: none
 
 //--------------------------------------------------------
 // B R E A D C R U M B
@@ -156,9 +175,10 @@ ul.wat-cf
 .breadcrumb
   position: static
   height: 30px
-  width: 100%
+  width: 92%
+  float: left
   //margin: 0px 0px 30px 200px
-  //display: inline
+  display: inline
   ul
     position: relative
     margin: 0px 5px 0 5px
@@ -215,7 +235,7 @@ ul.wat-cf
     right: 0px
     width: 10px
     height: 30px
-    display: block
+    display: inline
     z-index: 1
     background: url('../images/breadcrumbImage.png') 100% -90px no-repeat
 
@@ -254,8 +274,26 @@ ul.wat-cf
       list-style-type: square
       margin-bottom: 15px
 
-table tr
-  td.actions a
-    visibility: hidden
-  &:hover td.actions a
-    visibility: visible
+//--------------------------------------------------------
+// V A L I D A T I O N S
+//--------------------------------------------------------
+.field_with_errors input, checkbox
+  //&input, &checkbox, &select
+  border: 1px solid #ff0000
+  background: #fddfde
+
+#error_explanation
+  @include rounded-corners(6px)
+  border: 1px solid #ff0000
+  margin: 20px 5px 0 5px
+  ul
+    position: relative
+    margin: 0px 5px 0 5px
+    padding: 0
+    height: 30px
+    li
+      padding: 0
+      margin: 0
+      list-style: none
+      float: left
+      height: 30px

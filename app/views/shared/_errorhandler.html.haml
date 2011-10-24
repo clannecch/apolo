@@ -2,7 +2,7 @@
   #error_explanation.alert-message.error.fade.in.block-message{"data-alert" => "alert"}
     %a.close{ :href => "#"} &times;
     %h2
-      = t('scaffold.errors.message').titlecase
+      = t('scaffold.errors.message')
     %ul
       - obj_errors.full_messages.each do |msg|
         %li= msg
