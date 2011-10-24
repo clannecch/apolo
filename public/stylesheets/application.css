@@ -340,7 +340,7 @@ table tr:hover td.actions a {
 }
 
 /* line 280, ../../app/stylesheets/application.sass */
-.field_with_errors input, checkbox {
+.field_with_errors input, .field_with_errors checkbox, .field_with_errors select {
   border: 1px solid red;
   background: #fddfde;
 }
@@ -358,13 +358,11 @@ table tr:hover td.actions a {
   position: relative;
   margin: 0px 5px 0 5px;
   padding: 0;
-  height: 30px;
+  display: block;
 }
-/* line 294, ../../app/stylesheets/application.sass */
+/* line 295, ../../app/stylesheets/application.sass */
 #error_explanation ul li {
   padding: 0;
   margin: 0;
   list-style: none;
-  float: left;
-  height: 30px;
 }

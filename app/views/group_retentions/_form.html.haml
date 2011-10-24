@@ -1,12 +1,5 @@
 = form_for(@group_retention) do |f|
-  - if @group_retention.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@group_retention.errors.count, "error")
-        prohibited this group_retention from being saved:
-      %ul
-        - @group_retention.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @group_retention.errors
   .clear
   %br/
   .form_box

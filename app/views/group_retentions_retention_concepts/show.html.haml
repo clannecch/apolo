@@ -1,0 +1,30 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRetentionsRetentionConcept.model_name.human, group_retentions_retention_concepts_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_group_retentions_retention_concept_path(@group_retentions_retention_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, [@, @group_retentions_retention_concept], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@group_retentions_retention_concept) do |f|
+  - if @group_retentions_retention_concept.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_retentions_retention_concept.errors.count, "error")
+        prohibited this group_retentions_retention_concept from being saved:
+      %ul
+        - @group_retentions_retention_concept.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :group_retention_id, :class => "apsLabel"
+      %td.columnData
+        = @group_retentions_retention_concept.group_retention.detalle
+    %tr
+      %td.columnLabel
+        = f.label :retention_concept_id, :class => "apsLabel"
+      %td.columnData
+        = @group_retentions_retention_concept.retention_concept.detalle
+.clear

@@ -1,12 +1,5 @@
 = form_for(@group_remuneration) do |f|
-  - if @group_remuneration.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@group_remuneration.errors.count, "error")
-        prohibited this group_remuneration from being saved:
-      %ul
-        - @group_remuneration.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @group_remuneration.errors
   .clear
   %br/
   .form_box
