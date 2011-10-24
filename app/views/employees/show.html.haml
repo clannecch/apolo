@@ -79,10 +79,10 @@
 
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@employee.latitude}%2C#{@employee.longitude}"
 %br/
-%br/
-%b Distancia hasta el lugar de trabajo :
-= @employee.distance_from("Catamarca 50, buenos aires").to_i * 1.6
-%br/
+/%br/
+/%b Distancia hasta el lugar de trabajo :
+/= @employee.distance_from("Catamarca 50, buenos aires").to_i * 1.6
+/%br/
 %p
   %b Movil:
   = @employee.movil
