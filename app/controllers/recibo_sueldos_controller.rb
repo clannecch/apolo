@@ -207,6 +207,8 @@ class ReciboSueldosController < ApplicationController
       empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
       empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
+      Rails.logger.info("calle="+current_company.calle)
+      Rails.logger.info("altura="+current_company.altura)
       if !logo_id.nil?
         attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
@@ -249,8 +251,6 @@ class ReciboSueldosController < ApplicationController
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
     pdf.draw_text empresa.domicilio2.center(40), :at => [7,623], :size => 5
     pdf.draw_text ("C.U.I.T.: "+empresa.cuit).center(40), :at => [7,615], :size => 5
-    pdf.draw_text ("Nro.Inscripcion: " +empresa.inscripcion).center(40), :at => [7,609], :size => 5
-    pdf.draw_text ("Caja: " + empresa.caja).center(40), :at => [7,602], :size => 5
 
 # Primer columna
     pdf.bounding_box [136, 720], :width => 170, :height => 10 do

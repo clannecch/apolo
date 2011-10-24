@@ -1,13 +1,17 @@
 - content_for(:breadcrumbs) do
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
-    - breadcrumb.item ReciboSueldo.model_name.human, recibo_sueldos_path , :active => true
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item ReciboSueldo.model_name.human, liquidacion_recibo_sueldos_path , :active => true
 
-= link_to t('scaffold.actions.edit').titlecase, edit_recibo_sueldo_path(@recibo_sueldo), :class => "btn success" |
-= link_to t('scaffold.actions.destroy').titlecase, @recibo_sueldo, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+= link_to t('scaffold.actions.edit').titlecase, edit_liquidacion_recibo_sueldo_path(@recibo_sueldo), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, [@liquidacion, @recibo_sueldo], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+= link_to 'Recibo',  liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf'), :class => "btn standard"
 .clear
 %br/
-= form_for(@recibo_sueldo) do |f|
+%h3
+  Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
+= form_for([@liquidacion,@recibo_sueldo]) do |f|
   - if @recibo_sueldo.errors.any?
     #error_explanation
       %h2
@@ -19,14 +23,9 @@
   %table.tableForm
     %tr
       %td.columnLabel
-        = f.label :liquidacion_id, :class => "apsLabel"
-      %td.columnData
-        = @recibo_sueldo.liquidacion_id
-    %tr
-      %td.columnLabel
         = f.label :employee_id, :class => "apsLabel"
       %td.columnData
-        = @recibo_sueldo.employee_id
+        = @recibo_sueldo.employee.full_name
     %tr
       %td.columnLabel
         = f.label :fecha_recibo, :class => "apsLabel"
@@ -42,9 +41,4 @@
         = f.label :mensaje_recibo, :class => "apsLabel"
       %td.columnData
         = @recibo_sueldo.mensaje_recibo
-    %tr
-      %td.columnLabel
-        = f.label :fecha_calculo, :class => "apsLabel"
-      %td.columnData
-        = @recibo_sueldo.fecha_calculo
 .clear

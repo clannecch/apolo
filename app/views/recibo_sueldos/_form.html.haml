@@ -1,4 +1,4 @@
-= form_for(@recibo_sueldo) do |f|
+= form_for([@liquidacion,@recibo_sueldo]) do |f|
   - if @recibo_sueldo.errors.any?
     #error_explanation
       %h2
@@ -9,20 +9,17 @@
           %li= msg
   .clear
   %br/
+
+  %h3
+    Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
   .form_box
-    .form_box_title
-      %span.title= ReciboSueldo.model_name.human
     %table.tableForm
-      %tr
-        %td.columnLabel
-          = f.label :liquidacion_id, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :liquidacion_id, :class => "apsTextbox"
       %tr
         %td.columnLabel
           = f.label :employee_id, :class => "apsLabel"
         %td.columnData
-          = f.text_field :employee_id, :class => "apsTextbox"
+          = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos, :id, :full_name , :prompt => true  if @recibo_sueldo.new_record?
+          = @recibo_sueldo.employee.try(:full_name) unless @recibo_sueldo.new_record?
       %tr
         %td.columnLabel
           = f.label :fecha_recibo, :class => "apsLabel"
@@ -38,10 +35,35 @@
           = f.label :mensaje_recibo, :class => "apsLabel"
         %td.columnData
           = f.text_field :mensaje_recibo, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :fecha_calculo, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :fecha_calculo, :class => "apsDatetime"
+  - if @recibo_sueldo.persisted?
+    .field
+      %h3 Haberes
+      #detalle_recibo_haber
+        %table.field
+          %tr
+            %th= f.label "Concepto Retencion"
+            %th= f.label "Detalle Personalizado"
+            %th= f.label "Centro Costo"
+            %th= f.label "Cantidad"
+            %th= f.label "Importe"
+            %th &nbsp;
+          = f.fields_for :detalle_recibo_habers do |drh|
+            = render 'detalle_recibo_haber_fields', :f => drh
+        .links
+          = link_to_add_association 'Agregar Haber', f, :detalle_recibo_habers
+    .field
+      %h3 Retenciones
+      #detalle_recibo_retencion
+        %table.field
+          %tr
+            %th= f.label "Concepto Retencion"
+            %th= f.label "Detalle Personalizado"
+            %th= f.label "Cantidad"
+            %th= f.label "Importe"
+            %th &nbsp;
+          = f.fields_for :detalle_recibo_retencions do |drh|
+            = render 'detalle_recibo_retencion_fields', :f => drh
+        .links
+          = link_to_add_association 'Agregar retencion', f, :detalle_recibo_retencions
   .actions
     = f.submit :class => "btn success"

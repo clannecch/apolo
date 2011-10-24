@@ -1,17 +1,18 @@
 - content_for(:breadcrumbs) do
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
-    - breadcrumb.item ReciboSueldo.model_name.human, recibo_sueldos_path, :active => true
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item ReciboSueldo.model_name.human, liquidacion_recibo_sueldos_path(@liquidacion), :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => ReciboSueldo.model_name.human).titlecase , new_recibo_sueldo_path(@recibo_sueldo), :class => "btn success" 
+  /= link_to t('scaffold.actions.new', :item => ReciboSueldo.model_name.human).titlecase , new_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo), :class => "btn success"
+  = link_to 'Informar nuevo empleado', new_liquidacion_recibo_sueldo_path(@liquidacion), :class => "btn success"
   - if @recibo_sueldos.any?
-    = link_to t('scaffold.actions.export').titlecase, recibo_sueldos_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, liquidacion_recibo_sueldos_path( :format => 'pdf'), :class => "btn info"
 
 - if @recibo_sueldos.any?
   %table.tableStandard
     %tr
-      %th= sort_link @search, :liquidacion_id, @recibo_sueldos.human_attribute_name('liquidacion_id')
       %th= sort_link @search, :employee_id, @recibo_sueldos.human_attribute_name('employee_id')
       %th= sort_link @search, :fecha_recibo, @recibo_sueldos.human_attribute_name('fecha_recibo')
       %th= sort_link @search, :observaciones, @recibo_sueldos.human_attribute_name('observaciones')
@@ -21,16 +22,16 @@
 
     - @recibo_sueldos.each do |item|
       %tr
-        %td= item.liquidacion_id
-        %td= item.employee_id
+        %td= item.employee.full_name
         %td= item.fecha_recibo
         %td= item.observaciones
         %td= item.mensaje_recibo
         %td= item.fecha_calculo
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_recibo_sueldo_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), [@liquidacion,item]
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase),  edit_liquidacion_recibo_sueldo_path(@liquidacion,item)
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), [@liquidacion, item], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to 'Calcular',  calculo_recibo_liquidacion_recibo_sueldo_path(@liquidacion,item.id)
     .clear
     .block{:style => 'margin:20px;'}= paginate(@recibo_sueldos)
   .clear

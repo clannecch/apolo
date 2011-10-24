@@ -19,8 +19,8 @@
 #
 
 class Liquidacion < ActiveRecord::Base
-  #scope :by_company, lambda {|company| where(:company_id => company) }
-  default_scope where(:company_id => $CURRENT_COMPANY)
+  scope :by_company, lambda {|company| where(:company_id => company) }
+  #default_scope where(:company_id => current_company.id)
 
   has_many :recibo_sueldos, :dependent => :restrict
   belongs_to :tipo_recibo
