@@ -30,3 +30,5 @@ es-AR:
       back: volver
       export: exportar a PDF
       main: principal
+    errors:
+      message: Se han encontrado errores que impiden la grabacion.

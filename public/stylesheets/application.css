@@ -183,14 +183,14 @@ ul.wat-cf li {
 
 /* line 156, ../../app/stylesheets/application.sass */
 .breadcrumb {
-  position: relative;
+  position: static;
   height: 30px;
   width: 100%;
 }
 /* line 162, ../../app/stylesheets/application.sass */
 .breadcrumb ul {
   position: relative;
-  margin: 0 5px 0 5px 0px;
+  margin: 0px 5px 0 5px;
   padding: 0;
   height: 30px;
   background: url("../images/breadcrumbImage.png") 0px -30px repeat-x;
