@@ -27,7 +27,7 @@ class ReciboSueldosController < ApplicationController
         Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
 
         file_photo = Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
-        Dir.mkdir(file_photo.dirname) unless File.directory?(file_map.dirname)
+        Dir.mkdir(file_photo.dirname) unless File.directory?(file_photo.dirname)
 
 
         print_to_pdf(dump_tmp_filename,file_photo,@recibo_sueldo)
