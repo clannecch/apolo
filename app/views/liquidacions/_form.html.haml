@@ -36,6 +36,11 @@
           = f.text_field :fecha_liquidacion, :class => "apsDatetime"
       %tr
         %td.columnLabel
+          = f.label :periodo_deposito, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :periodo_deposito, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
           = f.label :fecha_deposito, :class => "apsLabel"
         %td.columnData
           = f.text_field :fecha_deposito, :class => "apsDatetime"
@@ -49,11 +54,6 @@
           = f.label :techo_retenciones, :class => "apsLabel"
         %td.columnData
           = f.text_field :techo_retenciones, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :periodo_deposito, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :periodo_deposito, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :fecha_cierre, :class => "apsLabel"
