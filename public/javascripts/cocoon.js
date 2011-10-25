@@ -45,6 +45,15 @@ $(document).ready(function() {
       insertionCallback.call(contentNode);
     }
     $(".remove_fields").addClass("btn danger");
+    $(".apsDatetime").datepick(
+        $.extend({
+            altField: '#l10nAlternate',
+            showOnFocus: true,
+            showTrigger: '#calImg',
+            yearRange: 'any'
+        },
+        $.datepick.regional['fr'])
+    );
     return false;
   });
 

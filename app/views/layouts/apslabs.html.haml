@@ -55,7 +55,7 @@
           /%div{:style => "text-align: center; font-weight: normal; font-size: 14px; width: 100% "}
         = yield(:breadcrumbs) if content_for?(:breadcrumbs)
         = content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
-        %br/
+        .clear{:style => "background-color: #00264d; margin: 12px"}
         %br/
         .clear
       #wrapper.wat-cf

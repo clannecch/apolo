@@ -38,7 +38,7 @@
 .field
   = f.label "Fecha de Nacimiento", :class => "tab_label"
   %br/
-  = f.text_field :fecha_nacimiento, :class => "apsDatetime"
+  = f.text_field :fecha_nacimiento, :value => @employee.fecha_nacimiento.to_s, :class => "apsDatetime"
 .field
   = f.label "Nivel de Estudios", :class => "tab_label"
   %br/

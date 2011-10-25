@@ -2,7 +2,7 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
-/    - breadcrumb.item "#{@liquidacion.detalle.titlecase}", liquidacion_path(@liquidacion), :active => true
+    - breadcrumb.item "#{@liquidacion.periodo.strftime('%m/%Y')}",nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_liquidacion_path(@liquidacion), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @liquidacion, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"

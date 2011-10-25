@@ -6,7 +6,7 @@
 .field
   = f.label "fecha_ingreso", :class => "tab_label"
   %br/
-  = f.text_field :fecha_ingreso, :class => "apsDatetime"
+  = f.text_field :fecha_ingreso, :value => @employee.fecha_ingreso.to_s, :class => "apsDatetime"
 .field
   = f.label "Modalidad de Contrato", :class => "tab_label"
   %br/
@@ -14,7 +14,7 @@
 .field
   = f.label "fecha_egreso", :class => "tab_label"
   %br/
-  = f.text_field :fecha_egreso, :class => "apsDatetime"
+  = f.text_field :fecha_egreso, :value => @employee.fecha_egreso.to_s, :class => "apsDatetime"
 .field
   = f.label "Causa de Egreso", :class => "tab_label"
   %br/
