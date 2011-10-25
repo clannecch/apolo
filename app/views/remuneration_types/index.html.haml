@@ -4,7 +4,7 @@
     - breadcrumb.item RemunerationType.model_name.human, remuneration_types_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => RemunerationType.model_name.human).titlecase , new_remuneration_type_path(@remuneration_type), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => RemunerationType.model_name.human) , new_remuneration_type_path(@remuneration_type), :class => "btn success" 
   - if @remuneration_types.any?
     = link_to t('scaffold.actions.export').titlecase, remuneration_types_path( :format => 'pdf'), :class => "btn info"
 
@@ -12,15 +12,19 @@
   %table.tableStandard
     %tr
       %th= sort_link @search, :detalle, @remuneration_types.human_attribute_name('detalle')
+      %th= sort_link @search, :hora_dia_mes, @remuneration_types.human_attribute_name('hora_dia_mes')
+      %th= sort_link @search, :code, @remuneration_types.human_attribute_name('code')
       %th.last
 
     - @remuneration_types.each do |item|
       %tr
         %td= item.detalle
+        %td= item.hora_dia_mes
+        %td= item.code
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_remuneration_type_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_remuneration_type_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@remuneration_types)
   .clear

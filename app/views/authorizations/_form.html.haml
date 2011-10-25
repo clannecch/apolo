@@ -1,17 +1,10 @@
 = form_for(@authorization) do |f|
-  - if @authorization.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@authorization.errors.count, "error")
-        prohibited this authorization from being saved:
-      %ul
-        - @authorization.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @authorization.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Authorization.model_name.human
+    /  %span.title= Authorization.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

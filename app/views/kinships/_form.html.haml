@@ -1,17 +1,10 @@
 = form_for(@kinship) do |f|
-  - if @kinship.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@kinship.errors.count, "error")
-        prohibited this kinship from being saved:
-      %ul
-        - @kinship.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @kinship.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Kinship.model_name.human
+    /  %span.title= Kinship.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
@@ -23,5 +16,10 @@
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
           = f.text_field :hijo_conyugue, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

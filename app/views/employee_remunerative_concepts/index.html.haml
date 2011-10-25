@@ -4,7 +4,7 @@
     - breadcrumb.item EmployeeRemunerativeConcept.model_name.human, employee_remunerative_concepts_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => EmployeeRemunerativeConcept.model_name.human).titlecase , new_employee_remunerative_concept_path(@employee_remunerative_concept), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => EmployeeRemunerativeConcept.model_name.human) , new_employee_remunerative_concept_path(@employee_remunerative_concept), :class => "btn success" 
   - if @employee_remunerative_concepts.any?
     = link_to t('scaffold.actions.export').titlecase, employee_remunerative_concepts_path( :format => 'pdf'), :class => "btn info"
 
@@ -32,9 +32,9 @@
         %td= item.cost_center_id
         %td= item.detalle
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_remunerative_concept_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_remunerative_concept_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@employee_remunerative_concepts)
   .clear

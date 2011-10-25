@@ -2,60 +2,54 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item DetalleReciboHaber.model_name.human, detalle_recibo_habers_path 
-    - breadcrumb.item "#{@detalle_recibo_haber.detalle.titlecase}", detalle_recibo_haber_path(@detalle_recibo_haber), :active => true
+    - breadcrumb.item "#{@detalle_recibo_haber.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_detalle_recibo_haber_path(@detalle_recibo_haber), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @detalle_recibo_haber, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@detalle_recibo_haber) do |f|
-  - if @detalle_recibo_haber.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@detalle_recibo_haber.errors.count, "error")
-        prohibited this detalle_recibo_haber from being saved:
-      %ul
-        - @detalle_recibo_haber.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :recibo_sueldo_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.recibo_sueldo_id
-    %tr
-      %td.columnLabel
-        = f.label :remunerative_concept_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.remunerative_concept.detalle
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.detalle
-    %tr
-      %td.columnLabel
-        = f.label :cost_center_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.cost_center.detalle
-    %tr
-      %td.columnLabel
-        = f.label :cantidad, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.cantidad
-    %tr
-      %td.columnLabel
-        = f.label :importe, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.importe
-    %tr
-      %td.columnLabel
-        = f.label :total, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.total
-    %tr
-      %td.columnLabel
-        = f.label :cantidad_recibo, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_haber.cantidad_recibo
+  = render 'shared/errorhandler', :obj_errors => @detalle_recibo_haber.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :recibo_sueldo_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.recibo_sueldo_id
+      %tr
+        %td.columnLabel
+          = f.label :remunerative_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.remunerative_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cost_center_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.cost_center.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.cantidad
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.importe
+      %tr
+        %td.columnLabel
+          = f.label :total, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.total
+      %tr
+        %td.columnLabel
+          = f.label :cantidad_recibo, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_haber.cantidad_recibo
 .clear

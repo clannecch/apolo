@@ -1,5 +1,10 @@
-%h1 Edicion de Ocupacion
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employment.model_name.human, employments_path 
+    - breadcrumb.item "#{@employment.detalle.titlecase}", employment_path(@employment), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, employment_path(@employment), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @employment
-|
-\#{link_to 'Volver', employments_path}

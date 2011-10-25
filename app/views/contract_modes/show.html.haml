@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item ContractMode.model_name.human, contract_modes_path 
-    - breadcrumb.item "#{@contract_mode.detalle.titlecase}", contract_mode_path(@contract_mode), :active => true
+    - breadcrumb.item "#{@contract_mode.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_contract_mode_path(@contract_mode), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @contract_mode, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@contract_mode) do |f|
-  - if @contract_mode.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@contract_mode.errors.count, "error")
-        prohibited this contract_mode from being saved:
-      %ul
-        - @contract_mode.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @contract_mode.detalle
+  = render 'shared/errorhandler', :obj_errors => @contract_mode.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @contract_mode.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @contract_mode.code
 .clear

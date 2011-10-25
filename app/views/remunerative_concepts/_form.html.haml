@@ -1,17 +1,10 @@
 = form_for(@remunerative_concept) do |f|
-  - if @remunerative_concept.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@remunerative_concept.errors.count, "error")
-        prohibited this remunerative_concept from being saved:
-      %ul
-        - @remunerative_concept.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @remunerative_concept.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= RemunerativeConcept.model_name.human
+    /  %span.title= RemunerativeConcept.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

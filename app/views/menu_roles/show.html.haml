@@ -8,23 +8,17 @@
 .clear
 %br/
 = form_for(@menu_role) do |f|
-  - if @menu_role.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@menu_role.errors.count, "error")
-        prohibited this menu_role from being saved:
-      %ul
-        - @menu_role.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :menu_id, :class => "apsLabel"
-      %td.columnData
-        = @menu_role.menu.name
-    %tr
-      %td.columnLabel
-        = f.label :rol_id, :class => "apsLabel"
-      %td.columnData
-        = @menu_role.rol_id
+  = render 'shared/errorhandler', :obj_errors => @menu_role.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :menu_id, :class => "apsLabel"
+        %td.columnData
+          = @menu_role.menu.name
+      %tr
+        %td.columnLabel
+          = f.label :rol_id, :class => "apsLabel"
+        %td.columnData
+          = @menu_role.rol_id
 .clear

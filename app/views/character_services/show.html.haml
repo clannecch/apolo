@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item CharacterService.model_name.human, character_services_path 
-    - breadcrumb.item "#{@character_service.detalle.titlecase}", character_service_path(@character_service), :active => true
+    - breadcrumb.item "#{@character_service.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_character_service_path(@character_service), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @character_service, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@character_service) do |f|
-  - if @character_service.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@character_service.errors.count, "error")
-        prohibited this character_service from being saved:
-      %ul
-        - @character_service.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @character_service.detalle
+  = render 'shared/errorhandler', :obj_errors => @character_service.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @character_service.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @character_service.code
 .clear

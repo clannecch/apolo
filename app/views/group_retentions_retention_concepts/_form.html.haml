@@ -1,16 +1,9 @@
 = form_for(@group_retentions_retention_concept) do |f|
-  - if @group_retentions_retention_concept.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@group_retentions_retention_concept.errors.count, "error")
-        prohibited this group_retentions_retention_concept from being saved:
-      %ul
-        - @group_retentions_retention_concept.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @group_retentions_retention_concept.errors
   .clear
   %br/
   .form_box
-    /.form_box_title
+    .form_box_title
     /  %span.title= GroupRetentionsRetentionConcept.model_name.human
     %table.tableForm
       %tr

@@ -4,7 +4,7 @@
     - breadcrumb.item InsuranceCompany.model_name.human, insurance_companies_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => InsuranceCompany.model_name.human).titlecase , new_insurance_company_path(@insurance_company), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => InsuranceCompany.model_name.human) , new_insurance_company_path(@insurance_company), :class => "btn success" 
   - if @insurance_companies.any?
     = link_to t('scaffold.actions.export').titlecase, insurance_companies_path( :format => 'pdf'), :class => "btn info"
 
@@ -12,15 +12,17 @@
   %table.tableStandard
     %tr
       %th= sort_link @search, :detalle, @insurance_companies.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @insurance_companies.human_attribute_name('code')
       %th.last
 
     - @insurance_companies.each do |item|
       %tr
         %td= item.detalle
+        %td= item.code
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_insurance_company_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_insurance_company_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@insurance_companies)
   .clear

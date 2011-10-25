@@ -4,7 +4,7 @@
     - breadcrumb.item DocumentType.model_name.human, document_types_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => DocumentType.model_name.human).titlecase , new_document_type_path(@document_type), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => DocumentType.model_name.human) , new_document_type_path(@document_type), :class => "btn success" 
   - if @document_types.any?
     = link_to t('scaffold.actions.export').titlecase, document_types_path( :format => 'pdf'), :class => "btn info"
 
@@ -12,15 +12,17 @@
   %table.tableStandard
     %tr
       %th= sort_link @search, :detalle, @document_types.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @document_types.human_attribute_name('code')
       %th.last
 
     - @document_types.each do |item|
       %tr
         %td= item.detalle
+        %td= item.code
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_document_type_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_document_type_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@document_types)
   .clear

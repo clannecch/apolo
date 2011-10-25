@@ -4,7 +4,7 @@
     - breadcrumb.item EmployeeFamiliar.model_name.human, employee_familiars_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => EmployeeFamiliar.model_name.human).titlecase , new_employee_familiar_path(@employee_familiar), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => EmployeeFamiliar.model_name.human) , new_employee_familiar_path(@employee_familiar), :class => "btn success" 
   - if @employee_familiars.any?
     = link_to t('scaffold.actions.export').titlecase, employee_familiars_path( :format => 'pdf'), :class => "btn info"
 
@@ -54,9 +54,9 @@
         %td= item.address
         %td= item.porcentual
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_familiar_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_familiar_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@employee_familiars)
   .clear

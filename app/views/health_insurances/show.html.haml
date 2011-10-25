@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item HealthInsurance.model_name.human, health_insurances_path 
-    - breadcrumb.item "#{@health_insurance.detalle.titlecase}", health_insurance_path(@health_insurance), :active => true
+    - breadcrumb.item "#{@health_insurance.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_health_insurance_path(@health_insurance), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @health_insurance, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@health_insurance) do |f|
-  - if @health_insurance.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@health_insurance.errors.count, "error")
-        prohibited this health_insurance from being saved:
-      %ul
-        - @health_insurance.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @health_insurance.detalle
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @health_insurance.code
+  = render 'shared/errorhandler', :obj_errors => @health_insurance.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @health_insurance.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @health_insurance.code
 .clear

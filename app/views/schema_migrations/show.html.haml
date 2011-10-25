@@ -8,18 +8,12 @@
 .clear
 %br/
 = form_for(@schema_migration) do |f|
-  - if @schema_migration.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@schema_migration.errors.count, "error")
-        prohibited this schema_migration from being saved:
-      %ul
-        - @schema_migration.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :version, :class => "apsLabel"
-      %td.columnData
-        = @schema_migration.version
+  = render 'shared/errorhandler', :obj_errors => @schema_migration.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :version, :class => "apsLabel"
+        %td.columnData
+          = @schema_migration.version
 .clear

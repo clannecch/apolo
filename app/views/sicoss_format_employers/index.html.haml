@@ -4,7 +4,7 @@
     - breadcrumb.item SicossFormatEmployer.model_name.human, sicoss_format_employers_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => SicossFormatEmployer.model_name.human).titlecase , new_sicoss_format_employer_path(@sicoss_format_employer), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => SicossFormatEmployer.model_name.human) , new_sicoss_format_employer_path(@sicoss_format_employer), :class => "btn success" 
   - if @sicoss_format_employers.any?
     = link_to t('scaffold.actions.export').titlecase, sicoss_format_employers_path( :format => 'pdf'), :class => "btn info"
 
@@ -22,9 +22,9 @@
         %td= item.field_type
         %td= item.formula
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_employer_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_employer_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@sicoss_format_employers)
   .clear

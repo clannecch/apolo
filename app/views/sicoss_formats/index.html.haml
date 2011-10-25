@@ -4,7 +4,7 @@
     - breadcrumb.item SicossFormat.model_name.human, sicoss_formats_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => SicossFormat.model_name.human).titlecase , new_sicoss_format_path(@sicoss_format), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => SicossFormat.model_name.human) , new_sicoss_format_path(@sicoss_format), :class => "btn success" 
   - if @sicoss_formats.any?
     = link_to t('scaffold.actions.export').titlecase, sicoss_formats_path( :format => 'pdf'), :class => "btn info"
 
@@ -19,7 +19,7 @@
       %th= sort_link @search, :formula, @sicoss_formats.human_attribute_name('formula')
       %th= sort_link @search, :field_type, @sicoss_formats.human_attribute_name('field_type')
       %th= sort_link @search, :number_of_decimals, @sicoss_formats.human_attribute_name('number_of_decimals')
-      /th= sort_link @search, :modifiable, @sicoss_formats.human_attribute_name('modifiable')
+      %th= sort_link @search, :modifiable, @sicoss_formats.human_attribute_name('modifiable')
       %th.last
 
     - @sicoss_formats.each do |item|
@@ -32,11 +32,11 @@
         %td= item.formula
         %td= item.field_type
         %td= item.number_of_decimals
-        /td= check_box_tag "sicoss_format_modifiable", sicoss_format.modifiable, sicoss_format.modifiable, :disabled => true
+        %td= check_box_tag "sicoss_format_modifiable", sicoss_format.modifiable, sicoss_format.modifiable, :disabled => true
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@sicoss_formats)
   .clear

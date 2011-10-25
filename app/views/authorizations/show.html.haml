@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Authorization.model_name.human, authorizations_path 
-    - breadcrumb.item "#{@authorization.name.titlecase}", authorization_path(@authorization), :active => true
+    - breadcrumb.item "#{@authorization.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_authorization_path(@authorization), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @authorization, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@authorization) do |f|
-  - if @authorization.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@authorization.errors.count, "error")
-        prohibited this authorization from being saved:
-      %ul
-        - @authorization.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @authorization.code
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @authorization.name
+  = render 'shared/errorhandler', :obj_errors => @authorization.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @authorization.code
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @authorization.name
 .clear

@@ -4,7 +4,7 @@
     - breadcrumb.item DetalleReciboHaber.model_name.human, detalle_recibo_habers_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => DetalleReciboHaber.model_name.human).titlecase , new_detalle_recibo_haber_path(@detalle_recibo_haber), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => DetalleReciboHaber.model_name.human) , new_detalle_recibo_haber_path(@detalle_recibo_haber), :class => "btn success" 
   - if @detalle_recibo_habers.any?
     = link_to t('scaffold.actions.export').titlecase, detalle_recibo_habers_path( :format => 'pdf'), :class => "btn info"
 
@@ -32,9 +32,9 @@
         %td= item.total
         %td= item.cantidad_recibo
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_detalle_recibo_haber_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_detalle_recibo_haber_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@detalle_recibo_habers)
   .clear

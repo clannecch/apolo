@@ -4,7 +4,7 @@
     - breadcrumb.item User.model_name.human, users_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => User.model_name.human).titlecase , new_user_path(@user), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => User.model_name.human) , new_user_path(@user), :class => "btn success" 
   - if @users.any?
     = link_to t('scaffold.actions.export').titlecase, users_path( :format => 'pdf'), :class => "btn info"
 
@@ -13,30 +13,30 @@
     %tr
       %th= sort_link @search, :first_name, @users.human_attribute_name('first_name')
       %th= sort_link @search, :last_name, @users.human_attribute_name('last_name')
-      %th= sort_link @search, :email, @users.human_attribute_name('email')
-      %th= sort_link @search, :encrypted_password, @users.human_attribute_name('encrypted_password')
-      %th= sort_link @search, :current_sign_in_ip, @users.human_attribute_name('current_sign_in_ip')
-      %th= sort_link @search, :last_sign_in_ip, @users.human_attribute_name('last_sign_in_ip')
-      %th= sort_link @search, :sign_in_count, @users.human_attribute_name('sign_in_count')
+      %th= sort_link @search, :reset_password_token, @users.human_attribute_name('reset_password_token')
+      %th= sort_link @search, :reset_password_sent_at, @users.human_attribute_name('reset_password_sent_at')
+      %th= sort_link @search, :remember_created_at, @users.human_attribute_name('remember_created_at')
       %th= sort_link @search, :current_sign_in_at, @users.human_attribute_name('current_sign_in_at')
       %th= sort_link @search, :last_sign_in_at, @users.human_attribute_name('last_sign_in_at')
+      %th= sort_link @search, :current_sign_in_ip, @users.human_attribute_name('current_sign_in_ip')
+      %th= sort_link @search, :last_sign_in_ip, @users.human_attribute_name('last_sign_in_ip')
       %th.last
 
     - @users.each do |item|
       %tr
         %td= item.first_name
         %td= item.last_name
-        %td= item.email
-        %td= item.encrypted_password
-        %td= item.current_sign_in_ip
-        %td= item.last_sign_in_ip
-        %td= item.sign_in_count
+        %td= item.reset_password_token
+        %td= item.reset_password_sent_at
+        %td= item.remember_created_at
         %td= item.current_sign_in_at
         %td= item.last_sign_in_at
+        %td= item.current_sign_in_ip
+        %td= item.last_sign_in_ip
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_user_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_user_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@users)
   .clear

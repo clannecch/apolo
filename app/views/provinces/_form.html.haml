@@ -1,17 +1,10 @@
 = form_for(@province) do |f|
-  - if @province.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@province.errors.count, "error")
-        prohibited this province from being saved:
-      %ul
-        - @province.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @province.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Province.model_name.human
+    /  %span.title= Province.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

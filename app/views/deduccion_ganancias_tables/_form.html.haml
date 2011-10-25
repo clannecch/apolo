@@ -1,17 +1,10 @@
 = form_for(@deduccion_ganancias_table) do |f|
-  - if @deduccion_ganancias_table.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@deduccion_ganancias_table.errors.count, "error")
-        prohibited this deduccion_ganancias_table from being saved:
-      %ul
-        - @deduccion_ganancias_table.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @deduccion_ganancias_table.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= DeduccionGananciasTable.model_name.human
+    /  %span.title= DeduccionGananciasTable.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

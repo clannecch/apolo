@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item SicossLocation.model_name.human, sicoss_locations_path 
-    - breadcrumb.item "#{@sicoss_location.name.titlecase}", sicoss_location_path(@sicoss_location), :active => true
+    - breadcrumb.item "#{@sicoss_location.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_sicoss_location_path(@sicoss_location), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @sicoss_location, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@sicoss_location) do |f|
-  - if @sicoss_location.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_location.errors.count, "error")
-        prohibited this sicoss_location from being saved:
-      %ul
-        - @sicoss_location.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_location.name
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_location.code
+  = render 'shared/errorhandler', :obj_errors => @sicoss_location.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_location.name
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_location.code
 .clear

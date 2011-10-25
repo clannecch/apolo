@@ -2,60 +2,59 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item RetentionConcept.model_name.human, retention_concepts_path 
-    - breadcrumb.item "#{@retention_concept.detalle.titlecase}", retention_concept_path(@retention_concept), :active => true
+    - breadcrumb.item "#{@retention_concept.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_retention_concept_path(@retention_concept), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @retention_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@retention_concept) do |f|
-  - if @retention_concept.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@retention_concept.errors.count, "error")
-        prohibited this retention_concept from being saved:
-      %ul
-        - @retention_concept.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :codigo, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.codigo
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.detalle
-    %tr
-      %td.columnLabel
-        = f.label :statistical_value, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.statistical_value
-    %tr
-      %td.columnLabel
-        = f.label :accounting_imputation_id, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.accounting_imputation.detalle
-    %tr
-      %td.columnLabel
-        = f.label :prioridad, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.prioridad
-    %tr
-      %td.columnLabel
-        = f.label :formula_calculo_valor, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.formula_calculo_valor
-    %tr
-      %td.columnLabel
-        = f.label :acumuladores_valor, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.acumuladores_valor
-    %tr
-      %td.columnLabel
-        = f.label :data_to_ask_id, :class => "apsLabel"
-      %td.columnData
-        = @retention_concept.data_to_ask.detalle
+  = render 'shared/errorhandler', :obj_errors => @retention_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.codigo
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.statistical_value
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.accounting_imputation.detalle
+      %tr
+        %td.columnLabel
+          = f.label :prioridad, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.prioridad
+      %tr
+        %td.columnLabel
+          = f.label :formula_calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.formula_calculo_valor
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.acumuladores_valor
+      %tr
+        %td.columnLabel
+          = f.label :data_to_ask_id, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.data_to_ask.detalle
+      %tr
+        %td.columnLabel
+          = f.label :auxiliar, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.auxiliar
 .clear

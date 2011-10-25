@@ -1,17 +1,10 @@
 = form_for(@menu_role) do |f|
-  - if @menu_role.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@menu_role.errors.count, "error")
-        prohibited this menu_role from being saved:
-      %ul
-        - @menu_role.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @menu_role.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= MenuRole.model_name.human
+    /  %span.title= MenuRole.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

@@ -1,22 +1,20 @@
 = form_for(@educational_level) do |f|
-  - if @educational_level.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@educational_level.errors.count, "error")
-        prohibited this educational_level from being saved:
-      %ul
-        - @educational_level.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @educational_level.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= EducationalLevel.model_name.human
+    /  %span.title= EducationalLevel.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

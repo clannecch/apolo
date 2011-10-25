@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item CausaEgreso.model_name.human, causa_egresos_path 
-    - breadcrumb.item "#{@causa_egreso.detalle.titlecase}", causa_egreso_path(@causa_egreso), :active => true
+    - breadcrumb.item "#{@causa_egreso.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_causa_egreso_path(@causa_egreso), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @causa_egreso, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@causa_egreso) do |f|
-  - if @causa_egreso.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@causa_egreso.errors.count, "error")
-        prohibited this causa_egreso from being saved:
-      %ul
-        - @causa_egreso.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @causa_egreso.detalle
+  = render 'shared/errorhandler', :obj_errors => @causa_egreso.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @causa_egreso.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @causa_egreso.code
 .clear

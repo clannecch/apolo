@@ -1,17 +1,10 @@
 = form_for(@insurance_beneficiary) do |f|
-  - if @insurance_beneficiary.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@insurance_beneficiary.errors.count, "error")
-        prohibited this insurance_beneficiary from being saved:
-      %ul
-        - @insurance_beneficiary.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @insurance_beneficiary.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= InsuranceBeneficiary.model_name.human
+    /  %span.title= InsuranceBeneficiary.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

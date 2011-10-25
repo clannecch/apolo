@@ -8,53 +8,47 @@
 .clear
 %br/
 = form_for(@deduccion_ganancias_table) do |f|
-  - if @deduccion_ganancias_table.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@deduccion_ganancias_table.errors.count, "error")
-        prohibited this deduccion_ganancias_table from being saved:
-      %ul
-        - @deduccion_ganancias_table.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :no_imponibles, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.no_imponibles
-    %tr
-      %td.columnLabel
-        = f.label :conyuge, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.conyuge
-    %tr
-      %td.columnLabel
-        = f.label :hijo, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.hijo
-    %tr
-      %td.columnLabel
-        = f.label :otras, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.otras
-    %tr
-      %td.columnLabel
-        = f.label :especial_inciso_e, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.especial_inciso_e
-    %tr
-      %td.columnLabel
-        = f.label :especial_inciso_abc, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.especial_inciso_abc
-    %tr
-      %td.columnLabel
-        = f.label :periodo_ano, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.periodo_ano
-    %tr
-      %td.columnLabel
-        = f.label :periodo_mes, :class => "apsLabel"
-      %td.columnData
-        = @deduccion_ganancias_table.periodo_mes
+  = render 'shared/errorhandler', :obj_errors => @deduccion_ganancias_table.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :no_imponibles, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.no_imponibles
+      %tr
+        %td.columnLabel
+          = f.label :conyuge, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.conyuge
+      %tr
+        %td.columnLabel
+          = f.label :hijo, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.hijo
+      %tr
+        %td.columnLabel
+          = f.label :otras, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.otras
+      %tr
+        %td.columnLabel
+          = f.label :especial_inciso_e, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.especial_inciso_e
+      %tr
+        %td.columnLabel
+          = f.label :especial_inciso_abc, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.especial_inciso_abc
+      %tr
+        %td.columnLabel
+          = f.label :periodo_ano, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.periodo_ano
+      %tr
+        %td.columnLabel
+          = f.label :periodo_mes, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.periodo_mes
 .clear

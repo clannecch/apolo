@@ -2,55 +2,49 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item DetalleReciboRetencion.model_name.human, detalle_recibo_retencions_path 
-    - breadcrumb.item "#{@detalle_recibo_retencion.detalle.titlecase}", detalle_recibo_retencion_path(@detalle_recibo_retencion), :active => true
+    - breadcrumb.item "#{@detalle_recibo_retencion.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_detalle_recibo_retencion_path(@detalle_recibo_retencion), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @detalle_recibo_retencion, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@detalle_recibo_retencion) do |f|
-  - if @detalle_recibo_retencion.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@detalle_recibo_retencion.errors.count, "error")
-        prohibited this detalle_recibo_retencion from being saved:
-      %ul
-        - @detalle_recibo_retencion.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :recibo_sueldo_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.recibo_sueldo_id
-    %tr
-      %td.columnLabel
-        = f.label :retention_concept_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.retention_concept.detalle
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.detalle
-    %tr
-      %td.columnLabel
-        = f.label :cost_center_id, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.cost_center.detalle
-    %tr
-      %td.columnLabel
-        = f.label :cantidad, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.cantidad
-    %tr
-      %td.columnLabel
-        = f.label :importe, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.importe
-    %tr
-      %td.columnLabel
-        = f.label :total, :class => "apsLabel"
-      %td.columnData
-        = @detalle_recibo_retencion.total
+  = render 'shared/errorhandler', :obj_errors => @detalle_recibo_retencion.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :recibo_sueldo_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.recibo_sueldo_id
+      %tr
+        %td.columnLabel
+          = f.label :retention_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.retention_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cost_center_id, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.cost_center.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.cantidad
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.importe
+      %tr
+        %td.columnLabel
+          = f.label :total, :class => "apsLabel"
+        %td.columnData
+          = @detalle_recibo_retencion.total
 .clear

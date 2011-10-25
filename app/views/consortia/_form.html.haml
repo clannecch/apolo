@@ -1,17 +1,10 @@
-= form_for(@consortium) do |f|
-  - if @consortium.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@consortium.errors.count, "error")
-        prohibited this consortium from being saved:
-      %ul
-        - @consortium.errors.full_messages.each do |msg|
-          %li= msg
+= form_for @consortium,  :html => { :multipart => true } do |f|
+  = render 'shared/errorhandler', :obj_errors => @consortium.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Consortium.model_name.human
+    /  %span.title= Consortium.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
@@ -108,5 +101,6 @@
           = f.label :observaciones, :class => "apsLabel"
         %td.columnData
           = f.text_field :observaciones, :class => "apsTextbox"
+      = render 'shared/attachments_manager', :f => f
   .actions
     = f.submit :class => "btn success"

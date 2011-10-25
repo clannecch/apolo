@@ -8,108 +8,102 @@
 .clear
 %br/
 = form_for(@employee_familiar) do |f|
-  - if @employee_familiar.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@employee_familiar.errors.count, "error")
-        prohibited this employee_familiar from being saved:
-      %ul
-        - @employee_familiar.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :apellido, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.apellido
-    %tr
-      %td.columnLabel
-        = f.label :nombre, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.nombre
-    %tr
-      %td.columnLabel
-        = f.label :fecha_nacimiento, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.fecha_nacimiento
-    %tr
-      %td.columnLabel
-        = f.label :numero_documento, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.numero_documento
-    %tr
-      %td.columnLabel
-        = f.label :health_insurance_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.health_insurance.detalle
-    %tr
-      %td.columnLabel
-        = f.label :cuil, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.cuil
-    %tr
-      %td.columnLabel
-        = f.label :cuit, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.cuit
-    %tr
-      %td.columnLabel
-        = f.label :tomo, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.tomo
-    %tr
-      %td.columnLabel
-        = f.label :folio, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.folio
-    %tr
-      %td.columnLabel
-        = f.label :acta, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.acta
-    %tr
-      %td.columnLabel
-        = f.label :country_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.country.detalle
-    %tr
-      %td.columnLabel
-        = f.label :province_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.province.detalle
-    %tr
-      %td.columnLabel
-        = f.label :comuna, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.comuna
-    %tr
-      %td.columnLabel
-        = f.label :employee_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.employee_id
-    %tr
-      %td.columnLabel
-        = f.label :document_type_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.document_type.detalle
-    %tr
-      %td.columnLabel
-        = f.label :activity_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.activity.name
-    %tr
-      %td.columnLabel
-        = f.label :kinship_id, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.kinship.name
-    %tr
-      %td.columnLabel
-        = f.label :address, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.address
-    %tr
-      %td.columnLabel
-        = f.label :porcentual, :class => "apsLabel"
-      %td.columnData
-        = @employee_familiar.porcentual
+  = render 'shared/errorhandler', :obj_errors => @employee_familiar.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :apellido, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.apellido
+      %tr
+        %td.columnLabel
+          = f.label :nombre, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.nombre
+      %tr
+        %td.columnLabel
+          = f.label :fecha_nacimiento, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.fecha_nacimiento
+      %tr
+        %td.columnLabel
+          = f.label :numero_documento, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.numero_documento
+      %tr
+        %td.columnLabel
+          = f.label :health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.health_insurance.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cuil, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.cuil
+      %tr
+        %td.columnLabel
+          = f.label :cuit, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.cuit
+      %tr
+        %td.columnLabel
+          = f.label :tomo, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.tomo
+      %tr
+        %td.columnLabel
+          = f.label :folio, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.folio
+      %tr
+        %td.columnLabel
+          = f.label :acta, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.acta
+      %tr
+        %td.columnLabel
+          = f.label :country_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.country.detalle
+      %tr
+        %td.columnLabel
+          = f.label :province_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.province.detalle
+      %tr
+        %td.columnLabel
+          = f.label :comuna, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.comuna
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.employee_id
+      %tr
+        %td.columnLabel
+          = f.label :document_type_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.document_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :activity_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.activity.name
+      %tr
+        %td.columnLabel
+          = f.label :kinship_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.kinship.name
+      %tr
+        %td.columnLabel
+          = f.label :address, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.address
+      %tr
+        %td.columnLabel
+          = f.label :porcentual, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.porcentual
 .clear

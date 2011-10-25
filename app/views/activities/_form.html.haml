@@ -1,22 +1,20 @@
 = form_for(@activity) do |f|
-  - if @activity.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@activity.errors.count, "error")
-        prohibited this activity from being saved:
-      %ul
-        - @activity.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @activity.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Activity.model_name.human
+    /  %span.title= Activity.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"
