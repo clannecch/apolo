@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111024224627
+# Schema version: 20111025214836
 #
 # Table name: kinships
 #
@@ -9,6 +9,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  code          :string(255)
+#  default       :boolean
 #
 
 require 'spec_helper'

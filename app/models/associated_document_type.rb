@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111024224627
+# Schema version: 20111025214836
 #
 # Table name: associated_document_types
 #
@@ -10,6 +10,7 @@
 #  updated_at    :datetime
 #  document_type :string(255)
 #  code          :string(255)
+#  default       :boolean
 #
 
 class AssociatedDocumentType < ActiveRecord::Base
