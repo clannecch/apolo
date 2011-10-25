@@ -46,7 +46,7 @@
         %td.columnLabel
           = f.label :accounting_imputation_id, :class => "apsLabel"
         %td.columnData
-          = @remunerative_concept.accounting_imputation.detalle
+          = @remunerative_concept.accounting_imputation.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :concepto_asociado_haber_id, :class => "apsLabel"
