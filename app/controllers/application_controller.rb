@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     return if params[:cc].blank?
     session[:current_company] = Company.find(params[:cc])
     $CURRENT_COMPANY = current_company
-    redirect_to :back
+    redirect_to liquidacions_path      #:back
   end
 
   def current_company

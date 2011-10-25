@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021133046) do
+ActiveRecord::Schema.define(:version => 20111024224627) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -637,7 +637,6 @@ ActiveRecord::Schema.define(:version => 20111021133046) do
   create_table "remunerative_concepts", :force => true do |t|
     t.string   "codigo"
     t.string   "detalle"
-    t.boolean  "porcentual_asistencia"
     t.integer  "prioridad_calculo"
     t.integer  "statistical_value"
     t.integer  "grupo_ganancias_id"
