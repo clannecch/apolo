@@ -1,12 +1,11 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: remunerative_concepts
 #
 #  id                               :integer         not null, primary key
 #  codigo                           :string(255)
 #  detalle                          :string(255)
-#  porcentual_asistencia            :boolean
 #  prioridad_calculo                :integer
 #  statistical_value                :integer
 #  grupo_ganancias_id               :integer

@@ -15,11 +15,12 @@
 
 class Category < ActiveRecord::Base
 	has_many :employees, :dependent => :restrict
-  validates_presence_of		    :detalle,	:codigo, :importe,			              :message => "es un dato requerido"
-  validates_numericality_of   :horas,:importe,                                :message => "requiere dato numerico"
-
   #scope :by_company, lambda {|company| where(:company_id => company) }
   default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+
+  validates_presence_of		    :detalle,	:codigo, :importe,			         :message => "es un dato requerido"
+  validates_numericality_of   :horas,:importe,                           :message => "requiere dato numerico"
+  validates_uniqueness_of		  :codigo,			                             :message => "existente"
 
   before_save :controlar_cambios
 

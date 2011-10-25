@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111025214836
 #
 # Table name: group_employer_contributions
 #
@@ -8,6 +8,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  company_id :integer
+#  code       :string(255)
+#  default    :boolean
 #
 
 class GroupEmployerContribution < ActiveRecord::Base
@@ -17,5 +19,7 @@ class GroupEmployerContribution < ActiveRecord::Base
 
 	has_many :employees, :dependent => :restrict
   has_and_belongs_to_many :employer_contribution_concepts
-  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
+  validates_presence_of		    :detalle,:code,                     :message => "es un dato requerido"
+  validates_uniqueness_of		  :code,			                        :message => "existente"
+
 end

@@ -35,7 +35,8 @@ class Company < ActiveRecord::Base
 
   validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
                                :razon_social, :province_id, :location_id , :telefono, :razon_social,
-                               :cuit, :email, :message => "es un dato requerido"
+                               :cuit, :email,                     :message => "es un dato requerido"
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 
   has_many   :attachments, :as => :attachable, :dependent => :restrict
 

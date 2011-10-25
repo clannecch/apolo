@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111025214836
 #
 # Table name: insurance_companies
 #
@@ -8,6 +8,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  company_id :integer
+#  code       :string(255)
+#  default    :boolean
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
