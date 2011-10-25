@@ -48,7 +48,7 @@ class AssociatedDocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @associated_document_type.save
-        format.html { redirect_to(@associated_document_type, :notice => 'associated_document_type was successfully created.') }
+        format.html { redirect_to(@associated_document_type, :notice => t('scaffold.notice.created', :item => AssociatedDocumentType.model_name.human)) }
         format.xml  { render :xml => @associated_document_type, :status => :created, :location => @associated_document_type }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class AssociatedDocumentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @associated_document_type.update_attributes(params[:associated_document_type])
-        format.html { redirect_to(@associated_document_type, :notice => 'associated_document_type was successfully updated.') }
+        format.html { redirect_to(@associated_document_type, :notice => t('scaffold.notice.updated', :item=> AssociatedDocumentType.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

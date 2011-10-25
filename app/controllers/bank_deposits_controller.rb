@@ -91,7 +91,7 @@ class BankDepositsController < ApplicationController
 
     respond_to do |format|
       if @bank_deposit.save
-        format.html { redirect_to(@bank_deposit, :notice => 'Bank deposit was successfully created.') }
+        format.html { redirect_to(@bank_deposit, :notice => t('scaffold.notice.created', :item=> BankDeposit.model_name.human)) }
         format.xml  { render :xml => @bank_deposit, :status => :created, :location => @bank_deposit }
       else
         format.html { render :action => "new" }
@@ -105,7 +105,7 @@ class BankDepositsController < ApplicationController
   def update
     respond_to do |format|
       if @bank_deposit.update_attributes(params[:bank_deposit])
-        format.html { redirect_to(@bank_deposit, :notice => 'Bank deposit was successfully updated.') }
+        format.html { redirect_to(@bank_deposit, :notice => t('scaffold.notice.updated', :item=> BankDeposit.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

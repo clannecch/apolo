@@ -74,7 +74,7 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.save
-        format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully created.') }
+        format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.created', :item=> Liquidacion.model_name.human)) }
         format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
         liquidar_employee
       else
@@ -90,7 +90,7 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.update_attributes(params[:liquidacion])
-        format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully updated.') }
+        format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.updated', :item=> Liquidacion.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

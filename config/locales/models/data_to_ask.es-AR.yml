@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      data_to_ask: Data To Ask
+      data_to_ask: Dato a solicitar
     attributes:
       data_to_ask:
         detalle: Detalle

@@ -25,7 +25,7 @@ es-AR:
       edit: editar
       destroy: eliminar
       destroy_confirm: Está seguro?
-      new: "crear %{item}"
+      new: "Crear %{item}"
       list: "listar %{item}"
       back: volver
       export: exportar a PDF

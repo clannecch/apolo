@@ -5,6 +5,8 @@ es-AR:
     attributes:
       province:
         detalle: Detalle
+        code: Código
+        country_id: Pais
         created_at: Creado el
         updated_at: Actualizado el
         company_id: Empresa

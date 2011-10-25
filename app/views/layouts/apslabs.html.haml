@@ -14,10 +14,11 @@
     = stylesheet_link_tag 'bootstrap', :media => 'screen'
     = stylesheet_link_tag 'docs', :media => 'screen'
     = stylesheet_link_tag 'prettify', :media => 'screen'
-    = stylesheet_link_tag 'jquery.jdpicker', :media => 'screen'
     = stylesheet_link_tag 'jquery.chosen', :media => 'screen'
     = stylesheet_link_tag 'apslabs', :media => 'screen'
     = stylesheet_link_tag 'mainmenu/menu', :media => 'screen'
+    /= stylesheet_link_tag 'jquery.datepick', :media => 'screen'
+    = stylesheet_link_tag 'redmond.datepick', :media => 'screen'
     /= stylesheet_link_tag 'scaffold', :media => 'screen'
     /[if IE]
       = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
@@ -33,12 +34,15 @@
     = javascript_include_tag 'bootstrap/bootstrap-scrollspy.js'
     = javascript_include_tag 'bootstrap/bootstrap-tabs.js'
     = javascript_include_tag('mainmenu/jquery.color.js')
-    = javascript_include_tag('jquery.jdpicker.js')
+    = javascript_include_tag('jquery.datepick.js')
+    = javascript_include_tag('jquery.datepick-es-AR.js')
     = javascript_include_tag('jquery.chosen.min.js')
     = csrf_meta_tag
     = head if respond_to? :head
     = yield :head
   %body
+    %div{:style => "display: none;"}
+      %img#calImg.trigger{:src => "/images/calendar.gif", :alt => " x", :style => "display: inline; cursor: pointer; color: #ff0000"}
     #container
       #header
         #status

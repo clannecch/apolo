@@ -43,7 +43,7 @@ class BankDepositAccountTypesController < ApplicationController
 
     respond_to do |format|
       if @bank_deposit_account_type.save
-        format.html { redirect_to(@bank_deposit_account_type, :notice => 'Bank deposit account type was successfully created.') }
+        format.html { redirect_to(@bank_deposit_account_type, :notice => t('scaffold.notice.created', :item=> BankDepositAccountType.model_name.human)) }
         format.xml  { render :xml => @bank_deposit_account_type, :status => :created, :location => @bank_deposit_account_type }
       else
         format.html { render :action => "new" }
@@ -58,7 +58,7 @@ class BankDepositAccountTypesController < ApplicationController
 
     respond_to do |format|
       if @bank_deposit_account_type.update_attributes(params[:bank_deposit_account_type])
-        format.html { redirect_to(@bank_deposit_account_type, :notice => 'Bank deposit account type was successfully updated.') }
+        format.html { redirect_to(@bank_deposit_account_type, :notice => t('scaffold.notice.updated', :item=> BankDepositAccountType.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

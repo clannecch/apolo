@@ -13,6 +13,7 @@ $(document).ready(function()
   //[PVD] :: Add the Bootsrap classes to the cocoon elements
   $(".add_fields").addClass("btn success");
   $(".remove_fields").addClass("btn danger");
+  $(".apsDatetime").addClass("embeded");
 
   // BOOTSTRAP plugin
   $("#mymodal").modal( {closeOnEscape: true} );
@@ -23,7 +24,6 @@ $(document).ready(function()
   // chosen multiple seleccion
   $(".apsSelect").chosen();
 
-
   $('.flash').ajaxStart(function() {
     $(this).append("<p class=\"message warning ajax\"><img style=\"vertical-align:middle;margin-right:5px;\" src=\"/images/spinner.gif\"><strong>Cargando ...</strong></p>");
   });
@@ -31,6 +31,16 @@ $(document).ready(function()
   $(".flash").ajaxStop(function(){
     $(".flash > .ajax").hide();
   });
+
+  $(".apsDatetime").datepick(
+    $.extend({
+        altField: '#l10nAlternate',
+        showOnFocus: true,
+        showTrigger: '#calImg',
+        yearRange: 'any'
+    },
+    $.datepick.regional['fr'])
+  );
 
 //  $('.accordion').accordion({
 //	collapsible: true,

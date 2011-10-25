@@ -3,10 +3,8 @@
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Employee.model_name.human, employees_path, :active => true
 
-%h1 Listado de Empleados
-
 - if true
-  = link_to 'Nuevo Empleado', new_employee_path, :class => "btn success"
+  = link_to t('scaffold.actions.new', :item => Employee.model_name.human).titlecase, new_employee_path, :class => "btn success"
   - if @employees.any?
     = link_to t('scaffold.actions.export').titlecase, employees_path( :format => 'pdf'), :class => "btn info"
 

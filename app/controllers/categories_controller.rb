@@ -58,7 +58,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to(@category, :notice => 'Category was successfully created.') }
+        format.html { redirect_to(@category, :notice => t('scaffold.notice.created', :item=> Category.model_name.human)) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -75,7 +75,7 @@ class CategoriesController < ApplicationController
         if @category.cambio_algo
           format.html {redirect_to notify_changes_category_url}
         else
-          format.html { redirect_to(@category, :notice => 'Category concept was successfully updated.') }
+          format.html { redirect_to(@category, :notice => t('scaffold.notice.updated', :item=> Category.model_name.human)) }
           format.xml  { head :ok }
         end
       else
