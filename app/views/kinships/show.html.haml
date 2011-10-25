@@ -14,6 +14,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @kinship.code
+      %tr
+        %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = @kinship.name
@@ -21,10 +26,5 @@
         %td.columnLabel
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
-          = @kinship.hijo_conyugue
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = @kinship.code
+          = @kinship.hijo_conyugue == "C" ? "Conyugue" : (@kinship.hijo_conyugue == "H" ? "Hijo" : "Otros")
 .clear

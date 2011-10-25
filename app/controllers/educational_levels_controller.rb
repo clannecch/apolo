@@ -74,11 +74,11 @@ before_filter :find_educational_level, :except => [:index, :new, :create]
     begin
       @educational_level.destroy
       flash[:success] = "successfully destroyed."
+      redirect_to educational_levels_url
     rescue ActiveRecord::DeleteRestrictionError => e
       @educational_level.errors.add(:base, e)
       flash[:error] = "#{e}"
       redirect_to educational_level_url
-      redirect_to educational_levels_url
     end
   end
 

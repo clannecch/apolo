@@ -8,6 +8,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
@@ -15,11 +20,6 @@
         %td.columnLabel
           = f.label :hora_dia_mes, :class => "apsLabel"
         %td.columnData
-          = f.text_field :hora_dia_mes, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :code, :class => "apsTextbox"
+          = f.select( :hora_dia_mes ,{ "Hora" => "H", "Dia" => "D", "Mes" => "M"},{ :prompt => "Seleccione un tipo de Remuneracion"})
   .actions
     = f.submit :class => "btn success"

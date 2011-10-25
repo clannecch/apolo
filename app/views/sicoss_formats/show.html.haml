@@ -31,7 +31,7 @@
         %td.columnLabel
           = f.label :justifies, :class => "apsLabel"
         %td.columnData
-          = @sicoss_format.justifies
+          = @sicoss_format.justifies == "R" ? "Derecha" : (item.justifies = "L" ? "Izquierda" : "Centrado")
       %tr
         %td.columnLabel
           = f.label :fill_character, :class => "apsLabel"
@@ -46,7 +46,7 @@
         %td.columnLabel
           = f.label :field_type, :class => "apsLabel"
         %td.columnData
-          = @sicoss_format.field_type
+          = @sicoss_format.field_type  == "N" ? "Numerico" : "Caracter"
       %tr
         %td.columnLabel
           = f.label :number_of_decimals, :class => "apsLabel"

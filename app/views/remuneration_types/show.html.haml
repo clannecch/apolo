@@ -14,6 +14,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.code
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @remuneration_type.detalle
@@ -21,10 +26,5 @@
         %td.columnLabel
           = f.label :hora_dia_mes, :class => "apsLabel"
         %td.columnData
-          = @remuneration_type.hora_dia_mes
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = @remuneration_type.code
+          = @remuneration_type.hora_dia_mes == "H" ? "Hora" : (@remuneration_type.hora_dia_mes == "D" ? "Dia" : "Mes" )
 .clear

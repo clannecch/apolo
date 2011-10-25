@@ -8,6 +8,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = f.text_field :name, :class => "apsTextbox"
@@ -15,11 +20,6 @@
         %td.columnLabel
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
-          = f.text_field :hijo_conyugue, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :code, :class => "apsTextbox"
+          = f.select( :hijo_conyugue ,{ "Otros" => "O", "Conyuge" => "C", "Hijo" => "H"},{ :prompt => "Seleccione un tipo de Parentezco"})
   .actions
     = f.submit :class => "btn success"

@@ -8,6 +8,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = f.text_field :name, :class => "apsTextbox"
@@ -15,11 +20,6 @@
         %td.columnLabel
           = f.label :document_type, :class => "apsLabel"
         %td.columnData
-          = f.text_field :document_type, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :code, :class => "apsTextbox"
+          = f.select :document_type,{"Otros" => "O","Logo" => "L","Foto Principal" => "F"},{ :prompt => "Seleccione un tipo de Documento"}
   .actions
     = f.submit :class => "btn success"

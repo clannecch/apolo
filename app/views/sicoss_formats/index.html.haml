@@ -27,12 +27,12 @@
         %td= item.position
         %td= item.name
         %td= item.field_length
-        %td= item.justifies
+        %td= item.justifies == "R" ? "Derecha" : (item.justifies = "L" ? "Izquierda" : "Centrado")
         %td= item.fill_character
         %td= item.formula
-        %td= item.field_type
+        %td= item.field_type == "N" ? "Numerico" : "Caracter"
         %td= item.number_of_decimals
-        %td= check_box_tag "sicoss_format_modifiable", sicoss_format.modifiable, sicoss_format.modifiable, :disabled => true
+        %td= check_box_tag "sicoss_format_modifiable", item.modifiable, item.modifiable, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

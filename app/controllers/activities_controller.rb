@@ -39,7 +39,7 @@ class ActivitiesController < ApplicationController
   # POST /activities.xml
   def create
     @activity = Activity.new(params[:activity])
-    flash[:notice] = t('scaffold.notice.created', :resource_name => Activity.model_name.human) if @activity.save
+    flash[:notice] = t('scaffold.notice.created', :item => Activity.model_name.human) if @activity.save
     respond_with(@activity, :location => activities_path)
   end
 
@@ -47,7 +47,7 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1.json
   # PUT /activities/1.xml
   def update
-    flash[:notice] = t('scaffold.notice.updated', :resource_name => Activity.model_name.human) if @activity.update_attributes(params[:activity])
+    flash[:notice] = t('scaffold.notice.updated', :item => Activity.model_name.human) if @activity.update_attributes(params[:activity])
     respond_with(@activity, :location => activities_path)
   end
 

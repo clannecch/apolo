@@ -14,6 +14,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @associated_document_type.code
+      %tr
+        %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = @associated_document_type.name
@@ -21,10 +26,6 @@
         %td.columnLabel
           = f.label :document_type, :class => "apsLabel"
         %td.columnData
-          = @associated_document_type.document_type
-      %tr
-        %td.columnLabel
-          = f.label :code, :class => "apsLabel"
-        %td.columnData
-          = @associated_document_type.code
+          = @associated_document_type.document_type == "O" ? "Otros" : (@associated_document_type.document_type == "L" ? "Logo" : "Foto Principal")
+
 .clear
