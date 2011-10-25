@@ -46,10 +46,14 @@
           Apolo
           = render('shared/change_current_company')
           /= content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
-        %p
+        .main_menu
           = render('shared/main_menu')
           /%div{:style => "text-align: center; font-weight: normal; font-size: 14px; width: 100% "}
         = yield(:breadcrumbs) if content_for?(:breadcrumbs)
+        = content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
+        %br/
+        %br/
+        .clear
       #wrapper.wat-cf
         %div{:id => content_for?(:sidebar) ? 'main':'full-main'}
           - if flash.any?

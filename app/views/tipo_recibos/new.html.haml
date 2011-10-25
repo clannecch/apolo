@@ -2,6 +2,6 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item TipoRecibo.model_name.human, tipo_recibos_path
-    - breadcrumb.item t('scaffold.actions.new', :item => TipoRecibo.model_name.human).titlecase , tipo_recibos_path, :active => true
+    - breadcrumb.item t('scaffold.actions.new', :item => TipoRecibo.model_name.human).titlecase , nil, :active => true
 
 = render 'form'

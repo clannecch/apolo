@@ -1,17 +1,10 @@
 = form_for(@sicoss_contract_mode) do |f|
-  - if @sicoss_contract_mode.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_contract_mode.errors.count, "error")
-        prohibited this sicoss_contract_mode from being saved:
-      %ul
-        - @sicoss_contract_mode.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @sicoss_contract_mode.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= SicossContractMode.model_name.human
+    /  %span.title= SicossContractMode.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

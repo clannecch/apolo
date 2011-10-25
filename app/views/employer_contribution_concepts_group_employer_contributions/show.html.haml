@@ -1,0 +1,24 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConceptsGroupEmployerContribution.model_name.human, employer_contribution_concepts_group_employer_contributions_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_employer_contribution_concepts_group_employer_contribution_path(@employer_contribution_concepts_group_employer_contribution), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employer_contribution_concepts_group_employer_contribution, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@employer_contribution_concepts_group_employer_contribution) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employer_contribution_concepts_group_employer_contribution.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :group_employer_contribution_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concepts_group_employer_contribution.group_employer_contribution.detalle
+      %tr
+        %td.columnLabel
+          = f.label :employer_contribution_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concepts_group_employer_contribution.employer_contribution_concept.detalle
+.clear

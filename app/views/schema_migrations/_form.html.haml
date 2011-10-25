@@ -1,17 +1,10 @@
 = form_for(@schema_migration) do |f|
-  - if @schema_migration.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@schema_migration.errors.count, "error")
-        prohibited this schema_migration from being saved:
-      %ul
-        - @schema_migration.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @schema_migration.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= SchemaMigration.model_name.human
+    /  %span.title= SchemaMigration.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

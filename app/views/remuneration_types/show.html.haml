@@ -2,25 +2,29 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item RemunerationType.model_name.human, remuneration_types_path 
-    - breadcrumb.item "#{@remuneration_type.detalle.titlecase}", remuneration_type_path(@remuneration_type), :active => true
+    - breadcrumb.item "#{@remuneration_type.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_remuneration_type_path(@remuneration_type), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @remuneration_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@remuneration_type) do |f|
-  - if @remuneration_type.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@remuneration_type.errors.count, "error")
-        prohibited this remuneration_type from being saved:
-      %ul
-        - @remuneration_type.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @remuneration_type.detalle
+  = render 'shared/errorhandler', :obj_errors => @remuneration_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :hora_dia_mes, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.hora_dia_mes
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.code
 .clear

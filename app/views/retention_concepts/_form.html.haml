@@ -1,17 +1,10 @@
 = form_for(@retention_concept) do |f|
-  - if @retention_concept.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@retention_concept.errors.count, "error")
-        prohibited this retention_concept from being saved:
-      %ul
-        - @retention_concept.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @retention_concept.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= RetentionConcept.model_name.human
+    /  %span.title= RetentionConcept.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
@@ -53,5 +46,10 @@
           = f.label :data_to_ask_id, :class => "apsLabel"
         %td.columnData
           = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :auxiliar, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :auxiliar, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

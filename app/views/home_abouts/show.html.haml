@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item HomeAbout.model_name.human, home_abouts_path 
-    - breadcrumb.item "#{@home_about.detalle.titlecase}", home_about_path(@home_about), :active => true
+    - breadcrumb.item "#{@home_about.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_home_about_path(@home_about), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @home_about, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@home_about) do |f|
-  - if @home_about.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@home_about.errors.count, "error")
-        prohibited this home_about from being saved:
-      %ul
-        - @home_about.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @home_about.detalle
+  = render 'shared/errorhandler', :obj_errors => @home_about.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @home_about.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @home_about.code
 .clear

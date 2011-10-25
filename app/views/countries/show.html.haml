@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Country.model_name.human, countries_path 
-    - breadcrumb.item "#{@country.detalle.titlecase}", country_path(@country), :active => true
+    - breadcrumb.item "#{@country.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_country_path(@country), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @country, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@country) do |f|
-  - if @country.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@country.errors.count, "error")
-        prohibited this country from being saved:
-      %ul
-        - @country.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @country.detalle
+  = render 'shared/errorhandler', :obj_errors => @country.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @country.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @country.code
 .clear

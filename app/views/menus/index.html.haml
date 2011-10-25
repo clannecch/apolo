@@ -4,7 +4,7 @@
     - breadcrumb.item Menu.model_name.human, menus_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => Menu.model_name.human).titlecase , new_menu_path(@menu), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => Menu.model_name.human) , new_menu_path(@menu), :class => "btn success" 
   - if @menus.any?
     = link_to t('scaffold.actions.export').titlecase, menus_path( :format => 'pdf'), :class => "btn info"
 
@@ -24,9 +24,9 @@
         %td= item.link_url
         %td= item.order_no
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_menu_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_menu_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@menus)
   .clear

@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Issued.model_name.human, issueds_path 
-    - breadcrumb.item "#{@issued.detalle.titlecase}", issued_path(@issued), :active => true
+    - breadcrumb.item "#{@issued.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_issued_path(@issued), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @issued, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@issued) do |f|
-  - if @issued.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@issued.errors.count, "error")
-        prohibited this issued from being saved:
-      %ul
-        - @issued.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @issued.detalle
+  = render 'shared/errorhandler', :obj_errors => @issued.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @issued.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @issued.code
 .clear

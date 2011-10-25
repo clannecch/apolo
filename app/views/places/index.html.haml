@@ -4,7 +4,7 @@
     - breadcrumb.item Place.model_name.human, places_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => Place.model_name.human).titlecase , new_place_path(@place), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => Place.model_name.human) , new_place_path(@place), :class => "btn success" 
   - if @places.any?
     = link_to t('scaffold.actions.export').titlecase, places_path( :format => 'pdf'), :class => "btn info"
 
@@ -12,15 +12,17 @@
   %table.tableStandard
     %tr
       %th= sort_link @search, :detalle, @places.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @places.human_attribute_name('code')
       %th.last
 
     - @places.each do |item|
       %tr
         %td= item.detalle
+        %td= item.code
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_place_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_place_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@places)
   .clear

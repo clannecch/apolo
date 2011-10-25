@@ -1,17 +1,10 @@
 = form_for(@group_employer_contribution) do |f|
-  - if @group_employer_contribution.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@group_employer_contribution.errors.count, "error")
-        prohibited this group_employer_contribution from being saved:
-      %ul
-        - @group_employer_contribution.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @group_employer_contribution.errors
   .clear
   %br/
   .form_box
-    .form_box_title
-      %span.title= GroupEmployerContribution.model_name.human
+    /.form_box_title
+    /  %span.title= GroupEmployerContribution.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

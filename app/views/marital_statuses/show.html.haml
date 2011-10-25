@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item MaritalStatus.model_name.human, marital_statuses_path 
-    - breadcrumb.item "#{@marital_status.detalle.titlecase}", marital_status_path(@marital_status), :active => true
+    - breadcrumb.item "#{@marital_status.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_marital_status_path(@marital_status), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @marital_status, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@marital_status) do |f|
-  - if @marital_status.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@marital_status.errors.count, "error")
-        prohibited this marital_status from being saved:
-      %ul
-        - @marital_status.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @marital_status.detalle
+  = render 'shared/errorhandler', :obj_errors => @marital_status.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @marital_status.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @marital_status.code
 .clear

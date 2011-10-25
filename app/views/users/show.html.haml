@@ -8,58 +8,52 @@
 .clear
 %br/
 = form_for(@user) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :first_name, :class => "apsLabel"
-      %td.columnData
-        = @user.first_name
-    %tr
-      %td.columnLabel
-        = f.label :last_name, :class => "apsLabel"
-      %td.columnData
-        = @user.last_name
-    %tr
-      %td.columnLabel
-        = f.label :email, :class => "apsLabel"
-      %td.columnData
-        = @user.email
-    %tr
-      %td.columnLabel
-        = f.label :encrypted_password, :class => "apsLabel"
-      %td.columnData
-        = @user.encrypted_password
-    %tr
-      %td.columnLabel
-        = f.label :current_sign_in_ip, :class => "apsLabel"
-      %td.columnData
-        = @user.current_sign_in_ip
-    %tr
-      %td.columnLabel
-        = f.label :last_sign_in_ip, :class => "apsLabel"
-      %td.columnData
-        = @user.last_sign_in_ip
-    %tr
-      %td.columnLabel
-        = f.label :sign_in_count, :class => "apsLabel"
-      %td.columnData
-        = @user.sign_in_count
-    %tr
-      %td.columnLabel
-        = f.label :current_sign_in_at, :class => "apsLabel"
-      %td.columnData
-        = @user.current_sign_in_at
-    %tr
-      %td.columnLabel
-        = f.label :last_sign_in_at, :class => "apsLabel"
-      %td.columnData
-        = @user.last_sign_in_at
+  = render 'shared/errorhandler', :obj_errors => @user.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :first_name, :class => "apsLabel"
+        %td.columnData
+          = @user.first_name
+      %tr
+        %td.columnLabel
+          = f.label :last_name, :class => "apsLabel"
+        %td.columnData
+          = @user.last_name
+      %tr
+        %td.columnLabel
+          = f.label :reset_password_token, :class => "apsLabel"
+        %td.columnData
+          = @user.reset_password_token
+      %tr
+        %td.columnLabel
+          = f.label :reset_password_sent_at, :class => "apsLabel"
+        %td.columnData
+          = @user.reset_password_sent_at
+      %tr
+        %td.columnLabel
+          = f.label :remember_created_at, :class => "apsLabel"
+        %td.columnData
+          = @user.remember_created_at
+      %tr
+        %td.columnLabel
+          = f.label :current_sign_in_at, :class => "apsLabel"
+        %td.columnData
+          = @user.current_sign_in_at
+      %tr
+        %td.columnLabel
+          = f.label :last_sign_in_at, :class => "apsLabel"
+        %td.columnData
+          = @user.last_sign_in_at
+      %tr
+        %td.columnLabel
+          = f.label :current_sign_in_ip, :class => "apsLabel"
+        %td.columnData
+          = @user.current_sign_in_ip
+      %tr
+        %td.columnLabel
+          = f.label :last_sign_in_ip, :class => "apsLabel"
+        %td.columnData
+          = @user.last_sign_in_ip
 .clear

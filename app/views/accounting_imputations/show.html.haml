@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item AccountingImputation.model_name.human, accounting_imputations_path 
-    - breadcrumb.item "#{@accounting_imputation.detalle.titlecase}", accounting_imputation_path(@accounting_imputation), :active => true
+    - breadcrumb.item "#{@accounting_imputation.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_accounting_imputation_path(@accounting_imputation), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @accounting_imputation, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@accounting_imputation) do |f|
-  - if @accounting_imputation.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@accounting_imputation.errors.count, "error")
-        prohibited this accounting_imputation from being saved:
-      %ul
-        - @accounting_imputation.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @accounting_imputation.detalle
+  = render 'shared/errorhandler', :obj_errors => @accounting_imputation.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @accounting_imputation.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @accounting_imputation.code
 .clear

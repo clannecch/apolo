@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Place.model_name.human, places_path 
-    - breadcrumb.item "#{@place.detalle.titlecase}", place_path(@place), :active => true
+    - breadcrumb.item "#{@place.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_place_path(@place), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @place, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@place) do |f|
-  - if @place.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@place.errors.count, "error")
-        prohibited this place from being saved:
-      %ul
-        - @place.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @place.detalle
+  = render 'shared/errorhandler', :obj_errors => @place.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @place.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @place.code
 .clear

@@ -4,7 +4,7 @@
     - breadcrumb.item DeduccionGananciasTable.model_name.human, deduccion_ganancias_tables_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => DeduccionGananciasTable.model_name.human).titlecase , new_deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => DeduccionGananciasTable.model_name.human) , new_deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn success" 
   - if @deduccion_ganancias_tables.any?
     = link_to t('scaffold.actions.export').titlecase, deduccion_ganancias_tables_path( :format => 'pdf'), :class => "btn info"
 
@@ -32,9 +32,9 @@
         %td= item.periodo_ano
         %td= item.periodo_mes
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_deduccion_ganancias_table_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_deduccion_ganancias_table_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@deduccion_ganancias_tables)
   .clear

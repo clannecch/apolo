@@ -1,17 +1,10 @@
 = form_for(@data_to_ask) do |f|
-  - if @data_to_ask.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@data_to_ask.errors.count, "error")
-        prohibited this data_to_ask from being saved:
-      %ul
-        - @data_to_ask.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @data_to_ask.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= DataToAsk.model_name.human
+    /  %span.title= DataToAsk.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

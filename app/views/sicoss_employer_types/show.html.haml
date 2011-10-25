@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item SicossEmployerType.model_name.human, sicoss_employer_types_path 
-    - breadcrumb.item "#{@sicoss_employer_type.name.titlecase}", sicoss_employer_type_path(@sicoss_employer_type), :active => true
+    - breadcrumb.item "#{@sicoss_employer_type.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_sicoss_employer_type_path(@sicoss_employer_type), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @sicoss_employer_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@sicoss_employer_type) do |f|
-  - if @sicoss_employer_type.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_employer_type.errors.count, "error")
-        prohibited this sicoss_employer_type from being saved:
-      %ul
-        - @sicoss_employer_type.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_employer_type.name
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_employer_type.code
+  = render 'shared/errorhandler', :obj_errors => @sicoss_employer_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_employer_type.name
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_employer_type.code
 .clear

@@ -1,22 +1,25 @@
 = form_for(@associated_document_type) do |f|
-  - if @associated_document_type.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@associated_document_type.errors.count, "error")
-        prohibited this associated_document_type from being saved:
-      %ul
-        - @associated_document_type.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @associated_document_type.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= AssociatedDocumentType.model_name.human
+    /  %span.title= AssociatedDocumentType.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :document_type, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :document_type, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

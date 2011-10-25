@@ -2,6 +2,6 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item SchemaMigration.model_name.human, schema_migrations_path
-    - breadcrumb.item t('scaffold.actions.new', :item => SchemaMigration.model_name.human).titlecase , schema_migrations_path, :active => true
+    - breadcrumb.item t('scaffold.actions.new', :item => SchemaMigration.model_name.human).titlecase , nil, :active => true
 
 = render 'form'

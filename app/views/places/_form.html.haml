@@ -1,22 +1,20 @@
 = form_for(@place) do |f|
-  - if @place.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@place.errors.count, "error")
-        prohibited this place from being saved:
-      %ul
-        - @place.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @place.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Place.model_name.human
+    /  %span.title= Place.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

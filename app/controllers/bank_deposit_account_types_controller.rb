@@ -1,17 +1,14 @@
 class BankDepositAccountTypesController < ApplicationController
+  respond_to :html, :xml, :json
   before_filter :bank_deposit_account_type, :except => [:index, :new, :create]
 
   # GET /bank_deposit_account_types
   # GET /bank_deposit_account_types.xml
   def index
-    #@bank_deposit_account_types = BankDepositAccountType.all
     @search = BankDepositAccountType.search(params[:search])
     @bank_deposit_account_types = @search.page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html # index.html.erbb
-      format.xml  { render :xml => @bank_deposit_account_types }
-    end
+    flash.now[:notice] = t('flash.actions.index.notice') if @bank_deposit_account_types.empty?
+    respond_with(@bank_deposit_account_types)
   end
 
   # GET /bank_deposit_account_types/1

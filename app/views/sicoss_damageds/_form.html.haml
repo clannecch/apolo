@@ -1,17 +1,10 @@
 = form_for(@sicoss_damaged) do |f|
-  - if @sicoss_damaged.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_damaged.errors.count, "error")
-        prohibited this sicoss_damaged from being saved:
-      %ul
-        - @sicoss_damaged.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @sicoss_damaged.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= SicossDamaged.model_name.human
+    /  %span.title= SicossDamaged.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel

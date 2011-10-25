@@ -1,0 +1,20 @@
+= form_for(@employer_contribution_concepts_group_employer_contribution) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employer_contribution_concepts_group_employer_contribution.errors
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+    /  %span.title= EmployerContributionConceptsGroupEmployerContribution.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :group_employer_contribution_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :group_employer_contribution_id, GroupEmployerContribution.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :employer_contribution_concept_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :employer_contribution_concept_id, EmployerContributionConcept.all, :id, :detalle, {:class => "apsSelect"}
+  .actions
+    = f.submit :class => "btn success"

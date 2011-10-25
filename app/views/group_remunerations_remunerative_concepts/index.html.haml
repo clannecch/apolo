@@ -1,0 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRemunerationsRemunerativeConcept.model_name.human, group_remunerations_remunerative_concepts_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => GroupRemunerationsRemunerativeConcept.model_name.human) , new_group_remunerations_remunerative_concept_path(@group_remunerations_remunerative_concept), :class => "btn success" 
+  - if @group_remunerations_remunerative_concepts.any?
+    = link_to t('scaffold.actions.export').titlecase, group_remunerations_remunerative_concepts_path( :format => 'pdf'), :class => "btn info"
+
+- if @group_remunerations_remunerative_concepts.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :group_remuneration_id, @group_remunerations_remunerative_concepts.human_attribute_name('group_remuneration_id')
+      %th= sort_link @search, :remunerative_concept_id, @group_remunerations_remunerative_concepts.human_attribute_name('remunerative_concept_id')
+      %th.last
+
+    - @group_remunerations_remunerative_concepts.each do |item|
+      %tr
+        %td= item.group_remuneration_id
+        %td= item.remunerative_concept_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_group_remunerations_remunerative_concept_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@group_remunerations_remunerative_concepts)
+  .clear
+.clear

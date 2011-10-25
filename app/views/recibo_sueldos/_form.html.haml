@@ -1,17 +1,11 @@
 = form_for([@liquidacion,@recibo_sueldo]) do |f|
-  - if @recibo_sueldo.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@recibo_sueldo.errors.count, "error")
-        prohibited this recibo_sueldo from being saved:
-      %ul
-        - @recibo_sueldo.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @recibo_sueldo.errors
   .clear
   %br/
 
-  %h3
-    Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
+  .alert-message.warning{"data-alert" => "alert"}
+    %h4
+      Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
   .form_box
     %table.tableForm
       %tr

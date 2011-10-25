@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item CostCenter.model_name.human, cost_centers_path 
-    - breadcrumb.item "#{@cost_center.detalle.titlecase}", cost_center_path(@cost_center), :active => true
+    - breadcrumb.item "#{@cost_center.detalle.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_cost_center_path(@cost_center), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @cost_center, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@cost_center) do |f|
-  - if @cost_center.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@cost_center.errors.count, "error")
-        prohibited this cost_center from being saved:
-      %ul
-        - @cost_center.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :detalle, :class => "apsLabel"
-      %td.columnData
-        = @cost_center.detalle
+  = render 'shared/errorhandler', :obj_errors => @cost_center.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @cost_center.detalle
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @cost_center.code
 .clear

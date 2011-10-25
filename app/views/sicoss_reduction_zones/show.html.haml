@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item SicossReductionZone.model_name.human, sicoss_reduction_zones_path 
-    - breadcrumb.item "#{@sicoss_reduction_zone.name.titlecase}", sicoss_reduction_zone_path(@sicoss_reduction_zone), :active => true
+    - breadcrumb.item "#{@sicoss_reduction_zone.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_sicoss_reduction_zone_path(@sicoss_reduction_zone), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @sicoss_reduction_zone, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@sicoss_reduction_zone) do |f|
-  - if @sicoss_reduction_zone.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_reduction_zone.errors.count, "error")
-        prohibited this sicoss_reduction_zone from being saved:
-      %ul
-        - @sicoss_reduction_zone.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_reduction_zone.name
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_reduction_zone.code
+  = render 'shared/errorhandler', :obj_errors => @sicoss_reduction_zone.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_reduction_zone.name
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_reduction_zone.code
 .clear

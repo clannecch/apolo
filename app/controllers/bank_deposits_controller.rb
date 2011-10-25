@@ -1,13 +1,13 @@
 class BankDepositsController < ApplicationController
+  respond_to :html, :xml, :json
   before_filter :find_bank_deposit, :except => [:index, :new, :create]
 
   # GET /bank_deposits
   # GET /bank_deposits.xml
   def index
-#    @search = BankDeposit.by_company(current_company.id).search(params[:search])
     @search = BankDeposit.search(params[:search])
     @bank_deposits = @search.page(params[:page]).per(10)
-
+    flash.now[:notice] = t('flash.actions.index.notice') if @bank_deposits.empty?
     respond_to do |format|
       format.html # index.html.erbb
       format.xml  { render :xml => @bank_deposits }

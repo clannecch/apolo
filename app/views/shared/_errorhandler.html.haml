@@ -1,0 +1,8 @@
+- if obj_errors.any?
+  #error_explanation.alert-message.error.fade.in.block-message{"data-alert" => "alert"}
+    %a.close{ :href => "#", :title => "Cerrar"} &times;
+    %h2
+      = t('scaffold.errors.message')
+    %ul
+      - obj_errors.full_messages.each do |msg|
+        %li= msg

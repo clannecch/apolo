@@ -2,25 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item Activity.model_name.human, activities_path 
-    - breadcrumb.item "#{@activity.name.titlecase}", activity_path(@activity), :active => true
+    - breadcrumb.item "#{@activity.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_activity_path(@activity), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @activity, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@activity) do |f|
-  - if @activity.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@activity.errors.count, "error")
-        prohibited this activity from being saved:
-      %ul
-        - @activity.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @activity.name
+  = render 'shared/errorhandler', :obj_errors => @activity.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @activity.name
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @activity.code
 .clear

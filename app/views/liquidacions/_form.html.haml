@@ -1,12 +1,5 @@
 = form_for(@liquidacion) do |f|
-  - if @liquidacion.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@liquidacion.errors.count, "error")
-        prohibited this liquidacion from being saved:
-      %ul
-        - @liquidacion.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @liquidacion.errors
   .clear
   %br/
   .form_box

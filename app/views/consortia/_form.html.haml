@@ -1,0 +1,106 @@
+= form_for @consortium,  :html => { :multipart => true } do |f|
+  = render 'shared/errorhandler', :obj_errors => @consortium.errors
+  .clear
+  %br/
+  .form_box
+    .form_box_title
+    /  %span.title= Consortium.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :razon_social, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :razon_social, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :calle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :calle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :altura, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :altura, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :codigo_postal, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo_postal, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :location_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :location_id, Location.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :province_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :province_id, Province.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :latitude, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :latitude, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :longitude, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :longitude, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :telefono, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :telefono, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :contacto, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :contacto, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :email, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :email, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :cuit, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cuit, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :numero_inscripcion, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :numero_inscripcion, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :caja, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :caja, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :ultima_hoja_libro, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :ultima_hoja_libro, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :imprimir_hasta_hoja_libro, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :imprimir_hasta_hoja_libro, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :observaciones, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :observaciones, :class => "apsTextbox"
+      = render 'shared/attachments_manager', :f => f
+  .actions
+    = f.submit :class => "btn success"

@@ -1,0 +1,24 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRemunerationsRemunerativeConcept.model_name.human, group_remunerations_remunerative_concepts_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_group_remunerations_remunerative_concept_path(@group_remunerations_remunerative_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @group_remunerations_remunerative_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@group_remunerations_remunerative_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @group_remunerations_remunerative_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :group_remuneration_id, :class => "apsLabel"
+        %td.columnData
+          = @group_remunerations_remunerative_concept.group_remuneration.detalle
+      %tr
+        %td.columnLabel
+          = f.label :remunerative_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @group_remunerations_remunerative_concept.remunerative_concept.detalle
+.clear

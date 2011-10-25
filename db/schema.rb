@@ -390,9 +390,9 @@ ActiveRecord::Schema.define(:version => 20111024224627) do
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
     t.string   "sicoss_seguro_obligatorio",        :limit => 1
-    t.integer  "group_employer_contribution_id"
-    t.integer  "group_remuneration_id"
     t.integer  "consortium_id"
+    t.integer  "group_remuneration_id"
+    t.integer  "group_employer_contribution_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|

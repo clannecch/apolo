@@ -8,23 +8,17 @@
 .clear
 %br/
 = form_for(@user_authorization) do |f|
-  - if @user_authorization.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@user_authorization.errors.count, "error")
-        prohibited this user_authorization from being saved:
-      %ul
-        - @user_authorization.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :user_id, :class => "apsLabel"
-      %td.columnData
-        = @user_authorization.user_id
-    %tr
-      %td.columnLabel
-        = f.label :authorization_id, :class => "apsLabel"
-      %td.columnData
-        = @user_authorization.authorization.name
+  = render 'shared/errorhandler', :obj_errors => @user_authorization.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :user_id, :class => "apsLabel"
+        %td.columnData
+          = @user_authorization.user_id
+      %tr
+        %td.columnLabel
+          = f.label :authorization_id, :class => "apsLabel"
+        %td.columnData
+          = @user_authorization.authorization.name
 .clear

@@ -4,7 +4,7 @@
     - breadcrumb.item RemunerativeConcept.model_name.human, remunerative_concepts_path, :active => true
 .clear
 - if true
-  = link_to t('scaffold.actions.new', :item => RemunerativeConcept.model_name.human).titlecase , new_remunerative_concept_path(@remunerative_concept), :class => "btn success" 
+  = link_to t('scaffold.actions.new', :item => RemunerativeConcept.model_name.human) , new_remunerative_concept_path(@remunerative_concept), :class => "btn success" 
   - if @remunerative_concepts.any?
     = link_to t('scaffold.actions.export').titlecase, remunerative_concepts_path( :format => 'pdf'), :class => "btn info"
 
@@ -13,46 +13,32 @@
     %tr
       %th= sort_link @search, :codigo, @remunerative_concepts.human_attribute_name('codigo')
       %th= sort_link @search, :detalle, @remunerative_concepts.human_attribute_name('detalle')
-      %th= sort_link @search, :porcentual_asistencia, @remunerative_concepts.human_attribute_name('porcentual_asistencia')
       %th= sort_link @search, :prioridad_calculo, @remunerative_concepts.human_attribute_name('prioridad_calculo')
-      %th= sort_link @search, :statistical_value, @remunerative_concepts.human_attribute_name('statistical_value')
-      %th= sort_link @search, :grupo_ganancias_id, @remunerative_concepts.human_attribute_name('grupo_ganancias_id')
-      %th= sort_link @search, :accounting_imputation_id, @remunerative_concepts.human_attribute_name('accounting_imputation_id')
-      %th= sort_link @search, :concepto_asociado_haber_id, @remunerative_concepts.human_attribute_name('concepto_asociado_haber_id')
-      %th= sort_link @search, :concepto_asociado_retencion_id, @remunerative_concepts.human_attribute_name('concepto_asociado_retencion_id')
-      %th= sort_link @search, :concepto_asociado_haber_2_id, @remunerative_concepts.human_attribute_name('concepto_asociado_haber_2_id')
-      %th= sort_link @search, :concepto_asociado_retencion_2_id, @remunerative_concepts.human_attribute_name('concepto_asociado_retencion_2_id')
       %th= sort_link @search, :acumuladores_valor, @remunerative_concepts.human_attribute_name('acumuladores_valor')
       %th= sort_link @search, :acumuladores_cantidad, @remunerative_concepts.human_attribute_name('acumuladores_cantidad')
       %th= sort_link @search, :calculo_valor, @remunerative_concepts.human_attribute_name('calculo_valor')
       %th= sort_link @search, :calculo_cantidad, @remunerative_concepts.human_attribute_name('calculo_cantidad')
       %th= sort_link @search, :data_to_ask_id, @remunerative_concepts.human_attribute_name('data_to_ask_id')
       %th= sort_link @search, :cantidad_en_recibo, @remunerative_concepts.human_attribute_name('cantidad_en_recibo')
+      %th= sort_link @search, :auxiliar, @remunerative_concepts.human_attribute_name('auxiliar')
       %th.last
 
     - @remunerative_concepts.each do |item|
       %tr
         %td= item.codigo
         %td= item.detalle
-        %td= check_box_tag "remunerative_concept.porcentual_asistencia", remunerative_concept.porcentual_asistencia, remunerative_concept.porcentual_asistencia, :disabled => true
         %td= item.prioridad_calculo
-        %td= item.statistical_value
-        %td= item.grupo_ganancias_id
-        %td= item.accounting_imputation_id
-        %td= item.concepto_asociado_haber_id
-        %td= item.concepto_asociado_retencion_id
-        %td= item.concepto_asociado_haber_2_id
-        %td= item.concepto_asociado_retencion_2_id
         %td= item.acumuladores_valor
         %td= item.acumuladores_cantidad
         %td= item.calculo_valor
         %td= item.calculo_cantidad
         %td= item.data_to_ask_id
         %td= item.cantidad_en_recibo
+        %td= check_box_tag "remunerative_concept_auxiliar", item.auxiliar, item.auxiliar, :disabled => true
         %td.last.actions
-          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
-          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_remunerative_concept_path(item)
-          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_remunerative_concept_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
     .clear
     .block{:style => 'margin:20px;'}= paginate(@remunerative_concepts)
   .clear

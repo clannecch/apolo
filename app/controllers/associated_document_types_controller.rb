@@ -7,12 +7,10 @@ class AssociatedDocumentTypesController < ApplicationController
   # GET /associated_document_types.json
   # GET /associated_document_types.xml
   def index
-    @associated_document_types = AssociatedDocumentType.all
-
-    respond_to do |format|
-      format.html # index.html.erbb
-      format.xml  { render :xml => @associated_document_types }
-    end
+    @search = AssociatedDocumentType.search(params[:search])
+    @associated_document_types = @search.page(params[:page]).per(10)
+    flash.now[:notice] = t('flash.actions.index.notice') if @associated_document_types.empty?
+    respond_with(@associated_document_types)
   end
 
   # GET /associated_document_types/1

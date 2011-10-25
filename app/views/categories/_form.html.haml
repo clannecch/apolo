@@ -1,17 +1,10 @@
 = form_for(@category) do |f|
-  - if @category.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@category.errors.count, "error")
-        prohibited this category from being saved:
-      %ul
-        - @category.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'shared/errorhandler', :obj_errors => @category.errors
   .clear
   %br/
   .form_box
     .form_box_title
-      %span.title= Category.model_name.human
+    /  %span.title= Category.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
@@ -23,5 +16,15 @@
           = f.label :importe, :class => "apsLabel"
         %td.columnData
           = f.text_field :importe, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :horas, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :horas, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

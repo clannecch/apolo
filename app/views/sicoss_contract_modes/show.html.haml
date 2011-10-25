@@ -2,30 +2,24 @@
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
     - breadcrumb.item SicossContractMode.model_name.human, sicoss_contract_modes_path 
-    - breadcrumb.item "#{@sicoss_contract_mode.name.titlecase}", sicoss_contract_mode_path(@sicoss_contract_mode), :active => true
+    - breadcrumb.item "#{@sicoss_contract_mode.name.titlecase}", nil, :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_sicoss_contract_mode_path(@sicoss_contract_mode), :class => "btn success" |
 = link_to t('scaffold.actions.destroy').titlecase, @sicoss_contract_mode, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 .clear
 %br/
 = form_for(@sicoss_contract_mode) do |f|
-  - if @sicoss_contract_mode.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@sicoss_contract_mode.errors.count, "error")
-        prohibited this sicoss_contract_mode from being saved:
-      %ul
-        - @sicoss_contract_mode.errors.full_messages.each do |msg|
-          %li= msg
-  %table.tableForm
-    %tr
-      %td.columnLabel
-        = f.label :name, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_contract_mode.name
-    %tr
-      %td.columnLabel
-        = f.label :code, :class => "apsLabel"
-      %td.columnData
-        = @sicoss_contract_mode.code
+  = render 'shared/errorhandler', :obj_errors => @sicoss_contract_mode.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_contract_mode.name
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_contract_mode.code
 .clear
