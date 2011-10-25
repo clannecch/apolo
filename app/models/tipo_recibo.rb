@@ -16,6 +16,7 @@ class TipoRecibo < ActiveRecord::Base
   default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
 
   has_many :liquidacions, :dependent => :restrict
-  validates_presence_of		    :detalle,															                          :message => "es un dato requerido"
+  validates_presence_of		    :detalle,															          :message => "es un dato requerido"
+  validates_uniqueness_of		  :recibo_principal,			                        :message => "existente"
 
 end

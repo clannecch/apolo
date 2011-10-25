@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110914031047
+# Schema version: 20111024224627
 #
 # Table name: kinships
 #
@@ -8,7 +8,7 @@
 #  hijo_conyugue :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
-#  company_id    :integer
+#  code          :string(255)
 #
 
 require 'spec_helper'

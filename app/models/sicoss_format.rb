@@ -20,6 +20,8 @@
 
 class SicossFormat < ActiveRecord::Base
   has_many :sicoss_format_employers, :dependent => :restrict
-  validates_presence_of		    :name,:field_length,:justifies,:field_type,       :message => "es un dato requerido"
+  validates_presence_of		    :name,:field_length,:justifies,
+                              :field_type, :position, :formula,       :message => "es un dato requerido"
+  validates_uniqueness_of		  :position,			                        :message => "existente"
 
 end

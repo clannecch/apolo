@@ -1,12 +1,11 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: remunerative_concepts
 #
 #  id                               :integer         not null, primary key
 #  codigo                           :string(255)
 #  detalle                          :string(255)
-#  porcentual_asistencia            :boolean
 #  prioridad_calculo                :integer
 #  statistical_value                :integer
 #  grupo_ganancias_id               :integer
@@ -43,6 +42,7 @@ class RemunerativeConcept < ActiveRecord::Base
   validate :cannot_asociate_iqual_concept
 #  validate :control_formula
   validates_presence_of :detalle, :codigo, :acumuladores_valor, :calculo_valor
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 
   before_save :controlar_cambios
 

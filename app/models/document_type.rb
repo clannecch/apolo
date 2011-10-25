@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111024224627
 #
 # Table name: document_types
 #
@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  company_id :integer
+#  code       :string(255)
 #
 
 class DocumentType < ActiveRecord::Base
@@ -15,10 +16,12 @@ class DocumentType < ActiveRecord::Base
 	has_many :employee, :dependent => :restrict
 	has_many :insurance_beneficiary, :dependent => :restrict
 #  before_destroy :no_referenced_data
-  validates_presence_of		    :detalle,															                :message => "es un dato requerido"
 
   #scope :by_company, lambda {|company| where(:company_id => company) }
   default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+
+  validates_presence_of		    :detalle, :code,				            :message => "es un dato requerido"
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 
   def no_referenced_data
     return if employee.empty?

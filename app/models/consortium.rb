@@ -33,10 +33,6 @@ require 'paperclip'
 class Consortium < ActiveRecord::Base
   belongs_to :province
   belongs_to :location
-
-  validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
-                               :cuit, :ultima_hoja_libro, :message => "es un dato requerido"
-
   has_many   :attachments, :as => :attachable, :dependent => :restrict
 
   accepts_nested_attributes_for :attachments , :allow_destroy => true
@@ -44,6 +40,9 @@ class Consortium < ActiveRecord::Base
   #scope :by_company, lambda {|company| where(:company_id => company) }
   default_scope where(:company_id => $CURRENT_COMPANY)
 
+  validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
+                               :cuit, :ultima_hoja_libro,         :message => "es un dato requerido"
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 
   def full_address
 #    apellido + ', '+nombre

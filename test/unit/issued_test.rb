@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110721162735
+# Schema version: 20111024224627
 #
 # Table name: issueds
 #
@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  company_id :integer
+#  code       :string(255)
 #
 
 require 'test_helper'

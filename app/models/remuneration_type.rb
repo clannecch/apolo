@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: remuneration_types
 #
@@ -9,6 +9,7 @@
 #  updated_at   :datetime
 #  company_id   :integer
 #  hora_dia_mes :string(255)
+#  code         :string(255)
 #
 
 class RemunerationType < ActiveRecord::Base
@@ -16,6 +17,7 @@ class RemunerationType < ActiveRecord::Base
   default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
 
   has_many :employees, :dependent => :restrict
-  validates_presence_of		    :detalle, :hora_dia_mes,               :message => "es un dato requerido"
+  validates_presence_of		    :detalle, :code, :hora_dia_mes,     :message => "es un dato requerido"
   validates_inclusion_of :hora_dia_mes , :in => %w(H D M)
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 end
