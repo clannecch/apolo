@@ -27,4 +27,9 @@
           = f.label :hora_dia_mes, :class => "apsLabel"
         %td.columnData
           = @remuneration_type.hora_dia_mes == "H" ? "Hora" : (@remuneration_type.hora_dia_mes == "D" ? "Dia" : "Mes" )
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "remuneration_type_default", @remuneration_type.default, @remuneration_type.default, :disabled => true
 .clear

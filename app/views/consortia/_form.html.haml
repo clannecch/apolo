@@ -47,16 +47,6 @@
           = f.collection_select :province_id, Province.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
-          = f.label :latitude, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :latitude, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :longitude, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :longitude, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
           = f.label :telefono, :class => "apsLabel"
         %td.columnData
           = f.text_field :telefono, :class => "apsTextbox"
@@ -75,16 +65,6 @@
           = f.label :cuit, :class => "apsLabel"
         %td.columnData
           = f.text_field :cuit, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :numero_inscripcion, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :numero_inscripcion, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :caja, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :caja, :class => "apsTextbox"
       %tr
         %td.columnLabel
           = f.label :ultima_hoja_libro, :class => "apsLabel"

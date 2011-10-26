@@ -2,7 +2,7 @@
 .field
   = f.label "Consorcio", :class => "tab_label"
   %br/
-  = f.collection_select :consortium_id, Consortium.all, :id, :name, :prompt => true
+  = f.collection_select :consortium_id, Consortium.by_company(current_company.id).all, :id, :name, :prompt => true
 .field
   = f.label "fecha_ingreso", :class => "tab_label"
   %br/

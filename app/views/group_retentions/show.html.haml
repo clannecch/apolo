@@ -20,6 +20,11 @@
   %table.tableForm
     %tr
       %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @group_retention.code
+    %tr
+      %td.columnLabel
         = f.label :detalle, :class => "apsLabel"
       %td.columnData
         = @group_retention.detalle
@@ -28,5 +33,10 @@
         = f.label :composicion, :class => "apsLabel"
       %td.columnData
         = f.collection_select :retention_concept_ids, RetentionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect", :disabled => "disabled"
+    %tr
+      %td.columnLabel
+        = f.label :default, :class => "apsLabel"
+      %td.columnData
+        = check_box_tag "retention_concept_default", @group_retention.default, @group_retention.default, :disabled => true
 .clear
 

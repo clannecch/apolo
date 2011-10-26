@@ -8,13 +8,23 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
-    %tr
-      %td.columnLabel
-        = f.label :composicion, :class => "apsLabel"
-      %td.columnData
-        = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect"
+      %tr
+        %td.columnLabel
+          = f.label :composicion, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect"
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

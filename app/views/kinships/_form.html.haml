@@ -19,6 +19,11 @@
         %td.columnLabel
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
-          = f.text_field :hijo_conyugue, :class => "apsTextbox"
+          = f.select :hijo_conyugue ,{"Otros" => "O","Hijo" => "H","Conyuge" => "C"},{ :prompt => "Seleccione un tipo de Documento"}
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

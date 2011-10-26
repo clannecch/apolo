@@ -14,6 +14,7 @@
       %th= sort_link @search, :code, @associated_document_types.human_attribute_name('code')
       %th= sort_link @search, :name, @associated_document_types.human_attribute_name('name')
       %th= sort_link @search, :document_type, @associated_document_types.human_attribute_name('document_type')
+      %th= sort_link @search, :default, @associated_document_types.human_attribute_name('default')
       %th.last
 
     - @associated_document_types.each do |item|
@@ -21,6 +22,7 @@
         %td= item.code
         %td= item.name
         %td= item.document_type  == "O" ? "Otros" : (item.document_type == "L" ? "Logo" : "Foto Principal")
+        %td= check_box_tag "associated_document_types_default", item.default, item.default, :disabled => true
 
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

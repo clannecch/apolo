@@ -1,7 +1,7 @@
 - content_for(:breadcrumbs) do
   = breadcrumbs do |breadcrumb|
     - breadcrumb.item current_company.name.titlecase, root_path
-    - breadcrumb.item GroupEmployerContribution.model_name.human, group_employer_contribution_path
+    - breadcrumb.item GroupEmployerContribution.model_name.human, group_employer_contributions_path
     - breadcrumb.item "#{@group_employer_contribution.detalle.titlecase}", group_employer_contribution_path(@group_remuneration), :active => true
 
 = link_to t('scaffold.actions.edit').titlecase, edit_group_employer_contribution_path(@group_remuneration), :class => "btn success" |
@@ -20,6 +20,11 @@
   %table.tableForm
     %tr
       %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @group_employer_contribution.code
+    %tr
+      %td.columnLabel
         = f.label :detalle, :class => "apsLabel"
       %td.columnData
         = @group_employer_contribution.detalle
@@ -28,4 +33,9 @@
         = f.label :composicion, :class => "apsLabel"
       %td.columnData
         = f.collection_select :employer_contribution_concept_ids, EmployerContributionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect", :disabled => "disabled"
+    %tr
+      %td.columnLabel
+        = f.label :default, :class => "apsLabel"
+      %td.columnData
+        = check_box_tag "group_employer_contribution_default", @group_employer_contribution.default, @group_employer_contribution.default, :disabled => true
 .clear

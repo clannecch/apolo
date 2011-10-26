@@ -37,12 +37,12 @@ class Consortium < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments , :allow_destroy => true
 
-  #scope :by_company, lambda {|company| where(:company_id => company) }
-  default_scope where(:company_id => $CURRENT_COMPANY)
+  scope :by_company, lambda {|company| where(:company_id => company) }
+  #default_scope where(:company_id => $CURRENT_COMPANY)
 
   validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
                                :cuit, :ultima_hoja_libro,         :message => "es un dato requerido"
-  validates_uniqueness_of		  :code,			                        :message => "existente"
+  validates_uniqueness_of		  :code, :scope => :company_id,       :message => "existente"
 
   def full_address
 #    apellido + ', '+nombre

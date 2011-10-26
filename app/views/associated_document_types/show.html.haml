@@ -27,5 +27,10 @@
           = f.label :document_type, :class => "apsLabel"
         %td.columnData
           = @associated_document_type.document_type == "O" ? "Otros" : (@associated_document_type.document_type == "L" ? "Logo" : "Foto Principal")
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "associated_document_type_default", @associated_document_type.default, @associated_document_type.default, :disabled => true
 
 .clear
