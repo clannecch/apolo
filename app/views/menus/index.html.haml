@@ -19,7 +19,7 @@
 
     - @menus.each do |item|
       %tr
-        %td= item.parent_id
+        %td= (item.parent_id.blank? ? "" : Menu.find(item.parent_id).name)
         %td= item.name
         %td= item.link_url
         %td= item.order_no

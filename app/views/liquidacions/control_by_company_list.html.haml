@@ -1,0 +1,26 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item "Control de Liquidaciones", nil, :active => true
+
+.clear
+.clear
+
+- if @liquidacions.any?
+  /%h2 Liquidaciones disponibles
+  %table#by_company.tableStandard
+    %tr
+      %th Periodo
+      %th Quincena
+      %th Tipo Recibo
+      %th Control parcial
+      //%th Control total
+
+    - @liquidacions.each do |liquidacion|
+      %tr
+        %td= liquidacion.periodo.strftime("%Y/%m")
+        %td{:style => "text-align:center"}= liquidacion.quincena
+        %td= liquidacion.tipo_recibo.try(:detalle)
+        %td= link_to 'Controlar', control_by_company_liquidacion_path(liquidacion), :rel => "twypsy", :title => "Controlar"
+

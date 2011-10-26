@@ -1,5 +1,5 @@
 class LiquidacionsController < ApplicationController
-  before_filter :find_liquidacion, :except => [:index, :new, :create]
+  before_filter :find_liquidacion, :except => [:index, :new, :create, :control_by_company_list]
 
   # GET /liquidacions
   # GET /liquidacions.xml
@@ -115,6 +115,25 @@ class LiquidacionsController < ApplicationController
       redirect_to liquidacion_url
     else
       redirect_to liquidacions_url
+    end
+  end
+
+  #[PVD] :: 2011-10-26 :: Listado de control de recibos de sueldo para MDQ...
+  def control_by_company_list
+    @liquidacions = Liquidacion.all
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
+    end
+  end
+
+  #[PVD] :: 2011-10-26 :: Listado de los recibos de sueldo de una liquidacion
+  def control_by_company
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
     end
   end
 

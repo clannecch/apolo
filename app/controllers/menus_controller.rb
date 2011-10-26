@@ -3,9 +3,8 @@ class MenusController < ApplicationController
   before_filter :find_menu, :except => [:index, :new, :create]
 
   def index
-		#@menus = Menu.all
     @search = Menu.search(params[:search])
-    @menus = @search.page(params[:page]).per(10)
+    @menus = @search.page(params[:page]).per(20).order{|m| m[:parent_id, :name]}
     flash.now[:notice] = t('flash.actions.index.notice') if @menus.empty?
 		respond_with(@menus)
 	end

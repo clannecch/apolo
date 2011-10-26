@@ -9,7 +9,8 @@
         %td.columnLabel
           = f.label :parent_id, :class => "apsLabel"
         %td.columnData
-          = f.text_field :parent_id, :class => "apsTextbox"
+          /= f.text_field :parent_id, :class => "apsTextbox"
+          = f.collection_select :parent_id, Menu.find(:all, :order => "name"), :id, :name, {:class => "apsSelect"}, {:include_blank => '< Menú principal >'}
       %tr
         %td.columnLabel
           = f.label :name, :class => "apsLabel"

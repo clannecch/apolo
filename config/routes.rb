@@ -107,16 +107,20 @@ APSSueldos::Application.routes.draw do |map|
     end
   end
 
+  match 'liquidacions/control_by_company_list' => 'liquidacions#control_by_company_list', :via => :get
   resources :liquidacions do
+    member do
+       get "control_by_company", :action => :control_by_company
+    end
     resources :recibo_sueldos do
+      member do
+         get "control_by_company", :action => :control_by_company
+      end
       resources :detalle_recibo_retencions
       resources :detalle_recibo_habers
       member do
         get "calculo_recibo", :action => :calculo_recibo
       end
-      #member do
-      #  get "imprimir", :action => :print
-      #end
     end
   end
 
