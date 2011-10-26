@@ -133,12 +133,6 @@ class LiquidacionsController < ApplicationController
   def print_planilla_remuneraciones_pdf(filename,liquidacion_actual)
   require 'prawn'
 
-  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
-#                              :background => img,
-                            :page_layout => :portrait)
-  offset = 0
-    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
-
 
   empresa = OpenStruct.new({
                   :logo                   => "",
@@ -153,10 +147,16 @@ class LiquidacionsController < ApplicationController
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
   if !@recibo_sueldos.any?
-    pdf.draw_text "No existen Movimientos para listar".center(170), :at => [5, 600],:style => :bold, :size => 10
-    pdf.render_file(filename)
+    flash[:error] = "No existen Movimientos para Listar"
     return
   end
+
+  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+#                              :background => img,
+                            :page_layout => :portrait)
+  offset = 0
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
@@ -714,10 +714,8 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
-  pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
-                            :page_layout => :portrait)
   if !@recibo_sueldos.any?
-    pdf.draw_text "No existen Movimientos para listar".center(170), :at => [5, 600],:style => :bold, :size => 10
+    flash[:error] = "No existen Movimientos para Listar"
     return
   end
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
@@ -766,6 +764,8 @@ def print_libro_pdf(filename,liquidacion_actual)
       empresa.logo = file_logo.to_s
     end
   end
+  pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
+                            :page_layout => :portrait)
 
   offset = 0
   numero_de_hoja = empresa.hoja
