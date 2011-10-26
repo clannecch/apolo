@@ -54,16 +54,6 @@
           = @consortium.province.try(:detalle)
       %tr
         %td.columnLabel
-          = f.label :latitude, :class => "apsLabel"
-        %td.columnData
-          = @consortium.latitude
-      %tr
-        %td.columnLabel
-          = f.label :longitude, :class => "apsLabel"
-        %td.columnData
-          = @consortium.longitude
-      %tr
-        %td.columnLabel
           = f.label :telefono, :class => "apsLabel"
         %td.columnData
           = @consortium.telefono
@@ -82,16 +72,6 @@
           = f.label :cuit, :class => "apsLabel"
         %td.columnData
           = @consortium.cuit
-      %tr
-        %td.columnLabel
-          = f.label :numero_inscripcion, :class => "apsLabel"
-        %td.columnData
-          = @consortium.numero_inscripcion
-      %tr
-        %td.columnLabel
-          = f.label :caja, :class => "apsLabel"
-        %td.columnData
-          = @consortium.caja
       %tr
         %td.columnLabel
           = f.label :ultima_hoja_libro, :class => "apsLabel"
