@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @educational_level.default
+          = check_box_tag "educational_level_default", @educational_level.default, @educational_level.default, :disabled => true
 .clear

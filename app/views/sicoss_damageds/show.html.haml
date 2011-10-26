@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @sicoss_damaged.default
+          = check_box_tag "sicoss_damaged_default", @sicoss_damaged.default, @sicoss_damaged.default, :disabled => true
 .clear

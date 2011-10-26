@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @bank_deposit.default
+          = check_box_tag "bank_deposit_default", @bank_deposit.default, @bank_deposit.default, :disabled => true
 .clear

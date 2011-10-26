@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @labor_union.default
+          = check_box_tag "labor_union_default", @labor_union.default, @labor_union.default, :disabled => true
 .clear

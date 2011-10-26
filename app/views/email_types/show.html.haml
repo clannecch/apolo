@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @email_type.default
+          = check_box_tag "email_type_default", @email_type.default, @email_type.default, :disabled => true
 .clear

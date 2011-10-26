@@ -21,10 +21,10 @@
         %td.columnLabel
           = f.label :recibo_principal, :class => "apsLabel"
         %td.columnData
-          = @tipo_recibo.recibo_principal
+          = check_box_tag "tipo_recibo_recibo_principal", @tipo_recibo.recibo_principal, @tipo_recibo.recibo_principal, :disabled => true
       %tr
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @tipo_recibo.default
+          = check_box_tag "tipo_recibo_default", @tipo_recibo.default, @tipo_recibo.default, :disabled => true
 .clear

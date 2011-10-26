@@ -6,12 +6,12 @@ es-AR:
       retention_concept:
         codigo: Codigo
         detalle: Detalle
-        statistical_value: Statistical Value
-        accounting_imputation_id: Accounting Imputation
+        statistical_value: Valor estadístico
+        accounting_imputation_id: Cuenta contable
         created_at: Creado el
         updated_at: Actualizado el
         prioridad: Prioridad
         formula_calculo_valor: Formula Calculo Valor
         acumuladores_valor: Acumuladores Valor
-        data_to_ask_id: Data To Ask
+        data_to_ask_id: Datos a solicitar
         company_id: Empresa
