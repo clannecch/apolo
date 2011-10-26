@@ -73,11 +73,8 @@ class LiquidacionsController < ApplicationController
     @liquidacion = Liquidacion.by_company(current_company.id).new(params[:liquidacion])
 
     respond_to do |format|
-      Rails.logger.info("pASO 1")
       if @liquidacion.save
-        Rails.logger.info("pASO 2")
         liquidar_employee
-        Rails.logger.info("pASO 3")
 
         format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.created', :item=> Liquidacion.model_name.human)) }
         format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
@@ -125,7 +122,6 @@ class LiquidacionsController < ApplicationController
   end
 
   def liquidar_employee
-    Rails.logger.info("Company="+$CURRENT_COMPANY.id.to_s)
     @employees = Employee.where(:fecha_egreso.blank?)
     Rails.logger.info("Cant="+@employees.count.to_s)
 
