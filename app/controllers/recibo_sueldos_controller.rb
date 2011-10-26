@@ -33,7 +33,11 @@ class ReciboSueldosController < ApplicationController
         print_to_pdf(dump_tmp_filename,file_photo,@recibo_sueldo)
         send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
         File.delete(dump_tmp_filename) unless Rails.env.development?
-        File.delete(file_photo) unless Rails.env.development?
+        begin
+          File.delete(file_photo) unless Rails.env.development?
+        rescue
+        end
+
       end
     end
   end
