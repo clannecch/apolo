@@ -709,7 +709,7 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
-  if @recibo_sueldos.nil?
+  if !@recibo_sueldos.any?
     return
   end
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
