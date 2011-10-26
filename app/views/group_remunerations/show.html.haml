@@ -20,6 +20,11 @@
   %table.tableForm
     %tr
       %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @group_remuneration.code
+    %tr
+      %td.columnLabel
         = f.label :detalle, :class => "apsLabel"
       %td.columnData
         = @group_remuneration.detalle

@@ -11,11 +11,13 @@
 - if @group_remunerations.any?
   %table.tableStandard
     %tr
+      %th= sort_link @search, :code, @group_remunerations.human_attribute_name('code')
       %th= sort_link @search, :detalle, @group_remunerations.human_attribute_name('detalle')
       %th.last
 
     - @group_remunerations.each do |item|
       %tr
+        %td= item.detalle
         %td= item.detalle
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
