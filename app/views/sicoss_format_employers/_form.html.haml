@@ -1,7 +1,6 @@
 = form_for(@sicoss_format_employer) do |f|
   = render 'shared/errorhandler', :obj_errors => @sicoss_format_employer.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= SicossFormatEmployer.model_name.human
@@ -10,7 +9,7 @@
         %td.columnLabel
           = f.label :sicoss_format_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :sicoss_format_id, SicossFormat.all, :id, :name, {:class => "apsSelect"}
+          = f.collection_select :sicoss_format_id, SicossFormat.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :field_type, :class => "apsLabel"

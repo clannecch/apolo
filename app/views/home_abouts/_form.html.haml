@@ -1,20 +1,19 @@
 = form_for(@home_about) do |f|
   = render 'shared/errorhandler', :obj_errors => @home_about.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= HomeAbout.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
-          = f.label :detalle, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :detalle, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
           = f.label :code, :class => "apsLabel"
         %td.columnData
           = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

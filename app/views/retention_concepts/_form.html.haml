@@ -1,7 +1,6 @@
 = form_for(@retention_concept) do |f|
   = render 'shared/errorhandler', :obj_errors => @retention_concept.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= RetentionConcept.model_name.human
@@ -25,7 +24,7 @@
         %td.columnLabel
           = f.label :accounting_imputation_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :prioridad, :class => "apsLabel"
@@ -45,7 +44,7 @@
         %td.columnLabel
           = f.label :data_to_ask_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :auxiliar, :class => "apsLabel"

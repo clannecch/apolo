@@ -11,16 +11,16 @@
 - if @remuneration_types.any?
   %table.tableStandard
     %tr
-      %th= sort_link @search, :code, @remuneration_types.human_attribute_name('code')
       %th= sort_link @search, :detalle, @remuneration_types.human_attribute_name('detalle')
       %th= sort_link @search, :hora_dia_mes, @remuneration_types.human_attribute_name('hora_dia_mes')
+      %th= sort_link @search, :code, @remuneration_types.human_attribute_name('code')
       %th.last
 
     - @remuneration_types.each do |item|
       %tr
-        %td= item.code
         %td= item.detalle
-        %td= item.hora_dia_mes == "H" ? "Hora" : (item.hora_dia_mes == "D" ? "Dia" : "Mes" )
+        %td= item.hora_dia_mes
+        %td= item.code
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_remuneration_type_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

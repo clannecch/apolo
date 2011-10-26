@@ -19,10 +19,8 @@
     = stylesheet_link_tag 'mainmenu/menu', :media => 'screen'
     /= stylesheet_link_tag 'jquery.datepick', :media => 'screen'
     = stylesheet_link_tag 'redmond.datepick', :media => 'screen'
-    /= stylesheet_link_tag 'scaffold', :media => 'screen'
     /[if IE]
       = stylesheet_link_tag 'apslabs-ie', :media => 'screen'
-    /= stylesheet_link_tag 'uniform.aristo', :media => 'screen'
     = stylesheet_link_tag 'application', :media => 'screen'
     = javascript_include_tag :defaults
     = javascript_include_tag :cocoon
@@ -42,17 +40,15 @@
     = yield :head
   %body
     %div{:style => "display: none;"}
-      %img#calImg.trigger{:src => "/images/calendar.gif", :alt => " x", :style => "display: inline; cursor: pointer; color: #ff0000"}
+      %img#calImg.trigger{:src => "/images/calendar.gif", :alt => "Calendario", :style => "cursor: pointer; padding: 0px 0px 0 5px"}
     #container
       #header
         #status
         %h1{:style => 'margin-left:0px; padding: 0px 0px; color: #fff'}
           Apolo
           = render('shared/change_current_company')
-          /= content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
         .main_menu
           = render('shared/main_menu')
-          /%div{:style => "text-align: center; font-weight: normal; font-size: 14px; width: 100% "}
         = yield(:breadcrumbs) if content_for?(:breadcrumbs)
         = content_for?(:user_navigation) ? yield(:user_navigation) : render('shared/user_navigation')
         .clear{:style => "background-color: #00264d; margin: 12px"}
@@ -67,7 +63,6 @@
                   %p= message
           .block
             .content
-              /= yield(:breadcrumbs) if content_for?(:breadcrumbs)
               /= yield(:controls) if content_for?(:controls)
               /%h2.title= yield(:title) if content_for?(:title)
               .inner

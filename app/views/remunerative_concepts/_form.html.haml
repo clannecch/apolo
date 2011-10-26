@@ -1,7 +1,6 @@
 = form_for(@remunerative_concept) do |f|
   = render 'shared/errorhandler', :obj_errors => @remunerative_concept.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= RemunerativeConcept.model_name.human
@@ -16,11 +15,6 @@
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :porcentual_asistencia, :class => "apsLabel"
-        %td.columnData
-          = f.check_box :porcentual_asistencia, :class => "apsCheckbox"
       %tr
         %td.columnLabel
           = f.label :prioridad_calculo, :class => "apsLabel"
@@ -40,7 +34,7 @@
         %td.columnLabel
           = f.label :accounting_imputation_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :concepto_asociado_haber_id, :class => "apsLabel"
@@ -85,7 +79,7 @@
         %td.columnLabel
           = f.label :data_to_ask_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :cantidad_en_recibo, :class => "apsLabel"

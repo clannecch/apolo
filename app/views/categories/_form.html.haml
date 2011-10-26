@@ -1,11 +1,15 @@
 = form_for(@category) do |f|
   = render 'shared/errorhandler', :obj_errors => @category.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= Category.model_name.human
     %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo, :class => "apsTextbox"
       %tr
         %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
@@ -21,10 +25,5 @@
           = f.label :horas, :class => "apsLabel"
         %td.columnData
           = f.text_field :horas, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
-          = f.label :codigo, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :codigo, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

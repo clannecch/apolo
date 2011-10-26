@@ -1,20 +1,19 @@
 = form_for(@sicoss_reduction_zone) do |f|
   = render 'shared/errorhandler', :obj_errors => @sicoss_reduction_zone.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= SicossReductionZone.model_name.human
     %table.tableForm
       %tr
         %td.columnLabel
-          = f.label :name, :class => "apsLabel"
-        %td.columnData
-          = f.text_field :name, :class => "apsTextbox"
-      %tr
-        %td.columnLabel
           = f.label :code, :class => "apsLabel"
         %td.columnData
           = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

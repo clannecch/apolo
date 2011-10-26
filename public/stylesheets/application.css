@@ -340,21 +340,27 @@ table tr:hover td.actions a {
   background: #fddfde;
 }
 
-/* line 277, ../../app/stylesheets/application.sass */
+/* line 276, ../../app/stylesheets/application.sass */
 #error_explanation {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
   border: 1px solid red;
 }
-/* line 281, ../../app/stylesheets/application.sass */
+/* line 280, ../../app/stylesheets/application.sass */
+#error_explanation h2 {
+  font-size: 16px;
+  font-style: normal;
+  padding: 0;
+}
+/* line 284, ../../app/stylesheets/application.sass */
 #error_explanation ul {
   position: relative;
   margin: 0px 5px 0 5px;
   padding: 0;
   display: block;
 }
-/* line 287, ../../app/stylesheets/application.sass */
+/* line 290, ../../app/stylesheets/application.sass */
 #error_explanation ul li {
   padding: 0;
   margin: 0;

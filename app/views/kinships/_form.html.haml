@@ -1,7 +1,6 @@
 = form_for(@kinship) do |f|
   = render 'shared/errorhandler', :obj_errors => @kinship.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= Kinship.model_name.human
@@ -20,6 +19,6 @@
         %td.columnLabel
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
-          = f.select( :hijo_conyugue ,{ "Otros" => "O", "Conyuge" => "C", "Hijo" => "H"},{ :prompt => "Seleccione un tipo de Parentezco"})
+          = f.text_field :hijo_conyugue, :class => "apsTextbox"
   .actions
     = f.submit :class => "btn success"

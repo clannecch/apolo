@@ -14,6 +14,13 @@
       %th= sort_link @search, :codigo, @remunerative_concepts.human_attribute_name('codigo')
       %th= sort_link @search, :detalle, @remunerative_concepts.human_attribute_name('detalle')
       %th= sort_link @search, :prioridad_calculo, @remunerative_concepts.human_attribute_name('prioridad_calculo')
+      %th= sort_link @search, :statistical_value, @remunerative_concepts.human_attribute_name('statistical_value')
+      %th= sort_link @search, :grupo_ganancias_id, @remunerative_concepts.human_attribute_name('grupo_ganancias_id')
+      %th= sort_link @search, :accounting_imputation_id, @remunerative_concepts.human_attribute_name('accounting_imputation_id')
+      %th= sort_link @search, :concepto_asociado_haber_id, @remunerative_concepts.human_attribute_name('concepto_asociado_haber_id')
+      %th= sort_link @search, :concepto_asociado_retencion_id, @remunerative_concepts.human_attribute_name('concepto_asociado_retencion_id')
+      %th= sort_link @search, :concepto_asociado_haber_2_id, @remunerative_concepts.human_attribute_name('concepto_asociado_haber_2_id')
+      %th= sort_link @search, :concepto_asociado_retencion_2_id, @remunerative_concepts.human_attribute_name('concepto_asociado_retencion_2_id')
       %th= sort_link @search, :acumuladores_valor, @remunerative_concepts.human_attribute_name('acumuladores_valor')
       %th= sort_link @search, :acumuladores_cantidad, @remunerative_concepts.human_attribute_name('acumuladores_cantidad')
       %th= sort_link @search, :calculo_valor, @remunerative_concepts.human_attribute_name('calculo_valor')
@@ -28,6 +35,13 @@
         %td= item.codigo
         %td= item.detalle
         %td= item.prioridad_calculo
+        %td= item.statistical_value
+        %td= item.grupo_ganancias_id
+        %td= item.accounting_imputation_id
+        %td= item.concepto_asociado_haber_id
+        %td= item.concepto_asociado_retencion_id
+        %td= item.concepto_asociado_haber_2_id
+        %td= item.concepto_asociado_retencion_2_id
         %td= item.acumuladores_valor
         %td= item.acumuladores_cantidad
         %td= item.calculo_valor

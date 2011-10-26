@@ -1,7 +1,6 @@
 = form_for(@user) do |f|
   = render 'shared/errorhandler', :obj_errors => @user.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= User.model_name.human
@@ -25,22 +24,22 @@
         %td.columnLabel
           = f.label :reset_password_sent_at, :class => "apsLabel"
         %td.columnData
-          = f.text_field :reset_password_sent_at, :class => "apsDatetime"
+          = f.text_field :reset_password_sent_at, :value => @user.reset_password_sent_at.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :remember_created_at, :class => "apsLabel"
         %td.columnData
-          = f.text_field :remember_created_at, :class => "apsDatetime"
+          = f.text_field :remember_created_at, :value => @user.remember_created_at.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :current_sign_in_at, :class => "apsLabel"
         %td.columnData
-          = f.text_field :current_sign_in_at, :class => "apsDatetime"
+          = f.text_field :current_sign_in_at, :value => @user.current_sign_in_at.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :last_sign_in_at, :class => "apsLabel"
         %td.columnData
-          = f.text_field :last_sign_in_at, :class => "apsDatetime"
+          = f.text_field :last_sign_in_at, :value => @user.last_sign_in_at.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :current_sign_in_ip, :class => "apsLabel"

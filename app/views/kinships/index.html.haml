@@ -11,17 +11,16 @@
 - if @kinships.any?
   %table.tableStandard
     %tr
-      %th= sort_link @search, :code, @kinships.human_attribute_name('code')
       %th= sort_link @search, :name, @kinships.human_attribute_name('name')
       %th= sort_link @search, :hijo_conyugue, @kinships.human_attribute_name('hijo_conyugue')
+      %th= sort_link @search, :code, @kinships.human_attribute_name('code')
       %th.last
 
     - @kinships.each do |item|
       %tr
-        %td= item.code
         %td= item.name
-        %td= item.hijo_conyugue == "C" ? "Conyugue" : (@kinship.hijo_conyugue == "H" ? "Hijo" : "Otros")
-
+        %td= item.hijo_conyugue
+        %td= item.code
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_kinship_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

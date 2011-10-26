@@ -1,7 +1,6 @@
 = form_for(@attachment) do |f|
   = render 'shared/errorhandler', :obj_errors => @attachment.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= Attachment.model_name.human
@@ -20,7 +19,7 @@
         %td.columnLabel
           = f.label :associated_document_type_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :associated_document_type_id, AssociatedDocumentType.all, :id, :name, {:class => "apsSelect"}
+          = f.collection_select :associated_document_type_id, AssociatedDocumentType.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :name, :class => "apsLabel"
@@ -30,7 +29,7 @@
         %td.columnLabel
           = f.label :reception_date, :class => "apsLabel"
         %td.columnData
-          = f.text_field :reception_date, :class => "apsDatetime"
+          = f.text_field :reception_date, :value => @attachment.reception_date.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :adjunto_file_name, :class => "apsLabel"

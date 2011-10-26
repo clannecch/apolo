@@ -1,7 +1,6 @@
 = form_for(@employee_remunerative_concept) do |f|
   = render 'shared/errorhandler', :obj_errors => @employee_remunerative_concept.errors
   .clear
-  %br/
   .form_box
     .form_box_title
     /  %span.title= EmployeeRemunerativeConcept.model_name.human
@@ -15,7 +14,7 @@
         %td.columnLabel
           = f.label :remunerative_concept_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :remunerative_concept_id, RemunerativeConcept.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :cantidad, :class => "apsLabel"
@@ -30,17 +29,17 @@
         %td.columnLabel
           = f.label :fecha_inicio, :class => "apsLabel"
         %td.columnData
-          = f.text_field :fecha_inicio, :class => "apsDatetime"
+          = f.text_field :fecha_inicio, :value => @employee_remunerative_concept.fecha_inicio.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :fecha_final, :class => "apsLabel"
         %td.columnData
-          = f.text_field :fecha_final, :class => "apsDatetime"
+          = f.text_field :fecha_final, :value => @employee_remunerative_concept.fecha_final.to_s, :class => "apsDatetime"
       %tr
         %td.columnLabel
           = f.label :cost_center_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}
+          = f.collection_select :cost_center_id, CostCenter.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
       %tr
         %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
