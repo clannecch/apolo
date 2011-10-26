@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees.xml
   def index
     #@employees = Employee.all
-    @search = Employee.search(params[:search])
+    @search = Employee.by_company(current_company.id).search(params[:search])
     @employees = @search.order("consortium_id, legajo").page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erbb
@@ -96,7 +96,7 @@ class EmployeesController < ApplicationController
   end
 
   def find_employee
-      @employee = Employee.find(params[:id])
+      @employee = Employee.by_company(current_company.id).find(params[:id])
   end
 
 # #################################################################################
