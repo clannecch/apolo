@@ -31,7 +31,7 @@
         %td.columnLabel
           = f.label :accounting_imputation_id, :class => "apsLabel"
         %td.columnData
-          = @retention_concept.accounting_imputation.detalle
+          = @retention_concept.accounting_imputation.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :prioridad, :class => "apsLabel"
@@ -51,7 +51,7 @@
         %td.columnLabel
           = f.label :data_to_ask_id, :class => "apsLabel"
         %td.columnData
-          = @retention_concept.data_to_ask.detalle
+          = @retention_concept.data_to_ask.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :auxiliar, :class => "apsLabel"

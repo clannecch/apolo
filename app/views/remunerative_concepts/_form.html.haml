@@ -1,6 +1,7 @@
 = form_for(@remunerative_concept) do |f|
   = render 'shared/errorhandler', :obj_errors => @remunerative_concept.errors
   .clear
+  %br/
   .form_box
     .form_box_title
     /  %span.title= RemunerativeConcept.model_name.human
@@ -34,7 +35,7 @@
         %td.columnLabel
           = f.label :accounting_imputation_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
       %tr
         %td.columnLabel
           = f.label :concepto_asociado_haber_id, :class => "apsLabel"
@@ -79,7 +80,7 @@
         %td.columnLabel
           = f.label :data_to_ask_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
       %tr
         %td.columnLabel
           = f.label :cantidad_en_recibo, :class => "apsLabel"

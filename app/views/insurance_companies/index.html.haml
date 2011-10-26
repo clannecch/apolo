@@ -13,12 +13,14 @@
     %tr
       %th= sort_link @search, :detalle, @insurance_companies.human_attribute_name('detalle')
       %th= sort_link @search, :code, @insurance_companies.human_attribute_name('code')
+      %th= sort_link @search, :default, @insurance_companies.human_attribute_name('default')
       %th.last
 
     - @insurance_companies.each do |item|
       %tr
         %td= item.detalle
         %td= item.code
+        %td= check_box_tag "insurance_company_default", item.default, item.default, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_insurance_company_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

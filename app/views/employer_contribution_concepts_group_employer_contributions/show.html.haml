@@ -15,10 +15,10 @@
         %td.columnLabel
           = f.label :group_employer_contribution_id, :class => "apsLabel"
         %td.columnData
-          = @employer_contribution_concepts_group_employer_contribution.group_employer_contribution.detalle
+          = @employer_contribution_concepts_group_employer_contribution.group_employer_contribution.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :employer_contribution_concept_id, :class => "apsLabel"
         %td.columnData
-          = @employer_contribution_concepts_group_employer_contribution.employer_contribution_concept.detalle
+          = @employer_contribution_concepts_group_employer_contribution.employer_contribution_concept.try(:detalle)
 .clear

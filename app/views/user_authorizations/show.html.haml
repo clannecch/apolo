@@ -20,5 +20,5 @@
         %td.columnLabel
           = f.label :authorization_id, :class => "apsLabel"
         %td.columnData
-          = @user_authorization.authorization.name
+          = @user_authorization.authorization.try(:name)
 .clear

@@ -27,10 +27,10 @@
         %td= item.position
         %td= item.name
         %td= item.field_length
-        %td= item.justifies
+        %td= item.justifies == "R" ? "Derecha" : (item.justifies = "L" ? "Izquierda" : "Centrado")
         %td= item.fill_character
         %td= item.formula
-        %td= item.field_type
+        %td= item.field_type == "N" ? "Numerico" : "Caracter"
         %td= item.number_of_decimals
         %td= check_box_tag "sicoss_format_modifiable", item.modifiable, item.modifiable, :disabled => true
         %td.last.actions

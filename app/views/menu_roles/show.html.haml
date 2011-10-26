@@ -15,7 +15,7 @@
         %td.columnLabel
           = f.label :menu_id, :class => "apsLabel"
         %td.columnData
-          = @menu_role.menu.name
+          = @menu_role.menu.try(:name)
       %tr
         %td.columnLabel
           = f.label :rol_id, :class => "apsLabel"

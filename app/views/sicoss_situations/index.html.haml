@@ -13,12 +13,14 @@
     %tr
       %th= sort_link @search, :name, @sicoss_situations.human_attribute_name('name')
       %th= sort_link @search, :code, @sicoss_situations.human_attribute_name('code')
+      %th= sort_link @search, :default, @sicoss_situations.human_attribute_name('default')
       %th.last
 
     - @sicoss_situations.each do |item|
       %tr
         %td= item.name
         %td= item.code
+        %td= check_box_tag "sicoss_situation_default", item.default, item.default, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_situation_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

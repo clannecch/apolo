@@ -351,16 +351,15 @@ table tr:hover td.actions a {
 #error_explanation h2 {
   font-size: 16px;
   font-style: normal;
-  padding: 0;
 }
-/* line 284, ../../app/stylesheets/application.sass */
+/* line 283, ../../app/stylesheets/application.sass */
 #error_explanation ul {
   position: relative;
   margin: 0px 5px 0 5px;
   padding: 0;
   display: block;
 }
-/* line 290, ../../app/stylesheets/application.sass */
+/* line 289, ../../app/stylesheets/application.sass */
 #error_explanation ul li {
   padding: 0;
   margin: 0;

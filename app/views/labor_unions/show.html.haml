@@ -14,12 +14,17 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @labor_union.code
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @labor_union.detalle
       %tr
         %td.columnLabel
-          = f.label :code, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @labor_union.code
+          = @labor_union.default
 .clear

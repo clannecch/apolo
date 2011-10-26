@@ -21,7 +21,7 @@
         %td.columnLabel
           = f.label :remunerative_concept_id, :class => "apsLabel"
         %td.columnData
-          = @employee_remunerative_concept.remunerative_concept.detalle
+          = @employee_remunerative_concept.remunerative_concept.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :cantidad, :class => "apsLabel"
@@ -46,7 +46,7 @@
         %td.columnLabel
           = f.label :cost_center_id, :class => "apsLabel"
         %td.columnData
-          = @employee_remunerative_concept.cost_center.detalle
+          = @employee_remunerative_concept.cost_center.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :detalle, :class => "apsLabel"

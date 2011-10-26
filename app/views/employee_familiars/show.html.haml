@@ -35,7 +35,7 @@
         %td.columnLabel
           = f.label :health_insurance_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.health_insurance.detalle
+          = @employee_familiar.health_insurance.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :cuil, :class => "apsLabel"
@@ -65,12 +65,12 @@
         %td.columnLabel
           = f.label :country_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.country.detalle
+          = @employee_familiar.country.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :province_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.province.detalle
+          = @employee_familiar.province.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :comuna, :class => "apsLabel"
@@ -85,17 +85,17 @@
         %td.columnLabel
           = f.label :document_type_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.document_type.detalle
+          = @employee_familiar.document_type.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :activity_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.activity.name
+          = @employee_familiar.activity.try(:name)
       %tr
         %td.columnLabel
           = f.label :kinship_id, :class => "apsLabel"
         %td.columnData
-          = @employee_familiar.kinship.name
+          = @employee_familiar.kinship.try(:name)
       %tr
         %td.columnLabel
           = f.label :address, :class => "apsLabel"

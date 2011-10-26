@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111025214836
 #
 # Table name: categories
 #
@@ -11,6 +11,7 @@
 #  company_id :integer
 #  horas      :decimal(, )
 #  codigo     :string(255)
+#  default    :boolean
 #
 
 class Category < ActiveRecord::Base
@@ -21,6 +22,7 @@ class Category < ActiveRecord::Base
   validates_presence_of		    :detalle,	:codigo, :importe,			         :message => "es un dato requerido"
   validates_numericality_of   :horas,:importe,                           :message => "requiere dato numerico"
   validates_uniqueness_of		  :codigo,			                             :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 
   before_save :controlar_cambios
 

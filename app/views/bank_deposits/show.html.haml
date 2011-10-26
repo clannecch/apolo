@@ -14,12 +14,17 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @bank_deposit.code
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @bank_deposit.detalle
       %tr
         %td.columnLabel
-          = f.label :code, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @bank_deposit.code
+          = @bank_deposit.default
 .clear

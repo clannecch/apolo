@@ -14,6 +14,11 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = @category.codigo
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @category.detalle
@@ -29,7 +34,7 @@
           = @category.horas
       %tr
         %td.columnLabel
-          = f.label :codigo, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @category.codigo
+          = @category.default
 .clear

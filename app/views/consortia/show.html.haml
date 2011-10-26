@@ -46,12 +46,12 @@
         %td.columnLabel
           = f.label :location_id, :class => "apsLabel"
         %td.columnData
-          = @consortium.location.detalle
+          = @consortium.location.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :province_id, :class => "apsLabel"
         %td.columnData
-          = @consortium.province.detalle
+          = @consortium.province.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :latitude, :class => "apsLabel"

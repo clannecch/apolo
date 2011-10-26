@@ -14,12 +14,17 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @document_type.code
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @document_type.detalle
       %tr
         %td.columnLabel
-          = f.label :code, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @document_type.code
+          = @document_type.default
 .clear

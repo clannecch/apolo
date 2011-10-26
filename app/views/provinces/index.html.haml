@@ -14,6 +14,7 @@
       %th= sort_link @search, :detalle, @provinces.human_attribute_name('detalle')
       %th= sort_link @search, :code, @provinces.human_attribute_name('code')
       %th= sort_link @search, :country_id, @provinces.human_attribute_name('country_id')
+      %th= sort_link @search, :default, @provinces.human_attribute_name('default')
       %th.last
 
     - @provinces.each do |item|
@@ -21,6 +22,7 @@
         %td= item.detalle
         %td= item.code
         %td= item.country_id
+        %td= check_box_tag "province_default", item.default, item.default, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_province_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111024224627
+# Schema version: 20111025214836
 #
 # Table name: countries
 #
@@ -9,6 +9,7 @@
 #  updated_at :datetime
 #  company_id :integer
 #  code       :string(255)
+#  default    :boolean
 #
 
 class Country < ActiveRecord::Base
@@ -21,4 +22,5 @@ class Country < ActiveRecord::Base
   validates_presence_of		    :detalle,:code,                     :message => "es un dato requerido"
   validates_uniqueness_of		  :code,			                        :message => "existente"
   #belongs_to :company
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 end

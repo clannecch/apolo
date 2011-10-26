@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.integer  "company_id"
     t.decimal  "horas"
     t.string   "codigo"
+    t.boolean  "default"
   end
 
   create_table "causa_egresos", :force => true do |t|
@@ -181,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "data_to_asks", :force => true do |t|
@@ -402,9 +404,9 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.string   "sicoss_en_convenio"
     t.integer  "sicoss_regimen_type_id"
     t.string   "sicoss_seguro_obligatorio",        :limit => 1
-    t.integer  "group_employer_contribution_id"
-    t.integer  "group_remuneration_id"
     t.integer  "consortium_id"
+    t.integer  "group_remuneration_id"
+    t.integer  "group_employer_contribution_id"
   end
 
   create_table "employer_contribution_concepts", :force => true do |t|
@@ -637,6 +639,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.integer  "company_id"
     t.string   "code"
     t.integer  "country_id"
+    t.boolean  "default"
   end
 
   create_table "recibo_sueldos", :force => true do |t|
@@ -729,6 +732,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_damageds", :force => true do |t|
@@ -737,6 +741,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_employer_types", :force => true do |t|
@@ -745,6 +750,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_format_employers", :force => true do |t|
@@ -777,6 +783,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_reduction_zones", :force => true do |t|
@@ -785,6 +792,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_regimen_types", :force => true do |t|
@@ -793,6 +801,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_situations", :force => true do |t|
@@ -801,6 +810,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "tasks", :force => true do |t|
@@ -818,6 +828,7 @@ ActiveRecord::Schema.define(:version => 20111025214836) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.boolean  "recibo_principal"
+    t.boolean  "default"
   end
 
   create_table "user_authorizations", :force => true do |t|

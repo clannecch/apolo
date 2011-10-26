@@ -1,6 +1,7 @@
 = form_for(@remuneration_type) do |f|
   = render 'shared/errorhandler', :obj_errors => @remuneration_type.errors
   .clear
+  %br/
   .form_box
     .form_box_title
     /  %span.title= RemunerationType.model_name.human
@@ -19,6 +20,6 @@
         %td.columnLabel
           = f.label :hora_dia_mes, :class => "apsLabel"
         %td.columnData
-          = f.text_field :hora_dia_mes, :class => "apsTextbox"
+          = f.select( :hora_dia_mes ,{ "Hora" => "H", "Dia" => "D", "Mes" => "M"},{ :prompt => "Seleccione un tipo de Remuneracion"})
   .actions
     = f.submit :class => "btn success"

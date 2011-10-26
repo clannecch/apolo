@@ -13,12 +13,14 @@
     %tr
       %th= sort_link @search, :detalle, @places.human_attribute_name('detalle')
       %th= sort_link @search, :code, @places.human_attribute_name('code')
+      %th= sort_link @search, :default, @places.human_attribute_name('default')
       %th.last
 
     - @places.each do |item|
       %tr
         %td= item.detalle
         %td= item.code
+        %td= check_box_tag "place_default", item.default, item.default, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_place_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

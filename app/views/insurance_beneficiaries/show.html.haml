@@ -25,7 +25,7 @@
         %td.columnLabel
           = f.label :document_type_id, :class => "apsLabel"
         %td.columnData
-          = @insurance_beneficiary.document_type.detalle
+          = @insurance_beneficiary.document_type.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :numero_documento, :class => "apsLabel"
@@ -50,7 +50,7 @@
         %td.columnLabel
           = f.label :kinship_id, :class => "apsLabel"
         %td.columnData
-          = @insurance_beneficiary.kinship.name
+          = @insurance_beneficiary.kinship.try(:name)
       %tr
         %td.columnLabel
           = f.label :porcentual, :class => "apsLabel"

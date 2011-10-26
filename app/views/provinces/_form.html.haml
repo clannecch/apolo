@@ -20,5 +20,10 @@
           = f.label :country_id, :class => "apsLabel"
         %td.columnData
           = f.collection_select :country_id, Country.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

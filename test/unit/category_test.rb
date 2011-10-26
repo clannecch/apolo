@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111025214836
 #
 # Table name: categories
 #
@@ -11,6 +11,7 @@
 #  company_id :integer
 #  horas      :decimal(, )
 #  codigo     :string(255)
+#  default    :boolean
 #
 
 require 'test_helper'

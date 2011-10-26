@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111025214836
 #
 # Table name: tipo_recibos
 #
@@ -9,6 +9,7 @@
 #  updated_at       :datetime
 #  company_id       :integer
 #  recibo_principal :boolean
+#  default          :boolean
 #
 
 class TipoRecibo < ActiveRecord::Base
@@ -18,5 +19,6 @@ class TipoRecibo < ActiveRecord::Base
   has_many :liquidacions, :dependent => :restrict
   validates_presence_of		    :detalle,															          :message => "es un dato requerido"
   validates_uniqueness_of		  :recibo_principal,			                        :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 
 end

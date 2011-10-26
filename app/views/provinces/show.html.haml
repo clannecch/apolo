@@ -14,17 +14,22 @@
     %table.tableForm
       %tr
         %td.columnLabel
-          = f.label :detalle, :class => "apsLabel"
-        %td.columnData
-          = @province.detalle
-      %tr
-        %td.columnLabel
           = f.label :code, :class => "apsLabel"
         %td.columnData
           = @province.code
       %tr
         %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @province.detalle
+      %tr
+        %td.columnLabel
           = f.label :country_id, :class => "apsLabel"
         %td.columnData
-          = @province.country.detalle
+          = @province.country.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = @province.default
 .clear

@@ -14,12 +14,17 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @home_about.code
+      %tr
+        %td.columnLabel
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = @home_about.detalle
       %tr
         %td.columnLabel
-          = f.label :code, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @home_about.code
+          = @home_about.default
 .clear

@@ -15,5 +15,10 @@
           = f.label :detalle, :class => "apsLabel"
         %td.columnData
           = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
   .actions
     = f.submit :class => "btn success"

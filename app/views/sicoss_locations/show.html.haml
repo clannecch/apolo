@@ -14,12 +14,17 @@
     %table.tableForm
       %tr
         %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_location.code
+      %tr
+        %td.columnLabel
           = f.label :name, :class => "apsLabel"
         %td.columnData
           = @sicoss_location.name
       %tr
         %td.columnLabel
-          = f.label :code, :class => "apsLabel"
+          = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @sicoss_location.code
+          = @sicoss_location.default
 .clear

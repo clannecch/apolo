@@ -15,7 +15,7 @@
         %td.columnLabel
           = f.label :sicoss_format_id, :class => "apsLabel"
         %td.columnData
-          = @sicoss_format_employer.sicoss_format.name
+          = @sicoss_format_employer.sicoss_format.try(:name)
       %tr
         %td.columnLabel
           = f.label :field_type, :class => "apsLabel"

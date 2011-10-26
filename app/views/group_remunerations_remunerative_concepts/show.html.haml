@@ -15,10 +15,10 @@
         %td.columnLabel
           = f.label :group_remuneration_id, :class => "apsLabel"
         %td.columnData
-          = @group_remunerations_remunerative_concept.group_remuneration.detalle
+          = @group_remunerations_remunerative_concept.group_remuneration.try(:detalle)
       %tr
         %td.columnLabel
           = f.label :remunerative_concept_id, :class => "apsLabel"
         %td.columnData
-          = @group_remunerations_remunerative_concept.remunerative_concept.detalle
+          = @group_remunerations_remunerative_concept.remunerative_concept.try(:detalle)
 .clear

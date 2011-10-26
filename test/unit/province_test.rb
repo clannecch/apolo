@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111024224627
+# Schema version: 20111025214836
 #
 # Table name: provinces
 #
@@ -10,6 +10,7 @@
 #  company_id :integer
 #  code       :string(255)
 #  country_id :integer
+#  default    :boolean
 #
 
 require 'test_helper'

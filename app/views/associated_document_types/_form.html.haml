@@ -1,6 +1,7 @@
 = form_for(@associated_document_type) do |f|
   = render 'shared/errorhandler', :obj_errors => @associated_document_type.errors
   .clear
+  %br/
   .form_box
     .form_box_title
     /  %span.title= AssociatedDocumentType.model_name.human
@@ -19,6 +20,6 @@
         %td.columnLabel
           = f.label :document_type, :class => "apsLabel"
         %td.columnData
-          = f.text_field :document_type, :class => "apsTextbox"
+          = f.select :document_type,{"Otros" => "O","Logo" => "L","Foto Principal" => "F"},{ :prompt => "Seleccione un tipo de Documento"}
   .actions
     = f.submit :class => "btn success"
