@@ -186,9 +186,7 @@ class ReciboSueldosController < ApplicationController
                     :logo                   => nil,
                     :empresa                => "",
                     :domicilio              => "",
-                    :cuit                   => "",
-                    :inscripcion            => "",
-                    :caja                   => ""
+                    :cuit                   => ""
                     })
 
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
@@ -210,8 +208,6 @@ class ReciboSueldosController < ApplicationController
                             @recibo_sueldo.employee.consortium.location.detalle+' ('+
                             @recibo_sueldo.employee.consortium.province.detalle+")"
       empresa.cuit        = @recibo_sueldo.employee.consortium.cuit
-      empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
-      empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
       Rails.logger.info("calle="+current_company.calle)
       Rails.logger.info("altura="+current_company.altura)
@@ -225,8 +221,6 @@ class ReciboSueldosController < ApplicationController
                             current_company.location.detalle+' ('+
                             current_company.province.detalle+")"
       empresa.cuit        = current_company.cuit
-      empresa.inscripcion = current_company.numero_inscripcion
-      empresa.caja        = current_company.caja
     end
 Rails.logger.info("10")
     if !attach.nil?
