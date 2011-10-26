@@ -56,5 +56,5 @@
         %td.columnLabel
           = f.label :auxiliar, :class => "apsLabel"
         %td.columnData
-          = @retention_concept.auxiliar
+          = check_box_tag "retention_concept_auxiliar", @retention_concept.auxiliar, @retention_concept.auxiliar, :disabled => true
 .clear

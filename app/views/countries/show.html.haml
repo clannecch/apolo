@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @country.default
+          = check_box_tag "country_default", @country.default, @country.default, :disabled => true
 .clear

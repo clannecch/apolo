@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @marital_status.default
+          = check_box_tag "marital_status_default", @marital_status.default, @marital_status.default, :disabled => true
 .clear

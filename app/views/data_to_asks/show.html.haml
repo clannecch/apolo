@@ -21,10 +21,10 @@
         %td.columnLabel
           = f.label :cantidad, :class => "apsLabel"
         %td.columnData
-          = @data_to_ask.cantidad
+          = check_box_tag "data_to_ask_cantidad", @data_to_ask.cantidad, @data_to_ask.cantidad, :disabled => true
       %tr
         %td.columnLabel
           = f.label :importe, :class => "apsLabel"
         %td.columnData
-          = @data_to_ask.importe
+          = check_box_tag "data_to_ask_importe", @data_to_ask.importe, @data_to_ask.importe, :disabled => true
 .clear

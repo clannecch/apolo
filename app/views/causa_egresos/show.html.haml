@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @causa_egreso.default
+          = check_box_tag "causa_egreso_default", @causa_egreso.default, @causa_egreso.default, :disabled => true
 .clear

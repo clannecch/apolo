@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @cost_center.default
+          = check_box_tag "cost_center_default", @cost_center.default, @cost_center.default, :disabled => true
 .clear

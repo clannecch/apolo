@@ -6,13 +6,13 @@ es-AR:
       sicoss_format:
         position: Position
         name: Nombre
-        field_length: Field Length
-        justifies: Justifies
-        fill_character: Fill Character
+        field_length: Logitud
+        justifies: Justifido
+        fill_character: Caracter de relleno
         formula: Formula
         company_id: Empresa
         created_at: Creado el
         updated_at: Actualizado el
-        field_type: Field Type
-        number_of_decimals: Number Of Decimals
+        field_type: Tipo de campo
+        number_of_decimals: Numero de decimales
         modifiable: Modifiable

@@ -36,5 +36,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @category.default
+          = check_box_tag "category_default", @category.default, @category.default, :disabled => true
 .clear

@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @sicoss_location.default
+          = check_box_tag "sicoss_location_default", @sicoss_location.default, @sicoss_location.default, :disabled => true
 .clear

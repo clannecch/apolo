@@ -26,5 +26,5 @@
         %td.columnLabel
           = f.label :default, :class => "apsLabel"
         %td.columnData
-          = @accounting_imputation.default
+          = check_box_tag "accounting_imputation_default", @accounting_imputation.default, @accounting_imputation.default, :disabled => true
 .clear

@@ -4,8 +4,8 @@ es-AR:
       sicoss_format_employer: Formato empleador (AFIP)
     attributes:
       sicoss_format_employer:
-        sicoss_format_id: Sicoss Format
-        field_type: Field Type
+        sicoss_format_id: Formato (AFIP)
+        field_type: Tipo de campo
         formula: Formula
         company_id: Empresa
         created_at: Creado el
