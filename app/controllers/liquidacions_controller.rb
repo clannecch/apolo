@@ -152,6 +152,11 @@ class LiquidacionsController < ApplicationController
                   })
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
+  if !@recibo_sueldos.any?
+    pdf.draw_text "No existen Movimientos para listar".center(170), :at => [5, 600],:style => :bold, :size => 10
+    pdf.render_file(filename)
+    return
+  end
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
@@ -709,7 +714,10 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
+  pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
+                            :page_layout => :portrait)
   if !@recibo_sueldos.any?
+    pdf.draw_text "No existen Movimientos para listar".center(170), :at => [5, 600],:style => :bold, :size => 10
     return
   end
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
@@ -757,21 +765,6 @@ def print_libro_pdf(filename,liquidacion_actual)
 
       empresa.logo = file_logo.to_s
     end
-  end
-  pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
-                            :page_layout => :portrait)
-  begin
-    logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
-  rescue
-    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores"
-    return
-  end
-  begin
-    logo_imprimir_hasta_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_imprimir_hasta_hoja"}).number.to_i
-  rescue
-    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_imprimir_hasta_hoja' en la tabla de numeradores"
-#    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
-    return
   end
 
   offset = 0
