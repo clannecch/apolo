@@ -74,9 +74,9 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.save
+        liquidar_employee
         format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.created', :item=> Liquidacion.model_name.human)) }
         format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
-        liquidar_employee
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @liquidacion.errors, :status => :unprocessable_entity }
@@ -709,6 +709,9 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
+  if @recibo_sueldos.nil?
+    return
+  end
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil?
