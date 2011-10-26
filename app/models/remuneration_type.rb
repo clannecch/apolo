@@ -21,4 +21,5 @@ class RemunerationType < ActiveRecord::Base
   validates_presence_of		    :detalle, :code, :hora_dia_mes,     :message => "es un dato requerido"
   validates_inclusion_of :hora_dia_mes , :in => %w(H D M)
   validates_uniqueness_of		  :code,			                        :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 end

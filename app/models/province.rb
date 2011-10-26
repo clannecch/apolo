@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111024224627
+# Schema version: 20111025214836
 #
 # Table name: provinces
 #
@@ -10,6 +10,7 @@
 #  company_id :integer
 #  code       :string(255)
 #  country_id :integer
+#  default    :boolean
 #
 
 class Province < ActiveRecord::Base
@@ -22,4 +23,5 @@ class Province < ActiveRecord::Base
 
   validates_presence_of		    :detalle, :code,   									:message => "es un dato requerido"
   validates_uniqueness_of		  :code,			                        :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 end

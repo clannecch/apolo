@@ -21,5 +21,6 @@ class GroupEmployerContribution < ActiveRecord::Base
   has_and_belongs_to_many :employer_contribution_concepts
   validates_presence_of		    :detalle,:code,                     :message => "es un dato requerido"
   validates_uniqueness_of		  :code,			                        :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 
 end

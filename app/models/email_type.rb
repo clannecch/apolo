@@ -19,4 +19,5 @@ class EmailType < ActiveRecord::Base
 
   #scope :by_company, lambda {|company| where(:company_id => company) }
   default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 end
