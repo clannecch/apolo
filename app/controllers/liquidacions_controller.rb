@@ -121,7 +121,11 @@ class LiquidacionsController < ApplicationController
   end
 
   def liquidar_employee
+    Rails.logger.info("Company="+current_company.id.to_s)
+
     @employees = Employee.where(:company_id => current_company.id).where(:fecha_egreso.blank?)
+    Rails.logger.info("Cant="+@employees.count.to_s)
+
     @employees.each do |employee|
       Rails.logger.info("Employee="+employee.id.to_s)
       @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
