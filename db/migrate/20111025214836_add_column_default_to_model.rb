@@ -28,7 +28,7 @@ class AddColumnDefaultToModel < ActiveRecord::Migration
     add_column :remuneration_types, :default, :boolean
     add_column :sections, :default, :boolean
     add_column :tasks, :default, :boolean
-#=begin
+=begin
     add_column :categories, :default, :boolean
     add_column :countries, :default, :boolean
     add_column :provinces, :default, :boolean
@@ -40,11 +40,11 @@ class AddColumnDefaultToModel < ActiveRecord::Migration
     add_column :sicoss_regimen_types, :default, :boolean
     add_column :sicoss_situations, :default, :boolean
     add_column :tipo_recibos, :default, :boolean
-#=end
+=end
 end
 
   def self.down
-#=begin
+=begin
     remove_column :tipo_recibos, :default
     remove_column :sicoss_situations, :default
     remove_column :sicoss_regimen_types, :default
@@ -56,7 +56,7 @@ end
     remove_column :provinces , :default
     remove_column :coutries, :default
     remove_column :categories, :default
-#=end
+=end
     remove_column :tasks, :default
     remove_column :sections, :default
     remove_column :remuneration_types, :default
