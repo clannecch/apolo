@@ -13,12 +13,14 @@
     %tr
       %th= sort_link @search, :code, @group_remunerations.human_attribute_name('code')
       %th= sort_link @search, :detalle, @group_remunerations.human_attribute_name('detalle')
+      %th= sort_link @search, :default, @group_remunerations.human_attribute_name('default')
       %th.last
 
     - @group_remunerations.each do |item|
       %tr
+        %td= item.code
         %td= item.detalle
-        %td= item.detalle
+        %td= check_box_tag "activity_default", item.default, item.default, :disabled => true
         %td.last.actions
           = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item
           = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_group_remuneration_path(item)

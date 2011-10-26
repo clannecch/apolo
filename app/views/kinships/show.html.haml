@@ -27,4 +27,9 @@
           = f.label :hijo_conyugue, :class => "apsLabel"
         %td.columnData
           = @kinship.hijo_conyugue == "C" ? "Conyugue" : (@kinship.hijo_conyugue == "H" ? "Hijo" : "Otros")
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "kinship_default", @kinship.default, @kinship.default, :disabled => true
 .clear
