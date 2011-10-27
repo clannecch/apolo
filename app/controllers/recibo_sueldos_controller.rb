@@ -200,7 +200,7 @@ class ReciboSueldosController < ApplicationController
 
     pdf.draw_text current_company.try(:code).to_s + '-' + 
                   @recibo_sueldo.employee.consortium.try(:code).to_s + '-' + 
-                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [150,725], :size => 7
+                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [450,725], :size => 7
 
     logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     attach = nil
