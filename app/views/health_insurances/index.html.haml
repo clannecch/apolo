@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => HealthInsurance.model_name.human) , new_health_insurance_path(@health_insurance), :class => "btn success" 
   - if @health_insurances.any?
-    = link_to t('scaffold.actions.export').titlecase, health_insurances_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + HealthInsurance.model_name, :class => "btn info"
 
 - if @health_insurances.any?
   %table.tableStandard

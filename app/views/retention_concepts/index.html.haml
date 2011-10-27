@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => RetentionConcept.model_name.human) , new_retention_concept_path(@retention_concept), :class => "btn success" 
   - if @retention_concepts.any?
-    = link_to t('scaffold.actions.export').titlecase, retention_concepts_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + RetentionConcept.model_name, :class => "btn info"
 
 - if @retention_concepts.any?
   %table.tableStandard

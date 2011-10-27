@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => DetalleReciboRetencion.model_name.human) , new_detalle_recibo_retencion_path(@detalle_recibo_retencion), :class => "btn success" 
   - if @detalle_recibo_retencions.any?
-    = link_to t('scaffold.actions.export').titlecase, detalle_recibo_retencions_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + DetalleReciboRetencion.model_name, :class => "btn info"
 
 - if @detalle_recibo_retencions.any?
   %table.tableStandard

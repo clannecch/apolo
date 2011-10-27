@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => BankDepositAccountType.model_name.human) , new_bank_deposit_account_type_path(@bank_deposit_account_type), :class => "btn success" 
   - if @bank_deposit_account_types.any?
-    = link_to t('scaffold.actions.export').titlecase, bank_deposit_account_types_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + BankDepositAccountType.model_name, :class => "btn info"
 
 - if @bank_deposit_account_types.any?
   %table.tableStandard

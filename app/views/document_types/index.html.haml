@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => DocumentType.model_name.human) , new_document_type_path(@document_type), :class => "btn success" 
   - if @document_types.any?
-    = link_to t('scaffold.actions.export').titlecase, document_types_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + DocumentType.model_name, :class => "btn info"
 
 - if @document_types.any?
   %table.tableStandard

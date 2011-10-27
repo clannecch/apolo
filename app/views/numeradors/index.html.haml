@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => Numerador.model_name.human) , new_numerador_path(@numerador), :class => "btn success" 
   - if @numeradors.any?
-    = link_to t('scaffold.actions.export').titlecase, numeradors_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Numerador.model_name, :class => "btn info"
 
 - if @numeradors.any?
   %table.tableStandard

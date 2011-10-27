@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => Issued.model_name.human) , new_issued_path(@issued), :class => "btn success" 
   - if @issueds.any?
-    = link_to t('scaffold.actions.export').titlecase, issueds_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Issued.model_name, :class => "btn info"
 
 - if @issueds.any?
   %table.tableStandard

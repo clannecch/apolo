@@ -30,10 +30,16 @@ class ApplicationController < ActionController::Base
 
 
 # #################################################################################
-  def print_table(name)
+  def print_table
+    name = params[:tablename]
     require 'prawn'
     @table = name.constantize.all
-
+    #Cuando el usuario no pueda acceder a la entidad, descomentar eso
+=begin
+    flash[:error] = "Usted no tiene acceso a la entidad " + name.humanize
+    redirect_to :root
+    return
+=end
     filename = Rails.root.join('tmp',rand.to_s[2..15])
     Dir.mkdir(filename.dirname) unless File.directory?(filename.dirname)
 

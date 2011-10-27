@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => HomeAbout.model_name.human) , new_home_about_path(@home_about), :class => "btn success" 
   - if @home_abouts.any?
-    = link_to t('scaffold.actions.export').titlecase, home_abouts_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + HomeAbout.model_name, :class => "btn info"
 
 - if @home_abouts.any?
   %table.tableStandard

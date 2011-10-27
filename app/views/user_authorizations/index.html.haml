@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => UserAuthorization.model_name.human) , new_user_authorization_path(@user_authorization), :class => "btn success" 
   - if @user_authorizations.any?
-    = link_to t('scaffold.actions.export').titlecase, user_authorizations_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + UserAuthorization.model_name, :class => "btn info"
 
 - if @user_authorizations.any?
   %table.tableStandard

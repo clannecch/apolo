@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => CostCenter.model_name.human) , new_cost_center_path(@cost_center), :class => "btn success" 
   - if @cost_centers.any?
-    = link_to t('scaffold.actions.export').titlecase, cost_centers_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + CostCenter.model_name, :class => "btn info"
 
 - if @cost_centers.any?
   %table.tableStandard

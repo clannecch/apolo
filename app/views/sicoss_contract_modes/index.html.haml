@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => SicossContractMode.model_name.human) , new_sicoss_contract_mode_path(@sicoss_contract_mode), :class => "btn success" 
   - if @sicoss_contract_modes.any?
-    = link_to t('scaffold.actions.export').titlecase, sicoss_contract_modes_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + SicossContractMode.model_name, :class => "btn info"
 
 - if @sicoss_contract_modes.any?
   %table.tableStandard

@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => EmailType.model_name.human) , new_email_type_path(@email_type), :class => "btn success" 
   - if @email_types.any?
-    = link_to t('scaffold.actions.export').titlecase, email_types_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EmailType.model_name, :class => "btn info"
 
 - if @email_types.any?
   %table.tableStandard

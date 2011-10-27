@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => Menu.model_name.human) , new_menu_path(@menu), :class => "btn success" 
   - if @menus.any?
-    = link_to t('scaffold.actions.export').titlecase, menus_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Menu.model_name, :class => "btn info"
 
 - if @menus.any?
   %table.tableStandard
@@ -19,7 +19,7 @@
 
     - @menus.each do |item|
       %tr
-        %td= (item.parent_id.blank? ? "" : Menu.find(item.parent_id).name)
+        %td= item.parent_id
         %td= item.name
         %td= item.link_url
         %td= item.order_no

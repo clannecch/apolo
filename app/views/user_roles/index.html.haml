@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => UserRole.model_name.human) , new_user_role_path(@user_role), :class => "btn success" 
   - if @user_roles.any?
-    = link_to t('scaffold.actions.export').titlecase, user_roles_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + UserRole.model_name, :class => "btn info"
 
 - if @user_roles.any?
   %table.tableStandard

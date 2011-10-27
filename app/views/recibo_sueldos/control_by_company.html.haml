@@ -7,6 +7,7 @@
     - breadcrumb.item @recibo_sueldo.employee.full_name, nil, :active => true
 
 .clear
+= link_to "Imprimir", "/print_table?tablename=" + Liquidacion.model_name.capitalize, :class => "btn info"
 .clear
 
 - if !@recibo_sueldo.blank?

@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => EmployerContributionConceptsGroupEmployerContribution.model_name.human) , new_employer_contribution_concepts_group_employer_contribution_path(@employer_contribution_concepts_group_employer_contribution), :class => "btn success" 
   - if @employer_contribution_concepts_group_employer_contributions.any?
-    = link_to t('scaffold.actions.export').titlecase, employer_contribution_concepts_group_employer_contributions_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EmployerContributionConceptsGroupEmployerContribution.model_name, :class => "btn info"
 
 - if @employer_contribution_concepts_group_employer_contributions.any?
   %table.tableStandard

@@ -107,6 +107,7 @@ APSSueldos::Application.routes.draw do |map|
     end
   end
 
+  match '/print_table' => 'application#print_table', :via => :get
   match 'liquidacions/control_by_company_list' => 'liquidacions#control_by_company_list', :via => :get
   resources :liquidacions do
     member do

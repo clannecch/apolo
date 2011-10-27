@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => EducationalLevel.model_name.human) , new_educational_level_path(@educational_level), :class => "btn success" 
   - if @educational_levels.any?
-    = link_to t('scaffold.actions.export').titlecase, educational_levels_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EducationalLevel.model_name, :class => "btn info"
 
 - if @educational_levels.any?
   %table.tableStandard

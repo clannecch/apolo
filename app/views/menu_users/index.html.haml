@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => MenuUser.model_name.human) , new_menu_user_path(@menu_user), :class => "btn success" 
   - if @menu_users.any?
-    = link_to t('scaffold.actions.export').titlecase, menu_users_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + MenuUser.model_name, :class => "btn info"
 
 - if @menu_users.any?
   %table.tableStandard

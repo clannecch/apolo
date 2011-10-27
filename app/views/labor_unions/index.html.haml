@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => LaborUnion.model_name.human) , new_labor_union_path(@labor_union), :class => "btn success" 
   - if @labor_unions.any?
-    = link_to t('scaffold.actions.export').titlecase, labor_unions_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + LaborUnion.model_name, :class => "btn info"
 
 - if @labor_unions.any?
   %table.tableStandard

@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => SicossActivity.model_name.human) , new_sicoss_activity_path(@sicoss_activity), :class => "btn success" 
   - if @sicoss_activities.any?
-    = link_to t('scaffold.actions.export').titlecase, sicoss_activities_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + SicossActivity.model_name, :class => "btn info"
 
 - if @sicoss_activities.any?
   %table.tableStandard

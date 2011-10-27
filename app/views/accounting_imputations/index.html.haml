@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => AccountingImputation.model_name.human) , new_accounting_imputation_path(@accounting_imputation), :class => "btn success" 
   - if @accounting_imputations.any?
-    = link_to t('scaffold.actions.export').titlecase, accounting_imputations_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + AccountingImputation.model_name, :class => "btn info"
 
 - if @accounting_imputations.any?
   %table.tableStandard

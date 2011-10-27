@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => DeduccionGananciasTable.model_name.human) , new_deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn success" 
   - if @deduccion_ganancias_tables.any?
-    = link_to t('scaffold.actions.export').titlecase, deduccion_ganancias_tables_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + DeduccionGananciasTable.model_name, :class => "btn info"
 
 - if @deduccion_ganancias_tables.any?
   %table.tableStandard
