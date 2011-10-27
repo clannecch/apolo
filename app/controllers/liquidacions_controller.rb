@@ -22,7 +22,11 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @liquidacion }
+#      format.xml  { render :xml => @liquidacion }
+      format.xml  do
+        print_table('RemunerativeConcept')
+      end
+
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
@@ -141,7 +145,7 @@ class LiquidacionsController < ApplicationController
   end
 
   def liquidar_employee
-    @employees = Employee.where(:fecha_egreso.blank?)
+    @employees = Employee.by_company(current_company.id).where(:fecha_egreso.blank?)
     Rails.logger.info("Cant="+@employees.count.to_s)
 
     @employees.each do |employee|
@@ -985,3 +989,4 @@ def print_libro_pdf(filename,liquidacion_actual)
   end
   pdf.render_file(filename)
 end
+

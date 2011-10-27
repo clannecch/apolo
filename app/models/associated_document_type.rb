@@ -1,4 +1,4 @@
-# == Schema Information
+# == S  chema Information
 # Schema version: 20111025214836
 #
 # Table name: associated_document_types

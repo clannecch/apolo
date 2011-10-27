@@ -27,6 +27,75 @@ class ApplicationController < ActionController::Base
 #  before_filter :check_change_company
 #  before_filter :before_all
 
+
+
+# #################################################################################
+  def print_table(name)
+    require 'prawn'
+    @table = name.constantize.all
+
+    filename = Rails.root.join('tmp',rand.to_s[2..15])
+    Dir.mkdir(filename.dirname) unless File.directory?(filename.dirname)
+
+    if !@table.any?
+      flash[:error] = "No existen Movimientos para Listar"
+      return
+    end
+
+    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+                              :page_layout => :portrait)
+    offset = 0
+#  page_number = 0
+    pdf.repeat(:all, :dynamic => true) do
+      pdf.draw_text name.constantize.model_name.human.pluralize.center(100), :at => [5,735],:style => :bold, :size => 10
+      pdf.draw_text current_company.name.humanize, :at => [5,745],:style => :bold, :size => 10
+#    page_number = page_number + 1
+     pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, 745], :size => 10
+    end
+    line = []
+    eval(name+".columns").each do |col|
+      if !"id created_at updated_at ".include?(col.name)
+        if col.name.include?("_id")
+        else
+          line << name.constantize.human_attribute_name(col.name)
+        end
+      end
+    end
+    data = []
+    data << line
+    data << []
+    @table.each do |reg|
+      line = []
+      eval(name+".columns").each do |col|
+        if !"id created_at updated_at ".include?(col.name)
+          if col.name.include?("_id")
+          else
+            line << eval("reg."+col.name+".to_s")
+          end
+        end
+      end
+      data << line
+    end
+    data.each do |r|
+      Rails.logger.info(r)
+    end
+    pdf.table(data, #:column_widths => [40, 170],
+           :cell_style => { :font => "Times-Roman",
+                            :size => 9,:padding => [2,3,4,2],
+                            :align =>  :left,
+                            :valign => :center },
+           :header => true ,
+           :row_colors => ["F0F0F0", "FFFFCC"]
+            )   do
+#    column(3..6).align = :right
+#    row(0).column(0..6).align = :center
+    end
+    pdf.render_file(filename)
+    send_file(filename, :type => :pdf, :disposition => 'attachment', :filename => name+".pdf")
+    File.delete(filename) unless Rails.env.development?
+  end
+
+
   protected
 
   def check_change_company
