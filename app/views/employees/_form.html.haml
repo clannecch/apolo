@@ -76,10 +76,10 @@
           .links
             = link_to_add_association 'Agregar Familiar', f, :employee_familiars
     #beneficiarios
-      .field
+      #field-beneficiarios
         %h3 Beneficiario Seguro
         #Insurance_beneficiary
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Apellido"
               %th= f.label "Nombre"
@@ -96,10 +96,10 @@
           .links
             = link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries, 'data-association-insertion-node' => '#nested-holder', 'data-association-insertion-position' => :before
     #remuneraciones
-      .field
+      .field-remuneraciones
         %h3 Conceptos remunerativos personalizados
         #employee_remunerative_concept
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Concepto haber"
               %th= f.label "Detalle Personalizado"
@@ -113,10 +113,10 @@
           .links
             = link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts, 'data-association-insertion-node' => '#nested-holder2', 'data-association-insertion-position' => :before
     #retenciones
-      .field
+      .field-retenciones
         %h3 Conceptos de retenciones personalizados
         #employee_retention_concept
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Concepto Retencion"
               %th= f.label "Detalle Personalizado"

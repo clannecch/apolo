@@ -1,0 +1,52 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item "Control de Liquidaciones", liquidacions_control_by_company_list_path
+    - breadcrumb.item @liquidacion.periodo.strftime("%Y/%m"), control_by_company_liquidacion_path(@liquidacion)
+    - breadcrumb.item @recibo_sueldo.employee.full_name, nil, :active => true
+
+.clear
+.clear
+
+- if !@recibo_sueldo.blank?
+  #modal-edit
+    //%h2 Legajo: = @recibo_sueldo.employee.full_name - = @recibo_sueldo.employee.fecha_ingreso.to_s
+    #recuadro{:style => "border:solid 1px black;"}
+      %table#conceptos.tableStandard
+        %tr
+          %th Concepto
+          %th CD
+          %th Haber
+          %th Retencion
+          %th Total
+
+        - @recibo_sueldo.detalle_recibo_habers.each do |item|
+          %tr
+            %td= item.remunerative_concept.detalle
+            %td
+            %td= item.total
+            %td
+            %td
+
+        - @recibo_sueldo.detalle_recibo_retencions.each do |item|
+          %tr
+            %td= item.retention_concept.detalle
+            %td
+            %td
+            %td= item.total
+            %td
+
+- @total = @recibo_sueldo.detalle_recibo_habers.sum(:total) - @recibo_sueldo.detalle_recibo_retencions.sum(:total)
+.clear
+.actions{:style => "border:solid 1px black;text-align:left"}
+  %h2= "Total: " + @total.to_s
+
+.clear
+.actions
+  = link_to "Aprobar", "#", :class => "btn success", :onclick => "return ShowModalAlert('Desea guadar los cambios?', 'Pregunta')"
+  = link_to "Editar", edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo), :rel => "twypsy", :class => "btn standard"
+  = link_to t('scaffold.actions.destroy').titlecase, [@liquidacion,@recibo_sueldo], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+
+:javascript
+  $(document).ready()

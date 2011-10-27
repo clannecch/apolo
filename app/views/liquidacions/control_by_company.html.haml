@@ -9,7 +9,6 @@
 .clear
 
 /- if @liquidacion.recibo_sueldos.any?
-
 - if true
   %table#recibo_sueldos.tableStandard
     %tr
@@ -17,54 +16,13 @@
       %th Empleado
       %th Total haberes
       %th Total retenciones
+      %th Control
 
-    - @liquidacion.recibo_sueldos.each do |recibo_sueldo|
+    - @liquidacion.recibo_sueldos.each do |item|
       %tr
-        %td= recibo_sueldo.employee.legajo
-        %td= recibo_sueldo.employee.full_name
-        %td= recibo_sueldo.total_haberes
-        %td= recibo_sueldo.total_retenciones
-        %td= link_to 'Controlar', liquidacions_control_by_company_path(), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
-
-/
-  - if !@recibo_sueldo.blank?
-    #modal-edit
-      %h2 Legajo: = @recibo_sueldo.employee.full_name - = @recibo_sueldo.employee.fecha_ingreso.to_s
-      #recuadro{:style => "border:solid 1px black;"}
-        %table#conceptos.tableStandard
-          %tr
-            %th Concepto
-            %th %
-            %th Haber
-            %th Retencion
-            %th Total
-            %th.last
-      - @recibo_sueldo.detalle_recibo_habers.each do |item|
-        %tr
-          %td= item.remunerative_concept.name
-          %td
-          %td= item.total
-          %td
-          %td.last.actions
-            = link_to 'Controlar', nil, :rel => "twypsy", :title => t('scaffold.actions.save').titlecase
-      - @recibo_sueldo.detalle_recibo_retentions.each do |item|
-        %tr
-          %td= item.retention_concept.name
-          %td
-          %td= item.total
-          %td
-          %td.last.actions
-            = link_to 'Controlar', nil, :rel => "twypsy", :title => t('scaffold.actions.save').titlecase
-
-
-
-  :javascript
-    function Xxx(texto,titulo){
-      $("#ModalText").text(texto);
-      if (titulo != null) $("#ModalTitle").text(titulo);
-      $("#modal-alert").modal({
-          show: true,
-          backdrop: true,
-          closeOnEscape: true
-      });
-    }
+        %td= item.employee.legajo
+        %td= item.employee.full_name
+        %td
+        /%td= item.total_haberes
+        %td= item.total_retenciones
+        %td= link_to 'Controlar', control_by_company_liquidacion_recibo_sueldo_path(@liquidacion, item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

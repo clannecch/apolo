@@ -180,6 +180,16 @@ class ReciboSueldosController < ApplicationController
   end
 =end
 
+  #[PVD] :: 2011-10-26 :: Listado de los recibos de sueldo de una liquidacion
+  def control_by_company
+    @recibo_sueldo =  @liquidacion.recibo_sueldos.find(params[:id])
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
+    end
+  end
+
 #  numero.truncate parte entera
   #"456778904".gsub(/(.)(?=.{3}+$)/, %q(\1,))
 
