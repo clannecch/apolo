@@ -198,6 +198,9 @@ class ReciboSueldosController < ApplicationController
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
 
+    pdf.draw_text current_company.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.consortium.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [150,725], :size => 7
 
     logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
     attach = nil
@@ -239,7 +242,7 @@ class ReciboSueldosController < ApplicationController
         empresa.logo = file_photo.to_s
       end
     end
-    Rails.logger.info("11")
+#    Rails.logger.info("11")
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
         pdf.stroke_bounds
@@ -254,10 +257,6 @@ class ReciboSueldosController < ApplicationController
     end
     pdf.font("Courier", :style => :bold)
     # codigo administracion - codigo consorcio - codigo legajo
-    pdf.draw_text current_company.try(:code).to_s + '-' + 
-                  @recibo_sueldo.employee.consortium.try(:code).to_s + '-' + 
-                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [5,643], :size => 8
-
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
     pdf.draw_text empresa.domicilio2.center(40), :at => [7,623], :size => 5
