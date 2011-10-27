@@ -213,8 +213,8 @@ class ReciboSueldosController < ApplicationController
                             @recibo_sueldo.employee.consortium.province.detalle+")"
       empresa.cuit        = @recibo_sueldo.employee.consortium.cuit
     else
-      Rails.logger.info("calle="+current_company.calle)
-      Rails.logger.info("altura="+current_company.altura)
+#      Rails.logger.info("calle="+current_company.calle)
+#      Rails.logger.info("altura="+current_company.altura)
       if !logo_id.nil?
         attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
@@ -226,7 +226,7 @@ class ReciboSueldosController < ApplicationController
                             current_company.province.detalle+")"
       empresa.cuit        = current_company.cuit
     end
-Rails.logger.info("10")
+#Rails.logger.info("10")
     if !attach.nil?
       if attach.adjunto_content_type[0..4] = "image"
 #        file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
@@ -253,6 +253,9 @@ Rails.logger.info("10")
       pdf.image empresa.logo, :at => [27,715], :width => 75
     end
     pdf.font("Courier", :style => :bold)
+    # codigo administracion - codigo consorcio - codigo legajo
+    pdf.draw_text current_company.code.to_s + '-' + @recibo_sueldo.employee.consortium.code.to_s + '-' + @recibo_sueldo.employee.legajo.to_s
+
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
     pdf.draw_text empresa.domicilio2.center(40), :at => [7,623], :size => 5
