@@ -254,7 +254,9 @@ class ReciboSueldosController < ApplicationController
     end
     pdf.font("Courier", :style => :bold)
     # codigo administracion - codigo consorcio - codigo legajo
-    pdf.draw_text current_company.code.to_s + '-' + @recibo_sueldo.employee.consortium.code.to_s + '-' + @recibo_sueldo.employee.legajo.to_s
+    pdf.draw_text current_company.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.consortium.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [5,643], :size => 8
 
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
