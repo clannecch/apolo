@@ -122,7 +122,7 @@ class LiquidacionsController < ApplicationController
   end
 
   def liquidar_employee
-    @employees = Employee.where(:fecha_egreso.blank?)
+    @employees = Employee.by_company(current_company.id).where(:fecha_egreso.blank?)
     Rails.logger.info("Cant="+@employees.count.to_s)
 
     @employees.each do |employee|

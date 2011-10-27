@@ -46,8 +46,9 @@ class Liquidacion < ActiveRecord::Base
       end
       return liquidados
   end
-  def retrieve_all_employee_without_recibo_sueldos
-    Employee.all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
+  def retrieve_all_employee_without_recibo_sueldos(current_company_id)
+    Employee.by_company(current_company_id).all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
+#    Employee.where(:id => current_company_id).all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
   end
 
   private

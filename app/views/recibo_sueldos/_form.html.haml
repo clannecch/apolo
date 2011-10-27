@@ -12,7 +12,7 @@
         %td.columnLabel
           = f.label :employee_id, :class => "apsLabel"
         %td.columnData
-          = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos, :id, :full_name , :prompt => true  if @recibo_sueldo.new_record?
+          = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos(@liquidacion.company_id), :id, :full_name , :prompt => true  if @recibo_sueldo.new_record?
           = @recibo_sueldo.employee.try(:full_name) unless @recibo_sueldo.new_record?
       %tr
         %td.columnLabel
