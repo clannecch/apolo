@@ -7,36 +7,35 @@
     - breadcrumb.item @recibo_sueldo.employee.full_name, nil, :active => true
 
 .clear
-= link_to "Imprimir", "/print_table?tablename=" + Liquidacion.model_name.capitalize, :class => "btn info"
-.clear
+%br/
 
 - if !@recibo_sueldo.blank?
   #modal-edit
     //%h2 Legajo: = @recibo_sueldo.employee.full_name - = @recibo_sueldo.employee.fecha_ingreso.to_s
-    #recuadro{:style => "border:solid 1px black;"}
-      %table#conceptos.tableStandard
-        %tr
-          %th Concepto
-          %th CD
-          %th Haber
-          %th Retencion
-          %th Total
+  - if !@recibo_sueldo.approved_date.blank?
+    .alert-message.info{"data-alert" => "alert"}
+      %h4{:style => "color: #fff"} Aprobado
+    .clear
+  %table#conceptos.tableStandard
+    %tr
+      %th Concepto
+      %th Con Desc.
+      %th Haber
+      %th Retencion
 
-        - @recibo_sueldo.detalle_recibo_habers.each do |item|
-          %tr
-            %td= item.remunerative_concept.detalle
-            %td
-            %td= item.total
-            %td
-            %td
+    - @recibo_sueldo.detalle_recibo_habers.each do |item|
+      %tr
+        %td= item.remunerative_concept.detalle
+        %td= item.remunerative_concept.acumuladores_valor.include?("@haberescondescuento") ? "Sí" : "No"
+        %td= item.total
+        %td
 
-        - @recibo_sueldo.detalle_recibo_retencions.each do |item|
-          %tr
-            %td= item.retention_concept.detalle
-            %td
-            %td
-            %td= item.total
-            %td
+    - @recibo_sueldo.detalle_recibo_retencions.each do |item|
+      %tr
+        %td= item.retention_concept.detalle
+        %td= item.retention_concept.acumuladores_valor.include?("@haberescondescuento") ? "Sí" : "No"
+        %td
+        %td= item.total
 
 - @total = @recibo_sueldo.detalle_recibo_habers.sum(:total) - @recibo_sueldo.detalle_recibo_retencions.sum(:total)
 .clear
@@ -45,9 +44,14 @@
 
 .clear
 .actions
-  = link_to "Aprobar", "#", :class => "btn success", :onclick => "return ShowModalAlert('Desea guadar los cambios?', 'Pregunta')"
+  /- if !@recibo_sueldo.approved_date.blank?
+  = link_to "Desaprobar", update_disapproved_fields_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo), :class => "btn success" unless @recibo_sueldo.approved_date.blank?
+  = link_to "Aprobar", "#", :class => "btn success", :onclick => "return ShowModalConfirm('Aprueba el recibo de sueldo?', 'Pregunta');"  if     @recibo_sueldo.approved_date.blank?
   = link_to "Editar", edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo), :rel => "twypsy", :class => "btn standard"
   = link_to t('scaffold.actions.destroy').titlecase, [@liquidacion,@recibo_sueldo], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
 
 :javascript
-  $(document).ready()
+  function ConfirmResult(value){
+  	if (value)
+      document.location.href = document.location.href.replace("control_by_company#", "update_approved_fields");
+  }

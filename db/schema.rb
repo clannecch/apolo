@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026212645) do
+ActiveRecord::Schema.define(:version => 20111028135309) do
 
   create_table "accounting_imputations", :force => true do |t|
     t.string   "detalle"
@@ -649,6 +649,8 @@ ActiveRecord::Schema.define(:version => 20111026212645) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "fecha_calculo"
+    t.integer  "approved_by_user_id"
+    t.datetime "approved_date"
   end
 
   create_table "remuneration_types", :force => true do |t|

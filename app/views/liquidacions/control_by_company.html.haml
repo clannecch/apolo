@@ -18,11 +18,11 @@
       %th Total retenciones
       %th Control
 
-    - @liquidacion.recibo_sueldos.each do |item|
-      %tr
+    - @liquidacion.recibo_sueldos.order("id").each do |item|
+      %tr{:style => "background-color:" + (item.approved_date.blank? ? "#fff" : "#bbffb6")}
         %td= item.employee.legajo
         %td= item.employee.full_name
-        %td
-        /%td= item.total_haberes
-        %td= item.total_retenciones
+        /%td= item.id.to_s
+        %td= item.total_haberes
+        %td= item.total_retenciones.to_s
         %td= link_to 'Controlar', control_by_company_liquidacion_recibo_sueldo_path(@liquidacion, item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

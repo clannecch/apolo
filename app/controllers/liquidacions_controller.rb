@@ -121,7 +121,7 @@ class LiquidacionsController < ApplicationController
 
   #[PVD] :: 2011-10-26 :: Listado de control de recibos de sueldo para MDQ...
   def control_by_company_list
-    @liquidacions = Liquidacion.all
+    @liquidacions = Liquidacion.by_company(current_company.id).order("periodo desc")
     respond_to do |format|
       format.html {}
       format.xml  { head :ok }

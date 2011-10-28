@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111028135309
 #
 # Table name: consortia
 #
@@ -18,8 +18,6 @@
 #  contacto                  :string(255)
 #  email                     :string(255)
 #  cuit                      :string(255)
-#  numero_inscripcion        :string(255)
-#  caja                      :string(255)
 #  ultima_hoja_libro         :string(255)
 #  imprimir_hasta_hoja_libro :string(255)
 #  observaciones             :text

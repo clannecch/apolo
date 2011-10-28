@@ -1,5 +1,6 @@
 class ReciboSueldosController < ApplicationController
   before_filter :find_liquidacion
+  before_filter :find_recibo_sueldo, :except => [:index, :new, :create]
 
   # GET /recibo_sueldos
   # GET /recibo_sueldos.xml
@@ -187,6 +188,35 @@ class ReciboSueldosController < ApplicationController
       format.html {}
       format.xml  { head :ok }
       format.json {}
+    end
+  end
+
+  #[PVD] :: 2011-10-27 :: Actualizar los campos de la aprobación del recibo
+  def update_approved_fields
+    @recibo_sueldo.approved_by_user_id = current_user.id
+    @recibo_sueldo.approved_date = DateTime.now
+    respond_to do |format|
+      if @recibo_sueldo.save
+        format.html { redirect_to control_by_company_liquidacion_path(@liquidacion), :notice => t('scaffold.notice.updated', :item=> ReciboSueldo.model_name.human) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @recibo_sueldo.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_disapproved_fields
+    @recibo_sueldo.approved_by_user_id = nil
+    @recibo_sueldo.approved_date = nil
+    respond_to do |format|
+      if @recibo_sueldo.save
+        format.html { redirect_to control_by_company_liquidacion_path(@liquidacion), :notice => t('scaffold.notice.updated', :item=> ReciboSueldo.model_name.human) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @recibo_sueldo.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -625,6 +655,10 @@ class ReciboSueldosController < ApplicationController
   def find_liquidacion
     raise "Debe ingresar una liquidacion!!!!!!!!!!!" if params[:liquidacion_id].blank?
     @liquidacion = Liquidacion.find(params[:liquidacion_id])
+  end
+
+  def find_recibo_sueldo
+    @recibo_sueldo =  @liquidacion.recibo_sueldos.find(params[:id])
   end
 
 end

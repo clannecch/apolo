@@ -115,7 +115,9 @@ APSSueldos::Application.routes.draw do |map|
     end
     resources :recibo_sueldos do
       member do
-         get "control_by_company", :action => :control_by_company
+        get "control_by_company", :action => :control_by_company
+        get "update_approved_fields", :action => :update_approved_fields
+        get "update_disapproved_fields", :action => :update_disapproved_fields
       end
       resources :detalle_recibo_retencions
       resources :detalle_recibo_habers

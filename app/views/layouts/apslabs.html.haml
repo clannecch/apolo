@@ -83,13 +83,26 @@
         .modal-body
           %p
             %span#ModalText Messsage text...
-          %a.btn.small.info.close{:href => "#"} Cerrar
         .modal-footer
+          %a.btn.standard.close{:href => "#", :onclick => "return ConfirmResult(false);" } No
+          %a.btn.success.close{:href => "#", :onclick => "return ConfirmResult(true);" } Si
 
 :javascript
   function ShowModalAlert(texto,titulo){
+  	if (titulo == null) titulo = "Atención"
   	$("#ModalText").text(texto);
-  	if (titulo != null) $("#ModalTitle").text(titulo);
+  	$("#ModalTitle").text(titulo);
+  	$("#modal-alert").modal({
+  		show: true,
+  		backdrop: true,
+  		closeOnEscape: true
+  	});
+  }
+
+  function ShowModalConfirm(texto,titulo){
+  	if (titulo == null) titulo = "Pregunta"
+  	$("#ModalText").text(texto);
+  	$("#ModalTitle").text(titulo);
   	$("#modal-alert").modal({
   		show: true,
   		backdrop: true,

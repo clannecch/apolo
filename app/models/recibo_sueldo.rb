@@ -1,17 +1,19 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111028135309
 #
 # Table name: recibo_sueldos
 #
-#  id             :integer         not null, primary key
-#  liquidacion_id :integer
-#  employee_id    :integer
-#  fecha_recibo   :date
-#  observaciones  :string(255)
-#  mensaje_recibo :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  fecha_calculo  :datetime
+#  id               :integer         not null, primary key
+#  liquidacion_id   :integer
+#  employee_id      :integer
+#  fecha_recibo     :date
+#  observaciones    :string(255)
+#  mensaje_recibo   :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  fecha_calculo    :datetime
+#  approved_by_user :integer
+#  approved_date    :datetime
 #
 
 # Schema version: 20110621182933
@@ -279,8 +281,8 @@ class ReciboSueldo < ActiveRecord::Base
 
   def total_haberes
 #      detalle_recibo_habers.all.sum(&:total).to_f
-     DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).
-         where("remunerative_concepts.auxiliar" <=> true).all.sum(&:total).to_f
+     #DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).where("remunerative_concepts.auxiliar" <=> true).all.sum(&:total).to_f
+    DetalleReciboHaber.joins(:remunerative_concept).where(:recibo_sueldo_id => self.id).where("remunerative_concepts.auxiliar" <=> true).sum(:total).to_f
   end
 
   def total_retenciones
