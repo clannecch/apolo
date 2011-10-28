@@ -11,13 +11,6 @@ class RemunerativeConceptsController < ApplicationController
     respond_to do |format|
       format.html # indexoo.html.erb
       format.xml  { render :xml => @remunerative_concepts }
-      format.pdf do
-        dump_tmp_filename = Rails.root.join('tmp',@remunerative_concept.cache_key)
-          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-          print_remunerative_concepts_pdf(dump_tmp_filename,@remunerative_concept)
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "remunerative_concept.pdf")
-          File.delete(dump_tmp_filename) unless Rails.env.development?
-      end
     end
   end
 

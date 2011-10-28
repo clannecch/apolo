@@ -6,7 +6,7 @@
 - if true
   = link_to t('scaffold.actions.new', :item => RemunerativeConcept.model_name.human) , new_remunerative_concept_path(@remunerative_concept), :class => "btn success" 
   - if @remunerative_concepts.any?
-    = link_to t('scaffold.actions.export').titlecase, remunerative_concepts_path( :format => 'pdf'), :class => "btn info"
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + RemunerativeConcept.model_name, :class => "btn info"
 
 - if @remunerative_concepts.any?
   %table.tableStandard

@@ -48,20 +48,27 @@ class ApplicationController < ActionController::Base
       return
     end
 
-    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
-                              :page_layout => :portrait)
-    offset = 0
-#  page_number = 0
-    pdf.repeat(:all, :dynamic => true) do
-      pdf.draw_text name.constantize.model_name.human.pluralize.center(100), :at => [5,735],:style => :bold, :size => 10
-      pdf.draw_text current_company.name.humanize, :at => [5,745],:style => :bold, :size => 10
-#    page_number = page_number + 1
-     pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, 745], :size => 10
-    end
+    dependencias = {}
+    types ={}
+    len=[]
     line = []
     eval(name+".columns").each do |col|
-      if !"id created_at updated_at ".include?(col.name)
-        if col.name.include?("_id")
+      if !"id created_at updated_at company_id ".include?(col.name)
+        types[col.name] = name.camelize.constantize.columns_hash[col.name].type
+        len << 0
+        if col.name[-3,3] == "_id"
+          cname="reg."+col.name+".to_s"
+          begin
+            line << col.name.gsub("_id","").camelize.constantize.model_name.human
+            begin
+             cname="reg."+ col.name.gsub("_id","")+".try(:name).to_s" if col.name.gsub("_id","").camelize.constantize.column_names.index("name").to_i > 0
+             cname="reg."+ col.name.gsub("_id","")+".try(:detalle).to_s" if col.name.gsub("_id","").camelize.constantize.column_names.index("detalle") > 0
+            rescue
+            end
+          rescue
+            line << name.constantize.human_attribute_name(col.name)
+          end
+          dependencias[col.name] = cname
         else
           line << name.constantize.human_attribute_name(col.name)
         end
@@ -72,19 +79,37 @@ class ApplicationController < ActionController::Base
     data << []
     @table.each do |reg|
       line = []
+      indice = 0
       eval(name+".columns").each do |col|
-        if !"id created_at updated_at ".include?(col.name)
-          if col.name.include?("_id")
+        if !"id created_at updated_at company_id".include?(col.name)
+          if col.name[-3,3] == "_id"
+            dato = eval(dependencias[col.name])
           else
-            line << eval("reg."+col.name+".to_s")
+            dato = eval("reg."+col.name+".to_s")
+            if types[col.name] == :boolean
+              dato = (dato == "true"  ? "Si" : "No")
+            end
           end
+          Rails.logger.info("Dato="+dato)
+          Rails.logger.info("Dato.length="+dato.length.to_s)
+          len[indice] = dato.length if dato.length > len[indice]
+          indice += 1
+          line << dato
         end
       end
       data << line
     end
-    data.each do |r|
-      Rails.logger.info(r)
+
+    pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+                              :page_layout => (len.sum < 100 ? :portrait : :landscape) )
+    pdf.repeat(:all, :dynamic => true) do
+      offset =len.sum < 100 ? 745 : 560
+      pdf.draw_text current_company.name.humanize, :at => [5,offset],:style => :bold, :size => 10
+      pdf.draw_text "Hoja Nro.: " + pdf.page_number.to_s.rjust(4,"0"), :at => [410, offset], :size => 10
+      pdf.draw_text name.constantize.model_name.human.pluralize.center(100), :at => [5,offset-10],:style => :bold, :size => 10
+      pdf.draw_text " ", :at => [5, offset -10]
     end
+
     pdf.table(data, #:column_widths => [40, 170],
            :cell_style => { :font => "Times-Roman",
                             :size => 9,:padding => [2,3,4,2],
@@ -93,7 +118,13 @@ class ApplicationController < ActionController::Base
            :header => true ,
            :row_colors => ["F0F0F0", "FFFFCC"]
             )   do
-#    column(3..6).align = :right
+      indice= 0
+      types.each do |t|
+        if t[1] == :decimal || t[1] == :float || t[1] == :integer
+          column(indice).align = :right
+        end
+        indice += 1
+      end
 #    row(0).column(0..6).align = :center
     end
     pdf.render_file(filename)
