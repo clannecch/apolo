@@ -33,6 +33,7 @@
     = head if respond_to? :head
     = yield :head
   %body
+    %input#rails_root{:type => "hidden", :value => root_url }
     #container
       #header
         #status
