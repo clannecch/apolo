@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.xml
   def index
-    @search = Location.by_company(current_company.id).search(params[:search])
+    @search = Location.search(params[:search])
     @locations = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   # GET /locations/new.xml
   def new
-    @location = Location.by_company(current_company.id).new
+    @location = Location.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.xml
   def create
-    @location = Location.by_company(current_company.id).new(params[:location])
+    @location = Location.new(params[:location])
 
     respond_to do |format|
       if @location.save
@@ -84,6 +84,6 @@ class LocationsController < ApplicationController
   end
 
   def find_location
-      @location = Location.by_company(current_company.id).find(params[:id])
+      @location = Location.find(params[:id])
   end
 end

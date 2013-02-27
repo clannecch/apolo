@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      insurance_company: Compañia de Obra Social
+      insurance_company: Aseguradora
     attributes:
       insurance_company:
         detalle: Detalle

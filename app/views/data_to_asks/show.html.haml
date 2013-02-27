@@ -1,13 +1,30 @@
-%p#notice= notice
-%p
-  %b Detalle:
-  = @data_to_ask.detalle
-%p
-  %b Cantidad:
-  = @data_to_ask.cantidad
-%p
-  %b Importe:
-  = @data_to_ask.importe
-= data_to_ask_links(@data_to_ask)
-|
-\#{link_to 'Back', data_to_asks_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DataToAsk.model_name.human, data_to_asks_path 
+    - breadcrumb.item "#{@data_to_ask.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_data_to_ask_path(@data_to_ask), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @data_to_ask, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@data_to_ask) do |f|
+  = render 'shared/errorhandler', :obj_errors => @data_to_ask.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @data_to_ask.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "data_to_ask_cantidad", @data_to_ask.cantidad, @data_to_ask.cantidad, :disabled => true
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "data_to_ask_importe", @data_to_ask.importe, @data_to_ask.importe, :disabled => true
+.clear

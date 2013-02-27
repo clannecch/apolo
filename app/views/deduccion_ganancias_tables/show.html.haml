@@ -1,38 +1,54 @@
-%p#notice= notice
-%p
-  %b Periodo Año:
-  = @deduccion_ganancias_table.periodo_ano
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DeduccionGananciasTable.model_name.human, deduccion_ganancias_tables_path , :active => true
 
-
-%p
-  %b Periodo Mes:
-  = @deduccion_ganancias_table.periodo_mes
-
-
-%p
-  %b No imponibles:
-  = @deduccion_ganancias_table.no_imponibles
-
-%p
-  %b Conyuge:
-  = @deduccion_ganancias_table.conyuge
-
-
-%p
-  %b Hijo:
-  = @deduccion_ganancias_table.hijo
-
-%p
-  %b Otras:
-  = @deduccion_ganancias_table.otras
-
-%p
-  %b Especial inciso e:
-  = @deduccion_ganancias_table.especial_inciso_e
-
-%p
-  %b Especial inciso abc:
-  = @deduccion_ganancias_table.especial_inciso_abc
-
-  = deduccion_ganancias_table_links(@edit_deduccion_ganancias_table)
-= link_to 'Back', deduccion_ganancias_tables_path
+= link_to t('scaffold.actions.edit').titlecase, edit_deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @deduccion_ganancias_table, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@deduccion_ganancias_table) do |f|
+  = render 'shared/errorhandler', :obj_errors => @deduccion_ganancias_table.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :no_imponibles, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.no_imponibles
+      %tr
+        %td.columnLabel
+          = f.label :conyuge, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.conyuge
+      %tr
+        %td.columnLabel
+          = f.label :hijo, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.hijo
+      %tr
+        %td.columnLabel
+          = f.label :otras, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.otras
+      %tr
+        %td.columnLabel
+          = f.label :especial_inciso_e, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.especial_inciso_e
+      %tr
+        %td.columnLabel
+          = f.label :especial_inciso_abc, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.especial_inciso_abc
+      %tr
+        %td.columnLabel
+          = f.label :periodo_ano, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.periodo_ano
+      %tr
+        %td.columnLabel
+          = f.label :periodo_mes, :class => "apsLabel"
+        %td.columnData
+          = @deduccion_ganancias_table.periodo_mes
+.clear

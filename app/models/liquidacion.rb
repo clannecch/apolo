@@ -20,13 +20,14 @@
 
 class Liquidacion < ActiveRecord::Base
   scope :by_company, lambda {|company| where(:company_id => company) }
+  #default_scope where(:company_id => current_company.id)
+
   has_many :recibo_sueldos, :dependent => :restrict
   belongs_to :tipo_recibo
   belongs_to :bank_deposit
 
   validates_uniqueness_of     :periodo,
-                              :scope => [:quincena, :tipo_recibo_id, :company_id], :message => "+quincena+tipo recibo duplicado+administradora"
-
+                              :scope => [:quincena, :tipo_recibo_id,:company_id],:message => "+quincena+tipo recibo duplicado"
   validates_inclusion_of 	    :quincena, :in => 1..2,                           :message => "valores posibles 1 o 2"
 
 	validates_presence_of		    :periodo, :quincena,
@@ -34,7 +35,7 @@ class Liquidacion < ActiveRecord::Base
   validates_presence_of		    :fecha_deposito,
                               :if => :periodo_deposito?,		    			          :message => "es un dato requerido"
 
-  default_scope order('periodo ASC') 
+  default_scope order('periodo ASC')
 
 #  validate                    :check_periodo
   def retrieve_all_employee_with_recibo_sueldos
@@ -44,8 +45,9 @@ class Liquidacion < ActiveRecord::Base
       end
       return liquidados
   end
-  def retrieve_all_employee_without_recibo_sueldos
-    Employee.all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
+  def retrieve_all_employee_without_recibo_sueldos(current_company_id)
+    Employee.by_company(current_company_id).all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
+#    Employee.where(:id => current_company_id).all.reject { |n| self.retrieve_all_employee_with_recibo_sueldos.include?(n) }
   end
 
   private

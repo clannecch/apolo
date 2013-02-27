@@ -1,13 +1,31 @@
-%h1 Listado de Lugares de Emision de Documentos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @issueds.each do |issued|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Issued.model_name.human, issueds_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Issued.model_name.human) , new_issued_path(@issued), :class => "btn success" 
+  - if @issueds.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Issued.model_name, :class => "btn info"
+
+- if @issueds.any?
+  %table.tableStandard
     %tr
-      %td= issued.detalle
-      %td= issued_links(issued)
-%br/
-= link_to 'Nuevo Lugar de EMision de Documento', new_issued_path
+      %th= sort_link @search, :detalle, @issueds.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @issueds.human_attribute_name('code')
+      %th= sort_link @search, :default, @issueds.human_attribute_name('default')
+      %th.last
+
+    - @issueds.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "issued_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_issued_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@issueds)
+  .clear
+.clear

@@ -5,8 +5,8 @@ class CharacterServicesController < ApplicationController
   # GET /character_services
   # GET /character_services.xml
   def index
-    #@character_services = CharacterService.by_company(current_company.id).all
-    @search = CharacterService.by_company(current_company.id).search(params[:search])
+    #@character_services = CharacterService.all
+    @search = CharacterService.search(params[:search])
     @character_services = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class CharacterServicesController < ApplicationController
   # GET /character_services/new
   # GET /character_services/new.xml
   def new
-    @character_service = CharacterService.by_company(current_company.id).new
+    @character_service = CharacterService.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class CharacterServicesController < ApplicationController
   # POST /character_services
   # POST /character_services.xml
   def create
-    @character_service = CharacterService.by_company(current_company.id).new(params[:character_service])
+    @character_service = CharacterService.new(params[:character_service])
 
     respond_to do |format|
       if @character_service.save
@@ -86,7 +86,7 @@ class CharacterServicesController < ApplicationController
   end
 
   def find_character_service
-      @character_service = CharacterService.by_company(current_company.id).find(params[:id])
+      @character_service = CharacterService.find(params[:id])
   end
 
 end

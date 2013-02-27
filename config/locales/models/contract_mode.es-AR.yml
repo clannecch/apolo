@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      contract_mode: Modalidad de Contratacion
+      contract_mode: Modo de contratación
     attributes:
       contract_mode:
         detalle: Detalle

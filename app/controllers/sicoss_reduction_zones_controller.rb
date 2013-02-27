@@ -9,7 +9,9 @@ class SicossReductionZonesController < ApplicationController
   # GET /sicoss_reduction_zones.json
   # GET /sicoss_reduction_zones.xml
   def index
-    @sicoss_reduction_zones = SicossReductionZone.all
+    @search = SicossReductionZone.search(params[:search])
+    @sicoss_reduction_zones = @search.page(params[:page]).per(10)
+
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_reduction_zones.empty?
     respond_with(@sicoss_reduction_zones)
   end

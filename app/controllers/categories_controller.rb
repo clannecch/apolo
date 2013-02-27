@@ -8,10 +8,9 @@ class CategoriesController < ApplicationController
   # GET /categories.xml
   # GET /categories.json
   def index
-    #@categories = Category.by_company(current_company.id).all
-    @search = Category.by_company(current_company.id).search(params[:search])
+#    @search = Category.by_company(current_company.id).search(params[:search])
+    @search = Category.search(params[:search])
     @categories = @search.page(params[:page]).per(10)
-
     respond_to do |format|
       format.html # indexoo.html.erb
       format.xml  { render :xml => @categories }
@@ -38,7 +37,8 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   # GET /categories/new.xml
   def new
-    @category = Category.by_company(current_company.id).new
+#    @category = Category.by_company(current_company.id).new
+    @category = Category.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,11 +53,12 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.xml
   def create
-    @category = Category.by_company(current_company.id).new(params[:category])
+#    @category = Category.by_company(current_company.id).new(params[:bank_deposit])
+    @category = Category.new(params[:category])
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to(@category, :notice => 'Category was successfully created.') }
+        format.html { redirect_to(@category, :notice => t('scaffold.notice.created', :item=> Category.model_name.human)) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -74,7 +75,7 @@ class CategoriesController < ApplicationController
         if @category.cambio_algo
           format.html {redirect_to notify_changes_category_url}
         else
-          format.html { redirect_to(@category, :notice => 'Category concept was successfully updated.') }
+          format.html { redirect_to(@category, :notice => t('scaffold.notice.updated', :item=> Category.model_name.human)) }
           format.xml  { head :ok }
         end
       else
@@ -100,7 +101,8 @@ class CategoriesController < ApplicationController
   end
 
   def find_category
-    @category = Category.by_company(current_company.id).find(params[:id])
+#    @category= Category.by_company(current_company.id).find(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def calculate_changes
@@ -152,7 +154,7 @@ class CategoriesController < ApplicationController
 
   def print
     require 'prawn'
-    @categories = Category.by_company(current_company.id).all
+    @categories = Category.all
     pdf = Prawn::Document.new
     pdf.draw_text "Categorias", :at => [100,740], :size => 16, :style => :bold
     pdf.bounding_box [10, 730], :width => 300, :height => 20 do

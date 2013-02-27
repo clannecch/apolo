@@ -1,13 +1,31 @@
-%h1 Listado de Centros de Costos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @cost_centers.each do |cost_center|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CostCenter.model_name.human, cost_centers_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => CostCenter.model_name.human) , new_cost_center_path(@cost_center), :class => "btn success" 
+  - if @cost_centers.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + CostCenter.model_name, :class => "btn info"
+
+- if @cost_centers.any?
+  %table.tableStandard
     %tr
-      %td= cost_center.detalle
-      %td= cost_center_links(cost_center)
-%br/
-= link_to 'Nuevo Centro de Costo', new_cost_center_path
+      %th= sort_link @search, :detalle, @cost_centers.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @cost_centers.human_attribute_name('code')
+      %th= sort_link @search, :default, @cost_centers.human_attribute_name('default')
+      %th.last
+
+    - @cost_centers.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "cost_center_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_cost_center_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@cost_centers)
+  .clear
+.clear

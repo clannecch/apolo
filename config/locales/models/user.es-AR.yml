@@ -1,0 +1,17 @@
+es-AR:
+  activerecord:
+    models:
+      user: Ususario
+    attributes:
+      user:
+        first_name: First Name
+        last_name: Last Name
+        created_at: Creado el
+        updated_at: Actualizado el
+        email: Email
+        encrypted_password: Clave encriptada
+        current_sign_in_ip: Current Sign In Ip
+        last_sign_in_ip: Last Sign In Ip
+        sign_in_count: Sign In Count
+        current_sign_in_at: Current Sign In At
+        last_sign_in_at: Last Sign In At

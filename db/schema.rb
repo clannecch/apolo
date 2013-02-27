@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "activities", :force => true do |t|
@@ -25,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "associated_document_types", :force => true do |t|
@@ -33,10 +37,23 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "document_type"
+    t.string   "code"
+    t.boolean  "default"
   end
 
-# Could not dump table "attachments" because of following StandardError
-#   Unknown type 'oid' for column 'adjunto_file'
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "associated_document_type_id"
+    t.string   "name"
+    t.date     "reception_date"
+    t.string   "adjunto_file_name"
+    t.string   "adjunto_content_type"
+    t.integer  "associated_document_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.binary   "adjunto_file"
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "code",       :limit => 16,  :null => false
@@ -50,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "bank_deposits", :force => true do |t|
@@ -57,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "categories", :force => true do |t|
@@ -67,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.integer  "company_id"
     t.decimal  "horas"
     t.string   "codigo"
+    t.boolean  "default"
   end
 
   create_table "causa_egresos", :force => true do |t|
@@ -74,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "character_services", :force => true do |t|
@@ -81,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "companies", :force => true do |t|
@@ -122,8 +148,6 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.string   "contacto"
     t.string   "email"
     t.string   "cuit"
-    t.string   "numero_inscripcion"
-    t.string   "caja"
     t.string   "ultima_hoja_libro"
     t.string   "imprimir_hasta_hoja_libro"
     t.text     "observaciones"
@@ -137,6 +161,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "cost_centers", :force => true do |t|
@@ -144,6 +170,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "countries", :force => true do |t|
@@ -152,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "data_to_asks", :force => true do |t|
@@ -207,6 +236,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "educational_levels", :force => true do |t|
@@ -214,6 +245,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "email_types", :force => true do |t|
@@ -221,6 +254,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "employee_familiars", :force => true do |t|
@@ -400,6 +435,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "group_employer_contributions", :force => true do |t|
@@ -407,6 +444,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "group_remunerations", :force => true do |t|
@@ -414,6 +453,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "group_remunerations_remunerative_concepts", :id => false, :force => true do |t|
@@ -428,6 +469,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "group_retentions_retention_concepts", :id => false, :force => true do |t|
@@ -443,6 +486,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "home_abouts", :force => true do |t|
@@ -450,6 +494,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "insurance_beneficiaries", :force => true do |t|
@@ -471,6 +517,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "issueds", :force => true do |t|
@@ -478,6 +526,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "kinships", :force => true do |t|
@@ -485,6 +535,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.string   "hijo_conyugue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "labor_unions", :force => true do |t|
@@ -492,6 +544,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "liquidacions", :force => true do |t|
@@ -514,6 +568,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "marital_statuses", :force => true do |t|
@@ -521,6 +577,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "menu_roles", :force => true do |t|
@@ -551,6 +609,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "numeradors", :force => true do |t|
@@ -567,6 +627,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "provinces", :force => true do |t|
@@ -587,6 +649,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "fecha_calculo"
+    t.integer  "approved_by_user_id"
+    t.datetime "approved_date"
   end
 
   create_table "remuneration_types", :force => true do |t|
@@ -595,12 +659,13 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "hora_dia_mes"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "remunerative_concepts", :force => true do |t|
     t.string   "codigo"
     t.string   "detalle"
-    t.boolean  "porcentual_asistencia"
     t.integer  "prioridad_calculo"
     t.integer  "statistical_value"
     t.integer  "grupo_ganancias_id"
@@ -641,6 +706,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_activities", :force => true do |t|
@@ -665,6 +732,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_damageds", :force => true do |t|
@@ -673,6 +741,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_employer_types", :force => true do |t|
@@ -681,6 +750,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_format_employers", :force => true do |t|
@@ -713,6 +783,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_reduction_zones", :force => true do |t|
@@ -721,6 +792,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_regimen_types", :force => true do |t|
@@ -729,6 +801,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "sicoss_situations", :force => true do |t|
@@ -737,6 +810,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "tasks", :force => true do |t|
@@ -744,6 +818,8 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "default"
   end
 
   create_table "tipo_recibos", :force => true do |t|
@@ -752,6 +828,7 @@ ActiveRecord::Schema.define(:version => 20111020124350) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.boolean  "recibo_principal"
+    t.boolean  "default"
   end
 
   create_table "user_authorizations", :force => true do |t|

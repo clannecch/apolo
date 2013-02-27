@@ -1,8 +1,30 @@
-%h1 Visualizacion de Tipo de Recibo
-%p#notice= notice
-%p
-  %b Detalle:
-  = @tipo_recibo.detalle
-= tipo_recibo_links(@tipo_recibo)
-|
-\#{link_to 'Volver', tipo_recibos_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item TipoRecibo.model_name.human, tipo_recibos_path 
+    - breadcrumb.item "#{@tipo_recibo.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_tipo_recibo_path(@tipo_recibo), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @tipo_recibo, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@tipo_recibo) do |f|
+  = render 'shared/errorhandler', :obj_errors => @tipo_recibo.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @tipo_recibo.detalle
+      %tr
+        %td.columnLabel
+          = f.label :recibo_principal, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "tipo_recibo_recibo_principal", @tipo_recibo.recibo_principal, @tipo_recibo.recibo_principal, :disabled => true
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "tipo_recibo_default", @tipo_recibo.default, @tipo_recibo.default, :disabled => true
+.clear

@@ -8,7 +8,9 @@ class SicossRegimenTypesController < ApplicationController
   # GET /sicoss_regimen_types.json
   # GET /sicoss_regimen_types.xml
   def index
-    @sicoss_regimen_types = SicossRegimenType.all
+    @search = SicossRegimenType.search(params[:search])
+    @sicoss_regimen_types = @search.page(params[:page]).per(10)
+
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_regimen_types.empty?
     respond_with(@sicoss_regimen_types)
   end

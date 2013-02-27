@@ -1,12 +1,11 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: remunerative_concepts
 #
 #  id                               :integer         not null, primary key
 #  codigo                           :string(255)
 #  detalle                          :string(255)
-#  porcentual_asistencia            :boolean
 #  prioridad_calculo                :integer
 #  statistical_value                :integer
 #  grupo_ganancias_id               :integer
@@ -29,7 +28,9 @@
 
 class RemunerativeConcept < ActiveRecord::Base
   paginates_per 10
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
+
   belongs_to :concepto_asociado_haber, :class_name => "RemunerativeConcept"
   belongs_to :concepto_asociado_retencion, :class_name => "RetentionConcept"
   belongs_to :concepto_asociado_haber_2, :class_name => "RemunerativeConcept"
@@ -41,6 +42,7 @@ class RemunerativeConcept < ActiveRecord::Base
   validate :cannot_asociate_iqual_concept
 #  validate :control_formula
   validates_presence_of :detalle, :codigo, :acumuladores_valor, :calculo_valor
+  validates_uniqueness_of		  :code,			                        :message => "existente"
 
   before_save :controlar_cambios
 

@@ -1,15 +1,36 @@
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), AssociatedDocumentType.model_name.human].join(' ').titlecase
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AssociatedDocumentType.model_name.human, associated_document_types_path 
+    - breadcrumb.item "#{@associated_document_type.name.titlecase}", nil, :active => true
 
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(@associated_document_type), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@associated_document_type) do |s|
-  = s.attributes(AssociatedDocumentType.human_name + ' Info') do
-
-    = s.attribute :name
-    = s.attribute :document_type
+= link_to t('scaffold.actions.edit').titlecase, edit_associated_document_type_path(@associated_document_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @associated_document_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@associated_document_type) do |f|
+  = render 'shared/errorhandler', :obj_errors => @associated_document_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @associated_document_type.code
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @associated_document_type.name
+      %tr
+        %td.columnLabel
+          = f.label :document_type, :class => "apsLabel"
+        %td.columnData
+          = @associated_document_type.document_type == "O" ? "Otros" : (@associated_document_type.document_type == "L" ? "Logo" : "Foto Principal")
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "associated_document_type_default", @associated_document_type.default, @associated_document_type.default, :disabled => true
 
 .clear

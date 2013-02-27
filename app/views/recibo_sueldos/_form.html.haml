@@ -1,53 +1,41 @@
 = form_for([@liquidacion,@recibo_sueldo]) do |f|
-  - if @recibo_sueldo.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@recibo_sueldo.errors.count, "error")
-        prohibited this recibo_sueldo from being saved:
-      %ul
-        - @recibo_sueldo.errors.full_messages.each do |msg|
-          %li= msg
-  %h3
-    Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
-  - if @recibo_sueldo.new_record?
-    .field
-      = f.label :employee_id
-      %br/
-      = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos, :id, :full_name , :prompt => true
-  - else
-    %h4
+  = render 'shared/errorhandler', :obj_errors => @recibo_sueldo.errors
+  .clear
+  %br/
 
-      Empleado: #{@recibo_sueldo.employee.apellido}, #{@recibo_sueldo.employee.nombre}
-  %table.field
-    %tr
-      %th= f.label "Fecha Recibo"
-      %th= f.label "Observaciones"
-      %th= f.label "Mensaje Recibo"
-    %tr
-    %tr
-      %td= f.date_select :fecha_recibo
-      %td= f.text_field :observaciones
-      %td= f.text_field :mensaje_recibo
-  /
-    <div class="field">
-    <haml:loud> f.label :fecha_recibo </haml:loud><br />
-    <haml:loud> f.date_select :fecha_recibo </haml:loud>
-    </div>
-    <div class="field">
-    <haml:loud> f.label :observaciones </haml:loud><br />
-    <haml:loud> f.text_field :observaciones </haml:loud>
-    </div>
-    <div class="field">
-    <haml:loud> f.label :mensaje_recibo </haml:loud><br />
-    <haml:loud> f.text_field :mensaje_recibo </haml:loud>
-    </div>
+  .alert-message.warning{"data-alert" => "alert"}
+    %h4
+      Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :employee_id, @liquidacion.retrieve_all_employee_without_recibo_sueldos(@liquidacion.company_id), :id, :full_name , :prompt => true  if @recibo_sueldo.new_record?
+          = @recibo_sueldo.employee.try(:full_name) unless @recibo_sueldo.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :fecha_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_recibo, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :observaciones, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :observaciones, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :mensaje_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :mensaje_recibo, :class => "apsTextbox"
   - if @recibo_sueldo.persisted?
     .field
       %h3 Haberes
       #detalle_recibo_haber
         %table.field
           %tr
-            %th= f.label "Concepto Retencion"
+            %th= f.label "Concepto Haber"
             %th= f.label "Detalle Personalizado"
             %th= f.label "Centro Costo"
             %th= f.label "Cantidad"
@@ -72,4 +60,4 @@
         .links
           = link_to_add_association 'Agregar retencion', f, :detalle_recibo_retencions
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

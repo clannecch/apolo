@@ -1,0 +1,9 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DeduccionGananciasTable.model_name.human, deduccion_ganancias_tables_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, deduccion_ganancias_table_path(@deduccion_ganancias_table), :class => "btn info" 
+.clear
+%br/
+= render 'form'

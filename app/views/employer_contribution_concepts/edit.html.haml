@@ -1,5 +1,10 @@
-%h1 Editing employer_contribution_concept
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConcept.model_name.human, employer_contribution_concepts_path 
+    - breadcrumb.item "#{@employer_contribution_concept.detalle.titlecase}", employer_contribution_concept_path(@employer_contribution_concept), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, employer_contribution_concept_path(@employer_contribution_concept), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Show', @employer_contribution_concept
-|
-\#{link_to 'Back', employer_contribution_concepts_path}

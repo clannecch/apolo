@@ -1,30 +1,33 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Kinship.model_name.human, kinships_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Kinship.model_name.human) , new_kinship_path(@kinship), :class => "btn success" 
+  - if @kinships.any?
+    = link_to t('scaffold.actions.export').titlecase, kinships_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => Kinship.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= Kinship.human_attribute_name('name')
-
-    %th= Kinship.human_attribute_name('hijo_conyugue')
-
-    %th
-    %th
-    %th
-
-  - @kinships.each do |kinship|
+- if @kinships.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :code, @kinships.human_attribute_name('code')
+      %th= sort_link @search, :name, @kinships.human_attribute_name('name')
+      %th= sort_link @search, :hijo_conyugue, @kinships.human_attribute_name('hijo_conyugue')
+      %th= sort_link @search, :default, @kinships.human_attribute_name('default')
+      %th.last
 
-      %td= kinship.name
-
-      %td= (kinship.hijo_conyugue =="C" ?  "Conyuge"  : (kinship.hijo_conyugue =="H" ? "Hijo" : ""))
-
-      %td= link_to t('scaffold.actions.show').titlecase, kinship
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_kinship_path(kinship)
-      %td= link_to t('scaffold.actions.destroy').titlecase, kinship, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => Kinship.model_name.human).titlecase, new_kinship_path
-
+    - @kinships.each do |item|
+      %tr
+        %td= item.code
+        %td= item.name
+        %td= item.hijo_conyugue
+        %td= check_box_tag "kinships_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_kinship_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@kinships)
+  .clear
+.clear

@@ -1,9 +1,30 @@
-%h1 Visualizacion de tipos de Email
-%p#notice= notice
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmailType.model_name.human, email_types_path 
+    - breadcrumb.item "#{@email_type.detalle.titlecase}", nil, :active => true
 
-%p
-  %dDetalle:
-  = @email_type.detalle
-= email_type_links(@email_type)
-|
-= link_to 'Volver', email_types_path
+= link_to t('scaffold.actions.edit').titlecase, edit_email_type_path(@email_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @email_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@email_type) do |f|
+  = render 'shared/errorhandler', :obj_errors => @email_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @email_type.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @email_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "email_type_default", @email_type.default, @email_type.default, :disabled => true
+.clear

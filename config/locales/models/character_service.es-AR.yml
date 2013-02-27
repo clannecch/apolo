@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      character_service: Character de Servicio
+      character_service: Servicio de caracter
     attributes:
       character_service:
         detalle: Detalle

@@ -1,10 +1,12 @@
 - content_for(:head) do
-  = stylesheet_link_tag 'tabs.css'
   :css
     .field{
         float:left;
         width:33%;
         padding: 5px 0px 5px 0px;
+    }
+    .tab_label{
+        padding: 20px;
     }
 
      .actions{
@@ -12,64 +14,58 @@
     }
   = javascript_tag do
     $(document).ready(function(){
-    $(".datepicker" ).datepicker({
-    defaultDate: -#{18.years.days},
-    changeMonth: true,
-    changeYear: true
-    });
+    /$(".datepicker" ).datepicker({
+    /defaultDate: -#{18.years.days},
+    /changeMonth: true,
+    /changeYear: true
+    /});
     });
 
   = javascript_tag do
-    $( function() {$("ul.tabs").tabs("div.panes > div"); });
+    /$( function() {$("ul.tabs").tabs("div.panes > div"); });
 
 = form_for @employee,  :html => { :multipart => true } do |f|
-  - if @employee.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@employee.errors.count, "error")
-        prohibited this employee from being saved:
-      %ul
-        - @employee.errors.full_messages.each do |msg|
-          %li= msg
-  %ul.tabs
+  = render 'shared/errorhandler', :obj_errors => @employee.errors
+
+  %ul.tabs{"data-tabs" => "tabs"}
+    %li.active
+      %a{:href => "#personales"} Personales
     %li
-      %a{:href => "#"} Personales
+      %a{:href => "#domicilio"} Domicilio
     %li
-      %a{:href => "#"} Domicilio
+      %a{:href => "#ocupacion"} Ocupacion
     %li
-      %a{:href => "#"} Ocupacion
+      %a{:href => "#filiacion"} Filiacion
     %li
-      %a{:href => "#"} Filiacion
+      %a{:href => "#contratacion"} Contratacion
     %li
-      %a{:href => "#"} Contratacion
+      %a{:href => "#banco-seguro"} Banco-Seguro
     %li
-      %a{:href => "#"} Banco-Seguro
+      %a{:href => "#familiares"} Familiares
     %li
-      %a{:href => "#"} Familiares
+      %a{:href => "#beneficiarios"} Benef.Seguro
     %li
-      %a{:href => "#"} Benef.Seguro
+      %a{:href => "#remuneraciones"} Remuneraciones
     %li
-      %a{:href => "#"} Remuneraciones
+      %a{:href => "#retenciones"} Retenciones
     %li
-      %a{:href => "#"} Retenciones
+      %a{:href => "#afip"} AFIP
     %li
-      %a{:href => "#"} AFIP
-    %li
-      %a{:href => "#"} Documentos
-  .panes
-    .panel
+      %a{:href => "#documentos"} Documentos
+  .tab-content
+    #personales.active
       = render :partial => 'datos_personales', :locals => {:f => f}
-    .panel
+    #domicilio
       = render :partial => 'datos_domicilio', :locals => {:f => f}
-    .panel
+    #ocupacion
       = render :partial => 'datos_ocupacion', :locals => {:f => f}
-    .panel
+    #filiacion
       = render :partial => 'datos_filiacion', :locals => {:f => f}
-    .panel
+    #contratacion
       = render :partial => 'datos_contratacion', :locals => {:f => f}
-    .panel
+    #banco-seguro
       = render :partial => 'datos_seguro_banco', :locals => {:f => f}
-    .panel
+    #familiares
       .field-nested
         = f.label " "
         %br/
@@ -79,11 +75,11 @@
             = render 'employee_familiar_fields', :f => employee_familiar
           .links
             = link_to_add_association 'Agregar Familiar', f, :employee_familiars
-    .panel
-      .field
+    #beneficiarios
+      #field-beneficiarios
         %h3 Beneficiario Seguro
         #Insurance_beneficiary
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Apellido"
               %th= f.label "Nombre"
@@ -99,11 +95,11 @@
                 = render 'insurance_beneficiary_fields', :f => insurance_beneficiary
           .links
             = link_to_add_association 'Agregar Beneficiario Seguro', f, :insurance_beneficiaries, 'data-association-insertion-node' => '#nested-holder', 'data-association-insertion-position' => :before
-    .panel
-      .field
+    #remuneraciones
+      .field-remuneraciones
         %h3 Conceptos remunerativos personalizados
         #employee_remunerative_concept
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Concepto haber"
               %th= f.label "Detalle Personalizado"
@@ -116,11 +112,11 @@
                 = render 'employee_remunerative_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar Haber', f, :employee_remunerative_concepts, 'data-association-insertion-node' => '#nested-holder2', 'data-association-insertion-position' => :before
-    .panel
-      .field
+    #retenciones
+      .field-retenciones
         %h3 Conceptos de retenciones personalizados
         #employee_retention_concept
-          %table.field
+          %table.tableStandard
             %tr
               %th= f.label "Concepto Retencion"
               %th= f.label "Detalle Personalizado"
@@ -132,11 +128,10 @@
                 = render 'employee_retention_concept_fields', :f => erc
           .links
             = link_to_add_association 'Agregar retencion', f, :employee_retention_concepts, 'data-association-insertion-node' => '#nested-holder3', 'data-association-insertion-position' => :before
-    .panel
+    #afip
       = render :partial => 'datos_siscoss', :locals => {:f => f}
-    .panel
+    #documentos
       = render 'shared/attachments_manager', :f => f
 
   .actions
-    = f.submit
-
+    = f.submit :class => "btn success"

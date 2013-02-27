@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      place: Lugar de Trabajo
+      place: Lugar de trabajo
     attributes:
       place:
         detalle: Detalle

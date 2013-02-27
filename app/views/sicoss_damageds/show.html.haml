@@ -1,19 +1,30 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossDamaged.model_name.human, sicoss_damageds_path 
+    - breadcrumb.item "#{@sicoss_damaged.name.titlecase}", nil, :active => true
 
-
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), SicossDamaged.model_name.human].join(' ').titlecase
-
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_sicoss_damaged_path(@sicoss_damaged), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@sicoss_damaged) do |s|
-  = s.attributes(SicossDamaged.human_name + ' Info') do
-
-    = s.attribute :code
-
-    = s.attribute :name
-
-
+= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_damaged_path(@sicoss_damaged), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @sicoss_damaged, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@sicoss_damaged) do |f|
+  = render 'shared/errorhandler', :obj_errors => @sicoss_damaged.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_damaged.code
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_damaged.name
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "sicoss_damaged_default", @sicoss_damaged.default, @sicoss_damaged.default, :disabled => true
 .clear

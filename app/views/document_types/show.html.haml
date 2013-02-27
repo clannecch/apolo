@@ -1,9 +1,30 @@
-%h1 Visualizar Tipo de Documento
-%p#notice= notice
-%p
-  %b Detalle:
-  = @document_type.detalle
-= document_type_links(@document_type)
-|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DocumentType.model_name.human, document_types_path 
+    - breadcrumb.item "#{@document_type.detalle.titlecase}", nil, :active => true
 
-\#{link_to 'Volver', document_types_path}
+= link_to t('scaffold.actions.edit').titlecase, edit_document_type_path(@document_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @document_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@document_type) do |f|
+  = render 'shared/errorhandler', :obj_errors => @document_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @document_type.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @document_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "document_type_default", @document_type.default, @document_type.default, :disabled => true
+.clear

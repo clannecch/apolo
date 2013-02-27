@@ -2,26 +2,27 @@
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function()
 {
-  // jquery uniform
-  //$("select, input:checkbox, input:radio, input:file").uniform();
-  //$("input, textarea, select, button").uniform();
-  $("select#company_current").uniform();
+  //[PVD] :: Adjust the labels width with the column table width
+  var max = 0;
+  $(".columnLabel").each(function(){
+    if ($(this).width() > max)
+        max = $(this).width();
+  });
+  $(".apsLabel").width(max);
+
+  //[PVD] :: Add the Bootsrap classes to the cocoon elements
+  $(".add_fields").addClass("btn success");
+  $(".remove_fields").addClass("btn danger");
+  $(".apsDatetime").addClass("embeded");
+
+  // BOOTSTRAP plugin
+  $("#mymodal").modal( {closeOnEscape: true} );
+  $(".tabs").tabs();
+  $("a[rel=twipsy]").twipsy( {live: true} );
+  $(".alert-message").alert();
 
   // chosen multiple seleccion
-  //$(".chosen_multi_select").chosen();
-
-  // jQuery datepicker for formtastic (see http://gist.github.com/271377)
-  $('input.ui-datepicker').datepicker({ dateFormat: 'yy-mm-dd'});
-
-  // Tooltips (see http://onehackoranother.com/projects/jquery/tipsy)
-  $('img').each( function() {
-    if ($(this).get(0).title != '') {
-      $(this).tipsy();
-    }
-  });
-  $('select[title]').each( function() {
-      $(this).tipsy();
-  });
+  $(".apsSelect").chosen();
 
   $('.flash').ajaxStart(function() {
     $(this).append("<p class=\"message warning ajax\"><img style=\"vertical-align:middle;margin-right:5px;\" src=\"/images/spinner.gif\"><strong>Cargando ...</strong></p>");
@@ -31,11 +32,21 @@ $(document).ready(function()
     $(".flash > .ajax").hide();
   });
 
-	$('.accordion').accordion({
-	  collapsible: true,
-	  active: false,
-	  autoHeight: true
-	});
+  $(".apsDatetime").datepick(
+    $.extend({
+        altField: '#l10nAlternate',
+        showOnFocus: true,
+        showTrigger: '#calImg',
+        yearRange: 'any'
+    },
+    $.datepick.regional['fr'])
+  );
+
+//  $('.accordion').accordion({
+//	collapsible: true,
+//	active: false,
+//   autoHeight: true
+//  });
 	
 $("#filters .clean-filters").bind('click', function(event){
    event.preventDefault();
@@ -47,8 +58,6 @@ $("#filters .clean-filters").bind('click', function(event){
      $('.accordion').accordion("activate");
    }
  });
-
-
 });
 
 // Scroll effect for anchors

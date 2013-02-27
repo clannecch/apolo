@@ -1,0 +1,15 @@
+es-AR:
+  activerecord:
+    models:
+      employee_retention_concept: Concepto de retención del empleador
+    attributes:
+      employee_retention_concept:
+        employee_id: Employee
+        retention_concept_id: Retention Concept
+        cantidad: Cantidad
+        importe: Importe
+        fecha_inicio: Fecha Inicio
+        fecha_final: Fecha Final
+        created_at: Creado el
+        updated_at: Actualizado el
+        detalle: Detalle

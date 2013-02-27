@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: employees
 #
@@ -50,8 +50,8 @@
 #  horas_pactadas                   :decimal(, )
 #  remuneracion_fuera_convenio      :decimal(, )
 #  remuneration_type_id             :integer
-#  group_remuneration_id            :integer
 #  group_retention_id               :integer
+#  group_employercontribution_id    :integer
 #  cost_center_id                   :integer
 #  antiguedad_reconocida_anos       :integer
 #  antiguedad_reconocida_meses      :integer
@@ -78,9 +78,7 @@
 #  bank_deposit_account_type_id     :integer
 #  deposito_banco_cuenta            :string(255)
 #  deposito_banco_cbu               :string(255)
-#  group_employer_contribution_id   :integer
 #  causa_egreso_id                  :integer
-#  foto                             :binary
 #  company_id                       :integer
 #  latitude                         :float
 #  longitude                        :float
@@ -99,7 +97,9 @@
 #  sicoss_reduction_zone_id         :integer
 #  sicoss_en_convenio               :string(255)
 #  sicoss_regimen_type_id           :integer
-#  sicoss_seguro_obligatorio        :string(255)
+#  sicoss_seguro_obligatorio        :string(1)
+#  group_employer_contribution_id   :integer
+#  group_remuneration_id            :integer
 #  consortium_id                    :integer
 #
 
@@ -107,6 +107,7 @@ require 'paperclip'
 class Employee < ActiveRecord::Base
 
   scope :by_company, lambda {|company| where(:company_id => company) }
+  #default_scope where(:company_id => $CURRENT_COMPANY)
 
   belongs_to :document_type
   belongs_to :educational_level

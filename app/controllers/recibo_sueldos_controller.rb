@@ -1,5 +1,6 @@
 class ReciboSueldosController < ApplicationController
   before_filter :find_liquidacion
+  before_filter :find_recibo_sueldo, :except => [:index, :new, :create]
 
   # GET /recibo_sueldos
   # GET /recibo_sueldos.xml
@@ -24,10 +25,20 @@ class ReciboSueldosController < ApplicationController
       format.xml  { render :xml => @recibo_sueldo }
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@recibo_sueldo.cache_key)
-          Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
-          print_to_pdf(dump_tmp_filename,@recibo_sueldo)
-          send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
-          File.delete(dump_tmp_filename) unless Rails.env.development?
+        Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
+
+        file_photo = Rails.root.join('tmp',rand.to_s[2..15]+'.jpg')
+        Dir.mkdir(file_photo.dirname) unless File.directory?(file_photo.dirname)
+
+
+        print_to_pdf(dump_tmp_filename,file_photo,@recibo_sueldo)
+        send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "recibo_sueldo.pdf")
+        File.delete(dump_tmp_filename) unless Rails.env.development?
+        begin
+          File.delete(file_photo) unless Rails.env.development?
+        rescue
+        end
+
       end
     end
   end
@@ -170,19 +181,56 @@ class ReciboSueldosController < ApplicationController
   end
 =end
 
+  #[PVD] :: 2011-10-26 :: Listado de los recibos de sueldo de una liquidacion
+  def control_by_company
+    @recibo_sueldo =  @liquidacion.recibo_sueldos.find(params[:id])
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
+    end
+  end
+
+  #[PVD] :: 2011-10-27 :: Actualizar los campos de la aprobación del recibo
+  def update_approved_fields
+    @recibo_sueldo.approved_by_user_id = current_user.id
+    @recibo_sueldo.approved_date = DateTime.now
+    respond_to do |format|
+      if @recibo_sueldo.save
+        format.html { redirect_to control_by_company_liquidacion_path(@liquidacion), :notice => t('scaffold.notice.updated', :item=> ReciboSueldo.model_name.human) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @recibo_sueldo.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_disapproved_fields
+    @recibo_sueldo.approved_by_user_id = nil
+    @recibo_sueldo.approved_date = nil
+    respond_to do |format|
+      if @recibo_sueldo.save
+        format.html { redirect_to control_by_company_liquidacion_path(@liquidacion), :notice => t('scaffold.notice.updated', :item=> ReciboSueldo.model_name.human) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @recibo_sueldo.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
 #  numero.truncate parte entera
   #"456778904".gsub(/(.)(?=.{3}+$)/, %q(\1,))
 
-  def print_to_pdf(filename,entity)
+  def print_to_pdf(filename,file_photo,entity)
     require 'prawn'
 
     empresa = OpenStruct.new({
-                    :logo                   => "",
+                    :logo                   => nil,
                     :empresa                => "",
                     :domicilio              => "",
-                    :cuit                   => "",
-                    :inscripcion            => "",
-                    :caja                   => ""
+                    :cuit                   => ""
                     })
 
     @recibo_sueldo = @liquidacion.recibo_sueldos.find(params[:id])
@@ -190,11 +238,15 @@ class ReciboSueldosController < ApplicationController
     pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER")
                                 #  :page_layout => :portrait)
 
+    pdf.draw_text current_company.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.consortium.try(:code).to_s + '-' + 
+                  @recibo_sueldo.employee.try(:legajo).to_s , :at => [450,725], :size => 7
 
     logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
+    attach = nil
     if @recibo_sueldo.employee.consortium_id.to_f > 0
       if !logo_id.nil?
- #       attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
+        attach = @recibo_sueldo.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
       end
       empresa.empresa     = @recibo_sueldo.employee.consortium.razon_social
       empresa.domicilio   = @recibo_sueldo.employee.consortium.calle + ' ' +
@@ -203,11 +255,11 @@ class ReciboSueldosController < ApplicationController
                             @recibo_sueldo.employee.consortium.location.detalle+' ('+
                             @recibo_sueldo.employee.consortium.province.detalle+")"
       empresa.cuit        = @recibo_sueldo.employee.consortium.cuit
-      empresa.inscripcion = @recibo_sueldo.employee.consortium.numero_inscripcion
-      empresa.caja        = @recibo_sueldo.employee.consortium.caja
     else
+#      Rails.logger.info("calle="+current_company.calle)
+#      Rails.logger.info("altura="+current_company.altura)
       if !logo_id.nil?
-#        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
+        attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
       end
       empresa.empresa     = current_company.razon_social
       empresa.domicilio   = current_company.calle + ' ' +
@@ -216,21 +268,21 @@ class ReciboSueldosController < ApplicationController
                             current_company.location.detalle+' ('+
                             current_company.province.detalle+")"
       empresa.cuit        = current_company.cuit
-      empresa.inscripcion = current_company.numero_inscripcion
-      empresa.caja        = current_company.caja
     end
-=begin
-    if attach.adjunto_content_type[0..4] = "image"
-      file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
-      Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
+#Rails.logger.info("10")
+    if !attach.nil?
+      if attach.adjunto_content_type[0..4] = "image"
+#        file_logo= Rails.root.join('tmp',"tmp"+rand.to_s[2..15]+'.jpg')
+#        Dir.mkdir(file_logo.dirname) unless File.directory?(file_logo.dirname)
 
-      open( file_logo, 'wb' ) { |file|
-          file.write(attach.adjunto_file)
-        }
+        open( file_photo, 'wb' ) { |file|
+            file.write(attach.adjunto_file)
+          }
 
-      empresa.logo = file_logo.to_s
+        empresa.logo = file_photo.to_s
+      end
     end
-=end
+#    Rails.logger.info("11")
 # Recuadro exterior
     pdf.bounding_box [1, 720], :width => 535, :height => 725 do
         pdf.stroke_bounds
@@ -240,15 +292,15 @@ class ReciboSueldosController < ApplicationController
     pdf.bounding_box [1, 720], :width => 135, :height => 120 do
         pdf.stroke_bounds
     end
-#    pdf.image empresa.logo, :at => [27,715], :width => 75
-
+    if !empresa.logo.nil?
+      pdf.image empresa.logo, :at => [27,715], :width => 75
+    end
     pdf.font("Courier", :style => :bold)
+    # codigo administracion - codigo consorcio - codigo legajo
     pdf.draw_text empresa.empresa.center(26), :at => [5,638], :size => 8  # columna, linea, tamaño estilo
     pdf.draw_text empresa.domicilio.center(40), :at => [7,631], :size => 5
     pdf.draw_text empresa.domicilio2.center(40), :at => [7,623], :size => 5
     pdf.draw_text ("C.U.I.T.: "+empresa.cuit).center(40), :at => [7,615], :size => 5
-    pdf.draw_text ("Nro.Inscripcion: " +empresa.inscripcion).center(40), :at => [7,609], :size => 5
-    pdf.draw_text ("Caja: " + empresa.caja).center(40), :at => [7,602], :size => 5
 
 # Primer columna
     pdf.bounding_box [136, 720], :width => 170, :height => 10 do
@@ -603,6 +655,10 @@ class ReciboSueldosController < ApplicationController
   def find_liquidacion
     raise "Debe ingresar una liquidacion!!!!!!!!!!!" if params[:liquidacion_id].blank?
     @liquidacion = Liquidacion.find(params[:liquidacion_id])
+  end
+
+  def find_recibo_sueldo
+    @recibo_sueldo =  @liquidacion.recibo_sueldos.find(params[:id])
   end
 
 end

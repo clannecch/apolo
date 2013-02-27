@@ -107,16 +107,23 @@ APSSueldos::Application.routes.draw do |map|
     end
   end
 
+  match '/print_table' => 'application#print_table', :via => :get
+  match 'liquidacions/control_by_company_list' => 'liquidacions#control_by_company_list', :via => :get
   resources :liquidacions do
+    member do
+       get "control_by_company", :action => :control_by_company
+    end
     resources :recibo_sueldos do
+      member do
+        get "control_by_company", :action => :control_by_company
+        get "update_approved_fields", :action => :update_approved_fields
+        get "update_disapproved_fields", :action => :update_disapproved_fields
+      end
       resources :detalle_recibo_retencions
       resources :detalle_recibo_habers
       member do
         get "calculo_recibo", :action => :calculo_recibo
       end
-      #member do
-      #  get "imprimir", :action => :print
-      #end
     end
   end
 
@@ -261,3 +268,5 @@ APSSueldos::Application.routes.draw do |map|
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+
+

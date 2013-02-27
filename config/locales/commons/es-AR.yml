@@ -19,4 +19,6 @@ es-AR:
           attributes:
             name:
               taken: "ya ha sido usado"
+      messages:
+        record_invalid: "El regsitro es invalido"
 

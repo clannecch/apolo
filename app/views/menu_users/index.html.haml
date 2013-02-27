@@ -1,0 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MenuUser.model_name.human, menu_users_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => MenuUser.model_name.human) , new_menu_user_path(@menu_user), :class => "btn success" 
+  - if @menu_users.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + MenuUser.model_name, :class => "btn info"
+
+- if @menu_users.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :menu_id, @menu_users.human_attribute_name('menu_id')
+      %th= sort_link @search, :user_id, @menu_users.human_attribute_name('user_id')
+      %th.last
+
+    - @menu_users.each do |item|
+      %tr
+        %td= item.menu_id
+        %td= item.user_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_menu_user_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@menu_users)
+  .clear
+.clear

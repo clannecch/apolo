@@ -1,17 +1,59 @@
-%h1 Visualizacion de beneficiarios seguro
-%p#notice= notice
-%p
-  %b Nombre:
-  = @insurance_beneficiary.nombre
-%p
-  %b Apellido:
-  = @insurance_beneficiary.apellido
-%p
-  %b Tipo de Documento:
-  = @insurance_beneficiary.document_type.try(:detalle)
-%p
-  %b Numero documento:
-  = @insurance_beneficiary.numero_documento
-= link_to 'Editar', edit_insurance_beneficiary_path(@insurance_beneficiary)
-|
-\#{link_to 'Volver', insurance_beneficiaries_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceBeneficiary.model_name.human, insurance_beneficiaries_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_insurance_beneficiary_path(@insurance_beneficiary), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @insurance_beneficiary, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@insurance_beneficiary) do |f|
+  = render 'shared/errorhandler', :obj_errors => @insurance_beneficiary.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :nombre, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.nombre
+      %tr
+        %td.columnLabel
+          = f.label :apellido, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.apellido
+      %tr
+        %td.columnLabel
+          = f.label :document_type_id, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.document_type.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :numero_documento, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.numero_documento
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.employee_id
+      %tr
+        %td.columnLabel
+          = f.label :fecha_nacimiento, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.fecha_nacimiento
+      %tr
+        %td.columnLabel
+          = f.label :address, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.address
+      %tr
+        %td.columnLabel
+          = f.label :kinship_id, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.kinship.try(:name)
+      %tr
+        %td.columnLabel
+          = f.label :porcentual, :class => "apsLabel"
+        %td.columnData
+          = @insurance_beneficiary.porcentual
+.clear

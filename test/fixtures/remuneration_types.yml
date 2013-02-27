@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111025214836
 #
 # Table name: remuneration_types
 #
@@ -9,6 +9,8 @@
 #  updated_at   :datetime
 #  company_id   :integer
 #  hora_dia_mes :string(255)
+#  code         :string(255)
+#  default      :boolean
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

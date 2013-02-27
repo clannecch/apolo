@@ -9,7 +9,7 @@ class NumeradorsController < ApplicationController
   # GET /numeradors.json
   # GET /numeradors.xml
   def index
-    @search = Numerador.by_company(current_company.id).search(params[:search])
+    @search = Numerador.search(params[:search])
     @numeradors = @search.page(params[:page])#.per(10)
 
       respond_to do |format|
@@ -32,7 +32,7 @@ class NumeradorsController < ApplicationController
   # GET /numeradors/new.json
   # GET /numeradors/new.xml
   def new
-    @numerador = Numerador.by_company(current_company.id).new
+    @numerador = Numerador.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,7 +50,7 @@ class NumeradorsController < ApplicationController
   # POST /numeradors.json
   # POST /numeradors.xml
   def create
-    @numerador = Numerador.by_company(current_company.id).new(params[:numerador])
+    @numerador = Numerador.new(params[:numerador])
 
     respond_to do |format|
       if @numerador.save
@@ -95,7 +95,7 @@ class NumeradorsController < ApplicationController
   end
 
   def find_numerador
-    @numerador = Numerador.by_company(current_company.id).find(params[:id])
+    @numerador = Numerador.find(params[:id])
   end
 end
 

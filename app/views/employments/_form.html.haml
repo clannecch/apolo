@@ -1,15 +1,24 @@
 = form_for(@employment) do |f|
-  - if @employment.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@employment.errors.count, "error")
-        prohibited this employment from being saved:
-      %ul
-        - @employment.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :detalle
-    %br/
-    = f.text_field :detalle
+  = render 'shared/errorhandler', :obj_errors => @employment.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= Employment.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

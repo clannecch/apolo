@@ -1,21 +1,43 @@
-%h1 Listado de Beneficiarios seguro
-%table
-  %tr
-    %th Nombre
-    %th Apellido
-    %th Tipo de Documento
-    %th Numero documento
-    %th
-    %th
-    %th
-  - @insurance_beneficiaries.each do |insurance_beneficiary|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceBeneficiary.model_name.human, insurance_beneficiaries_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => InsuranceBeneficiary.model_name.human) , new_insurance_beneficiary_path(@insurance_beneficiary), :class => "btn success" 
+  - if @insurance_beneficiaries.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + InsuranceBeneficiary.model_name, :class => "btn info"
+
+- if @insurance_beneficiaries.any?
+  %table.tableStandard
     %tr
-      %td= insurance_beneficiary.nombre
-      %td= insurance_beneficiary.apellido
-      %td= insurance_beneficiary.document_type.try(:detalle)
-      %td= insurance_beneficiary.numero_documento
-      %td= link_to 'Visualizar', insurance_beneficiary
-      %td= link_to 'Editar', edit_insurance_beneficiary_path(insurance_beneficiary)
-      %td= link_to 'Borrar', insurance_beneficiary, :confirm => 'Esta Seguro?', :method => :delete
-%br/
-= link_to 'Nuevo beneficiario de seguro', new_insurance_beneficiary_path
+      %th= sort_link @search, :nombre, @insurance_beneficiaries.human_attribute_name('nombre')
+      %th= sort_link @search, :apellido, @insurance_beneficiaries.human_attribute_name('apellido')
+      %th= sort_link @search, :document_type_id, @insurance_beneficiaries.human_attribute_name('document_type_id')
+      %th= sort_link @search, :numero_documento, @insurance_beneficiaries.human_attribute_name('numero_documento')
+      %th= sort_link @search, :employee_id, @insurance_beneficiaries.human_attribute_name('employee_id')
+      %th= sort_link @search, :fecha_nacimiento, @insurance_beneficiaries.human_attribute_name('fecha_nacimiento')
+      %th= sort_link @search, :address, @insurance_beneficiaries.human_attribute_name('address')
+      %th= sort_link @search, :kinship_id, @insurance_beneficiaries.human_attribute_name('kinship_id')
+      %th= sort_link @search, :porcentual, @insurance_beneficiaries.human_attribute_name('porcentual')
+      %th.last
+
+    - @insurance_beneficiaries.each do |item|
+      %tr
+        %td= item.nombre
+        %td= item.apellido
+        %td= item.document_type_id
+        %td= item.numero_documento
+        %td= item.employee_id
+        %td= item.fecha_nacimiento
+        %td= item.address
+        %td= item.kinship_id
+        %td= item.porcentual
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_insurance_beneficiary_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@insurance_beneficiaries)
+  .clear
+.clear

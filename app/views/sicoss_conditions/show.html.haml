@@ -1,19 +1,25 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossCondition.model_name.human, sicoss_conditions_path 
+    - breadcrumb.item "#{@sicoss_condition.name.titlecase}", nil, :active => true
 
-
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), SicossCondition.model_name.human].join(' ').titlecase
-
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_sicoss_condition_path(@sicoss_condition), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@sicoss_condition) do |s|
-  = s.attributes(SicossCondition.human_name + ' Info') do
-
-    = s.attribute :code
-
-    = s.attribute :name
-
-
+= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_condition_path(@sicoss_condition), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @sicoss_condition, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@sicoss_condition) do |f|
+  = render 'shared/errorhandler', :obj_errors => @sicoss_condition.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_condition.code
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = @sicoss_condition.name
 .clear

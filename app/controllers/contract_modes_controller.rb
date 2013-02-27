@@ -3,8 +3,8 @@ before_filter :find_contract_mode, :except => [:index, :new, :create]
   # GET /contract_modes
   # GET /contract_modes.xml
   def index
-    #@contract_modes = ContractMode.by_company(current_company.id).all
-    @search = ContractMode.by_company(current_company.id).search(params[:search])
+    #@contract_modes = ContractMode.all
+    @search = ContractMode.search(params[:search])
     @contract_modes = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ before_filter :find_contract_mode, :except => [:index, :new, :create]
   # GET /contract_modes/new
   # GET /contract_modes/new.xml
   def new
-    @contract_mode = ContractMode.by_company(current_company.id).new
+    @contract_mode = ContractMode.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ before_filter :find_contract_mode, :except => [:index, :new, :create]
   # POST /contract_modes
   # POST /contract_modes.xml
   def create
-    @contract_mode = ContractMode.by_company(current_company.id).new(params[:contract_mode])
+    @contract_mode = ContractMode.new(params[:contract_mode])
 
     respond_to do |format|
       if @contract_mode.save
@@ -86,7 +86,7 @@ end
 protected
 
   def find_contract_mode
-    @contract_mode = ContractMode.by_company(current_company.id).find(params[:id])
+    @contract_mode = ContractMode.find(params[:id])
    end
 
 end

@@ -1,0 +1,19 @@
+= form_for(@user_role) do |f|
+  = render 'shared/errorhandler', :obj_errors => @user_role.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= UserRole.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :user_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :user_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :rol_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :rol_id, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

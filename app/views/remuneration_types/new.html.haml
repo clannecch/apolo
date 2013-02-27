@@ -1,3 +1,7 @@
-%h1 Nuevo Tipo de Remuneracion
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RemunerationType.model_name.human, remuneration_types_path
+    - breadcrumb.item t('scaffold.actions.new', :item => RemunerationType.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Volver', remuneration_types_path

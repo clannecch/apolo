@@ -1,25 +1,43 @@
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => User.model_name.human).titlecase
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item User.model_name.human, users_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => User.model_name.human) , new_user_path(@user), :class => "btn success" 
+  - if @users.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + User.model_name, :class => "btn info"
 
-%table
-  %tr
-    %th= User.human_attribute_name('email')
-    %th= User.human_attribute_name('first_name')
-    %th= User.human_attribute_name('last_name')
-    %th
-    %th
-    %th
-
-  - @users.each do |user|
+- if @users.any?
+  %table.tableStandard
     %tr
-      %td= user.email
-      %td= user.first_name
-      %td= user.last_name
-      %td= link_to t('scaffold.actions.show').titlecase, user
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_user_path(user)
-      %td= link_to t('scaffold.actions.destroy').titlecase, user, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
+      %th= sort_link @search, :first_name, @users.human_attribute_name('first_name')
+      %th= sort_link @search, :last_name, @users.human_attribute_name('last_name')
+      %th= sort_link @search, :reset_password_token, @users.human_attribute_name('reset_password_token')
+      %th= sort_link @search, :reset_password_sent_at, @users.human_attribute_name('reset_password_sent_at')
+      %th= sort_link @search, :remember_created_at, @users.human_attribute_name('remember_created_at')
+      %th= sort_link @search, :current_sign_in_at, @users.human_attribute_name('current_sign_in_at')
+      %th= sort_link @search, :last_sign_in_at, @users.human_attribute_name('last_sign_in_at')
+      %th= sort_link @search, :current_sign_in_ip, @users.human_attribute_name('current_sign_in_ip')
+      %th= sort_link @search, :last_sign_in_ip, @users.human_attribute_name('last_sign_in_ip')
+      %th.last
 
-%br
-
-= link_to t('scaffold.actions.new', :item => User.model_name.human).titlecase, new_user_path
-
+    - @users.each do |item|
+      %tr
+        %td= item.first_name
+        %td= item.last_name
+        %td= item.reset_password_token
+        %td= item.reset_password_sent_at
+        %td= item.remember_created_at
+        %td= item.current_sign_in_at
+        %td= item.last_sign_in_at
+        %td= item.current_sign_in_ip
+        %td= item.last_sign_in_ip
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_user_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@users)
+  .clear
+.clear

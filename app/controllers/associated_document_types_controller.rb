@@ -7,12 +7,10 @@ class AssociatedDocumentTypesController < ApplicationController
   # GET /associated_document_types.json
   # GET /associated_document_types.xml
   def index
-    @associated_document_types = AssociatedDocumentType.by_company(current_company.id).all
-
-    respond_to do |format|
-      format.html # index.html.erbb
-      format.xml  { render :xml => @associated_document_types }
-    end
+    @search = AssociatedDocumentType.search(params[:search])
+    @associated_document_types = @search.page(params[:page]).per(10)
+    flash.now[:notice] = t('flash.actions.index.notice') if @associated_document_types.empty?
+    respond_with(@associated_document_types)
   end
 
   # GET /associated_document_types/1
@@ -28,7 +26,7 @@ class AssociatedDocumentTypesController < ApplicationController
   # GET /associated_document_types/new
   # GET /associated_document_types/new.xml
   def new
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).new
+    @associated_document_type = AssociatedDocumentType.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,11 +44,11 @@ class AssociatedDocumentTypesController < ApplicationController
   # POST /associated_document_types.json
   # POST /associated_document_types.xml
   def create
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).new(params[:associated_document_type])
+    @associated_document_type = AssociatedDocumentType.new(params[:associated_document_type])
 
     respond_to do |format|
       if @associated_document_type.save
-        format.html { redirect_to(@associated_document_type, :notice => 'associated_document_type was successfully created.') }
+        format.html { redirect_to(@associated_document_type, :notice => t('scaffold.notice.created', :item => AssociatedDocumentType.model_name.human)) }
         format.xml  { render :xml => @associated_document_type, :status => :created, :location => @associated_document_type }
       else
         format.html { render :action => "new" }
@@ -65,7 +63,7 @@ class AssociatedDocumentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @associated_document_type.update_attributes(params[:associated_document_type])
-        format.html { redirect_to(@associated_document_type, :notice => 'associated_document_type was successfully updated.') }
+        format.html { redirect_to(@associated_document_type, :notice => t('scaffold.notice.updated', :item=> AssociatedDocumentType.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -93,7 +91,7 @@ class AssociatedDocumentTypesController < ApplicationController
   protected
 
   def find_associated_document_type
-    @associated_document_type = AssociatedDocumentType.by_company(current_company.id).find(params[:id])
+    @associated_document_type = AssociatedDocumentType.find(params[:id])
   end
 end
 

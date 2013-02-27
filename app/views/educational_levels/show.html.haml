@@ -1,8 +1,30 @@
-%h1 Visualizacion de Nivel de Educacion
-%p#notice= notice
-%p
-  %b Detalle:
-  = @educational_level.detalle
-= educational_level_links(@educational_level)
-|
-= link_to 'Volver', educational_levels_path
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EducationalLevel.model_name.human, educational_levels_path 
+    - breadcrumb.item "#{@educational_level.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_educational_level_path(@educational_level), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @educational_level, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@educational_level) do |f|
+  = render 'shared/errorhandler', :obj_errors => @educational_level.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @educational_level.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @educational_level.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "educational_level_default", @educational_level.default, @educational_level.default, :disabled => true
+.clear

@@ -1,8 +1,30 @@
-%h1 Visualizacion de Estado Civil
-%p#notice= notice
-%p
-  %b Detalle:
-  = @marital_status.detalle
-= marital_status_links(@marital_status)
-|
-\#{link_to 'Volver', marital_statuses_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MaritalStatus.model_name.human, marital_statuses_path 
+    - breadcrumb.item "#{@marital_status.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_marital_status_path(@marital_status), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @marital_status, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@marital_status) do |f|
+  = render 'shared/errorhandler', :obj_errors => @marital_status.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @marital_status.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @marital_status.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "marital_status_default", @marital_status.default, @marital_status.default, :disabled => true
+.clear

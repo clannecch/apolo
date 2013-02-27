@@ -1,0 +1,9 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConceptsGroupEmployerContribution.model_name.human, employer_contribution_concepts_group_employer_contributions_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, employer_contribution_concepts_group_employer_contribution_path(@employer_contribution_concepts_group_employer_contribution), :class => "btn info" 
+.clear
+%br/
+= render 'form'

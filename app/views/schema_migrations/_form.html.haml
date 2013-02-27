@@ -1,0 +1,14 @@
+= form_for(@schema_migration) do |f|
+  = render 'shared/errorhandler', :obj_errors => @schema_migration.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= SchemaMigration.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :version, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :version, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

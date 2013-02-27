@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      group_retentions_retention_concept: Group Retentions Retention Concept
+      group_retentions_retention_concept: Concepto de grupo de retenciones
     attributes:
       group_retentions_retention_concept:
         group_retention_id: Group Retention

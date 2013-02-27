@@ -1,52 +1,100 @@
-%p#notice= notice
-%p
-  %b Codigo:
-  = @remunerative_concept.codigo
-%p
-  %b Detalle:
-  = @remunerative_concept.detalle
-%p
-  %b Porcentual asistencia:
-  = @remunerative_concept.porcentual_asistencia
-%p
-  %b Prioridad Calculo:
-  = @remunerative_concept.prioridad_calculo
-%p
-  %b Datos a Pedir:
-  = @remunerative_concept.data_to_ask.try(:detalle)
-%p
-  %b Formula Calculo Cantidad:
-  = @remunerative_concept.calculo_cantidad
-%p
-  %b Formula Calculo Valor:
-  = @remunerative_concept.calculo_valor
-%p
-  %b Statistical value:
-  = @remunerative_concept.statistical_value
-%p
-  %b Acumuladores Valor:
-  = @remunerative_concept.acumuladores_valor
-%p
-  %b Acumuladores cantidad:
-  = @remunerative_concept.acumuladores_cantidad
-%p
-  %b Grupo ganancias:
-  = @remunerative_concept.grupo_ganancias_id
-%p
-  %b Accounting imputation:
-  = @remunerative_concept.accounting_imputation_id
-%p
-  %b Concepto asociado haber:
-  = @remunerative_concept.concepto_asociado_haber
-%p
-  %b Concepto asociado retencion:
-  = @remunerative_concept.concepto_asociado_retencion
-%p
-  %b Concepto asociado haber 2:
-  = @remunerative_concept.concepto_asociado_haber_2
-%p
-  %b Concepto asociado retencion 2:
-  = @remunerative_concept.concepto_asociado_retencion_2
-= remunerative_concept_links(@remunerative_concept)
-|
-\#{link_to 'Volver', remunerative_concepts_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RemunerativeConcept.model_name.human, remunerative_concepts_path 
+    - breadcrumb.item "#{@remunerative_concept.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_remunerative_concept_path(@remunerative_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @remunerative_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@remunerative_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @remunerative_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.codigo
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :prioridad_calculo, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.prioridad_calculo
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.statistical_value
+      %tr
+        %td.columnLabel
+          = f.label :grupo_ganancias_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.grupo_ganancias_id
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.accounting_imputation.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.concepto_asociado_haber_id
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.concepto_asociado_retencion_id
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_2_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.concepto_asociado_haber_2_id
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_2_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.concepto_asociado_retencion_2_id
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.acumuladores_valor
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_cantidad, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.acumuladores_cantidad
+      %tr
+        %td.columnLabel
+          = f.label :calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.calculo_valor
+      %tr
+        %td.columnLabel
+          = f.label :calculo_cantidad, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.calculo_cantidad
+      %tr
+        %td.columnLabel
+          = f.label :data_to_ask_id, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.data_to_ask.detalle
+      %tr
+        %td.columnLabel
+          = f.label :cantidad_en_recibo, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.cantidad_en_recibo
+      %tr
+        %td.columnLabel
+          = f.label :auxiliar, :class => "apsLabel"
+        %td.columnData
+          = @remunerative_concept.auxiliar
+.clear

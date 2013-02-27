@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
   def index
     #@employees = Employee.all
     @search = Employee.by_company(current_company.id).search(params[:search])
-    @employees = @search.order("consortium_id,legajo").page(params[:page]).per(10)
+    @employees = @search.order("consortium_id, legajo").page(params[:page]).per(10)
     respond_to do |format|
       format.html # index.html.erbb
       format.xml  { render :xml => @employees }
@@ -35,7 +35,43 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.by_company(current_company.id).new
+    @employee = Employee.new(:company_id=>current_company.id)
+    @employee.bank_deposit_id                 = BankDeposit.where(:default => true).first.id               if BankDeposit.where(:default => true).any?
+    @employee.bank_deposit_account_type_id    = BankDepositAccountType.where(:default => true).first.id  if BankDepositAccountType.where(:default => true).any?
+    @employee.category_id                     = Category.where(:default => true).first.id                  if Category.where(:default => true).any?
+    @employee.character_service_id            = CharacterService.where(:default => true).first.id          if CharacterService.where(:default => true).any?
+    @employee.contract_mode_id                = ContractMode.where(:default => true).first.id              if ContractMode.where(:default => true).any?
+    @employee.cost_center_id                  = CostCenter.where(:default => true).first.id                if CostCenter.where(:default => true).any?
+    @employee.country_id                      = Country.where(:default => true).first.id                   if Country.where(:default => true).any?
+    @employee.document_type_id                = DocumentType.where(:default => true).first.id              if DocumentType.where(:default => true).any?
+    @employee.educational_level_id            = EducationalLevel.where(:default => true).first.id          if EducationalLevel.where(:default => true).any?
+    @employee.email_type_id                   = EmailType.where(:default => true).first.id                 if EmailType.where(:default => true).any?
+    @employee.employment_id                   = Employment.where(:default => true).first.id                if Employment.where(:default => true).any?
+    @employee.group_remuneration_id           = GroupRemuneration.where(:default => true).first.id         if GroupRemuneration.where(:default => true).any?
+    @employee.group_retention_id              = GroupRetention.where(:default => true).first.id            if GroupRetention.where(:default => true).any?
+    @employee.group_employer_contribution_id  = GroupEmployerContribution.where(:default => true).first.id if GroupEmployerContribution.where(:default => true).any?
+    @employee.health_insurance_id             = HealthInsurance.where(:default => true).first.id           if HealthInsurance.where(:default => true).any?
+    @employee.home_about_id                   = HomeAbout.where(:default => true).first.id                 if HomeAbout.where(:default => true).any?
+    @employee.insurance_company_id            = InsuranceCompany.where(:default => true).first.id          if InsuranceCompany.where(:default => true).any?
+    @employee.issued_id                       = Issued.where(:default => true).first.id                    if Issued.where(:default => true).any?
+    @employee.labor_union_id                  = LaborUnion.where(:default => true).first.id                if LaborUnion.where(:default => true).any?
+    @employee.marital_status_id               = MaritalStatus.where(:default => true).first.id             if MaritalStatus.where(:default => true).any?
+    @employee.nationality_id                  = Nationality.where(:default => true).first.id               if Nationality.where(:default => true).any?
+    @employee.place_id                        = Place.where(:default => true).first.id                     if Place.where(:default => true).any?
+    @employee.province_id                     = Province.where(:default => true).first.id                  if Province.where(:default => true).any?
+    @employee.remuneration_type_id            = RemunerationType.where(:default => true).first.id          if RemunerationType.where(:default => true).any?
+    @employee.section_id                      = Section.where(:default => true).first.id                   if Section.where(:default => true).any?
+    @employee.sicoss_activity_id              = SicossActivity.where(:default => true).first.id            if SicossActivity.where(:default => true).any?
+    @employee.sicoss_condition_id             = SicossCondition.where(:default => true).first.id           if SicossCondition.where(:default => true).any?
+    @employee.sicoss_contract_mode_id         = SicossContractMode.where(:default => true).first.id        if SicossContractMode.where(:default => true).any?
+    @employee.sicoss_damaged_id               = SicossDamaged.where(:default => true).first.id             if SicossDamaged.where(:default => true).any?
+    @employee.sicoss_employer_type_id         = SicossEmployerType.where(:default => true).first.id        if SicossEmployerType.where(:default => true).any?
+    @employee.sicoss_location_id              = SicossLocation.where(:default => true).first.id            if SicossLocation.where(:default => true).any?
+    @employee.sicoss_reduction_zone_id        = SicossReductionZone.where(:default => true).first.id       if SicossReductionZone.where(:default => true).any?
+    @employee.sicoss_regimen_type_id          = SicossRegimenType.where(:default => true).first.id         if SicossRegimenType.where(:default => true).any?
+    @employee.sicoss_situation_id             = SicossSituation.where(:default => true).first.id           if SicossSituation.where(:default => true).any?
+    @employee.task_id                         = Task.where(:default => true).first.id                      if Task.where(:default => true).any?
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,11 +86,11 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.xml
   def create
-    @employee = Employee.by_company(current_company.id).new(params[:employee])
-
+    @employee = Employee.new(params[:employee])
+    @employee.company_id = current_company.id
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to(@employee, :notice => 'Employee was successfully created.') }
+        format.html { redirect_to(@employee, :notice => t('scaffold.notice.created', :item=> Employee.model_name.human)) }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
       else
         format.html { render :action => "new" }
@@ -70,7 +106,7 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
-        format.html { redirect_to(@employee, :notice => 'Employee was successfully updated.') }
+        format.html { redirect_to(@employee, :notice => t('scaffold.notice.updated', :item=> Employee.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -121,9 +157,12 @@ class EmployeesController < ApplicationController
     end
 
     pdf.stroke_rectangle [400,710], 100, 100
-
-    foto_principal_id = AssociatedDocumentType.where(:document_type => "F").first.id
-    if !@foto_principal.nil?
+    begin
+      foto_principal_id = AssociatedDocumentType.where(:document_type => "F").first.id
+    rescue
+      foto_principal_id = nil
+    end
+    if !foto_principal_id.nil?
       photo = @employee.attachments.unscoped.where(:associated_document_type_id => foto_principal_id).first()
       if photo.adjunto_content_type[0..4] = "image"
         open( file_photo, 'wb' ) { |file|

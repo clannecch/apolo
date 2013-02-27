@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110910142220
+# Schema version: 20111025214836
 #
 # Table name: sicoss_contract_modes
 #
@@ -9,6 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  code       :string(255)
+#  default    :boolean
 #
 
 require 'spec_helper'

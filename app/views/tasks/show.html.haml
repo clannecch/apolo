@@ -1,8 +1,30 @@
-%h1 Visualizacion de Tarea
-%p#notice= notice
-%p
-  %b Detalle:
-  = @task.detalle
-= task_links(@task)
-|
-\#{link_to 'Volver', tasks_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Task.model_name.human, tasks_path 
+    - breadcrumb.item "#{@task.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_task_path(@task), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @task, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@task) do |f|
+  = render 'shared/errorhandler', :obj_errors => @task.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @task.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @task.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "task_default", @task.default, @task.default, :disabled => true
+.clear

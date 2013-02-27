@@ -1,0 +1,9 @@
+/* line 1, ../../app/stylesheets/application.sass */
+#ui-datepicker-div {
+  display: none;
+}
+
+/* line 4, ../../app/stylesheets/application.sass */
+form.formtastic fieldset > ol > li label {
+  float: none;
+}

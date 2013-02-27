@@ -1,3 +1,5 @@
-%hr
-= collection_select(:company, :id, Company.all, :id, :name, { :include_blank => '-- Cambiar de Administradora --'}, :onchange => 'location.href="?cc="+$(this).val();')
-%hr
+- if signed_in? && @user_menu.any?
+  #menu
+    %ul.menu
+      - @user_menu.select{|menu| menu[:parent_id] == nil }.sort_by{|s| s.order_no}.each do |level0|
+        = render 'shared/main_menu_level', :top_level => level0

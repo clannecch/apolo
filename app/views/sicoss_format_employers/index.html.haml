@@ -1,35 +1,31 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossFormatEmployer.model_name.human, sicoss_format_employers_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossFormatEmployer.model_name.human) , new_sicoss_format_employer_path(@sicoss_format_employer), :class => "btn success" 
+  - if @sicoss_format_employers.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + SicossFormatEmployer.model_name, :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossFormatEmployer.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossFormatEmployer.human_attribute_name('sicoss_format_id')
-
-    %th= SicossFormatEmployer.human_attribute_name('field_type')
-
-    %th= SicossFormatEmployer.human_attribute_name('formula')
-
-    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
-
-  - @sicoss_format_employers.each do |sicoss_format_employer|
+- if @sicoss_format_employers.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :sicoss_format_id, @sicoss_format_employers.human_attribute_name('sicoss_format_id')
+      %th= sort_link @search, :field_type, @sicoss_format_employers.human_attribute_name('field_type')
+      %th= sort_link @search, :formula, @sicoss_format_employers.human_attribute_name('formula')
+      %th.last
 
-      %td= sicoss_format_employer.sicoss_format.try(:name)
-
-      %td= sicoss_format_employer.field_type
-
-      %td= sicoss_format_employer.formula
-
-      %td.last
-        %a{ :href => "/sicoss_format_employers/#{sicoss_format_employer.id.to_s}" }
-          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
-      %td.last
-        %a{ :href => "/sicoss_format_employers/#{sicoss_format_employer.id.to_s}/edit" }
-          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
-      %td.last
-
-%br
-
-
+    - @sicoss_format_employers.each do |item|
+      %tr
+        %td= item.sicoss_format_id
+        %td= item.field_type
+        %td= item.formula
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_employer_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_format_employers)
+  .clear
+.clear

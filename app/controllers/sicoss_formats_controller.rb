@@ -9,7 +9,8 @@ class SicossFormatsController < ApplicationController
   # GET /sicoss_formats.json
   # GET /sicoss_formats.xml
   def index
-    @sicoss_formats = SicossFormat.all
+    @search = SicossFormat.search(params[:search])
+    @sicoss_formats = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_formats.empty?
     respond_with(@sicoss_formats)
   end

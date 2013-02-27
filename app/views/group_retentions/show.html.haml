@@ -1,8 +1,42 @@
-%h1 Grupo de Retenciones
-%p#notice= notice
-%p
-  %b Detalle:
-  = @group_retention.detalle
-= group_retention_links(@group_retention)
-|
-\#{link_to 'Volver', group_retentions_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRetention.model_name.human, group_retentions_path
+    - breadcrumb.item "#{@group_retention.detalle.titlecase}", group_retention_path(@group_retention), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_group_retention_path(@group_retention), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @group_retention, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@group_retention) do |f|
+  - if @group_retention.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_retention.errors.count, "error")
+        prohibited this group_retention from being saved:
+      %ul
+        - @group_retention.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @group_retention.code
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @group_retention.detalle
+    %tr
+      %td.columnLabel
+        = f.label :composicion, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :retention_concept_ids, RetentionConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect", :disabled => "disabled"
+    %tr
+      %td.columnLabel
+        = f.label :default, :class => "apsLabel"
+      %td.columnData
+        = check_box_tag "retention_concept_default", @group_retention.default, @group_retention.default, :disabled => true
+.clear
+

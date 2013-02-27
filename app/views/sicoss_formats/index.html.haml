@@ -1,57 +1,43 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossFormat.model_name.human, sicoss_formats_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossFormat.model_name.human) , new_sicoss_format_path(@sicoss_format), :class => "btn success" 
+  - if @sicoss_formats.any?
+    = link_to t('scaffold.actions.export').titlecase, sicoss_formats_path( :format => 'pdf'), :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossFormat.model_name.human).titlecase
-
-%table.tableStandard
-  %tr
-    %th= SicossFormat.human_attribute_name('position')
-
-    %th= SicossFormat.human_attribute_name('name')
-
-    %th= SicossFormat.human_attribute_name('field_length')
-
-    %th= SicossFormat.human_attribute_name('number_of_decimals')
-
-    %th= SicossFormat.human_attribute_name('justifies')
-
-    %th= SicossFormat.human_attribute_name('fill_character')
-
-    %th= SicossFormat.human_attribute_name('formula')
-
-    %th= SicossFormat.human_attribute_name('modifiable')
-
-    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
-
-  - @sicoss_formats.each do |sicoss_format|
+- if @sicoss_formats.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :position, @sicoss_formats.human_attribute_name('position')
+      %th= sort_link @search, :name, @sicoss_formats.human_attribute_name('name')
+      %th= sort_link @search, :field_length, @sicoss_formats.human_attribute_name('field_length')
+      %th= sort_link @search, :justifies, @sicoss_formats.human_attribute_name('justifies')
+      %th= sort_link @search, :fill_character, @sicoss_formats.human_attribute_name('fill_character')
+      %th= sort_link @search, :formula, @sicoss_formats.human_attribute_name('formula')
+      %th= sort_link @search, :field_type, @sicoss_formats.human_attribute_name('field_type')
+      %th= sort_link @search, :number_of_decimals, @sicoss_formats.human_attribute_name('number_of_decimals')
+      %th= sort_link @search, :modifiable, @sicoss_formats.human_attribute_name('modifiable')
+      %th.last
 
-      %td= sicoss_format.position
-
-      %td= sicoss_format.name
-
-      %td= sicoss_format.field_length
-
-      %td= sicoss_format.number_of_decimals
-
-      %td= sicoss_format.justifies
-
-      %td= sicoss_format.fill_character
-
-      %td= sicoss_format.formula
-
-      %td= sicoss_format.modifiable
-
-      %td.last
-        %a{ :href => "/sicoss_formats/#{sicoss_format.id.to_s}" }
-          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
-      %td.last
-        %a{ :href => "/sicoss_formats/#{sicoss_format.id.to_s}/edit" }
-          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
-      %td.last
-        %a{ :href => "/sicoss_formats/#{sicoss_format.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
-          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossFormat.model_name.human).titlecase, new_sicoss_format_path
-
+    - @sicoss_formats.each do |item|
+      %tr
+        %td= item.position
+        %td= item.name
+        %td= item.field_length
+        %td= item.justifies == "R" ? "Derecha" : (item.justifies = "L" ? "Izquierda" : "Centrado")
+        %td= item.fill_character
+        %td= item.formula
+        %td= item.field_type == "N" ? "Numerico" : "Caracter"
+        %td= item.number_of_decimals
+        %td= check_box_tag "sicoss_format_modifiable", item.modifiable, item.modifiable, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_format_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_formats)
+  .clear
+.clear

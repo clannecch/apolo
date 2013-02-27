@@ -1,3 +1,7 @@
-%h1 Nueva Cuenta Contable
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item AccountingImputation.model_name.human, accounting_imputations_path
+    - breadcrumb.item t('scaffold.actions.new', :item => AccountingImputation.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Volver', accounting_imputations_path

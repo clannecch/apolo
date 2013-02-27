@@ -1,8 +1,30 @@
-%h1 Visualizacion de Ocupacion
-%p#notice= notice
-%p
-  %b Detalle:
-  = @employment.detalle
-= employment_links(@employment)
-|
-\#{link_to 'Volver', employments_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employment.model_name.human, employments_path 
+    - breadcrumb.item "#{@employment.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_employment_path(@employment), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employment, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@employment) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employment.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @employment.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @employment.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "employment_default", @employment.default, @employment.default, :disabled => true
+.clear

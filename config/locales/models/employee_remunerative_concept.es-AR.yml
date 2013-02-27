@@ -1,0 +1,16 @@
+es-AR:
+  activerecord:
+    models:
+      employee_remunerative_concept: Concepto de remuneración del empleador
+    attributes:
+      employee_remunerative_concept:
+        employee_id: Employee
+        remunerative_concept_id: Remunerative Concept
+        cantidad: Cantidad
+        importe: Importe
+        fecha_inicio: Fecha Inicio
+        fecha_final: Fecha Final
+        created_at: Creado el
+        updated_at: Actualizado el
+        cost_center_id: Cost Center
+        detalle: Detalle

@@ -1,0 +1,18 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_format: Formato (AFIP)
+    attributes:
+      sicoss_format:
+        position: Position
+        name: Nombre
+        field_length: Logitud
+        justifies: Justifido
+        fill_character: Caracter de relleno
+        formula: Formula
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el
+        field_type: Tipo de campo
+        number_of_decimals: Numero de decimales
+        modifiable: Modifiable

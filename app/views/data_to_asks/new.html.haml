@@ -1,3 +1,7 @@
-%h1 New data_to_ask
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DataToAsk.model_name.human, data_to_asks_path
+    - breadcrumb.item t('scaffold.actions.new', :item => DataToAsk.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Back', data_to_asks_path

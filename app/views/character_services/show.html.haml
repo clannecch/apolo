@@ -1,8 +1,30 @@
-%h1 Visualizar Caracter de Servicio
-%p#notice= notice
-%p
-  %b Detalle:
-  = @character_service.detalle
-= character_service_links(@character_service)
-|
-\#{link_to 'Volver', character_services_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CharacterService.model_name.human, character_services_path 
+    - breadcrumb.item "#{@character_service.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_character_service_path(@character_service), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @character_service, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@character_service) do |f|
+  = render 'shared/errorhandler', :obj_errors => @character_service.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @character_service.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @character_service.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "character_service_default", @character_service.default, @character_service.default, :disabled => true
+.clear

@@ -1,13 +1,31 @@
-%h1 Listado de Tipos de Calles
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @home_abouts.each do |home_about|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item HomeAbout.model_name.human, home_abouts_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => HomeAbout.model_name.human) , new_home_about_path(@home_about), :class => "btn success" 
+  - if @home_abouts.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + HomeAbout.model_name, :class => "btn info"
+
+- if @home_abouts.any?
+  %table.tableStandard
     %tr
-      %td= home_about.detalle
-      %td= home_about_links(home_about)
-%br/
-= link_to 'Nuevo Tipo de Calle', new_home_about_path
+      %th= sort_link @search, :detalle, @home_abouts.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @home_abouts.human_attribute_name('code')
+      %th= sort_link @search, :default, @home_abouts.human_attribute_name('default')
+      %th.last
+
+    - @home_abouts.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "home_about_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_home_about_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@home_abouts)
+  .clear
+.clear

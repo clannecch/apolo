@@ -1,13 +1,31 @@
-%h1 Listing employments
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @employments.each do |employment|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Employment.model_name.human, employments_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Employment.model_name.human) , new_employment_path(@employment), :class => "btn success" 
+  - if @employments.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Employment.model_name, :class => "btn info"
+
+- if @employments.any?
+  %table.tableStandard
     %tr
-      %td= employment.detalle
-      %td= employment_links(employment)
-%br/
-= link_to 'Nueva Ocupacion', new_employment_path
+      %th= sort_link @search, :detalle, @employments.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @employments.human_attribute_name('code')
+      %th= sort_link @search, :default, @employments.human_attribute_name('default')
+      %th.last
+
+    - @employments.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "employment_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employment_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@employments)
+  .clear
+.clear

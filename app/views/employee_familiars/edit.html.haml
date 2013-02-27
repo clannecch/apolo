@@ -1,5 +1,9 @@
-%h1 Edicion de Familiares a cargo
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeFamiliar.model_name.human, employee_familiars_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, employee_familiar_path(@employee_familiar), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @employee_familiar
-|
-\#{link_to 'Volver', employee_familiars_path}

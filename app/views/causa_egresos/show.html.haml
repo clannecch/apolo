@@ -1,24 +1,30 @@
--#  ejemplos de html a haml
-  <p id="notice" class="diseno" border="1px"><%= notice %></p>
-  %p{:id => "notice", :class=>"diseno",:border=>"1px"}= notice
-  %p#notice{:class=>"diseno",:border=>"1px"}= notice
-  %p.diseno{:id => "notice", :border=>"1px"}= notice
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item CausaEgreso.model_name.human, causa_egresos_path 
+    - breadcrumb.item "#{@causa_egreso.detalle.titlecase}", nil, :active => true
 
-  <div class="diseno">hola</div>
-  %div.diseno hola
-  .diseno hola
-  ccs:
-    xxxx
-  javascript:
-    xxxx
-
-%p#notice= notice
-
-
-%p
-  %b Detalle:
-  = @causa_egreso.detalle
-
-
-= causa_egreso_links(@causa_egreso) |
-= link_to 'Back', causa_egresos_path
+= link_to t('scaffold.actions.edit').titlecase, edit_causa_egreso_path(@causa_egreso), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @causa_egreso, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@causa_egreso) do |f|
+  = render 'shared/errorhandler', :obj_errors => @causa_egreso.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @causa_egreso.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @causa_egreso.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "causa_egreso_default", @causa_egreso.default, @causa_egreso.default, :disabled => true
+.clear

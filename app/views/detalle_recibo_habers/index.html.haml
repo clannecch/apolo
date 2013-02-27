@@ -1,27 +1,41 @@
-%h1 Listing detalle_recibo_habers
-%table
-  %tr
-    %th Recibo sueldo
-    %th Remunerative concept
-    %th Detalle
-    %th Cost center
-    %th Cantidad
-    %th Importe
-    %th Total
-    %th
-    %th
-    %th
-  - @detalle_recibo_habers.each do |detalle_recibo_haber|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DetalleReciboHaber.model_name.human, detalle_recibo_habers_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => DetalleReciboHaber.model_name.human) , new_detalle_recibo_haber_path(@detalle_recibo_haber), :class => "btn success" 
+  - if @detalle_recibo_habers.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + DetalleReciboHaber.model_name, :class => "btn info"
+
+- if @detalle_recibo_habers.any?
+  %table.tableStandard
     %tr
-      %td= detalle_recibo_haber.recibo_sueldo_id
-      %td= detalle_recibo_haber.remunerative_concept_id
-      %td= detalle_recibo_haber.detalle
-      %td= detalle_recibo_haber.cost_center_id
-      %td= detalle_recibo_haber.cantidad
-      %td= detalle_recibo_haber.importe
-      %td= detalle_recibo_haber.total
-      %td= link_to 'Show', detalle_recibo_haber
-      %td= link_to 'Edit', edit_detalle_recibo_haber_path(detalle_recibo_haber)
-      %td= link_to 'Destroy', detalle_recibo_haber, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New Detalle recibo haber', new_detalle_recibo_haber_path
+      %th= sort_link @search, :recibo_sueldo_id, @detalle_recibo_habers.human_attribute_name('recibo_sueldo_id')
+      %th= sort_link @search, :remunerative_concept_id, @detalle_recibo_habers.human_attribute_name('remunerative_concept_id')
+      %th= sort_link @search, :detalle, @detalle_recibo_habers.human_attribute_name('detalle')
+      %th= sort_link @search, :cost_center_id, @detalle_recibo_habers.human_attribute_name('cost_center_id')
+      %th= sort_link @search, :cantidad, @detalle_recibo_habers.human_attribute_name('cantidad')
+      %th= sort_link @search, :importe, @detalle_recibo_habers.human_attribute_name('importe')
+      %th= sort_link @search, :total, @detalle_recibo_habers.human_attribute_name('total')
+      %th= sort_link @search, :cantidad_recibo, @detalle_recibo_habers.human_attribute_name('cantidad_recibo')
+      %th.last
+
+    - @detalle_recibo_habers.each do |item|
+      %tr
+        %td= item.recibo_sueldo_id
+        %td= item.remunerative_concept_id
+        %td= item.detalle
+        %td= item.cost_center_id
+        %td= item.cantidad
+        %td= item.importe
+        %td= item.total
+        %td= item.cantidad_recibo
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_detalle_recibo_haber_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@detalle_recibo_habers)
+  .clear
+.clear

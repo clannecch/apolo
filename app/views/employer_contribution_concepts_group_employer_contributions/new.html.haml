@@ -1,0 +1,7 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConceptsGroupEmployerContribution.model_name.human, employer_contribution_concepts_group_employer_contributions_path
+    - breadcrumb.item t('scaffold.actions.new', :item => EmployerContributionConceptsGroupEmployerContribution.model_name.human).titlecase , nil, :active => true
+
+= render 'form'

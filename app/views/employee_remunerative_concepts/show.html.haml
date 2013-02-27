@@ -1,0 +1,55 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeRemunerativeConcept.model_name.human, employee_remunerative_concepts_path 
+    - breadcrumb.item "#{@employee_remunerative_concept.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_employee_remunerative_concept_path(@employee_remunerative_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employee_remunerative_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@employee_remunerative_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employee_remunerative_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.employee_id
+      %tr
+        %td.columnLabel
+          = f.label :remunerative_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.remunerative_concept.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :cantidad, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.cantidad
+      %tr
+        %td.columnLabel
+          = f.label :importe, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.importe
+      %tr
+        %td.columnLabel
+          = f.label :fecha_inicio, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.fecha_inicio
+      %tr
+        %td.columnLabel
+          = f.label :fecha_final, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.fecha_final
+      %tr
+        %td.columnLabel
+          = f.label :cost_center_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.cost_center.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @employee_remunerative_concept.detalle
+.clear

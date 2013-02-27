@@ -1,24 +1,44 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item ReciboSueldo.model_name.human, liquidacion_recibo_sueldos_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_liquidacion_recibo_sueldo_path(@recibo_sueldo), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, [@liquidacion, @recibo_sueldo], :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+= link_to 'Recibo',  liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf'), :class => "btn standard"
+.clear
+%br/
 %h3
   Liquidacion Periodo: #{@liquidacion.periodo.year} / #{@liquidacion.periodo.month} Quincena: #{@liquidacion.quincena} Tipo liquidacion: #{@liquidacion.tipo_recibo.try(:detalle)}
-%h4
-  Empleado: #{@recibo_sueldo.employee.apellido}, #{@recibo_sueldo.employee.nombre}
-%p#notice= notice
-%p
-  %b Fecha recibo:
-  = @recibo_sueldo.fecha_recibo
-%p
-  %b Observaciones:
-  = @recibo_sueldo.observaciones
-%p
-  %b Mensaje recibo:
-  = @recibo_sueldo.mensaje_recibo
-%p
-  %b Fecha de Calculo:
-  = @recibo_sueldo.fecha_calculo.blank? ? '' : @recibo_sueldo.fecha_calculo.strftime("%d/%m/%y - %H:%M")
-= link_to 'Editar', edit_liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo)
-|
-\#{link_to 'Volver', liquidacion_recibo_sueldos_path}
-
-/- if !@recibo_sueldo.fecha_calculo.blank?
-|
-= link_to icon('printer', :small, :title => 'Imprimir'), liquidacion_recibo_sueldo_path(@liquidacion,@recibo_sueldo, :format => 'pdf')
+= form_for([@liquidacion,@recibo_sueldo]) do |f|
+  - if @recibo_sueldo.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@recibo_sueldo.errors.count, "error")
+        prohibited this recibo_sueldo from being saved:
+      %ul
+        - @recibo_sueldo.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :employee_id, :class => "apsLabel"
+      %td.columnData
+        = @recibo_sueldo.employee.full_name
+    %tr
+      %td.columnLabel
+        = f.label :fecha_recibo, :class => "apsLabel"
+      %td.columnData
+        = @recibo_sueldo.fecha_recibo
+    %tr
+      %td.columnLabel
+        = f.label :observaciones, :class => "apsLabel"
+      %td.columnData
+        = @recibo_sueldo.observaciones
+    %tr
+      %td.columnLabel
+        = f.label :mensaje_recibo, :class => "apsLabel"
+      %td.columnData
+        = @recibo_sueldo.mensaje_recibo
+.clear

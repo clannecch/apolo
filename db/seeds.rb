@@ -12,7 +12,6 @@ Execute:
   heroku console
   load Rails.root.join('db/apolo-heroku.rb').to_s
 =end
-=begin
 Country.create!(:code => 'AR', :detalle => 'Argentina')
 ar_country_id = Country.where(:code => 'AR').first.id
 
@@ -62,7 +61,7 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  :telefono => "45551234", :contacto => "pablo", :email => "esta@pro.com", :cuit => "3012345671",
  :numero_inscripcion => "no tiene", :caja => "industria", :ultima_hoja_libro => 1, :imprimir_hasta_hoja_libro => 100,
  :observaciones => "sfdfd")
-=end
+
  Menu.delete_all
 
  menu1 = Menu.create(:parent_id => nil, :name => "Maestros", :link_url => "", :order_no => 1).id
@@ -89,7 +88,7 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
 
  menu6 = Menu.create(:parent_id => menu1, :name => "Tablas Varias", :link_url => "?", :order_no => 0).id
  new_reg=Menu.create(:parent_id => menu6, :name => "Datos a Solicitar", :link_url => "/data_to_asks", :order_no => 1)
- new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documentos", :link_url => "document_types", :order_no => 1)
+ new_reg=Menu.create(:parent_id => menu6, :name => "Tipos de Documentos", :link_url => "/document_types", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Niveles de Educacion", :link_url => "/educational_levels", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Tipo de Calle", :link_url => "/home_abouts", :order_no => 1)
  new_reg=Menu.create(:parent_id => menu6, :name => "Lugares de emision de Documentos", :link_url => "/issueds", :order_no => 1)
@@ -155,13 +154,12 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  new_reg=Menu.create(:parent_id => menu6, :name => "Administradoras", :link_url => "/companies", :order_no => 98)
 
 
-=begin
+
  new_reg=Category.create!(:detalle => "Administrativo", :importe => 6000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "ADM")
  new_reg=Category.create!(:detalle => "Mi Categoria", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "c3")
  new_reg=Category.create!(:detalle => "Director", :importe => 12000.0, :company_id => Company.find(1).id , :horas => 200.0, :codigo => "dr")
  new_reg=Category.create!(:detalle => "Enfermero", :importe => 3000.0, :company_id => Company.find(1).id , :horas => 180.0, :codigo => "enf")
-=end 
-=begin
+
  account = AccountingImputation.create!(:detalle => "Sueldos").id
 
  id_data_to_ask_old = []
@@ -180,7 +178,7 @@ company2 = Company.create!(:name => "Administracion 2", :code => "adm2", :razon_
  id_data_to_ask_new << [new_reg.id]
 
  id_company_new = Company.find(1).id
- 
+=begin 
  new_reg=RemunerativeConcept.create!(:codigo => "004", :detalle => "premio asistencia", :porcentual_asistencia => false, :prioridad_calculo => 2,  :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@basico @haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => " @basico * 0.2", :calculo_cantidad => "", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
  new_reg=RemunerativeConcept.create!(:codigo => "603", :detalle => "Proporcional del mes trabajado", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account, :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 30) * (30 - @dias_trabajados_mes)", :calculo_cantidad => "30 - @dias_trabajados_mes", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)
  new_reg=RemunerativeConcept.create!(:codigo => "605", :detalle => "SAC proporcional", :porcentual_asistencia => false, :prioridad_calculo => 1, :grupo_ganancias_id => nil, :accounting_imputation_id => :account , :concepto_asociado_haber_id => nil, :concepto_asociado_retencion_id => nil, :concepto_asociado_haber_2_id => nil, :concepto_asociado_retencion_2_id => nil, :acumuladores_valor => "@haberescondescuento", :acumuladores_cantidad => "", :calculo_valor => "(@mejor_remuneracion_habitual_anual / 360) * @dias_trabajados_semestre", :calculo_cantidad => "@dias_trabajados_semestre", :data_to_ask_id => id_data_to_ask_new[ id_data_to_ask_old.find_to_detalle("importe")], :cantidad_en_recibo => "", :company_id => id_company_new)

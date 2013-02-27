@@ -1,8 +1,6 @@
-= navigation(:id => "user-navigation") do |menu|
-  - menu.item(image_tag('session/home.png'), root_path, :alt => 'Principal')
-  - menu.item(image_tag('session/account.png'), edit_user_registration_path, :alt => 'Editar mis Datos')
+= navigation(:id => "user-navigation", :class => "user_navigation") do |menu|
+  /- menu.item(image_tag('session/home.png'), root_path, :alt => 'Principal')
+  - menu.item(image_tag('session/account.png'), root_path, :alt => 'Editar mis Datos')
   - menu.item(image_tag('session/logout.png'), logout_path, :alt => 'Salir')
-
-%br
-%br
-
+/%br
+/%br

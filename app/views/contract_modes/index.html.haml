@@ -1,13 +1,31 @@
-%h1 Listado de Modalidades de Contrato
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @contract_modes.each do |contract_mode|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item ContractMode.model_name.human, contract_modes_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => ContractMode.model_name.human) , new_contract_mode_path(@contract_mode), :class => "btn success" 
+  - if @contract_modes.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + ContractMode.model_name, :class => "btn info"
+
+- if @contract_modes.any?
+  %table.tableStandard
     %tr
-      %td= contract_mode.detalle
-      %td= contract_mode_links(contract_mode)
-%br/
-= link_to 'Nueva Modalidad de Contrato', new_contract_mode_path
+      %th= sort_link @search, :detalle, @contract_modes.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @contract_modes.human_attribute_name('code')
+      %th= sort_link @search, :default, @contract_modes.human_attribute_name('default')
+      %th.last
+
+    - @contract_modes.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "contract_mode_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_contract_mode_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@contract_modes)
+  .clear
+.clear

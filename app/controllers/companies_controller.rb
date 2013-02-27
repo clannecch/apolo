@@ -56,9 +56,16 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   # DELETE /companies/1.xml
   def destroy
-    flash[:notice] = t('scaffold.notice.destroyed', :item => Company.model_name.human) if @company.destroy
-#    redirect_to(companies_path)
-    respond_with(@company, :location => companies_path)
+    begin
+       @company.destroy
+       flash[:success] = "successfully destroyed."
+    rescue ActiveRecord::DeleteRestrictionError => e
+       @company.errors.add(:base, e)
+       flash[:error] = "#{e}"
+       redirect_to company_url
+    else
+       redirect_to companies_url
+    end
   end
 
   protected

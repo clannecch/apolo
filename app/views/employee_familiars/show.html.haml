@@ -1,53 +1,109 @@
-%h1 Visualizacion de Familiar
-%p#notice= notice
-%p
-  %b Apellido:
-  = @employee_familiar.apellido
-%p
-  %b Nombre:
-  = @employee_familiar.nombre
-%p
-  %b Fecha nacimiento:
-  = @employee_familiar.fecha_nacimiento
-%p
-  %b Numero documento:
-  = @employee_familiar.numero_documento
-%p
-  %b Obra Social:
-  = @employee_familiar.health_insurance_id
-%p
-  %b Cuil:
-  = @employee_familiar.cuil
-%p
-  %b Cuit:
-  = @employee_familiar.cuit
-%p
-  %b Tomo:
-  = @employee_familiar.tomo
-%p
-  %b Folio:
-  = @employee_familiar.folio
-%p
-  %b Acta:
-  = @employee_familiar.acta
-%p
-  %b Pais:
-  = @employee_familiar.country_id
-%p
-  %b Provincia:
-  = @employee_familiar.province_id
-%p
-  %b Comuna:
-  = @employee_familiar.comuna
-%p
-  %b Tipo de documento:
-  = @employee_familiar.document_type_id
-%p
-  %b Ocupacion:
-  = @employee_familiar.activity_id
-%p
-  %b id empleado:
-  = @employee_familiar.employee_id
-= link_to 'Editar', edit_employee_familiar_path(@employee_familiar)
-|
-\#{link_to 'Volver', employee_familiars_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeFamiliar.model_name.human, employee_familiars_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_employee_familiar_path(@employee_familiar), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employee_familiar, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@employee_familiar) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employee_familiar.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :apellido, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.apellido
+      %tr
+        %td.columnLabel
+          = f.label :nombre, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.nombre
+      %tr
+        %td.columnLabel
+          = f.label :fecha_nacimiento, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.fecha_nacimiento
+      %tr
+        %td.columnLabel
+          = f.label :numero_documento, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.numero_documento
+      %tr
+        %td.columnLabel
+          = f.label :health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.health_insurance.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :cuil, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.cuil
+      %tr
+        %td.columnLabel
+          = f.label :cuit, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.cuit
+      %tr
+        %td.columnLabel
+          = f.label :tomo, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.tomo
+      %tr
+        %td.columnLabel
+          = f.label :folio, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.folio
+      %tr
+        %td.columnLabel
+          = f.label :acta, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.acta
+      %tr
+        %td.columnLabel
+          = f.label :country_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.country.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :province_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.province.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :comuna, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.comuna
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.employee_id
+      %tr
+        %td.columnLabel
+          = f.label :document_type_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.document_type.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :activity_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.activity.try(:name)
+      %tr
+        %td.columnLabel
+          = f.label :kinship_id, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.kinship.try(:name)
+      %tr
+        %td.columnLabel
+          = f.label :address, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.address
+      %tr
+        %td.columnLabel
+          = f.label :porcentual, :class => "apsLabel"
+        %td.columnData
+          = @employee_familiar.porcentual
+.clear

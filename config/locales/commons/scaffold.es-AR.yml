@@ -2,11 +2,12 @@
   flash:
     actions:
       index:
-        notice: no hay registros aún.
+        notice: No hay registros aún.
       create:
         notice: "%{resource_name} creado/a satisfactoriamente"
       update:
         notice: "%{resource_name} actualizado/a satisfactoriamente"
+        message: "%{resource_name} actualizado/a satisfactoriamente (2)"
       destroy:
         notice: "%{resource_name} eliminado/a satisfactoriamente"
         error: "%{resource_name} no pudo ser eliminado/a"
@@ -23,9 +24,11 @@
       show: mostrar
       edit: editar
       destroy: eliminar
-      destroy_confirm: está seguro?
-      new: "crear %{item}"
+      destroy_confirm: Está seguro?
+      new: "Crear %{item}"
       list: "listar %{item}"
       back: volver
       export: exportar a PDF
       main: principal
+    errors:
+      message: Se han encontrado errores que impiden la grabacion.

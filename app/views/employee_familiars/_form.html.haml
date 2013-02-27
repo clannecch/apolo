@@ -1,75 +1,104 @@
 = form_for(@employee_familiar) do |f|
-  - if @employee_familiar.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@employee_familiar.errors.count, "error")
-        prohibited this employee_familiar from being saved:
-      %ul
-        - @employee_familiar.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :apellido
-    %br/
-    = f.text_field :apellido
-  .field
-    = f.label :nombre
-    %br/
-    = f.text_field :nombre
-  .field
-    = f.label :fecha_nacimiento
-    %br/
-    = f.date_select :fecha_nacimiento
-  .field
-    = f.label "Numero de documento"
-    %br/
-    = f.text_field :numero_documento
-  .field
-    = f.label "Obra Social"
-    %br/
-    = f.collection_select :health_insurance_id,  HealthInsurance.all, :id, :detalle, :prompt => true
-  .field
-    = f.label "CUIL"
-    %br/
-    = f.text_field :cuil
-  .field
-    = f.label "CUIT"
-    %br/
-    = f.text_field :cuit
-  .field
-    = f.label "Tomo"
-    %br/
-    = f.text_field :tomo
-  .field
-    = f.label "Folio"
-    %br/
-    = f.text_field :folio
-  .field
-    = f.label "Acta"
-    %br/
-    = f.text_field :acta
-  .field
-    = f.label "Pais"
-    %br/
-    = f.collection_select :country_id,  Country.all, :id, :detalle, :prompt => true
-  .field
-    = f.label "Provincia"
-    %br/
-    = f.collection_select :province_id,  Province.all, :id, :detalle, :prompt => true
-  .field
-    = f.label "Comuna"
-    %br/
-    = f.text_field :comuna
-  .field
-    = f.label "Employee_id"
-    %br/
-    = f.text_field :employee_id
-  .field
-    = f.label "Tipo de Documento"
-    %br/
-    = f.collection_select :document_type_id,  DocumentType.all, :id, :detalle, :prompt => true
-  .field
-    = f.label "Actividad"
-    %br/
-    = f.collection_select :activity_id,  Activity.all, :id, :detalle, :prompt => true
+  = render 'shared/errorhandler', :obj_errors => @employee_familiar.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= EmployeeFamiliar.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :apellido, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :apellido, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :nombre, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :nombre, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_nacimiento, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_nacimiento, :value => @employee_familiar.fecha_nacimiento.to_s, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :numero_documento, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :numero_documento, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :health_insurance_id, HealthInsurance.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :cuil, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cuil, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :cuit, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cuit, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :tomo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :tomo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :folio, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :folio, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acta, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acta, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :country_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :country_id, Country.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :province_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :province_id, Province.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :comuna, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :comuna, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :employee_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :employee_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :document_type_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :document_type_id, DocumentType.all, :id, :detalle, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :activity_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :activity_id, Activity.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :kinship_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :kinship_id, Kinship.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+      %tr
+        %td.columnLabel
+          = f.label :address, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :address, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :porcentual, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :porcentual, :class => "apsTextbox"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

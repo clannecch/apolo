@@ -1,0 +1,29 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConceptsGroupEmployerContribution.model_name.human, employer_contribution_concepts_group_employer_contributions_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EmployerContributionConceptsGroupEmployerContribution.model_name.human) , new_employer_contribution_concepts_group_employer_contribution_path(@employer_contribution_concepts_group_employer_contribution), :class => "btn success" 
+  - if @employer_contribution_concepts_group_employer_contributions.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EmployerContributionConceptsGroupEmployerContribution.model_name, :class => "btn info"
+
+- if @employer_contribution_concepts_group_employer_contributions.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :group_employer_contribution_id, @employer_contribution_concepts_group_employer_contributions.human_attribute_name('group_employer_contribution_id')
+      %th= sort_link @search, :employer_contribution_concept_id, @employer_contribution_concepts_group_employer_contributions.human_attribute_name('employer_contribution_concept_id')
+      %th.last
+
+    - @employer_contribution_concepts_group_employer_contributions.each do |item|
+      %tr
+        %td= item.group_employer_contribution_id
+        %td= item.employer_contribution_concept_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employer_contribution_concepts_group_employer_contribution_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@employer_contribution_concepts_group_employer_contributions)
+  .clear
+.clear

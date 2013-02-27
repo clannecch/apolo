@@ -1,0 +1,24 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item UserAuthorization.model_name.human, user_authorizations_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_user_authorization_path(@user_authorization), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @user_authorization, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@user_authorization) do |f|
+  = render 'shared/errorhandler', :obj_errors => @user_authorization.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :user_id, :class => "apsLabel"
+        %td.columnData
+          = @user_authorization.user_id
+      %tr
+        %td.columnLabel
+          = f.label :authorization_id, :class => "apsLabel"
+        %td.columnData
+          = @user_authorization.authorization.try(:name)
+.clear

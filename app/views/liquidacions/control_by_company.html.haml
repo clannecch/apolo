@@ -1,0 +1,28 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item "Control de Liquidaciones", liquidacions_control_by_company_list_path
+    - breadcrumb.item @liquidacion.periodo.strftime("%Y/%m"), nil, :active => true
+
+.clear
+.clear
+
+/- if @liquidacion.recibo_sueldos.any?
+- if true
+  %table#recibo_sueldos.tableStandard
+    %tr
+      %th Legajo
+      %th Empleado
+      %th Total haberes
+      %th Total retenciones
+      %th Control
+
+    - @liquidacion.recibo_sueldos.order("id").each do |item|
+      %tr{:style => "background-color:" + (item.approved_date.blank? ? "#fff" : "#bbffb6")}
+        %td= item.employee.legajo
+        %td= item.employee.full_name
+        /%td= item.id.to_s
+        %td= item.total_haberes
+        %td= item.total_retenciones.to_s
+        %td= link_to 'Controlar', control_by_company_liquidacion_recibo_sueldo_path(@liquidacion, item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase

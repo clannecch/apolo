@@ -1,0 +1,15 @@
+es-AR:
+  activerecord:
+    models:
+      detalle_recibo_retencion: Detalle Recibo Retencion
+    attributes:
+      detalle_recibo_retencion:
+        recibo_sueldo_id: Recibo Sueldo
+        retention_concept_id: Retention Concept
+        detalle: Detalle
+        cost_center_id: Cost Center
+        cantidad: Cantidad
+        importe: Importe
+        total: Total
+        created_at: Creado el
+        updated_at: Actualizado el

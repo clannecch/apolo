@@ -33,11 +33,11 @@ gem 'meta_search'
 gem 'prawn'
 gem 'wicked_pdf'
 
-
+gem 'pg'
 
 group :development, :test do
   # database
-  gem 'sqlite3'
+  #gem 'sqlite3'
   # design depends
   #gem 'hpricot'
   #gem 'ruby_parser'

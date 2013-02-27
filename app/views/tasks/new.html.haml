@@ -1,3 +1,7 @@
-%h1 Nueva Tarea
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Task.model_name.human, tasks_path
+    - breadcrumb.item t('scaffold.actions.new', :item => Task.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Volver', tasks_path

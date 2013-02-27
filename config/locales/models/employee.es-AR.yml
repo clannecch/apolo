@@ -3,3 +3,100 @@ es-AR:
     models:
       employee: Empleado
     attributes:
+      employee:
+        legajo: Legajo
+        nombre: Nombre
+        apellido: Apellido
+        telefono: Telefono
+        document_type_id: Tipo de documento
+        numero_documento: Número de Documento
+        issued_id: Emitido
+        sexo: Sexo
+        nationality_id: Nationalidad
+        marital_status_id: Estado civil
+        fecha_nacimiento: Fecha Nacimiento
+        calle: Calle
+        puerta: Puerta
+        piso: Piso
+        departamento: Departamento
+        location_id: Ubicacion
+        province_id: Provincia
+        country_id: Pais
+        codigo_postal: Codigo Postal
+        created_at: Creado el
+        updated_at: Actualizado el
+        movil: Movil
+        email: Email
+        category_id: Categoria
+        section_id: Seccion
+        task_id: Tarea
+        place_id: Lugar
+        character_service_id: Character Service
+        matricula_nacional: Matricula Nacional
+        matricula_provincial: Matricula Provincial
+        discapacidad: Discapacidad
+        health_insurance_id: Health Insurance
+        plan_osocial: Plan Osocial
+        numero_afiliado_osocial: Numero Afiliado Osocial
+        cargas_extras_osocial: Cargas Extras Osocial
+        labor_union_id: Labor Union
+        numero_afiliado_sindicato: Numero Afiliado Sindicato
+        numero_jubilacion: Numero Jubilacion
+        numero_ganancias: Numero Ganancias
+        cuit: Cuit
+        cuil: Cuil
+        fecha_ingreso: Fecha Ingreso
+        fecha_egreso: Fecha Egreso
+        horas_pactadas: Horas Pactadas
+        remuneracion_fuera_convenio: Remuneracion Fuera Convenio
+        remuneration_type_id: Remuneration Type
+        group_retention_id: Group Retention
+        group_employercontribution_id: Group Employercontribution
+        cost_center_id: Cost Center
+        antiguedad_reconocida_anos: Antiguedad Reconocida Anos
+        antiguedad_reconocida_meses: Antiguedad Reconocida Meses
+        retencion_minima_osocial: Retencion Minima Osocial
+        educational_level_id: Educational Level
+        id_card: Id Card
+        numero_cofre: Numero Cofre
+        contract_mode_id: Contract Mode
+        home_about_id: Home About
+        cuadras_asfalto: Cuadras Asfalto
+        domicilio_entre_calle_izquierda: Domicilio Entre Calle Izquierda
+        domicilio_entre_calle_derecha: Domicilio Entre Calle Derecha
+        domicilio_entre_calles_detras: Domicilio Entre Calles Detras
+        domicilio_avenida_cercana: Domicilio Avenida Cercana
+        domicilio_avenida_cercana_altura: Domicilio Avenida Cercana Altura
+        email_type_id: Email Type
+        employment_id: Employment
+        accounting_imputation_id: Accounting Imputation
+        insurance_company_id: Insurance Company
+        seguro_conyuge: Seguro Conyuge
+        Seguro_numero_poliza: Seguro Numero Poliza
+        seguro_monto_asegurado: Seguro Monto Asegurado
+        bank_deposit_id: Bank Deposit
+        bank_deposit_account_type_id: Bank Deposit Account Type
+        deposito_banco_cuenta: Deposito Banco Cuenta
+        deposito_banco_cbu: Deposito Banco Cbu
+        causa_egreso_id: Causa Egreso
+        company_id: Empresa
+        latitude: Latitude
+        longitude: Longitude
+        avatar_file_name: Avatar File Name
+        avatar_content_type: Avatar Content Type
+        avatar_file_size: Avatar File Size
+        avatar_updated_at: Avatar Updated At
+        sicoss_reduccion: Sicoss Reduccion
+        sicoss_employer_type_id: Sicoss Employer Type
+        sicoss_situation_id: Sicoss Situation
+        sicoss_condition_id: Sicoss Condition
+        sicoss_activity_id: Sicoss Activity
+        sicoss_contract_mode_id: Sicoss Contract Mode
+        sicoss_damaged_id: Sicoss Damaged
+        sicoss_location_id: Sicoss Location
+        sicoss_reduction_zone_id: Sicoss Reduction Zone
+        sicoss_en_convenio: Sicoss En Convenio
+        sicoss_regimen_type_id: Sicoss Regimen Type
+        sicoss_seguro_obligatorio: Sicoss Seguro Obligatorio
+        group_employer_contribution_id: Group Employer Contribution
+        group_remuneration_id: Group Remuneration

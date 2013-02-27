@@ -1,7 +1,7 @@
 es-AR:
   activerecord:
     models:
-      bank_deposit_account_type: Tipo de Cuenta Bancaria
+      bank_deposit_account_type: Tipo de cuenta bancaria
     attributes:
       bank_deposit_account_type:
         detalle: Detalle

@@ -1,15 +1,13 @@
-
 class ActivitiesController < ApplicationController
-
-  before_filter :find_activity, :except => [:index, :new, :create]
-
   respond_to :html, :xml, :json
+  before_filter :find_activity, :except => [:index, :new, :create]
 
   # GET /activities
   # GET /activities.json
   # GET /activities.xml
   def index
-    @activities = Activity.all
+    @search = Activity.search(params[:search])
+    @activities = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @activities.empty?
     respond_with(@activities)
   end

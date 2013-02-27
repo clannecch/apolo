@@ -1,0 +1,19 @@
+= form_for(@user_authorization) do |f|
+  = render 'shared/errorhandler', :obj_errors => @user_authorization.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= UserAuthorization.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :user_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :user_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :authorization_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :authorization_id, Authorization.all, :id, :name, {:class => "apsSelect"}, {:include_blank => 'Sin datos'}
+  .actions
+    = f.submit :class => "btn success"

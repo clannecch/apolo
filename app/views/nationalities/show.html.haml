@@ -1,8 +1,30 @@
-%h1 Visualizar Nacionalidades
-%p#notice= notice
-%p
-  %b Detalle:
-  = @nationality.detalle
-= nationality_links(@nationality)
-|
-\#{link_to 'Volver', nationalities_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Nationality.model_name.human, nationalities_path 
+    - breadcrumb.item "#{@nationality.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_nationality_path(@nationality), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @nationality, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@nationality) do |f|
+  = render 'shared/errorhandler', :obj_errors => @nationality.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @nationality.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @nationality.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "nationality_default", @nationality.default, @nationality.default, :disabled => true
+.clear

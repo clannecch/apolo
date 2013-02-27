@@ -1,8 +1,30 @@
-%h1 Visualizacion de Sindicatos
-%p#notice= notice
-%p
-  %b Detalle:
-  = @labor_union.detalle
-= labor_union_links(@labor_union)
-|
-\#{link_to 'Volver', labor_unions_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item LaborUnion.model_name.human, labor_unions_path 
+    - breadcrumb.item "#{@labor_union.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_labor_union_path(@labor_union), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @labor_union, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@labor_union) do |f|
+  = render 'shared/errorhandler', :obj_errors => @labor_union.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @labor_union.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @labor_union.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "labor_union_default", @labor_union.default, @labor_union.default, :disabled => true
+.clear

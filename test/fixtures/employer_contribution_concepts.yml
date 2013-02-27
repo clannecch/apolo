@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111024224627
 #
 # Table name: employer_contribution_concepts
 #
@@ -14,7 +14,6 @@
 #  acumuladores_valor             :string(255)
 #  formula_calculo_valor          :string(255)
 #  company_id                     :integer
-#  aditional_halth_insurance_id   :integer
 #  retention_concept_id           :integer
 #  additional_health_insurance_id :integer
 #  health_insurance_id            :integer

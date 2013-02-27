@@ -1,13 +1,13 @@
 class BankDepositsController < ApplicationController
+  respond_to :html, :xml, :json
   before_filter :find_bank_deposit, :except => [:index, :new, :create]
 
   # GET /bank_deposits
   # GET /bank_deposits.xml
   def index
-    #@bank_deposits = BankDeposit.by_company(current_company.id).all
-    @search = BankDeposit.by_company(current_company.id).search(params[:search])
+    @search = BankDeposit.search(params[:search])
     @bank_deposits = @search.page(params[:page]).per(10)
-
+    flash.now[:notice] = t('flash.actions.index.notice') if @bank_deposits.empty?
     respond_to do |format|
       format.html # index.html.erbb
       format.xml  { render :xml => @bank_deposits }
@@ -70,7 +70,8 @@ class BankDepositsController < ApplicationController
   # GET /bank_deposits/new
   # GET /bank_deposits/new.xml
   def new
-    @bank_deposit = BankDeposit.by_company(current_company.id).new
+#    @bank_deposit = BankDeposit.by_company(current_company.id).new
+    @bank_deposit = BankDeposit.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -85,11 +86,12 @@ class BankDepositsController < ApplicationController
   # POST /bank_deposits
   # POST /bank_deposits.xml
   def create
-    @bank_deposit = BankDeposit.by_company(current_company.id).new(params[:bank_deposit])
+#    @bank_deposit = BankDeposit.by_company(current_company.id).new(params[:bank_deposit])
+    @bank_deposit = BankDeposit.new(params[:bank_deposit])
 
     respond_to do |format|
       if @bank_deposit.save
-        format.html { redirect_to(@bank_deposit, :notice => 'Bank deposit was successfully created.') }
+        format.html { redirect_to(@bank_deposit, :notice => t('scaffold.notice.created', :item=> BankDeposit.model_name.human)) }
         format.xml  { render :xml => @bank_deposit, :status => :created, :location => @bank_deposit }
       else
         format.html { render :action => "new" }
@@ -103,7 +105,7 @@ class BankDepositsController < ApplicationController
   def update
     respond_to do |format|
       if @bank_deposit.update_attributes(params[:bank_deposit])
-        format.html { redirect_to(@bank_deposit, :notice => 'Bank deposit was successfully updated.') }
+        format.html { redirect_to(@bank_deposit, :notice => t('scaffold.notice.updated', :item=> BankDeposit.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -128,7 +130,8 @@ class BankDepositsController < ApplicationController
   end
 
   def find_bank_deposit
-    @bank_deposit = BankDeposit.by_company(current_company.id).find(params[:id])
+#    @bank_deposit = BankDeposit.by_company(current_company.id).find(params[:id])
+    @bank_deposit = BankDeposit.find(params[:id])
   end
 
 end

@@ -1,0 +1,63 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Consortium.model_name.human, consortia_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Consortium.model_name.human) , new_consortium_path(@consortium), :class => "btn success" 
+  - if @consortia.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Consortium.model_name, :class => "btn info"
+
+- if @consortia.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :code, @consortia.human_attribute_name('code')
+      %th= sort_link @search, :name, @consortia.human_attribute_name('name')
+      %th= sort_link @search, :razon_social, @consortia.human_attribute_name('razon_social')
+      %th= sort_link @search, :calle, @consortia.human_attribute_name('calle')
+      %th= sort_link @search, :altura, @consortia.human_attribute_name('altura')
+      %th= sort_link @search, :codigo_postal, @consortia.human_attribute_name('codigo_postal')
+      %th= sort_link @search, :location_id, @consortia.human_attribute_name('location_id')
+      %th= sort_link @search, :province_id, @consortia.human_attribute_name('province_id')
+      %th= sort_link @search, :latitude, @consortia.human_attribute_name('latitude')
+      %th= sort_link @search, :longitude, @consortia.human_attribute_name('longitude')
+      %th= sort_link @search, :telefono, @consortia.human_attribute_name('telefono')
+      %th= sort_link @search, :contacto, @consortia.human_attribute_name('contacto')
+      %th= sort_link @search, :email, @consortia.human_attribute_name('email')
+      %th= sort_link @search, :cuit, @consortia.human_attribute_name('cuit')
+      %th= sort_link @search, :numero_inscripcion, @consortia.human_attribute_name('numero_inscripcion')
+      %th= sort_link @search, :caja, @consortia.human_attribute_name('caja')
+      %th= sort_link @search, :ultima_hoja_libro, @consortia.human_attribute_name('ultima_hoja_libro')
+      %th= sort_link @search, :imprimir_hasta_hoja_libro, @consortia.human_attribute_name('imprimir_hasta_hoja_libro')
+      %th= sort_link @search, :observaciones, @consortia.human_attribute_name('observaciones')
+      %th.last
+
+    - @consortia.each do |item|
+      %tr
+        %td= item.code
+        %td= item.name
+        %td= item.razon_social
+        %td= item.calle
+        %td= item.altura
+        %td= item.codigo_postal
+        %td= item.location_id
+        %td= item.province_id
+        %td= item.latitude
+        %td= item.longitude
+        %td= item.telefono
+        %td= item.contacto
+        %td= item.email
+        %td= item.cuit
+        %td= item.numero_inscripcion
+        %td= item.caja
+        %td= item.ultima_hoja_libro
+        %td= item.imprimir_hasta_hoja_libro
+        %td= item.observaciones
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_consortium_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@consortia)
+  .clear
+.clear

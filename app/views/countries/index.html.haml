@@ -1,11 +1,31 @@
-%h1 Listado de Paises
-%table
-  %tr
-    %th Country.human_attribute_name('detalle')
-    %th
-  - @countries.each do |country|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Country.model_name.human, countries_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Country.model_name.human) , new_country_path(@country), :class => "btn success" 
+  - if @countries.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Country.model_name, :class => "btn info"
+
+- if @countries.any?
+  %table.tableStandard
     %tr
-      %td= country.detalle
-      %td= country_links(country)
-%br/
-= link_to 'Nuevo Pais', new_country_path
+      %th= sort_link @search, :detalle, @countries.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @countries.human_attribute_name('code')
+      %th= sort_link @search, :default, @countries.human_attribute_name('default')
+      %th.last
+
+    - @countries.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "country_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_country_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@countries)
+  .clear
+.clear

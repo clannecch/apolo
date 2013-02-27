@@ -1,0 +1,10 @@
+es-AR:
+  activerecord:
+    models:
+      authorization: Autorización
+    attributes:
+      authorization:
+        code: Codigo
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el

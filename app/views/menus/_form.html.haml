@@ -1,0 +1,30 @@
+= form_for(@menu) do |f|
+  = render 'shared/errorhandler', :obj_errors => @menu.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= Menu.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :parent_id, :class => "apsLabel"
+        %td.columnData
+          /= f.text_field :parent_id, :class => "apsTextbox"
+          = f.collection_select :parent_id, Menu.find(:all, :order => "name"), :id, :name, {:class => "apsSelect"}, {:include_blank => '< Menú principal >'}
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :link_url, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :link_url, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :order_no, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :order_no, :class => "apsTextbox"
+  .actions
+    = f.submit :class => "btn success"

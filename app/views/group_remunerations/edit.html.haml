@@ -1,5 +1,10 @@
-%h1 Editing group_remuneration
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRemuneration.model_name.human, group_remunerations_path 
+    - breadcrumb.item "#{@group_remuneration.detalle.titlecase}", group_remuneration_path(@group_remuneration), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, group_remuneration_path(@group_remuneration), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Show', @group_remuneration
-|
-\#{link_to 'Back', group_remunerations_path}

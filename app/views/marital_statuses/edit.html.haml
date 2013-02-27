@@ -1,5 +1,10 @@
-%h1 Edicion de Estado Civil
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MaritalStatus.model_name.human, marital_statuses_path 
+    - breadcrumb.item "#{@marital_status.detalle.titlecase}", marital_status_path(@marital_status), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, marital_status_path(@marital_status), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @marital_status
-|
-\#{link_to 'Volver', marital_statuses_path}

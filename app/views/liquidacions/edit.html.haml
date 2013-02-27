@@ -1,6 +1,11 @@
-%h1 Editing liquidacion
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path
+    - breadcrumb.item "#{@liquidacion.periodo.strftime('%m/%Y')}",nil, :active => true
+
+= link_to t('scaffold.actions.show').titlecase, liquidacion_path(@liquidacion), :class => "btn info"
+= link_to 'Carga Novedades', liquidacion_recibo_sueldos_path(@liquidacion), :class => "btn standad"
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @liquidacion
-|
-\#{link_to 'Carga Novedades', liquidacion_recibo_sueldos_path(@liquidacion)} |
-\#{link_to 'Volver', liquidacions_path}

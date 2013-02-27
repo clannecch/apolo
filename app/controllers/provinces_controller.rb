@@ -5,7 +5,7 @@ class ProvincesController < ApplicationController
   # GET /provinces
   # GET /provinces.xml
   def index
-    @search = Province.by_company(current_company.id).search(params[:search])
+    @search = Province.search(params[:search])
     @provinces = @search.page(params[:page])#.per(10)
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class ProvincesController < ApplicationController
   # GET /provinces/new
   # GET /provinces/new.xml
   def new
-    @province = Province.by_company(current_company.id).new
+    @province = Province.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class ProvincesController < ApplicationController
   # POST /provinces
   # POST /provinces.xml
   def create
-    @province = Province.by_company(current_company.id).new(params[:province])
+    @province = Province.new(params[:province])
 
     respond_to do |format|
       if @province.save
@@ -85,7 +85,7 @@ class ProvincesController < ApplicationController
   end
 
   def find_province
-      @province = Province.by_company(current_company.id).find(params[:id])
+      @province = Province.find(params[:id])
   end
 
 end

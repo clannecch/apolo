@@ -1,36 +1,46 @@
-%h1 Listing liquidacions
-%table.tableStandard
-  %tr
-    %th Periodo
-    %th Quincena
-    %th Tipo Recibo
-    %th Fecha liquidacion
-    %th Banco ultimo deposito
-    %th Periodo deposito
-    %th Fecha deposito
-    %th Fecha cierre
-    %th Techo retenciones
-    %th{ :colspan => '3', :style => "text-align:center;"} Acciones
-  - @liquidacions.each do |liquidacion|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Liquidacion.model_name.human, liquidacions_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Liquidacion.model_name.human).titlecase , new_liquidacion_path(@liquidacion), :class => "btn success"
+  - if @liquidacions.any?
+    = link_to t('scaffold.actions.export').titlecase, liquidacions_path( :format => 'pdf'), :class => "btn info"
+.clear
+%br
+/%h1 Listing liquidacions
+- if @liquidacions.any?
+  %table.tableStandard
     %tr
-      %td= liquidacion.periodo.strftime("%Y/%m")
-      %td{:style => "text-align:center"}= liquidacion.quincena
-      %td= liquidacion.tipo_recibo.try(:detalle)
-      %td{:style => "text-align:center"}= liquidacion.fecha_liquidacion.strftime("%d/%m/%Y")
-      %td= liquidacion.bank_deposit.try(:detalle)
-      %td= liquidacion.periodo_deposito.strftime("%Y/%m")
-      %td= liquidacion.fecha_deposito.strftime("%d/%m/%Y")
-      %td= (liquidacion.fecha_cierre.blank? ? '  /  /' : liquidacion.fecha_cierre.strftime("%d/%m/%Y"))
-      %td= liquidacion.techo_retenciones
-      -#%td= liquidacion_links(liquidacion)
-      %td.last
-        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}" }
-          %img{ :alt => "Ver", :src => "images/icons/16x16/application_get.png", :title => "Ver" }/
-      %td.last
-        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}/edit" }
-          %img{ :alt => "Editar", :src => "images/icons/16x16/application_edit.png", :title => "Editar" }/
-      %td.last
-        %a{ :href => "/liquidacions/#{liquidacion.id.to_s}", "data-confirm" => "Esta ud. seguro?", "data-method" => "delete", :rel => "nofollow" }
-          %img{ :alt => "Eliminar", :src => "images/icons/16x16/application_delete.png", :title => "Eliminar" }/
-%br/
-= link_to 'Nueva Liquidacion', new_liquidacion_path
+      %th Periodo
+      %th Quincena
+      %th Tipo Recibo
+      %th Fecha liquidacion
+      %th Banco ultimo deposito
+      %th Periodo deposito
+      %th Fecha deposito
+      %th Fecha cierre
+      %th Techo retenciones
+      %th.last
+
+    - @liquidacions.each do |item|
+      %tr
+        %td= item.periodo.strftime("%Y/%m")
+        %td{:style => "text-align:center"}= item.quincena
+        %td= item.tipo_recibo.try(:detalle)
+        %td{:style => "text-align:center"}= item.fecha_liquidacion.strftime("%d/%m/%Y")
+        %td= item.bank_deposit.try(:detalle)
+        %td= (item.periodo_deposito.blank? ? '  /  ' :item.periodo_deposito.strftime("%Y/%m"))
+        %td= item.fecha_deposito.strftime("%d/%m/%Y")
+        %td= (item.fecha_cierre.blank? ? '  /  /' : item.fecha_cierre.strftime("%d/%m/%Y"))
+        %td= item.techo_retenciones
+        -#%td= liquidacion_links(liquidacion)
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_liquidacion_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    /.block{:style => 'margin:20px;'}= paginate(@bank_deposits)
+  .clear
+.clear

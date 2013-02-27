@@ -1,28 +1,31 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Activity.model_name.human, activities_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Activity.model_name.human) , new_activity_path(@activity), :class => "btn success" 
+  - if @activities.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Activity.model_name, :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => Activity.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= Activity.human_attribute_name('name')
-
-    %th
-    %th
-    %th
-
-  - @activities.each do |activity|
+- if @activities.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @activities.human_attribute_name('name')
+      %th= sort_link @search, :code, @activities.human_attribute_name('code')
+      %th= sort_link @search, :default, @activities.human_attribute_name('default')
+      %th.last
 
-      %td= activity.name
-
-      %td= activity.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, activity
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_activity_path(activity)
-      %td= link_to t('scaffold.actions.destroy').titlecase, activity, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => Activity.model_name.human).titlecase, new_activity_path
-
+    - @activities.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td= check_box_tag "activity_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_activity_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@activities)
+  .clear
+.clear

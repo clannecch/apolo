@@ -1,73 +1,95 @@
-= semantic_form_for(@remunerative_concept) do |f|
-  = f.semantic_errors
-  -# if @remunerative_concept.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@remunerative_concept.errors.count, "error")
-        prohibited this remunerative_concept from being saved:
-      %ul
-        - @remunerative_concept.errors.full_messages.each do |msg|
-          %li= msg
-  = f.inputs do
-    = f.input :codigo
-    = f.input :detalle
-    = f.input :porcentual_asistencia
-    = f.input :prioridad_calculo
-  .field
-    = f.label :data_to_ask
-    %br/
-    = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, :prompt => true
-  .field
-    %br/
-    = f.label :calculo_cantidad
-    %br/
-    = f.text_field :calculo_cantidad
-  .field
-    %br/
-    = f.label :calculo_valor
-    %br/
-    = f.text_field :calculo_valor
-  .field
-    %br/
-    = f.label :statistical_value
-    %br/
-    = f.text_field :statistical_value
-  .field
-    %br/
-    = f.label :acumuladores_valor
-    %br/
-    = f.text_field :acumuladores_valor
-  .field
-    %br/
-    = f.label :acumuladores_cantidad
-    %br/
-    = f.text_field :acumuladores_cantidad
-  .field
-    %br/
-    = f.label :grupo_ganancias_id
-    %br/
-    = f.text_field :grupo_ganancias_id
-  .field
-    %br/
-    = f.label :accounting_imputation_id
-    %br/
-    = f.text_field :accounting_imputation_id
-  - [:concepto_asociado_haber, :concepto_asociado_haber_2].each do |field|
-    .field
-      %br/
-      = f.label field
-      %br/
-      = f.collection_select("#{field}_id", @remunerative_concept.all_without_myself, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"})
-  - end unless RemunerativeConcept.count.zero?
-  - [:concepto_asociado_retencion, :concepto_asociado_retencion_2].each do |field|
-    .field
-      %br/
-      = f.label field
-      %br/
-      = f.collection_select("#{field}_id", RetentionConcept.all, :id, :detalle, {:include_blank => "-- elija un codigo de #{field.to_s.humanize} --"})
-  - end unless RetentionConcept.count.zero?
+= form_for(@remunerative_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @remunerative_concept.errors
+  .clear
   %br/
-
+  .form_box
+    .form_box_title
+    /  %span.title= RemunerativeConcept.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :codigo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :detalle, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :prioridad_calculo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :prioridad_calculo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :statistical_value, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :grupo_ganancias_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :grupo_ganancias_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :accounting_imputation_id, AccountingImputation.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_haber_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_retencion_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_haber_2_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_haber_2_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :concepto_asociado_retencion_2_id, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :concepto_asociado_retencion_2_id, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acumuladores_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :acumuladores_cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :calculo_valor, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :calculo_cantidad, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :calculo_cantidad, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :data_to_ask_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :data_to_ask_id, DataToAsk.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :cantidad_en_recibo, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :cantidad_en_recibo, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :auxiliar, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :auxiliar, :class => "apsCheckbox"
   .actions
-    = f.submit
-
+    = f.submit :class => "btn success"

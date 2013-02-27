@@ -1,13 +1,31 @@
-%h1 Listado de Sindicatos
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @labor_unions.each do |labor_union|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item LaborUnion.model_name.human, labor_unions_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => LaborUnion.model_name.human) , new_labor_union_path(@labor_union), :class => "btn success" 
+  - if @labor_unions.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + LaborUnion.model_name, :class => "btn info"
+
+- if @labor_unions.any?
+  %table.tableStandard
     %tr
-      %td= labor_union.detalle
-      %td= labor_union_links(labor_union)
-%br/
-= link_to 'Nuevo Sindicato', new_labor_union_path
+      %th= sort_link @search, :detalle, @labor_unions.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @labor_unions.human_attribute_name('code')
+      %th= sort_link @search, :default, @labor_unions.human_attribute_name('default')
+      %th.last
+
+    - @labor_unions.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "labor_union_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_labor_union_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@labor_unions)
+  .clear
+.clear

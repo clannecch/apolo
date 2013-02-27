@@ -1,13 +1,31 @@
-%h1 Listado de Nacionalidades
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @nationalities.each do |nationality|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Nationality.model_name.human, nationalities_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => Nationality.model_name.human) , new_nationality_path(@nationality), :class => "btn success" 
+  - if @nationalities.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + Nationality.model_name, :class => "btn info"
+
+- if @nationalities.any?
+  %table.tableStandard
     %tr
-      %td= nationality.detalle
-      %td= nationality_links(nationality)
-%br/
-= link_to 'Nueva Nacionalidad', new_nationality_path
+      %th= sort_link @search, :detalle, @nationalities.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @nationalities.human_attribute_name('code')
+      %th= sort_link @search, :default, @nationalities.human_attribute_name('default')
+      %th.last
+
+    - @nationalities.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "nationality_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_nationality_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@nationalities)
+  .clear
+.clear

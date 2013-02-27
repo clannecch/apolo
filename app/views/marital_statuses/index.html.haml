@@ -1,13 +1,31 @@
-%h1 Listado de Estado Civil
-%table
-  %tr
-    %th Detalle
-    %th
-    %th
-    %th
-  - @marital_statuses.each do |marital_status|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MaritalStatus.model_name.human, marital_statuses_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => MaritalStatus.model_name.human) , new_marital_status_path(@marital_status), :class => "btn success" 
+  - if @marital_statuses.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + MaritalStatus.model_name, :class => "btn info"
+
+- if @marital_statuses.any?
+  %table.tableStandard
     %tr
-      %td= marital_status.detalle
-      %td= marital_status_links(marital_status)
-%br/
-= link_to 'Nuevo Estado Civil', new_marital_status_path
+      %th= sort_link @search, :detalle, @marital_statuses.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @marital_statuses.human_attribute_name('code')
+      %th= sort_link @search, :default, @marital_statuses.human_attribute_name('default')
+      %th.last
+
+    - @marital_statuses.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "marital_status_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_marital_status_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@marital_statuses)
+  .clear
+.clear

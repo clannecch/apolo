@@ -3,7 +3,7 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.xml
   def index
-    @search = Section.by_company(current_company.id).search(params[:search])
+    @search = Section.search(params[:search])
     @sections = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class SectionsController < ApplicationController
   # GET /sections/new
   # GET /sections/new.xml
   def new
-    @section = Section.by_company(current_company.id).new
+    @section = Section.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class SectionsController < ApplicationController
   # POST /sections
   # POST /sections.xml
   def create
-    @section = Section.by_company(current_company.id).new(params[:section])
+    @section = Section.new(params[:section])
 
     respond_to do |format|
       if @section.save
@@ -84,6 +84,6 @@ class SectionsController < ApplicationController
   end
 
   def find_section
-      @section = Section.by_company(current_company.id).find(params[:id])
+      @section = Section.find(params[:id])
   end
 end

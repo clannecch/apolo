@@ -1,7 +1,41 @@
-%p#notice= notice
-%p
-  %b Detalle:
-  = @group_remuneration.detalle
-= group_remuneration_links(@group_remuneration)
-|
-\#{link_to 'Volver', group_remunerations_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item GroupRemuneration.model_name.human, group_remunerations_path 
+    - breadcrumb.item "#{@group_remuneration.detalle.titlecase}", group_remuneration_path(@group_remuneration), :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_group_remuneration_path(@group_remuneration), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @group_remuneration, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@group_remuneration) do |f|
+  - if @group_remuneration.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group_remuneration.errors.count, "error")
+        prohibited this group_remuneration from being saved:
+      %ul
+        - @group_remuneration.errors.full_messages.each do |msg|
+          %li= msg
+  %table.tableForm
+    %tr
+      %td.columnLabel
+        = f.label :code, :class => "apsLabel"
+      %td.columnData
+        = @group_remuneration.code
+    %tr
+      %td.columnLabel
+        = f.label :detalle, :class => "apsLabel"
+      %td.columnData
+        = @group_remuneration.detalle
+    %tr
+      %td.columnLabel
+        = f.label :composicion, :class => "apsLabel"
+      %td.columnData
+        = f.collection_select :remunerative_concept_ids, RemunerativeConcept.all, :id, :detalle, {}, :multiple => true, :class => "apsSelect", :disabled => "disabled"
+    %tr
+      %td.columnLabel
+        = f.label :default, :class => "apsLabel"
+      %td.columnData
+        = check_box_tag "group_remuneration_default", @group_remuneration.default, @group_remuneration.default, :disabled => true
+.clear

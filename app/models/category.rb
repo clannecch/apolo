@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111025214836
 #
 # Table name: categories
 #
@@ -11,14 +11,18 @@
 #  company_id :integer
 #  horas      :decimal(, )
 #  codigo     :string(255)
+#  default    :boolean
 #
 
 class Category < ActiveRecord::Base
 	has_many :employees, :dependent => :restrict
-  validates_presence_of		    :detalle,	:codigo, :importe,			              :message => "es un dato requerido"
-  validates_numericality_of   :horas,:importe,                                :message => "requiere dato numerico"
+  #scope :by_company, lambda {|company| where(:company_id => company) }
+  default_scope  ($MULTIPLE_COMPANIES == true) ? where(:company_id => $CURRENT_COMPANY) : where(false)
 
-  scope :by_company, lambda {|company| where(:company_id => company) }
+  validates_presence_of		    :detalle,	:codigo, :importe,			         :message => "es un dato requerido"
+  validates_numericality_of   :horas,:importe,                           :message => "requiere dato numerico"
+  validates_uniqueness_of		  :codigo,			                             :message => "existente"
+  validates_uniqueness_of     :default , :if => Proc.new { |t| t.default == true } , :message => "Ya existe un default"
 
   before_save :controlar_cambios
 

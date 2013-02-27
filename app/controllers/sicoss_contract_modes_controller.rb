@@ -9,7 +9,8 @@ class SicossContractModesController < ApplicationController
   # GET /sicoss_contract_modes.json
   # GET /sicoss_contract_modes.xml
   def index
-    @sicoss_contract_modes = SicossContractMode.all
+    @search = SicossContractMode.search(params[:search])
+    @sicoss_contract_modes = @search.page(params[:page]).per(10)
     flash.now[:notice] = t('flash.actions.index.notice') if @sicoss_contract_modes.empty?
     respond_with(@sicoss_contract_modes)
   end

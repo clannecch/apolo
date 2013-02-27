@@ -1,0 +1,24 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MenuRole.model_name.human, menu_roles_path , :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_menu_role_path(@menu_role), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @menu_role, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@menu_role) do |f|
+  = render 'shared/errorhandler', :obj_errors => @menu_role.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :menu_id, :class => "apsLabel"
+        %td.columnData
+          = @menu_role.menu.try(:name)
+      %tr
+        %td.columnLabel
+          = f.label :rol_id, :class => "apsLabel"
+        %td.columnData
+          = @menu_role.rol_id
+.clear

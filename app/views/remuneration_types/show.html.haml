@@ -1,8 +1,35 @@
-%h1 Visualizacion de Tipo de Remuneracion
-%p#notice= notice
-%p
-  %b Detalle:
-  = @remuneration_type.detalle
-= remuneration_type_links(@remuneration_typemodelo)
-|
-\#{link_to 'Volver', remuneration_types_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RemunerationType.model_name.human, remuneration_types_path 
+    - breadcrumb.item "#{@remuneration_type.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_remuneration_type_path(@remuneration_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @remuneration_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@remuneration_type) do |f|
+  = render 'shared/errorhandler', :obj_errors => @remuneration_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :hora_dia_mes, :class => "apsLabel"
+        %td.columnData
+          = @remuneration_type.hora_dia_mes == "H" ? "Hora" : (@remuneration_type.hora_dia_mes == "D" ? "Dia" : "Mes" )
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "remuneration_type_default", @remuneration_type.default, @remuneration_type.default, :disabled => true
+.clear

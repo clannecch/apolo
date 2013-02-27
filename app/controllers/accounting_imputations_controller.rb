@@ -1,4 +1,5 @@
 class AccountingImputationsController < ApplicationController
+  respond_to :html, :xml, :json
   before_filter :find_accounting_imputation, :except => [:index, :new, :create]
 
   # GET /accounting_imputations
@@ -7,12 +8,8 @@ class AccountingImputationsController < ApplicationController
     # TODO: mejorar la forma de traer este conjunto de registros!!! (se pueden usar optimize, :fixme, :todo) se llama con rake notes o rake notes:todo
     @search = AccountingImputation.search(params[:search])
     @accounting_imputations = @search.page(params[:page]).per(10)
-    #@accounting_imputations = AccountingImputation.by_company(current_company.id).all
-
-    respond_to do |format|
-      format.html # indexoo.html.erb
-      format.xml  { render :xml => @accounting_imputations }
-    end
+    flash.now[:notice] = t('flash.actions.index.notice') if @accounting_imputations.empty?
+    respond_with(@accounting_imputations)
   end
 
   # GET /accounting_imputations/1
@@ -28,7 +25,7 @@ class AccountingImputationsController < ApplicationController
   # GET /accounting_imputations/new
   # GET /accounting_imputations/new.xml
   def new
-    @accounting_imputation = AccountingImputation.by_company(current_company.id).new
+    @accounting_imputation = AccountingImputation.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +40,7 @@ class AccountingImputationsController < ApplicationController
   # POST /accounting_imputations
   # POST /accounting_imputations.xml
   def create
-    @accounting_imputation = AccountingImputation.by_company(current_company.id).new(params[:accounting_imputation])
+    @accounting_imputation = AccountingImputation.new(params[:accounting_imputation])
 
     respond_to do |format|
       if @accounting_imputation.save
@@ -87,6 +84,6 @@ class AccountingImputationsController < ApplicationController
   end
 
   def find_accounting_imputation
-    @accounting_imputation = AccountingImputation.by_company(current_company.id).find(params[:id])
+    @accounting_imputation = AccountingImputation.find(params[:id])
   end
 end

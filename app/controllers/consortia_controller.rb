@@ -25,7 +25,7 @@ class ConsortiaController < ApplicationController
   # GET /consortia/new.json
   # GET /consortia/new.xml
   def new
-    @consortium = Consortium.by_company(current_company.id).new
+    @consortium = Consortium.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,8 @@ class ConsortiaController < ApplicationController
   # POST /consortia.json
   # POST /consortia.xml
   def create
-    @consortium = Consortium.by_company(current_company.id).new(params[:consortium])
+    @consortium = Consortium.new(params[:consortium])
+    @consortium.company_id = current_company.id
 
     respond_to do |format|
       if @consortium.save
@@ -83,7 +84,7 @@ class ConsortiaController < ApplicationController
       flash[:error] = "#{e}"
       redirect_to consortiun_url
     else
-      redirect_to consortiun_url
+      redirect_to consortia_url
     end
   end
 

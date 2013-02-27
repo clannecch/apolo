@@ -1,0 +1,9 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item MenuUser.model_name.human, menu_users_path , :active => true
+
+= link_to t('scaffold.actions.show').titlecase, menu_user_path(@menu_user), :class => "btn info" 
+.clear
+%br/
+= render 'form'

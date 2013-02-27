@@ -5,7 +5,7 @@ class DeduccionGananciasTablesController < ApplicationController
   # GET /deduccion_ganancias_tables.xml
   def index
     #@deduccion_ganancias_tables = DeduccionGananciasTable.all
-    @search = DeduccionGananciasTable.by_company(current_company.id).search(params[:search])
+    @search = DeduccionGananciasTable.search(params[:search])
     @deduccion_ganancias_tables = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -27,7 +27,7 @@ class DeduccionGananciasTablesController < ApplicationController
   # GET /deduccion_ganancias_tables/new
   # GET /deduccion_ganancias_tables/new.xml
   def new
-    @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).new
+    @deduccion_ganancias_table = DeduccionGananciasTable.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class DeduccionGananciasTablesController < ApplicationController
   # POST /deduccion_ganancias_tables
   # POST /deduccion_ganancias_tables.xml
   def create
-    @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).new(params[:deduccion_ganancias_table])
+    @deduccion_ganancias_table = DeduccionGananciasTable.new(params[:deduccion_ganancias_table])
 
     respond_to do |format|
       if @deduccion_ganancias_table.save
@@ -82,6 +82,6 @@ class DeduccionGananciasTablesController < ApplicationController
   end
 
   def find_deduccion_ganancias_table
-      @deduccion_ganancias_table = DeduccionGananciasTable.by_company(current_company.id).find(params[:id])
+      @deduccion_ganancias_table = DeduccionGananciasTable.find(params[:id])
   end
 end

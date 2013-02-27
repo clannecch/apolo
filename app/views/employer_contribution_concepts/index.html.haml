@@ -1,25 +1,45 @@
-%h1 Listing employer_contribution_concepts
-%table
-  %tr
-    %th Codigo
-    %th Detalle
-    %th Formula de Calculo
-    %th Acumuladores
-    %th Prioridad
-    %th Valor Estadistico
-    %th Cuenta Contable
-    %th
-    %th
-    %th
-  - @employer_contribution_concepts.each do |employer_contribution_concept|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConcept.model_name.human, employer_contribution_concepts_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EmployerContributionConcept.model_name.human) , new_employer_contribution_concept_path(@employer_contribution_concept), :class => "btn success" 
+  - if @employer_contribution_concepts.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EmployerContributionConcept.model_name, :class => "btn info"
+
+- if @employer_contribution_concepts.any?
+  %table.tableStandard
     %tr
-      %td= employer_contribution_concept.codigo
-      %td= employer_contribution_concept.detalle
-      %td= employer_contribution_concept.formula_calculo_valor
-      %td= employer_contribution_concept.acumuladores_valor
-      %td= employer_contribution_concept.prioridad
-      %td= employer_contribution_concept.statistical_value
-      %td= employer_contribution_concept.accounting_imputation_id
-      %td= employer_contribution_concept_links(employer_contribution_concept)
-%br/
-= link_to 'New Employer contribution concept', new_employer_contribution_concept_path
+      %th= sort_link @search, :codigo, @employer_contribution_concepts.human_attribute_name('codigo')
+      %th= sort_link @search, :detalle, @employer_contribution_concepts.human_attribute_name('detalle')
+      %th= sort_link @search, :statistical_value, @employer_contribution_concepts.human_attribute_name('statistical_value')
+      %th= sort_link @search, :accounting_imputation_id, @employer_contribution_concepts.human_attribute_name('accounting_imputation_id')
+      %th= sort_link @search, :prioridad, @employer_contribution_concepts.human_attribute_name('prioridad')
+      %th= sort_link @search, :acumuladores_valor, @employer_contribution_concepts.human_attribute_name('acumuladores_valor')
+      %th= sort_link @search, :formula_calculo_valor, @employer_contribution_concepts.human_attribute_name('formula_calculo_valor')
+      %th= sort_link @search, :retention_concept_id, @employer_contribution_concepts.human_attribute_name('retention_concept_id')
+      %th= sort_link @search, :additional_health_insurance_id, @employer_contribution_concepts.human_attribute_name('additional_health_insurance_id')
+      %th= sort_link @search, :health_insurance_id, @employer_contribution_concepts.human_attribute_name('health_insurance_id')
+      %th.last
+
+    - @employer_contribution_concepts.each do |item|
+      %tr
+        %td= item.codigo
+        %td= item.detalle
+        %td= item.statistical_value
+        %td= item.accounting_imputation_id
+        %td= item.prioridad
+        %td= item.acumuladores_valor
+        %td= item.formula_calculo_valor
+        %td= item.retention_concept_id
+        %td= item.additional_health_insurance_id
+        %td= item.health_insurance_id
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employer_contribution_concept_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@employer_contribution_concepts)
+  .clear
+.clear

@@ -1,13 +1,24 @@
-
-= semantic_form_for @sicoss_damaged do |f|
-  = f.semantic_errors
-
-  = f.inputs do
-
-    = f.input :code
-
-    = f.input :name
-
-
-  = f.buttons
-
+= form_for(@sicoss_damaged) do |f|
+  = render 'shared/errorhandler', :obj_errors => @sicoss_damaged.errors
+  .clear
+  .form_box
+    .form_box_title
+    /  %span.title= SicossDamaged.model_name.human
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :code, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :name, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :name, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = f.check_box :default, :class => "apsCheckbox"
+  .actions
+    = f.submit :class => "btn success"

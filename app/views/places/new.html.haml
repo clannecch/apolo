@@ -1,3 +1,7 @@
-%h1 Nuevo Lugar
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Place.model_name.human, places_path
+    - breadcrumb.item t('scaffold.actions.new', :item => Place.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Volver', places_path

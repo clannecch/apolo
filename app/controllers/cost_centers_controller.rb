@@ -3,8 +3,8 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   # GET /cost_centers
   # GET /cost_centers.xml
   def index
-    #@cost_centers = CostCenter.by_company(current_company.id).all
-    @search = CostCenter.by_company(current_company.id).search(params[:search])
+    #@cost_centers = CostCenter.all
+    @search = CostCenter.search(params[:search])
     @cost_centers = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -25,7 +25,7 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   # GET /cost_centers/new
   # GET /cost_centers/new.xml
   def new
-    @cost_center = CostCenter.by_company(current_company.id).new
+    @cost_center = CostCenter.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   # POST /cost_centers
   # POST /cost_centers.xml
   def create
-    @cost_center = CostCenter.by_company(current_company.id).new(params[:cost_center])
+    @cost_center = CostCenter.new(params[:cost_center])
 
     respond_to do |format|
       if @cost_center.save
@@ -84,6 +84,6 @@ before_filter :find_cost_center, :except => [:index, :new, :create]
   end
 
   def find_cost_center
-    @cost_center = CostCenter.by_company(current_company.id).find(params[:id])
+    @cost_center = CostCenter.find(params[:id])
   end
 end

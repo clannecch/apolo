@@ -1,5 +1,10 @@
-%h1 Editing detalle_recibo_haber
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item DetalleReciboHaber.model_name.human, detalle_recibo_habers_path 
+    - breadcrumb.item "#{@detalle_recibo_haber.detalle.titlecase}", detalle_recibo_haber_path(@detalle_recibo_haber), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, detalle_recibo_haber_path(@detalle_recibo_haber), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Show', @detalle_recibo_haber
-|
-\#{link_to 'Back', detalle_recibo_habers_path}

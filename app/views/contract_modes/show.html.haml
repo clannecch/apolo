@@ -1,8 +1,30 @@
-%h1 Visualizacion de Modalidad de Contrato
-%p#notice= notice
-%p
-  %b Detalle:
-  = @contract_mode.detalle
-= contract_mode_links(@contract_mode)
-|
-\#{link_to 'Volver', contract_modes_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item ContractMode.model_name.human, contract_modes_path 
+    - breadcrumb.item "#{@contract_mode.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_contract_mode_path(@contract_mode), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @contract_mode, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@contract_mode) do |f|
+  = render 'shared/errorhandler', :obj_errors => @contract_mode.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @contract_mode.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @contract_mode.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "contract_mode_default", @contract_mode.default, @contract_mode.default, :disabled => true
+.clear

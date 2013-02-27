@@ -1,6 +1,292 @@
+@import 'partials/_mixins'
+
 #ui-datepicker-div
   display: none
+
+#main
+  .block
+    margin-bottom: 20px
+    padding-top: 1px
+    .content .inner
+      padding: 0 15px 15px
+  .main p.first
+    margin-top: 0
 
 form.formtastic fieldset > ol > li label
   float: none
 
+ul.wat-cf
+  list-style-type: none
+  position: static
+  text-align: left
+  display: inline
+  margin: 0px 0px 0px 0px
+  li
+    display: inline
+    //list-style-type: none
+    padding-right: 0px
+
+table tr
+  td.actions a
+    visibility: hidden
+  &:hover td.actions a
+    visibility: visible
+
+.clear
+  margin: 10px 10px 10px 10px
+
+.block
+  text-align: left
+  padding: 0px 0px 0px 0px
+
+.content
+  text-align: left
+  padding: 0px 0px 0px 0px
+
+#main
+  // set to fix for use a sidebar
+  width: 77%
+  float: left
+
+  .block
+    // box of main text
+    padding-top: 0px
+    background: #fff
+    @include box-shadow(0, 1px, 3px, rgba(0, 0, 0, 0.4))
+    @include rounded-corners(9px)
+
+    .content
+      padding-top: 1px
+      .inner
+        padding: 0 15px 15px
+      h2
+        margin-left: 15px
+        font-size: 22px
+        font-style: normal
+        font-weight: bold
+        text-transform: normal
+        letter-spacing: -1px
+        line-height: 1.2em
+      p
+        font-size: 13px
+        font-style: normal
+        font-weight: normal
+        text-transform: normal
+        letter-spacing: normal
+        line-height: 1.45em
+
+  .block-norounded
+    // version without round corners
+    @include box-shadow(0, 0, 4px, rgba(0, 0, 0, 0.3))
+
+.form_box
+  background: #e8eef4
+  margin: 30px 0px 30px
+  //padding-top: 0px
+  //@include box-shadow(0, 1px, 3px, rgba(0, 0, 0, 0.4))
+  //@include rounded-corners(9px)
+
+.form_box_title
+  //background: #c3c3c3
+  //border: 1px solid #000
+  //color: #00264D
+  //padding: 5px 0px 5px 0px
+  //@include box-shadow(0, 1px, 3px, rgba(0, 0, 0, 0.4))
+  //@include rounded-corners(9px)
+
+
+//--------------------------------------------------------
+// D E V I S E
+//--------------------------------------------------------
+#box
+  width: 500px
+  margin: 50px auto
+  background-color: #dedede
+  @include rounded-corners(9px)
+  h2
+    margin: 0
+  .block
+    margin-bottom: 20px
+    background-repeat: repeat-x
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#c3d5d5), to(#6c9999))
+    background-image: -moz-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -ms-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c3d5d5), color-stop(100%, #6c9999))
+    background-image: -webkit-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: -o-linear-gradient(top, #c3d5d5, #6c9999)
+    background-image: linear-gradient(top, #c3d5d5, #6c9999)
+    //@include rounded-corners(9px)
+    .content
+      padding: 10px 20px
+      @include rounded-corners(9px)
+      h2
+        background-color: #00264D
+        color: #fff
+        margin: 0
+        padding: 10px 15px
+        @include rounded-corners(9px)
+
+.user_navigation
+  text-align: left
+  display: block
+  float: right
+  margin:  0px 10px 50px 0px
+  padding: 0px 10px 0px 0px
+  position: relative
+  width: 50px
+  ul
+    position: relative
+    padding: 0
+    height: 30px
+    li
+      padding: 0px 2px
+      margin: 0
+      list-style: none
+
+.user_new label
+  margin:  12px 10px 0px 0px
+  //padding: 0px 10px 0px 0px
+  //position: relative
+
+.user_new input
+  margin:  2px 0px 0px 0px
+  //padding: 0px 10px 0px 0px
+  //position: relative
+
+.user_new input[type="checkbox"]
+  margin:  20px 0px 0px 0px
+  //padding: 0px 10px 0px 0px
+  //position: relative
+
+
+//--------------------------------------------------------
+// B R E A D C R U M B
+//--------------------------------------------------------
+.breadcrumb
+  position: static
+  height: 30px
+  width: 92%
+  float: left
+  //margin: 0px 0px 30px 200px
+  display: inline
+  ul
+    position: relative
+    margin: 0px 5px 0 5px
+    padding: 0
+    height: 30px
+    background: url('../images/breadcrumbImage.png') 0px -30px repeat-x
+    //display: inline
+    li
+      padding: 0
+      margin: 0
+      list-style: none
+      float: left
+      height: 30px
+      display: inline
+      a
+        color: #0000ff
+        text-decoration: none
+        line-height: 30px
+        display: block
+        background: url('../images/breadcrumbImage.png') 100% -60px no-repeat
+        padding: 0 17px 0 15px
+        outline: none
+        &:hover
+          text-decoration: underline
+          background-color: #fff
+          color: #0000ff
+        &.active
+          background-color: #fff
+          color: #000
+          &:hover
+            background-color: #00264d
+      &.active
+        background-color: #fff
+        color: #000
+        text-decoration: none
+        line-height: 30px
+        display: block
+        padding: 0 17px 0 15px
+        outline: none
+  .left
+    position: absolute
+    top: 0px
+    left: 0px
+    width: 10px
+    height: 30px
+    display: block
+    z-index: 1
+    background: url('../images/breadcrumbImage.png') 0% 0px no-repeat
+  .right
+    position: absolute
+    top: 0px
+    right: 0px
+    width: 10px
+    height: 30px
+    display: inline
+    z-index: 1
+    background: url('../images/breadcrumbImage.png') 100% -90px no-repeat
+
+
+//--------------------------------------------------------
+// FLASH-MESSAGES
+//--------------------------------------------------------
+.flash
+  .message
+    @include rounded-corners(6px)
+    text-align: center
+    margin: 0 auto 15px
+    p
+      margin: 8px
+
+  .error, .error-list
+    border: 1px solid #fbb
+    background-color: #fdd
+
+  .warning
+    //border: 1px solid $interactive_yellow
+    background-color: #ffffcc
+
+  .notice
+    border: 1px solid #1fdf00
+    background-color: #bbffb6
+
+  .success
+    border: 1px solid #1fdf00
+    background-color: #bbffb6
+
+  .error-list
+    text-align: left
+    h2
+      font-size: 16px
+      text-align: center
+    ul
+      padding-left: 22px
+      line-height: 18px
+      list-style-type: square
+      margin-bottom: 15px
+
+//--------------------------------------------------------
+// V A L I D A T I O N S
+//--------------------------------------------------------
+.field_with_errors input, .field_with_errors checkbox, .field_with_errors select
+  border: 1px solid #ff0000
+  background: #fddfde
+
+#error_explanation
+  @include rounded-corners(6px)
+  border: 1px solid #ff0000
+  //margin: 20px 5px 0 5px
+  h2
+    font-size: 16px
+    font-style: normal
+  ul
+    position: relative
+    margin: 0px 5px 0 5px
+    padding: 0
+    //height: 30px
+    display: block
+    li
+      padding: 0
+      margin: 0
+      list-style: none

@@ -1,64 +1,58 @@
-- content_for(:head) do
-  = javascript_tag do
-    $( ".datepicker" ).datepicker({
-    changeMonth: true,
-    changeYear: true
-    });
-  :css
-    .field_periodo{
-        float:left;
-        width:33%;
-    }
-
-     .actions{
-        clear:both;
-    }
 = form_for(@liquidacion) do |f|
-  - if @liquidacion.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@liquidacion.errors.count, "error")
-        prohibited this liquidacion from being saved:
-      %ul
-        - @liquidacion.errors.full_messages.each do |msg|
-          %li= msg
-  .field_periodo
-    = f.label :Periodo
-    = f.date_select :periodo, :discard_day => true if @liquidacion.new_record?
-    = @liquidacion.periodo unless @liquidacion.new_record?
-  .field
-    = f.label :quincena
-    = f.text_field :quincena , :size => 2 if @liquidacion.new_record?
-    = @liquidacion.quincena unless @liquidacion.new_record?
-  .field
-    = f.label :tipo_recibo_id
-    %br/
-    = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, :prompt => true if @liquidacion.new_record?
-    = @liquidacion.tipo_recibo.try(:detalle) unless @liquidacion.new_record?
-  .field
-    %br/
-    = f.label :fecha_liquidacion
-    %br/
-    = f.text_field :fecha_liquidacion ,:class => 'datepicker'
-  .field
-    = "Banco ultimo deposito:"
-    %br/
-    = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, :prompt => true
-  .field
-    = f.label :periodo_deposito
-    %br/
-    = f.date_select :periodo_deposito, :discard_day => true
-  .field
-    = f.label :fecha_deposito
-    %br/
-    = f.text_field :fecha_deposito,:class => 'datepicker'
-  .field
-    = f.label :fecha_cierre
-    %br/
-    = f.text_field :fecha_cierre,:class => 'datepicker'
-  .field
-    = f.label :techo_retenciones
-    %br/
-    = f.text_field :techo_retenciones
+  = render 'shared/errorhandler', :obj_errors => @liquidacion.errors
+  .clear
+  %br/
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :periodo, :class => "apsLabel"
+        %td.columnData
+          /= f.text_field :periodo, :class => "apsDatetime" if @liquidacion.new_record?
+          = f.date_select :periodo, :discard_day => true if @liquidacion.new_record?
+          = @liquidacion.periodo unless @liquidacion.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :quincena, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :quincena, :class => "apsTextbox" if @liquidacion.new_record?
+          = @liquidacion.quincena unless @liquidacion.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :tipo_recibo_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :tipo_recibo_id, TipoRecibo.all, :id, :detalle, {:class => "apsSelect"} if @liquidacion.new_record?
+          = @liquidacion.tipo_recibo.try(:detalle) unless @liquidacion.new_record?
+      %tr
+        %td.columnLabel
+          = f.label :fecha_liquidacion, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_liquidacion, :value => @liquidacion.fecha_liquidacion.to_s, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :periodo_deposito, :class => "apsLabel"
+        %td.columnData
+          /= f.text_field :periodo_deposito, :class => "apsDatetime"
+          = f.date_select :periodo_deposito, :discard_day => true
+      %tr
+        %td.columnLabel
+          = f.label :fecha_deposito, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_deposito, :value => @liquidacion.fecha_deposito.to_s, :class => "apsDatetime"
+      %tr
+        %td.columnLabel
+          = f.label :bank_deposit_id, :class => "apsLabel"
+        %td.columnData
+          = f.collection_select :bank_deposit_id, BankDeposit.all, :id, :detalle, {:class => "apsSelect"}
+      %tr
+        %td.columnLabel
+          = f.label :techo_retenciones, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :techo_retenciones, :class => "apsTextbox"
+      %tr
+        %td.columnLabel
+          = f.label :fecha_cierre, :class => "apsLabel"
+        %td.columnData
+          = f.text_field :fecha_cierre, :value => @liquidacion.fecha_cierre.to_s, :class => "apsDatetime"
   .actions
-    = f.submit
+    = f.submit :class => "btn success"

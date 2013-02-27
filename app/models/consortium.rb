@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20111013184648
+# Schema version: 20111028135309
 #
 # Table name: consortia
 #
@@ -18,8 +18,6 @@
 #  contacto                  :string(255)
 #  email                     :string(255)
 #  cuit                      :string(255)
-#  numero_inscripcion        :string(255)
-#  caja                      :string(255)
 #  ultima_hoja_libro         :string(255)
 #  imprimir_hasta_hoja_libro :string(255)
 #  observaciones             :text
@@ -33,18 +31,16 @@ require 'paperclip'
 class Consortium < ActiveRecord::Base
   belongs_to :province
   belongs_to :location
-
-  validates_presence_of	:name, :code, :calle, :altura, :codigo_postal,
-                        :cuit, :ultima_hoja_libro, :message => "es un dato requerido"
-
-#                               , :numero_inscripcion, :caja,
-
   has_many   :attachments, :as => :attachable, :dependent => :restrict
 
   accepts_nested_attributes_for :attachments , :allow_destroy => true
 
   scope :by_company, lambda {|company| where(:company_id => company) }
+  #default_scope where(:company_id => $CURRENT_COMPANY)
 
+  validates_presence_of		    :name,	:code, :calle, :altura, :codigo_postal,
+                               :cuit, :ultima_hoja_libro,         :message => "es un dato requerido"
+  validates_uniqueness_of		  :code, :scope => :company_id,       :message => "existente"
 
   def full_address
 #    apellido + ', '+nombre

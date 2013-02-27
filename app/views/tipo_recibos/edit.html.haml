@@ -1,5 +1,10 @@
-%h1 Editing tipo_recibo
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item TipoRecibo.model_name.human, tipo_recibos_path 
+    - breadcrumb.item "#{@tipo_recibo.detalle.titlecase}", tipo_recibo_path(@tipo_recibo), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, tipo_recibo_path(@tipo_recibo), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @tipo_recibo
-|
-\#{link_to 'Volver', tipo_recibos_path}

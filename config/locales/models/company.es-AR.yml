@@ -1,7 +1,7 @@
 'es-AR':
   activerecord:
     models:
-      company: Companía
+      company: Compania
     attributes:
       company:
         name: Nombre

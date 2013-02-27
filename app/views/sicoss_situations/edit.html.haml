@@ -1,10 +1,10 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossSituation.model_name.human, sicoss_situations_path 
+    - breadcrumb.item "#{@sicoss_situation.name.titlecase}", sicoss_situation_path(@sicoss_situation), :active => true
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.edit', :item => SicossSituation.model_name.human).titlecase
-
+= link_to t('scaffold.actions.show').titlecase, sicoss_situation_path(@sicoss_situation), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-
-= link_to t('scaffold.actions.show').titlecase, @sicoss_situation
-\|
-= link_to t('scaffold.actions.back').titlecase, sicoss_situations_path
-

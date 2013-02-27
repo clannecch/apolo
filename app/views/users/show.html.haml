@@ -1,15 +1,59 @@
-- content_for(:title) do
-  %h1= [t('scaffold.actions.show'), User.model_name.human].join(' ').titlecase
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item User.model_name.human, users_path , :active => true
 
-- content_for(:controls) do
-  = controls do |control|
-    - control.item t('scaffold.actions.edit').titlecase, edit_user_path(@user), :icon => 'application_edit'
-    - control.item t('scaffold.actions.back').titlecase, :back, :icon => 'application_view_list'
-
-= semantic_attributes_for(@user) do |s|
-  = s.attributes(User.human_name + ' Info') do
-    = s.attribute :email
-    = s.attribute :first_name
-    = s.attribute :last_name
-
+= link_to t('scaffold.actions.edit').titlecase, edit_user_path(@user), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @user, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@user) do |f|
+  = render 'shared/errorhandler', :obj_errors => @user.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :first_name, :class => "apsLabel"
+        %td.columnData
+          = @user.first_name
+      %tr
+        %td.columnLabel
+          = f.label :last_name, :class => "apsLabel"
+        %td.columnData
+          = @user.last_name
+      %tr
+        %td.columnLabel
+          = f.label :reset_password_token, :class => "apsLabel"
+        %td.columnData
+          = @user.reset_password_token
+      %tr
+        %td.columnLabel
+          = f.label :reset_password_sent_at, :class => "apsLabel"
+        %td.columnData
+          = @user.reset_password_sent_at
+      %tr
+        %td.columnLabel
+          = f.label :remember_created_at, :class => "apsLabel"
+        %td.columnData
+          = @user.remember_created_at
+      %tr
+        %td.columnLabel
+          = f.label :current_sign_in_at, :class => "apsLabel"
+        %td.columnData
+          = @user.current_sign_in_at
+      %tr
+        %td.columnLabel
+          = f.label :last_sign_in_at, :class => "apsLabel"
+        %td.columnData
+          = @user.last_sign_in_at
+      %tr
+        %td.columnLabel
+          = f.label :current_sign_in_ip, :class => "apsLabel"
+        %td.columnData
+          = @user.current_sign_in_ip
+      %tr
+        %td.columnLabel
+          = f.label :last_sign_in_ip, :class => "apsLabel"
+        %td.columnData
+          = @user.last_sign_in_ip
 .clear

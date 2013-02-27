@@ -1,25 +1,65 @@
-%p#notice= notice
-%p
-  %b Codigo:
-  = @employer_contribution_concept.codigo
-%p
-  %b Detalle:
-  = @employer_contribution_concept.detalle
-%p
-  %b Formula de Calculo Valor:
-  = @employer_contribution_concept.formula_calculo_valor
-%p
-  %b Acumuladores:
-  = @employer_contribution_concept.acumuladores_valor
-%p
-  %b Prioridad de Calculo:
-  = @employer_contribution_concept.prioridad
-%p
-  %b Valor Estaditico:
-  = @employer_contribution_concept.statistical_value
-%p
-  %b Cuenta Contable:
-  = @employer_contribution_concept.accounting_imputation_id
-= employer_contribution_concept_links(@employer_contribution_concept)
-|
-\#{link_to 'Back', employer_contribution_concepts_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployerContributionConcept.model_name.human, employer_contribution_concepts_path 
+    - breadcrumb.item "#{@employer_contribution_concept.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_employer_contribution_concept_path(@employer_contribution_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @employer_contribution_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@employer_contribution_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @employer_contribution_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.codigo
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.statistical_value
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.accounting_imputation.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :prioridad, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.prioridad
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.acumuladores_valor
+      %tr
+        %td.columnLabel
+          = f.label :formula_calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.formula_calculo_valor
+      %tr
+        %td.columnLabel
+          = f.label :retention_concept_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.retention_concept.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :additional_health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.additional_health_insurance_id
+      %tr
+        %td.columnLabel
+          = f.label :health_insurance_id, :class => "apsLabel"
+        %td.columnData
+          = @employer_contribution_concept.health_insurance.try(:detalle)
+.clear

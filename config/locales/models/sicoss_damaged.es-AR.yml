@@ -1,0 +1,11 @@
+es-AR:
+  activerecord:
+    models:
+      sicoss_damaged: Código de siniestrado (AFIP)
+    attributes:
+      sicoss_damaged:
+        name: Nombre
+        company_id: Empresa
+        created_at: Creado el
+        updated_at: Actualizado el
+        code: Codigo

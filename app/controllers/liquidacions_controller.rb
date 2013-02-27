@@ -1,5 +1,5 @@
 class LiquidacionsController < ApplicationController
-  before_filter :find_liquidacion, :except => [:index, :new, :create]
+  before_filter :find_liquidacion, :except => [:index, :new, :create, :control_by_company_list]
 
   # GET /liquidacions
   # GET /liquidacions.xml
@@ -22,30 +22,28 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @liquidacion }
+#      format.xml  { render :xml => @liquidacion }
+      format.xml  do
+        print_table('RemunerativeConcept')
+      end
+
       format.pdf do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           if print_libro_pdf(dump_tmp_filename,@liquidacion)
             send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "librosueldos.pdf")
             File.delete(dump_tmp_filename) unless Rails.env.development?
-            Rails.logger.info(">>>>>> 14")
           else
-            Rails.logger.info(">>>>>> 15")
-
             redirect_to :action => 'show'
           end
       end
+
       format.json do
         dump_tmp_filename = Rails.root.join('tmp',@liquidacion.cache_key)
           Dir.mkdir(dump_tmp_filename.dirname) unless File.directory?(dump_tmp_filename.dirname)
           print_planilla_remuneraciones_pdf(dump_tmp_filename,@liquidacion)
-        Rails.logger.info(">>>>>> 11")
           send_file(dump_tmp_filename, :type => :pdf, :disposition => 'attachment', :filename => "planilla_remuneraciones.pdf")
-        Rails.logger.info(">>>>>> 12")
           File.delete(dump_tmp_filename) unless Rails.env.development?
-        Rails.logger.info(">>>>>> 13")
-
       end
 
       format.text  do
@@ -80,9 +78,10 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.save
-        format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully created.') }
-        format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
         liquidar_employee
+
+        format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.created', :item=> Liquidacion.model_name.human)) }
+        format.xml  { render :xml => @liquidacion, :status => :created, :location => @liquidacion }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @liquidacion.errors, :status => :unprocessable_entity }
@@ -96,7 +95,7 @@ class LiquidacionsController < ApplicationController
 
     respond_to do |format|
       if @liquidacion.update_attributes(params[:liquidacion])
-        format.html { redirect_to(@liquidacion, :notice => 'Liquidacion was successfully updated.') }
+        format.html { redirect_to(@liquidacion, :notice => t('scaffold.notice.updated', :item=> Liquidacion.model_name.human)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -120,31 +119,46 @@ class LiquidacionsController < ApplicationController
     end
   end
 
+  #[PVD] :: 2011-10-26 :: Listado de control de recibos de sueldo para MDQ...
+  def control_by_company_list
+    @liquidacions = Liquidacion.by_company(current_company.id).order("periodo desc")
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
+    end
+  end
+
+  #[PVD] :: 2011-10-26 :: Listado de los recibos de sueldo de una liquidacion
+  def control_by_company
+    respond_to do |format|
+      format.html {}
+      format.xml  { head :ok }
+      format.json {}
+    end
+  end
+
   protected
 
   def find_liquidacion
-      @liquidacion = Liquidacion.by_company(current_company.id).find(params[:id])
+      @liquidacion= Liquidacion.by_company(current_company.id).find(params[:id])
   end
 
   def liquidar_employee
-    @employees = Employee.where(:company_id => current_company.id).where(:fecha_egreso.blank?)
+    @employees = Employee.by_company(current_company.id).where(:fecha_egreso.blank?)
+    Rails.logger.info("Cant="+@employees.count.to_s)
+
     @employees.each do |employee|
-      Rails.logger.info("employee="+employee.id.to_s)
-     @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
-     @recibo_sueldo.save
-     @recibo_sueldo.calcular_recibo
+      Rails.logger.info("Employee="+employee.id.to_s)
+      @recibo_sueldo = ReciboSueldo.new(:liquidacion_id => @liquidacion.id, :employee_id => employee.id)
+      @recibo_sueldo.save
+      @recibo_sueldo.calcular_recibo
     end
   end
 
 # #################################################################################
   def print_planilla_remuneraciones_pdf(filename,liquidacion_actual)
   require 'prawn'
-
-  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
-#                              :background => img,
-                            :page_layout => :portrait)
-  offset = 0
-  pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
 
   empresa = OpenStruct.new({
                   :logo                   => "",
@@ -158,6 +172,17 @@ class LiquidacionsController < ApplicationController
                   })
 
   @recibo_sueldos = liquidacion_actual.recibo_sueldos.all
+  if !@recibo_sueldos.any?
+    flash[:error] = "No existen Movimientos para Listar"
+    return
+  end
+
+  pdf = Prawn::Document.new(:left_margin => 35, :top_margin => 35,:page_size   => "LETTER",
+#                              :background => img,
+                            :page_layout => :portrait)
+  offset = 0
+    pdf.draw_text "Planilla de Remuneraciones".center(100), :at => [5,745],:style => :bold, :size => 10
+
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
@@ -165,7 +190,6 @@ class LiquidacionsController < ApplicationController
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil? && !Rails.env.development?
-
 #      attach = @recibo_sueldos.first.employee.consortium.attachments.unscoped.where(:associated_document_type_id => logo_id).first()
 #      con_logo = true
 
@@ -183,7 +207,6 @@ class LiquidacionsController < ApplicationController
     empresa.imprimir_hasta_hoja = @recibo_sueldos.first.employee.consortium.imprimir_hasta_hoja_libro.to_i
   else
     if !logo_id.nil?
-  Rails.logger.info("logo_id="+logo_id.to_s)
 #     attach = current_company.attachments.unscoped.where(:associated_document_type_id => logo_id).first
 #     con_logo = true
 
@@ -224,7 +247,6 @@ class LiquidacionsController < ApplicationController
   thaber_con_descuento = 0
   thaber_sin_descuento = 0
   tretencion = 0
-  Rails.logger.info("rs id 1="+@recibo_sueldos.count.to_s)
   @recibo_sueldos.each do |r|
      retencion = r.total_retenciones
      haber_total = r.total_haberes
@@ -265,6 +287,7 @@ class LiquidacionsController < ApplicationController
     column(3..6).align = :right
     row(0).column(0..6).align = :center
   end
+
   pdf.render_file(filename)
   if con_logo
     File.delete(file_logo) unless Rails.env.development?
@@ -512,11 +535,20 @@ end
     end
 =end
 
-    ["menu","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept","employee"].each do |entidadc|
+    procesadas = []
+    primer_parent_id = true
+    sicoss_file.puts "=begin"
+    sicoss_file.puts Execute:"
+    sicoss_file.puts   heroku console"
+    sicoss_file.puts " load Rails.root.join('db/apolo-heroku.rb').to_s"
+    sicoss_file.puts "=end"
+
+    ["menu","country","province","company","location","province","group_remuneration","group_retention","accounting_imputation", "data_to_ask","category","retention_concept","remunerative_concept"].each do |entidadc|
       entidadc=entidadc.camelize
       entidad = eval(entidadc)
       data = entidad.all
       columnas = entidad.column_names
+      sicoss_file.puts entidadc.camelize+".delete_all"
       sicoss_file.puts "id_"+entidadc.underscore+"_old = []"
       sicoss_file.puts "id_"+entidadc.underscore+"_new = []"
       data.each do |reg|
@@ -524,26 +556,43 @@ end
         columnas.each do |col|
           if ["created_at", "updated_at", "id"].exclude?(col)
             if col[col.length-3..col.length]=="_id"
-              pedazo = "id_"+col.gsub("-id","")+"_new[ id_"+col.gsub("-id","")+"_old.index["+reg.id.to_s+"]]"
+              if col == "parent_id"
+                pedazo = (primer_parent_id == true ? "nil" : "1")
+                primer_parent_id = false
+              else
+                if procesadas.index(col.gsub("_id","")).nil?
+                  pedazo = "nil"
+                else
+                  pedazo = eval("reg."+col).nil? ? 'nil' : "id_"+col.gsub("_id","")+"_new[ id_"+col.gsub("_id","")+"_old.index("+eval("reg."+col+".to_s")+")]"
+                end
+              end
             else
               case eval(entidadc+".columns_hash['"+col+"'].type")
                 when :date
-                  pedazo =  '"' +eval("reg."+col+".to_s")+ '"'
+                  pedazo =  eval("reg."+col).nil? ? 'nil' : '"' +eval("reg."+col+".to_s")+ '"'
                 when :string
-                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
                 when :text
-                  pedazo = '"' + eval("reg."+col+".to_s") + '"'
+                  pedazo = eval("reg."+col).nil? ? 'nil' : '"' + eval("reg."+col+".to_s") + '"'
+                when :decimal
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :integer
+                  pedazo =eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
+                when :boolean
+                  pedazo = eval("reg."+col+"? ? 'true' : 'false'")
                 else
-                  pedazo = eval("reg."+col+".to_s")
+                  pedazo = eval("reg."+col).nil? ? 'nil' : eval("reg."+col+".to_s")
               end
             end
             str=str+":"+col+" => "+pedazo+", "
           end
         end
         sicoss_file.puts "new_reg="+entidadc.camelize+'.create!('+str[0, str.length - 2]+")"
-        sicoss_file.puts "id_"+entidadc.underscore+"_old << [" + reg.id.to_s + "]"
-        sicoss_file.puts "id_"+entidadc.underscore+"_new << [new_reg.id]"
+        sicoss_file.puts "id_"+entidadc.underscore+"_old << " + reg.id.to_s
+        sicoss_file.puts "id_"+entidadc.underscore+"_new << new_reg.id"
       end
+      procesadas<< entidadc.underscore
+      primer_parent_id = true
     end
     sicoss_file.close
   end
@@ -691,6 +740,10 @@ def print_libro_pdf(filename,liquidacion_actual)
 
   logo_id = AssociatedDocumentType.where(:document_type => "L").first.id
   con_logo = false
+  if !@recibo_sueldos.any?
+    flash[:error] = "No existen Movimientos para Listar"
+    return
+  end
   if @recibo_sueldos.first.employee.consortium_id.to_i > 0
 
     if !logo_id.nil?
@@ -738,33 +791,16 @@ def print_libro_pdf(filename,liquidacion_actual)
     end
   end
   pdf = Prawn::Document.new(:left_margin => 50, :top_margin => 35,:page_size   => "LETTER",
-                            :page_layout => :portrait)                            
-=begin
-  begin
-    logo_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_ultima_hoja"}).number.to_i
-  rescue
-    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores"
-    return
-  end
-  begin
-    logo_imprimir_hasta_hoja = Numerador.find(:first, :conditions => {:company_id => current_company.id,  :code => "libro_sueldos_imprimir_hasta_hoja"}).number.to_i
-  rescue
-    flash[:error] = "Falta el alta del numerador con codigo 'libro_sueldos_imprimir_hasta_hoja' en la tabla de numeradores"
-#    @liquidacion.errors.add(:base, "Falta el alta del numerador con codigo 'libro_sueldos_ultima_hoja' en la tabla de numeradores")
-    return
-  end
-=end
+                            :page_layout => :portrait)
 
   offset = 0
   numero_de_hoja = empresa.hoja
-#  Rails.logger.info("numero_de_hoja 1= #{numero_de_hoja }")
-
   left = 10
   top  = 670
 
   linea_nombre = true
   linea_documento = true
-    
+
   @recibo_sueldos.each do |r|
     linea = []
 
@@ -863,7 +899,6 @@ def print_libro_pdf(filename,liquidacion_actual)
         pdf.bounding_box [left+28, top], :width => 60, :height => 15 do
             pdf.stroke_bounds
         end
-                            
 #          pdf.bounding_box [98, 500], :width => 30, :height => 15 do
 #              pdf.stroke_bounds
 #          end
@@ -953,3 +988,4 @@ def print_libro_pdf(filename,liquidacion_actual)
   end
   pdf.render_file(filename)
 end
+

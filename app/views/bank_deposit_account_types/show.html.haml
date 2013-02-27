@@ -1,8 +1,30 @@
-%h1 Visualizacion Tipo de Cuenta Bancaria
-%p#notice= notice
-%p
-  %b Detalle:
-  = @bank_deposit_account_type.detalle
-= bank_deposit_account_type_links(@bank_deposit_account_type)
-|
-\#{link_to 'Vover', bank_deposit_account_types_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item BankDepositAccountType.model_name.human, bank_deposit_account_types_path 
+    - breadcrumb.item "#{@bank_deposit_account_type.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_bank_deposit_account_type_path(@bank_deposit_account_type), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @bank_deposit_account_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@bank_deposit_account_type) do |f|
+  = render 'shared/errorhandler', :obj_errors => @bank_deposit_account_type.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :code, :class => "apsLabel"
+        %td.columnData
+          = @bank_deposit_account_type.code
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @bank_deposit_account_type.detalle
+      %tr
+        %td.columnLabel
+          = f.label :default, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "bank_deposit_account_type_default", @bank_deposit_account_type.default, @bank_deposit_account_type.default, :disabled => true
+.clear

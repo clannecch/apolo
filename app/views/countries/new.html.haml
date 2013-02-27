@@ -1,3 +1,7 @@
-%h1 Nuevo Pais
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Country.model_name.human, countries_path
+    - breadcrumb.item t('scaffold.actions.new', :item => Country.model_name.human).titlecase , nil, :active => true
+
 = render 'form'
-= link_to 'Volver', countries_path

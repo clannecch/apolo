@@ -1,14 +1,15 @@
 class MenusController < ApplicationController
 	respond_to :html, :xml, :json
+  before_filter :find_menu, :except => [:index, :new, :create]
 
-	def index
-		@menus = Menu.all
-		flash.now[:notice] = "No se encontraron registros" if @menus.empty?
+  def index
+    @search = Menu.search(params[:search])
+    @menus = @search.page(params[:page]).per(20).order{|m| m[:parent_id, :name]}
+    flash.now[:notice] = t('flash.actions.index.notice') if @menus.empty?
 		respond_with(@menus)
 	end
 
 	def show
-		@menu = Menu.find(params[:id])
 		respond_with(@menu)
 	end
 
@@ -24,12 +25,10 @@ class MenusController < ApplicationController
 	end
 
 	def edit
-		@menu = Menu.find(params[:id])
 		respond_with(@menu)
 	end
 
 	def update
-		@menu = Menu.find(params[:id])
 		flash[:notice] = "Menu actualizado con exito." if @menu.update_attributes(params[:menu])
 		respond_with(@menu)
 	end
@@ -41,10 +40,15 @@ class MenusController < ApplicationController
     rescue ActiveRecord::DeleteRestrictionError => e
       @menu.errors.add(:base, e)
       flash[:error] = "#{e}"
-      redirect_to @menu_url
+      redirect_to menu_url
     else
-      redirect_to @menus_url
+      redirect_to menus_url
     end
   end
 
+  protected
+
+  def find_menu
+    @menu = Menu.find(params[:id])
+  end
 end

@@ -1,11 +1,31 @@
-%h1 Listado de Aseguradoras
-%table
-  %tr
-    %th Detalle
-    %th
-  - @insurance_companies.each do |insurance_company|
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item InsuranceCompany.model_name.human, insurance_companies_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => InsuranceCompany.model_name.human) , new_insurance_company_path(@insurance_company), :class => "btn success" 
+  - if @insurance_companies.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + InsuranceCompany.model_name, :class => "btn info"
+
+- if @insurance_companies.any?
+  %table.tableStandard
     %tr
-      %td= insurance_company.detalle
-      %td= insurance_company_links(insurance_company)
-%br/
-= link_to 'Nueva Aseguradora', new_insurance_company_path
+      %th= sort_link @search, :detalle, @insurance_companies.human_attribute_name('detalle')
+      %th= sort_link @search, :code, @insurance_companies.human_attribute_name('code')
+      %th= sort_link @search, :default, @insurance_companies.human_attribute_name('default')
+      %th.last
+
+    - @insurance_companies.each do |item|
+      %tr
+        %td= item.detalle
+        %td= item.code
+        %td= check_box_tag "insurance_company_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_insurance_company_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@insurance_companies)
+  .clear
+.clear

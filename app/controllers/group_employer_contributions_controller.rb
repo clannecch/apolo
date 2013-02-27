@@ -6,7 +6,7 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions.xml
   def index
     #@group_employer_contributions = GroupEmployerContribution.all
-    @search = GroupEmployerContribution.by_company(current_company.id).search(params[:search])
+    @search = GroupEmployerContribution.search(params[:search])
     @group_employer_contributions = @search.page(params[:page]).per(10)
 
     respond_to do |format|
@@ -28,7 +28,7 @@ class GroupEmployerContributionsController < ApplicationController
   # GET /group_employer_contributions/new
   # GET /group_employer_contributions/new.xml
   def new
-    @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).new
+    @group_employer_contribution = GroupEmployerContribution.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,7 @@ class GroupEmployerContributionsController < ApplicationController
   # POST /group_employer_contributions
   # POST /group_employer_contributions.xml
   def create
-    @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).new(params[:group_employer_contribution])
+    @group_employer_contribution = GroupEmployerContribution.new(params[:group_employer_contribution])
 
     respond_to do |format|
       if @group_employer_contribution.save
@@ -87,6 +87,6 @@ class GroupEmployerContributionsController < ApplicationController
   end
 
   def find_group_employer_contribution
-      @group_employer_contribution = GroupEmployerContribution.by_company(current_company.id).find(params[:id])
+      @group_employer_contribution = GroupEmployerContribution.find(params[:id])
   end
 end

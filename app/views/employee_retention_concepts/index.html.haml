@@ -1,0 +1,39 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item EmployeeRetentionConcept.model_name.human, employee_retention_concepts_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => EmployeeRetentionConcept.model_name.human) , new_employee_retention_concept_path(@employee_retention_concept), :class => "btn success" 
+  - if @employee_retention_concepts.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + EmployeeRetentionConcept.model_name, :class => "btn info"
+
+- if @employee_retention_concepts.any?
+  %table.tableStandard
+    %tr
+      %th= sort_link @search, :employee_id, @employee_retention_concepts.human_attribute_name('employee_id')
+      %th= sort_link @search, :retention_concept_id, @employee_retention_concepts.human_attribute_name('retention_concept_id')
+      %th= sort_link @search, :cantidad, @employee_retention_concepts.human_attribute_name('cantidad')
+      %th= sort_link @search, :importe, @employee_retention_concepts.human_attribute_name('importe')
+      %th= sort_link @search, :fecha_inicio, @employee_retention_concepts.human_attribute_name('fecha_inicio')
+      %th= sort_link @search, :fecha_final, @employee_retention_concepts.human_attribute_name('fecha_final')
+      %th= sort_link @search, :detalle, @employee_retention_concepts.human_attribute_name('detalle')
+      %th.last
+
+    - @employee_retention_concepts.each do |item|
+      %tr
+        %td= item.employee_id
+        %td= item.retention_concept_id
+        %td= item.cantidad
+        %td= item.importe
+        %td= item.fecha_inicio
+        %td= item.fecha_final
+        %td= item.detalle
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_employee_retention_concept_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@employee_retention_concepts)
+  .clear
+.clear

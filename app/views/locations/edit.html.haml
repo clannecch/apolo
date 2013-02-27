@@ -1,5 +1,10 @@
-%h1 Edicion de Localidades
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item Location.model_name.human, locations_path 
+    - breadcrumb.item "#{@location.detalle.titlecase}", location_path(@location), :active => true
+
+= link_to t('scaffold.actions.show').titlecase, location_path(@location), :class => "btn info" 
+.clear
+%br/
 = render 'form'
-= link_to 'Visualizar', @location
-|
-\#{link_to 'Volver', locations_path}

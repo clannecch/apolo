@@ -1,28 +1,60 @@
-%p#notice= notice
-%p
-  %b Codigo:
-  = @retention_concept.codigo
-%p
-  %b Detalle:
-  = @retention_concept.detalle
-%p
-  %b Formula de Calculo Valor:
-  = @retention_concept.formula_calculo_valor
-%p
-  %b Acumuladores Valor:
-  = @retention_concept.acumuladores_valor
-%p
-  %b Prioridad de Calculo:
-  = @retention_concept.prioridad
-%p
-  %b datos_a_pedir:
-  = @retention_concept.data_to_ask.try(:detalle)
-%p
-  %b Statistical value:
-  = @retention_concept.statistical_value
-%p
-  %b Accounting imputation:
-  = @retention_concept.accounting_imputation_id
-= retention_concept_links(@retention_concept)
-|
-\#{link_to 'Volver', retention_concepts_path}
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item RetentionConcept.model_name.human, retention_concepts_path 
+    - breadcrumb.item "#{@retention_concept.detalle.titlecase}", nil, :active => true
+
+= link_to t('scaffold.actions.edit').titlecase, edit_retention_concept_path(@retention_concept), :class => "btn success" |
+= link_to t('scaffold.actions.destroy').titlecase, @retention_concept, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :class => "btn danger"
+.clear
+%br/
+= form_for(@retention_concept) do |f|
+  = render 'shared/errorhandler', :obj_errors => @retention_concept.errors
+  .form_box
+    %table.tableForm
+      %tr
+        %td.columnLabel
+          = f.label :codigo, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.codigo
+      %tr
+        %td.columnLabel
+          = f.label :detalle, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.detalle
+      %tr
+        %td.columnLabel
+          = f.label :statistical_value, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.statistical_value
+      %tr
+        %td.columnLabel
+          = f.label :accounting_imputation_id, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.accounting_imputation.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :prioridad, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.prioridad
+      %tr
+        %td.columnLabel
+          = f.label :formula_calculo_valor, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.formula_calculo_valor
+      %tr
+        %td.columnLabel
+          = f.label :acumuladores_valor, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.acumuladores_valor
+      %tr
+        %td.columnLabel
+          = f.label :data_to_ask_id, :class => "apsLabel"
+        %td.columnData
+          = @retention_concept.data_to_ask.try(:detalle)
+      %tr
+        %td.columnLabel
+          = f.label :auxiliar, :class => "apsLabel"
+        %td.columnData
+          = check_box_tag "retention_concept_auxiliar", @retention_concept.auxiliar, @retention_concept.auxiliar, :disabled => true
+.clear

@@ -1,30 +1,31 @@
+- content_for(:breadcrumbs) do
+  = breadcrumbs do |breadcrumb|
+    - breadcrumb.item current_company.name.titlecase, root_path
+    - breadcrumb.item SicossRegimenType.model_name.human, sicoss_regimen_types_path, :active => true
+.clear
+- if true
+  = link_to t('scaffold.actions.new', :item => SicossRegimenType.model_name.human) , new_sicoss_regimen_type_path(@sicoss_regimen_type), :class => "btn success" 
+  - if @sicoss_regimen_types.any?
+    = link_to t('scaffold.actions.export').titlecase, "/print_table?tablename=" + SicossRegimenType.model_name, :class => "btn info"
 
-- content_for(:title) do
-  %h1= t('scaffold.actions.list', :item => SicossRegimenType.model_name.human).titlecase
-
-%table
-  %tr
-
-    %th= SicossRegimenType.human_attribute_name('code')
-
-    %th= SicossRegimenType.human_attribute_name('name')
-
-    %th
-    %th
-    %th
-
-  - @sicoss_regimen_types.each do |sicoss_regimen_type|
+- if @sicoss_regimen_types.any?
+  %table.tableStandard
     %tr
+      %th= sort_link @search, :name, @sicoss_regimen_types.human_attribute_name('name')
+      %th= sort_link @search, :code, @sicoss_regimen_types.human_attribute_name('code')
+      %th= sort_link @search, :default, @sicoss_regimen_types.human_attribute_name('default')
+      %th.last
 
-      %td= sicoss_regimen_type.name
-
-      %td= sicoss_regimen_type.company_id
-
-      %td= link_to t('scaffold.actions.show').titlecase, sicoss_regimen_type
-      %td= link_to t('scaffold.actions.edit').titlecase, edit_sicoss_regimen_type_path(sicoss_regimen_type)
-      %td= link_to t('scaffold.actions.destroy').titlecase, sicoss_regimen_type, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete
-
-%br
-
-= link_to t('scaffold.actions.new', :item => SicossRegimenType.model_name.human).titlecase, new_sicoss_regimen_type_path
-
+    - @sicoss_regimen_types.each do |item|
+      %tr
+        %td= item.name
+        %td= item.code
+        %td= check_box_tag "sicoss_regimen_type_default", item.default, item.default, :disabled => true
+        %td.last.actions
+          = link_to icon('application_get', :small, :title => t('scaffold.actions.show').titlecase), item, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_edit', :small, :title => t('scaffold.actions.edit').titlecase), edit_sicoss_regimen_type_path(item), :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+          = link_to icon('application_delete', :small, :title => t('scaffold.actions.destroy').titlecase), item, :confirm => t('scaffold.actions.destroy_confirm'), :method => :delete, :rel => "twypsy", :title => t('scaffold.actions.show').titlecase
+    .clear
+    .block{:style => 'margin:20px;'}= paginate(@sicoss_regimen_types)
+  .clear
+.clear
